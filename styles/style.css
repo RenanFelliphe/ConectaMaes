@@ -1,4 +1,255 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch&family=Montserrat&display=swap');
+
 *{
-    padding:0;
-    margin:0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', 'sans-serif';
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+}
+
+/*====================================================================================================
+====================================== PÁGINA DE APRESENTAÇÃO ========================================
+====================================================================================================*/
+
+header{
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    height: 5rem;
+    padding: 0.5rem 1.5rem 0.5rem 0.5rem;
+    background-color: white;
+    z-index: 1;
+}
+
+header img.A-headerLogo{
+    width: 10rem;
+    cursor: pointer;
+}
+
+header .A-apresentationSections{
+    display: flex;
+    gap: 2.5rem;
+}
+
+header .A-apresentationSections h4{
+    cursor: pointer;
+}
+
+header .A-searchBar{
+    background-color: #D9D9D9;
+    border-radius: 100rem;
+    width: 15rem;
+    min-width: 13.5rem;
+    padding: 0.25rem 0rem 0.25rem 0.7rem;
+    opacity: 0.6;
+}
+
+header .A-searchBar .bi-search{
+    color: #8A8A8A;
+    font-size: 0.8rem;
+}
+
+header .A-searchBarInput{
+    background-color: transparent;
+    border: none;
+    color: #8A8A8A;
+    outline: none;
+    width: 90%;
+}
+
+header .A-signButtons{
+    display: flex;
+    gap: 1.2rem;
+}
+
+header .A-signButtons h4{
+    border: 1px solid #BDB150;
+    padding: 0.3rem 1.2rem 0.3rem 1.2rem;
+    border-radius: 100rem;
+    cursor: pointer;
+}
+
+header .A-signButtons .A-signUp{
+    color: #BDB150;
+}
+
+header .A-signButtons .A-signIn{
+    color: white;
+    background-color: #BDB150;
+}
+
+main .A-backgroundGeometricForms{
+    position: absolute;
+    height: 200vh;
+    right: 0;
+    top: 0;
+}
+
+main{
+    position: relative;
+    height: 200vh;
+}
+
+main section{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 5rem;
+}
+
+main section article{
+    display: flex;
+    padding-left: 2rem;
+    gap: 1.5rem;
+}
+
+main section .A-articleHighlight{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    float: left;
+    height: 10rem;
+    width: 2rem;
+}
+
+main section .A-articleHighlight .A-articleBar{
+    position: relative;
+    height: 10rem;
+    width: 2px;
+    background-color: #807523;
+}
+
+main section article .A-articleIcon{
+    font-size: 1.5rem;
+}
+
+main section .A-articleConectaMaes .A-focus,
+main section .A-articleHelping .A-focus{
+    font-weight: bolder;
+    color: #807523;
+}
+
+main section .A-Sharing .A-focus,
+main section .A-articleRating .A-focus{
+    font-weight: bolder;
+    color: #037180;
+}
+
+main section .A-articleFollowing .A-focus{
+    font-weight: bolder;
+    color: #A3155F;
+}
+
+main .A-createAccountSign{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+}
+
+main .A-createAccountSign p{
+    width: 15rem;
+    text-align: center;
+}
+
+main .A-createAccountSign .A-createAccountButton{
+    display: flex;
+    padding: 0.7rem 1.2rem 0.7rem 1.2rem;
+    border-radius: 100rem;
+    cursor: pointer;
+    color: white;
+    background-color: #BDB150;
+    width: 13rem;
+    box-shadow: 0 0 5px 1px #807523;
+    font-weight: 900;
+}
+
+footer{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    width: 100%;
+    padding: 1rem 2rem 0.5rem 0.5rem;
+    background-color: black;
+    color: white;
+}
+
+footer .A-footerLeft img.A-footerLogo{
+    width: 15rem;
+    cursor: pointer;
+}
+
+footer .A-footerLeft .A-footerContact{
+    padding: 0 0 1rem 1rem;
+    width: 14rem;
+}
+
+footer .A-footerLeft .A-footerContact h3{
+    padding: 0.5rem 0 1rem 0.2rem;
+}
+
+footer .A-footerLeft .A-footerContact .A-footerSocialMedias{
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.3rem;   
+}
+
+footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-instagram{
+    color: #FAEB7D;
+}
+
+footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-facebook{
+    color: #7DEBFA;
+}
+
+footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-envelope-at-fill{
+    color: #FA7EBD;
+}
+
+footer .A-copyrightSign{
+    position: absolute;
+    display: flex;
+    gap: 0.5rem;
+    width: 15rem;
+    bottom: 1rem;
+    left: 50%;
+    transform: translate(-50%);
+    font-size: 0.6rem;
+}
+
+footer .A-footerRight{
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    height: 100%;
+}
+footer .A-footerRight li h5{
+    font-size: 0.9rem;
+    line-height: 3rem;
+    pointer-events: none;
+}
+
+footer .A-footerRight li p{
+    font-size: 0.75rem;
+    line-height: 1.5rem;
+    cursor: pointer;
+}
+
+footer .A-footerRight li.A-footerAbout h5{
+    color: #FAEB7D;
+}
+
+footer .A-footerRight li.A-footerHelp h5{
+    color: #7DEBFA;
+}
+
+footer .A-footerRight li.A-footerPolitic h5{
+    color: #FA7EBD;
 }
