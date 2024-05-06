@@ -41,25 +41,34 @@ header .A-apresentationSections h4{
 }
 
 header .A-searchBar{
-    background-color: #D9D9D9;
-    border-radius: 100rem;
+    background-color: #cfcfcf;
+    border-radius: 0.75rem;
     width: 15rem;
+    height: 1.875rem;
     min-width: 13.5rem;
     padding: 0.25rem 0rem 0.25rem 0.7rem;
     opacity: 0.6;
 }
 
 header .A-searchBar .bi-search{
-    color: #8A8A8A;
-    font-size: 0.8rem;
+    color: #555555;
+    font-size: 0.938rem;
 }
 
 header .A-searchBarInput{
     background-color: transparent;
     border: none;
-    color: #8A8A8A;
+    color: #555555;
     outline: none;
     width: 90%;
+    font-size: 0.938rem;
+    font-weight: 500;
+}
+header .A-searchBarInput::placeholder{
+    color: #555555;
+    font-size: 0.938rem;
+    font-weight: 500;
+    
 }
 
 header .A-signButtons{
@@ -70,7 +79,7 @@ header .A-signButtons{
 header .A-signButtons h4{
     border: 1px solid #BDB150;
     padding: 0.3rem 1.2rem 0.3rem 1.2rem;
-    border-radius: 100rem;
+    border-radius: 0.75rem;
     cursor: pointer;
 }
 
@@ -160,7 +169,7 @@ main .A-createAccountSign p{
 main .A-createAccountSign .A-createAccountButton{
     display: flex;
     padding: 0.7rem 1.2rem 0.7rem 1.2rem;
-    border-radius: 100rem;
+    border-radius: 0.75rem;
     cursor: pointer;
     color: white;
     background-color: #BDB150;
