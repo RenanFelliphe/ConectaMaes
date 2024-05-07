@@ -61,12 +61,17 @@ header .A-searchBar{
 header .A-searchBarInput{
     background-color: transparent;
     border: none;
-    color: var(--grayColor);
+    color: var(--blackColor);
     outline: none;
     width: 90%;
-    font-weight: 500;
-    font-size: 0.9rem;
+    font-weight: 400;
+    font-size: 1rem;
 }
+
+header .A-searchBar .bi,
+header .A-searchBarInput::placeholder{
+    color:var(--blackColor);
+}   
 
 header .A-signButtons{
     display: flex;
@@ -111,7 +116,7 @@ main .A-backgroundMom img{
 
 main{
     position: relative;
-    background: linear-gradient(#ffffff50 0%, #80752350 19%, #03718050 38%, #a3155f50 69%, #80752350 100%);
+    background: linear-gradient(#ffffff50 0%, #80752350 22%, #03718050 37%, #a3155f50 58%, #80752350 80%);
 
 }
 
@@ -154,13 +159,28 @@ main section .A-articleEquip .A-articleHighlight .A-articleBar{
     background-color: var(--middleYellowColor);
 }
 
+main section .A-Sharing .A-articleHighlight .A-articleBar{
+    background: linear-gradient(#BDB150,#40AEBD);
+}
+
 main section .A-articleFollowing .A-articleHighlight .A-articleBar,
 main section .A-articleHelping .A-articleHighlight .A-articleBar{
     background-color: var(--middleBlueColor);
 }
 
+main section .A-articleHelping .A-articleHighlight .A-articleBar{
+    background: linear-gradient(#40AEBD,#CF4A8E);
+}
 main section .A-articleRating .A-articleHighlight .A-articleBar{
-    background-color: var(--middlePinkColor);
+    background: linear-gradient(var(--middlePinkColor),#FA7EBD00);
+}
+
+main section .A-articleConectaMaes p,
+main section .A-Sharing,
+main section .A-articleFollowing p,
+main section .A-articleHelping,
+main section .A-articleRating{
+    font-size: 1.25rem;
 }
 
 main section .A-articleConectaMaes .A-focus,
@@ -226,7 +246,12 @@ main section .A-articleEquip .A-articleHighlight{
 }
 
 main section .A-articleEquip .A-articleHighlight .A-articleBar{
-    height: 5rem;
+    height: 6.25rem;
+    background: linear-gradient(#FA7EBD00,var(--middleYellowColor));
+}
+
+main section .A-articleEquip .A-articleHighlight h2{
+    font-size: 2.5rem;
 }
 
 main section .A-articleEquip .A-equipContainer{
@@ -284,17 +309,17 @@ footer .A-footerLeft img.A-footerLogo{
 footer .A-footerLeft .A-footerContact{
     padding: 0 0 1rem 1rem;
     width: 14rem;
-    font-size: 1.25rem;
+    font-size: 1.625rem;
 }
 
 footer .A-footerLeft .A-footerContact h3{
-    padding: 0.5rem 0 1rem 0.2rem;
+    padding: 0.5rem 0 1rem 0;
 }
 
 footer .A-footerLeft .A-footerContact .A-footerSocialMedias{
     display: flex;
     justify-content: space-between;
-    font-size: 1.3rem;   
+    font-size: 2rem;   
 }
 
 footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-instagram{
@@ -305,7 +330,7 @@ footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-facebook{
     color: var(--pastelBlueColor);
 }
 
-footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-envelope-at-fill{
+footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-envelope-fill{
     color: var(--pastelPinkColor);
 }
 
@@ -313,27 +338,28 @@ footer .A-copyrightSign{
     position: absolute;
     display: flex;
     gap: 0.5rem;
-    width: 15rem;
+    width: 30rem;
     bottom: 1rem;
     left: 50%;
     transform: translate(-50%);
-    font-size: 0.6rem;
+    font-size: 0.938rem;
 }
 
 footer .A-footerRight{
     display: flex;
-    gap: 2rem;
+    gap: 6.25rem;
     list-style: none;
     height: 100%;
 }
+
 footer .A-footerRight li h5{
-    font-size: 0.9rem;
+    font-size: 1.438rem;
     line-height: 3rem;
     pointer-events: none;
 }
 
 footer .A-footerRight li p{
-    font-size: 0.75rem;
+    font-size: 1rem;
     line-height: 1.5rem;
     cursor: pointer;
 }
