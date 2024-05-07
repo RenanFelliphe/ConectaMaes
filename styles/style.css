@@ -1,18 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch&family=Montserrat&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch&family=Montserrat&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat', 'sans-serif';
-    text-decoration: none;
     justify-content: center;
     align-items: center;
+    font-family: 'Ubuntu', 'sans-serif';
+    font-style: normal;
 }
 
 /*====================================================================================================
 ====================================== PÁGINA DE APRESENTAÇÃO ========================================
 ====================================================================================================*/
+
+body::-webkit-scrollbar{
+    display: none;
+}
 
 header{
     position: sticky;
@@ -22,7 +25,7 @@ header{
     gap: 1rem;
     height: 5rem;
     padding: 0.5rem 1.5rem 0.5rem 0.5rem;
-    background-color: white;
+    background-color: var(--whiteColor);
     z-index: 1;
 }
 
@@ -38,144 +41,227 @@ header .A-apresentationSections{
 
 header .A-apresentationSections h4{
     cursor: pointer;
+    font-weight: 500;
 }
 
 header .A-searchBar{
+    display: flex;
     background-color: #cfcfcf;
-    border-radius: 0.75rem;
+    border-radius: 10rem;
     width: 15rem;
-    height: 1.875rem;
+    height: 2rem;
     min-width: 13.5rem;
-    padding: 0.25rem 0rem 0.25rem 0.7rem;
+    padding: 0 0.6rem 0 0.6rem;
+    gap: 0.4rem;
     opacity: 0.6;
-}
-
-header .A-searchBar .bi-search{
-    color: #555555;
-    font-size: 0.938rem;
+    font-size: 0.8rem;
+    color: var(--grayColor);
 }
 
 header .A-searchBarInput{
     background-color: transparent;
     border: none;
-    color: #555555;
+    color: var(--grayColor);
     outline: none;
     width: 90%;
-    font-size: 0.938rem;
     font-weight: 500;
-}
-header .A-searchBarInput::placeholder{
-    color: #555555;
-    font-size: 0.938rem;
-    font-weight: 500;
-    
+    font-size: 0.9rem;
 }
 
 header .A-signButtons{
     display: flex;
-    gap: 1.2rem;
+    gap: 1rem;
 }
 
 header .A-signButtons h4{
-    border: 1px solid #BDB150;
-    padding: 0.3rem 1.2rem 0.3rem 1.2rem;
-    border-radius: 0.75rem;
+    display: flex;
+    height: 2rem;
+    width: 7rem;    
+    color: var(--middleYellowColor);
+    border: 1px solid var(--middleYellowColor);
+    border-radius: 10rem;
     cursor: pointer;
 }
 
-header .A-signButtons .A-signUp{
-    color: #BDB150;
+header .A-signButtons .A-signIn{
+    color: var(--whiteColor);
+    background-color: var(--middleYellowColor);
 }
 
-header .A-signButtons .A-signIn{
-    color: white;
-    background-color: #BDB150;
-}
 
 main .A-backgroundGeometricForms{
     position: absolute;
-    height: 200vh;
+    height: 100%;
     right: 0;
     top: 0;
 }
 
+main .A-backgroundMom{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 10rem;
+    right: 20rem;
+    top: 13rem;
+}
+
+main .A-backgroundMom img{
+    width: 8rem;
+}
+
 main{
     position: relative;
-    height: 200vh;
+    background: linear-gradient(#ffffff50 0%, #80752350 19%, #03718050 38%, #a3155f50 69%, #80752350 100%);
+
 }
 
 main section{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding-top: 5rem;
+    padding: 1rem 0 3rem 2rem;
+}
+
+main section .A-quote{
+    padding:  5rem 0 5rem 5rem;
+    width: 40rem;
+    font-size: 2.5rem;
 }
 
 main section article{
     display: flex;
-    padding-left: 2rem;
-    gap: 1.5rem;
+    justify-content: flex-start;
+    gap: 2rem;
+    width: 60vw;
 }
 
 main section .A-articleHighlight{
     position: relative;
     display: flex;
     flex-direction: column;
-    float: left;
-    height: 10rem;
-    width: 2rem;
 }
 
 main section .A-articleHighlight .A-articleBar{
     position: relative;
     height: 10rem;
-    width: 2px;
-    background-color: #807523;
+    width: 3px;
+    border-radius: 100rem;
 }
 
-main section article .A-articleIcon{
-    font-size: 1.5rem;
+main section .A-articleConectaMaes .A-articleHighlight .A-articleBar,
+main section .A-Sharing .A-articleHighlight .A-articleBar,
+main section .A-articleEquip .A-articleHighlight .A-articleBar{
+    background-color: var(--middleYellowColor);
+}
+
+main section .A-articleFollowing .A-articleHighlight .A-articleBar,
+main section .A-articleHelping .A-articleHighlight .A-articleBar{
+    background-color: var(--middleBlueColor);
+}
+
+main section .A-articleRating .A-articleHighlight .A-articleBar{
+    background-color: var(--middlePinkColor);
 }
 
 main section .A-articleConectaMaes .A-focus,
+main section .A-Sharing .A-focus{
+    font-weight: bolder;
+    color: var(--middleYellowColor);
+}
+
+main section .A-articleFollowing .A-focus,
 main section .A-articleHelping .A-focus{
     font-weight: bolder;
-    color: #807523;
+    color: var(--middleBlueColor);
 }
 
-main section .A-Sharing .A-focus,
 main section .A-articleRating .A-focus{
     font-weight: bolder;
-    color: #037180;
+    color: var(--middlePinkColor);
 }
 
-main section .A-articleFollowing .A-focus{
-    font-weight: bolder;
-    color: #A3155F;
+main section:nth-of-type(2){
+    align-items: center;
 }
 
-main .A-createAccountSign{
+main section .A-createAccountSign{
     display: flex;
     flex-direction: column;
     gap: 1rem;
     padding: 2rem;
 }
 
-main .A-createAccountSign p{
-    width: 15rem;
+main section .A-createAccountSign p{
+    width: 20rem;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+main section .A-createAccountSign .A-createAccountButton{
+    display: flex;
+    padding: 0.7rem 1.2rem 0.7rem 1.2rem;
+    border-radius: 10rem;
+    cursor: pointer;
+    color: var(--whiteColor);
+    background-color: var(--middlePinkColor);
+    width: 13rem;
+    box-shadow: 0 0 5px 1px var(--darkPinkColor);
+    font-weight: 900;
+}
+
+main section .A-articleEquip{
+    position: relative;
+    justify-content: center;
+    padding: 10rem 2rem 0 0;
+    width: 100vw;
+}
+
+main section .A-articleEquip .A-articleHighlight{
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 2rem;
+    position: absolute;
+    left: 1rem;
+    top: 0;
+}
+
+main section .A-articleEquip .A-articleHighlight .A-articleBar{
+    height: 5rem;
+}
+
+main section .A-articleEquip .A-equipContainer{
+    display: flex;
+    flex-wrap: wrap;
+    width: 40rem;
+    gap: 3rem;
+}
+
+main section .A-articleEquip .A-equipContainer .A-equipMember{
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+main section .A-articleEquip .A-equipContainer .A-equipMember .A-memberImage img{
+    width: 8rem;
+}
+
+main section .A-articleEquip .A-equipContainer .A-equipMember .A-memberInformation{
+    line-height: 1.3rem;
     text-align: center;
 }
 
-main .A-createAccountSign .A-createAccountButton{
-    display: flex;
-    padding: 0.7rem 1.2rem 0.7rem 1.2rem;
-    border-radius: 0.75rem;
-    cursor: pointer;
-    color: white;
-    background-color: #BDB150;
-    width: 13rem;
-    box-shadow: 0 0 5px 1px #807523;
-    font-weight: 900;
+main section .A-articleEquip .A-equipContainer .A-equipMember .A-memberInformation .A-memberName{
+    font-size: 1.7rem;
+    font-weight: 600;
+}
+
+main section .A-articleEquip .A-equipContainer .A-equipMember .A-memberInformation .A-memberFamilyName{
+    font-weight: 500;
+}
+
+main section .A-articleEquip .A-equipContainer .A-equipMember .A-memberInformation .A-memberFunction{
+    font-weight: 400;
 }
 
 footer{
@@ -186,8 +272,8 @@ footer{
     gap: 1rem;
     width: 100%;
     padding: 1rem 2rem 0.5rem 0.5rem;
-    background-color: black;
-    color: white;
+    background-color: var(--blackColor);
+    color: var(--whiteColor);
 }
 
 footer .A-footerLeft img.A-footerLogo{
@@ -198,6 +284,7 @@ footer .A-footerLeft img.A-footerLogo{
 footer .A-footerLeft .A-footerContact{
     padding: 0 0 1rem 1rem;
     width: 14rem;
+    font-size: 1.25rem;
 }
 
 footer .A-footerLeft .A-footerContact h3{
@@ -211,15 +298,15 @@ footer .A-footerLeft .A-footerContact .A-footerSocialMedias{
 }
 
 footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-instagram{
-    color: #FAEB7D;
+    color: var(--pastelYellowColor);
 }
 
 footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-facebook{
-    color: #7DEBFA;
+    color: var(--pastelBlueColor);
 }
 
 footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-envelope-at-fill{
-    color: #FA7EBD;
+    color: var(--pastelPinkColor);
 }
 
 footer .A-copyrightSign{
@@ -252,13 +339,13 @@ footer .A-footerRight li p{
 }
 
 footer .A-footerRight li.A-footerAbout h5{
-    color: #FAEB7D;
+    color: var(--pastelYellowColor);
 }
 
 footer .A-footerRight li.A-footerHelp h5{
-    color: #7DEBFA;
+    color: var(--pastelBlueColor);
 }
 
 footer .A-footerRight li.A-footerPolitic h5{
-    color: #FA7EBD;
+    color: var(--pastelPinkColor);
 }

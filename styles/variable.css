@@ -1,3 +1,19 @@
 :root {
-    
+    --pastelYellowColor: #F9EC7C;
+    --middleYellowColor: #BDB150;
+    --darkYellowColor: #807523;
+
+    --pastelBlueColor: #7DEBFA;
+    --middleBlueColor: #40AEBD;
+    --darkBlueColor: #037180;
+
+    --pastelPinkColor: #FA7EBD;
+    --middlePinkColor: #CF4A8E;
+    --darkPinkColor: #A3155F;
+
+    --whiteColor: #FFFFFF;
+    --grayColor: #808080;
+    --blackColor: #000000;
+
+    --textColor: #;
 }

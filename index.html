@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        <link rel="stylesheet" href="styles/variable.css">
         <link rel="stylesheet" href="styles/style.css">
         <link rel="icon" href="assets/logos/Final/Conecta_Mães_Logo_Icon.png">
         <title>ConectaMães - Apresentação</title>
@@ -29,15 +30,15 @@
         </header>
 
         <main>
-            <img src="assets/images/Cells.png" class="A-backgroundGeometricForms">
-
+            <img src="assets/Imagens/Cells.png" class="A-backgroundGeometricForms">
+            <div class="A-backgroundMom">
+                <img src="assets/Imagens/mom_boy.png" class="A-momBoy">
+                <img src="assets/Imagens/mom_group.png" class="A-momGroup">
+                <img src="assets/Imagens/mom_opinion.png" class=" A-momOpinion">
+            </div>
+            
             <section>
-                <article class="A-articleAbout">
-                    <div class="A-articleHighlight">
-                        <span class="A-articleBar A-focus"></span>
-                    </div>
-                    <h1>Mães ajudando mães a cuidar da vida materna</h1>
-                </article>
+                <h1 class="A-quote">Mães ajudando mães a cuidar da vida materna</h1>
 
                 <article class="A-articleConectaMaes">
                     <div class="A-articleHighlight">
@@ -50,7 +51,7 @@
 
                 <article class="A-Sharing">
                     <div class="A-articleHighlight">
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAABL0lEQVR4nO2WTUrEQBCFm36gLjyUv+DgQRRBUjUbl696ZVx6izmBuvVnMadQGGd0pQsvMJLogJjJpE2MqOSD2qTz3qtQBR3nOjo+AQm7EI6hNo2seySh55qSG8WHvpVw9B3B0zrluuC/M+Mk9L4ULhxBuePawKsdzYK8GN1PAqVl5f4f5BLUTqB8gNgEwjR71roxhOmcBUobN4YK49yscG6T6MbKyDstGj8uDuY4Vl9KrS9SO47Vl1JlnM8weyefX+QO6Ad9KRXGret/F+SKF+575RWEzxB78mqXXm3PHZ4uN/JGP2x65QWEL1l55RkSrqEftqF2t+AyuIVwCxrWc81ML3YO4UZ54gFXIRzU/cOIuKUGWUYh1yuHrYXq+82lHM4Lvmk9WOy60R50uBq8AttIQ63P34lyAAAAAElFTkSuQmCC">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAABO0lEQVR4nO2WPU7DQBCFtwIK7oAyQ5VT8CsRcRBoqDwD5ZutYkpukRMALT9FTgESEKig4AKgtYJk4djexDIC5CdNY/m9b9c7613nOnX6Jp/QPpSeTPkjqoQefUID11QhKBo6LSg9NAfPCf0q14H/zBr7hAbzwAMUwnuuDZnSSW77wP2koGyh3L8T0F8y5VMoP5vQBMJpeNZ6MITTQgMJp40HhprgEDbjfzyJ9ZcqG2lxW7xUgcOhEesv1SIzMuVhrL9UdcFhvbJ3AiCyB/L+cnBNcNv+3yVgbQVKhxC+hvCbKb+a0pUJHZwdrS83CvdK2xC6hNB7VsrnSHjDH/d2Tfi+4jC4g/R2vPJm5pn6TekCCW1VzKa/CqHRojeM2lNKaBQYRbDSuC1o7quMZ4D5tm2wCd806oNObgF9Anb6cQEDlS11AAAAAElFTkSuQmCC">
                         <span class="A-articleBar A-focus"></span>
                     </div>
                     <p><span class="A-focus">Compartilhe</span> suas experiências através de <span class="A-focus">Relatos</span> e faça parte dessa rede de apoio.</p>
@@ -58,7 +59,7 @@
 
                 <article class="A-articleFollowing">
                     <div class="A-articleHighlight">
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAACr0lEQVR4nO2WTWgTURDHV4uoVC/uzEZFUERREdSz9qwHEUWaQyE7s4koInjyqpTW3vTSg4eCmu57iWJUpAdBqAdB9KTVg2L9OPkBolLaaC1FbORtErNN327fhlwEHyyEZOb/e/O5saz/5186+Y28QgBfksivJdCMQPokgO4LpGyv1bs0gQidFUgvBfBPgfRGOHxEZ1uxrCUS+JwA+iyRK/qH7pasdEcstLQhvVICP9YJCOQJgXzjmp1bX7eXQD3RwPDjnooFC6T+xUQE0it1wao9j5iB+UEkdMg6sUwCfTESAi9XjZgvmNgLpPeR4ALyHsPbVwTwzSBi2ztk6PMxJs3smYPpmfIp2rzdLGJ+EgmWyOdNwRL4m/K5sjaLhvZXY8A0aA6maeVTwvQqw4hHosFA+QTgmQBspTsE8pwB+EMc+JZxjZFn//YG8FeDrr4YA+bRBOBfIb97oVqOCuBjRfC2ilSmU5Wi6GQ3R0JrAi+MU63gqUxnrTf2S+C3PrpdVtIzFCwP/pEE7K9xd9T9B7ecXh6kPZVxBNKAGrdAr6o5piZG/bYA7KN7IAk0ADt8Mqwh0EtLpHK0D5UlUrcu1Qcl0O3aq21a18kS+J0EuuM77uFmqGF3z2nh8y7S5BRlp1Koi1Sgt7eAvE8Dn1KLRyum6tfsMJyinVow0oAuuqgAZHW8+jVC2d0CaVxjPD7s0K6FJaLnScESeawhYOe2SaTrEul33PyqvZtP8aaGcCPNKr1RJSnMSzuVq1/afEZtowQLZPaynVvdDFbiUWAf3a5wnZVjd9JRCmpeS3sws62kWgI9agVcAD4e9zpdpLn61B+AiVbAEvhh3DiptIfTKxvQyeK6HrDacVS5TBeIj97RtkCb4FPRUJpsO7R+1EZSy0EgPRXA34NHfUbqa07vH0HvJ68XMplJAAAAAElFTkSuQmCC">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAACnUlEQVR4nO2WO2gUURSGr/fsoqJ2amElgmgQ1NpNrYWIIm5h5wODBJI5d5Z0yn9mTAqJFiks0mgpRkVSCEIsBNFKo4VifFQ+QFQkWRNDEBOZu2vcx9zxTkgjeGDZhb3n/87zzij13/4pA1YRyyVieUkss8TyQTPuaiPHFaC9RbTBGWJ5TozvZPCKAhxynF6hWc6SwUcyspD20Sy3VXmEsqHm4mpt8DBVhPGVjFxTfdj0+7gO5KgL2AQ36M7kkkH8VyGWF0mAFswy6gVm3HNTu4aLZPDJSyjAiVqgMuhznhhvndxigN1eIrZ0ct2COTrgCX7vBOsQx3KAn1inENs9S/3I3V+Wc75gMvhinXoGNnhmfDkLPOQPlhnr1I21fhnLaBb4ijeYZdY6lUeIDOY9fN65e8y4kQM81xDwZ49SX3CDjYzlAP/444c7DUM3po2cVL3xVlUZXJO0QjG2OKF1gWc5erxghW3G2EssrwshOlVu6xouEmM6FziIOxb9e4ZW2u8KNhKjP1k3q8eY1ozxZGOS/9q4FET78kDru3m6SSOMysSoZvS5Sowj7XCO9msjN+2jzchM2iQT4402cos4OtgG9ZpuzKfCm8RaS+uyWnnbMi2E2FPgqJQSwFRy8aSLBXFHq0OR4x2pATL6U2fAkQDVMo/bhIom3kUGEymHJ4q92Nl6XjOe5gVrxnhjltuI5Sqx/MzaX3vvBtjckHG1sbyujhQay86o1qI2UkluoxwXyJzqO7+uDcxRyQkO0dnU52TK8q6S7Xm97HZnl1JqzfJgKWBt5FTW4zRzuFgiVX+Jyw9muZ+5ThyVWsq7UO/vpAqxXi2H1drleYEEOLws0Ga4TLkHEpPLDl00+yqEWBt5TEa+JR/7O+lpS3l/AdY/3MigQc3OAAAAAElFTkSuQmCC">
                         <span class="A-articleBar A-focus"></span>
                     </div>
                     <p>Você pode <span class="A-focus">seguir</span> usuários para ampliar suas interações e construir uma comunidade de apoio. </p>
@@ -66,7 +67,7 @@
 
                 <article class="A-articleHelping">
                     <div class="A-articleHighlight">
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB5klEQVR4nO2Wz0tUURTHrz9yHyIShPrOeRNWixYStYmgTQgtm0X/gGgr893zZmzR97zJsb9BCFy4CGajYH9Ci8xVuFBBJZHaiP2GSOgHd8yw0Tc87U6LmC+czX3n3s879/zgGtNUU+lqgYR3YXkFlt+rpVkUevuqJjTn1qrfhIadr/ElB1XhH3+Y5c2q1az/gvuRCq8eAqfbsjcwhD5nBTtfb2C1vJg5YssLjc1xKphGvIGnhgZOqfBSBvBL52t8qhTnzldbKS23rqXGevu9Qn/DIx6A5beHwfQhiXJXTCOFOLyqQtsHoNvHhlbypi2J+aYKzUD4jVragtDjUqHvUr19D6NzAYRfuGpHMUeZgaWYL0JYIfwqvR/5WSJhHrjebnxJs08h1x7rKlR4VOw5/W/Bsl+19FEtT/1V5eoJwAcm0zcIPag9EzCtSUSDanl+7yep7Be8d/2f9s+aLPZ3wrKF0FqN3zvPEdNXCE0kUXBZhafV8pcjCvM7hEv+I66fioVEgmv1c2zpNYTvIw7PToz2nIGlUfeSOFHxCa0hDm/XfYFA6LkK3UkZ6C2I6AaEKhDazQDdUQnvARc6jC+Vx4Nu18MQ2jgiwl3XXuXxsMs0SpW8aYMEtyD81FWrCj851qhs6r/XT5OaWu/yYQX5AAAAAElFTkSuQmCC">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB00lEQVR4nO2Wv2sUURDHJzN76SWICBbGSklhIaKNjY0IlrnCf0DUkOzMRVAs/M6uOf0bDgSLFIFrFPRPsPBHJSlMIIoi2gQ1akAUNPK8xR/J3rmJ7yzCfWGat7Pv897Od94+ooEG6q4hNpwXw4IoVtj8FqXYG4INt8NYeMaKsyGXYqkD9bV18aKIP8YLeByJ+mIJuDzUn0QEY7U6GKvRwGz+qCqY1R/0u8bl4IafiwamM60aq8//FWr+OORSVKX5gU7bdK3tCjWwPy60UG06PySKtyXg90maHaF+KjEcFfXl39pnefPQelskzU6I+qwYXov5S1HcqFl+sOd701dH2fAwuJ0U+yrzapqPicFF8by7UXBPGlmdgIRiSaoeBp14yuYX6dL1Hf8bvFa49oOYt/7JubIV8C8zfWXDlQ2TAixpdpLV7xSLbMYFd+Ljz8kmro2w4oIoltblvIu948+imEmmssOiflPUP23Mwzcx5P3Ycc+fRKLZsd41Vn/Fiss0iT2kM7vZoD9uGVsz35IoxnveQNhwn1M/3eVAHxLFcVG0xfClwqd/w+pGwDBF01RzV+hhUTwrqWNYVIsmmzupb6q3RRo4xYa7wa2iPrepo3Kgba/vQ70u+CUpTwMAAAAASUVORK5CYII=">
                         <span class="A-articleBar A-focus"></span>
                     </div>
                     <p>Você pode ofecerer e receber ajuda de outras mães na aba de <span class="A-focus">Pedidos</span>.</p>
@@ -74,17 +75,91 @@
 
                 <article class="A-articleRating">
                     <div class="A-articleHighlight">
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAAByklEQVR4nNWWv0ocURTGr/eskiJRYyMpLIKRYC0IFoIp9AVEm2C7woI756z/Qiy+MzMJro/gA6hgIxZJ6wtESGobbQXRLglBDXdwddl1cGd2Z8APTjXn3N/MN9+9XGOenYCeqPKWFT1ylS91OXxLghsSvTUr4XBuXCu67qCuLGMtT/BxHfhHPtSVcLgGrZUpByOZc21FNxrBlvE5e7Dor0fAP7OlesH7Rui93V4w2nkg8MJ82nxNrGEc2D1zPVFvqyLxP5DgnBhXsQu3W+zWxjl5mHogC94R4zQzqNzXWfOBs17tI8Z+VlDLemgEA7G2W0aRWP92zmL95046Y0zXk/+8ezkYI9aTTlhb8PyJlsMWaQm9xLqX2lrRgyjlaWUFJWdXMmtRMm2r/HWQWK8TgK8Nf3nTNteKLiZPMIodAON7iq3zrT1qCS+J9XfycOGPC2f6r2XMxwWIBBpVXPAq/lxqMAl2m6E4LbA/WespCMYf3fOsO+moxe1uEr1sgO4bD/1Nvatbr0h0u6H3KtX1lxgz9YtY1o9Pzog/S6wXdXZPpwFX706gI1MJh1oerIRDbubuhauJwaYcjFjWBQPYxLOAjWbzuASa56L/qjlY3SDfOQIAAAAASUVORK5CYII=">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB20lEQVR4nNWWz0sbURDHn4LiQROTnUnooUhJRTwXCj0U9KD/gMRDY2YWhRT8AxT0oNCL/4JQ0LxxI+xFPOjVf0BBz17sVRC92VL8wWAiITGa3U0WHPiedr7z4c3MPp4x7y18k+9XxQ62SEeqeKHZuU8W+V6QH7aRcvGBkZYVqrLIS3GCT+rAx7FAt5FyNWhNHrijXQcL8GojWIBW4gCfvQA+7S7UmR9rglZVThfHOw7cGuEBL/kjJci/WoH1m+ZobtuFdxyaFKBLi3TzSuFIslob6FIcnngGW5z7bIEuugWt05+mC8dPlZKC5HfvxLzvJxbSLdtugUsW+V8Hgf/1pnswpufNmXvAXwT4vBOtLWeK39peNg1JFxKCtBsaCrSnWx4IWh+CxUVtV5DWqsdEjUpmIStId+2flu4ECh8ig8Whn4EXCrgUGWyRD4PPmA4iQX3MDwrQbYjF+qvLGRosQLOtF4jXVa0Wz6KbDw22yJXm+dGFgPu9luOl6etL/7xF8kJBN02pT5CuG2bnbyV5uDH3tzM/JMibDeCbUM9fQZquL2IdLrzlscgzFunq2Zdxp4KDgTeq0KPdlPuxXZ/mqudpyXgjMNgDd7SMXFwza71BvepRbyyPQPNe4hFtyYahczKoHAAAAABJRU5ErkJggg==">
                         <span class="A-articleBar A-focus"></span>
                     </div>
                     <p>Avalie <span class="A-focus">Relatos</span> e <span class="A-focus">Pedidos</span> para ajudar a comunidade a identificar conteúdos relevantes.</p>
                 </article>
             </section>
 
-            <div class="A-createAccountSign">
-                <p>Seja parte desta comunidade, conecte-se com outras mães!</p>
-                <h3 class="A-createAccountButton">Crie sua conta</h3>
-            </div>    
+            <section>
+                <article class="A-createAccountSign">
+                    <p>Seja parte desta comunidade, conecte-se com outras mães!</p>
+                    <h3 class="A-createAccountButton">Crie sua conta</h3>
+                </article>  
+            </section>
+
+            <section>
+                <article class="A-articleEquip">
+                    <div class="A-articleHighlight">
+                        <span class="A-articleBar A-focus"></span>
+                        <h2>Equipe</h2>
+                    </div>
+
+                    <div class="A-equipContainer">
+                        <div class="A-equipMember">
+                            <div class="A-memberImage">
+                                <img src="assets/Image.png" alt="Foto da Lívia Braga">
+                            </div>
+
+                            <div class="A-memberInformation">
+                                <p class="A-memberName"> Lívia</p>
+                                <p class="A-memberFamilyName"> Braga</p>
+                                <p class="A-memberFunction"> Desenvolvedora </p>
+                            </div>
+                        </div>
+
+                        <div class="A-equipMember">
+                            <div class="A-memberImage">
+                                <img src="assets/Image (1).png" alt="Foto da Nathália Lessa">
+                            </div>
+
+                            <div class="A-memberInformation">
+                                <p class="A-memberName"> Nathália</p>
+                                <p class="A-memberFamilyName"> Lessa</p>
+                                <p class="A-memberFunction"> Desenvolvedora </p>
+                            </div>
+                        </div>
+
+                        <div class="A-equipMember">
+                            <div class="A-memberImage">
+                                <img src="assets/Image (2).png" alt="Foto o Renan Moura">
+                            </div>
+
+                            <div class="A-memberInformation">
+                                <p class="A-memberName"> Renan</p>
+                                <p class="A-memberFamilyName"> Moura</p>
+                                <p class="A-memberFunction"> Desenvolvedor </p>
+                            </div>
+                        </div>
+
+                        <div class="A-equipMember">
+                            <div class="A-memberImage">
+                                <img src="assets/Image (3).png" alt="Foto do Luís Mendes">
+                            </div>
+
+                            <div class="A-memberInformation">
+                                <p class="A-memberName"> Luís</p>
+                                <p class="A-memberFamilyName"> Mendes</p>
+                                <p class="A-memberFunction"> Orientador </p>
+                            </div>
+                        </div>
+
+                        <div class="A-equipMember">
+                            <div class="A-memberImage">
+                                <img src="assets/Image (4).png" alt="Foto da Tatiana Azevedo">
+                            </div>
+
+                            <div class="A-memberInformation">
+                                <p class="A-memberName"> Tatiana</p>
+                                <p class="A-memberFamilyName"> Azevedo</p>
+                                <p class="A-memberFunction"> Coorientadora </p>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </section>
+            
         </main>
 
         <footer>
