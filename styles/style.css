@@ -148,7 +148,7 @@ main section .A-articleHighlight{
 
 main section .A-articleHighlight .A-articleBar{
     position: relative;
-    height: 10rem;
+    height: 28.125rem;
     width: 3px;
     border-radius: 100rem;
 }
