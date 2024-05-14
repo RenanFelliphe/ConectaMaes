@@ -34,12 +34,12 @@ header img.A-headerLogo{
     cursor: pointer;
 }
 
-header .A-apresentationSections{
+header .A-headerLinks{
     display: flex;
     gap: 2.5rem;
 }
 
-header .A-apresentationSections h4{
+header .A-headerLinks h4{
     cursor: pointer;
     font-weight: 500;
 }
@@ -123,105 +123,107 @@ main .A-backgroundMom img{
     width: 9rem;
 }
 
-main section{
+main .A-apresentationSections{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 1rem 0 3rem 2rem;
+    padding: 0 0 3rem 2rem;
 }
 
-main section .A-quote{
-    padding:  5rem 0 5rem 5rem;
+main .A-apresentationSections .A-quote{
+    padding:  5rem 0 3rem 5rem;
     width: 40rem;
     font-size: 2.5rem;
 }
 
-main section article{
+main .A-apresentationSections article{
     display: flex;
     justify-content: flex-start;
     gap: 2rem;
     width: 60vw;
 }
 
-main section .A-articleHighlight{
+main .A-apresentationSections .A-articleHighlight{
     position: relative;
     display: flex;
     flex-direction: column;
+    gap: 1rem;
+    padding-top: 1rem;
 }
 
-main section .A-articleHighlight .A-articleBar{
+main .A-apresentationSections .A-articleHighlight .A-articleBar{
     position: relative;
-    height: 28.125rem;
+    height: 20rem;
     width: 3px;
     border-radius: 100rem;
 }
 
-main section .A-articleConectaMaes .A-articleHighlight .A-articleBar,
-main section .A-Sharing .A-articleHighlight .A-articleBar,
-main section .A-articleEquip .A-articleHighlight .A-articleBar{
+main .A-apresentationSections .A-articleConectaMaes .A-articleHighlight .A-articleBar,
+main .A-apresentationSections .A-Sharing .A-articleHighlight .A-articleBar,
+main .A-apresentationSections .A-articleEquip .A-articleHighlight .A-articleBar{
     background-color: var(--middleYellowColor);
 }
 
-main section .A-Sharing .A-articleHighlight .A-articleBar{
+main .A-apresentationSections .A-Sharing .A-articleHighlight .A-articleBar{
     background: linear-gradient(#BDB150,#40AEBD);
 }
 
-main section .A-articleFollowing .A-articleHighlight .A-articleBar,
-main section .A-articleHelping .A-articleHighlight .A-articleBar{
+main .A-apresentationSections .A-articleFollowing .A-articleHighlight .A-articleBar,
+main .A-apresentationSections .A-articleHelping .A-articleHighlight .A-articleBar{
     background-color: var(--middleBlueColor);
 }
 
-main section .A-articleHelping .A-articleHighlight .A-articleBar{
+main .A-apresentationSections .A-articleHelping .A-articleHighlight .A-articleBar{
     background: linear-gradient(#40AEBD,#CF4A8E);
 }
-main section .A-articleRating .A-articleHighlight .A-articleBar{
+main .A-apresentationSections .A-articleRating .A-articleHighlight .A-articleBar{
     background: linear-gradient(var(--middlePinkColor),#FA7EBD00);
 }
 
-main section .A-articleConectaMaes p,
-main section .A-Sharing,
-main section .A-articleFollowing p,
-main section .A-articleHelping,
-main section .A-articleRating{
+main .A-apresentationSections .A-articleConectaMaes p,
+main .A-apresentationSections .A-Sharing,
+main .A-apresentationSections .A-articleFollowing p,
+main .A-apresentationSections .A-articleHelping,
+main .A-apresentationSections .A-articleRating{
     font-size: 1.25rem;
     text-align: justify;
 }
 
-main section .A-articleConectaMaes .A-focus,
-main section .A-Sharing .A-focus{
+main .A-apresentationSections .A-articleConectaMaes .A-focus,
+main .A-apresentationSections .A-Sharing .A-focus{
     font-weight: bolder;
     color: var(--middleYellowColor);
 }
 
-main section .A-articleFollowing .A-focus,
-main section .A-articleHelping .A-focus{
+main .A-apresentationSections .A-articleFollowing .A-focus,
+main .A-apresentationSections .A-articleHelping .A-focus{
     font-weight: bolder;
     color: var(--middleBlueColor);
 }
 
-main section .A-articleRating .A-focus{
+main .A-apresentationSections .A-articleRating .A-focus{
     font-weight: bolder;
     color: var(--middlePinkColor);
 }
 
-main section:nth-of-type(2){
+main .A-apresentationSections:nth-of-type(2){
     align-items: center;
 }
 
-main section .A-createAccountSign{
+main .A-apresentationSections .A-createAccountSign{
     display: flex;
     flex-direction: column;
     gap: 1rem;
     padding: 2rem;
 }
 
-main section .A-createAccountSign p{
+main .A-apresentationSections .A-createAccountSign p{
     width: 20rem;
     text-align: center;
     font-size: 1.2rem;
 }
 
-main section .A-createAccountSign .A-createAccountButton{
+main .A-apresentationSections .A-createAccountSign .A-createAccountButton{
     display: flex;
     padding: 0.7rem 1.2rem 0.7rem 1.2rem;
     border-radius: 10rem;
@@ -233,14 +235,14 @@ main section .A-createAccountSign .A-createAccountButton{
     font-weight: 900;
 }
 
-main section .A-articleEquip{
+main .A-apresentationSections .A-articleEquip{
     position: relative;
     justify-content: center;
     padding: 10rem 2rem 0 0;
     width: 100vw;
 }
 
-main section .A-articleEquip .A-articleHighlight{
+main .A-apresentationSections .A-articleEquip .A-articleHighlight{
     flex-direction: row;
     align-items: flex-end;
     gap: 2rem;
@@ -249,47 +251,47 @@ main section .A-articleEquip .A-articleHighlight{
     top: 0;
 }
 
-main section .A-articleEquip .A-articleHighlight .A-articleBar{
+main .A-apresentationSections .A-articleEquip .A-articleHighlight .A-articleBar{
     height: 6.25rem;
     background: linear-gradient(#FA7EBD00,var(--middleYellowColor));
 }
 
-main section .A-articleEquip .A-articleHighlight h2{
+main .A-apresentationSections .A-articleEquip .A-articleHighlight h2{
     font-size: 2.5rem;
 }
 
-main section .A-articleEquip .A-equipContainer{
+main .A-apresentationSections .A-articleEquip .A-equipContainer{
     display: flex;
     flex-wrap: wrap;
     width: 40rem;
     gap: 3rem;
 }
 
-main section .A-articleEquip .A-equipContainer .A-equipMember{
+main .A-apresentationSections .A-articleEquip .A-equipContainer .A-equipMember{
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
 }
 
-main section .A-articleEquip .A-equipContainer .A-equipMember .A-memberImage img{
+main .A-apresentationSections .A-articleEquip .A-equipContainer .A-equipMember .A-memberImage img{
     width: 8rem;
 }
 
-main section .A-articleEquip .A-equipContainer .A-equipMember .A-memberInformation{
+main .A-apresentationSections .A-articleEquip .A-equipContainer .A-equipMember .A-memberInformation{
     line-height: 1.3rem;
     text-align: center;
 }
 
-main section .A-articleEquip .A-equipContainer .A-equipMember .A-memberInformation .A-memberName{
+main .A-apresentationSections .A-articleEquip .A-equipContainer .A-equipMember .A-memberInformation .A-memberName{
     font-size: 1.7rem;
     font-weight: 600;
 }
 
-main section .A-articleEquip .A-equipContainer .A-equipMember .A-memberInformation .A-memberFamilyName{
+main .A-apresentationSections .A-articleEquip .A-equipContainer .A-equipMember .A-memberInformation .A-memberFamilyName{
     font-weight: 500;
 }
 
-main section .A-articleEquip .A-equipContainer .A-equipMember .A-memberInformation .A-memberFunction{
+main .A-apresentationSections .A-articleEquip .A-equipContainer .A-equipMember .A-memberInformation .A-memberFunction{
     font-weight: 400;
 }
 
@@ -397,17 +399,17 @@ footer .A-footerRight li.A-footerPolitic h5{
 }
 
 .L-form{
-    background-color: var(--whiteColor);
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    background-color: var(--whiteColor);
     padding: 2rem 1.5rem;
     border: 2px solid transparent;
     background: linear-gradient(white, white) padding-box, linear-gradient(var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
-    width: 28.5rem;   
-    height: 32.813rem;
+    width: 28rem;   
+    height: 32rem;
     border-radius: 1rem;
-    
     
 }
 .L-title{
@@ -431,10 +433,11 @@ footer .A-footerRight li.A-footerPolitic h5{
     background-color: var(--middleYellowColor);
     gap: 0.5rem;
     height: 2rem;
-    width: 12rem; 
+    width: 14rem; 
     padding: 0.2rem 0.5rem;
     border-radius: 100rem;
     font-weight: 600;
+    font-size: 16px;
     color: var(--whiteColor);
     cursor: pointer;
     border: none;
@@ -465,17 +468,69 @@ footer .A-footerRight li.A-footerPolitic h5{
     gap: 0.5rem 0;
     width: 75%;
 }
+.L-inputs div{
+    width:100%;
+}
 .L-inputs input{
     width:100%;
     border:solid 3px var(--middleYellowColor);
     border-radius: 1rem;
-    padding: 0.6rem 0.75rem;
+    padding: 0.6rem 1rem;
     outline:none;
     border: 2px solid transparent;
     background: linear-gradient(white, white) padding-box, linear-gradient(to right, var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
     color: black;
     opacity: 0.5;
 }
+.L-form .L-userInputs{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.L-form .L-userInputs div {
+    position: relative;
+}
+
+.L-form .L-userInputs input {
+    padding: 0.6rem 0.5rem 0.6rem 0.5rem;
+    border-radius: 100rem;
+    border: 2px solid transparent;
+    background: linear-gradient(white, white) padding-box, linear-gradient(to right, var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
+    outline: none;
+    color: black;
+    opacity: 0.5;
+}
+
+.L-form .L-userInputs input:focus,
+.L-form .L-userInputs input:hover,
+.L-form .L-userInputs input:valid {
+    opacity: 1;
+    transition: 0.15s ease-in-out;
+}
+
+.L-form .L-userInputs label{
+    position: absolute;
+    color: var(--darkYellowColor);
+    font-weight: 600;
+    cursor: text;
+    transition: 0.25s ease-in-out, 0.3s ease-in-out text-shadow;
+    font-size: 15px;
+    top: 11px;
+    left: 1rem;
+    opacity: 0.65;
+}
+
+.L-form .L-userInputs input:focus + label,
+.L-form .L-userInputs input:valid + label {
+    top: -5px;
+    font-size: 12px;
+    opacity: 1;
+    text-shadow: 3px 0 0 var(--whiteColor), -3px 0 0 var(--whiteColor), 0 3px 0 var(--whiteColor), 0 -3px 0 var(--whiteColor),3px 3px 0 var(--whiteColor), -3px -3px 0 var(--whiteColor), 3px -3px 0 var(--whiteColor), -3px 3px 0 var(--whiteColor),
+                5px 0 0 var(--whiteColor), -5px 0 0 var(--whiteColor), 0 5px 0 var(--whiteColor), 0 -5px 0 var(--whiteColor),5px 5px 0 var(--whiteColor), -5px -5px 0 var(--whiteColor), 5px -5px 0 var(--whiteColor), -5px 5px 0 var(--whiteColor);
+    transition: 0.25s ease-in-out, 0.3s ease-in-out text-shadow;
+}
+
 .L-secondaryLOptions{
     width:75%;
     display: flex;
@@ -524,10 +579,10 @@ footer .A-footerRight li.A-footerPolitic h5{
 
 .R-registerForm{
     position: relative;
-    background-color: var(--whiteColor);
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    background-color: var(--whiteColor);
     padding: 2rem 1.5rem;
     border: 2px solid transparent;
     background: linear-gradient(white, white) padding-box, linear-gradient(var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
@@ -536,6 +591,13 @@ footer .A-footerRight li.A-footerPolitic h5{
     border-radius: 1rem;
     transform: translateX(-50%);
     left: 50%;
+}
+
+.R-registerForm section{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
 .R-registerMain .A-backgroundGeometricForms{
@@ -652,4 +714,24 @@ footer .A-footerRight li.A-footerPolitic h5{
 .R-registerForm .R-goLogin a{
     color: var(--middleYellowColor);
     font-weight: 700;
+}
+
+.R-registerForm .R-childSection .R-addChild{
+    display: flex;
+    color: var(--whiteColor);
+    width: 150%;
+    height: 2rem;
+    border-radius: 100rem;
+    font-size: 0.85rem;
+    background: linear-gradient(to right, var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor));
+    cursor: pointer;
+}
+
+.R-registerForm .R-childSection .R-systemTheme .R-themeContainer{
+    line-height: 3rem;
+}
+
+.R-registerForm .R-childSection .R-systemTheme .R-themeContainer{
+    display: flex;
+    gap: 1rem;
 }
