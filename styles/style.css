@@ -97,6 +97,12 @@ header .A-signButtons .A-signIn{
     background-color: var(--middleYellowColor);
 }
 
+main{
+    position: relative;
+    background: linear-gradient(#ffffff50 0%, #80752350 20%, #03718050 45%, #a3155f50 75%, #80752350 95%);
+    padding: 0.3rem 1rem 3rem 1rem;
+}
+
 main .A-backgroundGeometricForms{
     position: absolute;
     height: 100%;
@@ -108,19 +114,13 @@ main .A-backgroundMom{
     position: absolute;
     display: flex;
     flex-direction: column;
-    gap: 10rem;
+    gap: 50rem;
     right: 20rem;
     top: 13rem;
 }
 
 main .A-backgroundMom img{
-    width: 8rem;
-}
-
-main{
-    position: relative;
-    background: linear-gradient(#ffffff50 0%, #80752350 20%, #03718050 45%, #a3155f50 75%, #80752350 95%);
-
+    width: 9rem;
 }
 
 main section{
@@ -292,6 +292,121 @@ main section .A-articleEquip .A-equipContainer .A-equipMember .A-memberInformati
     font-weight: 400;
 }
 
+/*====================================================================================================
+========================================= PÁGINA DE LOGIN  ===========================================
+====================================================================================================*/
+
+.L-mainBackground{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(#ffffff50 0%, #80752350 100%);
+}
+.L-form{
+    background-color: #ffffff;
+    width: 25rem;
+    height: 29.167rem;
+    border-radius: 1.563rem;
+    margin: 1.5rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+.L-title{
+    color:var(--middleYellowColor);
+    font-size: 3rem;
+}
+.L-submitButton{
+    color: var(--whiteColor);
+    background-color: var(--middleYellowColor);
+    border:none;
+    height: 2rem;
+    width: 7rem; 
+    border-radius: 10rem;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+}
+.L-googleButton{
+    color: var(--whiteColor);
+    background-color: var(--middleYellowColor);
+    border:none;
+    height: 2rem;
+    width: 11rem; 
+    border-radius: 10rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.L-signWGoogle{
+    text-decoration: none;
+}
+.L-orDivision{
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    width:100%;
+}
+.L-orDivision .L-orText{
+    font-weight: 500;
+    font-size: 20px;
+    color: var(--middleYellowColor);
+}
+.L-orDivision .L-horizontalOrBar{
+    background: var(--middleYellowColor);
+    width:5rem;
+    height:3px;
+    border-radius: 3px;
+}
+.L-inputs{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem 0;
+    width: 75%;
+}
+.L-inputs input{
+    width:100%;
+    border:solid 3px var(--middleYellowColor);
+    border-radius: 1rem;
+    padding: 0.5rem 0.75rem;
+    outline:none;
+}
+.L-secondaryLOptions{
+    width:75%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    gap:0.5rem;
+    font-size: 0.75rem;
+    gap: space-between;
+    
+}
+.L-secondaryLOptions a{
+    text-decoration: none;
+    color: #000000;
+}
+.L-rememberCheckbox{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap:5px;
+}
+.L-rememberCheckbox a{
+    text-decoration: none;
+    color: #000000;
+}
+.L-noAccount{
+    font-size: 0.75rem;
+}
+.L-noAccount span{
+    font-weight: 600;
+    color: var(--middleYellowColor);
+    text-decoration: underline var(--middleYellowColor);
+}
+
 footer{
     position: relative;
     display: flex;
@@ -315,26 +430,29 @@ footer .A-footerLeft .A-footerContact{
     font-size: 1.625rem;
 }
 
-footer .A-footerLeft .A-footerContact h3{
+footer .A-footerLeft .A-footerContact h4{
     padding: 0.5rem 0 1rem 0;
 }
 
 footer .A-footerLeft .A-footerContact .A-footerSocialMedias{
     display: flex;
     justify-content: space-between;
-    font-size: 2rem;   
+    font-size: 1.5rem;   
 }
 
 footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-instagram{
     color: var(--pastelYellowColor);
+    cursor: pointer;
 }
 
 footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-facebook{
     color: var(--pastelBlueColor);
+    cursor: pointer;
 }
 
 footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-envelope-fill{
     color: var(--pastelPinkColor);
+    cursor: pointer;
 }
 
 footer .A-copyrightSign{
@@ -350,6 +468,7 @@ footer .A-copyrightSign{
 
 footer .A-footerRight{
     display: flex;
+    align-items: flex-start;
     gap: 6.25rem;
     list-style: none;
     height: 100%;
@@ -377,4 +496,146 @@ footer .A-footerRight li.A-footerHelp h5{
 
 footer .A-footerRight li.A-footerPolitic h5{
     color: var(--pastelPinkColor);
+}
+
+
+/*====================================================================================================
+======================================== PÁGINA DE REGISTRO ==========================================
+====================================================================================================*/
+
+.R-registerMain{
+    background: linear-gradient(#ffffff 0%, #fffad0 95%);
+}
+
+.R-registerForm{
+    position: relative;
+    background-color: var(--whiteColor);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem 1.5rem;
+    border: 2px solid transparent;
+    background: linear-gradient(white, white) padding-box, linear-gradient(var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
+    width: min-content;   
+    height: min-content;
+    border-radius: 1rem;
+    transform: translateX(-50%);
+    left: 50%;
+}
+
+.R-registerMain .A-backgroundGeometricForms{
+    height: 100%;
+    position: absolute;
+}
+
+.R-registerMain .A-backgroundGeometricForms.cellsLeft{
+    left: 0;
+}
+
+
+.R-registerTitle{
+    color: var(--middleYellowColor);
+    text-transform: uppercase;
+    font-size: 3rem;
+}
+
+.R-loginWithGoogle{
+    display: flex;
+    background-color: var(--middleYellowColor);
+    gap: 0.5rem;
+    padding: 0.2rem 0.5rem 0.2rem 0.5rem;
+    border-radius: 100rem;
+    font-weight: 900;
+    color: var(--whiteColor);
+    cursor: pointer;
+}
+
+.R-registerForm .R-separator{
+    position: relative;
+    color: var(--middleYellowColor);
+    display: flex;
+    gap: 1rem;
+}
+
+.R-registerForm .R-separator span{
+    width: 7rem;
+    border: 1px solid var(--middleYellowColor);
+    border-radius: 100rem;
+}
+
+
+.R-registerForm .R-userInputs{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.R-registerForm .R-userInputs div {
+    position: relative;
+}
+
+.R-registerForm .R-userInputs input {
+    padding: 0.6rem 0.5rem 0.6rem 0.5rem;
+    border-radius: 100rem;
+    border: 2px solid transparent;
+    background: linear-gradient(white, white) padding-box, linear-gradient(to right, var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
+    outline: none;
+    color: black;
+    opacity: 0.5;
+}
+
+.R-registerForm .R-userInputs input:focus,
+.R-registerForm .R-userInputs input:hover,
+.R-registerForm .R-userInputs input:valid {
+    opacity: 1;
+    transition: 0.15s ease-in-out;
+}
+
+.R-registerForm .R-userInputs label{
+    position: absolute;
+    color: var(--middleYellowColor);
+    font-weight: 600;
+    cursor: text;
+    transition: 0.25s ease-in-out, 0.3s ease-in-out text-shadow;
+    font-size: 15px;
+    top: 11px;
+    left: 1rem;
+    opacity: 0.65;
+}
+
+.R-registerForm .R-userInputs input:focus + label,
+.R-registerForm .R-userInputs input:valid + label {
+    top: -5px;
+    font-size: 12px;
+    opacity: 1;
+    text-shadow: 3px 0 0 var(--whiteColor), -3px 0 0 var(--whiteColor), 0 3px 0 var(--whiteColor), 0 -3px 0 var(--whiteColor),3px 3px 0 var(--whiteColor), -3px -3px 0 var(--whiteColor), 3px -3px 0 var(--whiteColor), -3px 3px 0 var(--whiteColor),
+                5px 0 0 var(--whiteColor), -5px 0 0 var(--whiteColor), 0 5px 0 var(--whiteColor), 0 -5px 0 var(--whiteColor),5px 5px 0 var(--whiteColor), -5px -5px 0 var(--whiteColor), 5px -5px 0 var(--whiteColor), -5px 5px 0 var(--whiteColor);
+    transition: 0.25s ease-in-out, 0.3s ease-in-out text-shadow;
+}
+
+.R-registerForm .R-next{
+    display: flex;
+    color: var(--whiteColor);
+    background-color: var(--middleYellowColor);
+    padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+    border: none;
+    border-radius: 100rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.R-registerForm .R-next:hover{
+    font-size: 1.4rem;
+    transition: 0.2s;
+}
+
+.R-registerForm .R-goLogin{
+    font-size: 0.8rem;
+}
+
+.R-registerForm .R-goLogin a{
+    color: var(--middleYellowColor);
+    font-weight: 700;
 }

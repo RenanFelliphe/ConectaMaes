@@ -29,14 +29,71 @@
             </div>
         </header>
 
-        <main>
-            
+        <main class="R-registerMain">
+            <img src="assets/Imagens/CellsLog.png" class="A-backgroundGeometricForms cellsLeft">
+            <img src="assets/Imagens/CellsLog2.png" class="A-backgroundGeometricForms cellsRight">
+
+            <form action="" class="R-registerForm">
+                <h1 class="R-registerTitle"> Cadastrar </h1>
+                <div class="R-loginWithGoogle">
+                    <img src="assets/Imagens/Google.png" alt="">
+                    <p>Cadastrar com o Google</p>
+                </div>
+
+                <div class="R-separator"> 
+                    <span></span>
+                    <h3> OU </h3>
+                    <span></span>
+                </div>
+
+                <div class="R-userInputs">
+                    <div>
+                        <input type="text" id="nomeCompleto" required>
+                        <label class="R-fakePlaceholder" for="nomeCompleto">Nome Completo
+                            <span></span>
+                        </label>
+                    </div>
+                    <div>
+                        <input type="text" id="dataNascimento" required>
+                        <label class="R-fakePlaceholder" for="dataNascimento">Data de Nascimento</label>
+                    </div>
+                    <div>
+                        <input type="text" id="telefone" required>
+                        <label class="R-fakePlaceholder" for="telefone">Telefone</label>
+                    </div>
+                    <div>
+                        <input type="text" id="cep" required>
+                        <label class="R-fakePlaceholder" for="cep">CEP</label>
+                    </div>
+                    <div>
+                        <input type="text" id="email" required>
+                        <label class="R-fakePlaceholder" for="email">Email</label>
+                    </div>
+                    <div>
+                        <input type="text" id="confirmarEmail" required>
+                        <label class="R-fakePlaceholder" for="confirmarEmail">Confirmar Email</label>
+                    </div>
+                    <div>
+                        <input type="text" id="senha" required>
+                        <label class="R-fakePlaceholder" for="senha">Senha</label>
+                    </div>
+                    <div>
+                        <input type="text" id="confirmarSenha" required>
+                        <label class="R-fakePlaceholder" for="confirmarSenha">Confirmar Senha</label>
+                    </div>
+                </div>
+                
+                
+
+                <button class="R-next">Próximo</button>
+                <p class="R-goLogin">Já possui uma conta? <a href="login.html">Entre</a></p>
+            </form>
         </main>
 
         <footer>
             <div class="A-footerLeft">
                 <div class="A-footerContact">
-                    <h3>Contato</h3>
+                    <h4>Contato</h4>
                     <div class="A-footerSocialMedias">
                         <i class="bi bi-instagram"></i>
                         <i class="bi bi-facebook"></i>
@@ -58,7 +115,6 @@
                 </li>
                 <li class="A-footerHelp">
                     <h5>Ajuda</h5>
-                    <p class="A-footerHelpFAQ">FAQ</p>
                     <p class="A-footerHelpSuport">Suporte</p>
                 </li>
                 <li class="A-footerPolitic">
