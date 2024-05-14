@@ -9,13 +9,32 @@
     font-style: normal;
 }
 
-/*====================================================================================================
-====================================== PÁGINA DE APRESENTAÇÃO ========================================
-====================================================================================================*/
-
 body::-webkit-scrollbar{
     display: none;
 }
+
+main{
+    position: relative;
+    padding: 0.3rem 1rem 3rem 1rem;
+    overflow: hidden;
+}
+
+.backgroundGeometricForms{
+    position: absolute;
+    right: 0;
+    top: -4rem;
+    width: 15vw;
+    height: max-content;
+}
+
+.backgroundGeometricForms.cellsLeft{
+    left: 0;
+    transform: scaleX(-1);
+}
+
+/*====================================================================================================
+========================================= HEADER E FOOTER ============================================
+====================================================================================================*/
 
 header{
     position: sticky;
@@ -23,7 +42,7 @@ header{
     display: flex;
     justify-content: space-between;
     gap: 1rem;
-    height: 5rem;
+    height: 4rem;
     padding: 0.5rem 1.5rem 0.5rem 0.5rem;
     background-color: var(--whiteColor);
     z-index: 1;
@@ -96,205 +115,6 @@ header .A-signButtons .A-signIn{
     color: var(--whiteColor);
     background-color: var(--middleYellowColor);
 }
-
-main{
-    position: relative;
-    background: linear-gradient(#ffffff50 0%, #80752350 20%, #03718050 45%, #a3155f50 75%, #80752350 95%);
-    padding: 0.3rem 1rem 3rem 1rem;
-}
-
-main .A-backgroundGeometricForms{
-    position: absolute;
-    height: 100%;
-    right: 0;
-    top: 0;
-}
-
-main .A-backgroundMom{
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    gap: 50rem;
-    right: 20rem;
-    top: 13rem;
-}
-
-main .A-backgroundMom img{
-    width: 9rem;
-}
-
-main .A-apresentationSections{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0 0 3rem 2rem;
-}
-
-main .A-apresentationSections .A-quote{
-    padding:  5rem 0 3rem 5rem;
-    width: 40rem;
-    font-size: 2.5rem;
-}
-
-main .A-apresentationSections article{
-    display: flex;
-    justify-content: flex-start;
-    gap: 2rem;
-    width: 60vw;
-}
-
-main .A-apresentationSections .A-articleHighlight{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding-top: 1rem;
-}
-
-main .A-apresentationSections .A-articleHighlight .A-articleBar{
-    position: relative;
-    height: 20rem;
-    width: 3px;
-    border-radius: 100rem;
-}
-
-main .A-apresentationSections .A-articleConectaMaes .A-articleHighlight .A-articleBar,
-main .A-apresentationSections .A-Sharing .A-articleHighlight .A-articleBar,
-main .A-apresentationSections .A-articleEquip .A-articleHighlight .A-articleBar{
-    background-color: var(--middleYellowColor);
-}
-
-main .A-apresentationSections .A-Sharing .A-articleHighlight .A-articleBar{
-    background: linear-gradient(#BDB150,#40AEBD);
-}
-
-main .A-apresentationSections .A-articleFollowing .A-articleHighlight .A-articleBar,
-main .A-apresentationSections .A-articleHelping .A-articleHighlight .A-articleBar{
-    background-color: var(--middleBlueColor);
-}
-
-main .A-apresentationSections .A-articleHelping .A-articleHighlight .A-articleBar{
-    background: linear-gradient(#40AEBD,#CF4A8E);
-}
-main .A-apresentationSections .A-articleRating .A-articleHighlight .A-articleBar{
-    background: linear-gradient(var(--middlePinkColor),#FA7EBD00);
-}
-
-main .A-apresentationSections .A-articleConectaMaes p,
-main .A-apresentationSections .A-Sharing,
-main .A-apresentationSections .A-articleFollowing p,
-main .A-apresentationSections .A-articleHelping,
-main .A-apresentationSections .A-articleRating{
-    font-size: 1.25rem;
-    text-align: justify;
-}
-
-main .A-apresentationSections .A-articleConectaMaes .A-focus,
-main .A-apresentationSections .A-Sharing .A-focus{
-    font-weight: bolder;
-    color: var(--middleYellowColor);
-}
-
-main .A-apresentationSections .A-articleFollowing .A-focus,
-main .A-apresentationSections .A-articleHelping .A-focus{
-    font-weight: bolder;
-    color: var(--middleBlueColor);
-}
-
-main .A-apresentationSections .A-articleRating .A-focus{
-    font-weight: bolder;
-    color: var(--middlePinkColor);
-}
-
-main .A-apresentationSections:nth-of-type(2){
-    align-items: center;
-}
-
-main .A-apresentationSections .A-createAccountSign{
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding: 2rem;
-}
-
-main .A-apresentationSections .A-createAccountSign p{
-    width: 20rem;
-    text-align: center;
-    font-size: 1.2rem;
-}
-
-main .A-apresentationSections .A-createAccountSign .A-createAccountButton{
-    display: flex;
-    padding: 0.7rem 1.2rem 0.7rem 1.2rem;
-    border-radius: 10rem;
-    cursor: pointer;
-    color: var(--whiteColor);
-    background-color: var(--middlePinkColor);
-    width: 13rem;
-    box-shadow: 0 0 5px 1px var(--darkPinkColor);
-    font-weight: 900;
-}
-
-main .A-apresentationSections .A-articleEquip{
-    position: relative;
-    justify-content: center;
-    padding: 10rem 2rem 0 0;
-    width: 100vw;
-}
-
-main .A-apresentationSections .A-articleEquip .A-articleHighlight{
-    flex-direction: row;
-    align-items: flex-end;
-    gap: 2rem;
-    position: absolute;
-    left: 1rem;
-    top: 0;
-}
-
-main .A-apresentationSections .A-articleEquip .A-articleHighlight .A-articleBar{
-    height: 6.25rem;
-    background: linear-gradient(#FA7EBD00,var(--middleYellowColor));
-}
-
-main .A-apresentationSections .A-articleEquip .A-articleHighlight h2{
-    font-size: 2.5rem;
-}
-
-main .A-apresentationSections .A-articleEquip .A-equipContainer{
-    display: flex;
-    flex-wrap: wrap;
-    width: 40rem;
-    gap: 3rem;
-}
-
-main .A-apresentationSections .A-articleEquip .A-equipContainer .A-equipMember{
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-}
-
-main .A-apresentationSections .A-articleEquip .A-equipContainer .A-equipMember .A-memberImage img{
-    width: 8rem;
-}
-
-main .A-apresentationSections .A-articleEquip .A-equipContainer .A-equipMember .A-memberInformation{
-    line-height: 1.3rem;
-    text-align: center;
-}
-
-main .A-apresentationSections .A-articleEquip .A-equipContainer .A-equipMember .A-memberInformation .A-memberName{
-    font-size: 1.7rem;
-    font-weight: 600;
-}
-
-main .A-apresentationSections .A-articleEquip .A-equipContainer .A-equipMember .A-memberInformation .A-memberFamilyName{
-    font-weight: 500;
-}
-
-main .A-apresentationSections .A-articleEquip .A-equipContainer .A-equipMember .A-memberInformation .A-memberFunction{
-    font-weight: 400;
-}
-
 
 footer{
     position: relative;
@@ -388,130 +208,276 @@ footer .A-footerRight li.A-footerPolitic h5{
 }
 
 /*====================================================================================================
+====================================== PÁGINA DE APRESENTAÇÃO ========================================
+====================================================================================================*/
+
+.La-landing{
+    background: linear-gradient(var(--whiteColor) 8%, #80752350 16%, #03718050 45%, #a3155f50 75%, #80752350 85%);
+    padding-left: 3rem;
+}
+
+.La-landingSections .La-quote{
+    padding:  5rem 0 3rem 5rem;
+    width: 75vw;
+    font-size: 10vh;
+}
+
+.La-landingSections article{
+    display: flex;
+    justify-content: flex-start;
+    gap: 3rem;
+    width: 60vw;
+    font-size: 1.25rem;
+    text-align: justify;
+}
+
+.La-landingSections  article .La-momImageRight{
+    width: 9rem;
+    margin-right: -15rem;
+}
+
+.La-landingSections  article .La-momImageLeft{
+    width: 12rem;
+}
+
+.La-landingSections .La-articleHighlight{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-top: 1rem;
+}
+
+.La-landingSections .La-articleHighlight .La-articleBar{
+    position: relative;
+    height: 20rem;
+    width: 3px;
+    border-radius: 100%;
+}
+
+.La-landingSections .La-articleHighlight .La-articleBar::before {
+    content: "";
+    position: absolute;
+    transform: translateY(-20%);
+    height: 140%;
+    inset: -7px;
+    filter: blur(15px);
+    border-radius: 100%;
+    z-index: -1;
+}
+
+.La-landingSections .La-articleConectaMaes .La-articleHighlight .La-articleBar,
+.La-landingSections .La-articleEquip .La-articleHighlight .La-articleBar{
+    background: var(--middleYellowColor);
+}
+.La-landingSections .La-articleConectaMaes .La-articleHighlight .La-articleBar::before,
+.La-landingSections .La-articleEquip .La-articleHighlight .La-articleBar::before{
+    background: var(--pastelYellowColor);
+}
+
+.La-landingSections .La-Sharing .La-articleHighlight .La-articleBar{
+    background: linear-gradient(var(--middleYellowColor) 30%, var(--middleBlueColor) 100%);
+}
+
+.La-landingSections .La-Sharing .La-articleHighlight .La-articleBar::before{
+    background: linear-gradient(var(--pastelYellowColor) 30%, var(--pastelBlueColor) 100%);
+}
+
+.La-landingSections .La-articleFollowing .La-articleHighlight .La-articleBar{
+    background-color: var(--middleBlueColor);
+}
+
+.La-landingSections .La-articleFollowing .La-articleHighlight .La-articleBar::before{
+    background-color: var(--pastelBlueColor);
+}
+
+.La-landingSections .La-articleHelping .La-articleHighlight .La-articleBar{
+    background: linear-gradient(var(--middleBlueColor) 30%, var(--middlePinkColor) 100%);
+}
+
+.La-landingSections .La-articleHelping .La-articleHighlight .La-articleBar::before{
+    background: linear-gradient(var(--pastelBlueColor) 30%, var(--pastelPinkColor) 100%);
+}
+
+.La-landingSections .La-articleRating .La-articleHighlight .La-articleBar{
+    background: linear-gradient(var(--middlePinkColor), #FA7EBD00);
+}
+
+.La-landingSections .La-articleRating .La-articleHighlight .La-articleBar::before{
+    background: linear-gradient(var(--pastelPinkColor), #FA7EBD00);
+}
+
+.La-landingSections .La-articleConectaMaes .La-focus,
+.La-landingSections .La-Sharing .La-focus{
+    font-weight: bolder;
+    color: var(--middleYellowColor);
+}
+
+.La-landingSections .La-articleFollowing .La-focus,
+.La-landingSections .La-articleHelping .La-focus{
+    font-weight: bolder;
+    color: var(--middleBlueColor);
+}
+
+.La-landingSections .La-articleRating .La-focus{
+    font-weight: bolder;
+    color: var(--middlePinkColor);
+}
+
+.La-landingSections:nth-of-type(2){
+    align-items: center;
+}
+
+.La-landingSections .La-createAccountSign{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.La-landingSections .La-createAccountSign p{
+    width: 20rem;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.La-landingSections .La-createAccountSign .La-createAccountButton{
+    display: flex;
+    padding: 0.7rem 1.2rem;
+    border-radius: 10rem;
+    cursor: pointer;
+    color: var(--whiteColor);
+    background-color: var(--middlePinkColor);
+    width: 13rem;
+    box-shadow: 0 0 5px 1px var(--darkPinkColor);
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.La-landingSections .La-articleEquip{
+    position: relative;
+    justify-content: center;
+    padding: 10rem 2rem 0 0;
+    width: 100vw;
+}
+
+.La-landingSections .La-articleEquip .La-articleHighlight{
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 2rem;
+    position: absolute;
+    left: 1rem;
+    top: 0;
+}
+
+.La-landingSections .La-articleEquip .La-articleHighlight .La-articleBar{
+    height: 6.25rem;
+    background: linear-gradient(#FA7EBD00,var(--middleYellowColor));
+}
+
+.La-landingSections .La-articleEquip .La-articleHighlight h2{
+    font-size: 2rem;
+}
+
+.La-landingSections .La-articleEquip .La-equipContainer{
+    display: flex;
+    flex-wrap: wrap;
+    width: 40rem;
+    gap: 3rem;
+}
+
+.La-landingSections .La-articleEquip .La-equipContainer .La-equipMember .La-memberImage img{
+    width: 10rem;
+}
+
+.La-landingSections .La-articleEquip .La-equipContainer .La-equipMember .La-memberInformation{
+    line-height: 1.4rem;
+    text-align: center;
+}
+
+.La-landingSections .La-articleEquip .La-equipContainer .La-equipMember .La-memberInformation .La-memberName{
+    font-size: 1.7rem;
+    font-weight: 600;
+}
+
+.La-landingSections .La-articleEquip .La-equipContainer .La-equipMember .La-memberInformation .La-memberFamilyName{
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+
+.La-landingSections .La-articleEquip .La-equipContainer .La-equipMember .La-memberInformation .La-memberFunction{
+    font-weight: 400;
+    font-size: 1rem;
+}
+
+/*====================================================================================================
 ========================================= PÁGINA DE LOGIN  ===========================================
 ====================================================================================================*/
 
-.L-mainBackground{
+.Lo-Login{
+    position: relative;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(#ffffff50 0%, #80752350 100%);
+    background: linear-gradient(var(--whiteColor) 0%, #fffad0 95%);
 }
 
-.L-form{
+.Lo-loginForm{
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    background-color: var(--whiteColor);
+    gap: 2rem;
     padding: 2rem 1.5rem;
     border: 2px solid transparent;
-    background: linear-gradient(white, white) padding-box, linear-gradient(var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
-    width: 28rem;   
-    height: 32rem;
+    background: linear-gradient(var(--whiteColor), var(--whiteColor)) padding-box, linear-gradient(var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
     border-radius: 1rem;
-    
+    width: 29rem;   
+    height: 32rem;
 }
-.L-title{
-    color:var(--middleYellowColor);
+
+.Lo-loginForm .Lo-loginTitle{
+    position: relative;
+    color: var(--middleYellowColor);
+    text-transform: uppercase;
     font-size: 3rem;
 }
-.L-submitButton{
-    color: var(--whiteColor);
-    background-color: var(--middleYellowColor);
-    border:none;
-    height: 2.5rem;
-    width: 10rem; 
-    border-radius: 10rem;
-    cursor: pointer;
-    font-size: 1.25rem;
-    font-weight: 600;
-}
-.L-googleButton{
-    display: flex;
-    justify-content: space-evenly;
-    background-color: var(--middleYellowColor);
-    gap: 0.5rem;
-    height: 2rem;
-    width: 14rem; 
-    padding: 0.2rem 0.5rem;
-    border-radius: 100rem;
-    font-weight: 600;
-    font-size: 16px;
-    color: var(--whiteColor);
-    cursor: pointer;
-    border: none;
-}
-.L-signWGoogle{
-    text-decoration: none;
-}
-.L-orDivision{
-    display: flex;
-    flex-direction: row;
-    gap: 0.5rem;
-    width:100%;
-}
-.L-orDivision .L-orText{
-    font-weight: 600;
-    font-size: 20px;
-    color: var(--middleYellowColor);
-}
-.L-orDivision .L-horizontalOrBar{
-    background: var(--middleYellowColor);
-    width:7rem;
-    height:2px;
-    border-radius: 2px;
-}
-.L-inputs{
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem 0;
-    width: 75%;
-}
-.L-inputs div{
-    width:100%;
-}
-.L-inputs input{
-    width:100%;
-    border:solid 3px var(--middleYellowColor);
-    border-radius: 1rem;
-    padding: 0.6rem 1rem;
-    outline:none;
-    border: 2px solid transparent;
-    background: linear-gradient(white, white) padding-box, linear-gradient(to right, var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
-    color: black;
-    opacity: 0.5;
-}
-.L-form .L-userInputs{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
 
-.L-form .L-userInputs div {
+.Lo-loginForm .Lo-inputsContainer{
     position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
-.L-form .L-userInputs input {
-    padding: 0.6rem 0.5rem 0.6rem 0.5rem;
+.Lo-loginForm .Lo-inputsContainer .Lo-input{
+    position: relative;
+    width: 23rem;
+}
+
+.Lo-loginForm .Lo-inputsContainer .Lo-input input {
+    position: relative;
+    padding: 0.6rem 1rem;
+    width:100%;
     border-radius: 100rem;
     border: 2px solid transparent;
-    background: linear-gradient(white, white) padding-box, linear-gradient(to right, var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
+    background: linear-gradient(var(--whiteColor), var(--whiteColor)) padding-box, linear-gradient(to right, var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
     outline: none;
-    color: black;
+    color: var(--blackColor);
     opacity: 0.5;
 }
 
-.L-form .L-userInputs input:focus,
-.L-form .L-userInputs input:hover,
-.L-form .L-userInputs input:valid {
+.Lo-loginForm .Lo-inputsContainer .Lo-input input:focus,
+.Lo-loginForm .Lo-inputsContainer .Lo-input input:hover,
+.Lo-loginForm .Lo-inputsContainer .Lo-input input:valid {
     opacity: 1;
     transition: 0.15s ease-in-out;
 }
 
-.L-form .L-userInputs label{
+.Lo-loginForm .Lo-inputsContainer .Lo-input .Lo-fakePlaceholder{
     position: absolute;
-    color: var(--darkYellowColor);
+    color: var(--middleYellowColor);
     font-weight: 600;
     cursor: text;
     transition: 0.25s ease-in-out, 0.3s ease-in-out text-shadow;
@@ -521,8 +487,8 @@ footer .A-footerRight li.A-footerPolitic h5{
     opacity: 0.65;
 }
 
-.L-form .L-userInputs input:focus + label,
-.L-form .L-userInputs input:valid + label {
+.Lo-loginForm .Lo-inputsContainer .Lo-input input:focus + .Lo-fakePlaceholder,
+.Lo-loginForm .Lo-inputsContainer .Lo-input input:valid + .Lo-fakePlaceholder {
     top: -5px;
     font-size: 12px;
     opacity: 1;
@@ -531,143 +497,118 @@ footer .A-footerRight li.A-footerPolitic h5{
     transition: 0.25s ease-in-out, 0.3s ease-in-out text-shadow;
 }
 
-.L-secondaryLOptions{
-    width:75%;
+.Lo-loginForm .Lo-input:last-of-type{
+    position: relative;
+    width: 100%;
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    gap:0.5rem;
-    font-size: 0.75rem;
-    gap: space-between;
-    
+    justify-content: space-between;
+    padding: 0rem 1.3rem;
+    font-size: 0.8rem;
+    margin-top: -0.5rem;
+    color: var(--blackColor);
 }
-.L-secondaryLOptions a{
-    text-decoration: none;
-    color: #000000;
-}
-.L-rememberCheckbox{
+
+.Lo-loginForm .Lo-rememberMe{
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap:5px;
+    gap: 5px;
+    white-space: nowrap;
 }
-.L-rememberCheckbox a{
+
+.Lo-loginForm .Lo-forgetPassword{
     text-decoration: none;
-    color: #000000;
+    color: var(--blackColor);
 }
-.L-noAccount{
-    font-size: 0.75rem;
+
+.Lo-loginForm .Lo-loginSubmit{
+    position: relative;
+    display: flex;
+    color: var(--whiteColor);
+    background-color: var(--middleYellowColor);
+    padding: 0.5rem 2.5rem;
+    border: none;
+    border-radius: 100rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
 }
-.L-noAccount span{
-    font-weight: 600;
+
+.Lo-loginForm .Lo-loginSubmit:hover{
+    position: relative;
+    font-size: 1.4rem;
+    transition: 0.2s;
+}
+.Lo-loginForm .Lo-goRegister{
+    position: relative;
+    font-size: 0.8rem;
+}
+
+.Lo-loginForm .Lo-goRegister a{
+    position: relative;
     color: var(--middleYellowColor);
-    text-decoration: underline var(--middleYellowColor);
-}
-.L-cellsLeft{
-    left:0;
+    font-weight: 700;
 }
 
 /*====================================================================================================
 ======================================== PÁGINA DE REGISTRO ==========================================
 ====================================================================================================*/
 
-.R-registerMain{
-    background: linear-gradient(#ffffff 0%, #fffad0 95%);
+.Re-register{
+    position: relative;
+    display: flex;
+    background: linear-gradient(var(--whiteColor) 0%, #fffad0 95%);
 }
 
-.R-registerForm{
+.Re-registerForm{
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    background-color: var(--whiteColor);
+    gap: 2rem;
     padding: 2rem 1.5rem;
     border: 2px solid transparent;
-    background: linear-gradient(white, white) padding-box, linear-gradient(var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
-    width: min-content;   
-    height: min-content;
+    background: linear-gradient(var(--whiteColor), var(--whiteColor)) padding-box, linear-gradient(var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
     border-radius: 1rem;
-    transform: translateX(-50%);
-    left: 50%;
+    width: 29rem;   
+    height: 32rem;
 }
 
-.R-registerForm section{
+.Re-registerForm .Re-registerTitle{
     position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.R-registerMain .A-backgroundGeometricForms{
-    height: 100%;
-    position: absolute;
-}
-
-.R-registerMain .A-backgroundGeometricForms.cellsLeft{
-    left: 0;
-}
-
-.R-registerTitle{
     color: var(--middleYellowColor);
     text-transform: uppercase;
     font-size: 3rem;
 }
 
-.R-loginWithGoogle{
-    display: flex;
-    background-color: var(--middleYellowColor);
-    gap: 0.5rem;
-    padding: 0.2rem 0.5rem 0.2rem 0.5rem;
-    border-radius: 100rem;
-    font-weight: 900;
-    color: var(--whiteColor);
-    cursor: pointer;
-}
-
-.R-registerForm .R-separator{
+.Re-registerForm .Re-inputsContainer{
     position: relative;
-    color: var(--middleYellowColor);
-    display: flex;
-    gap: 1rem;
-}
-
-.R-registerForm .R-separator span{
-    width: 7rem;
-    border: 1px solid var(--middleYellowColor);
-    border-radius: 100rem;
-}
-
-
-.R-registerForm .R-userInputs{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
 }
 
-.R-registerForm .R-userInputs div {
+.Re-registerForm .Re-inputsContainer .Re-input {
     position: relative;
 }
 
-.R-registerForm .R-userInputs input {
-    padding: 0.6rem 0.5rem 0.6rem 0.5rem;
+.Re-registerForm .Re-inputsContainer .Re-input input {
+    position: relative;
+    padding: 0.6rem 0.5rem;
     border-radius: 100rem;
     border: 2px solid transparent;
-    background: linear-gradient(white, white) padding-box, linear-gradient(to right, var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
+    background: linear-gradient(var(--whiteColor), var(--whiteColor)) padding-box, linear-gradient(to right, var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
     outline: none;
-    color: black;
+    color: var(--blackColor);
     opacity: 0.5;
 }
 
-.R-registerForm .R-userInputs input:focus,
-.R-registerForm .R-userInputs input:hover,
-.R-registerForm .R-userInputs input:valid {
+.Re-registerForm .Re-inputsContainer .Re-input input:focus,
+.Re-registerForm .Re-inputsContainer .Re-input input:hover,
+.Re-registerForm .Re-inputsContainer .Re-input input:valid {
     opacity: 1;
     transition: 0.15s ease-in-out;
 }
 
-.R-registerForm .R-userInputs label{
+.Re-registerForm .Re-inputsContainer .Re-input .Re-fakePlaceholder{
     position: absolute;
     color: var(--middleYellowColor);
     font-weight: 600;
@@ -679,8 +620,8 @@ footer .A-footerRight li.A-footerPolitic h5{
     opacity: 0.65;
 }
 
-.R-registerForm .R-userInputs input:focus + label,
-.R-registerForm .R-userInputs input:valid + label {
+.Re-registerForm .Re-inputsContainer .Re-input input:focus + .Re-fakePlaceholder,
+.Re-registerForm .Re-inputsContainer .Re-input input:valid + .Re-fakePlaceholder{
     top: -5px;
     font-size: 12px;
     opacity: 1;
@@ -689,7 +630,8 @@ footer .A-footerRight li.A-footerPolitic h5{
     transition: 0.25s ease-in-out, 0.3s ease-in-out text-shadow;
 }
 
-.R-registerForm .R-next{
+.Re-registerForm .Re-registerNext{
+    position: relative;
     display: flex;
     color: var(--whiteColor);
     background-color: var(--middleYellowColor);
@@ -702,36 +644,19 @@ footer .A-footerRight li.A-footerPolitic h5{
     transition: 0.2s;
 }
 
-.R-registerForm .R-next:hover{
+.Re-registerForm .Re-registerNext:hover{
+    position: relative;
     font-size: 1.4rem;
     transition: 0.2s;
 }
 
-.R-registerForm .R-goLogin{
+.Re-registerForm .Re-goLogin{
+    position: relative;
     font-size: 0.8rem;
 }
 
-.R-registerForm .R-goLogin a{
+.Re-registerForm .Re-goLogin a{
+    position: relative;
     color: var(--middleYellowColor);
     font-weight: 700;
-}
-
-.R-registerForm .R-childSection .R-addChild{
-    display: flex;
-    color: var(--whiteColor);
-    width: 150%;
-    height: 2rem;
-    border-radius: 100rem;
-    font-size: 0.85rem;
-    background: linear-gradient(to right, var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor));
-    cursor: pointer;
-}
-
-.R-registerForm .R-childSection .R-systemTheme .R-themeContainer{
-    line-height: 3rem;
-}
-
-.R-registerForm .R-childSection .R-systemTheme .R-themeContainer{
-    display: flex;
-    gap: 1rem;
 }
