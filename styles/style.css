@@ -293,6 +293,98 @@ main section .A-articleEquip .A-equipContainer .A-equipMember .A-memberInformati
     font-weight: 400;
 }
 
+
+footer{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    width: 100%;
+    padding: 1rem 2rem 0.5rem 0.5rem;
+    background-color: var(--blackColor);
+    color: var(--whiteColor);
+}
+
+footer .A-footerLeft img.A-footerLogo{
+    width: 15rem;
+    cursor: pointer;
+}
+
+footer .A-footerLeft .A-footerContact{
+    padding: 0 0 4rem 1rem;
+    width: 14rem;
+    font-size: 1.625rem;
+}
+
+footer .A-footerLeft .A-footerContact h4{
+    padding: 0.5rem 0 1rem 0;
+}
+
+footer .A-footerLeft .A-footerContact .A-footerSocialMedias{
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.3rem;   
+}
+
+footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-instagram{
+    color: var(--pastelYellowColor);
+    cursor: pointer;
+}
+
+footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-facebook{
+    color: var(--pastelBlueColor);
+    cursor: pointer;
+}
+
+footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-envelope-fill{
+    color: var(--pastelPinkColor);
+    cursor: pointer;
+}
+
+footer .A-copyrightSign{
+    position: absolute;
+    display: flex;
+    gap: 0.5rem;
+    width: 30rem;
+    bottom: 1rem;
+    left: 50%;
+    transform: translate(-50%);
+    font-size: 0.7rem;
+}
+
+footer .A-footerRight{
+    display: flex;
+    align-items: flex-start;
+    gap: 6.25rem;
+    list-style: none;
+    height: 100%;
+}
+
+footer .A-footerRight li h5{
+    font-size: 1.438rem;
+    line-height: 3rem;
+    pointer-events: none;
+}
+
+footer .A-footerRight li p{
+    font-size: 1rem;
+    line-height: 1.5rem;
+    cursor: pointer;
+}
+
+footer .A-footerRight li.A-footerAbout h5{
+    color: var(--pastelYellowColor);
+}
+
+footer .A-footerRight li.A-footerHelp h5{
+    color: var(--pastelBlueColor);
+}
+
+footer .A-footerRight li.A-footerPolitic h5{
+    color: var(--pastelPinkColor);
+}
+
 /*====================================================================================================
 ========================================= PÁGINA DE LOGIN  ===========================================
 ====================================================================================================*/
@@ -421,98 +513,6 @@ main section .A-articleEquip .A-equipContainer .A-equipMember .A-memberInformati
 .L-cellsLeft{
     left:0;
 }
-
-footer{
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 1rem;
-    width: 100%;
-    padding: 1rem 2rem 0.5rem 0.5rem;
-    background-color: var(--blackColor);
-    color: var(--whiteColor);
-}
-
-footer .A-footerLeft img.A-footerLogo{
-    width: 15rem;
-    cursor: pointer;
-}
-
-footer .A-footerLeft .A-footerContact{
-    padding: 0 0 4rem 1rem;
-    width: 14rem;
-    font-size: 1.625rem;
-}
-
-footer .A-footerLeft .A-footerContact h3{
-    padding: 0.5rem 0 1rem 0;
-}
-
-footer .A-footerLeft .A-footerContact .A-footerSocialMedias{
-    display: flex;
-    justify-content: space-between;
-    font-size: 1.6rem;   
-}
-
-footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-instagram{
-    color: var(--pastelYellowColor);
-    cursor: pointer;
-}
-
-footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-facebook{
-    color: var(--pastelBlueColor);
-    cursor: pointer;
-}
-
-footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-envelope-fill{
-    color: var(--pastelPinkColor);
-    cursor: pointer;
-}
-
-footer .A-copyrightSign{
-    position: absolute;
-    display: flex;
-    gap: 0.5rem;
-    width: 30rem;
-    bottom: 1rem;
-    left: 50%;
-    transform: translate(-50%);
-    font-size: 0.938rem;
-}
-
-footer .A-footerRight{
-    display: flex;
-    align-items: flex-start;
-    gap: 6.25rem;
-    list-style: none;
-    height: 100%;
-}
-
-footer .A-footerRight li h5{
-    font-size: 1.438rem;
-    line-height: 3rem;
-    pointer-events: none;
-}
-
-footer .A-footerRight li p{
-    font-size: 1rem;
-    line-height: 1.5rem;
-    cursor: pointer;
-}
-
-footer .A-footerRight li.A-footerAbout h5{
-    color: var(--pastelYellowColor);
-}
-
-footer .A-footerRight li.A-footerHelp h5{
-    color: var(--pastelBlueColor);
-}
-
-footer .A-footerRight li.A-footerPolitic h5{
-    color: var(--pastelPinkColor);
-}
-
 
 /*====================================================================================================
 ======================================== PÁGINA DE REGISTRO ==========================================
