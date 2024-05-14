@@ -18,7 +18,11 @@
             <img src="assets/Imagens/Cells.png" class="backgroundGeometricForms cellsLeft">
 
             <form class="Lo-loginForm">
-                <h1 class="Lo-loginTitle"> Login </h1>
+                <div class="Lo-formHeader">
+                    <h1 class="Lo-loginTitle"> Login </h1>
+                    <p>Seja bem-vindo novamente!</p>
+                </div>    
+            
                 <div class="Lo-inputsContainer">
                     <div class="Lo-input">
                         <input type="email" id="email" required>

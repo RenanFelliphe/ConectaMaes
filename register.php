@@ -18,7 +18,11 @@
             <img src="assets/Imagens/Cells.png" class="backgroundGeometricForms cellsLeft">
 
             <form class="Re-registerForm">
-                <h1 class="Re-registerTitle"> Registro </h1>
+                <div class="Re-formHeader">
+                    <h1 class="Re-registerTitle"> Registro </h1>
+                    <p>Venha logo fazer parte desta comunidade!</p>
+                </div>                  
+                
                 <div class="Re-inputsContainer">
                     <div class="Re-input">
                         <input type="text" id="nomeCompleto" required>

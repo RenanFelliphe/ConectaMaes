@@ -437,7 +437,13 @@ footer .A-footerRight li.A-footerPolitic h5{
     height: 32rem;
 }
 
-.Lo-loginForm .Lo-loginTitle{
+.Lo-loginForm .Lo-formHeader{
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--darkYellowColor);
+}
+
+.Lo-loginForm .Lo-formHeader .Lo-loginTitle{
     position: relative;
     color: var(--middleYellowColor);
     text-transform: uppercase;
@@ -485,6 +491,7 @@ footer .A-footerRight li.A-footerPolitic h5{
     top: 11px;
     left: 1rem;
     opacity: 0.65;
+    font-weight: 500;
 }
 
 .Lo-loginForm .Lo-inputsContainer .Lo-input input:focus + .Lo-fakePlaceholder,
@@ -572,7 +579,13 @@ footer .A-footerRight li.A-footerPolitic h5{
     height: 32rem;
 }
 
-.Re-registerForm .Re-registerTitle{
+.Re-registerForm .Re-formHeader{
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--darkYellowColor);
+}
+
+.Re-registerForm .Re-formHeader .Re-registerTitle{
     position: relative;
     color: var(--middleYellowColor);
     text-transform: uppercase;
@@ -618,6 +631,7 @@ footer .A-footerRight li.A-footerPolitic h5{
     top: 11px;
     left: 1rem;
     opacity: 0.65;
+    font-weight: 500;
 }
 
 .Re-registerForm .Re-inputsContainer .Re-input input:focus + .Re-fakePlaceholder,
