@@ -184,6 +184,7 @@ main section .A-articleFollowing p,
 main section .A-articleHelping,
 main section .A-articleRating{
     font-size: 1.25rem;
+    text-align: justify;
 }
 
 main section .A-articleConectaMaes .A-focus,
