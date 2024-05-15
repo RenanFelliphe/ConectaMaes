@@ -1,0 +1,16 @@
+Para a próxima reunião dia 21/05:
+- Texto artigo;
+- finalizar a prototipação
+- solicitar ao Alexandre que crie uma estrutura para o projeto de PI
+- Manter Perfil - Natália
+- Manter Pedido - Lívia
+- Manter Relato - Renan
+- criar o banco de dados
+
+Ideias Futuras
+- Algortimo de sujestão | Nath
+- Conectar com o Google | Nath
+- Botões de emoji nas publicações | Renan
+- Chat para mensagens diretas | Renan
+- Imagens nos comentários | Renan
+- Seção para "Páginas" ou Grupos de usuários | Renan
