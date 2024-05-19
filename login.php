@@ -23,7 +23,7 @@
                     <p>Seja bem-vindo novamente!</p>
                 </div>    
             
-                <div class="Lo-inputsContainer">
+                <div class="Lo-userSection">
                     <div class="Lo-input">
                         <input type="email" id="email" required>
                         <label class="Lo-fakePlaceholder" for="email">Email</label>

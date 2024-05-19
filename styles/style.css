@@ -262,7 +262,7 @@ main{
     border-radius: 1rem;
     width: 29rem;   
     height: 32rem;
-    box-shadow: 0 4px 4px 0 black;
+    box-shadow: 0 4px 16px 0px #00000040;
 }
 
 .Lo-loginForm .Lo-formHeader{
@@ -276,25 +276,25 @@ main{
     color: var(--middleYellowColor);
     text-transform: uppercase;
     font-size: 3rem;
-    box-shadow: 0 4px 4px 0 black;
+    text-shadow: 0 2px 4px #00000040;
 }
 
-.Lo-loginForm .Lo-inputsContainer{
+.Lo-loginForm .Lo-userSection{
     position: relative;
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-.Lo-loginForm .Lo-inputsContainer .Lo-input{
+.Lo-loginForm .Lo-userSection .Lo-input{
     position: relative;
     width: 23rem;
 }
 
-.Lo-loginForm .Lo-inputsContainer .Lo-input input {
+.Lo-loginForm .Lo-userSection .Lo-input input {
     position: relative;
     padding: 0.6rem 1rem;
-    width:100%;
+    width: 100%;
     border-radius: 100rem;
     border: 2px solid transparent;
     background: linear-gradient(var(--whiteColor), var(--whiteColor)) padding-box, linear-gradient(to right, var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
@@ -303,14 +303,14 @@ main{
     opacity: 0.5;
 }
 
-.Lo-loginForm .Lo-inputsContainer .Lo-input input:focus,
-.Lo-loginForm .Lo-inputsContainer .Lo-input input:hover,
-.Lo-loginForm .Lo-inputsContainer .Lo-input input:valid {
+.Lo-loginForm .Lo-userSection .Lo-input input:focus,
+.Lo-loginForm .Lo-userSection .Lo-input input:hover,
+.Lo-loginForm .Lo-userSection .Lo-input input:valid {
     opacity: 1;
     transition: 0.15s ease-in-out;
 }
 
-.Lo-loginForm .Lo-inputsContainer .Lo-input .Lo-fakePlaceholder{
+.Lo-loginForm .Lo-userSection .Lo-input .Lo-fakePlaceholder{
     position: absolute;
     color: var(--middleYellowColor);
     font-weight: 600;
@@ -323,8 +323,8 @@ main{
     font-weight: 500;
 }
 
-.Lo-loginForm .Lo-inputsContainer .Lo-input input:focus + .Lo-fakePlaceholder,
-.Lo-loginForm .Lo-inputsContainer .Lo-input input:valid + .Lo-fakePlaceholder {
+.Lo-loginForm .Lo-userSection .Lo-input input:focus + .Lo-fakePlaceholder,
+.Lo-loginForm .Lo-userSection .Lo-input input:valid + .Lo-fakePlaceholder {
     top: -5px;
     font-size: 12px;
     opacity: 1;
@@ -371,7 +371,7 @@ main{
     font-weight: 700;
     cursor: pointer;
     transition: 0.2s;
-    box-shadow: 0 4px 5px 0 black;
+    box-shadow: 0 2px 4px 0px #00000040;
 }
 
 .Lo-loginForm .Lo-loginSubmit:hover{
@@ -404,14 +404,15 @@ main{
     position: relative;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     gap: 2rem;
-    padding: 2rem 1.5rem;
+    padding: 3rem 0;
     border: 2px solid transparent;
     background: linear-gradient(var(--whiteColor), var(--whiteColor)) padding-box, linear-gradient(var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
     border-radius: 1rem;
     width: 29rem;   
     height: 32rem;
-    box-shadow: 0 4px 4px 0 black;
+    box-shadow: 0 4px 16px 0px #00000040;
 }
 
 .Re-registerForm .Re-formHeader{
@@ -425,21 +426,21 @@ main{
     color: var(--middleYellowColor);
     text-transform: uppercase;
     font-size: 3rem;
-    box-shadow: 0 4px 4px 0 black;
+    text-shadow: 0 2px 4px #00000040;
 }
 
-.Re-registerForm .Re-inputsContainer{
+.Re-registerForm .Re-userSection{
     position: relative;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
 }
 
-.Re-registerForm .Re-inputsContainer .Re-input {
+.Re-registerForm .Re-userSection .Re-input {
     position: relative;
 }
 
-.Re-registerForm .Re-inputsContainer .Re-input input {
+.Re-registerForm .Re-userSection .Re-input input {
     position: relative;
     padding: 0.6rem 0.5rem;
     border-radius: 100rem;
@@ -450,14 +451,14 @@ main{
     opacity: 0.5;
 }
 
-.Re-registerForm .Re-inputsContainer .Re-input input:focus,
-.Re-registerForm .Re-inputsContainer .Re-input input:hover,
-.Re-registerForm .Re-inputsContainer .Re-input input:valid {
+.Re-registerForm .Re-userSection .Re-input input:focus,
+.Re-registerForm .Re-userSection .Re-input input:hover,
+.Re-registerForm .Re-userSection .Re-input input:valid {
     opacity: 1;
     transition: 0.15s ease-in-out;
 }
 
-.Re-registerForm .Re-inputsContainer .Re-input .Re-fakePlaceholder{
+.Re-registerForm .Re-userSection .Re-input .Re-fakePlaceholder{
     position: absolute;
     color: var(--middleYellowColor);
     font-weight: 600;
@@ -470,8 +471,8 @@ main{
     font-weight: 500;
 }
 
-.Re-registerForm .Re-inputsContainer .Re-input input:focus + .Re-fakePlaceholder,
-.Re-registerForm .Re-inputsContainer .Re-input input:valid + .Re-fakePlaceholder{
+.Re-registerForm .Re-userSection .Re-input input:focus + .Re-fakePlaceholder,
+.Re-registerForm .Re-userSection .Re-input input:valid + .Re-fakePlaceholder{
     top: -5px;
     font-size: 12px;
     opacity: 1;
@@ -492,7 +493,7 @@ main{
     font-weight: 700;
     cursor: pointer;
     transition: 0.2s;
-    box-shadow: 0 4px 5px 0 black;
+    box-shadow: 0 2px 4px 0px #00000040;
 }
 
 .Re-registerForm .Re-registerNext:hover{
@@ -510,4 +511,83 @@ main{
     position: relative;
     color: var(--middleYellowColor);
     font-weight: 700;
+}
+
+.Re-registerForm .Re-childSection{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 1rem 0 1rem 0;
+}
+
+.Re-registerForm .Re-childSection .Re-childInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+}
+
+.Re-registerForm .Re-childSection .Re-childInfo .Re-addChild{
+    position: relative;
+    display: flex;
+    background: linear-gradient( to right, var(--pastelYellowColor) 0%, var(--pastelBlueColor) 50%, var(--pastelPinkColor) 100%);
+    border: 1px solid #D9D9D9;
+    border-radius: 100rem;
+    width: 23rem;
+    height: 2.3rem;
+    box-shadow: 0 2px 2px 0px rgba(0, 0, 0, 0.07);
+    font-weight: 900;
+    font-size: 1.2rem;
+    text-shadow: 0 0px 5px #00000040;
+    color: white;
+    cursor: pointer;
+}
+
+.Re-registerForm .Re-childSection .Re-childInfo .Re-haveNoChildBox{
+    display: flex;
+    gap: 10px;
+    font-size: 0.8rem;
+}
+
+.Re-registerForm .Re-childSection .Re-themeInfo{
+    position: relative;
+    line-height: 1.7rem;
+}
+
+.Re-registerForm .Re-childSection .Re-themeInfo .Re-themeOptions{
+    display: flex;
+    gap: 1rem;
+    font-size: 0.8rem;
+}
+
+.Re-registerForm .Re-childSection .Re-themeInfo .Re-themeOptions div{
+    display: flex;
+    gap: 10px;
+}
+
+.Re-registerForm .Re-addChildBox{
+    position: absolute;
+    border: 1px solid var(--blackColor);
+    display: flex;
+    flex-direction: column;
+    padding: 0 1rem 1rem 1rem;
+    border: 2px solid transparent;
+    background: linear-gradient(var(--whiteColor), var(--whiteColor)) padding-box, linear-gradient(var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
+    border-radius: 1rem;
+    width: 25rem;   
+    height: 15rem;
+    box-shadow: 0 4px 16px 0px #00000040;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    /*z-index: +1;*/
+}
+
+.Re-registerForm .Re-termsBox{
+    display: flex;
+    gap: 10px;
+    font-size: 0.8rem;
+    margin: 1rem 0 -1rem 0;
 }
