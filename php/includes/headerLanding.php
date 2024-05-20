@@ -11,7 +11,7 @@
         <header>
             <a href="index.php"><img src="assets/Logos/Final/Conecta_Mães_Logo_Black.png" class="A-headerLogo" alt="Logo do ConectaMães"></a>
             <div class="A-headerLinks">
-                <h4><a href="#La-articleEquip">Equipe</a></h4>
+                <h4><a href="index.php#La-articleEquip">Equipe</a></h4>
                 <h4><a href="#"></a>Contato</h4>
                 <h4><a href="#"></a>Direitos</h4>
             </div>
