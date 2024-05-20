@@ -32,6 +32,11 @@ header .A-headerLinks h4{
     font-weight: 500;
 }
 
+header .A-headerLinks h4 a{
+    text-decoration: none;
+    color: black;
+}
+
 header .A-searchBar{
     display: flex;
     background-color: #e4e4e4;
@@ -79,6 +84,7 @@ header .A-signButtons h4{
     border: 1px solid var(--middleYellowColor);
     border-radius: 10rem;
     cursor: pointer;
+    text-decoration: none;
 }
 
 header .A-signButtons .A-signIn{

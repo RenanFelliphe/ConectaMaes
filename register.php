@@ -7,11 +7,11 @@
         <link rel="stylesheet" href="styles/variable.css">
         <link rel="stylesheet" href="styles/style.css">
         <link rel="icon" href="assets/Logos/Final/Conecta_Mães_Logo_Icon.png">
-        <title>ConectaMães - Apresentação</title>
+        <title>ConectaMães - Registro</title>
     </head>
 
     <body>
-        <?php include_once ("php/includes/header.php");?>
+        <?php include_once ("php/includes/headerLanding.php");?>
 
         <main class="Re-register">
             <img src="assets/Imagens/Cells.png" class="backgroundGeometricForms">
@@ -25,7 +25,7 @@
                 
                 <div class="Re-userSection">
                     <div class="Re-input">
-                        <input type="text" id="nomeCompleto" required>
+                        <input type="text" id="nomeCompleto" required autofocus>
                         <label class="Re-fakePlaceholder" for="nomeCompleto">Nome Completo</label>
                     </div>
                     <div class="Re-input">
@@ -58,22 +58,7 @@
                     </div>
                 </div>
                     
-                <button class="Re-registerNext"> Próximo </button>
-                <p class="Re-goLogin"> Já possui uma conta? <a href="login.php"> Entre </a></p>
-            </form>
-
-            <form class="Re-registerForm">
-                <div class="Re-formHeader">
-                    <h1 class="Re-registerTitle"> Registro </h1>
-                    <p>Venha logo fazer parte desta comunidade!</p>
-                </div>                  
-                    
-                <div class="Re-termsBox">
-                    <input type="checkbox" id="Re-terms">
-                    <label for="Re-terms"> Eu li e concordo com os Termos e Condições </label>
-                </div>
-
-                <div class="Re-childSection open">
+                <div class="Re-childSection">
                     <div class="Re-childInfo">
                         <label class="Re-addChild"> Adicionar filho +</label>
                         <div class="Re-haveNoChildBox">
@@ -81,34 +66,61 @@
                             <label for="Re-haveNoChild"> Não tenho filho</label>
                         </div>
 
-                        <div class="Re-addChildBox">
+                        <div class="Re-addChildBox close">
                             <div class="Re-childBoxHeader">
-                                <i class="bi bi-gender-male"></i>
-                                <span class="Re-childName"> Nome Completo </span>
+                                <img src="assets/Icons/icons8-child-icon-90.png" alt="Icone de Criança" width="35px" class="Re-child-icon">
+                                <input type="text" class="Re-childName" placeholder="Nome Completo" required>
                             </div>
 
                             <div class="Re-childBoxSex">
-                                <span class="Re-childGirl"> Menina</span>
-                                <span class="Re-childBoy"> Menino </span>
-                                <span class="Re-childOther"> Não Informar </span>
+                                <span class="Re-childGirl Re-childSex"> Menina</span>
+                                <span class="Re-childBoy Re-childSex"> Menino </span>
+                                <span class="Re-childOther Re-childSex"> Não Informar </span>
                             </div>
 
                             <div class="Re-childBoxInputs">
                                 <div class="Re-input">
-                                    <input type="text" id="dataNascFilho" placeholder="dd/mm/yyyy" required>
-                                    <label for="telefone">Data de Nascimento</label>
-                                    <i class="bi bi-calendar"></i>
+                                    <input type="date" id="dataNascFilho" placeholder="dd/mm/yyyy" required>
+                                    <label for="dataNascFilho">Data de Nascimento</label>
                                 </div>
                                 <div class="Re-input">
-                                    <input type="text" id="deficiencia" placeholder="--------" required>
-                                    <label for="telefone">Deficiência</label>
-                                    <i class="bi bi-chevron-down"></i>
+                                    <select name="select" id="deficiencia">
+                                        <option value="valor0">--------</option>
+                                        <optgroup label="Deficiência Físicas">
+                                            <option value="valor1">H81 — Hemiplegia</option>
+                                            <option value="valor2">H81.1 — Paraplegia espástica</option>
+                                            <option value="valor3">H82.3 — Tetraplegia flágida</option>
+                                          </optgroup>
+                                          <optgroup label="Deficiência Neurológicas">
+                                            <option value="valor4">G04.0 — Encefalite agura disseminada</option>
+                                            <option value="valor5">G20 — Doença de Parkinson</option>
+                                            <option value="valor6">G30 — Alzheimer</option>
+                                            <option value="valor7">G35 — Esclerose múltipla</option>
+                                        </optgroup>
+                                          <optgroup label="Deficiência Visuais">
+                                            <option value="valor8">H54 — Cegueira visão subnormal</option>
+                                            <option value="valor9">H54.0 — Cegueira, ambos os olhos</option>
+                                            <option value="valor10">H54.1 — Cegueira em um olho e visão subnormal em outro</option>
+                                        </optgroup>
+                                        <optgroup label="Deficiência Auditivas">
+                                            <option value="valor11">H80 — Otosclerose</option>
+                                            <option value="valor12">H91.1 — Presbiacusia</option>
+                                            <option value="valor13">H91.3 — Surdo-mudez não classificada em outra parte</option>
+                                        </optgroup>
+                                        <optgroup label="Deficiência Intelectuais">
+                                            <option value="valor7">F84.0 — Autismo infantil</option>
+                                            <option value="valor8">F84.1 — Autismo atípico</option>
+                                            <option value="valor9">F84.5 — Síndrome de Asperger</option>
+                                        </optgroup>
+                                    </select>
+                                    <label for="deficiencia">Deficiência</label>
                                 </div>
+                                
                             </div>
                             
                             <div class="Re-childBoxButtons">
-                                <button> Cancelar </button>
-                                <button type="submit"> Confirmar </button>
+                                <button type="reset" value="reset" class="Re-cancelAddChild"> Cancelar </button>
+                                <button type="submit" value="submit"> Confirmar </button>
                             </div>
                         </div>
                     </div>
@@ -116,28 +128,29 @@
                     <div class="Re-themeInfo">
                         <h3> Tema </h3>
                         <div class="Re-themeOptions">
-                            <div>
-                                <input type="radio" id="Re-yellowTheme">
-                                <label for="Re-yellowTheme"> Amarelo </label>
-                            </div>
-                            <div>
-                                <input type="radio" id="Re-blueTheme">
-                                <label for="Re-blueTheme"> Azul </label>
-                            </div>
-                            <div>
-                                <input type="radio" id="Re-pinkTheme">
-                                <label for="Re-pinkTheme"> Rosa </label>
-                            </div>
+                            <input type="radio" name="changeTheme" value="yellowTheme" id="Re-yellowTheme">
+                            <label for="Re-yellowTheme"> Amarelo </label>
+                            <input type="radio" name="changeTheme" value="blueTheme" id="Re-blueTheme">
+                            <label for="Re-blueTheme"> Azul </label>
+                            <input type="radio" name="changeTheme" value="pinkTheme" id="Re-pinkTheme">
+                            <label for="Re-pinkTheme"> Rosa </label>
                         </div>
                     </div>
                 </div>
+
+                <div class="Re-termsBox">
+                    <input type="checkbox" id="Re-terms">
+                    <label for="Re-terms"> Eu li e concordo com os Termos e Condições </label>
+                </div>
                 <button class="Re-registerNext"> Próximo </button>
+                <p class="Re-goLogin"> Já possui uma conta? <a href="login.php"> Entre </a></p>
             </form>
+                
         </main>
 
         <?php include_once ("php/includes/footer.php");?>
 
     </body>
 
-    <script></script>
+    <script src="js/register.js"></script>
 </html>

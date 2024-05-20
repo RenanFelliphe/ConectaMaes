@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <?php include_once ("php/includes/header.php");?>
+    <?php include_once ("php/includes/headerLanding.php");?>
 
     <main class="La-landing">
         <img src="assets/Imagens/Cells.png" class="backgroundGeometricForms">
@@ -73,7 +73,7 @@
             </article>  
         </section>
 
-        <section class="La-landingSections">
+        <section class="La-landingSections" id="La-articleEquip">
             <article class="La-articleEquip">
                 <div class="La-articleHighlight">
                     <span class="La-articleBar La-focus"></span>

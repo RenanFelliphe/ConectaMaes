@@ -7,11 +7,11 @@
         <link rel="stylesheet" href="styles/variable.css">
         <link rel="stylesheet" href="styles/style.css">
         <link rel="icon" href="assets/Logos/Final/Conecta_Mães_Logo_Icon.png">
-        <title>ConectaMães - Apresentação</title>
+        <title>ConectaMães - Login</title>
     </head>
 
     <body>
-        <?php include_once ("php/includes/header.php");?>
+        <?php include_once ("php/includes/headerLanding.php");?>
 
         <main class="Lo-Login">
             <img src="assets/Imagens/Cells.png" class="backgroundGeometricForms">
@@ -25,7 +25,7 @@
             
                 <div class="Lo-userSection">
                     <div class="Lo-input">
-                        <input type="email" id="email" required>
+                        <input type="email" id="email" required autofocus>
                         <label class="Lo-fakePlaceholder" for="email">Email</label>
                     </div>
                     <div class="Lo-input">

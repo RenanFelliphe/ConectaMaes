@@ -11,12 +11,14 @@
 
 body::-webkit-scrollbar{
     display: none;
+    scroll-behavior: smooth;
 }
 
 main{
     position: relative;
     padding: 0.3rem 1rem 3rem 1rem;
     overflow: hidden;
+    scroll-behavior: smooth;
 }
 
 .backgroundGeometricForms{
@@ -258,7 +260,7 @@ main{
     gap: 2.5rem;
     padding: 2rem 1.5rem;
     border: 2px solid transparent;
-    background: linear-gradient(var(--whiteColor), var(--whiteColor)) padding-box, linear-gradient(var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
+    background: linear-gradient(var(--whiteColor), var(--whiteColor)) padding-box, linear-gradient(var(--pastelYellowColor), var(--pastelBlueColor), var(--pastelPinkColor)) border-box;
     border-radius: 1rem;
     width: 29rem;   
     height: 32rem;
@@ -307,7 +309,8 @@ main{
 .Lo-loginForm .Lo-userSection .Lo-input input:hover,
 .Lo-loginForm .Lo-userSection .Lo-input input:valid {
     opacity: 1;
-    transition: 0.15s ease-in-out;
+    background: linear-gradient(var(--whiteColor), var(--whiteColor)) padding-box, linear-gradient(to right, var(--pastelYellowColor), var(--pastelBlueColor), var(--pastelPinkColor)) border-box;
+    transition: 0.15s ease-in-out, 0 background-image;
 }
 
 .Lo-loginForm .Lo-userSection .Lo-input .Lo-fakePlaceholder{
@@ -408,11 +411,16 @@ main{
     gap: 2rem;
     padding: 3rem 0;
     border: 2px solid transparent;
-    background: linear-gradient(var(--whiteColor), var(--whiteColor)) padding-box, linear-gradient(var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
+    background: linear-gradient(var(--whiteColor), var(--whiteColor)) padding-box, linear-gradient(var(--pastelYellowColor), var(--pastelBlueColor), var(--pastelPinkColor)) border-box;
     border-radius: 1rem;
     width: 29rem;   
     height: 32rem;
     box-shadow: 0 4px 16px 0px #00000040;
+    overflow: auto;
+}
+
+.Re-registerForm::-webkit-scrollbar{
+    display: none;
 }
 
 .Re-registerForm .Re-formHeader{
@@ -455,7 +463,8 @@ main{
 .Re-registerForm .Re-userSection .Re-input input:hover,
 .Re-registerForm .Re-userSection .Re-input input:valid {
     opacity: 1;
-    transition: 0.15s ease-in-out;
+    background: linear-gradient(var(--whiteColor), var(--whiteColor)) padding-box, linear-gradient(to right, var(--pastelYellowColor), var(--pastelBlueColor), var(--pastelPinkColor)) border-box;
+    transition: 0.15s ease-in-out, 0 background-image;
 }
 
 .Re-registerForm .Re-userSection .Re-input .Re-fakePlaceholder{
@@ -532,16 +541,15 @@ main{
 .Re-registerForm .Re-childSection .Re-childInfo .Re-addChild{
     position: relative;
     display: flex;
-    background: linear-gradient( to right, var(--pastelYellowColor) 0%, var(--pastelBlueColor) 50%, var(--pastelPinkColor) 100%);
-    border: 1px solid #D9D9D9;
+    background: linear-gradient(to right, var(--pastelYellowColor) 0%, var(--pastelBlueColor) 50%, var(--pastelPinkColor) 100%);
     border-radius: 100rem;
     width: 23rem;
     height: 2.3rem;
-    box-shadow: 0 2px 2px 0px rgba(0, 0, 0, 0.07);
+    box-shadow: 0 3px 3px 0px #00000020;
     font-weight: 900;
     font-size: 1.2rem;
-    text-shadow: 0 0px 5px #00000040;
-    color: white;
+    text-shadow: 0 0 3px #ffffff30;
+    color: var(--whiteColor);
     cursor: pointer;
 }
 
@@ -558,13 +566,12 @@ main{
 
 .Re-registerForm .Re-childSection .Re-themeInfo .Re-themeOptions{
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
     font-size: 0.8rem;
 }
 
-.Re-registerForm .Re-childSection .Re-themeInfo .Re-themeOptions div{
-    display: flex;
-    gap: 10px;
+.Re-registerForm .Re-childSection .Re-themeInfo .Re-themeOptions label{
+    margin-left: -0.8rem;
 }
 
 .Re-registerForm .Re-addChildBox{
@@ -572,17 +579,163 @@ main{
     border: 1px solid var(--blackColor);
     display: flex;
     flex-direction: column;
-    padding: 0 1rem 1rem 1rem;
+    justify-content: flex-start;
+    gap: 0.3rem;
     border: 2px solid transparent;
-    background: linear-gradient(var(--whiteColor), var(--whiteColor)) padding-box, linear-gradient(var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
+    background: linear-gradient(var(--whiteColor), var(--whiteColor)) padding-box, linear-gradient(to right, var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
     border-radius: 1rem;
-    width: 25rem;   
-    height: 15rem;
+    width: 26rem;   
+    height: 18rem;
     box-shadow: 0 4px 16px 0px #00000040;
     left: 50%;
-    top: 50%;
+    top: 40%;
     transform: translateX(-50%) translateY(-50%);
-    /*z-index: +1;*/
+    z-index: +1;
+    overflow: hidden;
+}
+
+.Re-registerForm .Re-addChildBox.close{
+    display: none;
+}
+
+.Re-registerForm .Re-addChildBox .Re-childBoxHeader{
+    position: relative;
+    display: flex;
+    width: 100%;
+    padding: 0.5rem 2rem 0.5rem 0.5rem;
+    border-bottom: 1px solid transparent;
+    background: linear-gradient(to right, var(--pastelYellowColor), var(--pastelBlueColor), var(--pastelPinkColor)) padding-box, linear-gradient(to right, var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
+}
+
+.Re-registerForm .Re-addChildBox .Re-childBoxHeader .Re-childName{
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 1.1rem;
+    font-weight: 550;
+    color: var(--whiteColor);
+    text-shadow: 0 0 3px #ffffff30;
+    text-align: center;
+}
+
+.Re-registerForm .Re-addChildBox .Re-childBoxHeader .Re-childName::placeholder{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 550;
+    color: var(--whiteColor);
+    text-shadow: 0 0 3px #ffffff30;
+}
+
+.Re-registerForm .Re-addChildBox .Re-childBoxSex{
+    display: flex;
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+.Re-registerForm .Re-addChildBox .Re-childBoxSex span{
+    display: flex;
+    height: 2rem;
+    width: 6.5rem;
+    border: 1px solid transparent;
+    border-radius: 10rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.Re-registerForm .Re-addChildBox .Re-childBoxSex .Re-childGirl{
+    background: linear-gradient(#ffdcee, #ffdcee) padding-box, linear-gradient(to right, var(--pastelYellowColor), var(--pastelBlueColor), var(--pastelPinkColor)) border-box;
+    color: var(--middlePinkColor);
+}
+
+.Re-registerForm .Re-addChildBox .Re-childBoxSex .Re-childBoy{
+    background: linear-gradient(#dffbff, #dffbff) padding-box, linear-gradient(to right, var(--pastelYellowColor), var(--pastelBlueColor), var(--pastelPinkColor)) border-box;
+    color: var(--middleBlueColor);
+}
+
+.Re-registerForm .Re-addChildBox .Re-childBoxSex .Re-childOther{
+    background: linear-gradient(#fffbd6, #fffbd6) padding-box, linear-gradient(to right, var(--pastelYellowColor), var(--pastelBlueColor), var(--pastelPinkColor)) border-box;
+    color: var(--middleYellowColor);
+}
+
+.Re-registerForm .Re-addChildBox .Re-childBoxInputs{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.Re-registerForm .Re-addChildBox .Re-childBoxInputs .Re-input{
+    position: relative;
+    border: 1px solid transparent;
+    background: linear-gradient(var(--whiteColor), var(--whiteColor)) padding-box, linear-gradient(to right, var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
+    border-radius: 10rem;
+    width: 22rem;
+    height: 2.5rem;
+    padding-right: 1.4rem;
+}
+
+.Re-registerForm .Re-addChildBox .Re-childBoxInputs .Re-input input,
+.Re-registerForm .Re-addChildBox .Re-childBoxInputs .Re-input select{
+    position: relative;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    width: 100%;
+    height: 100%;
+    padding-left: 1.5rem;
+    border-radius: 10rem;
+}
+
+.Re-registerForm .Re-addChildBox .Re-childBoxInputs .Re-input label{
+    position: absolute;
+    top: -10px;
+    left: 1rem;
+    font-size: 0.8rem;
+    background-color: var(--whiteColor);
+    padding: 0 0.5rem;
+    color: var(--middleYellowColor);
+    font-weight: 500;
+}
+
+.Re-registerForm .Re-addChildBox .Re-childBoxInputs .Re-input .Re-inputIcon{
+    position: absolute;
+    font-size: 0.8rem;
+    right: 1.6rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.Re-registerForm .Re-childBoxButtons{
+    position: absolute;
+    display: flex;
+    gap: 0.5rem;
+    bottom: 1rem;
+    right: 2rem;
+}
+
+.Re-registerForm .Re-childBoxButtons button{
+    display: flex;
+    height: 2rem;
+    width: 6rem;    
+    cursor: pointer;
+    color: var(--middleYellowColor);
+    font-weight: 600;
+    border: none;
+    background-color: transparent;
+}
+
+.Re-registerForm .Re-childBoxButtons button:nth-of-type(2){
+    color: var(--whiteColor);
+    background-color: var(--middleYellowColor);
+    border: 1px solid var(--middleYellowColor);
+    border-radius: 10rem;
 }
 
 .Re-registerForm .Re-termsBox{
