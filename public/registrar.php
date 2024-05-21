@@ -4,18 +4,22 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-        <link rel="stylesheet" href="styles/variable.css">
-        <link rel="stylesheet" href="styles/style.css">
-        <link rel="icon" href="assets/Logos/Final/Conecta_Mães_Logo_Icon.png">
+        <link rel="stylesheet" href="../app/assets/styles/variable.css">
+        <link rel="stylesheet" href="../app/assets/styles/style.css">
+        <link rel="stylesheet" href="../app/assets/styles/include.css">
+        <link rel="icon" href="../app/assets/imagens/logos/final/Conecta_Mães_Logo_Icon.png">
         <title>ConectaMães - Registro</title>
     </head>
 
     <body>
-        <?php include_once ("php/includes/headerLanding.php");?>
+        <?php 
+            include_once ("../app/includes/headerLanding.php");
+            include_once ("../app/services/crud/userFunctions.php");
+        ?>
 
         <main class="Re-register">
-            <img src="assets/Imagens/Cells.png" class="backgroundGeometricForms">
-            <img src="assets/Imagens/Cells.png" class="backgroundGeometricForms cellsLeft">
+            <img src="../app/assets/imagens/figuras/Cells.png" class="backgroundGeometricForms">
+            <img src="../app/assets/imagens/figuras/Cells.png" class="backgroundGeometricForms cellsLeft">
 
             <form class="Re-registerForm">
                 <div class="Re-formHeader">
@@ -68,7 +72,7 @@
 
                         <div class="Re-addChildBox close">
                             <div class="Re-childBoxHeader">
-                                <img src="assets/Icons/icons8-child-icon-90.png" alt="Icone de Criança" width="35px" class="Re-child-icon">
+                                <img src="../app/assets/imagens/icons/icons8-child-icon-90.png" alt="Icone de Criança" width="35px" class="Re-child-icon">
                                 <input type="text" class="Re-childName" placeholder="Nome Completo" required>
                             </div>
 
@@ -84,7 +88,7 @@
                                     <label for="dataNascFilho">Data de Nascimento</label>
                                 </div>
                                 <div class="Re-input">
-                                    <select name="select" id="deficiencia">
+                                    <select name="deficienciaSelect" id="deficiencia">
                                         <option value="valor0">--------</option>
                                         <optgroup label="Deficiência Físicas">
                                             <option value="valor1">H81 — Hemiplegia</option>
@@ -145,12 +149,12 @@
                 <button class="Re-registerNext" type="submit" value="submit" > Próximo </button>
                 <p class="Re-goLogin"> Já possui uma conta? <a href="login.php"> Entre </a></p>
             </form>
-                
+            <?php signUp($conn);?>  
         </main>
 
-        <?php include_once ("php/includes/footer.php");?>
+        <?php include_once ("../app/includes/footer.php");?>
 
     </body>
 
-    <script src="js/register.js"></script>
+    <script src="../app/assets/js/register.js"></script>
 </html>

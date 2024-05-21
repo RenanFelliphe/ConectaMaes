@@ -778,29 +778,59 @@ main{
     position: relative;
     display: flex;
     justify-content: flex-start;
-    gap: 1.5rem;
+    gap: 1rem;
     border-bottom: 1px solid #e4e4e4;
+    height: 10rem;
     padding: 1rem 0.5rem 3rem 1rem;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-userProfileImage{
+.Ho-Main .timeline .Ho-postSomething .Ho-postLeft{
+    display: flex;
+    flex-direction: column;
+}
+
+.Ho-Main .timeline .Ho-postSomething .Ho-postLeft .Ho-userProfileImage{
     position: relative;
     width: fit-content;
 }
 
-.Ho-Main .timeline .Ho-postSomething .postTextContent{
+.Ho-Main .timeline .Ho-postSomething .Ho-postLeft .Ho-userProfileImage img{
+    width: 4rem;
+    height: 4rem;
+}
+
+.Ho-Main .timeline .Ho-postSomething .Ho-postLeft .H-characters{
+    font-size: 0.8rem;
+}
+
+.characterBlocked {
+    animation: shake 0.7s;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+.Ho-Main .timeline .Ho-postSomething .Ho-postCenter{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.Ho-Main .timeline .Ho-postSomething .Ho-postCenter .postTextContent{
     position: relative;
     width: 100%;
-    height: 4rem;
+    height: 2rem;
     outline: none;
     border: none;    
     background-color: transparent;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-userProfileImage img{
-    width: 4rem;
-    height: 4rem;
-}
 .Ho-Main .timeline .Ho-postSomething .imageInput{
     position: absolute;
     left: 2rem;
