@@ -1,13 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch&family=Montserrat&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Ubuntu', 'sans-serif';
+    font-style: normal;
+}
+
 /*====================================================================================================
-============================================== HEADER ================================================
+========================================== HEADER LANDING ============================================
 ====================================================================================================*/
 
-header{
+.headerLanding{
     position: sticky;
     top: 0;
     display: flex;
     justify-content: space-between;
-    gap: 1rem;
+    gap: 3rem;
     height: 4rem;
     padding: 0.5rem 1rem;
     z-index: 1;
@@ -17,27 +28,27 @@ header{
     border-bottom: 1px solid #ffffff33;
 }
 
-header img.A-headerLogo{
+.headerLanding .A-headerLogo{
     width: 10rem;
     cursor: pointer;
 }
 
-header .A-headerLinks{
+.headerLanding .A-headerLinks{
     display: flex;
     gap: 2.5rem;
 }
 
-header .A-headerLinks h4{
+.headerLanding .A-headerLinks h4{
     cursor: pointer;
     font-weight: 500;
 }
 
-header .A-headerLinks h4 a{
+.headerLanding .A-headerLinks h4 a{
     text-decoration: none;
     color: black;
 }
 
-header .A-searchBar{
+.headerLanding .A-searchBar{
     display: flex;
     background-color: #e4e4e4;
     border-radius: 10rem;
@@ -52,7 +63,7 @@ header .A-searchBar{
     border: 1px solid #d1d1d1;
 }
 
-header .A-searchBarInput{
+.headerLanding .A-searchBarInput{
     background-color: transparent;
     border: none;
     color: var(--blackColor);
@@ -62,21 +73,21 @@ header .A-searchBarInput{
     font-size: 1rem;
 }
 
-header .A-searchBar .bi,
-header .A-searchBarInput::placeholder{
+.headerLanding .A-searchBar .bi,
+.headerLanding .A-searchBarInput::placeholder{
     color:var(--blackColor);
 }   
 
-header .A-signButtons{
+.headerLanding .A-signButtons{
     display: flex;
     gap: 1rem;
 }
 
-header .A-signButtons a{
+.headerLanding .A-signButtons a{
     text-decoration: none;
 }
 
-header .A-signButtons h4{
+.headerLanding .A-signButtons h4{
     display: flex;
     height: 2rem;
     width: 7rem;    
@@ -87,11 +98,121 @@ header .A-signButtons h4{
     text-decoration: none;
 }
 
-header .A-signButtons .A-signIn{
+.headerLanding .A-signButtons .A-signIn{
     color: var(--whiteColor);
     background-color: var(--middleYellowColor);
 }
 
+
+/*====================================================================================================
+============================================ HEADER HOME =============================================
+====================================================================================================*/
+.headerHome{
+    position: sticky;
+    top: 0;
+    display: flex;
+    gap: 3rem;
+    justify-content: space-between;
+    height: 4rem;
+    padding: 0.5rem 1rem;
+    background: #ffffff;
+    border-bottom: 1px solid #e4e4e4;
+}
+
+.headerHome .A-headerLogo{
+    width: 10rem;
+    cursor: pointer;
+}
+
+.headerHome .headerIcon{
+    width: 2rem;
+    cursor: pointer;
+}
+
+.headerHome .headerPageLinks{
+    display: flex;
+    gap: 2.5rem;
+}
+
+.headerHome .headerPageLinks .pageLink{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    height: 4rem;
+    font-weight: 500;
+    color: #8A8A8A;
+    text-decoration: none;
+}
+
+.headerHome .headerPageLinks .pageLink.active{
+    color: var(--pastelPinkColor);
+    font-weight: 900;
+}
+
+.headerHome .headerPageLinks .pageLink .pageSelector{
+    position: absolute;
+    width: 200%;
+    height: 2px;
+    bottom: -1px;
+    border-radius: 100rem;
+}
+
+.headerHome .headerPageLinks .pageLink.active .pageSelector{
+    background-color: var(--pastelPinkColor);
+}
+
+.headerHome .userContainer{
+    display: flex;
+    gap: 0.7rem;
+}
+
+.headerHome .userContainer .notificationsModalIcon{
+    width: 1.5rem;
+    margin-right: 2rem;
+}
+
+.headerHome .userContainer .userInformations{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.headerHome .userContainer .userInformations .userNickname{
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: #8A8A8A;
+}
+
+.headerHome .userContainer .userAccount{
+    position: relative;
+    width: 3.3rem;  
+    height: 3.3rem;
+}
+
+.headerHome .userContainer .userAccount .userProfileImage img{
+    width: 100%;
+    height: 100%;
+    cursor: pointer;  
+}
+
+.headerHome .userContainer .userAccount .bi-chevron-down{
+    position: absolute;
+    display: flex;
+    width: 1.2rem;
+    height: 1.2rem;
+    right: 0;
+    bottom: 0;
+    font-size: 0.8rem;
+    font-weight: 900;
+    color: #6E6E6E;
+    background-color: var(--whiteColor);
+    border-radius: 100%;
+    cursor: pointer;
+}
 /*====================================================================================================
 ============================================== FOOTER ================================================
 ====================================================================================================*/

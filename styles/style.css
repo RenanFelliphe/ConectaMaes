@@ -16,7 +16,9 @@ body::-webkit-scrollbar{
 
 main{
     position: relative;
-    padding: 0.3rem 1rem 3rem 1rem;
+    width: 100vw;
+    height: max-content;
+    padding-bottom: 3rem;
     overflow: hidden;
     scroll-behavior: smooth;
 }
@@ -743,4 +745,115 @@ main{
     gap: 10px;
     font-size: 0.8rem;
     margin: 1rem 0 -1rem 0;
+}
+
+
+/*====================================================================================================
+======================================= PÁGINA INICIAL (HOME) ========================================
+====================================================================================================*/
+
+.Ho-Main{
+    width: 100vw;
+    display: flex;
+    padding: 0;
+}
+
+.Ho-Main .asideLeft{
+    width: 25vw;
+}
+
+.Ho-Main .timeline{
+    border: 1px solid #e4e4e4;
+    border-bottom: none;
+    border-top: none;
+    width: 50vw;
+    height: 89.5vh;
+}
+
+.Ho-Main .asideRight{
+    width: 25vw;
+}
+
+.Ho-Main .timeline .Ho-postSomething{
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    gap: 1.5rem;
+    border-bottom: 1px solid #e4e4e4;
+    padding: 1rem 0.5rem 3rem 1rem;
+}
+
+.Ho-Main .timeline .Ho-postSomething .Ho-userProfileImage{
+    position: relative;
+    width: fit-content;
+}
+
+.Ho-Main .timeline .Ho-postSomething .postTextContent{
+    position: relative;
+    width: 100%;
+    height: 4rem;
+    outline: none;
+    border: none;    
+    background-color: transparent;
+}
+
+.Ho-Main .timeline .Ho-postSomething .Ho-userProfileImage img{
+    width: 4rem;
+    height: 4rem;
+}
+.Ho-Main .timeline .Ho-postSomething .imageInput{
+    position: absolute;
+    left: 2rem;
+    bottom: 1rem;   
+    display: flex; 
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.Ho-Main .timeline .Ho-postSomething .imageInput input{
+    display: none
+}
+  
+.Ho-Main .timeline .Ho-postSomething .imageInput label {
+    display: flex;
+    gap: 0.5rem;
+    width: fit-content;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.Ho-Main .timeline .Ho-postSomething .imageInput label img{
+    width: 1.3rem;
+}
+
+.preview img {
+    margin-left: 1rem;
+    width: 2rem;
+    opacity: 0.5;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.preview img:hover {
+    opacity: 1;
+    width: 2.3rem;
+    transition: 0.3s;
+}
+
+.preview.maximize img {
+    transform: scale(5);    
+}
+
+.Ho-Main .timeline .Ho-postSomething button[type='submit']{
+    position: absolute;
+    right: 2rem;
+    bottom: 1rem;
+    background-color: var(--pastelPinkColor);
+    padding: 0.5rem 1.5rem;
+    color: var(--whiteColor);
+    border-radius: 100rem;
+    border: none;
+    cursor: pointer;
+    font-weight: 900;
 }

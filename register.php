@@ -142,7 +142,7 @@
                     <input type="checkbox" id="Re-terms">
                     <label for="Re-terms"> Eu li e concordo com os Termos e Condições </label>
                 </div>
-                <button class="Re-registerNext"> Próximo </button>
+                <button class="Re-registerNext" type="submit" value="submit" > Próximo </button>
                 <p class="Re-goLogin"> Já possui uma conta? <a href="login.php"> Entre </a></p>
             </form>
                 

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles/variable.css">
     <link rel="stylesheet" href="styles/style.css">
     <link rel="icon" href="assets/Logos/Final/Conecta_Mães_Logo_Icon.png">
-    <title>ConectaMães - Perfil</title>
+    <title>ConectaMães - Pedidos</title>
 </head>
 <body>
     <?php include_once ("php/includes/headerHome.php");?>

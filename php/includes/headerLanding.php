@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="styles/include.css">
     </head>
     <body>
-        <header>
+        <header class="headerLanding">
             <a href="index.php"><img src="assets/Logos/Final/Conecta_Mães_Logo_Black.png" class="A-headerLogo" alt="Logo do ConectaMães"></a>
             <div class="A-headerLinks">
                 <h4><a href="index.php#La-articleEquip">Equipe</a></h4>
