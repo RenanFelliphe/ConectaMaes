@@ -1,3 +1,9 @@
+<?php 
+    session_start();
+    $verify = isset($_SESSION['active']) ? true : header("Location:/ConectaMaesProject/public/login.php");
+    require_once "../../app/services/crud/userFunctions.php"; 
+    $currentUserData = unitQuery($conn, "Usuario", $_SESSION['idUsuario']);   
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
