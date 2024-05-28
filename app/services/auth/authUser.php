@@ -48,5 +48,5 @@
         session_unset();
         session_destroy();
 
-        header("Location: ../../../public/login.php");
+        header("Location: /ConectaMaesProject/public/login.php");
     }

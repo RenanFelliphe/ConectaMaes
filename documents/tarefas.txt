@@ -1,11 +1,11 @@
 Para a próxima reunião dia 21/05:
 - Texto artigo;
-- finalizar a prototipação
-- solicitar ao Alexandre que crie uma estrutura para o projeto de PI
-- Manter Perfil - Natália
+//- finalizar a prototipação - Nathália e Renan
+//- solicitar ao Alexandre que crie uma estrutura para o projeto de PI - Nathália
+//- Manter Perfil - Nathália
 - Manter Pedido - Lívia
 - Manter Relato - Renan
-- criar o banco de dados
+//- criar o banco de dados
 
 Ideias Futuras
 - Algortimo de sujestão | Nath
