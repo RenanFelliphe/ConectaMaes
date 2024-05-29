@@ -79,7 +79,7 @@ addPost();
 document.getElementById('voltarEditar').addEventListener('click', function(event) {
     event.preventDefault(); // Evita o comportamento padrão do botão
     const url = new URL(window.location.href);
-    url.searchParams.delete('editId'); // Remove o parâmetro 'editId'
+    url.searchParams.delete('editId');
     window.history.replaceState(null, '', url.toString()); // Atualiza a URL sem recarregar a página
     location.reload(); // Recarrega a página para aplicar as mudanças
 });

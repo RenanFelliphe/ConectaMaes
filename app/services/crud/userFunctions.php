@@ -21,10 +21,10 @@
             $emailRegistro = filter_input(INPUT_POST, "emailRegistro", FILTER_VALIDATE_EMAIL);
             $userRegistro = mysqli_real_escape_string($conn, $_POST['userRegistro']);
             $senhaRegistro = md5($_POST['senhaRegistro']);
-            $dtNascRegistro = mysqli_real_escape_string($conn, $_POST['dtNascRegistro']);
-            $nCelularRegistro = mysqli_real_escape_string($conn, $_POST['nCelularRegistro']);
-            $CEPRegistro = mysqli_real_escape_string($conn, $_POST['CEPRegistro']);
-            $linkFtPerfilRegistro = mysqli_real_escape_string($conn, $_POST['linkFtPerfilRegistro']);
+            $dataNascimentoRegistro = mysqli_real_escape_string($conn, $_POST['dataNascimentoRegistro']);
+            $telefoneRegistro = mysqli_real_escape_string($conn, $_POST['telefoneRegistro']);
+            //! $CEPRegistro = mysqli_real_escape_string($conn, $_POST['CEPRegistro']);
+            $linkFotoPerfilRegistro = mysqli_real_escape_string($conn, $_POST['linkFotoPerfilRegistro']);
             $biografiaUsuarioRegistro = mysqli_real_escape_string($conn, $_POST['biografiaUsuarioRegistro']);
 
             if($_POST['emailRegistro'] != $_POST['emailRegistroConfirma']){
@@ -44,7 +44,7 @@
             }
     
             if(empty($err)){
-                $insertNewUser = "INSERT INTO Usuario (nome, email, senha, dtNasc, nCelular, CEP, linkFtPerfil, biografiaUsuario, user) VALUES ('$nomeRegistro','$emailRegistro','$senhaRegistro','$dtNascRegistro','$nCelularRegistro','$CEPRegistro','$linkFtPerfilRegistro','$biografiaUsuarioRegistro','$userRegistro')";
+                $insertNewUser = "INSERT INTO Usuario (nome, email, senha, dataNascimento, telefone, linkFotoPerfil, biografiaUsuario, user) VALUES ('$nomeRegistro','$emailRegistro','$senhaRegistro','$dataNascimentoRegistro','$telefoneRegistro','$linkFotoPerfilRegistro','$biografiaUsuarioRegistro','$userRegistro')";
                 $executeSignUp = mysqli_query($conn, $insertNewUser);
     
                 if($executeSignUp){
@@ -94,10 +94,10 @@
             $email = !empty($_POST['email']) ? filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL) : null;
             $user = !empty($_POST['user']) ? mysqli_real_escape_string($conn, $_POST['user']) : null;
             $senha = !empty($_POST['senha']) ? md5($_POST['senha']) : null;
-            $dtNasc = !empty($_POST['dtNasc']) ? mysqli_real_escape_string($conn, $_POST['dtNasc']) : null;
-            $nCelular = !empty($_POST['nCelular']) ? mysqli_real_escape_string($conn, $_POST['nCelular']) : null;
+            $dataNascimento = !empty($_POST['dataNascimento']) ? mysqli_real_escape_string($conn, $_POST['dataNascimento']) : null;
+            $telefone = !empty($_POST['telefone']) ? mysqli_real_escape_string($conn, $_POST['telefone']) : null;
             $CEP = !empty($_POST['CEP']) ? mysqli_real_escape_string($conn, $_POST['CEP']) : null;
-            $linkFtPerfil = !empty($_POST['linkFtPerfil']) ? mysqli_real_escape_string($conn, $_POST['linkFtPerfil']) : null;
+            $linkFotoPerfil = !empty($_POST['linkFotoPerfil']) ? mysqli_real_escape_string($conn, $_POST['linkFotoPerfil']) : null;
             $biografiaUsuario = !empty($_POST['biografiaUsuario']) ? mysqli_real_escape_string($conn, $_POST['biografiaUsuario']) : null;
     
             // Verificação de email duplicado
@@ -128,10 +128,10 @@
                 if($email) $fields["email"] = $email;
                 if($user) $fields["user"] = $user;
                 if($senha) $fields["senha"] = $senha;
-                if($dtNasc) $fields["dtNasc"] = $dtNasc;
-                if($nCelular) $fields["nCelular"] = $nCelular;
+                if($dataNascimento) $fields["dataNascimento"] = $dataNascimento;
+                if($telefone) $fields["telefone"] = $telefone;
                 if($CEP) $fields["CEP"] = $CEP;
-                if($linkFtPerfil) $fields["linkFtPerfil"] = $linkFtPerfil;
+                if($linkFotoPerfil) $fields["linkFtPerfil"] = $linkFotoPerfil;
                 if($biografiaUsuario) $fields["biografiaUsuario"] = $biografiaUsuario;
     
                 if(!empty($fields)) {

@@ -3,8 +3,8 @@ idUsuario bigint PRIMARY KEY,
 nome varchar(100),
 email varchar(256),
 senha varchar(100),
-dtNasc date,
-nCelular bigint,
+dataNascimento date,
+telefone bigint,
 CEP bigint,
 linkFtPerfil varchar(256),
 decricao varchar(256)
@@ -23,7 +23,7 @@ CONSTRAINT FK_usuario_publicacao FOREIGN KEY(idUsuario) REFERENCES Usuario(idUsu
 CREATE TABLE Filho (
 idFilho bigint PRIMARY KEY,
 nomeFilho varchar(100),
-dtNasc date,
+dataNascimento date,
 sexo varchar(25),
 idUsuario bigint,
 CONSTRAINT FK_usuario_filho FOREIGN KEY(idUsuario) REFERENCES Usuario(idUsuario)

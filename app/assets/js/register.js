@@ -52,11 +52,44 @@ function addChild(){
             });
         });
     }
-       
-    
 
     openCloseAddChild();
     toggleChildSex();
 }
 
 addChild();
+
+
+function getLocation() {
+    // Verifica se o navegador suporta geolocalização
+    if (navigator.geolocation) {
+      // Obtém a localização do usuário
+      navigator.geolocation.getCurrentPosition(function(position) {
+        // Obtém as coordenadas de latitude e longitude
+        var latitude = position.coords.latitude;
+        var longitude = position.coords.longitude;
+  
+        // Faz uma requisição para a API de geolocalização reversa
+        var url = 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + latitude + '&lon=' + longitude;
+  
+        // Faz uma requisição Axios
+        axios.get(url)
+          .then(response => {
+            var data = response.data;
+            // Extrai a cidade e o estado da resposta
+            var cidade = data.address.city;
+            var estado = data.address.state;
+  
+            // Exibe a cidade e o estado
+            console.log(cidade + ', ' + estado);
+          })
+          .catch(error => console.log('Erro na requisição:', error));
+      });
+    } else {
+      // Navegador não suporta geolocalização
+      console.log('Geolocalização não suportada pelo navegador.');
+    }
+  }
+
+  getLocation();
+  

@@ -67,17 +67,17 @@
                         <label for="senha">Senha:</label>
                         <input type="password" id="senha" name="senha" placeholder="Deixe em branco para manter a mesma senha" />
                 
-                        <label for="dtNasc">Data de Nascimento:</label>
-                        <input type="date" id="dtNasc" name="dtNasc" value="<?php echo $currentUserData['dtNasc']; ?>" />
+                        <label for="dataNascimento">Data de Nascimento:</label>
+                        <input type="date" id="dataNascimento" name="dataNascimento" value="<?php echo $currentUserData['dataNascimento']; ?>" />
                 
-                        <label for="nCelular">Número de Celular:</label>
-                        <input type="text" id="nCelular" name="nCelular" value="<?php echo $currentUserData['nCelular']; ?>" />
+                        <label for="telefone">Número de Celular:</label>
+                        <input type="text" id="telefone" name="telefone" value="<?php echo $currentUserData['telefone']; ?>" />
                 
-                        <label for="CEP">CEP:</label>
-                        <input type="text" id="CEP" name="CEP" value="<?php echo $currentUserData['CEP']; ?>" />
+                        <!--label for="CEP">CEP:</label>
+                        <input type="text" id="CEP" name="CEP" value="--><?php //echo $currentUserData['CEP']; ?><!--"-->
                 
-                        <label for="linkFtPerfil">Link da Foto de Perfil:</label>
-                        <input type="text" id="linkFtPerfil" name="linkFtPerfil" value="<?php echo $currentUserData['linkFtPerfil']; ?>" />
+                        <label for="linkFotoPerfil">Link da Foto de Perfil:</label>
+                        <input type="text" id="linkFotoPerfil" name="linkFotoPerfil" value="<?php echo $currentUserData['linkFotoPerfil']; ?>" />
                 
                         <label for="biografiaUsuario">Biografia:</label>
                         <textarea id="biografiaUsuario" name="biografiaUsuario"><?php echo $currentUserData['biografiaUsuario']; ?></textarea>

@@ -24,7 +24,8 @@
 <body>
     <?php include_once ("../app/includes/headerLanding.php");?>
 
-    <main class="La-landing">
+    <main class="Su-suporte">
+        
     </main>
 
     <?php include_once ("../app/includes/footer.php");?>
