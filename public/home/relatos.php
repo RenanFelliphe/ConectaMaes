@@ -26,36 +26,42 @@
                 <img src="/ConectaMaesProject/app/assets/imagens/figuras/CellsFull<?php echo $currentUserData['tema'];?>.png" class= "cellsHome">
             </section>
 
-                <section class="timeline">
-                    <form class="Ho-postSomething">
-                        <div class="Ho-postLeft">
-                            <a class="Ho-userProfileImage" href="profile.php">
-                                <img src="/ConectaMaesProject/app/assets/imagens/fotos/Renan-Moura.png" alt="Foto de Perfil do Usuário">
-                            </a>
-                            <span class="H-characters"><span class="H-charactersNumber">0</span>/<span class="H-maxCharacters">20</span></span>
-                        </div>
+            <section class="timeline">
+            <form class="Ho-postSomething">
+                <div class="Ho-postLeft">
+                    <a class="Ho-userProfileImage" href="profile.php">
+                    <img src="/ConectaMaesProject/app/assets/imagens/fotos/<?php echo $currentUserData['linkFotoPerfil']; ?>" alt="Foto de perfil do usuário">
+                    </a>
+                    <span class="H-characters"><span class="H-charactersNumber">0</span>/<span class="H-maxCharacters">200</span></span>
+                </div>
 
-                        <div class="Ho-postCenter">
-                            <select name="postStyleSelect" id="postStyle" class="postStyle">
-                                <option value="">Padrão</option>
-                                <option value="" selected>Relato</option>
-                            </select>
+                <div class="Ho-postCenter">
+                    <input type="text" class="postTextContent" placeholder="Como você está se sentindo? Compartilhe sua experiência!" oninput="postCharLimiter()">
+                </div>
+                
+                <div class="imageInput">
+                    <input type="file" id="imageSelector" accept="image/*">
+                    <label for="imageSelector">
+                        <img src="/ConectaMaesProject/app/assets/imagens/icons/icons8-adicionar-imagem-96.png" alt="">
+                        <p> Adicionar Imagem </p>
+                    </label>
+                    <span class="preview"></span>
+                </div>
 
-                            <input type="text" class="postTextContent" placeholder="Como você está se sentindo? Compartilhe sua experiência!" oninput="postCharLimiter()">
-                        </div>
-                        
-                        <div class="imageInput">
-                            <input type="file" id="imageSelector" accept="image/*">
-                            <label for="imageSelector">
-                                <img src="/ConectaMaesProject/app/assets/imagens/icons/icons8-adicionar-imagem-96.png" alt="">
-                                <p> Adicionar Imagem </p>
-                            </label>
-                            <span class="preview"></span>
-                        </div>
+                <div class="tagsInput">
+                    <img src="" alt="">
+                    <input type="search" id="" placeholder="Tags">
+                </div>
 
-                        <button type="submit" value="submit">Postar</button>
-                    </form>
-                </section>
+                <div class="dropdown">
+                    <button class="dropbtn">Relatar</button>
+                    
+                </div>
+                <span class="sensivel"><input type="checkbox" name="sensivel" class="checkboxSensivel">Conteúdo sensível</span>
+            </form>
+
+            <article class="post"></article>
+        </section> 
 
                 <section class="asideRight">
             <div class="searchBar">

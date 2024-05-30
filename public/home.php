@@ -30,15 +30,10 @@
                     <a class="Ho-userProfileImage" href="profile.php">
                     <img src="/ConectaMaesProject/app/assets/imagens/fotos/<?php echo $currentUserData['linkFotoPerfil']; ?>" alt="Foto de perfil do usuário">
                     </a>
-                    <span class="H-characters"><span class="H-charactersNumber">0</span>/<span class="H-maxCharacters">20</span></span>
+                    <span class="H-characters"><span class="H-charactersNumber">0</span>/<span class="H-maxCharacters">200</span></span>
                 </div>
 
                 <div class="Ho-postCenter">
-                    <select name="postStyleSelect" id="postStyle" class="postStyle">
-                        <option value="" selected>Padrão</option>
-                        <option value="">Relato</option>
-                    </select>
-
                     <input type="text" class="postTextContent" placeholder="Como você está se sentindo? Compartilhe sua experiência!" oninput="postCharLimiter()">
                 </div>
                 
@@ -51,7 +46,20 @@
                     <span class="preview"></span>
                 </div>
 
-                <button type="submit" value="submit">Postar</button>
+                <div class="tagsInput">
+                    <img src="" alt="">
+                    <input type="search" id="" placeholder="Tags">
+                </div>
+
+                <div class="dropdown">
+                    <button class="dropbtn">Postar</button>
+                    <div class="dropdown-content">
+                        <a href="#">Postar</a>
+                        <a href="#">Relatar</a>
+                        <a href="#">Pedir</a>
+                    </div>
+                </div>
+                <span class="sensivel"><input type="checkbox" name="sensivel" class="checkboxSensivel">Conteúdo sensível</span>
             </form>
 
             <article class="post"></article>
@@ -93,6 +101,14 @@
                         <button>Seguir</button>
                     </div>
                 </div>
+            </div>
+
+            <div class="asideRightFooter">
+                <a href="">Sobre o ConectaMães</a>
+                <a href="">Suporte</a>
+                <a href="">Termos de Privacidade</a>
+                <a href="">CEFET-MG</a>
+                <h5>© 2024 ConectaMães do CEFET-MG</h5>
             </div>
         </section>
     </main>
