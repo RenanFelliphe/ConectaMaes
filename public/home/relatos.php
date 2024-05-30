@@ -22,7 +22,9 @@
         <?php include_once ("../../app/includes/headerHome.php");?>
 
         <main class="Ho-Main">
-                <section class="asideLeft"></section>
+            <section class="asideLeft">
+                <img src="/ConectaMaesProject/app/assets/imagens/figuras/CellsFull<?php echo $currentUserData['tema'];?>.png" class= "cellsHome">
+            </section>
 
                 <section class="timeline">
                     <form class="Ho-postSomething">
@@ -55,7 +57,44 @@
                     </form>
                 </section>
 
-                <section class="asideRight"></section>
+                <section class="asideRight">
+            <div class="searchBar">
+                <img src="/ConectaMaesProject/app/assets/imagens/icons/search.png" alt="Símbolo de Lupa">
+                <input class="input" type="search" placeholder="Pesquisar"/>
+            </div>
+
+            <div class="followSuggestion">
+                <h1>Sugestões</h1>
+                <div class="suggestionContainer">
+                    <div class="suggestedFollower">
+                        <h3>
+                            <?php
+                                echo "Nome de Usuário Sugerido 1";
+                            ?>
+                        </h3>
+                        <button>Seguir</button>
+                    </div>
+
+                    <div class="suggestedFollower">
+                        <h3>
+                            <?php
+                                echo "Nome de Usuário Sugerido 2";
+                            ?>
+                        </h3>
+                        <button>Seguir</button>
+                    </div>
+
+                    <div class="suggestedFollower">
+                        <h3>
+                            <?php
+                                echo "Nome de Usuário Sugerido 3";
+                            ?>
+                        </h3>
+                        <button>Seguir</button>
+                    </div>
+                </div>
+            </div>
+        </section>
         </main>
     </body>
 </html>

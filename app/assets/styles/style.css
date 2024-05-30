@@ -755,11 +755,19 @@ main{
 .Ho-Main{
     width: 100vw;
     display: flex;
+    flex-direction: row;
     padding: 0;
 }
 
 .Ho-Main .asideLeft{
     width: 25vw;
+    position: sticky;
+}
+.Ho-Main .asideLeft .cellsHome{
+    top: -4rem;
+    width: 15vw;
+    height: max-content;
+    left: 0;
 }
 
 .Ho-Main .timeline{
@@ -771,7 +779,9 @@ main{
 }
 
 .Ho-Main .asideRight{
+    background-color: red;
     width: 25vw;
+    height: 89.5vh;
 }
 
 .Ho-Main .timeline .Ho-postSomething{

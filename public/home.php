@@ -20,13 +20,15 @@
     <?php include_once ("../app/includes/headerHome.php");?>
 
     <main class="Ho-Main">
-        <section class="asideLeft"></section>
+        <section class="asideLeft">
+            <img src="/ConectaMaesProject/app/assets/imagens/figuras/CellsFull<?php echo $currentUserData['tema'];?>.png" class= "cellsHome">
+        </section>
 
         <section class="timeline">
             <form class="Ho-postSomething">
                 <div class="Ho-postLeft">
                     <a class="Ho-userProfileImage" href="profile.php">
-                        <img src="/ConectaMaesProject/app/assets/imagens/fotos/Renan-Moura.png" alt="Foto de Perfil do Usuário">
+                    <img src="/ConectaMaesProject/app/assets/imagens/fotos/<?php echo $currentUserData['linkFotoPerfil']; ?>" alt="Foto de perfil do usuário">
                     </a>
                     <span class="H-characters"><span class="H-charactersNumber">0</span>/<span class="H-maxCharacters">20</span></span>
                 </div>
@@ -51,11 +53,48 @@
 
                 <button type="submit" value="submit">Postar</button>
             </form>
-        </section>
-        
-        
 
-        <section class="asideRight"></section>
+            <article class="post"></article>
+        </section> 
+
+        <section class="asideRight">
+            <div class="searchBar">
+                <img src="/ConectaMaesProject/app/assets/imagens/icons/search.png" alt="Símbolo de Lupa">
+                <input class="input" type="search" placeholder="Pesquisar"/>
+            </div>
+
+            <div class="followSuggestion">
+                <h1>Sugestões</h1>
+                <div class="suggestionContainer">
+                    <div class="suggestedFollower">
+                        <h3>
+                            <?php
+                                echo "Nome de Usuário Sugerido 1";
+                            ?>
+                        </h3>
+                        <button>Seguir</button>
+                    </div>
+
+                    <div class="suggestedFollower">
+                        <h3>
+                            <?php
+                                echo "Nome de Usuário Sugerido 2";
+                            ?>
+                        </h3>
+                        <button>Seguir</button>
+                    </div>
+
+                    <div class="suggestedFollower">
+                        <h3>
+                            <?php
+                                echo "Nome de Usuário Sugerido 3";
+                            ?>
+                        </h3>
+                        <button>Seguir</button>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <script src="/ConectaMaesProject/app/assets/js/home.js"></script>

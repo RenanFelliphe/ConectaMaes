@@ -132,11 +132,11 @@
                     <div class="Re-themeInfo">
                         <h3> Tema </h3>
                         <div class="Re-themeOptions">
-                            <input type="radio" name="changeTheme" value="yellowTheme" id="Re-yellowTheme">
+                            <input type="radio" name="tema" value="Amarelo" id="Re-yellowTheme">
                             <label for="Re-yellowTheme"> Amarelo </label>
-                            <input type="radio" name="changeTheme" value="blueTheme" id="Re-blueTheme">
+                            <input type="radio" name="tema" value="Azul" id="Re-blueTheme">
                             <label for="Re-blueTheme"> Azul </label>
-                            <input type="radio" name="changeTheme" value="pinkTheme" id="Re-pinkTheme">
+                            <input type="radio" name="tema" value="Rosa" id="Re-pinkTheme">
                             <label for="Re-pinkTheme"> Rosa </label>
                         </div>
                     </div>

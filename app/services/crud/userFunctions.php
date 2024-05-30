@@ -26,6 +26,8 @@
             //! $CEPRegistro = mysqli_real_escape_string($conn, $_POST['CEPRegistro']);
             $linkFotoPerfilRegistro = mysqli_real_escape_string($conn, $_POST['linkFotoPerfilRegistro']);
             $biografiaUsuarioRegistro = mysqli_real_escape_string($conn, $_POST['biografiaUsuarioRegistro']);
+            $isAdmin = false;
+            $tema = mysqli_real_escape_string($conn, $_POST['changeTheme']);
 
             if($_POST['emailRegistro'] != $_POST['emailRegistroConfirma']){
                 $err[] = "Email não confere!";
@@ -44,7 +46,7 @@
             }
     
             if(empty($err)){
-                $insertNewUser = "INSERT INTO Usuario (nome, email, senha, dataNascimento, telefone, linkFotoPerfil, biografiaUsuario, user) VALUES ('$nomeRegistro','$emailRegistro','$senhaRegistro','$dataNascimentoRegistro','$telefoneRegistro','$linkFotoPerfilRegistro','$biografiaUsuarioRegistro','$userRegistro')";
+                $insertNewUser = "INSERT INTO Usuario (nome, email, senha, dataNascimento, telefone, linkFotoPerfil, biografiaUsuario, user, isAdmin, tema) VALUES ('$nomeRegistro','$emailRegistro','$senhaRegistro','$dataNascimentoRegistro','$telefoneRegistro','$linkFotoPerfilRegistro','$biografiaUsuarioRegistro','$userRegistro','$isAdmin','$tema')";
                 $executeSignUp = mysqli_query($conn, $insertNewUser);
     
                 if($executeSignUp){

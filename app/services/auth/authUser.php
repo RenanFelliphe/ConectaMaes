@@ -30,6 +30,8 @@
                 $_SESSION['user'] = $return['user'];
                 $_SESSION['idUsuario'] = $return['idUsuario'];
                 $_SESSION['email'] = $return['email'];
+                $_SESSION['linkFotoPerfil'] = $return['linkFotoPerfil'];
+                $_SESSION['tema'] = $return['tema'];
 
                 $_SESSION['active'] = true;
 
