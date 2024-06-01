@@ -91,8 +91,8 @@
     display: flex;
     height: 2rem;
     width: 7rem;    
-    color: var(--middleYellowColor);
-    border: 1px solid var(--middleYellowColor);
+    color: var(--secondColor);
+    border: 1px solid var(--secondColor);
     border-radius: 10rem;
     cursor: pointer;
     text-decoration: none;
@@ -100,7 +100,7 @@
 
 .headerLanding .A-signButtons .A-signIn{
     color: var(--whiteColor);
-    background-color: var(--middleYellowColor);
+    background-color: var(--secondColor);
 }
 
 

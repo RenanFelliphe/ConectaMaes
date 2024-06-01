@@ -76,10 +76,10 @@ function postCharLimiter() {
 addPost();
 
 //? 
-document.getElementById('voltarEditar').addEventListener('click', function(event) {
+document.getElementById('cancelCrudForm').addEventListener('click', function(event) {
     event.preventDefault(); // Evita o comportamento padrão do botão
     const url = new URL(window.location.href);
-    url.searchParams.delete('editId');
+    url.searchParams.delete('account');
     window.history.replaceState(null, '', url.toString()); // Atualiza a URL sem recarregar a página
     location.reload(); // Recarrega a página para aplicar as mudanças
 });

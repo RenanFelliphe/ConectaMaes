@@ -1,71 +1,141 @@
-function addChild(){
-    const addChildBox = document.querySelector('.Re-addChildBox');
-    const addChildStart = document.querySelector('.Re-addChild');
-    const registerNext = document.querySelectorAll('.Re-registerNext');
+function registerUser(){
+    const registerNext = document.querySelector('.Re-registerNext');
+    const backButton = document.querySelector('.Re-backButton');
+    const termsCheckbox = document.querySelector('.Re-termsBox');
+    const accountInformations = document.querySelector('.Re-accountInformations');
+    const userInformations = document.querySelector('.Re-userInformations');
+    const childInformations = document.querySelector('.Re-childInformations');
+    const registerResult = document.querySelector('.Re-registerResult'); 
+
+    function toggleRegisterSection(){       
+        
+        registerNext.addEventListener('click', () => {
+            backButton.classList.remove('close');
     
-    function openCloseAddChild(){
-        const addChildCancel = document.querySelector('.Re-cancelAddChild');
-
-        addChildStart.addEventListener('click', () => {
-            addChildBox.classList.remove('close');
-            blockRegisterNext();
+            if(!accountInformations.classList.contains('closed')){
+                accountInformations.classList.toggle('closed');
+                userInformations.classList.toggle('closed');
+                
+            } else if(!userInformations.classList.contains('closed')){
+                userInformations.classList.toggle('closed');
+                childInformations.classList.toggle('closed');
+    
+            } else if(!childInformations.classList.contains('closed')){
+                childInformations.classList.toggle('closed');
+                registerResult.classList.toggle('closed');
+                termsCheckbox.classList.toggle('close');
+            }
+    
         });
-
-        addChildCancel.addEventListener('click', () => {
-            addChildBox.classList.add('close');
-            blockRegisterNext();
+    
+        backButton.addEventListener('click', () => {
+            if(!userInformations.classList.contains('closed')){
+                accountInformations.classList.toggle('closed');
+                userInformations.classList.toggle('closed');
+                backButton.classList.toggle('close');
+                
+            } else if(!childInformations.classList.contains('closed')){
+                userInformations.classList.toggle('closed');
+                childInformations.classList.toggle('closed');
+    
+            } else if(!registerResult.classList.contains('closed')){
+                childInformations.classList.toggle('closed');
+                registerResult.classList.toggle('closed');
+                termsCheckbox.classList.toggle('close');
+            }
         });
+    }
+    
+    function chooseTheme(){
+        const body = document.querySelector("body");
+        const yellowTheme = document.querySelector("#Re-yellowTheme");
+        const blueTheme = document.querySelector("#Re-blueTheme");
+        const pinkTheme = document.querySelector("#Re-pinkTheme");
+    
+        yellowTheme.addEventListener("click", () => {
+            body.classList.add("Y-theme");
+            body.classList.remove("B-theme");
+            body.classList.remove("P-theme");
+        });
+        
+        blueTheme.addEventListener("click", () => {
+            body.classList.add("B-theme");
+            body.classList.remove("P-theme");
+            body.classList.remove("Y-theme");
+        });
+        
+        pinkTheme.addEventListener("click", () => {
+            body.classList.add("P-theme");
+            body.classList.remove("B-theme");
+            body.classList.remove("Y-theme");
+        });        
+    }
+    
 
-        function blockRegisterNext(){
-            if(!addChildBox.classList.contains('close')){
-                registerNext.forEach(Next => {
-                    Next.style.backgroundColor = "#A8A8A8";
-                    Next.style.pointerEvents = "none";
-                });
-            } else {
-                registerNext.forEach(Next => {
-                    Next.style.backgroundColor = 'var(--middleYellowColor)';
-                    Next.style.pointerEvents = "all";
-                });
+    function addChild(){
+        const addChildBox = document.querySelector('.Re-addChildBox');
+        const addChildStart = document.querySelector('.Re-addChild');
+    
+        function openCloseAddChild(){
+            const addChildCancel = document.querySelector('.Re-cancelAddChild');
+    
+            addChildStart.addEventListener('click', () => {
+                addChildBox.classList.remove('close');
+                blockRegisterNext();
+            });
+    
+            addChildCancel.addEventListener('click', () => {
+                addChildBox.classList.add('close');
+                blockRegisterNext();
+            });
+    
+            function blockRegisterNext(){
+                if (!addChildBox.classList.contains('close')) {
+                    registerNext.style.backgroundColor = "#808080";
+                    registerNext.style.pointerEvents = "none";
+    
+                    backButton.src = "../app/assets/imagens/icons/back_arrow_disabled.png";
+                    backButton.style.pointerEvents = "none";
+                } else {
+                    registerNext.style.backgroundColor = 'var(--secondColor)';
+                    registerNext.style.pointerEvents = "all";
+    
+                    backButton.src = "../app/assets/imagens/icons/back_arrow.png";
+                    backButton.style.pointerEvents = "all";
+                }
             }
         }
+    
+        openCloseAddChild();
     }
     
-    function toggleChildSex() {
-        const childSex = document.querySelectorAll('.Re-childSex');
+    function showUserImageProfile() {
+        const input = document.getElementById("imagesSelector");
+        const preview = document.querySelector(".Re-userImage");
     
-        childSex.forEach(childSexOption => {
-            childSexOption.addEventListener('click', () => {
-
-                if(childSexOption.style.opacity != '1'){
-                    childSex.forEach(option => {
-                        option.style.opacity = '0.5';
-                    });
-
-                    childSexOption.style.opacity = '1';
-
-                } else if (childSexOption.style.opacity === '1'){
-                    childSex.forEach(option => {
-                        option.style.opacity = '0.5';
-                    });
-                }
-            });
+        input.addEventListener("change", function () {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
         });
     }
-
-    openCloseAddChild();
-    toggleChildSex();
+        
+    toggleRegisterSection();
+    chooseTheme();
+    addChild();
+    showUserImageProfile();
 }
 
-addChild();
-
+registerUser();
 
 function getLocation() {
-    // Verifica se o navegador suporta geolocalização
     if (navigator.geolocation) {
-      // Obtém a localização do usuário
       navigator.geolocation.getCurrentPosition(function(position) {
-        // Obtém as coordenadas de latitude e longitude
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
   
@@ -86,10 +156,9 @@ function getLocation() {
           .catch(error => console.log('Erro na requisição:', error));
       });
     } else {
-      // Navegador não suporta geolocalização
       console.log('Geolocalização não suportada pelo navegador.');
     }
-  }
+}
 
-  getLocation();
+getLocation();
   

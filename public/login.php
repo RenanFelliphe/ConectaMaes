@@ -16,7 +16,7 @@
     <?php 
             include_once ("../app/includes/headerLanding.php");
             include_once ("../app/services/auth/authUser.php");
-        ?>
+    ?>
 
     <main class="Lo-Login">
         <img src="../app/assets/imagens/figuras/Cells.png" class="backgroundGeometricForms">
@@ -45,7 +45,7 @@
             </div>
 
             <input class="Lo-loginSubmit" type="submit" name="logar" value="Entrar">
-            <span class="Lo-goRegister"> Não possui uma conta? <a href="register.php">Registre-se</a></span>
+            <span class="Lo-goRegister"> Não possui uma conta? <a href="registrar.php">Registre-se</a></span>
         </form>
         <?php
                 if(isset($_POST['logar']))

@@ -1,4 +1,17 @@
 :root {
+    /* ================ CORES ================ */
+    --firstColor: #F9EC7C;
+    --firstColorLowOpacity: #F9EC7C80;
+    --firstColorTransparent: #F9EC7C20;
+
+    --secondColor: #BDB150;
+    --secondColorLowOpacity: #BDB15080;
+    --secondColorTransparent: #BDB15020;
+
+    --thirdColor: #807523;
+    --thirdColorLowOpacity: #80752380;
+    --thirdColorTransparent: #80752320;
+
     --pastelYellowColor: #F9EC7C;
     --middleYellowColor: #BDB150;
     --darkYellowColor: #807523;
@@ -15,5 +28,55 @@
     --grayColor: #808080;
     --blackColor: #000000;
 
-    --textColor: #;
+    /* ================ FONTES ================ */
+    --sizeFontTitle: 26px;
+    --sizeFontIcons: 18px;
+    --sizeFontSubtitle: 16px;
+    --sizeFontText: 14px;
+
+    /* ============== TRANSIÇÕES ============== */
+    --elementIn: 0.45s;
+    --elementOut: 0.65s;
+}
+
+.Y-theme {
+    --firstColor: #F9EC7C;
+    --firstColorLowOpacity: #F9EC7C80;
+    --firstColorTransparent: #F9EC7C20;
+
+    --secondColor: #BDB150;
+    --secondColorLowOpacity: #BDB15080;
+    --secondColorTransparent: #BDB15020;
+
+    --thirdColor: #807523;
+    --thirdColorLowOpacity: #80752380;
+    --thirdColorTransparent: #80752320;
+}
+
+.B-theme {
+    --firstColor: #7DEBFA;
+    --firstColorLowOpacity: #7DEBFA80;
+    --firstColorTransparent: #7DEBFA20;
+
+    --secondColor: #40AEBD;
+    --secondColorLowOpacity: #40AEBD80;
+    --secondColorTransparent: #40AEBD20;
+
+    --thirdColor: #037180;
+    --thirdColorLowOpacity: #03718080;
+    --thirdColorTransparent: #03718020;  
+}
+
+.P-theme {
+    --firstColor: #FA7EBD;
+    --firstColorLowOpacity: #FA7EBD80;
+    --firstColorTransparent: #FA7EBD20;
+
+    --secondColor: #CF4A8E;
+    --secondColorLowOpacity: #CF4A8E80;
+    --secondColorTransparent: #CF4A8E20;
+
+    --thirdColor: #A3155F;
+    --thirdColorLowOpacity: #A3155F80;
+    --thirdColorTransparent: #A3155F20;
 }

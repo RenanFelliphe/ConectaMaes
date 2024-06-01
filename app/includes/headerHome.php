@@ -90,7 +90,7 @@
                 </div>   
                 <div class="dropdown">
                     <button class="dropbtn">
-                        <img src="" alt="">
+                        <img src="" alt="Ícone de Engrenagem">
                     </button>
                     <div class="dropdown-content">
                         <a href="#">Marcar como Lido</a>
