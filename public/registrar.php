@@ -22,7 +22,7 @@
         <img src="" class="backCells">
         <img src="" class="backCells cellsLeft">
 
-        <form class="Re-registerForm">
+        <form class="Re-registerForm" method="post">
             <div class="Re-registerHeader">
                 <i class="bi bi-arrow-left-circle Re-backButton close"></i>
                 <h1 class="Re-registerTitle"> Registro </h1>
@@ -71,7 +71,7 @@
                         <label class="Re-fakePlaceholder" for="telefone">Telefone</label>
                     </div>
                     <div class="Re-input">
-                        <input type="text" id="dataNascimento" name="dataNascimentoRegistro" required>
+                        <input type="date" id="dataNascimento" name="dataNascimentoRegistro" required>
                         <label class="Re-fakePlaceholder" for="dataNascimento">Data de Nascimento</label>
                     </div>
                     <div class="Re-input">
@@ -266,7 +266,7 @@
                     <input type="checkbox" id="Re-terms">
                     <label for="Re-terms">Eu li e concordo com os Termos e Condições</label>
                 </div>
-                <button class="Re-registerNext" type="button">Próximo</button>
+                <button class="Re-registerNext" name="proximo" type="button">Próximo</button>
                 <button class="Re-registerSubmit close" type="submit" name="registrar">Registrar</button>
                 <p class="Re-goLogin">Já possui uma conta? <a href="login.php">Entre</a></p>
             </div>
