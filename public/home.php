@@ -23,8 +23,7 @@
 
     <main class="Ho-Main">
         <section class="asideLeft">
-            <img src="/ConectaMaesProject/app/assets/imagens/figuras/CellsFull<?php echo $currentUserData['tema'];?>.png"
-                class="cellsHome">
+            <img src="../app/assets/imagens/figuras/cells_standart_full_pink.png<?php echo $currentUserData['tema'];?>.png" class="cellsInSystem">
         </section>
 
         <section class="timeline">
@@ -54,7 +53,7 @@
                 </div>
 
                 <div class="tagsInput">
-                    <img src="" alt="">
+                    <img src="" alt="Ícone de Etiqueta">
                     <input type="search" id="" placeholder="Tags">
                 </div>
 
@@ -75,38 +74,59 @@
 
         <section class="asideRight">
             <div class="searchBar">
-                <img src="/ConectaMaesProject/app/assets/imagens/icons/search.png" alt="Símbolo de Lupa">
-                <input class="input" type="search" placeholder="Pesquisar" />
+                <i class="bi bi-search"></i>
+                <input type="search" class="searchBarInput" placeholder="Pesquisar">
             </div>
 
             <div class="followSuggestion">
                 <h1>Sugestões</h1>
                 <div class="suggestionContainer">
                     <div class="suggestedFollower">
-                        <h3>
-                            <?php
-                                echo "Nome de Usuário Sugerido 1";
-                            ?>
-                        </h3>
-                        <button>Seguir</button>
+                        <div class="suggestedUserInfo">
+                            <h3>
+                                <?php
+                                    echo "Nome Usuário Sugerido 1";
+                                ?>
+                            </h3>
+                            <small>
+                                <?php
+                                    echo "@"."Usuário Sugerido 1";
+                                ?>
+                            </small>
+                        </div>
+                        <button class="followSuggestedButton">Seguir</button>
                     </div>
 
                     <div class="suggestedFollower">
-                        <h3>
-                            <?php
-                                echo "Nome de Usuário Sugerido 2";
-                            ?>
-                        </h3>
-                        <button>Seguir</button>
+                        <div class="suggestedUserInfo">
+                            <h3>
+                                <?php
+                                    echo "Nome Usuário Sugerido 2";
+                                ?>
+                            </h3>
+                            <small>
+                                <?php
+                                    echo "@"."Usuário Sugerido 2";
+                                ?>
+                            </small>
+                        </div>
+                        <button class="followSuggestedButton">Seguir</button>
                     </div>
 
                     <div class="suggestedFollower">
-                        <h3>
-                            <?php
-                                echo "Nome de Usuário Sugerido 3";
-                            ?>
-                        </h3>
-                        <button>Seguir</button>
+                        <div class="suggestedUserInfo">
+                            <h3>
+                                <?php
+                                    echo "Nome Usuário Sugerido 3";
+                                ?>
+                            </h3>
+                            <small>
+                                <?php
+                                    echo "@"."Usuário Sugerido 3";
+                                ?>
+                            </small>
+                        </div>
+                        <button class="followSuggestedButton">Seguir</button>
                     </div>
                 </div>
             </div>

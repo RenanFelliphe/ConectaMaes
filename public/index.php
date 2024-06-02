@@ -15,7 +15,7 @@
     <?php include_once ("../app/includes/headerLanding.php");?>
 
     <main class="La-landing">
-        <img src="../app/assets/imagens/figuras/Cells.png" class="backgroundGeometricForms">
+        <img src="../app/assets/imagens/figuras/cells_standart_first_yellow.png" class="backCells">
         
         <section class="La-landingSections">
             <h1 class="La-quote">Mães ajudando mães a cuidar da vida materna</h1>

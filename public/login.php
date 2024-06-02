@@ -19,45 +19,51 @@
     ?>
 
     <main class="Lo-Login">
-        <img src="../app/assets/imagens/figuras/Cells.png" class="backgroundGeometricForms">
-        <img src="../app/assets/imagens/figuras/Cells.png" class="backgroundGeometricForms cellsLeft">
+        <img src="" class="backCells">
+        <img src="" class="backCells cellsLeft">
 
         <form class="Lo-loginForm" method="post">
-            <div class="Lo-formHeader">
+            <div class="Lo-loginHeader">
+                <i class="bi bi-arrow-left-circle Lo-backButton close"></i>
                 <h1 class="Lo-loginTitle"> Login </h1>
                 <p>Seja bem-vindo novamente!</p>
             </div>
 
-            <div class="Lo-userSection">
-                <div class="Lo-input">
-                    <input type="email" id="email" name="email" required autofocus>
-                    <label class="Lo-fakePlaceholder" for="email">Email</label>
-                </div>
-                <div class="Lo-input">
-                    <input type="password" id="senha" name="senha" required>
-                    <label class="Lo-fakePlaceholder" for="senha">Senha</label>
-                </div>
+            <div class="Lo-loginCenter">
+                <div class="Lo-userSection Lo-loginSections">
+                    <div class="Lo-input">
+                        <input type="email" id="email" name="email" required autofocus>
+                        <label class="Lo-fakePlaceholder" for="email">Email</label>
+                    </div>
+                    <div class="Lo-input">
+                        <input type="password" id="senha" name="senha" required>
+                        <label class="Lo-fakePlaceholder" for="senha">Senha</label>
+                    </div>
 
-                <div class="Lo-input">
-                    <span class="Lo-rememberMe"><input type="checkbox" name="lembrar"> Lembrar de mim</span>
-                    <a href="" class="Lo-forgetPassword">Esqueceu sua senha?</a>
+                    <div class="Lo-input Lo-loginAssistants">
+                        <span class="Lo-rememberMe"><input type="checkbox" name="lembrar"> Lembrar de mim</span>
+                        <a href="" class="Lo-forgetPassword">Esqueceu sua senha?</a>
+                    </div>
                 </div>
             </div>
 
-            <input class="Lo-loginSubmit" type="submit" name="logar" value="Entrar">
-            <span class="Lo-goRegister"> Não possui uma conta? <a href="registrar.php">Registre-se</a></span>
+            <div class="Lo-loginBottom">
+                <input class="Lo-loginSubmit" type="submit" name="logar" value="Entrar">
+                <span class="Lo-goRegister"> Não possui uma conta? <a href="registrar.php">Registre-se</a></span>
+            </div>
         </form>
+
         <?php
-                if(isset($_POST['logar']))
-                {
-                    logIn($conn);
-                }
-            ?>
+            if(isset($_POST['logar']))
+            {
+                logIn($conn);
+            }
+        ?>
     </main>
 
     <?php include_once ("../app/includes/footer.php");?>
 </body>
 
-<script></script>
+<script src="../app/assets/js/loginRegister.js"></script>
 
 </html>

@@ -102,35 +102,40 @@
 
                             <label for="nome">Nome:</label>
                             <input type="text" id="nome" name="nome" value="<?php echo $currentUserData['nome']; ?>" />
-
-                            <label for="email">Email:</label>
-                            <input type="email" id="email" name="email" value="<?php echo $currentUserData['email']; ?>" />
+                            
+                            <label for="biografiaUsuario">Biografia:</label>
+                            <textarea id="biografiaUsuario"
+                                name="biografiaUsuario"><?php echo $currentUserData['biografiaUsuario']; ?></textarea>
+                            
+                            <!--label for="Localização">Localização:</label>
+                            <input type="text" id="localização" name="localização" value=""-->
 
                             <label for="user">Username:</label>
                             <input type="text" id="user" name="user" value="<?php echo $currentUserData['user']; ?>" />
 
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" value="<?php echo $currentUserData['email']; ?>" />
+                            
                             <label for="senha">Senha:</label>
                             <input type="password" id="senha" name="senha"
                                 placeholder="Deixe em branco para manter a mesma senha" />
 
-                            <label for="dataNascimento">Data de Nascimento:</label>
-                            <input type="date" id="dataNascimento" name="dataNascimento"
-                                value="<?php echo $currentUserData['dataNascimento']; ?>" />
-
                             <label for="telefone">Número de Celular:</label>
                             <input type="text" id="telefone" name="telefone" value="<?php echo $currentUserData['telefone']; ?>" />
 
-                            <!--label for="Localização">Localização:</label>
-                            <input type="text" id="localização" name="localização" value=""-->
+                            <div class="Re-themeInfo">
+                                <p> Tema </p>
+                                <div class="Re-themeOptions">
+                                    <input type="radio" name="tema" value="Amarelo" id="Re-yellowTheme" checked>
+                                    <label for="Re-yellowTheme"> Amarelo </label>
+                                    
+                                    <input type="radio" name="tema" value="Azul" id="Re-blueTheme">
+                                    <label for="Re-blueTheme"> Azul </label>
 
-                            <label for="linkFotoPerfil">Link da Foto de Perfil:</label>
-                            <input type="text" id="linkFotoPerfil" name="linkFotoPerfil"
-                                value="<?php echo $currentUserData['linkFotoPerfil']; ?>" />
-
-                            <label for="biografiaUsuario">Biografia:</label>
-                            <textarea id="biografiaUsuario"
-                                name="biografiaUsuario"><?php echo $currentUserData['biografiaUsuario']; ?></textarea>
-
+                                    <input type="radio" name="tema" value="Rosa" id="Re-pinkTheme">
+                                    <label for="Re-pinkTheme"> Rosa </label>
+                                </div>
+                            </div>
                         </form>        
                 </div>
             </div>
@@ -164,6 +169,21 @@
         </section>
     </main>
     <script src="/ConectaMaesProject/app/assets/js/home.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Add event listener to cancel button
+            const cancelCrudFormButton = document.getElementById('cancelCrudForm');
+            if (cancelCrudFormButton) {
+                cancelCrudFormButton.addEventListener('click', function(event) {
+                    event.preventDefault(); // Evita o comportamento padrão do botão
+                    const url = new URL(window.location.href);
+                    url.searchParams.delete('account');
+                    window.history.replaceState(null, '', url.toString()); // Atualiza a URL sem recarregar a página
+                    location.reload(); // Recarrega a página para aplicar as mudanças
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

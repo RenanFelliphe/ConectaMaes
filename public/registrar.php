@@ -19,109 +19,107 @@
         ?>
 
     <main class="Re-register">
-        <img src="../app/assets/imagens/figuras/Cells.png" class="backgroundGeometricForms">
-        <img src="../app/assets/imagens/figuras/Cells.png" class="backgroundGeometricForms cellsLeft">
+        <img src="" class="backCells">
+        <img src="" class="backCells cellsLeft">
 
         <form class="Re-registerForm">
-            <div class="Re-formHeader">
-                <img src="../app/assets/imagens/icons/back_arrow.png" alt="Voltar" class="Re-backButton close">
+            <div class="Re-registerHeader">
+                <i class="bi bi-arrow-left-circle Re-backButton close"></i>
                 <h1 class="Re-registerTitle"> Registro </h1>
                 <p>Venha logo fazer parte desta comunidade!</p>
             </div>
 
-            <div class="Re-accountInformations Re-registerSections ">
-                <div class="Re-inputTexts">
+            <div class="Re-registerCenter">
+                <div class="Re-accountInformations Re-registerSections ">
                     <div class="Re-input">
-                        <input type="text" id="nomeUsuario" required autofocus>
-                        <label class="Re-fakePlaceholder" for="nomeUsuario">Nome de Usuário</label>
+                        <input type="text" id="nomeUsuario" name="user" required autofocus>
+                        <label class="Re-fakePlaceholder" for="nomeUsuario">Usuário</label>
                     </div>
                     <div class="Re-input">
-                        <input type="text" id="email" required>
+                        <input type="text" id="email" name="email" required>
                         <label class="Re-fakePlaceholder" for="email">Email</label>
                     </div>
                     <div class="Re-input">
-                        <input type="password" id="senha" required>
+                        <input type="password" id="senha" name="senha" required>
                         <label class="Re-fakePlaceholder" for="senha">Senha</label>
                     </div>
                     <div class="Re-input">
-                        <input type="password" id="confirmarSenha" required>
+                        <input type="password" id="confirmarSenha" name="confirmarSenha" required>
                         <label class="Re-fakePlaceholder" for="confirmarSenha">Confirmar Senha</label>
                     </div>
-                </div>
 
-                <div class="Re-themeInfo">
-                    <p> Tema </p>
-                    <div class="Re-themeOptions">
-                        <input type="radio" name="tema" value="Amarelo" id="Re-yellowTheme" checked>
-                        <label for="Re-yellowTheme"> Amarelo </label>
-                        <input type="radio" name="tema" value="Azul" id="Re-blueTheme">
-                        <label for="Re-blueTheme"> Azul </label>
-                        <input type="radio" name="tema" value="Rosa" id="Re-pinkTheme">
-                        <label for="Re-pinkTheme"> Rosa </label>
+                    <div class="Re-themeInfo">
+                        <p> Tema </p>
+                        <div class="Re-themeOptions">
+                            <input type="radio" name="tema" value="Amarelo" id="Re-yellowTheme" checked>
+                            <label for="Re-yellowTheme"> Amarelo </label>
+                            <input type="radio" name="tema" value="Azul" id="Re-blueTheme">
+                            <label for="Re-blueTheme"> Azul </label>
+                            <input type="radio" name="tema" value="Rosa" id="Re-pinkTheme">
+                            <label for="Re-pinkTheme"> Rosa </label>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="Re-userInformations Re-registerSections closed">
-                <div class="Re-inputTexts">
+                <div class="Re-userInformations Re-registerSections close">
                     <div class="Re-input">
-                        <input type="text" id="nomeCompleto" required autofocus>
+                        <input type="text" id="nomeCompleto" name="nomeUsuario" required autofocus>
                         <label class="Re-fakePlaceholder" for="nomeCompleto">Nome Completo</label>
                     </div>
                     <div class="Re-input">
-                        <input type="text" id="telefone" required>
+                        <input type="text" id="telefone" name="telefone" required>
                         <label class="Re-fakePlaceholder" for="telefone">Telefone</label>
                     </div>
                     <div class="Re-input">
-                        <input type="text" id="dataNasc" required>
-                        <label class="Re-fakePlaceholder" for="dataNasc">Data de Nascimento</label>
+                        <input type="text" id="dataNascimento" name="dataNascimento" required>
+                        <label class="Re-fakePlaceholder" for="dataNascimento">Data de Nascimento</label>
                     </div>
                     <div class="Re-input">
-                        <input type="text" id="localizacao" required>
+                        <input type="hidden" name="latitude" id="latitude" value="">
+                        <input type="hidden" name="longitude" id="longitude" value="">
+                        <input type="text" id="localizacao" name="localização" value="" required>
                         <label class="Re-fakePlaceholder" for="localizacao">Localização</label>
                     </div>
                     <div class="Re-input">
-                        <input type="text" id="bio" required>
-                        <label class="Re-fakePlaceholder" for="bio">Biografia</label>
+                        <textarea name="biografiaUsuario" id="biografiaUsuario" cols="54" rows="4" required></textarea>                        
+                        <label class="Re-fakePlaceholder" for="biografiaUsuario">Biografia</label>
                     </div>
                 </div>
-            </div>
 
-            <div class="Re-childInformations Re-registerSections closed">
-                <div class="Re-childSection">
+                <div class="Re-childInformations Re-registerSections close">
                     <div class="Re-childInfo">
                         <label class="Re-addChild"> Adicionar filho +</label>
                         <div class="Re-haveNoChildBox">
                             <input type="checkbox" id="Re-haveNoChild">
                             <label for="Re-haveNoChild"> Não tenho filho</label>
                         </div>
+                    </div>
 
-                        <div class="Re-addChildBox close">
-                            <div class="Re-childBoxHeader">
-                                <img src="../app/assets/imagens/icons/baby_face.png" alt="Icone de Criança"
-                                    width="35px" class="Re-child-icon">
-                                <input type="text" class="Re-childName" placeholder="Nome Completo" required>
+                    <div class="Re-addChildBox close">
+                        <div class="Re-childBoxHeader">
+                            <i class="bi bi-balloon Re-childIcon"></i>
+                            <input type="text" class="Re-childName" placeholder="Nome Completo" required>
+                        </div>
+
+                        <div class="Re-childBoxSex">
+                            <p> Sexo: </p>
+                            <div class="Re-sexOptions">
+                                <input type="radio" name="childSex" value="boy" id="Re-childBoySex">
+                                <label for="Re-childBoySex"> Menino </label>
+                                <input type="radio" name="childSex" value="girl" id="Re-childGirlSex">
+                                <label for="Re-childGirlSex"> Menina </label>
+                                <input type="radio" name="childSex" value="nullSex" id="Re-childNullSex">
+                                <label for="Re-childNullSex"> Não Informar </label>
                             </div>
+                        </div>
 
-                            <div class="Re-childBoxSex">
-                                <p> Sexo: </p>
-                                <div class="Re-sexOptions">
-                                    <input type="radio" name="childSex" value="boy" id="Re-childBoySex">
-                                    <label for="Re-childBoySex"> Menino </label>
-                                    <input type="radio" name="childSex" value="girl" id="Re-childGirlSex">
-                                    <label for="Re-childGirlSex"> Menina </label>
-                                    <input type="radio" name="childSex" value="nullSex" id="Re-childNullSex">
-                                    <label for="Re-childNullSex"> Não Informar </label>
-                                </div>
+                        <div class="Re-childBoxInputs">
+                            <div class="Re-input">
+                                <input type="date" id="dataNascFilho" placeholder="dd/mm/yyyy" required>
+                                <label for="dataNascFilho">Data de Nascimento</label>
                             </div>
-
-                            <div class="Re-childBoxInputs">
-                                <div class="Re-input">
-                                    <input type="date" id="dataNascFilho" placeholder="dd/mm/yyyy" required>
-                                    <label for="dataNascFilho">Data de Nascimento</label>
-                                </div>
-                                <div class="Re-input">
-                                <select name="deficienciaSelect" id="deficiencia">
+                            <div class="Re-input">
+                                <select name="deficienciaSelect" id="deficiencia" required>
                                     <option value="valor0">- - - - Nenhuma - - - -</option>
                                     <optgroup label="Deficiência Físicas">
                                         <option value="G80">G80 — Paralisia cerebral</option>
@@ -211,76 +209,78 @@
                                         <option value="F84.5">F84.5 — Síndrome de Asperger</option>
                                     </optgroup>
                                 </select>
-                                    <label for="deficiencia">Deficiência</label>
-                                </div>
+                                <label for="deficiencia">Deficiência</label>
                             </div>
+                        </div>
 
-                            <div class="Re-childBoxButtons">
-                                <button class="Re-cancelAddChild"> Cancelar </button>
-                                <button> Confirmar </button>
-                            </div>
+                        <div class="Re-childBoxButtons">
+                            <button class="Re-cancelAddChild"> Cancelar </button>
+                            <button> Confirmar </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="Re-registerResult Re-registerSections close">
+                    <div class="Re-addImageProfile">
+                        <div class="Re-userImageProfile">
+                            <img src="../app/assets/imagens/icons/user_no_profile_image.png" alt="" class="Re-userImage">
+                        </div>
+
+                        <input type="file" id="imagesSelector" accept="image/*">
+                        <label for="imagesSelector" class="Re-addImageIcon">                        
+                            <i class="bi bi-camera-fill"></i>                    
+                        </label>
+                    </div>
+
+                    <div class="Re-userInfoContainer">
+                        <div class="Re-userInformations">
+                            <p class="Re-infoLabel">Nome:</p>
+                            <p class="Re-userInfo"></p>
+                        </div>
+                        <div class="Re-userInformations">
+                            <p class="Re-infoLabel">Usuário:</p>
+                            <p class="Re-userInfo"></p>
+                        </div>
+                        <div class="Re-userInformations">
+                            <p class="Re-infoLabel">Email:</p>
+                            <p class="Re-userInfo"></p>
+                        </div>
+                        <div class="Re-userInformations">
+                            <p class="Re-infoLabel">Telefone:</p>
+                            <p class="Re-userInfo"></p>
+                        </div>
+                        <div class="Re-userInformations">
+                            <p class="Re-infoLabel">Data de Nascimento:</p>
+                            <p class="Re-userInfo"></p>
+                        </div>
+                        <div class="Re-userInformations">
+                            <p class="Re-infoLabel">Localização:</p>
+                            <p class="Re-userInfo"></p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="Re-registerResult Re-registerSections closed">
-                <div class="Re-addImageProfile">
-                    <div class="Re-userImageProfile">
-                        <img src="../app/assets/imagens/icons/user_no_profile_image.png" alt="" class="Re-userImage">
-                    </div>
-
-                    <input type="file" id="imagesSelector" accept="image/*">
-                    <label for="imagesSelector" class="Re-addImageIcon">                        
-                        <img src="../app/assets/imagens/icons/camera_icon.png" alt="">
-                    </label>
-                </div>
-
-                <div class="Re-userInfoContainer">
-                    <div class="Re-userInformations">
-                        <p class="Re-infoLabel">Nome:</p>
-                        <p class="Re-userInfo"></p>
-                    </div>
-                    <div class="Re-userInformations">
-                        <p class="Re-infoLabel">Usuário:</p>
-                        <p class="Re-userInfo"></p>
-                    </div>
-                    <div class="Re-userInformations">
-                        <p class="Re-infoLabel">Email:</p>
-                        <p class="Re-userInfo"></p>
-                    </div>
-                    <div class="Re-userInformations">
-                        <p class="Re-infoLabel">Telefone:</p>
-                        <p class="Re-userInfo"></p>
-                    </div>
-                    <div class="Re-userInformations">
-                        <p class="Re-infoLabel">Data de Nascimento:</p>
-                        <p class="Re-userInfo"></p>
-                    </div>
-                    <div class="Re-userInformations">
-                        <p class="Re-infoLabel">Localização:</p>
-                        <p class="Re-userInfo"></p>
-                    </div>
-                </div>
-            </div>
-            
             <div class="Re-registerBottom">
                 <div class="Re-termsBox close">
-                    <input type="checkbox" id="Re-terms" required>
-                    <label for="Re-terms"> Eu li e concordo com os Termos e Condições </label>
+                    <input type="checkbox" id="Re-terms">
+                    <label for="Re-terms">Eu li e concordo com os Termos e Condições</label>
                 </div>
-                <button class="Re-registerNext" type="submit" value="submit"> Próximo </button>
-                <p class="Re-goLogin"> Já possui uma conta? <a href="login.php"> Entre </a></p>
+                <button class="Re-registerNext" type="button">Próximo</button>
+                <button class="Re-registerSubmit close" type="submit">Registrar</button>
+                <p class="Re-goLogin">Já possui uma conta? <a href="login.php">Entre</a></p>
             </div>
-
         </form>
-        <?php signUp($conn);?>
+
+        <?php
+            signUp($conn);
+        ?>
     </main>
 
     <?php include_once ("../app/includes/footer.php");?>
 
 </body>
 
-<script src="../app/assets/js/register.js"></script>
+<script src="../app/assets/js/loginRegister.js"></script>
 
 </html>
