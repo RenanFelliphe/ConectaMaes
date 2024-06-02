@@ -32,30 +32,30 @@
             <div class="Re-registerCenter">
                 <div class="Re-accountInformations Re-registerSections ">
                     <div class="Re-input">
-                        <input type="text" id="nomeUsuario" name="user" required autofocus>
+                        <input type="text" id="nomeUsuario" name="userRegistro" required autofocus>
                         <label class="Re-fakePlaceholder" for="nomeUsuario">Usuário</label>
                     </div>
                     <div class="Re-input">
-                        <input type="text" id="email" name="email" required>
+                        <input type="text" id="email" name="emailRegistro" required>
                         <label class="Re-fakePlaceholder" for="email">Email</label>
                     </div>
                     <div class="Re-input">
-                        <input type="password" id="senha" name="senha" required>
+                        <input type="password" id="senha" name="senhaRegistro" required>
                         <label class="Re-fakePlaceholder" for="senha">Senha</label>
                     </div>
                     <div class="Re-input">
-                        <input type="password" id="confirmarSenha" name="confirmarSenha" required>
+                        <input type="password" id="confirmarSenha" name="senhaRegistroConfirma" required>
                         <label class="Re-fakePlaceholder" for="confirmarSenha">Confirmar Senha</label>
                     </div>
 
                     <div class="Re-themeInfo">
                         <p> Tema </p>
                         <div class="Re-themeOptions">
-                            <input type="radio" name="tema" value="Amarelo" id="Re-yellowTheme" checked>
+                            <input type="radio" name="temaRegistro" value="Amarelo" id="Re-yellowTheme" checked>
                             <label for="Re-yellowTheme"> Amarelo </label>
-                            <input type="radio" name="tema" value="Azul" id="Re-blueTheme">
+                            <input type="radio" name="temaRegistro" value="Azul" id="Re-blueTheme">
                             <label for="Re-blueTheme"> Azul </label>
-                            <input type="radio" name="tema" value="Rosa" id="Re-pinkTheme">
+                            <input type="radio" name="temaRegistro" value="Rosa" id="Re-pinkTheme">
                             <label for="Re-pinkTheme"> Rosa </label>
                         </div>
                     </div>
@@ -63,21 +63,21 @@
 
                 <div class="Re-userInformations Re-registerSections close">
                     <div class="Re-input">
-                        <input type="text" id="nomeCompleto" name="nomeUsuario" required autofocus>
+                        <input type="text" id="nomeCompleto" name="nomeUsuarioRegistro" required autofocus>
                         <label class="Re-fakePlaceholder" for="nomeCompleto">Nome Completo</label>
                     </div>
                     <div class="Re-input">
-                        <input type="text" id="telefone" name="telefone" required>
+                        <input type="text" id="telefone" name="telefoneRegistro" required>
                         <label class="Re-fakePlaceholder" for="telefone">Telefone</label>
                     </div>
                     <div class="Re-input">
-                        <input type="text" id="dataNascimento" name="dataNascimento" required>
+                        <input type="text" id="dataNascimento" name="dataNascimentoRegistro" required>
                         <label class="Re-fakePlaceholder" for="dataNascimento">Data de Nascimento</label>
                     </div>
                     <div class="Re-input">
-                        <input type="hidden" name="latitude" id="latitude" value="">
-                        <input type="hidden" name="longitude" id="longitude" value="">
-                        <input type="text" id="localizacao" name="localização" value="" required>
+                        <input type="hidden" name="latitudeRegistro" id="latitude" value="">
+                        <input type="hidden" name="longitudeRegistro" id="longitude" value="">
+                        <input type="text" id="localizacao" name="localizacaoRegistro" value="" required readonly>
                         <label class="Re-fakePlaceholder" for="localizacao">Localização</label>
                     </div>
                     <div class="Re-input">
@@ -267,7 +267,7 @@
                     <label for="Re-terms">Eu li e concordo com os Termos e Condições</label>
                 </div>
                 <button class="Re-registerNext" type="button">Próximo</button>
-                <button class="Re-registerSubmit close" type="submit">Registrar</button>
+                <button class="Re-registerSubmit close" type="submit" name="registrar">Registrar</button>
                 <p class="Re-goLogin">Já possui uma conta? <a href="login.php">Entre</a></p>
             </div>
         </form>
