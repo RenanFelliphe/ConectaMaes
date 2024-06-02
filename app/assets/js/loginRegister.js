@@ -185,49 +185,48 @@ function toggleTheme(){
 }
 
 let inputLatitude = document.getElementById("latitude");
-        let inputLongitude = document.getElementById("longitude");
-        let inputLocalizacao = document.getElementById("localizacao");
+let inputLongitude = document.getElementById("longitude");
+let inputLocalizacao = document.getElementById("localizacao");
 
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    function(position) {
-                        var latitude = position.coords.latitude;
-                        var longitude = position.coords.longitude;
-        
-                        // Define a latitude e longitude nos inputs ocultos
-                        inputLatitude.value = latitude;
-                        inputLongitude.value = longitude;
-        
-                        // Faz uma requisição para a API de geolocalização reversa da HERE
-                        var url = 'https://revgeocode.search.hereapi.com/v1/revgeocode?at=' + latitude + ',' + longitude + '&lang=en-US&apiKey=gliPuOeHmpSBKB17nHzt3ZuYzgupiVV2fp_G05L0u5Q';
-        
-                        // Faz uma requisição usando fetch
-                        fetch(url)
-                            .then(response => response.json())
-                            .then(data => {
-                                // Extrai a cidade e o estado da resposta
-                                var estado = data.items[0].address.state;
-        
-                                // Define a cidade e o estado no input de localização
-                                inputLocalizacao.value = estado;
-                            })
-                            .catch(error => {
-                                console.log('Erro na requisição:', error);
-                                inputLocalizacao.value = "Erro na requisição";
-                            });
-                    },
-                    function(error) {
-                        // Tratar erros de geolocalização negada ou bloqueada
-                        inputLocalizacao.value = "Não definida";
-                        console.log('Erro ao obter a geolocalização:', error);
-                    }
-                );
-            } else {
-                inputLocalizacao.value = "Geolocalização não suportada pelo navegador.";
-                console.log('Geolocalização não suportada pelo navegador.');
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+                var latitude = position.coords.latitude;
+                var longitude = position.coords.longitude;
+
+                inputLatitude.value = latitude;
+                inputLongitude.value = longitude;
+
+                // Faz uma requisição para a API de geolocalização reversa da HERE
+                var url = 'https://revgeocode.search.hereapi.com/v1/revgeocode?at=' + latitude + ',' + longitude + '&lang=en-US&apiKey=gliPuOeHmpSBKB17nHzt3ZuYzgupiVV2fp_G05L0u5Q';
+
+                // Faz uma requisição usando fetch
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Extrai a cidade e o estado da resposta
+                        var estado = data.items[0].address.state;
+
+                        // Define a cidade e o estado no input de localização
+                        inputLocalizacao.value = estado;
+                    })
+                    .catch(error => {
+                        console.log('Erro na requisição:', error);
+                        inputLocalizacao.value = "Erro na requisição";
+                    });
+            },
+            function(error) {
+                // Tratar erros de geolocalização negada ou bloqueada
+                inputLocalizacao.value = "Não definida";
+                console.log('Erro ao obter a geolocalização:', error);
             }
-        }
+        );
+    } else {
+        inputLocalizacao.value = "Sem geolocalização.";
+        console.log('Geolocalização não suportada pelo navegador.');
+    }
+}
 
 
 toggleTheme();

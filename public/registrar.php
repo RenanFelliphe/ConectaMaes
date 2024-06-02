@@ -36,7 +36,7 @@
                         <label class="Re-fakePlaceholder" for="nomeUsuario">Usuário</label>
                     </div>
                     <div class="Re-input">
-                        <input type="text" id="email" name="emailRegistro" required>
+                        <input type="email" id="email" name="emailRegistro" required>
                         <label class="Re-fakePlaceholder" for="email">Email</label>
                     </div>
                     <div class="Re-input">
@@ -90,7 +90,7 @@
                     <div class="Re-childInfo">
                         <label class="Re-addChild"> Adicionar filho +</label>
                         <div class="Re-haveNoChildBox">
-                            <input type="checkbox" id="Re-haveNoChild">
+                            <input type="checkbox" name="semFilhos" id="Re-haveNoChild">
                             <label for="Re-haveNoChild"> Não tenho filho</label>
                         </div>
                     </div>
@@ -98,7 +98,7 @@
                     <div class="Re-addChildBox close">
                         <div class="Re-childBoxHeader">
                             <i class="bi bi-balloon Re-childIcon"></i>
-                            <input type="text" class="Re-childName" placeholder="Nome Completo" required>
+                            <input type="text" class="Re-childName" name="nomeFilho" placeholder="Nome Completo" required>
                         </div>
 
                         <div class="Re-childBoxSex">
@@ -115,7 +115,7 @@
 
                         <div class="Re-childBoxInputs">
                             <div class="Re-input">
-                                <input type="date" id="dataNascFilho" placeholder="dd/mm/yyyy" required>
+                                <input type="date" id="dataNascFilho" name="dataNascimentoFilho" placeholder="dd/mm/yyyy" required>
                                 <label for="dataNascFilho">Data de Nascimento</label>
                             </div>
                             <div class="Re-input">
