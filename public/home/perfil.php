@@ -25,8 +25,6 @@
     <main class="mainSystem">
         <section class="asideLeft"></section>
 
-        
-
         <section class="asideRight"></section>
     </main>
 

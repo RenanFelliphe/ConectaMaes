@@ -1,4 +1,5 @@
-<?php 
+
+    <?php 
     session_start();
     $verify = isset($_SESSION['active']) ? true : header("Location:/ConectaMaesProject/public/login.php");
     require_once "../app/services/crud/userFunctions.php"; 
@@ -18,7 +19,7 @@
     <title>ConectaMães - Home</title>
 </head>
 
-<body class="P-theme">
+<body class="Y-theme">
 
     <?php include_once ("../app/includes/headerHome.php");?>
 

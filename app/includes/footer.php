@@ -1,4 +1,3 @@
-
 <footer>
     <div class="A-footerLeft">
         <div class="A-footerContact">

@@ -23,8 +23,8 @@
             $senhaRegistro = md5($_POST['senhaRegistro']);
             $dataNascimentoRegistro = mysqli_real_escape_string($conn, $_POST['dataNascimentoRegistro']);
             $telefoneRegistro = mysqli_real_escape_string($conn, $_POST['telefoneRegistro']);
-            $latitudeRegistro = mysqli_real_escape_string($conn, $_POST['latitudeRegistro']);
-            $longitudeRegistro = mysqli_real_escape_string($conn, $_POST['longitudeRegistro']);
+            $latitudeRegistro = mysqli_real_escape_string($conn, "<script src=\"../../assets/js/loginRegister.js\">document.write(latitude)</script>");
+            $longitudeRegistro = mysqli_real_escape_string($conn, "<script src=\"../../assets/js/loginRegister.js\">document.write(longitude)</script>");
             $linkFotoPerfilRegistro = mysqli_real_escape_string($conn, $_POST['linkFotoPerfilRegistro']);
             $biografiaUsuarioRegistro = mysqli_real_escape_string($conn, $_POST['biografiaUsuarioRegistro']);
             $isAdminRegistro = false;
@@ -43,19 +43,20 @@
             }
     
             if(empty($err)){
-                $insertNewUser = "INSERT INTO Usuario (nomeUsuario, email, senha, dataNascimento, telefone, linkFotoPerfil, biografiaUsuario, user, isAdmin, tema, latitude, longitude) VALUES ('$nomeRegistro','$emailRegistro','$senhaRegistro','$dataNascimentoRegistro','$telefoneRegistro','$linkFotoPerfilRegistro','$biografiaUsuarioRegistro','$userRegistro','$isAdminRegistro','$temaRegistro','$latitudeRegistro','$longitudeRegistro')";
+                $insertNewUser = "INSERT INTO Usuario (nome, email, senha, dataNascimento, telefone, linkFotoPerfil, biografiaUsuario, user, isAdmin, tema, latitude, longitude) VALUES ('$nomeRegistro','$emailRegistro','$senhaRegistro','$dataNascimentoRegistro','$telefoneRegistro','$linkFotoPerfilRegistro','$biografiaUsuarioRegistro','$userRegistro','$isAdminRegistro','$temaRegistro','$latitudeRegistro','$longitudeRegistro')";
                 $executeSignUp = mysqli_query($conn, $insertNewUser);
     
                 if($executeSignUp){
-                    echo "Usuário registrado com sucesso!";
+                    require_once "../auth/authUser.php";
+                    logInFromRegister($conn);
                 }
                 else{
-                    echo "Erro ao registrar usuário: " . mysqli_error($conn) . "!";
+                    echo "<p>Erro ao registrar usuário: " . mysqli_error($conn) . "!<p>";
                 }
             }
             else{
                 foreach($err as $e){
-                    echo "<p>$e</p>";
+                    echo "<p>$e</p><br>";
                 }
             }      
         }

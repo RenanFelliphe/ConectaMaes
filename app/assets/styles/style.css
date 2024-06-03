@@ -40,6 +40,10 @@ main{
     color: var(--secondColor);
 }
 
+.pageIcon{
+    color: var(--grayColor);
+}
+
 /*====================================================================================================
 ====================================== PÁGINA DE APRESENTAÇÃO ========================================
 ====================================================================================================*/
@@ -1203,7 +1207,7 @@ main{
     padding: 2rem 0 0.3rem 0;
 }
 
-.Se-settingsHeader{
+.Se-settingsCenter .Se-centerHeader{
     position: relative;
     display: flex;
     gap: 1.5rem;
@@ -1211,31 +1215,49 @@ main{
     padding: 2rem 1.8rem;
 }
 
-.Se-settingsHeader .bi-arrow-left-circle{
+.Se-settingsCenter .Se-centerHeader .bi-arrow-left-circle{
     font-size: 1.2rem;
     color: var(--grayColor);
 }
 
-.Se-settingsHeader h1{
+.Se-settingsCenter .Se-centerHeader h1{
     font-size: 1.8rem;
 }
 
-.Se-settingsSections{
-
-}
-
-.Se-sectionTitle{
+.Se-settingsCenter .Se-centerSections .Se-sectionTitle{
     display: flex;
     justify-content: space-between;
     padding: 1rem 2rem;
     border-top: 1px solid var(--grayColor);
 }
 
-.Se-sectionTitle:last-of-type{
+.Se-settingsCenter .Se-centerSections .Se-sectionTitle.active{
+    color: var(--secondColor);
+    font-weight: 700;
+}
+
+.Se-settingsCenter .Se-centerSections .Se-sectionTitle:last-of-type{
     border-bottom: 1px solid var(--grayColor);
 }
 
-.Se-sectionTitle div{
+.Se-settingsCenter .Se-centerSections .Se-sectionTitle div{
     display: flex;
     gap: 1rem;
 }
+
+.Se-settingsCenter .Se-centerSections .Se-sectionTitle div img.pageIcon{
+    width: 1.2rem;
+}
+
+body.Y-theme .Se-settingsCenter .Se-centerSections .Se-sectionTitle.active div img.pageIcon{
+    filter: brightness(0) saturate(100%) invert(42%) sepia(61%) saturate(1820%) hue-rotate(302deg) brightness(87%) contrast(85%);
+}
+
+body.B-theme  .Se-settingsCenter .Se-centerSections .Se-sectionTitle.active div img.pageIcon{
+    filter: brightness(0) saturate(100%) invert(63%) sepia(81%) saturate(331%) hue-rotate(139deg) brightness(83%) contrast(87%);
+}
+
+body.Y-theme  .Se-settingsCenter .Se-centerSections .Se-sectionTitle.active div img.pageIcon{
+    filter: brightness(0) saturate(100%) invert(66%) sepia(48%) saturate(459%) hue-rotate(16deg) brightness(97%) contrast(85%);
+}
+

@@ -162,57 +162,85 @@ function registerTheme(){
 
 function toggleTheme(){
     const body = document.querySelector("body");
-    var cells = document.querySelectorAll('.backCells');
+    const main = document.querySelector("main");
+    const cells = document.querySelectorAll('.backCells');
 
-    if(body.classList.contains("B-theme")){
-        cells.forEach(cell => {
-            cell.src = '../app/assets/imagens/figuras/cells_standart_first_blue.png';
-        });
-    } else if(body.classList.contains("P-theme")){
-        cells.forEach(cell => {
-            cell.src = '../app/assets/imagens/figuras/cells_standart_first_pink.png';
-        });
-    } else {
-        cells.forEach(cell => {
-            cell.src = '../app/assets/imagens/figuras/cells_standart_first_yellow.png';
-        });
+    if(main.classList.contains("Lo-Login") || main.classList.contains("Re-register")){
+        if(body.classList.contains("B-theme")){
+            cells.forEach(cell => {
+                cell.src = '/ConectaMaesProject/app/assets/imagens/figuras/cells_standart_first_blue.png';
+            });
+        } else if(body.classList.contains("P-theme")){
+            cells.forEach(cell => {
+                cell.src = '/ConectaMaesProject/app/assets/imagens/figuras/cells_standart_first_pink.png';
+            });
+        } else {
+            cells.forEach(cell => {
+                cell.src = '/ConectaMaesProject/app/assets/imagens/figuras/cells_standart_first_yellow.png';
+            });
+        }
+    } else if (main.classList.contains("mainSystem")){
+        if(body.classList.contains("B-theme")){
+            cells.forEach(cell => {
+                cell.src = '/ConectaMaesProject/app/assets/imagens/figuras/cells_standart_full_blue.png';
+            });
+        } else if(body.classList.contains("P-theme")){
+            cells.forEach(cell => {
+                cell.src = '/ConectaMaesProject/app/assets/imagens/figuras/cells_standart_full_pink.png';
+            });
+        } else {
+            cells.forEach(cell => {
+                cell.src = '/ConectaMaesProject/app/assets/imagens/figuras/cells_standart_full_yellow.png';
+            });
+        }
     }
+    
 }
-
-let inputLatitude = document.getElementById("latitude");
-let inputLongitude = document.getElementById("longitude");
+    
+let latitude;
+let longitude;
 let inputLocalizacao = document.getElementById("localizacao");
+
+function sendLocation(latitude, longitude) {
+    let formData = new FormData();
+    formData.append('latitudeRegistro', latitude);
+    formData.append('longitudeRegistro', longitude);
+
+    fetch('/ConectaMaesProject/app/services/crud/userFunctions.php', {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => {
+            console.log('sendLocation enviada com sucesso');
+        })
+        .catch(error => {
+            console.error('Erro ao enviar a sendLocation:', error);
+        });
+}
 
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
             function(position) {
-                var latitude = position.coords.latitude;
-                var longitude = position.coords.longitude;
+                latitude = position.coords.latitude;
+                longitude = position.coords.longitude;
 
-                inputLatitude.value = latitude;
-                inputLongitude.value = longitude;
+                sendLocation(latitude, longitude);
 
-                // Faz uma requisição para a API de geolocalização reversa da HERE
                 var url = 'https://revgeocode.search.hereapi.com/v1/revgeocode?at=' + latitude + ',' + longitude + '&lang=en-US&apiKey=gliPuOeHmpSBKB17nHzt3ZuYzgupiVV2fp_G05L0u5Q';
 
-                // Faz uma requisição usando fetch
                 fetch(url)
-                    .then(response => response.json())
-                    .then(data => {
-                        // Extrai a cidade e o estado da resposta
-                        var estado = data.items[0].address.state;
-
-                        // Define a cidade e o estado no input de localização
-                        inputLocalizacao.value = estado;
-                    })
-                    .catch(error => {
-                        console.log('Erro na requisição:', error);
-                        inputLocalizacao.value = "Erro na requisição";
-                    });
+                .then(response => response.json())
+                .then(data => {
+                    var estado = data.items[0].address.state;
+                    inputLocalizacao.value = estado;
+                })
+                .catch(error => {
+                    console.log('Erro na requisição:', error);
+                    inputLocalizacao.value = "Erro na requisição";
+                });
             },
             function(error) {
-                // Tratar erros de geolocalização negada ou bloqueada
                 inputLocalizacao.value = "Não definida";
                 console.log('Erro ao obter a geolocalização:', error);
             }
@@ -223,7 +251,9 @@ function getLocation() {
     }
 }
 
+document.getElementById('nomeUsuario').focus();
 
+registerTheme();
 toggleTheme();
 registerUser();
 getLocation();

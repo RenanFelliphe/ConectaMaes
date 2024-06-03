@@ -11,7 +11,7 @@
     <title>ConectaMães - Apresentação</title>
 </head>
 
-<body>
+<body class="Y-theme">
     <?php include_once ("../app/includes/headerLanding.php");?>
 
     <main class="La-landing">

@@ -1,9 +1,10 @@
-<?php 
+<?php
     session_start();
     $verify = isset($_SESSION['active']) ? true : header("Location:/ConectaMaesProject/public/login.php");
     require_once "../../app/services/crud/userFunctions.php"; 
     $currentUserData = unitQuery($conn, "Usuario", $_SESSION['idUsuario']);   
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -19,7 +20,7 @@
     </meta>
 </head>
 
-<body>
+<body class="B-theme">
     <?php include_once ("../../app/includes/headerHome.php");?>
 
     <main class="Ho-Main mainSystem">
@@ -28,14 +29,14 @@
         </section>
 
         <section class="Se-settingsCenter">
-            <div class="Se-settingsHeader">  
+            <div class="Se-centerHeader">  
                 <i class="bi bi-arrow-left-circle"></i>
                 <h1>Configurações</h1>
             </div>
-            <div class="Se-settingsSections">
-                <div class="Se-sectionTitle">
+            <div class="Se-centerSections">
+                <div class="Se-sectionTitle active">
                     <div>
-                        <i class="bi bi-person-fill"></i>
+                        <img src="../../app/assets/imagens/icons/user_icon.png" class="pageIcon" alt="Ícone de usuário">
                         <p> Informações da Conta</p>
                     </div>
                     <i class="bi bi-chevron-right"></i>
@@ -43,7 +44,7 @@
 
                 <div class="Se-sectionTitle">
                     <div>
-                        <i class="bi bi-balloon"></i>
+                        <img src="../../app/assets/imagens/icons/pram_icon.png" class="pageIcon" alt="Ícone de usuário">
                         <p> Informações dos Filhos</p>
                     </div>
                     <i class="bi bi-chevron-right"></i>
@@ -51,7 +52,7 @@
 
                 <div class="Se-sectionTitle">
                     <div>
-                        <i class="bi bi-chat-heart"></i>
+                        <img src="../../app/assets/imagens/icons/chat_icon.png" class="pageIcon" alt="Ícone de usuário">
                         <p> Interações com outros usuários</p>
                     </div>
                     <i class="bi bi-chevron-right"></i>
@@ -59,7 +60,7 @@
 
                 <div class="Se-sectionTitle">
                     <div>
-                        <i class="bi bi-bell"></i>
+                        <img src="../../app/assets/imagens/icons/notifications_icon.png" class="pageIcon" alt="Ícone de usuário">
                         <p> Notificações</p>
                     </div>
                     <i class="bi bi-chevron-right"></i>
@@ -67,7 +68,7 @@
 
                 <div class="Se-sectionTitle">
                     <div>
-                        <i class="bi bi-heart-fill"></i>
+                        <img src="../../app/assets/imagens/icons/conectamaes_icon.png" class="pageIcon" alt="Ícone de usuário">
                         <p> Sobre o ConectaMães</p>
                     </div>
                     <i class="bi bi-chevron-right"></i>
@@ -75,7 +76,7 @@
 
                 <div class="Se-sectionTitle">
                     <div>
-                        <i class="bi bi-megaphone-fill"></i>
+                        <img src="../../app/assets/imagens/icons/support_icon.png" class="pageIcon" alt="Ícone de usuário">
                         <p> Suporte</p>
                     </div>
                     <i class="bi bi-chevron-right"></i>
@@ -86,7 +87,8 @@
 
         <section class="asideRightConfig infoAccount"></section>
     </main>
-    <script src="/ConectaMaesProject/app/assets/js/home.js"></script>
+
+    <script src="/ConectaMaesProject/app/assets/js/config.js"></script>
 </body>
 
 </html>

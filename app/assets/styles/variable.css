@@ -1,28 +1,58 @@
 :root {
     /* ================ CORES ================ */
-    --firstColor: #F9EC7C;
-    --firstColorLowOpacity: #F9EC7C80;
-    --firstColorTransparent: #F9EC7C20;
+    --firstColor: #;
+    --firstColorLowOpacity: #;
+    --firstColorTransparent: #;
 
-    --secondColor: #BDB150;
-    --secondColorLowOpacity: #BDB15080;
-    --secondColorTransparent: #BDB15020;
+    --secondColor: #;
+    --secondColorLowOpacity: #;
+    --secondColorTransparent: #;
 
-    --thirdColor: #807523;
-    --thirdColorLowOpacity: #80752380;
-    --thirdColorTransparent: #80752320;
-
+    --thirdColor: #;
+    --thirdColorLowOpacity: #;
+    --thirdColorTransparent: #;
+    
+    /* ============ TEMA AMARELO ============ */
     --pastelYellowColor: #F9EC7C;
+    --pastelYellowColorLowOpacity: #F9EC7C80;
+    --pastelYellowColorTransparent: #F9EC7C20;
+
     --middleYellowColor: #BDB150;
+    --middleYellowColorLowOpacity: #BDB15080;
+    --middleYellowColorTransparent: #BDB15020;
+
     --darkYellowColor: #807523;
+    --darkYellowColorLowOpacity: #80752380;
+    --darkYellowColorTransparent: #80752320;
 
+
+    /* ============= TEMA AZUL ============= */
     --pastelBlueColor: #7DEBFA;
-    --middleBlueColor: #40AEBD;
-    --darkBlueColor: #037180;
+    --pastelBlueColorLowOpacity: #7DEBFA80;
+    --pastelBlueColorTransparent: #7DEBFA20;
 
+    --middleBlueColor: #40AEBD;
+    --middleBlueColorLowOpacity: #40AEBD80;
+    --middleBlueColorTransparent: #40AEBD20;
+
+    --darkBlueColor: #037180;
+    --darkBlueColorLowOpacity: #03718080;
+    --darkBlueColorTransparent: #03718020;  
+
+
+    /* ============= TEMA ROSA ============= */
     --pastelPinkColor: #FA7EBD;
+    --pastelPinkColorLowOpacity: #FA7EBD80;
+    --pastelPinkColorTransparent: #FA7EBD20;
+
     --middlePinkColor: #CF4A8E;
+    --middlePinkColorLowOpacity: #CF4A8E80;
+    --middlePinkColorTransparent: #CF4A8E20;
+
     --darkPinkColor: #A3155F;
+    --darkPinkColorLowOpacity: #A3155F80;
+    --darkPinkColorTransparent: #A3155F20;
+
 
     --whiteColor: #FFFFFF;
     --grayColor: #808080;
@@ -34,15 +64,13 @@
     --sizeFontIcons: 18px;
     --sizeFontSubtitle: 16px;
     --sizeFontText: 14px;
-
-    /* ============== TRANSIÇÕES ============== */
-    --elementIn: 0.45s;
-    --elementOut: 0.65s;
 }
 
 .Y-theme {
+    /* ============= Variaveis de Substituicao ============= */
+
     --firstColor: #F9EC7C;
-    --firstColorLowOpacity: #F9EC7C80;
+    --firstColorLowOpacity: #F9EC7C80; 
     --firstColorTransparent: #F9EC7C20;
 
     --secondColor: #BDB150;
@@ -52,9 +80,25 @@
     --thirdColor: #807523;
     --thirdColorLowOpacity: #80752380;
     --thirdColorTransparent: #80752320;
+
+    /* ================== Variaveis Fixas =================== */
+
+    --pastelYellowColor: #F9EC7C;
+    --pastelYellowColorLowOpacity: #F9EC7C80;
+    --pastelYellowColorTransparent: #F9EC7C20;
+
+    --middleYellowColor: #BDB150;
+    --middleYellowColorLowOpacity: #BDB15080;
+    --middleYellowColorTransparent: #BDB15020;
+
+    --darkYellowColor: #807523;
+    --darkYellowColorLowOpacity: #80752380;
+    --darkYellowColorTransparent: #80752320;
 }
 
 .B-theme {
+    /* ============= Variaveis de Substituicao ============= */
+
     --firstColor: #7DEBFA;
     --firstColorLowOpacity: #7DEBFA80;
     --firstColorTransparent: #7DEBFA20;
@@ -65,10 +109,26 @@
 
     --thirdColor: #037180;
     --thirdColorLowOpacity: #03718080;
-    --thirdColorTransparent: #03718020;  
+    --thirdColorTransparent: #03718020; 
+    
+    /* ================== Variaveis Fixas =================== */
+
+    --pastelBlueColor: #7DEBFA;
+    --pastelBlueColorLowOpacity: #7DEBFA80;
+    --pastelBlueColorTransparent: #7DEBFA20;
+
+    --middleBlueColor: #40AEBD;
+    --middleBlueColorLowOpacity: #40AEBD80;
+    --middleBlueColorTransparent: #40AEBD20;
+
+    --darkBlueColor: #037180;
+    --darkBlueColorLowOpacity: #03718080;
+    --darkBlueColorTransparent: #03718020;  
 }
 
 .P-theme {
+    /* ============= Variaveis de Substituicao ============= */
+
     --firstColor: #FA7EBD;
     --firstColorLowOpacity: #FA7EBD80;
     --firstColorTransparent: #FA7EBD20;
@@ -80,4 +140,18 @@
     --thirdColor: #A3155F;
     --thirdColorLowOpacity: #A3155F80;
     --thirdColorTransparent: #A3155F20;
+
+    /* ================== Variaveis Fixas =================== */
+
+    --pastelPinkColor: #FA7EBD;
+    --pastelPinkColorLowOpacity: #FA7EBD80;
+    --pastelPinkColorTransparent: #FA7EBD20;
+
+    --middlePinkColor: #CF4A8E;
+    --middlePinkColorLowOpacity: #CF4A8E80;
+    --middlePinkColorTransparent: #CF4A8E20;
+
+    --darkPinkColor: #A3155F;
+    --darkPinkColorLowOpacity: #A3155F80;
+    --darkPinkColorTransparent: #A3155F20;
 }

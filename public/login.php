@@ -12,7 +12,7 @@
     <title>ConectaMães - Login</title>
 </head>
 
-<body>
+<body class="Y-theme">
     <?php 
         include_once ("../app/includes/headerLanding.php");
         include_once ("../app/services/auth/authUser.php");

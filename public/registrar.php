@@ -12,11 +12,11 @@
     <title>ConectaMães - Registro</title>
 </head>
 
-<body>
+<body class="Y-theme">
     <?php 
-            include_once ("../app/includes/headerLanding.php");
-            include_once ("../app/services/crud/userFunctions.php");
-        ?>
+        include_once ("../app/includes/headerLanding.php");
+        include_once ("../app/services/crud/userFunctions.php");
+    ?>
 
     <main class="Re-register">
         <img src="" class="backCells">
@@ -32,11 +32,11 @@
             <div class="Re-registerCenter">
                 <div class="Re-accountInformations Re-registerSections ">
                     <div class="Re-input">
-                        <input type="text" id="nomeUsuario" name="userRegistro" required autofocus>
+                        <input type="text" id="nomeUsuario" name="userRegistro" required>
                         <label class="Re-fakePlaceholder" for="nomeUsuario">Usuário</label>
                     </div>
                     <div class="Re-input">
-                        <input type="email" id="email" name="emailRegistro" required>
+                        <input type="email" id="email" name="emailRegistro" autocomplete="email" required>
                         <label class="Re-fakePlaceholder" for="email">Email</label>
                     </div>
                     <div class="Re-input">
@@ -63,7 +63,7 @@
 
                 <div class="Re-userInformations Re-registerSections close">
                     <div class="Re-input">
-                        <input type="text" id="nomeCompleto" name="nomeUsuarioRegistro" required autofocus>
+                        <input type="text" id="nomeCompleto" name="nomeUsuarioRegistro" required>
                         <label class="Re-fakePlaceholder" for="nomeCompleto">Nome Completo</label>
                     </div>
                     <div class="Re-input">
@@ -75,20 +75,18 @@
                         <label class="Re-fakePlaceholder" for="dataNascimento">Data de Nascimento</label>
                     </div>
                     <div class="Re-input">
-                        <input type="hidden" name="latitudeRegistro" id="latitude" value="">
-                        <input type="hidden" name="longitudeRegistro" id="longitude" value="">
-                        <input type="text" id="localizacao" name="localizacaoRegistro" value="" required readonly>
+                        <input type="text" id="localizacao" name="localizacaoRegistro" value="" readonly valid>
                         <label class="Re-fakePlaceholder" for="localizacao">Localização</label>
                     </div>
                     <div class="Re-input">
-                        <textarea name="biografiaUsuario" id="biografiaUsuario" cols="54" rows="4" required></textarea>                        
+                        <textarea name="biografiaUsuarioRegistro" id="biografiaUsuario" cols="54" rows="4" required></textarea>                        
                         <label class="Re-fakePlaceholder" for="biografiaUsuario">Biografia</label>
                     </div>
                 </div>
 
                 <div class="Re-childInformations Re-registerSections close">
                     <div class="Re-childInfo">
-                        <label class="Re-addChild"> Adicionar filho +</label>
+                        <div class="Re-addChild"> Adicionar filho +</div>
                         <div class="Re-haveNoChildBox">
                             <input type="checkbox" name="semFilhos" id="Re-haveNoChild">
                             <label for="Re-haveNoChild"> Não tenho filho</label>
@@ -98,7 +96,7 @@
                     <div class="Re-addChildBox close">
                         <div class="Re-childBoxHeader">
                             <i class="bi bi-balloon Re-childIcon"></i>
-                            <input type="text" class="Re-childName" name="nomeFilho" placeholder="Nome Completo" required>
+                            <input type="text" class="Re-childName" id="nomeFilho" name="nomeFilho" placeholder="Nome Completo" >
                         </div>
 
                         <div class="Re-childBoxSex">
@@ -115,11 +113,11 @@
 
                         <div class="Re-childBoxInputs">
                             <div class="Re-input">
-                                <input type="date" id="dataNascFilho" name="dataNascimentoFilho" placeholder="dd/mm/yyyy" required>
+                                <input type="date" id="dataNascFilho" name="dataNascimentoFilho" placeholder="dd/mm/yyyy" >
                                 <label for="dataNascFilho">Data de Nascimento</label>
                             </div>
                             <div class="Re-input">
-                                <select name="deficienciaSelect" id="deficiencia" required>
+                                <select name="deficienciaSelect" id="deficiencia" >
                                     <option value="valor0">- - - - Nenhuma - - - -</option>
                                     <optgroup label="Deficiência Físicas">
                                         <option value="G80">G80 — Paralisia cerebral</option>
@@ -226,7 +224,7 @@
                             <img src="../app/assets/imagens/icons/user_no_profile_image.png" alt="" class="Re-userImage">
                         </div>
 
-                        <input type="file" id="imagesSelector" accept="image/*">
+                        <input type="file" id="imagesSelector" name="linkFotoPerfilRegistro" accept="image/*">
                         <label for="imagesSelector" class="Re-addImageIcon">                        
                             <i class="bi bi-camera-fill"></i>                    
                         </label>

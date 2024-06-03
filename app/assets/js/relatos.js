@@ -101,7 +101,7 @@ function postTitleCharLimiter() {
         characteres.style.fontWeight = "normal";
     }
 }
- 
+
 function toggleTheme(){
     const body = document.querySelector("body");
     const main = document.querySelector("main");
@@ -138,6 +138,6 @@ function toggleTheme(){
     }
     
 }
- 
+    
 toggleTheme();
 addPost();

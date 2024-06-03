@@ -45,7 +45,7 @@
 
 .headerLanding .A-headerLinks h4 a{
     text-decoration: none;
-    color: black;
+    color: var(--blackColor);
 }
 
 .headerLanding .A-searchBar{
@@ -107,6 +107,7 @@
 /*====================================================================================================
 ============================================ HEADER HOME =============================================
 ====================================================================================================*/
+
 .headerHome{
     position: sticky;
     top: 0;
@@ -144,28 +145,41 @@
     font-weight: 500;
     color: var(--grayColor);
     text-decoration: none;
+    cursor: pointer;
 }
 
 .headerHome .headerPageLinks .pageLink.active{
-    color: var(--pastelPinkColor);
-    font-weight: 900;
+    color: var(--secondColor);
 }
 
 .headerHome .headerPageLinks .pageLink .pageSelector{
     position: absolute;
-    width: 200%;
-    height: 2px;
+    width: 150%;
+    height: 3px;
     bottom: -1px;
     border-radius: 100rem;
 }
 
 .headerHome .headerPageLinks .pageLink.active .pageSelector{
-    background-color: var(--pastelPinkColor);
+    background-color: var(--secondColor);
+}
+
+body.P-theme .headerHome .headerPageLinks .pageLink.active .headerIcon {
+    filter: brightness(0) saturate(100%) invert(42%) sepia(61%) saturate(1820%) hue-rotate(302deg) brightness(87%) contrast(85%);
+}
+
+body.B-theme .headerHome .headerPageLinks .pageLink.active .headerIcon {
+    filter: brightness(0) saturate(100%) invert(63%) sepia(81%) saturate(331%) hue-rotate(139deg) brightness(83%) contrast(87%);
+}
+
+body.Y-theme .headerHome .headerPageLinks .pageLink.active .headerIcon {
+    filter: brightness(0) saturate(100%) invert(66%) sepia(48%) saturate(459%) hue-rotate(16deg) brightness(97%) contrast(85%);
 }
 
 .headerHome .userContainer{
     display: flex;
     gap: 0.7rem;
+    height: 4rem;
 }
 
 .headerHome .userContainer .notificationsModalIcon{
@@ -214,6 +228,84 @@
     border-radius: 100%;
     cursor: pointer;
 }
+
+
+.headerHome .userFunctio{
+    position: absolute;
+    height: 15rem;
+    bottom: -5rem;
+    right: 1rem;
+}
+
+.headerHome .userFunctionsModal{
+    position: fixed;
+    right: 1rem;
+    top: 3.95rem;
+    height: fit-content;
+    padding: 1rem;
+    display: flex;    
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    border-bottom-left-radius: 1.3rem;
+    border-bottom-right-radius: 1.3rem;
+    background-color: var(--whiteColor);
+}
+
+.headerHome .userFunctionsModal:after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-bottom-left-radius: 1.3rem;
+    border-bottom-right-radius: 1.3rem;
+    border: 4px solid transparent;
+    border-top: none;
+    background: linear-gradient(var(--whiteColor), var(--whiteColor)) padding-box, linear-gradient(to bottom, var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
+    z-index: -1;
+    opacity: 0.4;
+}
+
+.headerHome .userFunctionsModal.close{
+    display: none;
+}
+
+.headerHome .userFunctionsModal a{
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    border-radius: 0.5rem;
+    width: 10rem;
+    height: 1.7rem;
+    padding: 0 0.6rem;
+    background-color: #80808025;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    color: var(--blackColor);
+    text-decoration: none;
+}
+
+.headerHome .userFunctionsModal span{
+    text-align: center;
+    position: relative;
+    width: 100%;
+    height: 1px;
+    background-color: #80808070;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.headerHome .userFunctionsModal span:last-of-type{
+    width: 50%;
+}
+
+.headerHome .userFunctionsModal a .pageIcon{
+    font-size: 0.9rem;
+}
+
 /*====================================================================================================
 ============================================== FOOTER ================================================
 ====================================================================================================*/

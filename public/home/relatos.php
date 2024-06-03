@@ -19,96 +19,84 @@
     </meta>
 </head>
 
-<body>
+<body class="P-theme">
     <?php include_once ("../../app/includes/headerHome.php");?>
 
     <main class="Ho-Main mainSystem">
         <section class="asideLeft">
-            <img src="/ConectaMaesProject/app/assets/imagens/figuras/CellsFull<?php echo $currentUserData['tema'];?>.png"
-                class="cellsHome">
+            <img src="" class="backCells cellsLeft">
         </section>
 
         <section class="timeline">
             <form class="Ho-postSomething">
-                <div class="Ho-postLeft">
+                <div class="Ho-postTop">
                     <a class="Ho-userProfileImage" href="profile.php">
-                        <img src="/ConectaMaesProject/app/assets/imagens/fotos/<?php echo $currentUserData['linkFotoPerfil']; ?>"
-                            alt="Foto de perfil do usuário">
+                        <img src="../../app/assets/imagens/fotos/Renan-Moura.png" alt="Foto de perfil do usuário">
                     </a>
-                    <span class="H-characters"><span class="H-charactersNumber">0</span>/<span
-                            class="H-maxCharacters">200</span></span>
+    
+                    <div class="Ho-postText">
+                        <textarea name="" id="" cols="62" rows="3" class="Ho-postTextContent" placeholder="Como você está se sentindo? Compartilhe sua experiência!" oninput="postCharLimiter()"></textarea>
+                        <div class="Ho-characters">
+                            <span class="Ho-charactersNumber">0</span>/<span class="Ho-maxCharacters">200</span>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="Ho-postCenter">
-                    <input type="text" class="postTextContent"
-                        placeholder="Como você está se sentindo? Compartilhe sua experiência!"
-                        oninput="postCharLimiter()">
+                <div class="Ho-postBottom">
+                    <div class="Ho-extraInputs">
+                        <div class="Ho-imageInput">
+                            <input type="file" id="Ho-imageSelector" accept="image/*">
+                            <label for="Ho-imageSelector">
+                                <i class="bi bi-images Ho-iconLabel"></i>
+                                <p> Imagem </p>
+                            </label>
+                        </div>
+        
+                        <div class="Ho-tagInput">
+                            <label for="tagInput"><i class="bi bi-tags-fill Ho-iconLabel"></i></label>
+                            <input type="text" id="tagInput" placeholder="Tags">
+                        </div>
+                    </div>
+    
+                    <div class="Ho-submitArea">
+                        <div class="Ho-submitPost">
+                            <button type="submit" value="submit" class="Ho-submitBtn">Postar</button>
+    
+                            <div class="Ho-postStyle">
+                                <i class="bi bi-caret-down-fill"></i>
+                            </div>
+                        </div>
+        
+                        <div class="Ho-sensitiveContent">
+                            <input type="checkbox" name="sensitiveContent" id="sensitiveContent" class="Ho-sensitiveCheckbox">
+                            <label for="sensitiveContent">Conteúdo sensível</label>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="imageInput">
-                    <input type="file" id="imageSelector" accept="image/*">
-                    <label for="imageSelector">
-                        <img src="/ConectaMaesProject/app/assets/imagens/icons/icons8-adicionar-imagem-96.png" alt="">
-                        <p> Adicionar Imagem </p>
-                    </label>
-                    <span class="preview"></span>
+                <div class="Ho-postAttachments">
+                    <span class="Ho-preview"></span>
                 </div>
-
-                <div class="tagsInput">
-                    <img src="" alt="">
-                    <input type="search" id="" placeholder="Tags">
-                </div>
-
-                <div class="dropdown">
-                    <button class="dropbtn">Relatar</button>
-
-                </div>
-                <span class="sensivel"><input type="checkbox" name="sensivel" class="checkboxSensivel">Conteúdo
-                    sensível</span>
             </form>
-
-            <article class="post"></article>
         </section>
 
         <section class="asideRight">
             <div class="searchBar">
-                <img src="/ConectaMaesProject/app/assets/imagens/icons/search.png" alt="Símbolo de Lupa">
-                <input class="input" type="search" placeholder="Pesquisar" />
+                <i class="bi bi-search"></i>
+                <input type="search" class="searchBarInput" placeholder="Pesquisar">
             </div>
 
-            <div class="followSuggestion">
-                <h1>Sugestões</h1>
-                <div class="suggestionContainer">
-                    <div class="suggestedFollower">
-                        <h3>
-                            <?php
-                                echo "Nome de Usuário Sugerido 1";
-                            ?>
-                        </h3>
-                        <button>Seguir</button>
-                    </div>
-
-                    <div class="suggestedFollower">
-                        <h3>
-                            <?php
-                                echo "Nome de Usuário Sugerido 2";
-                            ?>
-                        </h3>
-                        <button>Seguir</button>
-                    </div>
-
-                    <div class="suggestedFollower">
-                        <h3>
-                            <?php
-                                echo "Nome de Usuário Sugerido 3";
-                            ?>
-                        </h3>
-                        <button>Seguir</button>
-                    </div>
-                </div>
+            <div class="asideRightFooter">
+                <a href="">Sobre o ConectaMães</a>
+                <a href="">Suporte</a>
+                <a href="">Termos de Privacidade</a>
+                <a href="">CEFET-MG</a>
+                <h4>© 2024 ConectaMães do CEFET-MG</h4>
             </div>
         </section>
     </main>
+
+    <script src="/ConectaMaesProject/app/assets/js/relatos.js"></script>
 </body>
 
 </html>

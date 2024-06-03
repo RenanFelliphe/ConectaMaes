@@ -22,7 +22,7 @@
     </meta>
 </head>
 
-<body class="P-theme">
+<body class="B-theme">
 
     <?php include_once ("../../app/includes/headerHome.php");?>
 
@@ -47,7 +47,7 @@
                             </div>
                         </div>
                         
-                        <textarea name="" id="" cols="62" rows="3" class="Ho-postTextContent" placeholder="Como você está se sentindo? Compartilhe sua experiência!" oninput="postCharLimiter()"></textarea>
+                        <textarea name="" id="" cols="62" rows="3" class="Ho-postTextContent" placeholder="Encontrou uma dificuldade? Peça ajuda!" oninput="postCharLimiter()"></textarea>
                         <div class="Ho-characters">
                             <span class="Ho-charactersNumber">0</span>/<span class="Ho-maxCharacters">20</span>
                         </div>
@@ -77,7 +77,7 @@
     
                     <div class="Ho-submitArea">
                         <div class="Ho-submitPost">
-                            <button type="submit" value="submit" class="Ho-submitBtn">Postar</button>
+                            <button type="submit" value="submit" class="Ho-submitBtn">Pedir</button>
     
                             <div class="Ho-postStyle">
                                 <i class="bi bi-caret-down-fill"></i>
@@ -112,7 +112,7 @@
             </div>
     </main>
 
-    <script src="../../app/assets/js/pedidos.js"></script>
+    <script src="/ConectaMaesProject/app/assets/js/pedidos.js"></script>
 
 </body>
 

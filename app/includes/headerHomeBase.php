@@ -136,9 +136,6 @@
             <a href="/ConectaMaesProject/app/services/helpers/logOut.php">   
                 <div class="sair">Sair</div>  
             </a>
-                
-            
-            
         </modal>
     </div>
 </header>
