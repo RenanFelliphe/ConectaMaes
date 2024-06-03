@@ -1,6 +1,12 @@
 <?php
 
-    include_once ("conexaoBD.php");
+    $hostname = '162.240.17.101';
+    $username = 'projetos_nlessa';
+    $password = 'Gc&sgY74PK$}';
+    $database = 'projetos_INF2023_G10';
+
+    // Create a database connection
+    $conn = mysqli_connect($hostname, $username, $password, $database);
 
     function setPreferences($conn)
     {
@@ -11,21 +17,18 @@
         if(isset($_POST['registrar']) AND !empty($_POST['emailRegistro']) AND !empty($_POST['senhaRegistro'])){
             $err = array();
     
-            $nomeRegistro = mysqli_real_escape_string($conn, $_POST['nomeRegistro']);
+            $nomeRegistro = mysqli_real_escape_string($conn, $_POST['nomeUsuarioRegistro']);
             $emailRegistro = filter_input(INPUT_POST, "emailRegistro", FILTER_VALIDATE_EMAIL);
             $userRegistro = mysqli_real_escape_string($conn, $_POST['userRegistro']);
             $senhaRegistro = md5($_POST['senhaRegistro']);
             $dataNascimentoRegistro = mysqli_real_escape_string($conn, $_POST['dataNascimentoRegistro']);
             $telefoneRegistro = mysqli_real_escape_string($conn, $_POST['telefoneRegistro']);
-            //! $CEPRegistro = mysqli_real_escape_string($conn, $_POST['CEPRegistro']);
+            $latitudeRegistro = mysqli_real_escape_string($conn, $_POST['latitudeRegistro']);
+            $longitudeRegistro = mysqli_real_escape_string($conn, $_POST['longitudeRegistro']);
             $linkFotoPerfilRegistro = mysqli_real_escape_string($conn, $_POST['linkFotoPerfilRegistro']);
             $biografiaUsuarioRegistro = mysqli_real_escape_string($conn, $_POST['biografiaUsuarioRegistro']);
-            $isAdmin = false;
-            $tema = mysqli_real_escape_string($conn, $_POST['changeTheme']);
-
-            if($_POST['emailRegistro'] != $_POST['emailRegistroConfirma']){
-                $err[] = "Email não confere!";
-            }
+            $isAdminRegistro = false;
+            $temaRegistro = mysqli_real_escape_string($conn, $_POST['temaRegistro']);
                 
             if($_POST['senhaRegistro'] != $_POST['senhaRegistroConfirma']){
                 $err[] = "Senhas não conferem!";
@@ -40,7 +43,7 @@
             }
     
             if(empty($err)){
-                $insertNewUser = "INSERT INTO Usuario (nome, email, senha, dataNascimento, telefone, linkFotoPerfil, biografiaUsuario, user, isAdmin, tema) VALUES ('$nomeRegistro','$emailRegistro','$senhaRegistro','$dataNascimentoRegistro','$telefoneRegistro','$linkFotoPerfilRegistro','$biografiaUsuarioRegistro','$userRegistro','$isAdmin','$tema')";
+                $insertNewUser = "INSERT INTO Usuario (nomeUsuario, email, senha, dataNascimento, telefone, linkFotoPerfil, biografiaUsuario, user, isAdmin, tema, latitude, longitude) VALUES ('$nomeRegistro','$emailRegistro','$senhaRegistro','$dataNascimentoRegistro','$telefoneRegistro','$linkFotoPerfilRegistro','$biografiaUsuarioRegistro','$userRegistro','$isAdminRegistro','$temaRegistro','$latitudeRegistro','$longitudeRegistro')";
                 $executeSignUp = mysqli_query($conn, $insertNewUser);
     
                 if($executeSignUp){

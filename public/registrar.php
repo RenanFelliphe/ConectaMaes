@@ -22,7 +22,7 @@
         <img src="" class="backCells">
         <img src="" class="backCells cellsLeft">
 
-        <form class="Re-registerForm">
+        <form class="Re-registerForm" method="post">
             <div class="Re-registerHeader">
                 <i class="bi bi-arrow-left-circle Re-backButton close"></i>
                 <h1 class="Re-registerTitle"> Registro </h1>
@@ -32,30 +32,30 @@
             <div class="Re-registerCenter">
                 <div class="Re-accountInformations Re-registerSections ">
                     <div class="Re-input">
-                        <input type="text" id="nomeUsuario" name="user" required autofocus>
+                        <input type="text" id="nomeUsuario" name="userRegistro" required autofocus>
                         <label class="Re-fakePlaceholder" for="nomeUsuario">Usuário</label>
                     </div>
                     <div class="Re-input">
-                        <input type="text" id="email" name="email" required>
+                        <input type="email" id="email" name="emailRegistro" required>
                         <label class="Re-fakePlaceholder" for="email">Email</label>
                     </div>
                     <div class="Re-input">
-                        <input type="password" id="senha" name="senha" required>
+                        <input type="password" id="senha" name="senhaRegistro" required>
                         <label class="Re-fakePlaceholder" for="senha">Senha</label>
                     </div>
                     <div class="Re-input">
-                        <input type="password" id="confirmarSenha" name="confirmarSenha" required>
+                        <input type="password" id="confirmarSenha" name="senhaRegistroConfirma" required>
                         <label class="Re-fakePlaceholder" for="confirmarSenha">Confirmar Senha</label>
                     </div>
 
                     <div class="Re-themeInfo">
                         <p> Tema </p>
                         <div class="Re-themeOptions">
-                            <input type="radio" name="tema" value="Amarelo" id="Re-yellowTheme" checked>
+                            <input type="radio" name="temaRegistro" value="Amarelo" id="Re-yellowTheme" checked>
                             <label for="Re-yellowTheme"> Amarelo </label>
-                            <input type="radio" name="tema" value="Azul" id="Re-blueTheme">
+                            <input type="radio" name="temaRegistro" value="Azul" id="Re-blueTheme">
                             <label for="Re-blueTheme"> Azul </label>
-                            <input type="radio" name="tema" value="Rosa" id="Re-pinkTheme">
+                            <input type="radio" name="temaRegistro" value="Rosa" id="Re-pinkTheme">
                             <label for="Re-pinkTheme"> Rosa </label>
                         </div>
                     </div>
@@ -63,21 +63,21 @@
 
                 <div class="Re-userInformations Re-registerSections close">
                     <div class="Re-input">
-                        <input type="text" id="nomeCompleto" name="nomeUsuario" required autofocus>
+                        <input type="text" id="nomeCompleto" name="nomeUsuarioRegistro" required autofocus>
                         <label class="Re-fakePlaceholder" for="nomeCompleto">Nome Completo</label>
                     </div>
                     <div class="Re-input">
-                        <input type="text" id="telefone" name="telefone" required>
+                        <input type="text" id="telefone" name="telefoneRegistro" required>
                         <label class="Re-fakePlaceholder" for="telefone">Telefone</label>
                     </div>
                     <div class="Re-input">
-                        <input type="text" id="dataNascimento" name="dataNascimento" required>
+                        <input type="date" id="dataNascimento" name="dataNascimentoRegistro" required>
                         <label class="Re-fakePlaceholder" for="dataNascimento">Data de Nascimento</label>
                     </div>
                     <div class="Re-input">
-                        <input type="hidden" name="latitude" id="latitude" value="">
-                        <input type="hidden" name="longitude" id="longitude" value="">
-                        <input type="text" id="localizacao" name="localização" value="" required>
+                        <input type="hidden" name="latitudeRegistro" id="latitude" value="">
+                        <input type="hidden" name="longitudeRegistro" id="longitude" value="">
+                        <input type="text" id="localizacao" name="localizacaoRegistro" value="" required readonly>
                         <label class="Re-fakePlaceholder" for="localizacao">Localização</label>
                     </div>
                     <div class="Re-input">
@@ -90,7 +90,7 @@
                     <div class="Re-childInfo">
                         <label class="Re-addChild"> Adicionar filho +</label>
                         <div class="Re-haveNoChildBox">
-                            <input type="checkbox" id="Re-haveNoChild">
+                            <input type="checkbox" name="semFilhos" id="Re-haveNoChild">
                             <label for="Re-haveNoChild"> Não tenho filho</label>
                         </div>
                     </div>
@@ -98,7 +98,7 @@
                     <div class="Re-addChildBox close">
                         <div class="Re-childBoxHeader">
                             <i class="bi bi-balloon Re-childIcon"></i>
-                            <input type="text" class="Re-childName" placeholder="Nome Completo" required>
+                            <input type="text" class="Re-childName" name="nomeFilho" placeholder="Nome Completo" required>
                         </div>
 
                         <div class="Re-childBoxSex">
@@ -115,7 +115,7 @@
 
                         <div class="Re-childBoxInputs">
                             <div class="Re-input">
-                                <input type="date" id="dataNascFilho" placeholder="dd/mm/yyyy" required>
+                                <input type="date" id="dataNascFilho" name="dataNascimentoFilho" placeholder="dd/mm/yyyy" required>
                                 <label for="dataNascFilho">Data de Nascimento</label>
                             </div>
                             <div class="Re-input">
@@ -266,8 +266,8 @@
                     <input type="checkbox" id="Re-terms">
                     <label for="Re-terms">Eu li e concordo com os Termos e Condições</label>
                 </div>
-                <button class="Re-registerNext" type="button">Próximo</button>
-                <button class="Re-registerSubmit close" type="submit">Registrar</button>
+                <button class="Re-registerNext" name="proximo" type="button">Próximo</button>
+                <button class="Re-registerSubmit close" type="submit" name="registrar">Registrar</button>
                 <p class="Re-goLogin">Já possui uma conta? <a href="login.php">Entre</a></p>
             </div>
         </form>
