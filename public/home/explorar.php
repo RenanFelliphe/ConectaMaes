@@ -20,5 +20,7 @@
 
 <body>
     <?php include_once ("../../app/includes/headerHome.php");?>
+    <main class="mainSystem">
 
+    </main>
 </html>

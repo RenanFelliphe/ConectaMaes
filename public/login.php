@@ -14,8 +14,8 @@
 
 <body>
     <?php 
-            include_once ("../app/includes/headerLanding.php");
-            include_once ("../app/services/auth/authUser.php");
+        include_once ("../app/includes/headerLanding.php");
+        include_once ("../app/services/auth/authUser.php");
     ?>
 
     <main class="Lo-Login">

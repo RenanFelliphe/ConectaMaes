@@ -111,12 +111,13 @@
     position: sticky;
     top: 0;
     display: flex;
-    gap: 3rem;
+    gap: 5rem;
     justify-content: space-between;
     height: 4rem;
     padding: 0.5rem 1rem;
-    background: #ffffff;
-    border-bottom: 1px solid #e4e4e4;
+    background: var(--whiteColor);
+    border-bottom: 1px solid var(--grayColor);
+    z-index: 999;
 }
 
 .headerHome .A-headerLogo{
@@ -131,7 +132,7 @@
 
 .headerHome .headerPageLinks{
     display: flex;
-    gap: 2.5rem;
+    gap: 3rem;
 }
 
 .headerHome .headerPageLinks .pageLink{
@@ -141,7 +142,7 @@
     cursor: pointer;
     height: 4rem;
     font-weight: 500;
-    color: #8A8A8A;
+    color: var(--grayColor);
     text-decoration: none;
 }
 
@@ -184,7 +185,7 @@
 .headerHome .userContainer .userInformations .userNickname{
     font-size: 0.65rem;
     font-weight: 500;
-    color: #8A8A8A;
+    color: var(--grayColor);
 }
 
 .headerHome .userContainer .userAccount{
@@ -208,7 +209,7 @@
     bottom: 0;
     font-size: 0.8rem;
     font-weight: 900;
-    color: #6E6E6E;
+    color: var(--grayColor);
     background-color: var(--whiteColor);
     border-radius: 100%;
     cursor: pointer;

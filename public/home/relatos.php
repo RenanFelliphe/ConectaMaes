@@ -22,7 +22,7 @@
 <body>
     <?php include_once ("../../app/includes/headerHome.php");?>
 
-    <main class="Ho-Main">
+    <main class="Ho-Main mainSystem">
         <section class="asideLeft">
             <img src="/ConectaMaesProject/app/assets/imagens/figuras/CellsFull<?php echo $currentUserData['tema'];?>.png"
                 class="cellsHome">

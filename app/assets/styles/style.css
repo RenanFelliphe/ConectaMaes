@@ -29,12 +29,15 @@ main{
     top: -4rem;
     width: 19vw;
     height: max-content;
-
 }
 
 .backCells.cellsLeft{
     left: 0;
     transform: scaleX(-1);
+}
+
+.Ho-iconLabel{
+    color: var(--secondColor);
 }
 
 /*====================================================================================================
@@ -837,34 +840,37 @@ main{
 .Ho-Main .timeline .Ho-postSomething{
     position: relative;
     display: flex;
-    justify-content: flex-start;
-    gap: 1rem;
-    border-bottom: 1px solid var(--grayColor);
-    height: 10rem;
-    padding: 1rem 0.5rem 3rem 1rem;
-}
-
-.Ho-Main .timeline .Ho-postSomething .Ho-postLeft{
-    display: flex;
     flex-direction: column;
+    border-bottom: 1px solid var(--grayColor);
+    padding: 1rem 1rem 1rem 1.5rem;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postLeft .Ho-userProfileImage{
+.Ho-Main .timeline .Ho-postSomething .Ho-postTop{
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-bottom: 1rem;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.Ho-Main .timeline .Ho-postSomething .Ho-postTop .Ho-userProfileImage{
     position: relative;
     width: fit-content;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postLeft .Ho-userProfileImage img{
+.Ho-Main .timeline .Ho-postSomething .Ho-postTop .Ho-userProfileImage img{
     width: 4rem;
     height: 4rem;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postLeft .H-characters{
-    font-size: 0.8rem;
-}
-
-.characterBlocked {
-    animation: shake 0.7s;
+.Ho-Main .timeline .Ho-postSomething .Ho-postTop .Ho-postText{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: fit-content;
 }
 
 @keyframes shake {
@@ -875,117 +881,186 @@ main{
     100% { transform: translateX(0); }
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postCenter{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
+.Ho-Main .timeline .Ho-postSomething .Ho-postTop .Ho-postText .characterBlocked {
+    animation: shake 0.7s;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postCenter .postTextContent{
+.Ho-Main .timeline .Ho-postSomething .Ho-postTop .Ho-postTitle label .characterBlocked {
+    animation: shake 0.7s;
+}
+
+.Ho-Main .timeline .Ho-postSomething .Ho-postTop .Ho-postText .Ho-postTextContent{
     position: relative;
-    width: 100%;
-    height: 2rem;
     outline: none;
-    border: none;    
+    border: 1px solid var(--grayColor);
+    padding: 0.5rem 2rem 0.5rem 1rem;
     background-color: transparent;
+    border-radius: 0.7rem;
+    font-size: 0.9rem;
 }
 
-.Ho-Main .timeline .Ho-postSomething .imageInput{
+.Ho-Main .timeline .Ho-postSomething .Ho-postTop .Ho-postText .Ho-postTextContent::-webkit-scrollbar{
+    display: none;
+}
+
+.Ho-Main .timeline .Ho-postSomething .Ho-postTop .Ho-postText .Ho-characters{
     position: absolute;
-    left: 2rem;
-    bottom: 1rem;   
-    display: flex; 
-    justify-content: flex-end;
-    align-items: flex-end;
+    right: 0.5rem;
+    bottom: 0.1rem;
+    color: var(--grayColor);
+    font-size: 0.65rem;
 }
 
-.Ho-Main .timeline .Ho-postSomething .imageInput input{
+.Ho-Main .timeline .Ho-postSomething .Ho-postBottom{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    padding-left: 1.5rem;
+}
+
+.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-extraInputs{
+    display: flex;
+    gap: 1rem;
+}
+
+.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-iconLabel{
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+
+.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-imageInput{ 
+    display: flex; 
+}
+
+.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-imageInput input{
     display: none
 }
   
-.Ho-Main .timeline .Ho-postSomething .imageInput label {
+.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-imageInput label,
+.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput{
     display: flex;
     gap: 0.5rem;
     width: fit-content;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 0.8rem;
+    font-size: 1rem;
 }
 
-.Ho-Main .timeline .Ho-postSomething .imageInput label img{
+.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-imageInput label img{
     width: 1.3rem;
 }
 
-.preview img {
-    margin-left: 1rem;
-    width: 2rem;
+.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput{
+    cursor: text;
+}
+
+.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput input{
+    width: 5rem;
+    outline: none;
+    font-size: 1rem;
+    border: none;
+}
+
+.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput input:focus{
+    border-bottom: 1px solid var(--grayColor);
+}
+
+.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput input::placeholder{
+    color: var(--blackColor);
+    font-size: 1rem;
+}
+
+.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-submitArea{
+    display: flex;
+    flex-direction: column;
+    font-size: 0.8rem;
+    gap: 0.3rem;
+}
+
+.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-submitArea .Ho-submitPost{
+    display: flex;
+    gap: 0.2rem;
+    cursor: pointer;
+}
+
+.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-submitArea .Ho-submitBtn{
+    background-color: var(--secondColor);
+    padding: 0.5rem 0.5rem 0.45rem 1rem;
+    border: none;
+    border-top-left-radius: 100rem;
+    border-bottom-left-radius: 100rem;
+    color: var(--whiteColor);
+    font-weight: 900;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-submitArea .Ho-postStyle{
+    background-color: var(--secondColor);
+    padding: 0.75rem 0.5rem 0.55rem 0.3rem;
+    border-top-right-radius: 100rem;
+    border-bottom-right-radius: 100rem;
+    color: var(--whiteColor);
+    font-size: 0.7rem;
+    cursor: pointer;
+}
+
+.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-submitArea .Ho-sensitiveContent{
+    display: flex;
+    gap: 0.3rem;
+    font-size: 0.7rem;
+}
+
+.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-submitArea .Ho-sensitiveContent input{
+    height: 0.6rem;
+} 
+
+.Ho-Main .timeline .Ho-postSomething .Ho-postAttachments{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    padding-left: 1.5rem;
+}
+
+.Ho-Main .timeline .Ho-postSomething .Ho-postAttachments .Ho-preview img {
+    margin-top: -1rem;
+    width: 4rem;
     opacity: 0.5;
     transition: 0.3s;
+    border-radius: 0.5rem;
     cursor: pointer;
 }
 
-.preview img:hover {
+.Ho-Main .timeline .Ho-postSomething .Ho-postAttachments .Ho-preview img:hover {
     opacity: 1;
-    width: 2.3rem;
     transition: 0.3s;
 }
-
-.preview.maximize img {
-    transform: scale(5);    
-}
-
-.Ho-Main .timeline .Ho-postSomething button[type='submit']{
-    position: absolute;
-    right: 2rem;
-    bottom: 1rem;
-    background-color: var(--secondColor);
-    padding: 0.5rem 1.5rem;
-    color: var(--whiteColor);
-    border-radius: 100rem;
-    border: none;
-    cursor: pointer;
-    font-weight: 900;
-}
-
-/*====================================================================================================
-=========================================== Home - Esquerda  =========================================
-====================================================================================================*/
 
 .Ho-Main .asideLeft{
     width: 25vw;
     height: 100%;
-    position: sticky;
 }
 
-.cellsInSystem{
-    width: 19.25vw;
-    bottom:-4px;
-    position: sticky;
+.Ho-Main .asideLeft .backCells{
+    top: -2rem;
 }
-
-/*===================================================================================================
-=========================================== Home - Direita  =========================================
-====================================================================================================*/
 
 .Ho-Main .asideRight{
-    background-color: red;
     width: 25vw;
     height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 0 0.3rem 0;
 }
 
-.Ho-Main .asideRight .searchBar{
-    background-color: #dfdfdf;
-}
-
-.searchBar{
+.asideRight .searchBar{
     display: flex;
     background-color: #e4e4e4;
-    border-radius: 10rem;
-    width: 15rem;
+    border-radius: 100rem;
+    width: 80%;
     height: 2rem;
     min-width: 13.5rem;
     padding: 0 0.6rem 0 0.6rem;
@@ -996,32 +1071,171 @@ main{
     border: 1px solid var(--grayColor);
 }
 
-.searchBarInput{
+.asideRight .searchBarInput{
     background-color: transparent;
+    outline: none;
     border: none;
     color: var(--blackColor);
-    outline: none;
-    width: 90%;
+    width: 100%;
     font-weight: 400;
-    font-size: 1rem;
+    font-size: 0.9rem;
 }
 
-.searchBar .bi,
-.searchBarInput::placeholder{
+.asideRight .searchBar .bi-search{
+    font-size: 0.8rem;
+}
+
+.asideRight .searchBar .bi-search,
+.asideRight .searchBarInput::placeholder{
     color:var(--blackColor);
 }   
 
-.suggestionContainer{
+.asideRight .asideRightFooter{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    font-size: 0.6rem;
+    font-weight: 700;
+    row-gap: 0.4rem;
+}
+
+.asideRight .asideRightFooter a{
+    color: var(--blackColor);
+    text-decoration: none;
+}
+
+.asideRight .asideRightFooter a:hover{
+    text-decoration: underline;
+}
+
+.asideRight .asideRightFooter h4{
+    color: var(--thirdColor);
+}
+
+/*====================================================================================================
+========================================= PÁGINA DE PEDIDOS ==========================================
+====================================================================================================*/
+
+.Ho-Main .timeline .Ho-postSomething .Ho-postTop .Ho-postTitle{
+    position: relative;
+    margin-bottom: 0.5rem;
+    color: var(--grayColor);
+    width: 100%;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.Ho-Main .timeline .Ho-postSomething .Ho-postTop .Ho-postTitle label{
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.Ho-Main .timeline .Ho-postSomething .Ho-postTop .Ho-postTitle .Ho-postTitleInput{
+    position: relative;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid var(--grayColor);
+    background-color: transparent;
+    font-size: 0.9rem;
+    width: 100%;
+    padding-right: 3rem;
+}
+
+.Ho-Main .timeline .Ho-postSomething .Ho-postTop .Ho-postTitle .Ho-titleCharacters{
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0.1rem;
+    color: var(--grayColor);
+    font-size: 0.65rem;
+}
+
+.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-maxColabsInput{
+    cursor: text;
+    margin-left: 1rem;
+}
+
+.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-maxColabsInput input{
+    width: 3rem;
+    outline: none;
+    font-size: 1rem;
+    border: none;
+    overflow: visible;
+}
+
+.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-maxColabsInput input:focus{
+    border-bottom: 1px solid var(--grayColor);
+}
+
+.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-maxColabsInput input::placeholder{
+    color: var(--blackColor);
+    font-size: 1rem;
+    overflow: visible;
+}
+
+
+/*====================================================================================================
+====================================== PÁGINA DE CONFIGURAÇÕES =======================================
+====================================================================================================*/
+
+.Se-settingsCenter{
+    border: 1px solid var(--grayColor);
+    border-bottom: none;
+    border-top: none;
+    width: 40vw;
+    height: 100%;
+}
+
+.asideLeftConfig{
+    width: 20vw;
+    height: 100%;
+}
+
+.Ho-Main .asideLeftConfig .backCells{
+    top: -2rem;
+}
+
+.Ho-Main .asideRightConfig{
+    width: 40vw;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    background-color: #ffff00;
-    height:8rem;
-    width: 18.75rem;
+    justify-content: space-between;
+    padding: 2rem 0 0.3rem 0;
 }
-.suggestedFollower{
+
+.Se-settingsHeader{
+    position: relative;
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap:12px;
+    gap: 1.5rem;
+    justify-content: flex-start;
+    padding: 2rem 1.8rem;
+}
+
+.Se-settingsHeader .bi-arrow-left-circle{
+    font-size: 1.2rem;
+    color: var(--grayColor);
+}
+
+.Se-settingsHeader h1{
+    font-size: 1.8rem;
+}
+
+.Se-settingsSections{
+
+}
+
+.Se-sectionTitle{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    border-top: 1px solid var(--grayColor);
+}
+
+.Se-sectionTitle:last-of-type{
+    border-bottom: 1px solid var(--grayColor);
+}
+
+.Se-sectionTitle div{
+    display: flex;
+    gap: 1rem;
 }

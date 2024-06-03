@@ -132,93 +132,88 @@ function registerUser() {
     validateSubmit();
 }
 
+function registerTheme(){
+    const body = document.querySelector("body");
+    const yellowTheme = document.querySelector("#Re-yellowTheme");
+    const blueTheme = document.querySelector("#Re-blueTheme");
+    const pinkTheme = document.querySelector("#Re-pinkTheme");
+    
+    yellowTheme.addEventListener("click", () => {
+        body.classList.add("Y-theme");
+        body.classList.remove("B-theme");
+        body.classList.remove("P-theme");
+        toggleTheme();
+    });
+    
+    blueTheme.addEventListener("click", () => {
+        body.classList.add("B-theme");
+        body.classList.remove("P-theme");
+        body.classList.remove("Y-theme");
+        toggleTheme();
+    });
+    
+    pinkTheme.addEventListener("click", () => {
+        body.classList.add("P-theme");
+        body.classList.remove("B-theme");
+        body.classList.remove("Y-theme");
+        toggleTheme();
+    }); 
+}  
+
 function toggleTheme(){
     const body = document.querySelector("body");
+    var cells = document.querySelectorAll('.backCells');
 
-    function registerTheme(){
-        const yellowTheme = document.querySelector("#Re-yellowTheme");
-        const blueTheme = document.querySelector("#Re-blueTheme");
-        const pinkTheme = document.querySelector("#Re-pinkTheme");
-        
-        yellowTheme.addEventListener("click", () => {
-            body.classList.add("Y-theme");
-            body.classList.remove("B-theme");
-            body.classList.remove("P-theme");
-            toggleCells();
+    if(body.classList.contains("B-theme")){
+        cells.forEach(cell => {
+            cell.src = '../app/assets/imagens/figuras/cells_standart_first_blue.png';
         });
-        
-        blueTheme.addEventListener("click", () => {
-            body.classList.add("B-theme");
-            body.classList.remove("P-theme");
-            body.classList.remove("Y-theme");
-            toggleCells();
+    } else if(body.classList.contains("P-theme")){
+        cells.forEach(cell => {
+            cell.src = '../app/assets/imagens/figuras/cells_standart_first_pink.png';
         });
-        
-        pinkTheme.addEventListener("click", () => {
-            body.classList.add("P-theme");
-            body.classList.remove("B-theme");
-            body.classList.remove("Y-theme");
-            toggleCells();
-        }); 
-    }    
-
-    function toggleCells(){
-        var cells = document.querySelectorAll('.backCells');
-    
-        if(body.classList.contains("B-theme")){
-            cells.forEach(cell => {
-                cell.src = '../app/assets/imagens/figuras/cells_standart_first_blue.png';
-            });
-        } else if(body.classList.contains("P-theme")){
-            cells.forEach(cell => {
-                cell.src = '../app/assets/imagens/figuras/cells_standart_first_pink.png';
-            });
-        } else {
-            cells.forEach(cell => {
-                cell.src = '../app/assets/imagens/figuras/cells_standart_first_yellow.png';
-            });
-        }
+    } else {
+        cells.forEach(cell => {
+            cell.src = '../app/assets/imagens/figuras/cells_standart_first_yellow.png';
+        });
     }
-
-    toggleCells();
-    registerTheme();
 }
 
 let inputLatitude = document.getElementById("latitude");
-        let inputLongitude = document.getElementById("longitude");
-        let inputLocalizacao = document.getElementById("localizacao");
+let inputLongitude = document.getElementById("longitude");
+let inputLocalizacao = document.getElementById("localizacao");
 
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    var latitude = position.coords.latitude;
-                    var longitude = position.coords.longitude;
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
 
-                    // Define a latitude e longitude nos inputs ocultos
-                    inputLatitude.value = latitude;
-                    inputLongitude.value = longitude;
+            // Define a latitude e longitude nos inputs ocultos
+            inputLatitude.value = latitude;
+            inputLongitude.value = longitude;
 
-                    // Faz uma requisição para a API de geolocalização reversa
-                    var url = 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + latitude + '&lon=' + longitude;
+            // Faz uma requisição para a API de geolocalização reversa
+            var url = 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + latitude + '&lon=' + longitude;
 
-                    // Faz uma requisição usando fetch
-                    fetch(url)
-                        .then(response => response.json())
-                        .then(data => {
-                            // Extrai a cidade e o estado da resposta
-                            var cidade = data.address.city;
-                            var estado = data.address.state;
+            // Faz uma requisição usando fetch
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    // Extrai a cidade e o estado da resposta
+                    var cidade = data.address.city;
+                    var estado = data.address.state;
 
-                            // Define a cidade e o estado no input de localização
-                            inputLocalizacao.value = cidade + ', ' + estado;
-                        })
-                        .catch(error => console.log('Erro na requisição:', error));
-                });
-            } else {
-                inputLocalizacao.value = "Não definida";
-                console.log('Geolocalização não suportada pelo navegador.');
-            }
-        }
+                    // Define a cidade e o estado no input de localização
+                    inputLocalizacao.value = cidade + ', ' + estado;
+                })
+                .catch(error => console.log('Erro na requisição:', error));
+        });
+    } else {
+        inputLocalizacao.value = "Não definida";
+        console.log('Geolocalização não suportada pelo navegador.');
+    }
+}
 
 
 toggleTheme();

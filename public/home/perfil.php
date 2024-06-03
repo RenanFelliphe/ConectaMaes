@@ -22,7 +22,7 @@
 <body>
     <?php include_once ("../../app/includes/headerHome.php");?>
 
-    <main>
+    <main class="mainSystem">
         <section class="asideLeft"></section>
 
         

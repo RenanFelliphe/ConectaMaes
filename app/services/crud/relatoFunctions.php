@@ -2,11 +2,6 @@
 
     include_once ("conexaoBD.php");
 
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
     $title = $_POST['title'];
     $content = $_POST['content'];
 
