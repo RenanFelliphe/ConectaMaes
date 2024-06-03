@@ -24,12 +24,12 @@
     <div class="userContainer">
         <img class="notificationsModalIcon headerIcon" src="/ConectaMaesProject/app/assets/imagens/icons/notifications_off.png" alt="Ícone do modal de notificações">
         <div class="userInformations">
-            <span class="userRealName">Nome do Usuário</span>
-            <span class="userNickname">@usuario</span>
+            <span class="userRealName"><?php echo $currentUserData['nome']; ?></span>
+            <span class="userNickname"><?php echo "@". $currentUserData['user']; ?></span>
         </div>
         <div class="userAccount" onclick="openHeaderUserFunctions();">
             <div class="userProfileImage">
-                <img src="/ConectaMaesProject/app/assets/imagens/fotos/Renan-Moura.png" alt="Foto de perfil do usuário">
+                <img src="/ConectaMaesProject/app/assets/imagens/fotos/perfil/<?php echo $currentUserData['user'] . '-' . $currentUserData['dataNascimento'] . '-perfil.'."png";?>" alt="Foto de perfil do usuário">
             </div>    
             <i class="bi bi-chevron-down"></i>
         </div>

@@ -26,5 +26,8 @@
     </main>
 
     <script src="/ConectaMaesProject/app/assets/js/home.js"></script>
-
+    <script>        
+        toggleTheme();
+    </script>
+</body>
 </html>

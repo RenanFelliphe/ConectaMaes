@@ -1,5 +1,4 @@
-
-    <?php 
+<?php 
     session_start();
     $verify = isset($_SESSION['active']) ? true : header("Location:/ConectaMaesProject/public/login.php");
     require_once "../../app/services/crud/userFunctions.php"; 
@@ -35,7 +34,7 @@
             <form class="Ho-postSomething">
                 <div class="Ho-postTop">
                     <a class="Ho-userProfileImage" href="profile.php">
-                        <img src="../../app/assets/imagens/fotos/Renan-Moura.png" alt="Foto de perfil do usuário">
+                        <img src="/ConectaMaesProject/app/assets/imagens/fotos/perfil/<?php echo $currentUserData['user'] . '-' . $currentUserData['dataNascimento'] . '-perfil.'."png";?>" alt="Foto de perfil do usuário">
                     </a>
     
                     <div class="Ho-postText">
@@ -113,7 +112,9 @@
     </main>
 
     <script src="/ConectaMaesProject/app/assets/js/pedidos.js"></script>
-
+    <script>        
+        toggleTheme();
+    </script>
 </body>
 
 </html>

@@ -1,5 +1,4 @@
-
-    <?php 
+<?php
     session_start();
     $verify = isset($_SESSION['active']) ? true : header("Location:/ConectaMaesProject/public/login.php");
     require_once "../app/services/crud/userFunctions.php"; 
@@ -98,5 +97,8 @@
     </main>
 
     <script src="../app/assets/js/home.js"></script>
-
+    <script>        
+        toggleTheme();
+    </script>
+</body>
 </html>

@@ -22,7 +22,7 @@
         <img src="" class="backCells">
         <img src="" class="backCells cellsLeft">
 
-        <form class="Re-registerForm" method="post">
+        <form class="Re-registerForm" id="registerForm" method="post">
             <div class="Re-registerHeader">
                 <i class="bi bi-arrow-left-circle Re-backButton close"></i>
                 <h1 class="Re-registerTitle"> Registro </h1>
@@ -62,23 +62,23 @@
                 </div>
 
                 <div class="Re-userInformations Re-registerSections close">
-                    <div class="Re-input">
+                    <div class="Re-input inputName">
                         <input type="text" id="nomeCompleto" name="nomeUsuarioRegistro" required>
                         <label class="Re-fakePlaceholder" for="nomeCompleto">Nome Completo</label>
                     </div>
-                    <div class="Re-input">
+                    <div class="Re-input inputCell">
                         <input type="text" id="telefone" name="telefoneRegistro" required>
                         <label class="Re-fakePlaceholder" for="telefone">Telefone</label>
                     </div>
-                    <div class="Re-input">
+                    <div class="Re-input inputDataNasc">
                         <input type="date" id="dataNascimento" name="dataNascimentoRegistro" required>
-                        <label class="Re-fakePlaceholder" for="dataNascimento">Data de Nascimento</label>
+                        <label class="Re-fakePlaceholder" id="dataNascPlaceholder" for="dataNascimento">Data de Nascimento</label>
                     </div>
-                    <div class="Re-input">
-                        <input type="text" id="localizacao" name="localizacaoRegistro" value="" readonly valid>
+                    <div class="Re-input inputLocal">
+                        <input type="text" id="localizacao" name="localizacaoRegistro" value="">
                         <label class="Re-fakePlaceholder" for="localizacao">Localização</label>
                     </div>
-                    <div class="Re-input">
+                    <div class="Re-input inputBio">
                         <textarea name="biografiaUsuarioRegistro" id="biografiaUsuario" cols="54" rows="4" required></textarea>                        
                         <label class="Re-fakePlaceholder" for="biografiaUsuario">Biografia</label>
                     </div>
@@ -269,7 +269,6 @@
                 <p class="Re-goLogin">Já possui uma conta? <a href="login.php">Entre</a></p>
             </div>
         </form>
-
         <?php
             signUp($conn);
         ?>
@@ -277,8 +276,9 @@
 
     <?php include_once ("../app/includes/footer.php");?>
 
+    <script src="../app/assets/js/loginRegister.js"></script>
+    <script>        
+        toggleTheme();
+    </script>
 </body>
-
-<script src="../app/assets/js/loginRegister.js"></script>
-
 </html>

@@ -148,7 +148,8 @@
     </main>
 
     <?php include_once ("../app/includes/footer.php");?>
+    
+    <script></script>
 </body>
 
-<script></script>
 </html>

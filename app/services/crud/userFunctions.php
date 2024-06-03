@@ -47,7 +47,7 @@
                 $executeSignUp = mysqli_query($conn, $insertNewUser);
     
                 if($executeSignUp){
-                    require_once "../auth/authUser.php";
+                    require_once __DIR__ . '/../auth/authUser.php';
                     logInFromRegister($conn);
                 }
                 else{

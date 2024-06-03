@@ -97,6 +97,9 @@
     </main>
 
     <script src="/ConectaMaesProject/app/assets/js/relatos.js"></script>
+    <script>        
+        toggleTheme();
+    </script>
 </body>
 
 </html>

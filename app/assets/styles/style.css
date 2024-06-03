@@ -294,7 +294,7 @@ main{
     position: absolute;
     left: -3.5rem;
     top: -2rem;
-    font-size: 1.4rem;  
+    font-size: 1.5rem;  
     cursor: pointer;
     transition: 0.2s;
     color: var(--secondColor);
@@ -307,8 +307,8 @@ main{
 
 .Lo-loginForm .Lo-loginHeader .Lo-backButton:hover,
 .Re-registerForm .Re-registerHeader .Re-backButton:hover{
-    transform: scale(1.1);    
-    transition: 0.1s;
+    transform: scale(1.2);    
+    transition: 0.2s;
 }
 
 .Lo-loginForm .Lo-loginHeader .Lo-backButton.close,
@@ -346,6 +346,8 @@ main{
 .Re-registerForm .Re-registerCenter .Re-registerSections.close{
     display: none;
 }
+
+
 
 .Lo-loginForm .Lo-loginCenter .Lo-userSection .Lo-input,
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input{
@@ -389,6 +391,10 @@ main{
     transition: 0.15s ease-in-out, 0 background-image;
 }
 
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input input#dataNascimento{
+    width: 12.5rem;
+}
+
 .Lo-loginForm .Lo-loginCenter .Lo-userSection .Lo-input .Lo-fakePlaceholder,
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-fakePlaceholder{
     position: absolute;
@@ -408,7 +414,8 @@ main{
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input input:focus + .Re-fakePlaceholder,
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input input:valid + .Re-fakePlaceholder,
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input textarea:focus + .Re-fakePlaceholder,
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input textarea:valid + .Re-fakePlaceholder{
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input textarea:valid + .Re-fakePlaceholder,
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-fakePlaceholder#dataNascPlaceholder{
     top: -6px;
     font-size: 12px;
     opacity: 1;
@@ -469,8 +476,41 @@ main{
     padding-left: 1rem;
 }
 
+.Re-registerForm .Re-registerCenter .Re-accountInformations .Re-themeInfo .Re-themeOptions input {
+    transform: translateY(1px);
+    cursor: pointer;
+    -webkit-appearance: none;
+    background-color: var(--whiteColor);
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 100%;
+    border: none;
+    box-shadow: 0 0 0 1px var(--whiteColor), 0 0 0 2px var(--blackColor);
+}
+
+.Re-registerForm .Re-registerCenter .Re-accountInformations .Re-themeInfo .Re-themeOptions input:checked {
+    background-color: var(--secondColor);
+    box-shadow: 0 0 0 2px var(--whiteColor), 0 0 0 3px var(--thirdColor);
+}
+
 .Re-registerForm .Re-registerCenter .Re-accountInformations .Re-themeInfo .Re-themeOptions label{
     margin-left: -0.8rem;
+    cursor: pointer;
+}
+
+.Re-registerForm .Re-registerCenter .Re-accountInformations .Re-themeInfo .Re-themeOptions input#Re-yellowTheme:checked + label {
+    color: var(--thirdColor);
+    font-weight: 500;
+}
+
+.Re-registerForm .Re-registerCenter .Re-accountInformations .Re-themeInfo .Re-themeOptions input#Re-blueTheme:checked + label {
+    color: var(--thirdColor);
+    font-weight: 500;
+}
+
+.Re-registerForm .Re-registerCenter .Re-accountInformations .Re-themeInfo .Re-themeOptions input#Re-pinkTheme:checked + label {
+    color: var(--thirdColor);
+    font-weight: 500;
 }
 
 .Re-registerForm .Re-registerCenter .Re-userInformations .Re-input input#biografiaUsuario{
@@ -750,10 +790,10 @@ main{
     object-fit: fill;
 }
 
-#imagesSelector {
+.Re-registerResult .Re-userImage #imagesSelector {
     display: none;
 }
-.Re-addImageIcon {
+.Re-registerResult .Re-userImage .Re-addImageIcon {
     position: absolute;
     bottom: 10px;
     right: 10px;
@@ -1186,25 +1226,27 @@ main{
     border-bottom: none;
     border-top: none;
     width: 40vw;
-    height: 100%;
+    height: 100vh;
 }
 
-.asideLeftConfig{
+.Se-asideLeft{
     width: 20vw;
-    height: 100%;
+    height: 100vh;
+    overflow-y: hidden;
 }
 
-.Ho-Main .asideLeftConfig .backCells{
+.Ho-Main .Se-asideLeft .backCells{
     top: -2rem;
 }
 
-.Ho-Main .asideRightConfig{
+.Ho-Main .Se-asideRight{
     width: 40vw;
-    height: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 2rem 0 0.3rem 0;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .Se-settingsCenter .Se-centerHeader{
@@ -1212,13 +1254,22 @@ main{
     display: flex;
     gap: 1.5rem;
     justify-content: flex-start;
-    padding: 2rem 1.8rem;
+    padding: 2rem 2rem;
 }
 
 .Se-settingsCenter .Se-centerHeader .bi-arrow-left-circle{
     font-size: 1.2rem;
     color: var(--grayColor);
+    transition: 0.2s transform;
+    cursor: pointer;
 }
+
+.Se-settingsCenter .Se-centerHeader .bi-arrow-left-circle:hover{
+    transform: scale(1.1);
+    color: var(--secondColor);
+    transition: 0.2s transform;
+}
+
 
 .Se-settingsCenter .Se-centerHeader h1{
     font-size: 1.8rem;
@@ -1227,11 +1278,16 @@ main{
 .Se-settingsCenter .Se-centerSections .Se-sectionTitle{
     display: flex;
     justify-content: space-between;
-    padding: 1rem 2rem;
+    padding: 0rem 2rem;
     border-top: 1px solid var(--grayColor);
+    width: 100%;
+    height: 4rem;
+    cursor: pointer;
 }
 
-.Se-settingsCenter .Se-centerSections .Se-sectionTitle.active{
+.Se-settingsCenter .Se-centerSections .Se-sectionTitle.active,
+.Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover{
+    border-color: var(--secondColor);
     color: var(--secondColor);
     font-weight: 700;
 }
@@ -1249,15 +1305,283 @@ main{
     width: 1.2rem;
 }
 
-body.Y-theme .Se-settingsCenter .Se-centerSections .Se-sectionTitle.active div img.pageIcon{
+.Se-settingsCenter .Se-centerSections .Se-sectionTitle.active div img.pageIcon,
+.Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover div img.pageIcon{
+    width: 1.3rem;
+}
+
+.Se-settingsCenter .Se-centerSections .Se-sectionTitle.active .bi{
+    transform: rotate(0);
+}
+
+.Se-settingsCenter .Se-centerSections .Se-sectionTitle .bi-chevron-right{
+    transform: rotate(90deg);
+}
+
+.Se-settingsCenter .Se-centerSections .Se-sectionTitle .bi-box-arrow-up-right{
+    font-size: 0.8rem;
+}
+
+body.P-theme .Se-settingsCenter .Se-centerSections .Se-sectionTitle.active div img.pageIcon,
+body.P-theme .Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover div img.pageIcon{
     filter: brightness(0) saturate(100%) invert(42%) sepia(61%) saturate(1820%) hue-rotate(302deg) brightness(87%) contrast(85%);
 }
 
-body.B-theme  .Se-settingsCenter .Se-centerSections .Se-sectionTitle.active div img.pageIcon{
+body.B-theme  .Se-settingsCenter .Se-centerSections .Se-sectionTitle.active div img.pageIcon,
+body.B-theme  .Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover div img.pageIcon{
     filter: brightness(0) saturate(100%) invert(63%) sepia(81%) saturate(331%) hue-rotate(139deg) brightness(83%) contrast(87%);
 }
 
-body.Y-theme  .Se-settingsCenter .Se-centerSections .Se-sectionTitle.active div img.pageIcon{
+body.Y-theme  .Se-settingsCenter .Se-centerSections .Se-sectionTitle.active div img.pageIcon,
+body.Y-theme  .Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover div img.pageIcon{
     filter: brightness(0) saturate(100%) invert(66%) sepia(48%) saturate(459%) hue-rotate(16deg) brightness(97%) contrast(85%);
 }
 
+.Se-asideRight .Se-accountInformations{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 2rem;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0 2rem;
+}
+
+.Se-asideRight .Se-accountInformations .Se-userInfo{
+    display: flex;
+    gap: 1rem;
+}
+
+.Se-asideRight .Se-accountInformations .Se-userInfo .Re-addImageProfile .Re-userImageProfile{
+    position: relative;
+    display: flex;
+    width: 7rem;
+    height: 7rem;
+    border-radius: 100%;
+    border: 2px solid var(--thirdColor);
+    overflow: hidden;
+}
+
+.Se-asideRight .Se-accountInformations .Se-userInfo .Re-addImageProfile .Re-userImage {
+    object-fit: cover;
+}
+
+.Se-asideRight .Se-accountInformations .Se-userInfo .Re-addImageProfile input[type="file"] {
+    display: none;
+}
+
+.Se-asideRight .Se-accountInformations .Se-userInfo .Re-addImageProfile .Re-addImageIcon{
+    position: absolute;
+    display: flex;
+    right: 0rem;
+    bottom: 0rem;
+    width: 2.3rem;
+    height: 2.3rem;
+    background-color: var(--whiteColor);
+    border-radius: 100%;
+    font-size: 1.5rem;
+    color: var(--grayColor);
+    cursor: pointer;
+}
+
+.Se-asideRight .Se-accountInformations .Se-userInfo .Re-userInfoContainer .Re-userInformations{
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: 0.8rem;
+    width: 15rem;
+    line-height: 1.2rem;
+}
+
+.Se-asideRight .Se-accountInformations .Se-userInfo .Re-userInfoContainer .Re-userInformations .Re-infoLabel{
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.Se-asideRight .Se-accountInformations .Se-userInfo .Re-addImageProfile {
+    position: relative;
+}
+
+.Se-asideRight .Se-accountInformations .Se-userInfo .Re-userImage {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+.Se-asideRight .Se-accountInformations .Se-userInfo .Re-userImage #imagesSelector {
+    display: none;
+}
+
+.Se-asideRight .Se-accountInformations .Se-userInfo .Re-userImage .Re-addImageIcon {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.Se-asideRight .Se-accountInformations .Se-sectionHeader{
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    gap: 2rem;
+    padding: 2rem 0 0 0;
+    width: 100%;
+}
+
+.Se-asideRight  .Se-accountInformations .Se-sectionHeader .pageIcon{
+    color: var(--secondColor);
+    font-size: 1.5rem;
+}
+
+.Se-asideRight .Se-accountInformations .Se-editInfo {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.Se-asideRight .Se-accountInformations .Se-editInfo .Se-userInput{
+    position: relative;
+    padding: 0.7rem 0rem 0.5rem 1rem;
+    border-radius: 0.7rem;
+    border: 1px solid var(--blackColor);
+}
+
+.Se-asideRight .Se-accountInformations .Se-editInfo .Se-userInput.full-width {
+    grid-column: span 2;
+}
+
+.Se-asideRight .Se-accountInformations .Se-editInfo .Se-userInput.side-by-side {
+    grid-column: span 1;
+}
+  
+.Se-asideRight .Se-accountInformations .Se-editInfo .Se-userInput label{
+    position: absolute;
+    top: -0.5rem;
+    left: 1rem;
+    background-color: var(--whiteColor);
+    padding: 0 1rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.Se-asideRight .Se-accountInformations .Se-editInfo .Se-userInput input,
+.Se-asideRight .Se-accountInformations .Se-editInfo .Se-userInput textarea{
+    position: relative;
+    width: 100%;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding-right: 2rem;
+}
+
+.Se-asideRight .Se-accountInformations .Se-editInfo .Se-userInput textarea::-webkit-scrollbar{
+    display: none;
+}
+
+.Se-asideRight .Se-accountInformations .Se-editInfo .Se-userInput .Se-editIcon{
+    position: absolute;
+    right: 1rem;
+    font-size: 0.7rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--secondColor);
+}
+
+.Se-asideRight .Se-accountInformations .Se-themeInfo{
+    display: flex;
+    gap: 1rem;
+}
+
+.Se-asideRight .Se-accountInformations .Se-themeInfo p{
+    font-weight: 500;
+}
+
+.Se-asideRight .Se-accountInformations .Se-themeInfo .Se-themeOptions{
+    position: relative;
+    display: flex;
+    gap: 0.6rem;
+    font-size: 0.8rem;
+    transform: translateY(1px);
+}
+
+.Se-asideRight .Se-accountInformations .Se-themeInfo .Se-themeOptions input {
+    transform: translateY(1px);
+    cursor: pointer;
+    -webkit-appearance: none;
+    background-color: var(--whiteColor);
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 100%;
+    border: none; /* Removendo a borda padrão */
+    box-shadow: 0 0 0 1px var(--whiteColor), 0 0 0 2px var(--blackColor); /* Borda dupla */
+}
+
+.Se-asideRight .Se-accountInformations .Se-themeInfo .Se-themeOptions input:checked {
+    background-color: var(--secondColor);
+    box-shadow: 0 0 0 2px var(--whiteColor), 0 0 0 3px var(--thirdColor); /* Borda dupla */
+}
+
+
+.Se-asideRight .Se-accountInformations .Se-themeInfo .Se-themeOptions label{
+    cursor: pointer;
+}
+
+.Se-asideRight .Se-accountInformations .Se-themeInfo .Se-themeOptions input#Se-yellowTheme:checked + label {
+    color: var(--thirdColor);
+    font-weight: 500;
+}
+
+.Se-asideRight .Se-accountInformations .Se-themeInfo .Se-themeOptions input#Se-blueTheme:checked + label {
+    color: var(--thirdColor);
+    font-weight: 500;
+}
+
+.Se-asideRight .Se-accountInformations .Se-themeInfo .Se-themeOptions input#Se-pinkTheme:checked + label {
+    color: var(--thirdColor);
+    font-weight: 500;
+}
+
+.Se-asideRight .Se-accountBottom{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+    height: fit-content;
+}
+
+.Se-asideRight .Se-accountBottom .Se-dateCriation{
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    width: fit-content;
+    font-size: 0.8rem;
+}
+
+.Se-asideRight .Se-accountBottom .Se-accountDate{
+    color: var(--thirdColor);
+    font-weight: 600;
+}
+
+.Se-asideRight .Se-accountBottom .Se-accountDelete{
+    position: relative;
+    display: flex;
+    color: var(--whiteColor);
+    background-color: var(--redColor);
+    padding: 0.6rem 1.3rem 0.6rem 1.3rem;
+    border: none;
+    border-radius: 100rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.Se-asideRight .Se-accountBottom .Se-accountDelete:hover{
+    transition: 0.2s;
+    transform: translateY(0px) scale(1.1);
+}

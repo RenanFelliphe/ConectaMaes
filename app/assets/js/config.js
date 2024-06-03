@@ -1,3 +1,45 @@
+function toggleConfigSection(){
+    const configSections = document.querySelectorAll(".Se-sectionTitle");
+
+    configSections.forEach(section => {
+        section.addEventListener('click', () => {
+            configSections.forEach(allSection => {
+                allSection.classList.remove('active');
+            });
+            
+            section.classList.add('active');
+        })
+    });
+}
+
+function registerTheme(){
+    const body = document.querySelector("body");
+    const yellowTheme = document.querySelector("#Se-yellowTheme");
+    const blueTheme = document.querySelector("#Se-blueTheme");
+    const pinkTheme = document.querySelector("#Se-pinkTheme");
+    
+    yellowTheme.addEventListener("click", () => {
+        body.classList.add("Y-theme");
+        body.classList.remove("B-theme");
+        body.classList.remove("P-theme");
+        toggleTheme();
+    });
+    
+    blueTheme.addEventListener("click", () => {
+        body.classList.add("B-theme");
+        body.classList.remove("P-theme");
+        body.classList.remove("Y-theme");
+        toggleTheme();
+    });
+    
+    pinkTheme.addEventListener("click", () => {
+        body.classList.add("P-theme");
+        body.classList.remove("B-theme");
+        body.classList.remove("Y-theme");
+        toggleTheme();
+    }); 
+}  
+
 function toggleTheme(){
     const body = document.querySelector("body");
     const main = document.querySelector("main");
@@ -34,5 +76,7 @@ function toggleTheme(){
     }
     
 }
-    
+
+registerTheme();
+toggleConfigSection();
 toggleTheme();

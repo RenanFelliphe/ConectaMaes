@@ -31,6 +31,9 @@
 
 
     <script src="/ConectaMaesProject/app/assets/js/profile.js"></script>
+    <script>        
+        toggleTheme();
+    </script>
 </body>
 
 </html>

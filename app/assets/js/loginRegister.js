@@ -251,9 +251,26 @@ function getLocation() {
     }
 }
 
-document.getElementById('nomeUsuario').focus();
+/*
+    document.getElementById('registerForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+        
+        const form = document.getElementById('registerForm');
+        const formData = new FormData(form);
+        
+        try {
+            const response = await fetch('/ConectaMaesProject/app/services/helpers/upload.php', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.text();
+        } catch (error) {
+            console.error('Erro:', error);
+        }
+    });
+*/
 
-registerTheme();
 toggleTheme();
+registerTheme();
 registerUser();
 getLocation();

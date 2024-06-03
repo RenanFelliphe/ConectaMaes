@@ -1,11 +1,9 @@
 <?php
-
     $hostname = '162.240.17.101';
     $username = 'projetos_nlessa';
     $password = 'Gc&sgY74PK$}';
     $database = 'projetos_INF2023_G10';
 
-    // Create a database connection
     $conn = mysqli_connect($hostname, $username, $password, $database);
 
     // LOG IN AND OUT FUNCTIONS
@@ -25,16 +23,8 @@
             if(!empty($return['email']))
             {
                 session_start();
-
-                $_SESSION['nome'] = $return['nome'];
-                $_SESSION['user'] = $return['user'];
                 $_SESSION['idUsuario'] = $return['idUsuario'];
-                $_SESSION['email'] = $return['email'];
-                $_SESSION['linkFotoPerfil'] = $return['linkFotoPerfil'];
-                $_SESSION['tema'] = $return['tema'];
-
                 $_SESSION['active'] = true;
-
                 header('Location: home.php');
             }
             else
@@ -46,8 +36,8 @@
 
     function logInFromRegister($conn)
     {
-        $email = filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL);
-        $senha = md5($_POST['senha']);
+        $email = filter_input(INPUT_POST, "emailRegistro", FILTER_VALIDATE_EMAIL);
+        $senha = md5($_POST['senhaRegistro']);
 
         $query = "SELECT * FROM Usuario WHERE email = '$email' AND senha = '$senha' ";
 
@@ -58,22 +48,10 @@
         if(!empty($return['email']))
         {
             session_start();
-
-            $_SESSION['nome'] = $return['nome'];
-            $_SESSION['user'] = $return['user'];
             $_SESSION['idUsuario'] = $return['idUsuario'];
-            $_SESSION['email'] = $return['email'];
-            $_SESSION['linkFotoPerfil'] = $return['linkFotoPerfil'];
-            $_SESSION['tema'] = $return['tema'];
-            $_SESSION['dataCriacaoConta'] = $return['dataCriacaoConta'];
-            $_SESSION['biografiaUsuario'] = $return['biografiaUsuario'];
-            $_SESSION['dataNascimento'] = $return['dataNascimento'];
-            $_SESSION['telefone'] = $return['telefone'];
-            $_SESSION['isAdmin'] = $return['isAdmin'];
-
             $_SESSION['active'] = true;
-
-            header('Location: home.php');
+            echo '<script">'.'window.location.href="home.php";'.'</script>';
+            exit();
         }
     }
 

@@ -148,7 +148,8 @@
     cursor: pointer;
 }
 
-.headerHome .headerPageLinks .pageLink.active{
+.headerHome .headerPageLinks .pageLink.active,
+.headerHome .headerPageLinks .pageLink:hover{
     color: var(--secondColor);
 }
 
@@ -164,15 +165,18 @@
     background-color: var(--secondColor);
 }
 
-body.P-theme .headerHome .headerPageLinks .pageLink.active .headerIcon {
+body.P-theme .headerHome .headerPageLinks .pageLink.active .headerIcon,
+body.P-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon {
     filter: brightness(0) saturate(100%) invert(42%) sepia(61%) saturate(1820%) hue-rotate(302deg) brightness(87%) contrast(85%);
 }
 
-body.B-theme .headerHome .headerPageLinks .pageLink.active .headerIcon {
+body.B-theme .headerHome .headerPageLinks .pageLink.active .headerIcon,
+body.B-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon{
     filter: brightness(0) saturate(100%) invert(63%) sepia(81%) saturate(331%) hue-rotate(139deg) brightness(83%) contrast(87%);
 }
 
-body.Y-theme .headerHome .headerPageLinks .pageLink.active .headerIcon {
+body.Y-theme .headerHome .headerPageLinks .pageLink.active .headerIcon,
+body.Y-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon{
     filter: brightness(0) saturate(100%) invert(66%) sepia(48%) saturate(459%) hue-rotate(16deg) brightness(97%) contrast(85%);
 }
 
