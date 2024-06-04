@@ -1512,7 +1512,7 @@ body.Y-theme  .Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover div i
 .Se-asideRight .Se-accountInformations .Se-themeInfo .Se-themeOptions input {
     transform: translateY(1px);
     cursor: pointer;
-    -webkit-appearance: none;
+    --webkit-appearance: none;
     background-color: var(--whiteColor);
     width: 0.5rem;
     height: 0.5rem;
