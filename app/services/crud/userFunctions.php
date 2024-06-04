@@ -90,15 +90,21 @@
         if(isset($_POST['editar'])) {
             $err = array();
     
-            $nome = !empty($_POST['nome']) ? mysqli_real_escape_string($conn, $_POST['nome']) : null;
-            $email = !empty($_POST['email']) ? filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL) : null;
-            $user = !empty($_POST['user']) ? mysqli_real_escape_string($conn, $_POST['user']) : null;
-            $senha = !empty($_POST['senha']) ? md5($_POST['senha']) : null;
-            $dataNascimento = !empty($_POST['dataNascimento']) ? mysqli_real_escape_string($conn, $_POST['dataNascimento']) : null;
-            $telefone = !empty($_POST['telefone']) ? mysqli_real_escape_string($conn, $_POST['telefone']) : null;
-            $CEP = !empty($_POST['CEP']) ? mysqli_real_escape_string($conn, $_POST['CEP']) : null;
-            $linkFotoPerfil = !empty($_POST['linkFotoPerfil']) ? mysqli_real_escape_string($conn, $_POST['linkFotoPerfil']) : null;
-            $biografiaUsuario = !empty($_POST['biografiaUsuario']) ? mysqli_real_escape_string($conn, $_POST['biografiaUsuario']) : null;
+            $nome = !empty($_POST['nomeEdit']) ? mysqli_real_escape_string($conn, $_POST['nome']) : null;
+            $email = !empty($_POST['emailEdit']) ? filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL) : null;
+            $user = !empty($_POST['userEdit']) ? mysqli_real_escape_string($conn, $_POST['user']) : null;
+            $senha = !empty($_POST['senhaEdit']) ? md5($_POST['senhaEdit']) : null;
+            $dataNascimento = !empty($_POST['dataNascimentoEdit']) ? mysqli_real_escape_string($conn, $_POST['dataNascimentoEdit']) : null;
+            $telefone = !empty($_POST['telefoneEdit']) ? mysqli_real_escape_string($conn, $_POST['telefoneEdit']) : null;
+            $localizacao = !empty($_POST['localizacaoEdit']) ? mysqli_real_escape_string($conn, $_POST['localizacaoEdit']) : null;
+                $partesLocalizacao = explode(',', $localizacao);
+
+                // Remove espaços em branco adicionais
+                $cidade = mysqli_real_escape_string($conn, trim($partesLocalizacao[0]));
+                $estado = mysqli_real_escape_string($conn, trim($partesLocalizacao[1]));
+            $linkFotoPerfil = !empty($_POST['linkFotoPerfilEdit']) ? mysqli_real_escape_string($conn, $_POST['linkFotoPerfilEdit']) : null;
+            $biografiaUsuario = !empty($_POST['biografiaUsuarioEdit']) ? mysqli_real_escape_string($conn, $_POST['biografiaUsuarioEdit']) : null;
+            $tema = !empty($_POST['temaEdit']) ? mysqli_real_escape_string($conn, $_POST['temaEdit']) : null;
     
             // Verificação de email duplicado
             if($email) {
@@ -130,9 +136,11 @@
                 if($senha) $fields["senha"] = $senha;
                 if($dataNascimento) $fields["dataNascimento"] = $dataNascimento;
                 if($telefone) $fields["telefone"] = $telefone;
-                if($CEP) $fields["CEP"] = $CEP;
-                if($linkFotoPerfil) $fields["linkFtPerfil"] = $linkFotoPerfil;
+                if($cidade) $fields["cidade"] = $cidade;
+                if($estado) $fields["estado"] = $estado;
+                if($linkFotoPerfil) $fields["linkFotoPerfil"] = $linkFotoPerfil;
                 if($biografiaUsuario) $fields["biografiaUsuario"] = $biografiaUsuario;
+                if($tema) $fields["tema"] = $tema;
     
                 if(!empty($fields)) {
                     $setFields = [];
@@ -175,7 +183,7 @@
                 session_unset();
                 session_destroy();
                 
-                header("Location: login.php");
+                header("Location: /ConectaMaesProject/public/login.php");
             }
             else
             {

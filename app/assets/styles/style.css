@@ -479,7 +479,7 @@ main{
 .Re-registerForm .Re-registerCenter .Re-accountInformations .Re-themeInfo .Re-themeOptions input {
     transform: translateY(1px);
     cursor: pointer;
-    -webkit-appearance: none;
+    --webkit-appearance: none;
     background-color: var(--whiteColor);
     width: 0.5rem;
     height: 0.5rem;
@@ -1552,6 +1552,8 @@ body.Y-theme  .Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover div i
     align-items: flex-end;
     width: 100%;
     height: fit-content;
+    margin-bottom: 2rem;
+    
 }
 
 .Se-asideRight .Se-accountBottom .Se-dateCriation{
@@ -1563,10 +1565,30 @@ body.Y-theme  .Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover div i
     font-size: 0.8rem;
 }
 
-.Se-asideRight .Se-accountBottom .Se-accountDate{
+.Se-asideRight .Se-accountDate{
     color: var(--thirdColor);
     font-weight: 600;
 }
+
+.Se-asideRight .Se-accountEdit{
+    position: relative;
+    display: flex;
+    color: var(--whiteColor);
+    background-color: var(--secondColorLowOpacity);
+    padding: 0.6rem 1.3rem 0.6rem 1.3rem;
+    border: none;
+    border-radius: 100rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.Se-asideRight .Se-accountEdit:hover{
+    transition: 0.2s;
+    transform: translateY(0px) scale(1.05);
+    background-color: var(--secondColor);
+}
+
 
 .Se-asideRight .Se-accountBottom .Se-accountDelete{
     position: relative;

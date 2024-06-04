@@ -42,13 +42,13 @@
                             <label for="Ho-postTitleInput">Título:</label>
                             <input type="text" id="Ho-postTitleInput" class="Ho-postTitleInput" oninput="postTitleCharLimiter()">
                             <div class="Ho-titleCharacters">
-                                <span class="Ho-titleCharactersNumber">0</span>/<span class="Ho-maxTitleCharacters">20</span>
+                                <span class="Ho-titleCharactersNumber">0</span>/<span class="Ho-maxTitleCharacters">50</span>
                             </div>
                         </div>
                         
                         <textarea name="" id="" cols="62" rows="3" class="Ho-postTextContent" placeholder="Encontrou uma dificuldade? Peça ajuda!" oninput="postCharLimiter()"></textarea>
                         <div class="Ho-characters">
-                            <span class="Ho-charactersNumber">0</span>/<span class="Ho-maxCharacters">20</span>
+                            <span class="Ho-charactersNumber">0</span>/<span class="Ho-maxCharacters">200</span>
                         </div>
                     </div>
                 </div>

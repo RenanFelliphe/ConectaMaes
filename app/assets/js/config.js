@@ -77,6 +77,8 @@ function toggleTheme(){
     
 }
 
+
+
 registerTheme();
 toggleConfigSection();
 toggleTheme();

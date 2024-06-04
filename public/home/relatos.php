@@ -31,11 +31,11 @@
             <form class="Ho-postSomething">
                 <div class="Ho-postTop">
                     <a class="Ho-userProfileImage" href="profile.php">
-                        <img src="../../app/assets/imagens/fotos/Renan-Moura.png" alt="Foto de perfil do usuário">
+                        <img src="/ConectaMaesProject/app/assets/imagens/fotos/perfil/<?php echo $currentUserData['user'] . '-' . $currentUserData['dataNascimento'] . '-perfil.'."png";?>" alt="Foto de perfil do usuário">
                     </a>
     
                     <div class="Ho-postText">
-                        <textarea name="" id="" cols="62" rows="3" class="Ho-postTextContent" placeholder="Como você está se sentindo? Compartilhe sua experiência!" oninput="postCharLimiter()"></textarea>
+                        <textarea name="" id="" cols="62" rows="3" class="Ho-postTextContent" placeholder="Compartilhe sua experiência!" oninput="postCharLimiter()"></textarea>
                         <div class="Ho-characters">
                             <span class="Ho-charactersNumber">0</span>/<span class="Ho-maxCharacters">200</span>
                         </div>
