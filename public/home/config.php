@@ -149,6 +149,7 @@
                     </div>
 
                     <form class="Se-editInfo" method="post">
+                        <input type="hidden" class="updaterIdHiddenInput" name="updaterId" value="<?php echo $currentUserData['idUsuario']; ?>">    
                         <div class="Se-userInput full-width">
                             <input type="text" id="nomeUsuario" name="nomeEdit" value="<?php echo $currentUserData['nome'];?>">
                             <label class="Re-fakePlaceholder" for="nomeUsuario">Nome Completo</label>
@@ -198,6 +199,16 @@
                         </div>
                         <button class="Se-accountEdit" type="submit" name="editar">Editar conta</button>
                     </form>
+                    <?php
+                    if(isset($_POST['editar'])) {   
+                        if($_POST['updaterId'] === $currentUserData['idUsuario']) {
+                            editProfile($conn, $_POST['updaterId']);
+                        } else {
+                            echo "Algo deu errado!";
+                        }
+                    }
+                ?>
+                            
 
                     <div class="Se-accountBottom" style="margin-bottom: 1rem;">
                         <span class="Se-dateCriation"> Criado em: <span class="Se-accountDate">28/05/2024</span></span>
@@ -218,14 +229,17 @@
                             <button type="submit" id="Se-submitAccountDeleteModalForm">ENVIAR</button>
                             <button id="Se-cancelAccountDelete">CANCELAR</button>
                         <?php
-                            if($_POST['confirmaTextoDelete'] === ("delete/".$currentUserData['idUsuario']."/".$currentUserData['user']))
-                            {
-                                deleteAccount($conn, $table, $_POST['deleterId']);
+                            if(isset($_POST['confirmaTextoDelete'])){
+                                if($_POST['confirmaTextoDelete'] === ("delete/".$currentUserData['idUsuario']."/".$currentUserData['user']))
+                                {
+                                    deleteAccount($conn, $table, $_POST['deleterId']);
+                                }
+                                else
+                                {
+                                    echo "Insira o texto corretamente!";
+                                }
                             }
-                            else
-                            {
-                                echo "Insira o texto corretamente!";
-                            }
+                            
                         ?>
                         </form>
                     </modal>

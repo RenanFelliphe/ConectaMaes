@@ -90,15 +90,14 @@
         if(isset($_POST['editar'])) {
             $err = array();
     
-            $nome = !empty($_POST['nomeEdit']) ? mysqli_real_escape_string($conn, $_POST['nome']) : null;
-            $email = !empty($_POST['emailEdit']) ? filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL) : null;
-            $user = !empty($_POST['userEdit']) ? mysqli_real_escape_string($conn, $_POST['user']) : null;
+            $nome = !empty($_POST['nomeEdit']) ? mysqli_real_escape_string($conn, $_POST['nomeEdit']) : null;
+            $email = !empty($_POST['emailEdit']) ? filter_input(INPUT_POST, "emailEdit", FILTER_VALIDATE_EMAIL) : null;
+            $user = !empty($_POST['userEdit']) ? mysqli_real_escape_string($conn, $_POST['userEdit']) : null;
             $senha = !empty($_POST['senhaEdit']) ? md5($_POST['senhaEdit']) : null;
             $dataNascimento = !empty($_POST['dataNascimentoEdit']) ? mysqli_real_escape_string($conn, $_POST['dataNascimentoEdit']) : null;
             $telefone = !empty($_POST['telefoneEdit']) ? mysqli_real_escape_string($conn, $_POST['telefoneEdit']) : null;
             $localizacao = !empty($_POST['localizacaoEdit']) ? mysqli_real_escape_string($conn, $_POST['localizacaoEdit']) : null;
                 $partesLocalizacao = explode(',', $localizacao);
-
                 // Remove espaços em branco adicionais
                 $cidade = mysqli_real_escape_string($conn, trim($partesLocalizacao[0]));
                 $estado = mysqli_real_escape_string($conn, trim($partesLocalizacao[1]));
@@ -179,11 +178,8 @@
 
             if($dExec)
             {
-                session_start();
                 session_unset();
                 session_destroy();
-                
-                header("Location: /ConectaMaesProject/public/login.php");
             }
             else
             {
