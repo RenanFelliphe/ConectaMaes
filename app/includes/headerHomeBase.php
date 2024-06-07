@@ -1,5 +1,5 @@
 <?php 
-    $currentUserData = unitQuery($conn, "Usuario", $_SESSION['idUsuario']);   
+    $currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);   
 
     // Get the current URL path
     $url_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);

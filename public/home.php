@@ -2,7 +2,7 @@
     session_start();
     $verify = isset($_SESSION['active']) ? true : header("Location:/ConectaMaesProject/public/login.php");
     require_once "../app/services/crud/userFunctions.php"; 
-    $currentUserData = unitQuery($conn, "Usuario", $_SESSION['idUsuario']);   
+    $currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);   
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +30,7 @@
         <section class="timeline">
             <form class="Ho-postSomething">
                 <div class="Ho-postTop">
-                    <a class="Ho-userProfileImage" href="profile.php">
+                    <a class="Ho-userProfileImage" href="/ConectaMaesProject/public/home/perfil.php">
                         <img src="/ConectaMaesProject/app/assets/imagens/fotos/perfil/<?php echo $currentUserData['user'] . '-' . $currentUserData['dataNascimento'] . '-perfil.'."png";?>" alt="Foto de perfil do usuário">
                     </a>
     
@@ -60,7 +60,7 @@
     
                     <div class="Ho-submitArea">
                         <div class="Ho-submitPost">
-                            <button type="submit" value="submit" class="Ho-submitBtn">Postar</button>
+                            <button type="submit" value="submit" name ="postHome" class="Ho-submitBtn">Postar</button>
     
                             <div class="Ho-postStyle">
                                 <i class="bi bi-caret-down-fill"></i>
