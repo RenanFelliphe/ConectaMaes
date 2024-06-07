@@ -3,7 +3,7 @@
     $verify = isset($_SESSION['active']) ? true : header("Location:/ConectaMaesProject/public/login.php");
     require_once "../../app/services/crud/userFunctions.php"; 
     $table = "Usuario";
-    $currentUserData = unitQuery($conn, $table, $_SESSION['idUsuario']);   
+    $currentUserData = queryUserData($conn, $table, $_SESSION['idUsuario']);   
 ?>
 
 <!DOCTYPE html>

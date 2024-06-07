@@ -75,7 +75,7 @@
                         <label class="Re-fakePlaceholder" id="dataNascPlaceholder" for="dataNascimento">Data de Nascimento</label>
                     </div>
                     <div class="Re-input inputLocal">
-                        <input type="text" id="localizacao" name="localizacaoRegistro" value="">
+                        <input type="text" id="localizacao" name="localizacaoRegistro" value="" placeholder="Cidade, Estado">
                         <label class="Re-fakePlaceholder" for="localizacao">Localização</label>
                     </div>
                     <div class="Re-input inputBio">
