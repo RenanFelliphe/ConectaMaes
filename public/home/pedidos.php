@@ -94,6 +94,48 @@
                     <span class="Ho-preview"></span>
                 </div>
             </form>
+            <?php
+                sendAssistance($conn);
+
+                $count = 0;
+                $id = 1;
+
+                // Loop para mostrar publicações
+                while (true) {
+                    $stmt = $conn->prepare("SELECT * FROM Pedidos WHERE id = ?");
+                    $stmt->bind_param("i", $id);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+
+                    if ($result->num_rows > 0) {
+                        // Exibir a publicação
+                        $publicacao = $result->fetch_assoc();
+                        echo "Publicação ID: " . $publicacao['id'] . "<br>";
+                        echo "Conteúdo: " . $publicacao['conteudo'] . "<br><br>";
+                        $count++;
+
+                        // A cada 50 publicações, mostrar "sugestões"
+                        if ($count % 50 == 0) {
+                            echo "Sugestões<br><br>";
+                        }
+                    }
+
+                    $id++;
+
+                    // Verificar se existem mais publicações
+                    $stmt = $conn->prepare("SELECT COUNT(*) as total FROM publicacoes WHERE id >= ?");
+                    $stmt->bind_param("i", $id);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    $row = $result->fetch_assoc();
+                    $totalRestante = $row['total'];
+
+                    if ($totalRestante == 0) {
+                        echo "Seu feed acabou<br>";
+                        break;
+                    }
+                }
+            ?>
         </section>
 
         <section class="asideRight">

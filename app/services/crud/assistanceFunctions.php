@@ -8,8 +8,8 @@
     $conn = mysqli_connect($hostname, $username, $password, $database);
 
     // SEND ASSISTANCES - CREATE
-        function sendAssistances($conn) {
-            if(isset($_POST['enviar']) AND !empty($_POST['conteudoEnvio'])){
+        function sendAssistance($conn) {
+            if(isset($_POST['postAuxilio']) AND !empty($_POST['conteudoEnvio'])){
                 $err = array();
                     
                 if(isset($_GET['algumaCondicaoDeErro'])){
