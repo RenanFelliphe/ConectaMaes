@@ -2,6 +2,7 @@
     session_start();
     $verify = isset($_SESSION['active']) ? true : header("Location:/ConectaMaesProject/public/login.php");
     require_once "../../app/services/crud/userFunctions.php"; 
+    require_once "../../app/services/crud/postFunctions.php";
     $currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);   
 ?>
 
@@ -34,13 +35,13 @@
             <form class="Ho-postSomething">
                 <div class="Ho-postTop">
                     <a class="Ho-userProfileImage" href="/ConectaMaesProject/public/home/perfil.php">
-                        <img src="/ConectaMaesProject/app/assets/imagens/fotos/perfil/<?php echo $currentUserData['user'] . '-' . $currentUserData['dataNascimento'] . '-perfil.'."png";?>" alt="Foto de perfil do usuário">
+                        <img src="/ConectaMaesProject/app/assets/imagens/fotos/perfil/<?php echo $currentUserData['nomeDeUsuario'] . '-' . $currentUserData['dataNascimentoUsuario'] . '-perfil.'."png";?>" alt="Foto de perfil do usuário">
                     </a>
     
                     <div class="Ho-postText">
                         <div class="Ho-postTitle">
                             <label for="Ho-postTitleInput">Título:</label>
-                            <input type="text" id="Ho-postTitleInput" class="Ho-postTitleInput" oninput="postTitleCharLimiter()">
+                            <input type="text" id="Ho-postTitleInput" name="tituloEnvio" class="Ho-postTitleInput" oninput="postTitleCharLimiter()">
                             <div class="Ho-titleCharacters">
                                 <span class="Ho-titleCharactersNumber">0</span>/<span class="Ho-maxTitleCharacters">50</span>
                             </div>
@@ -93,10 +94,11 @@
                 <div class="Ho-postAttachments">
                     <span class="Ho-preview"></span>
                 </div>
+                <?php
+                    sendPost($conn,"Auxílio", $currentUserData['idUsuario']);
+                ?>
             </form>
-            <?php
-                sendAssistance($conn);
-            ?>
+            
         </section>
 
         <section class="asideRight">

@@ -391,7 +391,8 @@ main{
     transition: 0.15s ease-in-out, 0 background-image;
 }
 
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input input#dataNascimento{
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input input#dataNascimento,
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input input#localizacao{
     width: 12.5rem;
 }
 
@@ -1608,3 +1609,4 @@ body.Y-theme  .Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover div i
     transition: 0.2s;
     transform: translateY(0px) scale(1.1);
 }
+

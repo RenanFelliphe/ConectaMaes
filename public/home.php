@@ -1,8 +1,11 @@
 <?php
-    session_start();
-    $verify = isset($_SESSION['active']) ? true : header("Location:/ConectaMaesProject/public/login.php");
-    require_once "../app/services/crud/userFunctions.php"; 
-    $currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);   
+session_start();
+$verify = isset($_SESSION['active']) ? true : header("Location:/ConectaMaesProject/public/login.php");
+
+require_once "../app/services/crud/userFunctions.php";
+$conn = mysqli_connect($hostname, $username, $password, $database); // Conexão deve estar aberta
+
+$currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);
 ?>
 
 <!DOCTYPE html>
@@ -31,11 +34,11 @@
             <form class="Ho-postSomething">
                 <div class="Ho-postTop">
                     <a class="Ho-userProfileImage" href="/ConectaMaesProject/public/home/perfil.php">
-                        <img src="/ConectaMaesProject/app/assets/imagens/fotos/perfil/<?php echo $currentUserData['user'] . '-' . $currentUserData['dataNascimento'] . '-perfil.'."png";?>" alt="Foto de perfil do usuário">
+                        <img src="/ConectaMaesProject/app/assets/imagens/fotos/perfil/<?php echo $currentUserData['nomeDeUsuario'] . '-' . $currentUserData['dataNascimentoUsuario'] . '-perfil.png';?>" alt="Foto de perfil do usuário">
                     </a>
     
                     <div class="Ho-postText">
-                        <textarea name="" id="" cols="62" rows="3" class="Ho-postTextContent" placeholder="Como você está se sentindo?" oninput="postCharLimiter()"></textarea>
+                        <textarea name="postText" id="postText" cols="62" rows="3" class="Ho-postTextContent" placeholder="Como você está se sentindo?" oninput="postCharLimiter()"></textarea>
                         <div class="Ho-characters">
                             <span class="Ho-charactersNumber">0</span>/<span class="Ho-maxCharacters">200</span>
                         </div>
@@ -84,7 +87,7 @@
 
                 // Loop para mostrar publicações
                 while (true) {
-                    $stmt = $conn->prepare("SELECT * FROM Publicacoes WHERE id = ?");
+                    $stmt = $conn->prepare("SELECT * FROM Publicacao WHERE idPublicacao = ?");
                     $stmt->bind_param("i", $id);
                     $stmt->execute();
                     $result = $stmt->get_result();
@@ -105,7 +108,7 @@
                     $id++;
 
                     // Verificar se existem mais publicações
-                    $stmt = $conn->prepare("SELECT COUNT(*) as total FROM publicacoes WHERE id >= ?");
+                    $stmt = $conn->prepare("SELECT COUNT(*) as total FROM Publicacao WHERE idPublicacao >= ?");
                     $stmt->bind_param("i", $id);
                     $stmt->execute();
                     $result = $stmt->get_result();

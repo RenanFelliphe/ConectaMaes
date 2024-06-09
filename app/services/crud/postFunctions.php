@@ -8,29 +8,26 @@
     $conn = mysqli_connect($hostname, $username, $password, $database);
 
     // SEND POSTS - CREATE
-        function sendPosts($conn) {
+        function sendPost($conn, $postType, $currentUserId) {
         if(!empty($_POST['conteudoEnvio'])){
             $err = array();
-                
-            if(isset($_GET['algumaCondicaoDeErro'])){
-                $err[] = "Algo deu Errado!";
-            }
-    
+            
+            $tipoPublicacaoEnvio = mysqli_real_escape_string($conn, $postType);
+            $conteudoEnvio = mysqli_real_escape_string($conn, $_POST['conteudoEnvio']);
+            $linkAnexoEnvio = mysqli_real_escape_string($conn, $_POST['linkAnexoEnvio']);
+            $tituloEnvio = mysqli_real_escape_string($conn, $_POST['tituloEnvio']);
+            $isSensivelEnvio = mysqli_real_escape_string($conn, $_POST['sensitiveContent']);
+            $isConcluido = mysqli_real_escape_string($conn, $_POST['isConcluidoEnvio']);
+            $idUsuarioQuePostou = mysqli_real_escape_string($conn, $currentUserId);
+
             if(empty($err)){
-                $insertNewUser = "INSERT INTO Publicacao (ATRIBUTOS) VALUES ('$ VARIAVEIS')";
-                $executeSignUp = mysqli_query($conn, $insertNewUser);
+                $insertNewPost = "INSERT INTO Publicacao (tipoPublicacao, conteudo, linkAnexo, titulo, isSensivel, isConcluido, idUsuario) VALUES ('$tipoPublicacaoEnvio','$conteudoEnvio','$linkAnexoEnvio','$tituloEnvio','$isSensivelEnvio','$isConcluido','$idUsuarioQuePostou')";
+                $executeSendPost = mysqli_query($conn, $insertNewPost);
     
-                if($executeSignUp){
-                }
-                else{
+                if(!$executeSendPost){
                     echo "<p>Erro ao enviar publicação: " . mysqli_error($conn) . "!<p>";
                 }
-            }
-            else{
-                foreach($err as $e){
-                    echo "<p>$e</p><br>";
-                }
-            }      
+            }     
         }
         }
 

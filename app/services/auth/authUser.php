@@ -47,10 +47,9 @@
 
         if(!empty($return['email']))
         {
-            session_start();
             $_SESSION['idUsuario'] = $return['idUsuario'];
             $_SESSION['active'] = true;
-            echo '<script">'.'window.location.href="home.php";'.'</script>';
+            echo 'Usuário registrado com sucesso!';
             exit();
         }
     }

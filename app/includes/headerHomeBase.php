@@ -104,7 +104,7 @@
             </div>
         </modal>
         <div class="userInformations">
-            <span class="userRealName"> <?php echo $currentUserData['nome']; ?></span>
+            <span class="userRealName"> <?php echo $currentUserData['nomeCompleto']; ?></span>
             <span class="userNickname"> <?php echo "@".$currentUserData['user']; ?></span>
         </div>
         <div class="userAccount">

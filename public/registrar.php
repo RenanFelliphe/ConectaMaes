@@ -75,8 +75,37 @@
                         <label class="Re-fakePlaceholder" id="dataNascPlaceholder" for="dataNascimento">Data de Nascimento</label>
                     </div>
                     <div class="Re-input inputLocal">
-                        <input type="text" id="localizacao" name="localizacaoRegistro" value="" placeholder="Cidade, Estado">
-                        <label class="Re-fakePlaceholder" for="localizacao">Localização</label>
+                        <select name="localizacaoRegistro" id="localizacao" >
+                            <option value="-" selected>- - - - - -</option>
+                            <option value="AC">AC | Acre</option>
+                            <option value="AL">AL | Alagoas</option>
+                            <option value="AP">AP | Amapá</option>
+                            <option value="AM">AM | Amazonas</option>
+                            <option value="BA">BA | Bahia</option>
+                            <option value="CE">CE | Ceará</option>
+                            <option value="DF">DF | Distrito Federal</option>
+                            <option value="ES">ES | Espírito Santo</option>
+                            <option value="GO">GO | Goiás</option>
+                            <option value="MA">MA | Maranhão</option>
+                            <option value="MT">MT | Mato Grosso</option>
+                            <option value="MS">MS | Mato Grosso do Sul</option>
+                            <option value="MG">MG | Minas Gerais</option>
+                            <option value="PA">PA | Pará</option>
+                            <option value="PB">PB | Paraíba</option>
+                            <option value="PR">PR | Paraná</option>
+                            <option value="PE">PE | Pernambuco</option>
+                            <option value="PI">PI | Piauí</option>
+                            <option value="RJ">RJ | Rio de Janeiro</option>
+                            <option value="RN">RN | Rio Grande do Norte</option>
+                            <option value="RS">RS | Rio Grande do Sul</option>
+                            <option value="RO">RO | Rondônia</option>
+                            <option value="RR">RR | Roraima</option>
+                            <option value="SC">SC | Santa Catarina</option>
+                            <option value="SP">SP | São Paulo</option>
+                            <option value="SE">SE | Sergipe</option>
+                            <option value="TO">TO | Tocantins</option>                        
+                        </select>
+                        <label class="Re-fakePlaceholder" for="localizacao" style="pointer-events: none;">Localização</label>
                     </div>
                     <div class="Re-input inputBio">
                         <textarea name="biografiaUsuarioRegistro" id="biografiaUsuario" cols="54" rows="4" required></textarea>                        
@@ -268,10 +297,11 @@
                 <button class="Re-registerSubmit close" type="submit" name="registrar">Registrar</button>
                 <p class="Re-goLogin">Já possui uma conta? <a href="login.php">Entre</a></p>
             </div>
-        </form>
-        <?php
+            <?php
             signUp($conn);
-        ?>
+            ?>
+        </form>
+        
     </main>
 
     <?php include_once ("../app/includes/footer.php");?>

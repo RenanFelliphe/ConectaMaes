@@ -2,6 +2,7 @@
     session_start();
     $verify = isset($_SESSION['active']) ? true : header("Location:/ConectaMaesProject/public/login.php");
     require_once "../../app/services/crud/userFunctions.php"; 
+    require_once "../../app/services/crud/postFunctions.php";
     $currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);   
 ?>
 <!DOCTYPE html>
@@ -28,14 +29,22 @@
         </section>
 
         <section class="timeline">
-            <form class="Ho-postSomething">
+            <form class="Ho-postSomething" method="post">
                 <div class="Ho-postTop">
                     <a class="Ho-userProfileImage" href="/ConectaMaesProject/public/home/perfil.php">
-                        <img src="/ConectaMaesProject/app/assets/imagens/fotos/perfil/<?php echo $currentUserData['user'] . '-' . $currentUserData['dataNascimento'] . '-perfil.'."png";?>" alt="Foto de perfil do usuário">
+                        <img src="/ConectaMaesProject/app/assets/imagens/fotos/perfil/<?php echo $currentUserData['nomeDeUsuario'] . '-' . $currentUserData['dataNascimentoUsuario'] . '-perfil.'."png";?>" alt="Foto de perfil do usuário">
                     </a>
     
                     <div class="Ho-postText">
-                        <textarea name="" id="" cols="62" rows="3" class="Ho-postTextContent" placeholder="Compartilhe sua experiência!" oninput="postCharLimiter()"></textarea>
+                        <div class="Ho-postTitle">
+                            <label for="Ho-postTitleInput">Título:</label>
+                            <input type="text" id="Ho-postTitleInput" name="tituloEnvio" class="Ho-postTitleInput" oninput="postTitleCharLimiter()">
+                            <div class="Ho-titleCharacters">
+                                <span class="Ho-titleCharactersNumber">0</span>/<span class="Ho-maxTitleCharacters">50</span>
+                            </div>
+                        </div>
+
+                        <textarea name="conteudoEnvio" id="" cols="62" rows="3" class="Ho-postTextContent" placeholder="Compartilhe sua experiência!" oninput="postCharLimiter()"></textarea>
                         <div class="Ho-characters">
                             <span class="Ho-charactersNumber">0</span>/<span class="Ho-maxCharacters">200</span>
                         </div>
@@ -45,16 +54,11 @@
                 <div class="Ho-postBottom">
                     <div class="Ho-extraInputs">
                         <div class="Ho-imageInput">
-                            <input type="file" id="Ho-imageSelector" accept="image/*">
+                            <input type="file" id="Ho-imageSelector" name="linkAnexoEnvio" accept="image/*">
                             <label for="Ho-imageSelector">
                                 <i class="bi bi-images Ho-iconLabel"></i>
                                 <p> Imagem </p>
                             </label>
-                        </div>
-        
-                        <div class="Ho-tagInput">
-                            <label for="tagInput"><i class="bi bi-tags-fill Ho-iconLabel"></i></label>
-                            <input type="text" id="tagInput" placeholder="Tags">
                         </div>
                     </div>
     
@@ -77,6 +81,11 @@
                 <div class="Ho-postAttachments">
                     <span class="Ho-preview"></span>
                 </div>
+                <?php
+                if(isset($_POST['postRelato'])){
+                    sendPost($conn,"Relato", $currentUserData['idUsuario']);
+                }
+                ?>
             </form>
             <?php
                 $count = 0;
@@ -84,7 +93,7 @@
 
                 // Loop para mostrar publicações
                 while (true) {
-                    $stmt = $conn->prepare("SELECT * FROM Relatos WHERE id = ?");
+                    $stmt = $conn->prepare("SELECT * FROM Publicacao WHERE idPublicacao = ? AND tipoPublicacao = 'Relato'");
                     $stmt->bind_param("i", $id);
                     $stmt->execute();
                     $result = $stmt->get_result();
@@ -92,8 +101,12 @@
                     if ($result->num_rows > 0) {
                         // Exibir a publicação
                         $publicacao = $result->fetch_assoc();
-                        echo "Publicação ID: " . $publicacao['id'] . "<br>";
-                        echo "Conteúdo: " . $publicacao['conteudo'] . "<br><br>";
+                        ?>
+                            <div class="post Relato">
+                                <h1 class="postTitle"><?php echo $publicacao['titulo'];?></h1>
+                                echo "Conteúdo: " . $publicacao['conteudo'] . "<br><br>";
+                            </div>
+                        <?php
                         $count++;
 
                         // A cada 50 publicações, mostrar "sugestões"
@@ -105,7 +118,7 @@
                     $id++;
 
                     // Verificar se existem mais publicações
-                    $stmt = $conn->prepare("SELECT COUNT(*) as total FROM publicacoes WHERE id >= ?");
+                    $stmt = $conn->prepare("SELECT COUNT(*) as total FROM Publicacao WHERE idPublicacao >= ?");
                     $stmt->bind_param("i", $id);
                     $stmt->execute();
                     $result = $stmt->get_result();

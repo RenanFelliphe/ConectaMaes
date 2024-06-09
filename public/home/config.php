@@ -94,7 +94,7 @@
                     <div class="Se-userInfo">
                         <div class="Re-addImageProfile">
                             <div class="Re-userImageProfile">
-                                <img src="/ConectaMaesProject/app/assets/imagens/fotos/perfil/<?php echo $currentUserData['user'] . '-' . $currentUserData['dataNascimento'] . '-perfil.'."png";?>" alt="" class="Re-userImage">
+                                <img src="/ConectaMaesProject/app/assets/imagens/fotos/perfil/<?php echo $currentUserData['nomeDeUsuario'] . '-' . $currentUserData['dataNascimentoUsuario'] . '-perfil.'."png";?>" alt="" class="Re-userImage">
                             </div>
 
                             <input type="file" id="imagesSelector" name="linkFotoPerfilEdit" accept="image/*">
@@ -106,11 +106,11 @@
                         <div class="Re-userInfoContainer">
                             <div class="Re-userInformations">
                                 <p class="Re-infoLabel">Nome:</p>
-                                <p class="Re-userInfo"><?php echo $currentUserData['nome'];?></p>
+                                <p class="Re-userInfo"><?php echo $currentUserData['nomeCompleto'];?></p>
                             </div>
                             <div class="Re-userInformations">
                                 <p class="Re-infoLabel">Usuário:</p>
-                                <p class="Re-userInfo"><?php echo $currentUserData['user'];?></p>
+                                <p class="Re-userInfo"><?php echo $currentUserData['nomeDeUsuario'];?></p>
                             </div>
                             <div class="Re-userInformations">
                                 <p class="Re-infoLabel">Email:</p>
@@ -138,7 +138,7 @@
                                 <p class="Re-infoLabel">Data de Nascimento:</p>
                                 <p class="Re-userInfo">
                                     <?php 
-                                        $data = new DateTime($currentUserData['dataNascimento']);                                          
+                                        $data = new DateTime($currentUserData['dataNascimentoUsuario']);                                          
                                         $dataFormatada = $data->format('d/m/Y');
 
                                         echo $dataFormatada; 
@@ -151,22 +151,22 @@
                     <form class="Se-editInfo" method="post">
                         <input type="hidden" class="updaterIdHiddenInput" name="updaterId" value="<?php echo $currentUserData['idUsuario']; ?>">    
                         <div class="Se-userInput full-width">
-                            <input type="text" id="nomeUsuario" name="nomeEdit" value="<?php echo $currentUserData['nome'];?>">
+                            <input type="text" id="nomeUsuario" name="nomeEdit" value="<?php echo $currentUserData['nomeCompleto'];?>">
                             <label class="Re-fakePlaceholder" for="nomeUsuario">Nome Completo</label>
                             <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
                         </div>
                         <div class="Se-userInput full-width">
-                            <textarea name="biografiaUsuarioEdit" id="biografiaUsuario" cols="54" rows="4"><?php echo $currentUserData['biografiaUsuario'];?></textarea>                        
+                            <textarea name="biografiaUsuarioEdit" id="biografiaUsuario" cols="54" rows="4"><?php echo $currentUserData['biografia'];?></textarea>                        
                             <label class="Re-fakePlaceholder" for="biografiaUsuario">Biografia</label>
                             <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
                         </div>
                         <div class="Se-userInput full-width">
-                            <input type="text" id="nomeUsuario" name="localizacaoEdit" value="<?php echo $currentUserData['cidade'].", ".$currentUserData['estado'];?>">
+                            <input type="text" id="nomeUsuario" name="localizacaoEdit" value="<?php echo $currentUserData['estado'];?>">
                             <label class="Re-fakePlaceholder" for="nomeUsuario">Localização</label>
                             <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
                         </div>
                         <div class="Se-userInput side-by-side">
-                            <input type="text" id="nomeUsuario" name="userEdit" value="<?php echo $currentUserData['user'];?>">
+                            <input type="text" id="nomeUsuario" name="userEdit" value="<?php echo $currentUserData['nomeDeUsuario'];?>">
                             <label class="Re-fakePlaceholder" for="nomeUsuario">Nome de Usuário</label>
                             <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
                         </div>
@@ -224,13 +224,13 @@
 
                         <form class="Se-accountDeleteModalForm" method="post">
                             <input type="hidden" name="deleterId" value=<?php echo $currentUserData['idUsuario'];?>>
-                            <input type="text" placeholder="<?php echo "delete/".$currentUserData['idUsuario']."/".$currentUserData['user'];?>"
+                            <input type="text" placeholder="<?php echo "delete/".$currentUserData['idUsuario']."/".$currentUserData['nomeDeUsuario'];?>"
                                 name="confirmaTextoDelete">
                             <button type="submit" id="Se-submitAccountDeleteModalForm">ENVIAR</button>
                             <button id="Se-cancelAccountDelete">CANCELAR</button>
                         <?php
                             if(isset($_POST['confirmaTextoDelete'])){
-                                if($_POST['confirmaTextoDelete'] === ("delete/".$currentUserData['idUsuario']."/".$currentUserData['user']))
+                                if($_POST['confirmaTextoDelete'] === ("delete/".$currentUserData['idUsuario']."/".$currentUserData['nomeDeUsuario']))
                                 {
                                     deleteAccount($conn, $table, $_POST['deleterId']);
                                 }

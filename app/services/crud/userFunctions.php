@@ -1,52 +1,45 @@
 <?php
 
-    $hostname = '162.240.17.101';
-    $username = 'projetos_nlessa';
-    $password = 'Gc&sgY74PK$}';
-    $database = 'projetos_INF2023_G10';
+$hostname = '162.240.17.101';
+$username = 'projetos_nlessa';
+$password = 'Gc&sgY74PK$}';
+$database = 'projetos_INF2023_G10';
 
-    $conn = mysqli_connect($hostname, $username, $password, $database);
+$conn = mysqli_connect($hostname, $username, $password, $database);
 
-    // REGISTER USER - CREATE
+    // Função para registrar um novo usuário
         function signUp($conn) {
-            if(isset($_POST['registrar']) AND !empty($_POST['emailRegistro']) AND !empty($_POST['senhaRegistro'])){
+            if(isset($_POST['registrar']) && !empty($_POST['emailRegistro']) && !empty($_POST['senhaRegistro'])){
                 $err = array();
-        
+
                 $nomeRegistro = mysqli_real_escape_string($conn, $_POST['nomeUsuarioRegistro']);
                 $emailRegistro = filter_input(INPUT_POST, "emailRegistro", FILTER_VALIDATE_EMAIL);
                 $userRegistro = mysqli_real_escape_string($conn, $_POST['userRegistro']);
                 $senhaRegistro = md5($_POST['senhaRegistro']);
                 $dataNascimentoRegistro = mysqli_real_escape_string($conn, $_POST['dataNascimentoRegistro']);
                 $telefoneRegistro = mysqli_real_escape_string($conn, $_POST['telefoneRegistro']);
-                $linkFotoPerfilRegistro = mysqli_real_escape_string($conn, $_POST['linkFotoPerfilRegistro']);
                 $biografiaUsuarioRegistro = mysqli_real_escape_string($conn, $_POST['biografiaUsuarioRegistro']);
-                $isAdminRegistro = false;
                 $temaRegistro = mysqli_real_escape_string($conn, $_POST['temaRegistro']);
                 $localizacaoRegistro = mysqli_real_escape_string($conn, $_POST['localizacaoRegistro']);
-                    $partesLocalizacao = explode(',', $localizacaoRegistro);
-                    // Remove espaços em branco adicionais
-                    $cidadeRegistro = mysqli_real_escape_string($conn, trim($partesLocalizacao[0]));
-                    $estadoRegistro = mysqli_real_escape_string($conn, trim($partesLocalizacao[1]));
                     
                 if($_POST['senhaRegistro'] != $_POST['senhaRegistroConfirma']){
                     $err[] = "Senhas não conferem!";
                 }
-        
+
                 $queryEmail = "SELECT email FROM Usuario WHERE email = '$emailRegistro' ";
                 $searchEmail = mysqli_query($conn, $queryEmail);
                 $verifyRowNum = mysqli_num_rows($searchEmail);
-        
+
                 if(!empty($verifyRowNum)){
                     $err[] = "Email já registrado!";
                 }
-        
+
                 if(empty($err)){
-                    $insertNewUser = "INSERT INTO Usuario (nome, email, senha, dataNascimento, telefone, linkFotoPerfil, biografiaUsuario, user, isAdmin, tema, cidade, estado) VALUES ('$nomeRegistro','$emailRegistro','$senhaRegistro','$dataNascimentoRegistro','$telefoneRegistro','$linkFotoPerfilRegistro','$biografiaUsuarioRegistro','$userRegistro','$isAdminRegistro','$temaRegistro','$cidadeRegistro','$estadoRegistro')";
+                    $insertNewUser = "INSERT INTO Usuario (nomeCompleto, email, senha, dataNascimentoUsuario, telefone, biografia, nomeDeUsuario, isAdmin, tema, localizacao) VALUES ('$nomeRegistro','$emailRegistro','$senhaRegistro','$dataNascimentoRegistro','$telefoneRegistro','$biografiaUsuarioRegistro','$userRegistro', false,'$temaRegistro','$localizacaoRegistro')";
                     $executeSignUp = mysqli_query($conn, $insertNewUser);
-        
+
                     if($executeSignUp){
-                        require_once __DIR__ . '/../auth/authUser.php';
-                        logInFromRegister($conn);
+                        echo "Usuário registrado com sucesso!";
                     }
                     else{
                         echo "<p>Erro ao registrar usuário: " . mysqli_error($conn) . "!<p>";
@@ -95,10 +88,6 @@
                 $dataNascimento = !empty($_POST['dataNascimentoEdit']) ? mysqli_real_escape_string($conn, $_POST['dataNascimentoEdit']) : null;
                 $telefone = !empty($_POST['telefoneEdit']) ? mysqli_real_escape_string($conn, $_POST['telefoneEdit']) : null;
                 $localizacao = !empty($_POST['localizacaoEdit']) ? mysqli_real_escape_string($conn, $_POST['localizacaoEdit']) : null;
-                    $partesLocalizacao = explode(',', $localizacao);
-                    // Remove espaços em branco adicionais
-                    $cidade = mysqli_real_escape_string($conn, trim($partesLocalizacao[0]));
-                    $estado = mysqli_real_escape_string($conn, trim($partesLocalizacao[1]));
                 $linkFotoPerfil = !empty($_POST['linkFotoPerfilEdit']) ? mysqli_real_escape_string($conn, $_POST['linkFotoPerfilEdit']) : null;
                 $biografiaUsuario = !empty($_POST['biografiaUsuarioEdit']) ? mysqli_real_escape_string($conn, $_POST['biografiaUsuarioEdit']) : null;
                 $tema = !empty($_POST['temaEdit']) ? mysqli_real_escape_string($conn, $_POST['temaEdit']) : null;
@@ -116,7 +105,7 @@
         
                 // Verificação de username duplicado
                 if($user) {
-                    $queryUser = "SELECT user FROM Usuario WHERE user = '$user' AND idUsuario != '$userId'";
+                    $queryUser = "SELECT nomeDeUsuario FROM Usuario WHERE nomeDeUsuario = '$user' AND idUsuario != '$userId'";
                     $searchUser = mysqli_query($conn, $queryUser);
                     $verifyUserRowNum = mysqli_num_rows($searchUser);
         
@@ -127,16 +116,14 @@
         
                 if(empty($err)){
                     $fields = [];
-                    if($nome) $fields["nome"] = $nome;
+                    if($nome) $fields["nomeCompleto"] = $nome;
                     if($email) $fields["email"] = $email;
-                    if($user) $fields["user"] = $user;
+                    if($user) $fields["nomeDeUsuario"] = $user;
                     if($senha) $fields["senha"] = $senha;
                     if($dataNascimento) $fields["dataNascimento"] = $dataNascimento;
                     if($telefone) $fields["telefone"] = $telefone;
-                    if($cidade) $fields["cidade"] = $cidade;
-                    if($estado) $fields["estado"] = $estado;
                     if($linkFotoPerfil) $fields["linkFotoPerfil"] = $linkFotoPerfil;
-                    if($biografiaUsuario) $fields["biografiaUsuario"] = $biografiaUsuario;
+                    if($biografiaUsuario) $fields["biografia"] = $biografiaUsuario;
                     if($tema) $fields["tema"] = $tema;
         
                     if(!empty($fields)) {
