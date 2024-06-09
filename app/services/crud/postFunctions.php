@@ -9,7 +9,7 @@
 
     // SEND POSTS - CREATE
         function sendPosts($conn) {
-        if(isset($_POST['enviarPostagem']) AND !empty($_POST['conteudoEnvio'])){
+        if(!empty($_POST['conteudoEnvio'])){
             $err = array();
                 
             if(isset($_GET['algumaCondicaoDeErro'])){
@@ -17,7 +17,7 @@
             }
     
             if(empty($err)){
-                $insertNewUser = "INSERT INTO TABELA (ATRIBUTOS) VALUES ('$ VARIAVEIS')";
+                $insertNewUser = "INSERT INTO Publicacao (ATRIBUTOS) VALUES ('$ VARIAVEIS')";
                 $executeSignUp = mysqli_query($conn, $insertNewUser);
     
                 if($executeSignUp){
