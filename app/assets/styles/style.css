@@ -472,7 +472,7 @@ main{
 
 .Re-registerForm .Re-registerCenter .Re-accountInformations .Re-themeInfo .Re-themeOptions{
     display: flex;
-    gap: 1.2rem;
+    gap: 1.5rem;
     font-size: 0.8rem;
     padding-left: 1rem;
 }
@@ -480,10 +480,10 @@ main{
 .Re-registerForm .Re-registerCenter .Re-accountInformations .Re-themeInfo .Re-themeOptions input {
     transform: translateY(1px);
     cursor: pointer;
-    --webkit-appearance: none;
+    appearance: none;
     background-color: var(--whiteColor);
-    width: 0.5rem;
-    height: 0.5rem;
+    width: 0.4rem;
+    height: 0.4rem;
     border-radius: 100%;
     border: none;
     box-shadow: 0 0 0 1px var(--whiteColor), 0 0 0 2px var(--blackColor);
@@ -1284,6 +1284,8 @@ main{
     width: 100%;
     height: 4rem;
     cursor: pointer;
+    color: var(--blackColor);
+    text-decoration: none;
 }
 
 .Se-settingsCenter .Se-centerSections .Se-sectionTitle.active,
@@ -1338,17 +1340,45 @@ body.Y-theme  .Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover div i
     filter: brightness(0) saturate(100%) invert(66%) sepia(48%) saturate(459%) hue-rotate(16deg) brightness(97%) contrast(85%);
 }
 
-.Se-asideRight .Se-accountInformations{
+.Se-asideRight .Se-subSection{
     position: relative;
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
     gap: 2rem;
     height: 100%;
+    width: 100%;
     overflow-y: auto;
     overflow-x: hidden;
     padding: 0 2rem;
+}
+
+.Se-asideRight .Se-subSection.active{
+    display: flex;
+}
+
+.Se-asideRight .Se-subSection .Se-sectionHeader{
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    gap: 2rem;
+    padding-top: 2rem;
+    width: 100%;
+}
+
+.Se-asideRight  .Se-subSection .Se-sectionHeader .pageIcon{
+    width: 1.5rem;
+}
+
+body.P-theme .Se-asideRight  .Se-subSection .Se-sectionHeader .pageIcon{
+    filter: brightness(0) saturate(100%) invert(42%) sepia(61%) saturate(1820%) hue-rotate(302deg) brightness(87%) contrast(85%);
+}
+body.B-theme .Se-asideRight  .Se-subSection .Se-sectionHeader .pageIcon{
+    filter: brightness(0) saturate(100%) invert(63%) sepia(81%) saturate(331%) hue-rotate(139deg) brightness(83%) contrast(87%);
+}
+body.Y-theme .Se-asideRight  .Se-subSection .Se-sectionHeader .pageIcon{
+    filter: brightness(0) saturate(100%) invert(66%) sepia(48%) saturate(459%) hue-rotate(16deg) brightness(97%) contrast(85%);
 }
 
 .Se-asideRight .Se-accountInformations .Se-userInfo{
@@ -1395,7 +1425,7 @@ body.Y-theme  .Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover div i
     align-items: flex-start;
     font-size: 0.8rem;
     width: 15rem;
-    line-height: 1.2rem;
+    line-height: 2rem;
 }
 
 .Se-asideRight .Se-accountInformations .Se-userInfo .Re-userInfoContainer .Re-userInformations .Re-infoLabel{
@@ -1424,20 +1454,6 @@ body.Y-theme  .Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover div i
     cursor: pointer;
 }
 
-.Se-asideRight .Se-accountInformations .Se-sectionHeader{
-    position: relative;
-    display: flex;
-    justify-content: flex-start;
-    gap: 2rem;
-    padding: 2rem 0 0 0;
-    width: 100%;
-}
-
-.Se-asideRight  .Se-accountInformations .Se-sectionHeader .pageIcon{
-    color: var(--secondColor);
-    font-size: 1.5rem;
-}
-
 .Se-asideRight .Se-accountInformations .Se-editInfo {
     position: relative;
     display: grid;
@@ -1450,6 +1466,8 @@ body.Y-theme  .Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover div i
     padding: 0.7rem 0rem 0.5rem 1rem;
     border-radius: 0.7rem;
     border: 1px solid var(--blackColor);
+    min-height: 2.5rem;
+    cursor: pointer;
 }
 
 .Se-asideRight .Se-accountInformations .Se-editInfo .Se-userInput.full-width {
@@ -1468,6 +1486,7 @@ body.Y-theme  .Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover div i
     padding: 0 1rem;
     font-size: 0.8rem;
     font-weight: 500;
+    cursor: pointer;
 }
 
 .Se-asideRight .Se-accountInformations .Se-editInfo .Se-userInput input,
@@ -1495,7 +1514,7 @@ body.Y-theme  .Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover div i
 
 .Se-asideRight .Se-accountInformations .Se-themeInfo{
     display: flex;
-    gap: 1rem;
+    gap: 1.2rem;
 }
 
 .Se-asideRight .Se-accountInformations .Se-themeInfo p{
@@ -1505,31 +1524,31 @@ body.Y-theme  .Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover div i
 .Se-asideRight .Se-accountInformations .Se-themeInfo .Se-themeOptions{
     position: relative;
     display: flex;
-    gap: 0.6rem;
+    gap: 0.5rem;
     font-size: 0.8rem;
     transform: translateY(1px);
 }
 
 .Se-asideRight .Se-accountInformations .Se-themeInfo .Se-themeOptions input {
-    transform: translateY(1px);
     cursor: pointer;
-    --webkit-appearance: none;
+    appearance: none;
     background-color: var(--whiteColor);
-    width: 0.5rem;
-    height: 0.5rem;
+    width: 0.4rem;
+    height: 0.4rem;
     border-radius: 100%;
-    border: none; /* Removendo a borda padrão */
-    box-shadow: 0 0 0 1px var(--whiteColor), 0 0 0 2px var(--blackColor); /* Borda dupla */
+    border: none;
+    box-shadow: 0 0 0 1px var(--whiteColor), 0 0 0 2px var(--blackColor);
 }
 
 .Se-asideRight .Se-accountInformations .Se-themeInfo .Se-themeOptions input:checked {
     background-color: var(--secondColor);
-    box-shadow: 0 0 0 2px var(--whiteColor), 0 0 0 3px var(--thirdColor); /* Borda dupla */
+    box-shadow: 0 0 0 2px var(--whiteColor), 0 0 0 3px var(--thirdColor);
 }
 
 
 .Se-asideRight .Se-accountInformations .Se-themeInfo .Se-themeOptions label{
     cursor: pointer;
+    margin-right: 0.4rem;
 }
 
 .Se-asideRight .Se-accountInformations .Se-themeInfo .Se-themeOptions input#Se-yellowTheme:checked + label {
@@ -1547,7 +1566,7 @@ body.Y-theme  .Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover div i
     font-weight: 500;
 }
 
-.Se-asideRight .Se-accountBottom{
+.Se-asideRight .Se-accountInformations .Se-accountBottom{
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -1557,7 +1576,7 @@ body.Y-theme  .Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover div i
     
 }
 
-.Se-asideRight .Se-accountBottom .Se-dateCriation{
+.Se-asideRight .Se-accountInformations .Se-accountBottom .Se-dateCriation{
     position: relative;
     display: flex;
     flex-wrap: nowrap;
@@ -1566,12 +1585,12 @@ body.Y-theme  .Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover div i
     font-size: 0.8rem;
 }
 
-.Se-asideRight .Se-accountDate{
+.Se-asideRight .Se-accountInformations .Se-accountDate{
     color: var(--thirdColor);
     font-weight: 600;
 }
 
-.Se-asideRight .Se-accountEdit{
+.Se-asideRight .Se-accountInformations .Se-accountEdit{
     position: relative;
     display: flex;
     color: var(--whiteColor);
@@ -1584,14 +1603,14 @@ body.Y-theme  .Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover div i
     transition: 0.2s;
 }
 
-.Se-asideRight .Se-accountEdit:hover{
+.Se-asideRight .Se-accountInformations .Se-accountEdit:hover{
     transition: 0.2s;
     transform: translateY(0px) scale(1.05);
     background-color: var(--secondColor);
 }
 
 
-.Se-asideRight .Se-accountBottom .Se-accountDelete{
+.Se-asideRight .Se-accountInformations .Se-accountBottom .Se-accountDelete{
     position: relative;
     display: flex;
     color: var(--whiteColor);
@@ -1605,8 +1624,401 @@ body.Y-theme  .Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover div i
     text-decoration: none;
 }
 
-.Se-asideRight .Se-accountBottom .Se-accountDelete:hover{
+.Se-asideRight .Se-accountInformations .Se-accountBottom .Se-accountDelete:hover{
     transition: 0.2s;
     transform: translateY(0px) scale(1.1);
 }
 
+.Se-asideRight .Se-childInformations .Se-addNewChild{
+    position: fixed;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    padding: 0.7rem 1rem;
+    border-radius: 100rem;
+    border: 2px solid transparent;
+    background-color: var(--secondColor);
+    color: var(--whiteColor);
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: 0.2s;
+}
+
+.Se-asideRight .Se-childInformations .Se-addNewChild:hover,
+.Se-asideRight .Se-childInformations .Se-addNewChild.active{
+    transition: 0.3s;
+    transform: translateY(0px) scale(1.05);
+    background-color: var(--whiteColor);
+    color: var(--secondColor);
+    border-color: var(--secondColor);
+}
+
+.Se-asideRight .Se-childInformations .Se-userChild{
+    position: relative;
+    width: 100%;
+    height: fit-content;
+}
+
+.Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader{
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    gap: 2rem;
+    padding: 1rem 0;
+    width: 100%;
+}
+
+.Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader img{
+    width: 1.5rem;
+}
+
+body.P-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader img{
+    filter: brightness(0) saturate(100%) invert(42%) sepia(61%) saturate(1820%) hue-rotate(302deg) brightness(87%) contrast(85%);
+}
+
+body.B-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader img{
+    filter: brightness(0) saturate(100%) invert(63%) sepia(81%) saturate(331%) hue-rotate(139deg) brightness(83%) contrast(87%);
+}
+
+body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader img{
+    filter: brightness(0) saturate(100%) invert(66%) sepia(48%) saturate(459%) hue-rotate(16deg) brightness(97%) contrast(85%);
+}
+
+.Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader input{
+    position: relative;
+    font-size: 1.1rem;
+    font-weight: 600;
+    width: 100%;
+    padding-right: 2.5rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader .Se-editIcon{
+    position: absolute;
+    right: 1rem;
+    color: var(--secondColor);
+    font-size: 0.8rem;
+}
+
+.Se-asideRight .Se-childInformations .Se-childInputs{
+    position: relative;
+    padding-left: 2rem;
+}
+
+.Se-asideRight .Se-childInformations .Se-childInputs .Se-childInfoContainer{
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+    font-size: 0.8rem;
+    transform: translateY(2px);
+}
+
+.Se-asideRight .Se-childInformations .Se-childInputs .Se-childInfoContainer p{
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.Se-asideRight .Se-childInformations .Se-childInputs .Se-childInfoContainer .Re-sexOptions{
+    position: relative;
+    display: flex;
+    gap: 0.7rem; 
+}
+
+.Se-asideRight .Se-childInformations .Se-childInputs .Se-childInfoContainer .Re-sexOptions input {
+    transform: translateY(1px);
+    cursor: pointer;
+    appearance: none;
+    background-color: var(--whiteColor);
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 100%;
+    border: none;
+    box-shadow: 0 0 0 1px var(--whiteColor), 0 0 0 2px var(--blackColor);
+}
+
+.Se-asideRight .Se-childInformations .Se-childInputs .Se-childInfoContainer .Re-sexOptions input:checked {
+    background-color: var(--secondColor);
+    box-shadow: 0 0 0 2px var(--whiteColor), 0 0 0 3px var(--thirdColor);
+}
+
+
+.Se-asideRight .Se-childInformations .Se-childInputs .Se-childInfoContainer .Re-sexOptions label{
+    cursor: pointer;
+    margin-right: 0.4rem;
+    font-size: 0.8rem;
+}
+
+.Se-asideRight .Se-childInformations .Se-childInputs .Se-childInfoContainer .Re-sexOptions input:checked + label {
+    font-weight: 500;
+}
+
+.Se-asideRight .Se-childInformations .Se-childInputs .Se-childInfoContainer .Se-childInfo{
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+
+.Se-asideRight .Se-childInformations .Se-childInputs .Se-childInfoContainer select{
+    position: relative;
+    width: 97%;
+    border: none;
+    transform: translateY(1px);
+}
+
+.Se-asideRight .Se-childInformations .Se-childBottom{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    cursor: pointer;
+    padding: 1rem 0;
+    font-weight: 600;
+}
+
+.Se-asideRight .Se-childInformations .Se-childBottom .Se-deleteChild{
+    color: var(--redColor);
+}
+
+.Se-asideRight .Se-childInformations .Se-childBottom .Se-editSubmit{
+    position: relative;
+    display: flex;
+    color: var(--whiteColor);
+    background-color: var(--secondColorLowOpacity);
+    padding: 0.5rem 1.2rem 0.5rem 1.2rem;
+    border: none;
+    border-radius: 100rem;
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: 0.2s;
+    font-weight: 600;
+    border: 1px solid transparent;
+}
+
+.Se-asideRight .Se-childInformations .Se-childBottom .Se-editSubmit:hover{
+    transition: 0.3s;
+    transform: translateY(0px) scale(1.05);
+    background-color: var(--whiteColor);
+    color: var(--secondColor);
+    border-color: var(--secondColor);
+}
+
+/*====================================================================================================
+===================================== MODAIS DAS CONFIGURAÇÕES =======================================
+====================================================================================================*/
+
+.modalSection{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    display: flex;
+    background-color: #00000060;
+    backdrop-filter: blur(3px);
+    z-index: +999;
+}
+
+.modalSection.close{
+    display: none;
+}
+
+.pageModal{
+    display: block;
+    background-color: var(--whiteColor);
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 2px solid var(--firstColor);
+    height: 23rem;
+}
+
+.pageModal.close{
+    display: none;
+}
+
+.modalSection .pageModal .modalHeader{
+    position: relative;
+    display: flex;
+    gap: 1.5rem;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.modalSection .pageModal .modalHeader .bi-arrow-left-circle{
+    font-size: 1.4rem;
+    color: var(--grayColor);
+    transition: 0.2s transform;
+    cursor: pointer;
+}
+
+.modalSection .pageModal .modalHeader .bi-arrow-left-circle:hover{
+    transform: scale(1.1);
+    color: var(--secondColor);
+    transition: 0.2s transform;
+}
+
+.modalSection .pageModal .modalHeader h1{
+    font-size: 1.8rem;
+}
+
+
+.modalSection .pageModal .Se-modalSubmit{
+    position: relative;
+    display: flex;
+    color: var(--whiteColor);
+    background-color: var(--secondColorLowOpacity);
+    padding: 0.6rem 1.5rem 0.6rem 1.5rem;
+    border: none;
+    border-radius: 100rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.2s;
+    font-weight: 600;
+    top:20%;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.modalSection .pageModal .Se-modalSubmit:hover{
+    transition: 0.2s;
+    font-size: 1.2rem;
+    background-color: var(--secondColor);
+}
+
+.modalSection .Se-editPasswordModal .Se-passwordInputs {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.7rem;
+    bottom: -40%;
+    transform: translateY(-50%);
+}
+
+.modalSection .Se-editPasswordModal .Se-passwordInputs .Se-passInput{
+    position: relative;
+    padding: 0.7rem 0.5rem 0.5rem 1rem;
+    width: 22rem;
+    height: 2.5rem;
+    border-radius: 0.7rem;
+    border: 1px solid var(--blackColor);
+}
+
+.modalSection .Se-editPasswordModal .Se-passwordInputs .Se-passInput input{
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: none;
+}
+
+.modalSection .Se-editPasswordModal .Se-passwordInputs .Se-passInput label{
+    position: absolute;
+    top: -0.5rem;
+    left: 1rem;
+    background-color: var(--whiteColor);
+    padding: 0 1rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.modalSection .Se-editPasswordModal .Se-passwordInputs .Se-passInput .Se-forgotPassword{
+    position: absolute;
+    right: 0;
+    bottom: -1rem;
+    font-size: 0.75rem;
+    cursor: pointer;
+}
+
+
+.modalSection .Se-addNewChildModal .Se-childInputs {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    bottom: -40%;
+    transform: translateY(-50%);
+}
+
+.modalSection .Se-addNewChildModal .Se-childInputs .Se-childInput{
+    position: relative;
+    padding: 0.7rem 0.5rem 0.5rem 1.5rem;
+    width: 22rem;
+    height: 2.5rem;
+    border-radius: 0.7rem;
+    border: 1px solid var(--blackColor);
+}
+
+.modalSection .Se-addNewChildModal .Se-childInputs .Se-childInput input,
+.modalSection .Se-addNewChildModal .Se-childInputs .Se-childInput select{
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: none;
+}
+
+.modalSection .Se-addNewChildModal .Se-childInputs .Se-childInput .pageIcon{
+    position: absolute;
+    right: 0.65rem;
+    width: 0.9rem;
+    filter: brightness(0) saturate(100%)
+}
+
+.modalSection .Se-addNewChildModal .Se-childInputs .Se-childInput label{
+    position: absolute;
+    top: -0.5rem;
+    left: 1rem;
+    background-color: var(--whiteColor);
+    padding: 0 1rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.modalSection .Se-addNewChildModal .Se-childInputs .Re-childBoxSex{
+    position: relative;
+    display: flex;
+    gap: 1rem;
+    font-size: 0.8rem;
+    transform: translateY(2px);
+}
+
+.modalSection .Se-addNewChildModal .Se-childInputs .Re-childBoxSex p{
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--secondColor);
+}
+
+.modalSection .Se-addNewChildModal .Se-childInputs .Re-childBoxSex .Re-sexOptions{
+    position: relative;
+    display: flex;
+    gap: 0.7rem; 
+}
+
+.modalSection .Se-addNewChildModal .Se-childInputs .Re-childBoxSex .Re-sexOptions input {
+    transform: translateY(1px);
+    cursor: pointer;
+    appearance: none;
+    background-color: var(--whiteColor);
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 100%;
+    border: none;
+    box-shadow: 0 0 0 1px var(--whiteColor), 0 0 0 2px var(--blackColor);
+}
+
+.modalSection .Se-addNewChildModal .Se-childInputs .Re-childBoxSex .Re-sexOptions input:checked {
+    background-color: var(--secondColor);
+    box-shadow: 0 0 0 2px var(--whiteColor), 0 0 0 3px var(--thirdColor);
+}
+
+
+.modalSection .Se-addNewChildModal .Se-childInputs .Re-childBoxSex .Re-sexOptions label{
+    cursor: pointer;
+    margin-right: 0.4rem;
+}
+
+.modalSection .Se-addNewChildModal .Se-childInputs .Re-childBoxSex .Re-sexOptions input:checked + label {
+    font-weight: 600;
+}
+
+.modalSection .Se-addNewChildModal .Se-modalSubmit{
+    top: 10%;
+}

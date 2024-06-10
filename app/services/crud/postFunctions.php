@@ -8,18 +8,18 @@
     $conn = mysqli_connect($hostname, $username, $password, $database);
 
     // SEND POSTS - CREATE
-        function sendPost($conn, $postType, $currentUserId) {
+    function sendPost($conn, $postType, $currentUserId) {
         if(!empty($_POST['conteudoEnvio'])){
             $err = array();
             
             $tipoPublicacaoEnvio = mysqli_real_escape_string($conn, $postType);
             $conteudoEnvio = mysqli_real_escape_string($conn, $_POST['conteudoEnvio']);
             $linkAnexoEnvio = mysqli_real_escape_string($conn, $_POST['linkAnexoEnvio']);
-            $tituloEnvio = mysqli_real_escape_string($conn, $_POST['tituloEnvio']);
-            $isSensivelEnvio = mysqli_real_escape_string($conn, $_POST['sensitiveContent']);
-            $isConcluido = mysqli_real_escape_string($conn, $_POST['isConcluidoEnvio']);
+            $tituloEnvio = isset($_POST['tituloEnvio']) ? mysqli_real_escape_string($conn, $_POST['tituloEnvio']) : null;
+            $isSensivelEnvio = isset($_POST['sensitiveContent']) ? mysqli_real_escape_string($conn, $_POST['sensitiveContent']) : 0;
+            $isConcluido = isset($_POST['isConcluidoEnvio']) ? mysqli_real_escape_string($conn, $_POST['isConcluidoEnvio']) : 0;
             $idUsuarioQuePostou = mysqli_real_escape_string($conn, $currentUserId);
-
+    
             if(empty($err)){
                 $insertNewPost = "INSERT INTO Publicacao (tipoPublicacao, conteudo, linkAnexo, titulo, isSensivel, isConcluido, idUsuario) VALUES ('$tipoPublicacaoEnvio','$conteudoEnvio','$linkAnexoEnvio','$tituloEnvio','$isSensivelEnvio','$isConcluido','$idUsuarioQuePostou')";
                 $executeSendPost = mysqli_query($conn, $insertNewPost);
@@ -29,7 +29,8 @@
                 }
             }     
         }
-        }
+    }
+    
 
     // SEARCH POSTS - READ
         function querySpecificPost($conn, $table, $id){

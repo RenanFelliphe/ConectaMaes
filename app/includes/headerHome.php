@@ -25,17 +25,41 @@
 
     <div class="userContainer">
         <img class="notificationsModalIcon headerIcon" src="/ConectaMaesProject/app/assets/imagens/icons/notifications_off.png" alt="Ícone do modal de notificações">
+        
+        <div class="makeAPost">
+            <button name ="postPostagem" class="makeAPostBtn">Postar</button>
+
+            <div class="postStyle">
+                <i class="bi bi-caret-down-fill"></i>
+            </div>
+        </div>
+
         <div class="userInformations">
-            <span class="userRealName"><?php echo htmlspecialchars($currentUserData['nomeCompleto']); ?></span>
-            <span class="userNickname"><?php echo "@" . htmlspecialchars($currentUserData['nomeDeUsuario']); ?></span>
+            <span class="userRealName">
+                <?php 
+                    $partesDoNomeCompleto = explode(" ", $currentUserData['nomeCompleto']);
+                    $firstName = $partesDoNomeCompleto[0];
+                    $lastName = $partesDoNomeCompleto[count($partesDoNomeCompleto) - 1];
+                    
+                    // Concatena a primeira e a última palavra separadas por um espaço
+                    $firstAndLastName = $firstName . " " . $lastName;
+                    
+                    echo $firstAndLastName;
+                ?>
+            </span>
+            <span class="userNickname">
+                <?php 
+                    echo "@" . $currentUserData['nomeDeUsuario']; 
+                ?>
+            </span>
         </div>
         <div class="userAccount" onclick="openHeaderUserFunctions();">
             <div class="userProfileImage">
                 <?php
-                $profileImagePath = "/ConectaMaesProject/app/assets/imagens/fotos/perfil/" . htmlspecialchars($currentUserData['nomeDeUsuario']) . '-' . htmlspecialchars($currentUserData['dataNascimentoUsuario']) . '-perfil.png';
-                if (!file_exists($_SERVER['DOCUMENT_ROOT'] . $profileImagePath)) {
-                    $profileImagePath = "/ConectaMaesProject/app/assets/imagens/fotos/perfil/default.png";
-                }
+                    $profileImagePath = "/ConectaMaesProject/app/assets/imagens/fotos/perfil/" . htmlspecialchars($currentUserData['nomeDeUsuario']) . '-' . htmlspecialchars($currentUserData['dataNascimentoUsuario']) . '-perfil.png';
+                    if (!file_exists($_SERVER['DOCUMENT_ROOT'] . $profileImagePath)) {
+                        $profileImagePath = "/ConectaMaesProject/app/assets/imagens/fotos/perfil/default.png";
+                    }
                 ?>
                 <img src="<?php echo $profileImagePath; ?>">
             </div>

@@ -8,50 +8,52 @@ $database = 'projetos_INF2023_G10';
 $conn = mysqli_connect($hostname, $username, $password, $database);
 
     // Função para registrar um novo usuário
-        function signUp($conn) {
-            if(isset($_POST['registrar']) && !empty($_POST['emailRegistro']) && !empty($_POST['senhaRegistro'])){
-                $err = array();
-
-                $nomeRegistro = mysqli_real_escape_string($conn, $_POST['nomeUsuarioRegistro']);
-                $emailRegistro = filter_input(INPUT_POST, "emailRegistro", FILTER_VALIDATE_EMAIL);
-                $userRegistro = mysqli_real_escape_string($conn, $_POST['userRegistro']);
-                $senhaRegistro = md5($_POST['senhaRegistro']);
-                $dataNascimentoRegistro = mysqli_real_escape_string($conn, $_POST['dataNascimentoRegistro']);
-                $telefoneRegistro = mysqli_real_escape_string($conn, $_POST['telefoneRegistro']);
-                $biografiaUsuarioRegistro = mysqli_real_escape_string($conn, $_POST['biografiaUsuarioRegistro']);
-                $temaRegistro = mysqli_real_escape_string($conn, $_POST['temaRegistro']);
-                $localizacaoRegistro = mysqli_real_escape_string($conn, $_POST['localizacaoRegistro']);
-                    
-                if($_POST['senhaRegistro'] != $_POST['senhaRegistroConfirma']){
-                    $err[] = "Senhas não conferem!";
+    function signUp($conn)
+    {
+        if (isset($_POST['registrar']) && !empty($_POST['emailRegistro']) && !empty($_POST['senhaRegistro'])) {
+            $err = array();
+    
+            $nomeRegistro = mysqli_real_escape_string($conn, $_POST['nomeUsuarioRegistro']);
+            $emailRegistro = filter_input(INPUT_POST, "emailRegistro", FILTER_VALIDATE_EMAIL);
+            $userRegistro = mysqli_real_escape_string($conn, $_POST['userRegistro']);
+            $senhaRegistro = md5($_POST['senhaRegistro']);
+            $dataNascimentoRegistro = mysqli_real_escape_string($conn, $_POST['dataNascimentoRegistro']);
+            $telefoneRegistro = mysqli_real_escape_string($conn, $_POST['telefoneRegistro']);
+            $biografiaUsuarioRegistro = mysqli_real_escape_string($conn, $_POST['biografiaUsuarioRegistro']);
+            $temaRegistro = mysqli_real_escape_string($conn, $_POST['temaRegistro']);
+            $localizacaoRegistro = mysqli_real_escape_string($conn, $_POST['localizacaoRegistro']);
+            $linkFotoPerfilRegistro = ''; // Não temos essa informação no formulário fornecido
+            $isAdminRegistro = false; // Não é possível definir a administração durante o registro
+            
+    
+            if ($_POST['senhaRegistro'] != $_POST['senhaRegistroConfirma']) {
+                $err[] = "Senhas não conferem!";
+            }
+    
+            $queryEmail = "SELECT email FROM Usuario WHERE email = '$emailRegistro' ";
+            $searchEmail = mysqli_query($conn, $queryEmail);
+            $verifyRowNum = mysqli_num_rows($searchEmail);
+    
+            if (!empty($verifyRowNum)) {
+                $err[] = "Email já registrado!";
+            }
+    
+            if (empty($err)) {
+                $insertNewUser = "INSERT INTO Usuario (nomeCompleto, email, senha, dataNascimentoUsuario, telefone, linkFotoPerfil, biografia, nomeDeUsuario, isAdmin, tema, estado) VALUES ('$nomeRegistro','$emailRegistro','$senhaRegistro','$dataNascimentoRegistro','$telefoneRegistro','$linkFotoPerfilRegistro','$biografiaUsuarioRegistro','$userRegistro','$isAdminRegistro','$temaRegistro','$localizacaoRegistro')";
+                $executeSignUp = mysqli_query($conn, $insertNewUser);
+    
+                if ($executeSignUp) {
+                    echo "Usuário registrado com sucesso!";
+                } else {
+                    echo "<p>Erro ao registrar usuário: " . mysqli_error($conn) . "!<p>";
                 }
-
-                $queryEmail = "SELECT email FROM Usuario WHERE email = '$emailRegistro' ";
-                $searchEmail = mysqli_query($conn, $queryEmail);
-                $verifyRowNum = mysqli_num_rows($searchEmail);
-
-                if(!empty($verifyRowNum)){
-                    $err[] = "Email já registrado!";
+            } else {
+                foreach ($err as $e) {
+                    echo "<p>$e</p><br>";
                 }
-
-                if(empty($err)){
-                    $insertNewUser = "INSERT INTO Usuario (nomeCompleto, email, senha, dataNascimentoUsuario, telefone, biografia, nomeDeUsuario, isAdmin, tema, localizacao) VALUES ('$nomeRegistro','$emailRegistro','$senhaRegistro','$dataNascimentoRegistro','$telefoneRegistro','$biografiaUsuarioRegistro','$userRegistro', false,'$temaRegistro','$localizacaoRegistro')";
-                    $executeSignUp = mysqli_query($conn, $insertNewUser);
-
-                    if($executeSignUp){
-                        echo "Usuário registrado com sucesso!";
-                    }
-                    else{
-                        echo "<p>Erro ao registrar usuário: " . mysqli_error($conn) . "!<p>";
-                    }
-                }
-                else{
-                    foreach($err as $e){
-                        echo "<p>$e</p><br>";
-                    }
-                }      
             }
         }
+    }
 
     // USER QUERY FUNCTIONS - READ
         function queryUserData($conn, $table, $id){
@@ -110,7 +112,7 @@ $conn = mysqli_connect($hostname, $username, $password, $database);
                     $verifyUserRowNum = mysqli_num_rows($searchUser);
         
                     if(!empty($verifyUserRowNum)){
-                        $err[] = "Username já registrado!";
+                        $err[] = "Usuário já registrado!";
                     }
                 }
         
@@ -120,8 +122,9 @@ $conn = mysqli_connect($hostname, $username, $password, $database);
                     if($email) $fields["email"] = $email;
                     if($user) $fields["nomeDeUsuario"] = $user;
                     if($senha) $fields["senha"] = $senha;
-                    if($dataNascimento) $fields["dataNascimento"] = $dataNascimento;
+                    if($dataNascimento) $fields["dataNascimentoUsuario"] = $dataNascimento;
                     if($telefone) $fields["telefone"] = $telefone;
+                    if($localizacao) $fields["estado"] = $localizacao;
                     if($linkFotoPerfil) $fields["linkFotoPerfil"] = $linkFotoPerfil;
                     if($biografiaUsuario) $fields["biografia"] = $biografiaUsuario;
                     if($tema) $fields["tema"] = $tema;
@@ -135,14 +138,9 @@ $conn = mysqli_connect($hostname, $username, $password, $database);
                         $setFieldsStr = implode(", ", $setFields);
                         $updateUser = "UPDATE Usuario SET $setFieldsStr WHERE idUsuario = '$userId'";
                         $executeUpdate = mysqli_query($conn, $updateUser);
-        
-                        if($executeUpdate){
-                            echo "Perfil atualizado com sucesso!";
-                        } else {
+                        if(!$executeUpdate){
                             echo "Erro ao atualizar perfil: " . mysqli_error($conn) . "!";
                         }
-                    } else {
-                        echo "Nenhuma alteração foi realizada.";
                     }
                 } else {
                     foreach($err as $e){

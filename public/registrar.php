@@ -32,11 +32,11 @@
             <div class="Re-registerCenter">
                 <div class="Re-accountInformations Re-registerSections ">
                     <div class="Re-input">
-                        <input type="text" id="nomeUsuario" name="userRegistro" required>
+                        <input class="Re-userInput" type="text" id="nomeUsuario" name="userRegistro" required>
                         <label class="Re-fakePlaceholder" for="nomeUsuario">Usuário</label>
                     </div>
                     <div class="Re-input">
-                        <input type="email" id="email" name="emailRegistro" autocomplete="email" required>
+                        <input class="Re-userInput" type="email" id="email" name="emailRegistro" autocomplete="email" required>
                         <label class="Re-fakePlaceholder" for="email">Email</label>
                     </div>
                     <div class="Re-input">
@@ -51,11 +51,11 @@
                     <div class="Re-themeInfo">
                         <p> Tema </p>
                         <div class="Re-themeOptions">
-                            <input type="radio" name="temaRegistro" value="Amarelo" id="Re-yellowTheme" checked>
+                            <input type="radio" name="temaRegistro" value="Y-theme" id="Re-yellowTheme" checked>
                             <label for="Re-yellowTheme"> Amarelo </label>
-                            <input type="radio" name="temaRegistro" value="Azul" id="Re-blueTheme">
+                            <input type="radio" name="temaRegistro" value="B-theme" id="Re-blueTheme">
                             <label for="Re-blueTheme"> Azul </label>
-                            <input type="radio" name="temaRegistro" value="Rosa" id="Re-pinkTheme">
+                            <input type="radio" name="temaRegistro" value="P-theme" id="Re-pinkTheme">
                             <label for="Re-pinkTheme"> Rosa </label>
                         </div>
                     </div>
@@ -63,52 +63,52 @@
 
                 <div class="Re-userInformations Re-registerSections close">
                     <div class="Re-input inputName">
-                        <input type="text" id="nomeCompleto" name="nomeUsuarioRegistro" required>
+                        <input class="Re-userInput" type="text" id="nomeCompleto" name="nomeUsuarioRegistro" required>
                         <label class="Re-fakePlaceholder" for="nomeCompleto">Nome Completo</label>
                     </div>
                     <div class="Re-input inputCell">
-                        <input type="text" id="telefone" name="telefoneRegistro" required>
+                        <input class="Re-userInput" type="tel" id="telefone" name="telefoneRegistro"  required />
                         <label class="Re-fakePlaceholder" for="telefone">Telefone</label>
                     </div>
                     <div class="Re-input inputDataNasc">
-                        <input type="date" id="dataNascimento" name="dataNascimentoRegistro" required>
+                        <input class="Re-userInput" type="date" id="dataNascimento" name="dataNascimentoRegistro" required>
                         <label class="Re-fakePlaceholder" id="dataNascPlaceholder" for="dataNascimento">Data de Nascimento</label>
                     </div>
                     <div class="Re-input inputLocal">
-                        <select name="localizacaoRegistro" id="localizacao" >
-                            <option value="-" selected>- - - - - -</option>
-                            <option value="AC">AC | Acre</option>
-                            <option value="AL">AL | Alagoas</option>
-                            <option value="AP">AP | Amapá</option>
-                            <option value="AM">AM | Amazonas</option>
-                            <option value="BA">BA | Bahia</option>
-                            <option value="CE">CE | Ceará</option>
-                            <option value="DF">DF | Distrito Federal</option>
-                            <option value="ES">ES | Espírito Santo</option>
-                            <option value="GO">GO | Goiás</option>
-                            <option value="MA">MA | Maranhão</option>
-                            <option value="MT">MT | Mato Grosso</option>
-                            <option value="MS">MS | Mato Grosso do Sul</option>
-                            <option value="MG">MG | Minas Gerais</option>
-                            <option value="PA">PA | Pará</option>
-                            <option value="PB">PB | Paraíba</option>
-                            <option value="PR">PR | Paraná</option>
-                            <option value="PE">PE | Pernambuco</option>
-                            <option value="PI">PI | Piauí</option>
-                            <option value="RJ">RJ | Rio de Janeiro</option>
-                            <option value="RN">RN | Rio Grande do Norte</option>
-                            <option value="RS">RS | Rio Grande do Sul</option>
-                            <option value="RO">RO | Rondônia</option>
-                            <option value="RR">RR | Roraima</option>
-                            <option value="SC">SC | Santa Catarina</option>
-                            <option value="SP">SP | São Paulo</option>
-                            <option value="SE">SE | Sergipe</option>
-                            <option value="TO">TO | Tocantins</option>                        
+                        <select class="Re-userInput" name="localizacaoRegistro" id="localizacao" >
+                            <option value="">- - - - - -</option>
+                            <option value="Acre"> AC | Acre</option>
+                            <option value="Alagoas"> AL | Alagoas</option>
+                            <option value="Amapá"> AP | Amapá</option>
+                            <option value="Amazonas"> AM | Amazonas</option>
+                            <option value="Bahia"> BA | Bahia</option>
+                            <option value="Ceará"> CE | Ceará</option>
+                            <option value="Distrito Federal"> DF | Distrito Federal</option>
+                            <option value="Espírito Santo"> ES | Espírito Santo</option>
+                            <option value="Goiás"> GO | Goiás</option>
+                            <option value="Maranhão"> MA | Maranhão</option>
+                            <option value="Mato Grosso"> MT | Mato Grosso</option>
+                            <option value="Mato Grosso do Sul"> MS | Mato Grosso do Sul</option>
+                            <option value="Minas Gerais"> MG | Minas Gerais</option>
+                            <option value="Pará"> PA | Pará</option>
+                            <option value="Paraíba"> PB | Paraíba</option>
+                            <option value="Paraná"> PR | Paraná</option>
+                            <option value="Pernambuco"> PE | Pernambuco</option>
+                            <option value="Piauí"> PI | Piauí</option>
+                            <option value="Rio de Janeiro"> RJ | Rio de Janeiro</option>
+                            <option value="Rio Grande do Norte"> RN | Rio Grande do Norte</option>
+                            <option value="Rio Grande do Sul"> RS | Rio Grande do Sul</option>
+                            <option value="Rondônia"> RO | Rondônia</option>
+                            <option value="Roraima"> RR | Roraima</option>
+                            <option value="Santa Catarina"> SC | Santa Catarina</option>
+                            <option value="São Paulo"> SP | São Paulo</option>
+                            <option value="Sergipe"> SE | Sergipe</option>
+                            <option value="Tocantins"> TO | Tocantins</option>                 
                         </select>
                         <label class="Re-fakePlaceholder" for="localizacao" style="pointer-events: none;">Localização</label>
                     </div>
                     <div class="Re-input inputBio">
-                        <textarea name="biografiaUsuarioRegistro" id="biografiaUsuario" cols="54" rows="4" required></textarea>                        
+                        <textarea class="Re-userInput" name="biografiaUsuarioRegistro" id="biografiaUsuario" cols="54" rows="4"></textarea>                        
                         <label class="Re-fakePlaceholder" for="biografiaUsuario">Biografia</label>
                     </div>
                 </div>
@@ -147,7 +147,7 @@
                             </div>
                             <div class="Re-input">
                                 <select name="deficienciaSelect" id="deficiencia" >
-                                    <option value="valor0">- - - - Nenhuma - - - -</option>
+                                    <option value="N/a">- - - - Nenhuma - - - -</option>
                                     <optgroup label="Deficiência Físicas">
                                         <option value="G80">G80 — Paralisia cerebral</option>
                                         <option value="G80.0">G80.0 — Paralisia cerebral quadriplégica espástica</option>
@@ -262,27 +262,27 @@
                     <div class="Re-userInfoContainer">
                         <div class="Re-userInformations">
                             <p class="Re-infoLabel">Nome:</p>
-                            <p class="Re-userInfo"></p>
+                            <p class="Re-userInfo" id="infoNomeCompleto"></p>
                         </div>
                         <div class="Re-userInformations">
                             <p class="Re-infoLabel">Usuário:</p>
-                            <p class="Re-userInfo"></p>
+                            <p class="Re-userInfo" id="infoNomeUsuario"></p>
                         </div>
                         <div class="Re-userInformations">
                             <p class="Re-infoLabel">Email:</p>
-                            <p class="Re-userInfo"></p>
+                            <p class="Re-userInfo" id="infoEmail"></p>
                         </div>
                         <div class="Re-userInformations">
                             <p class="Re-infoLabel">Telefone:</p>
-                            <p class="Re-userInfo"></p>
+                            <p class="Re-userInfo" id="infoTelefone"></p>
                         </div>
                         <div class="Re-userInformations">
                             <p class="Re-infoLabel">Data de Nascimento:</p>
-                            <p class="Re-userInfo"></p>
+                            <p class="Re-userInfo" id="infoDataNascimento"></p>
                         </div>
                         <div class="Re-userInformations">
                             <p class="Re-infoLabel">Localização:</p>
-                            <p class="Re-userInfo"></p>
+                            <p class="Re-userInfo" id="infoLocalizacao"></p>
                         </div>
                     </div>
                 </div>
@@ -298,10 +298,9 @@
                 <p class="Re-goLogin">Já possui uma conta? <a href="login.php">Entre</a></p>
             </div>
             <?php
-            signUp($conn);
+                signUp($conn);
             ?>
-        </form>
-        
+        </form>    
     </main>
 
     <?php include_once ("../app/includes/footer.php");?>
@@ -309,6 +308,27 @@
     <script src="../app/assets/js/loginRegister.js"></script>
     <script>        
         toggleTheme();
+
+        document.querySelectorAll('.Re-userInput').forEach(input => {
+            const updateInfo = (event) => {
+                const inputId = event.target.id;
+                const infoElement = document.getElementById('info' + inputId.charAt(0).toUpperCase() + inputId.slice(1));
+
+                if (inputId === 'dataNascimento') {
+                    const dateValue = new Date(event.target.value);
+                    const formattedDate = dateValue.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
+                    infoElement.textContent = formattedDate;
+                } else {
+                    infoElement.textContent = event.target.value;
+                }
+            };
+
+            input.addEventListener('input', updateInfo);
+
+            if (input.tagName === 'SELECT') {
+                input.addEventListener('change', updateInfo);
+            }
+        });
     </script>
 </body>
 </html>

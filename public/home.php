@@ -1,11 +1,9 @@
 <?php
-session_start();
-$verify = isset($_SESSION['active']) ? true : header("Location:/ConectaMaesProject/public/login.php");
-
-require_once "../app/services/crud/userFunctions.php";
-$conn = mysqli_connect($hostname, $username, $password, $database); // Conexão deve estar aberta
-
-$currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);
+    session_start();
+    $verify = isset($_SESSION['active']) ? true : header("Location:/ConectaMaesProject/public/login.php");
+    require_once "../app/services/crud/userFunctions.php"; 
+    require_once "../app/services/crud/postFunctions.php";
+    $currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +19,7 @@ $currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);
     <title>ConectaMães - Home</title>
 </head>
 
-<body class="Y-theme">
+<body class="<?php echo $currentUserData['tema'];?>">
 
     <?php include_once ("../app/includes/headerHome.php");?>
 
@@ -31,14 +29,14 @@ $currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);
         </section>
 
         <section class="timeline">
-            <form class="Ho-postSomething">
+            <form class="Ho-postSomething" method="post">
                 <div class="Ho-postTop">
                     <a class="Ho-userProfileImage" href="/ConectaMaesProject/public/home/perfil.php">
-                        <img src="/ConectaMaesProject/app/assets/imagens/fotos/perfil/<?php echo $currentUserData['nomeDeUsuario'] . '-' . $currentUserData['dataNascimentoUsuario'] . '-perfil.png';?>" alt="Foto de perfil do usuário">
+                        <img src="/ConectaMaesProject/app/assets/imagens/fotos/perfil/<?php echo $currentUserData['nomeDeUsuario'] . '-' . $currentUserData['dataNascimentoUsuario'] . '-perfil.png';?>">
                     </a>
     
                     <div class="Ho-postText">
-                        <textarea name="postText" id="postText" cols="62" rows="3" class="Ho-postTextContent" placeholder="Como você está se sentindo?" oninput="postCharLimiter()"></textarea>
+                        <textarea name="conteudoEnvio" id="postText" cols="62" rows="3" class="Ho-postTextContent" placeholder="Como você está se sentindo?" oninput="postCharLimiter()"></textarea>
                         <div class="Ho-characters">
                             <span class="Ho-charactersNumber">0</span>/<span class="Ho-maxCharacters">200</span>
                         </div>
@@ -48,22 +46,17 @@ $currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);
                 <div class="Ho-postBottom">
                     <div class="Ho-extraInputs">
                         <div class="Ho-imageInput">
-                            <input type="file" id="Ho-imageSelector" accept="image/*">
+                            <input type="file" id="Ho-imageSelector" name="linkAnexoEnvio" accept="image/*">
                             <label for="Ho-imageSelector">
                                 <i class="bi bi-images Ho-iconLabel"></i>
                                 <p> Imagem </p>
                             </label>
                         </div>
-        
-                        <div class="Ho-tagInput">
-                            <label for="tagInput"><i class="bi bi-tags-fill Ho-iconLabel"></i></label>
-                            <input type="text" id="tagInput" placeholder="Tags">
-                        </div>
                     </div>
     
                     <div class="Ho-submitArea">
                         <div class="Ho-submitPost">
-                            <button type="submit" value="submit" name ="postHome" class="Ho-submitBtn">Postar</button>
+                            <button type="submit" value="submit" name ="postPostagem" class="Ho-submitBtn">Postar</button>
     
                             <div class="Ho-postStyle">
                                 <i class="bi bi-caret-down-fill"></i>
@@ -80,6 +73,11 @@ $currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);
                 <div class="Ho-postAttachments">
                     <span class="Ho-preview"></span>
                 </div>
+                <?php
+                    if(isset($_POST['postPostagem'])){
+                        sendPost($conn,"Postagem", $currentUserData['idUsuario']);
+                    }
+                ?>
             </form>
             <?php
                 $count = 0;
@@ -87,16 +85,37 @@ $currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);
 
                 // Loop para mostrar publicações
                 while (true) {
-                    $stmt = $conn->prepare("SELECT * FROM Publicacao WHERE idPublicacao = ?");
+                    $stmt = $conn->prepare("SELECT * FROM Publicacao WHERE idPublicacao = ? ORDER BY dataCriacaoPublicacao DESC");
                     $stmt->bind_param("i", $id);
                     $stmt->execute();
                     $result = $stmt->get_result();
 
                     if ($result->num_rows > 0) {
                         // Exibir a publicação
-                        $publicacao = $result->fetch_assoc();
-                        echo "Publicação ID: " . $publicacao['id'] . "<br>";
-                        echo "Conteúdo: " . $publicacao['conteudo'] . "<br><br>";
+                        $dadosPublicacao = $result->fetch_assoc();
+                        $postOwner = queryUserData($conn, "Usuario", $dadosPublicacao["idUsuario"]);
+                        ?>
+                            <article class="Ho-relato">
+                                <div class="postTimelineTop">
+                                    <div class="postOwnerInfo">
+                                        <div class="postOwnerImage"></div>
+                                        <div class="postOwnerName"><?php echo $postOwner['nomeCompleto'];?></div>
+                                        <div class="postOwnerUser"><?php echo $postOwner['nomeDeUsuario'];?></div>
+                                    </div>
+                                    
+                                    <div class="postMoreButton"></div>
+                                </div>
+                                <div class="postTimelineContent">
+                                    <h3 class="postTitle"><?php echo $dadosPublicacao['titulo'];?></h3>
+                                    <p class="textPost"><?php echo $dadosPublicacao['conteudo']?></p>
+                                </div>
+                                <div class="postTimelineBottom">
+                                    <div class="postLikes"></div>
+                                    <div class="postComments"></div>
+                                </div>
+                                
+                            </article>
+                        <?php
                         $count++;
 
                         // A cada 50 publicações, mostrar "sugestões"

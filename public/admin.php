@@ -18,7 +18,7 @@
     <title>ConectaMães - Home</title>
 </head>
 
-<body>
+<body class="<?php echo $currentUserData['tema'];?>">
     <?php include_once ("../app/includes/headerHome.php");?>
 
     <main class="Ho-Main">

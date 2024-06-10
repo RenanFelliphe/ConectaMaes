@@ -20,7 +20,7 @@
     </meta>
 </head>
 
-<body class="P-theme">
+<body class="<?php echo $currentUserData['tema'];?>">
     <?php include_once ("../../app/includes/headerHome.php");?>
 
     <main class="Ho-Main mainSystem">
@@ -100,12 +100,29 @@
 
                     if ($result->num_rows > 0) {
                         // Exibir a publicação
-                        $publicacao = $result->fetch_assoc();
+                        $dadosPublicacao = $result->fetch_assoc();
+                        $postOwner = queryUserData($conn, "Usuario", $dadosPublicacao["idUsuario"]);
                         ?>
-                            <div class="post Relato">
-                                <h1 class="postTitle"><?php echo $publicacao['titulo'];?></h1>
-                                echo "Conteúdo: " . $publicacao['conteudo'] . "<br><br>";
-                            </div>
+                            <article class="Ho-relato">
+                                <div class="postTimelineTop">
+                                    <div class="postOwnerInfo">
+                                        <div class="postOwnerImage"></div>
+                                        <div class="postOwnerName"><?php echo $postOwner['nomeCompleto'];?></div>
+                                        <div class="postOwnerUser"><?php echo $postOwner['nomeDeUsuario'];?></div>
+                                    </div>
+                                    
+                                    <div class="postMoreButton"></div>
+                                </div>
+                                <div class="postTimelineContent">
+                                    <h3 class="postTitle"><?php echo $dadosPublicacao['titulo'];?></h3>
+                                    <p class="textPost"><?php echo $dadosPublicacao['conteudo']?></p>
+                                </div>
+                                <div class="postTimelineBottom">
+                                    <div class="postLikes"></div>
+                                    <div class="postComments"></div>
+                                </div>
+                                
+                            </article>
                         <?php
                         $count++;
 

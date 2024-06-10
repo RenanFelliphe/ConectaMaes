@@ -22,7 +22,7 @@
     </meta>
 </head>
 
-<body class="B-theme">
+<body class="<?php echo $currentUserData['tema'];?>">
 
     <?php include_once ("../../app/includes/headerHome.php");?>
 
@@ -35,7 +35,7 @@
             <form class="Ho-postSomething">
                 <div class="Ho-postTop">
                     <a class="Ho-userProfileImage" href="/ConectaMaesProject/public/home/perfil.php">
-                        <img src="/ConectaMaesProject/app/assets/imagens/fotos/perfil/<?php echo $currentUserData['nomeDeUsuario'] . '-' . $currentUserData['dataNascimentoUsuario'] . '-perfil.'."png";?>" alt="Foto de perfil do usuário">
+                        <img src="/ConectaMaesProject/app/assets/imagens/fotos/perfil/<?php echo $currentUserData['nomeDeUsuario'] . '-' . $currentUserData['dataNascimentoUsuario'] . '-perfil.'."png";?>">
                     </a>
     
                     <div class="Ho-postText">
@@ -62,16 +62,6 @@
                                 <i class="bi bi-images Ho-iconLabel"></i>
                                 <p> Imagem </p>
                             </label>
-                        </div>
-        
-                        <div class="Ho-maxColabsInput">
-                            <label for="Ho-maxColabsInput"><i class="bi bi-chat-heart-fill Ho-iconLabel"></i></label>
-                            <input type="number" id="Ho-maxColabsInput" min="0" placeholder="Colaboradores">
-                        </div>
-
-                        <div class="Ho-tagInput">
-                            <label for="tagInput"><i class="bi bi-tags-fill Ho-iconLabel"></i></label>
-                            <input type="text" id="tagInput" placeholder="Tags">
                         </div>
                     </div>
     

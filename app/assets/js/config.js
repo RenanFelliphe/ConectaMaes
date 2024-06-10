@@ -1,17 +1,3 @@
-function toggleConfigSection(){
-    const configSections = document.querySelectorAll(".Se-sectionTitle");
-
-    configSections.forEach(section => {
-        section.addEventListener('click', () => {
-            configSections.forEach(allSection => {
-                allSection.classList.remove('active');
-            });
-            
-            section.classList.add('active');
-        })
-    });
-}
-
 function registerTheme(){
     const body = document.querySelector("body");
     const yellowTheme = document.querySelector("#Se-yellowTheme");
@@ -76,8 +62,6 @@ function toggleTheme(){
     }
     
 }
-
-
 
 registerTheme();
 toggleConfigSection();

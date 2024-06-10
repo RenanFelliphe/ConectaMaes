@@ -310,6 +310,35 @@ body.Y-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon{
     font-size: 0.9rem;
 }
 
+
+.headerHome .userContainer .makeAPost{
+    display: flex;
+    gap: 0.2rem;
+    cursor: pointer;
+}
+
+.headerHome .userContainer .makeAPost .makeAPostBtn{
+    background-color: var(--secondColor);
+    padding: 0.5rem 0.5rem 0.45rem 1rem;
+    border: none;
+    border-top-left-radius: 100rem;
+    border-bottom-left-radius: 100rem;
+    color: var(--whiteColor);
+    font-weight: 900;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.headerHome .userContainer .makeAPost .postStyle{
+    background-color: var(--secondColor);
+    padding: 0.75rem 0.5rem 0.55rem 0.3rem;
+    border-top-right-radius: 100rem;
+    border-bottom-right-radius: 100rem;
+    color: var(--whiteColor);
+    font-size: 0.7rem;
+    cursor: pointer;
+}
+
 /*====================================================================================================
 ============================================== FOOTER ================================================
 ====================================================================================================*/
