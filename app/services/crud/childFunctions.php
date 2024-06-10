@@ -97,7 +97,7 @@ $conn = mysqli_connect($hostname, $username, $password, $database);
                 $dExec = mysqli_query($conn, $dQuery);
 
                 if(!$dExec){
-                    echo "Não foi possível deletar a conta!";
+                    echo "Não foi possível excluir o filho!";
                 }
             }    
         }

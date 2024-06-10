@@ -32,6 +32,49 @@
             <div class="postStyle">
                 <i class="bi bi-caret-down-fill"></i>
             </div>
+
+            <div class="makeAPostModal">
+                <div class="modalHeader">
+                    <h1>Publicação</h1>
+                    <i class="bi bi-three-dots-vertical"></i>
+                </div>
+
+                <div class="postStyleSummary">
+                    <div class="postStyleTitle">
+                        <img class="homePageIcon headerIcon" src="/ConectaMaesProject/app/assets/imagens/icons/home_off.png" alt="Ícone da página inicial">
+                        <p>Post</p>
+                    </div>
+                    <p>Faça uma publicação para compartilhar momentos 
+                        do seu dia a dia, novidades, fotos ou qualquer outra coisa 
+                        que queira dividir com a comunidade. É a forma padrão 
+                        de se conectar e interagir com outras mães.</p>
+                    <button name ="postPostagem" class="postBtn postagemBtn">Postar</button>
+                </div>
+
+                <div class="postStyleSummary">
+                    <div class="postStyleTitle">
+                        <img class="reportPageIcon headerIcon" src="/ConectaMaesProject/app/assets/imagens/icons/reports_off.png" alt="Ícone da página de relatos">
+                        <p>Relato</p>
+                    </div>
+                    <p>Compartilhe suas experiências pessoais. Conte sobre 
+                        momentos importantes, dificuldades superadas, 
+                        alegrias ou tristezas da sua vida. Seus relatos podem 
+                        inspirar e confortar outras mães na comunidade.</p>
+                    <button name ="postPostagem" class="postBtn relatoBtn">Postar</button>
+                </div>
+
+                <div class="postStyleSummary">
+                    <div class="postStyleTitle">
+                        <img class="helpPageIcon headerIcon" src="/ConectaMaesProject/app/assets/imagens/icons/helps_off.png" alt="Ícone da página de pedidos">
+                        <p>Auxílio</p>
+                    </div>
+                    <p>Precisa de ajuda? Descreva uma dificuldade que está 
+                        enfrentando no momento e consiga apoio da 
+                        comunidade. Outras mães estão aqui para oferecer 
+                        suporte baseado em suas próprias experiências.</p>
+                    <button name ="postPostagem" class="postBtn pedidosBtn">Postar</button>
+                </div>
+            </div>
         </div>
 
         <div class="userInformations">

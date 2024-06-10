@@ -9,6 +9,164 @@
     font-style: normal;
 }
 
+:root {
+    /* ================ CORES ================ */
+    --firstColor: #;
+    --firstColorLowOpacity: #;
+    --firstColorTransparent: #;
+
+    --secondColor: #;
+    --secondColorLowOpacity: #;
+    --secondColorTransparent: #;
+
+    --thirdColor: #;
+    --thirdColorLowOpacity: #;
+    --thirdColorTransparent: #;
+    
+    /* ============ TEMA AMARELO ============ */
+    --pastelYellowColor: #F9EC7C;
+    --pastelYellowColorLowOpacity: #F9EC7C80;
+    --pastelYellowColorTransparent: #F9EC7C20;
+
+    --middleYellowColor: #BDB150;
+    --middleYellowColorLowOpacity: #BDB15080;
+    --middleYellowColorTransparent: #BDB15020;
+
+    --darkYellowColor: #807523;
+    --darkYellowColorLowOpacity: #80752380;
+    --darkYellowColorTransparent: #80752320;
+
+
+    /* ============= TEMA AZUL ============= */
+    --pastelBlueColor: #7DEBFA;
+    --pastelBlueColorLowOpacity: #7DEBFA80;
+    --pastelBlueColorTransparent: #7DEBFA20;
+
+    --middleBlueColor: #40AEBD;
+    --middleBlueColorLowOpacity: #40AEBD80;
+    --middleBlueColorTransparent: #40AEBD20;
+
+    --darkBlueColor: #037180;
+    --darkBlueColorLowOpacity: #03718080;
+    --darkBlueColorTransparent: #03718020;  
+
+
+    /* ============= TEMA ROSA ============= */
+    --pastelPinkColor: #FA7EBD;
+    --pastelPinkColorLowOpacity: #FA7EBD80;
+    --pastelPinkColorTransparent: #FA7EBD20;
+
+    --middlePinkColor: #CF4A8E;
+    --middlePinkColorLowOpacity: #CF4A8E80;
+    --middlePinkColorTransparent: #CF4A8E20;
+
+    --darkPinkColor: #A3155F;
+    --darkPinkColorLowOpacity: #A3155F80;
+    --darkPinkColorTransparent: #A3155F20;
+
+
+    --whiteColor: #FFFFFF;
+    --grayColor: #808080;
+    --blackColor: #000000;
+    --redColor: #C84A60;
+
+    /* ================ FONTES ================ */
+    --sizeFontTitle: 26px;
+    --sizeFontIcons: 18px;
+    --sizeFontSubtitle: 16px;
+    --sizeFontText: 14px;
+}
+
+.Y-theme {
+    /* ============= Variaveis de Substituicao ============= */
+
+    --firstColor: #F9EC7C;
+    --firstColorLowOpacity: #F9EC7C80; 
+    --firstColorTransparent: #F9EC7C20;
+
+    --secondColor: #BDB150;
+    --secondColorLowOpacity: #BDB15080;
+    --secondColorTransparent: #BDB15020;
+
+    --thirdColor: #807523;
+    --thirdColorLowOpacity: #80752380;
+    --thirdColorTransparent: #80752320;
+
+    /* ================== Variaveis Fixas =================== */
+
+    --pastelYellowColor: #F9EC7C;
+    --pastelYellowColorLowOpacity: #F9EC7C80;
+    --pastelYellowColorTransparent: #F9EC7C20;
+
+    --middleYellowColor: #BDB150;
+    --middleYellowColorLowOpacity: #BDB15080;
+    --middleYellowColorTransparent: #BDB15020;
+
+    --darkYellowColor: #807523;
+    --darkYellowColorLowOpacity: #80752380;
+    --darkYellowColorTransparent: #80752320;
+}
+
+.B-theme {
+    /* ============= Variaveis de Substituicao ============= */
+
+    --firstColor: #7DEBFA;
+    --firstColorLowOpacity: #7DEBFA80;
+    --firstColorTransparent: #7DEBFA20;
+
+    --secondColor: #40AEBD;
+    --secondColorLowOpacity: #40AEBD80;
+    --secondColorTransparent: #40AEBD20;
+
+    --thirdColor: #037180;
+    --thirdColorLowOpacity: #03718080;
+    --thirdColorTransparent: #03718020; 
+    
+    /* ================== Variaveis Fixas =================== */
+
+    --pastelBlueColor: #7DEBFA;
+    --pastelBlueColorLowOpacity: #7DEBFA80;
+    --pastelBlueColorTransparent: #7DEBFA20;
+
+    --middleBlueColor: #40AEBD;
+    --middleBlueColorLowOpacity: #40AEBD80;
+    --middleBlueColorTransparent: #40AEBD20;
+
+    --darkBlueColor: #037180;
+    --darkBlueColorLowOpacity: #03718080;
+    --darkBlueColorTransparent: #03718020;  
+}
+
+.P-theme {
+    /* ============= Variaveis de Substituicao ============= */
+
+    --firstColor: #FA7EBD;
+    --firstColorLowOpacity: #FA7EBD80;
+    --firstColorTransparent: #FA7EBD20;
+
+    --secondColor: #CF4A8E;
+    --secondColorLowOpacity: #CF4A8E80;
+    --secondColorTransparent: #CF4A8E20;
+
+    --thirdColor: #A3155F;
+    --thirdColorLowOpacity: #A3155F80;
+    --thirdColorTransparent: #A3155F20;
+
+    /* ================== Variaveis Fixas =================== */
+
+    --pastelPinkColor: #FA7EBD;
+    --pastelPinkColorLowOpacity: #FA7EBD80;
+    --pastelPinkColorTransparent: #FA7EBD20;
+
+    --middlePinkColor: #CF4A8E;
+    --middlePinkColorLowOpacity: #CF4A8E80;
+    --middlePinkColorTransparent: #CF4A8E20;
+
+    --darkPinkColor: #A3155F;
+    --darkPinkColorLowOpacity: #A3155F80;
+    --darkPinkColorTransparent: #A3155F20;
+}
+
 body::-webkit-scrollbar{
     display: none;
     scroll-behavior: smooth;
@@ -42,6 +200,432 @@ main{
 
 .pageIcon{
     color: var(--grayColor);
+}
+
+
+/*====================================================================================================
+========================================== HEADER LANDING ============================================
+====================================================================================================*/
+
+.headerLanding{
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+    height: 4rem;
+    padding: 0.5rem 1rem;
+    z-index: 1;
+    background: #ffffff66;
+    backdrop-filter: blur(1px);
+    box-shadow: 0 5px 15px 3px #ffffff66;
+    border-bottom: 1px solid #ffffff33;
+}
+
+.headerLanding .A-headerLogo{
+    width: 10rem;
+    cursor: pointer;
+}
+
+.headerLanding .A-headerLinks{
+    display: flex;
+    gap: 2.5rem;
+}
+
+.headerLanding .A-headerLinks h4{
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.headerLanding .A-headerLinks h4 a{
+    text-decoration: none;
+    color: var(--blackColor);
+}
+
+.headerLanding .A-searchBar{
+    display: flex;
+    background-color: #e4e4e4;
+    border-radius: 10rem;
+    width: 15rem;
+    height: 2rem;
+    min-width: 13.5rem;
+    padding: 0 0.6rem 0 0.6rem;
+    gap: 0.4rem;
+    opacity: 0.6;
+    font-size: 0.8rem;
+    color: var(--grayColor);
+    border: 1px solid #d1d1d1;
+}
+
+.headerLanding .A-searchBarInput{
+    background-color: transparent;
+    border: none;
+    color: var(--blackColor);
+    outline: none;
+    width: 90%;
+    font-weight: 400;
+    font-size: 1rem;
+}
+
+.headerLanding .A-searchBar .bi,
+.headerLanding .A-searchBarInput::placeholder{
+    color:var(--blackColor);
+}   
+
+.headerLanding .A-signButtons{
+    display: flex;
+    gap: 1rem;
+}
+
+.headerLanding .A-signButtons a{
+    text-decoration: none;
+}
+
+.headerLanding .A-signButtons h4{
+    display: flex;
+    height: 2rem;
+    width: 7rem;    
+    color: var(--secondColor);
+    border: 1px solid var(--secondColor);
+    border-radius: 10rem;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.headerLanding .A-signButtons .A-signIn{
+    color: var(--whiteColor);
+    background-color: var(--secondColor);
+}
+
+
+/*====================================================================================================
+============================================ HEADER HOME =============================================
+====================================================================================================*/
+
+.headerHome{
+    position: sticky;
+    top: 0;
+    display: flex;
+    gap: 5rem;
+    justify-content: space-between;
+    height: 4rem;
+    padding: 0.5rem 1rem;
+    background: var(--whiteColor);
+    border-bottom: 1px solid var(--grayColor);
+    z-index: 999;
+}
+
+.headerHome .A-headerLogo{
+    width: 10rem;
+    cursor: pointer;
+}
+
+.headerHome .headerIcon{
+    width: 2rem;
+    cursor: pointer;
+}
+
+.headerHome .headerPageLinks{
+    display: flex;
+    gap: 3rem;
+}
+
+.headerHome .headerPageLinks .pageLink{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    height: 4rem;
+    font-weight: 500;
+    color: var(--grayColor);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.headerHome .headerPageLinks .pageLink.active,
+.headerHome .headerPageLinks .pageLink:hover{
+    color: var(--secondColor);
+}
+
+.headerHome .headerPageLinks .pageLink .pageSelector{
+    position: absolute;
+    width: 150%;
+    height: 3px;
+    bottom: -1px;
+    border-radius: 100rem;
+}
+
+.headerHome .headerPageLinks .pageLink.active .pageSelector{
+    background-color: var(--secondColor);
+}
+
+body.P-theme .headerHome .headerPageLinks .pageLink.active .headerIcon,
+body.P-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon {
+    filter: brightness(0) saturate(100%) invert(42%) sepia(61%) saturate(1820%) hue-rotate(302deg) brightness(87%) contrast(85%);
+}
+
+body.B-theme .headerHome .headerPageLinks .pageLink.active .headerIcon,
+body.B-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon{
+    filter: brightness(0) saturate(100%) invert(63%) sepia(81%) saturate(331%) hue-rotate(139deg) brightness(83%) contrast(87%);
+}
+
+body.Y-theme .headerHome .headerPageLinks .pageLink.active .headerIcon,
+body.Y-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon{
+    filter: brightness(0) saturate(100%) invert(66%) sepia(48%) saturate(459%) hue-rotate(16deg) brightness(97%) contrast(85%);
+}
+
+.headerHome .userContainer{
+    display: flex;
+    gap: 0.7rem;
+    height: 4rem;
+}
+
+.headerHome .userContainer .notificationsModalIcon{
+    width: 1.5rem;
+    margin-right: 2rem;
+}
+
+.headerHome .userContainer .userInformations{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.headerHome .userContainer .userInformations .userNickname{
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: var(--grayColor);
+}
+
+.headerHome .userContainer .userAccount{
+    position: relative;
+    width: 3.3rem;  
+    height: 3.3rem;
+}
+
+.headerHome .userContainer .userAccount .userProfileImage img{
+    width: 100%;
+    height: 100%;
+    cursor: pointer;  
+}
+
+.headerHome .userContainer .userAccount .bi-chevron-down{
+    position: absolute;
+    display: flex;
+    width: 1.2rem;
+    height: 1.2rem;
+    right: 0;
+    bottom: 0;
+    font-size: 0.8rem;
+    font-weight: 900;
+    color: var(--grayColor);
+    background-color: var(--whiteColor);
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+
+.headerHome .userFunctio{
+    position: absolute;
+    height: 15rem;
+    bottom: -5rem;
+    right: 1rem;
+}
+
+.headerHome .userFunctionsModal{
+    position: fixed;
+    right: 1rem;
+    top: 3.95rem;
+    height: fit-content;
+    padding: 1rem;
+    display: flex;    
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    border-bottom-left-radius: 1.3rem;
+    border-bottom-right-radius: 1.3rem;
+    background-color: var(--whiteColor);
+}
+
+.headerHome .userFunctionsModal:after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-bottom-left-radius: 1.3rem;
+    border-bottom-right-radius: 1.3rem;
+    border: 4px solid transparent;
+    border-top: none;
+    background: linear-gradient(var(--whiteColor), var(--whiteColor)) padding-box, linear-gradient(to bottom, var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
+    z-index: -1;
+    opacity: 0.4;
+}
+
+.headerHome .userFunctionsModal.close{
+    display: none;
+}
+
+.headerHome .userFunctionsModal a{
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.5rem;
+    border-radius: 0.5rem;
+    width: 10rem;
+    height: 1.7rem;
+    padding: 0 0.6rem;
+    background-color: #80808025;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    color: var(--blackColor);
+    text-decoration: none;
+}
+
+.headerHome .userFunctionsModal span{
+    text-align: center;
+    position: relative;
+    width: 100%;
+    height: 1px;
+    background-color: #80808070;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.headerHome .userFunctionsModal span:last-of-type{
+    width: 50%;
+}
+
+.headerHome .userFunctionsModal a .pageIcon{
+    font-size: 0.9rem;
+}
+
+
+.headerHome .userContainer .makeAPost{
+    display: flex;
+    gap: 0.2rem;
+    cursor: pointer;
+}
+
+.headerHome .userContainer .makeAPost .makeAPostBtn{
+    background-color: var(--secondColor);
+    padding: 0.5rem 0.5rem 0.45rem 1rem;
+    border: none;
+    border-top-left-radius: 100rem;
+    border-bottom-left-radius: 100rem;
+    color: var(--whiteColor);
+    font-weight: 900;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.headerHome .userContainer .makeAPost .postStyle{
+    background-color: var(--secondColor);
+    padding: 0.75rem 0.5rem 0.55rem 0.3rem;
+    border-top-right-radius: 100rem;
+    border-bottom-right-radius: 100rem;
+    color: var(--whiteColor);
+    font-size: 0.7rem;
+    cursor: pointer;
+}
+
+/*====================================================================================================
+============================================== FOOTER ================================================
+====================================================================================================*/
+
+footer{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    width: 100%;
+    padding: 1rem 2rem 0.5rem 0.5rem;
+    background-color: var(--blackColor);
+    color: var(--whiteColor);
+}
+
+footer .A-footerLeft img.A-footerLogo{
+    width: 15rem;
+    cursor: pointer;
+}
+
+footer .A-footerLeft .A-footerContact{
+    padding: 0 0 4rem 1rem;
+    width: 14rem;
+    font-size: 1.625rem;
+}
+
+footer .A-footerLeft .A-footerContact h4{
+    padding: 0.5rem 0 1rem 0;
+}
+
+footer .A-footerLeft .A-footerContact .A-footerSocialMedias{
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.3rem;   
+}
+
+footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-instagram{
+    color: var(--pastelYellowColor);
+    cursor: pointer;
+}
+
+footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-facebook{
+    color: var(--pastelBlueColor);
+    cursor: pointer;
+}
+
+footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-envelope-fill{
+    color: var(--pastelPinkColor);
+    cursor: pointer;
+}
+
+footer .A-copyrightSign{
+    position: absolute;
+    display: flex;
+    gap: 0.5rem;
+    width: 30rem;
+    bottom: 1rem;
+    left: 50%;
+    transform: translate(-50%);
+    font-size: 0.7rem;
+}
+
+footer .A-footerRight{
+    display: flex;
+    align-items: flex-start;
+    gap: 6.25rem;
+    list-style: none;
+    height: 100%;
+}
+
+footer .A-footerRight li h5{
+    font-size: 1.438rem;
+    line-height: 3rem;
+    pointer-events: none;
+}
+
+footer .A-footerRight li p{
+    font-size: 1rem;
+    line-height: 1.5rem;
+    cursor: pointer;
+}
+
+footer .A-footerRight li.A-footerAbout h5{
+    color: var(--pastelYellowColor);
+}
+
+footer .A-footerRight li.A-footerHelp h5{
+    color: var(--pastelBlueColor);
+}
+
+footer .A-footerRight li.A-footerPolitic h5{
+    color: var(--pastelPinkColor);
 }
 
 /*====================================================================================================
