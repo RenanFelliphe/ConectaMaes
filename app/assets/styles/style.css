@@ -168,6 +168,7 @@
 }
 
 body::-webkit-scrollbar{
+    position: relative;
     display: none;
     scroll-behavior: smooth;
 }
@@ -175,8 +176,6 @@ body::-webkit-scrollbar{
 main{
     position: relative;
     width: 100vw;
-    height: max-content;
-    padding-bottom: 3rem;
     overflow: hidden;
     scroll-behavior: smooth;
 }
@@ -508,29 +507,201 @@ body.Y-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon{
 .headerHome .userContainer .makeAPost{
     display: flex;
     gap: 0.2rem;
-    cursor: pointer;
 }
 
 .headerHome .userContainer .makeAPost .makeAPostBtn{
     background-color: var(--secondColor);
     padding: 0.5rem 0.5rem 0.45rem 1rem;
-    border: none;
+    border: 2px solid transparent;
     border-top-left-radius: 100rem;
     border-bottom-left-radius: 100rem;
     color: var(--whiteColor);
     font-weight: 900;
-    font-size: 1rem;
+    font-size: 0.8rem;
     cursor: pointer;
 }
 
 .headerHome .userContainer .makeAPost .postStyle{
+    border: 2px solid transparent;
     background-color: var(--secondColor);
     padding: 0.75rem 0.5rem 0.55rem 0.3rem;
     border-top-right-radius: 100rem;
     border-bottom-right-radius: 100rem;
-    color: var(--whiteColor);
-    font-size: 0.7rem;
+    font-size: 0.5rem;
     cursor: pointer;
+}
+
+.headerHome .userContainer .makeAPost .postStyle .pageIcon{
+    color: var(--whiteColor);
+}
+
+.headerHome .userContainer .makeAPost:hover .makeAPostBtn,
+.headerHome .userContainer .makeAPost:hover .postStyle,
+.headerHome .userContainer .makeAPost.active .makeAPostBtn,
+.headerHome .userContainer .makeAPost.active .postStyle{
+    transition: 0.3s;
+    background-color: var(--whiteColor);
+    color: var(--secondColor);
+    border-color: var(--secondColor);
+}
+
+.headerHome .userContainer .makeAPost:hover .postStyle .pageIcon,
+.headerHome .userContainer .makeAPost.active .postStyle .pageIcon{
+    color: var(--secondColor);
+}
+
+.headerHome .headerModal.close{
+    display: none;
+}
+
+.headerHome .userContainer .makeAPostModal{
+    position: fixed;
+    right: 3.5rem;
+    top: 3.95rem;
+    height: fit-content;
+    width: min-content;
+    padding: 1rem;
+    display: flex;    
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    border-bottom-left-radius: 1.3rem;
+    border-bottom-right-radius: 1.3rem;
+    background-color: var(--whiteColor);
+}
+
+.headerHome .userContainer .makeAPostModal.close{
+    display: none;
+}
+
+.headerHome .userContainer .makeAPostModal:after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-bottom-left-radius: 1.3rem;
+    border-bottom-right-radius: 1.3rem;
+    border: 4px solid transparent;
+    border-top: none;
+    background: linear-gradient(var(--whiteColor), var(--whiteColor)) padding-box, linear-gradient(to bottom, var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
+    z-index: -1;
+    opacity: 0.4;
+}
+
+.headerHome .userContainer .makeAPostModal .modalHeader{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0 1rem 1rem;
+    width: 100%;
+}
+
+.headerHome .userContainer .makeAPostModal .modalHeader h1{
+    font-size: 1.8rem;
+}
+
+.headerHome .userContainer .makeAPostModal .postStyleSummary{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+    width: 20rem;
+    cursor: pointer;
+}
+
+.headerHome .userContainer .makeAPostModal .postStyleSummary .postStyleTitle{
+    position: relative;
+    display: flex;
+    gap: 0.7rem;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.headerHome .userContainer .makeAPostModal .postStyleSummary .postStyleTitle span{
+    position: relative;
+    width: 100%;
+    height: 1px;
+    background-color: var(--grayColor);
+    border-radius: 100%;
+}
+
+.headerHome .userContainer .makeAPostModal .postStyleSummary .postStyleTitle span:first-of-type{
+    width: 2rem;
+}
+
+.headerHome .userContainer .makeAPostModal .postStyleSummary .postStyleTitle h4{
+    color: var(--grayColor);
+    transition: 0.2s;
+}
+
+.headerHome .userContainer .makeAPostModal .postStyleSummary:hover .postStyleTitle h4{
+    color: var(--secondColor);
+    transition: 0.2s;
+}
+
+.headerHome .userContainer .makeAPostModal .postStyleSummary .postStyleTitle img{
+    width: 1.1rem;
+    transition: 0.2s;
+}
+
+body.P-theme .headerHome  .userContainer .makeAPostModal .postStyleSummary:hover .postStyleTitle img {
+    filter: brightness(0) saturate(100%) invert(42%) sepia(61%) saturate(1820%) hue-rotate(302deg) brightness(87%) contrast(85%);
+    transition: 0.2s;
+}
+
+body.B-theme .headerHome .userContainer .makeAPostModal .postStyleSummary:hover .postStyleTitle img{
+    filter: brightness(0) saturate(100%) invert(63%) sepia(81%) saturate(331%) hue-rotate(139deg) brightness(83%) contrast(87%);
+    transition: 0.2s;
+}
+
+body.Y-theme .headerHome .userContainer .makeAPostModal .postStyleSummary:hover .postStyleTitle img{
+    filter: brightness(0) saturate(100%) invert(66%) sepia(48%) saturate(459%) hue-rotate(16deg) brightness(97%) contrast(85%);
+    transition: 0.2s;
+}
+
+.headerHome .userContainer .makeAPostModal .postStyleSummary p{
+    position: relative;
+    width: 100%;
+    white-space: wrap;
+    font-size: 0.8rem;
+    text-align: justify;
+    transition: 0.2s;
+}
+
+.headerHome .userContainer .makeAPostModal .postStyleSummary p span{
+    font-weight: 600;
+}
+
+.headerHome .userContainer .makeAPostModal .postStyleSummary:hover p span{
+    color: var(--secondColor);
+    transition: 0.2s;
+}
+
+.headerHome .userContainer .makeAPostModal .postStyleSummary .postBtn{
+    position: relative;
+    display: flex;
+    color: var(--whiteColor);
+    background-color: var(--secondColorLowOpacity);
+    padding: 0.4rem 1.3rem 0.4rem 1.3rem;
+    border: none;
+    border-radius: 100rem;
+    font-size: 0.7rem;
+    transition: 0.2s;
+    font-weight: 600;
+    border: 1px solid transparent;
+}
+
+.headerHome .userContainer .makeAPostModal .postStyleSummary .postBtn:hover,
+.headerHome .userContainer .makeAPostModal .postStyleSummary:hover .postBtn{
+    transition: 0.3s;
+    transform: scale(1.1);
+    padding: 0.43rem 1.3rem 0.37rem 1.3rem;
+    background-color: var(--whiteColor);
+    color: var(--secondColor);
+    border-color: var(--secondColor);
 }
 
 /*====================================================================================================
@@ -1451,19 +1622,25 @@ footer .A-footerRight li.A-footerPolitic h5{
 ====================================================================================================*/
 
 .Ho-Main{
+    position: relative;
     width: 100vw;
     display: flex;
-    flex-direction: row;
-    padding: 0;
-    height: 100vh;
+    height: 89.5vh;
+    overflow: hidden;
 }
 
 .Ho-Main .timeline{
+    position: relative;
     border: 1px solid var(--grayColor);
     border-bottom: none;
     border-top: none;
     width: 50vw;
     height: 100%;
+    overflow: auto;
+}
+
+.Ho-Main .timeline::-webkit-scrollbar{
+    display: none;
 }
 
 .Ho-Main .timeline .Ho-postSomething{
@@ -1812,11 +1989,13 @@ footer .A-footerRight li.A-footerPolitic h5{
     border-top: none;
     width: 40vw;
     height: 100vh;
+    padding-top: 2rem;
 }
 
 .Se-asideLeft{
+    position: relative;
     width: 20vw;
-    height: 100vh;
+    height: 100%;
     overflow-y: hidden;
 }
 
@@ -1825,8 +2004,9 @@ footer .A-footerRight li.A-footerPolitic h5{
 }
 
 .Ho-Main .Se-asideRight{
+    position: relative;
     width: 40vw;
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -2096,16 +2276,16 @@ body.Y-theme .Se-asideRight  .Se-subSection .Se-sectionHeader .pageIcon{
     color: var(--secondColor);
 }
 
-.Se-asideRight .Se-accountInformations .Se-themeInfo{
+.Se-asideRight .Se-accountInformations .Re-themeInfo{
     display: flex;
     gap: 1.2rem;
 }
 
-.Se-asideRight .Se-accountInformations .Se-themeInfo p{
+.Se-asideRight .Se-accountInformations .Re-themeInfo p{
     font-weight: 500;
 }
 
-.Se-asideRight .Se-accountInformations .Se-themeInfo .Se-themeOptions{
+.Se-asideRight .Se-accountInformations .Re-themeInfo .Re-themeOptions{
     position: relative;
     display: flex;
     gap: 0.5rem;
@@ -2113,7 +2293,7 @@ body.Y-theme .Se-asideRight  .Se-subSection .Se-sectionHeader .pageIcon{
     transform: translateY(1px);
 }
 
-.Se-asideRight .Se-accountInformations .Se-themeInfo .Se-themeOptions input {
+.Se-asideRight .Se-accountInformations .Re-themeInfo .Re-themeOptions input {
     cursor: pointer;
     appearance: none;
     background-color: var(--whiteColor);
@@ -2124,28 +2304,28 @@ body.Y-theme .Se-asideRight  .Se-subSection .Se-sectionHeader .pageIcon{
     box-shadow: 0 0 0 1px var(--whiteColor), 0 0 0 2px var(--blackColor);
 }
 
-.Se-asideRight .Se-accountInformations .Se-themeInfo .Se-themeOptions input:checked {
+.Se-asideRight .Se-accountInformations .Re-themeInfo .Re-themeOptions input:checked {
     background-color: var(--secondColor);
     box-shadow: 0 0 0 2px var(--whiteColor), 0 0 0 3px var(--thirdColor);
 }
 
 
-.Se-asideRight .Se-accountInformations .Se-themeInfo .Se-themeOptions label{
+.Se-asideRight .Se-accountInformations .Re-themeInfo .Re-themeOptions label{
     cursor: pointer;
     margin-right: 0.4rem;
 }
 
-.Se-asideRight .Se-accountInformations .Se-themeInfo .Se-themeOptions input#Se-yellowTheme:checked + label {
+.Se-asideRight .Se-accountInformations .Re-themeInfo .Re-themeOptions input#Re-yellowTheme:checked + label {
     color: var(--thirdColor);
     font-weight: 500;
 }
 
-.Se-asideRight .Se-accountInformations .Se-themeInfo .Se-themeOptions input#Se-blueTheme:checked + label {
+.Se-asideRight .Se-accountInformations .Re-themeInfo .Re-themeOptions input#Re-blueTheme:checked + label {
     color: var(--thirdColor);
     font-weight: 500;
 }
 
-.Se-asideRight .Se-accountInformations .Se-themeInfo .Se-themeOptions input#Se-pinkTheme:checked + label {
+.Se-asideRight .Se-accountInformations .Re-themeInfo .Re-themeOptions input#Re-pinkTheme:checked + label {
     color: var(--thirdColor);
     font-weight: 500;
 }

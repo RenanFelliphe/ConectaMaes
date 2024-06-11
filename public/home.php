@@ -30,7 +30,7 @@
             <form class="Ho-postSomething" method="post">
                 <div class="Ho-postTop">
                     <a class="Ho-userProfileImage" href="/ConectaMaesProject/public/home/perfil.php">
-                        <img src="/ConectaMaesProject/app/assets/imagens/fotos/perfil/<?php echo $currentUserData['nomeDeUsuario'] . '-' . $currentUserData['dataNascimentoUsuario'] . '-perfil.png';?>">
+                        <img src="">
                     </a>
     
                     <div class="Ho-postText">
@@ -156,7 +156,7 @@
         </section>
     </main>
 
-    <script src="../app/assets/js/home.js"></script>
+    <script src="../app/assets/js/system.js"></script>
     <script>        
         toggleTheme();
     </script>

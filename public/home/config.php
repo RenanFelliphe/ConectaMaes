@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
         <link rel="stylesheet" href="/ConectaMaesProject/app/assets/styles/style.css">
         <link rel="icon" href="/ConectaMaesProject/app/assets/imagens/logos/final/Conecta_Mães_Logo_Icon.png">
-        <title>ConectaMães - Relatos</title>
+        <title>ConectaMães - Configurações</title>
         </meta>
     </head>
 
@@ -152,17 +152,18 @@
                             <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
                         </div>
 
-                        <div class="Se-themeInfo">
-                            <p> Tema: </p>
-                            <div class="Se-themeOptions">
-                                <input type="radio" name="temaEdit" value="Y-theme" id="Se-yellowTheme">
-                                <label for="Se-yellowTheme"> Amarelo </label>
-                                <input type="radio" name="temaEdit" value="B-theme" id="Se-blueTheme">
-                                <label for="Se-blueTheme"> Azul </label>
-                                <input type="radio" name="temaEdit" value="P-theme" id="Se-pinkTheme">
-                                <label for="Se-pinkTheme"> Rosa </label>
+                        <div class="Re-themeInfo">
+                            <p> Tema </p>
+                            <div class="Re-themeOptions">
+                                <input type="radio" name="temaRegistro" value="Y-theme" id="Re-yellowTheme">
+                                <label for="Re-yellowTheme"> Amarelo </label>
+                                <input type="radio" name="temaRegistro" value="B-theme" id="Re-blueTheme">
+                                <label for="Re-blueTheme"> Azul </label>
+                                <input type="radio" name="temaRegistro" value="P-theme" id="Re-pinkTheme">
+                                <label for="Re-pinkTheme"> Rosa </label>
                             </div>
                         </div>
+
                         <button class="Se-accountEdit" type="submit" name="editar">Editar conta</button>
                     </form>
 
@@ -336,37 +337,37 @@
             <?php 
                 if(isset($_GET['deletar'])){ 
                 ?>
-            <modal class="Se-accountDeleteModal">
-                <h2>Tem certeza que deseja deletar sua conta?</h2>
+                    <modal class="Se-accountDeleteModal">
+                        <h2>Tem certeza que deseja deletar sua conta?</h2>
 
-                <form class="Se-accountDeleteModalForm" method="post">
-                    <input type="hidden" name="deleterId" value=<?php echo $currentUserData['idUsuario'];?>>
-                    <input type="text" placeholder="<?php echo "delete/".$currentUserData['idUsuario']."/".$currentUserData['nomeDeUsuario'];?>"
-                        name="confirmaTextoDelete">
-                    <button type="submit" id="Se-submitAccountDeleteModalForm">ENVIAR</button>
-                    <button id="Se-cancelAccountDelete">CANCELAR</button>
-                <?php
-                    if(isset($_POST['confirmaTextoDelete'])){
-                        if($_POST['confirmaTextoDelete'] === ("delete/".$currentUserData['idUsuario']."/".$currentUserData['nomeDeUsuario']))
-                        {
-                            deleteAccount($conn, $table, $_POST['deleterId']);
-                        }
-                        else
-                        {
-                            echo "Insira o texto corretamente!";
-                        }
-                    }
-                    
-                ?>
-                </form>
-            </modal>
-                <?php
+                        <form class="Se-accountDeleteModalForm" method="post">
+                            <input type="hidden" name="deleterId" value=<?php echo $currentUserData['idUsuario'];?>>
+                            <input type="text" placeholder="<?php echo "delete/".$currentUserData['idUsuario']."/".$currentUserData['nomeDeUsuario'];?>"
+                                name="confirmaTextoDelete">
+                            <button type="submit" id="Se-submitAccountDeleteModalForm">ENVIAR</button>
+                            <button id="Se-cancelAccountDelete">CANCELAR</button>
+                        <?php
+                            if(isset($_POST['confirmaTextoDelete'])){
+                                if($_POST['confirmaTextoDelete'] === ("delete/".$currentUserData['idUsuario']."/".$currentUserData['nomeDeUsuario']))
+                                {
+                                    deleteAccount($conn, $table, $_POST['deleterId']);
+                                }
+                                else
+                                {
+                                    echo "Insira o texto corretamente!";
+                                }
+                            }
+                            
+                        ?>
+                        </form>
+                    </modal>
+            <?php
                 }
             ?>
         </main>
 
         <section class="modalSection close">
-            <form class="Se-editPasswordModal pageModal close">
+            <form class="Se-editPasswordModal pageModal close" method="post">
                 <div class="modalHeader">  
                     <i class="bi bi-arrow-left-circle closeModal"></i>
                     <h1>Alterar a Senha</h1>
@@ -389,6 +390,11 @@
                 </div>
 
                 <button class="Se-modalSubmit" type="submit" name="editPasswordSubmit">Confirmar</button>
+                <?php
+                    if(isset($_POST["editPasswordSubmit"])){
+                        editPassword($conn, $currentUserData['idUsuario']);
+                    }
+                ?>
             </form>
 
             <form class="Se-addNewChildModal pageModal close">
@@ -516,8 +522,8 @@
             </form>
         </section>
 
-        <script src="/ConectaMaesProject/app/assets/js/config.js"></script>
-        <script>     
+        <script src="/ConectaMaesProject/app/assets/js/system.js"></script>
+        <script>    
             function toggleConfigSection() {
                 const sectionTitles = document.querySelectorAll('.Se-sectionTitle');
                 const subSections = document.querySelectorAll('.Se-subSection');

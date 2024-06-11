@@ -23,7 +23,7 @@
 
     </main>
 
-    <script src="/ConectaMaesProject/app/assets/js/home.js"></script>
+    <script src="/ConectaMaesProject/app/assets/js/system.js"></script>
     <script>        
         toggleTheme();
     </script>

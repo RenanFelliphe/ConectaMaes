@@ -28,7 +28,7 @@
 
 
 
-    <script src="/ConectaMaesProject/app/assets/js/profile.js"></script>
+    <script src="/ConectaMaesProject/app/assets/js/system.js"></script>
     <script>        
         toggleTheme();
     </script>

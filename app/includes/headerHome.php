@@ -30,50 +30,56 @@
             <button name ="postPostagem" class="makeAPostBtn">Postar</button>
 
             <div class="postStyle">
-                <i class="bi bi-caret-down-fill"></i>
+                <i class="bi bi-caret-down-fill pageIcon"></i>
+            </div>
+        </div>
+
+        <div class="makeAPostModal headerModal close">
+            <div class="modalHeader">
+                <h1>Publicação</h1>
+                <i class="bi bi-three-dots pageIcon"></i>
             </div>
 
-            <div class="makeAPostModal">
-                <div class="modalHeader">
-                    <h1>Publicação</h1>
-                    <i class="bi bi-three-dots-vertical"></i>
+            <div class="postStyleSummary">
+                <div class="postStyleTitle">
+                    <span></span>
+                    <img class="homePageIcon headerIcon" src="/ConectaMaesProject/app/assets/imagens/icons/home_off.png" alt="Ícone da página inicial">
+                    <h4>Post</h4>
+                    <span></span>
                 </div>
+                <p>Faça uma publicação para compartilhar momentos
+                    do seu dia a dia, novidades, fotos ou qualquer outra coisa
+                    que queira dividir com a comunidade. <span>É a forma padrão
+                    de se conectar e interagir com outras mães<span>.</p>
+                <button name ="postPostagem" class="postBtn postagemBtn">Postar</button>
+            </div>
 
-                <div class="postStyleSummary">
-                    <div class="postStyleTitle">
-                        <img class="homePageIcon headerIcon" src="/ConectaMaesProject/app/assets/imagens/icons/home_off.png" alt="Ícone da página inicial">
-                        <p>Post</p>
-                    </div>
-                    <p>Faça uma publicação para compartilhar momentos 
-                        do seu dia a dia, novidades, fotos ou qualquer outra coisa 
-                        que queira dividir com a comunidade. É a forma padrão 
-                        de se conectar e interagir com outras mães.</p>
-                    <button name ="postPostagem" class="postBtn postagemBtn">Postar</button>
+            <div class="postStyleSummary">
+                <div class="postStyleTitle">
+                    <span></span>
+                    <img class="reportPageIcon headerIcon" src="/ConectaMaesProject/app/assets/imagens/icons/reports_off.png" alt="Ícone da página de relatos">
+                    <h4>Relato</h4>
+                    <span></span>
                 </div>
+                <p>Compartilhe suas experiências pessoais. <span>Conte sobre
+                    momentos importantes, dificuldades superadas,
+                    alegrias ou tristezas da sua vida</span>. Seus relatos podem
+                    inspirar e confortar outras mães na comunidade.</p>
+                <button name ="postPostagem" class="postBtn relatoBtn">Postar</button>
+            </div>
 
-                <div class="postStyleSummary">
-                    <div class="postStyleTitle">
-                        <img class="reportPageIcon headerIcon" src="/ConectaMaesProject/app/assets/imagens/icons/reports_off.png" alt="Ícone da página de relatos">
-                        <p>Relato</p>
-                    </div>
-                    <p>Compartilhe suas experiências pessoais. Conte sobre 
-                        momentos importantes, dificuldades superadas, 
-                        alegrias ou tristezas da sua vida. Seus relatos podem 
-                        inspirar e confortar outras mães na comunidade.</p>
-                    <button name ="postPostagem" class="postBtn relatoBtn">Postar</button>
+            <div class="postStyleSummary">
+                <div class="postStyleTitle">
+                    <span></span>
+                    <img class="helpPageIcon headerIcon" src="/ConectaMaesProject/app/assets/imagens/icons/helps_off.png" alt="Ícone da página de pedidos">
+                    <h4>Auxílio</h4>
+                    <span></span>
                 </div>
-
-                <div class="postStyleSummary">
-                    <div class="postStyleTitle">
-                        <img class="helpPageIcon headerIcon" src="/ConectaMaesProject/app/assets/imagens/icons/helps_off.png" alt="Ícone da página de pedidos">
-                        <p>Auxílio</p>
-                    </div>
-                    <p>Precisa de ajuda? Descreva uma dificuldade que está 
-                        enfrentando no momento e consiga apoio da 
-                        comunidade. Outras mães estão aqui para oferecer 
-                        suporte baseado em suas próprias experiências.</p>
-                    <button name ="postPostagem" class="postBtn pedidosBtn">Postar</button>
-                </div>
+                <p>Precisa de ajuda? <span>Descreva uma dificuldade que está
+                    enfrentando no momento e consiga apoio da
+                    comunidade</span>. Outras mães estão aqui para oferecer
+                    suporte baseado em suas próprias experiências.</p>
+                <button name ="postPostagem" class="postBtn pedidosBtn">Postar</button>
             </div>
         </div>
 
@@ -96,21 +102,16 @@
                 ?>
             </span>
         </div>
-        <div class="userAccount" onclick="openHeaderUserFunctions();">
+
+        <div class="userAccount">
             <div class="userProfileImage">
-                <?php
-                    $profileImagePath = "/ConectaMaesProject/app/assets/imagens/fotos/perfil/" . htmlspecialchars($currentUserData['nomeDeUsuario']) . '-' . htmlspecialchars($currentUserData['dataNascimentoUsuario']) . '-perfil.png';
-                    if (!file_exists($_SERVER['DOCUMENT_ROOT'] . $profileImagePath)) {
-                        $profileImagePath = "/ConectaMaesProject/app/assets/imagens/fotos/perfil/default.png";
-                    }
-                ?>
-                <img src="<?php echo $profileImagePath; ?>">
+                <img src="">
             </div>
             <i class="bi bi-chevron-down"></i>
         </div>
     </div>
 
-    <div class="userFunctionsModal close">
+    <div class="userFunctionsModal headerModal close">
         <a href="/ConectaMaesProject/public/home/perfil.php" class="userFunctions">
             <i class="bi bi-person-fill pageIcon"></i>
             <p>Perfil</p>
@@ -130,43 +131,69 @@
         </a>
         <span></span>
     </div>
+
 </header>
 
-
-
 <script>
-    function openHeaderUserFunctions() {
-        const userFunctionsModal = document.querySelector('.userFunctionsModal');
-        userFunctionsModal.classList.toggle('close');
-    }
+    function headerFunctions() {
+        function toggleModals() {
+            const modals = document.querySelectorAll('.headerModal');
+            const makeAPostButton = document.querySelector('.makeAPost');
+            let closeTimeout;
 
-    function toggleHeaderActivePage() {
-        const homePageLink = document.getElementById('homePageLink');
-        const reportPageLink = document.getElementById('reportPageLink');
-        const helpPageLink = document.getElementById('helpPageLink');
-        const currentUrl = window.location.href;
+            function closeAllModals() {
+                modals.forEach(modal => modal.classList.add('close'));
+                makeAPostButton.classList.remove('active');
+            }
 
-        if (currentUrl.includes('/ConectaMaesProject/public/home.php')) {
-            homePageLink.classList.add('active');
-            reportPageLink.classList.remove('active');
-            helpPageLink.classList.remove('active');
-        } else if (currentUrl.includes('/ConectaMaesProject/public/home/relatos.php')) {
-            homePageLink.classList.remove('active');
-            reportPageLink.classList.add('active');
-            helpPageLink.classList.remove('active');
-        } else if (currentUrl.includes('/ConectaMaesProject/public/home/pedidos.php')) {
-            homePageLink.classList.remove('active');
-            reportPageLink.classList.remove('active');
-            helpPageLink.classList.add('active');
-        } else {
-            homePageLink.classList.remove('active');
-            reportPageLink.classList.remove('active');
-            helpPageLink.classList.remove('active');
+            function toggleModal(modal, button = null) {
+                const isClosed = modal.classList.contains('close');
+                closeAllModals();
+                if (isClosed) {
+                    modal.classList.remove('close');
+                    if (button) {
+                        button.classList.add('active');
+                    }
+                }
+            }
+
+            document.querySelector('.userAccount').addEventListener('click', () => {
+                toggleModal(document.querySelector('.userFunctionsModal'));
+            });
+
+            makeAPostButton.addEventListener('click', () => {
+                toggleModal(document.querySelector('.makeAPostModal'), makeAPostButton);
+            });
+
+            modals.forEach(modal => {
+                modal.addEventListener('mouseleave', () => {
+                    closeTimeout = setTimeout(closeAllModals, 400);
+                });
+                modal.addEventListener('mouseenter', () => {
+                    clearTimeout(closeTimeout);
+                });
+            });
         }
+
+        function togglePages() {
+            const homePageLink = document.getElementById('homePageLink');
+            const reportPageLink = document.getElementById('reportPageLink');
+            const helpPageLink = document.getElementById('helpPageLink');
+            const currentUrl = window.location.href;
+
+            if (currentUrl.includes('/ConectaMaesProject/public/home.php')) {
+                homePageLink.classList.add('active');
+            } else if (currentUrl.includes('/ConectaMaesProject/public/home/relatos.php')) {
+                reportPageLink.classList.add('active');
+            } else if (currentUrl.includes('/ConectaMaesProject/public/home/pedidos.php')) {
+                helpPageLink.classList.add('active');
+            }
+        }
+
+        toggleModals();
+        togglePages();
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
-        toggleHeaderActivePage();
-    });
+    headerFunctions();
 </script>
 

@@ -86,7 +86,6 @@ $conn = mysqli_connect($hostname, $username, $password, $database);
                 $nome = !empty($_POST['nomeEdit']) ? mysqli_real_escape_string($conn, $_POST['nomeEdit']) : null;
                 $email = !empty($_POST['emailEdit']) ? filter_input(INPUT_POST, "emailEdit", FILTER_VALIDATE_EMAIL) : null;
                 $user = !empty($_POST['userEdit']) ? mysqli_real_escape_string($conn, $_POST['userEdit']) : null;
-                $senha = !empty($_POST['senhaEdit']) ? md5($_POST['senhaEdit']) : null;
                 $dataNascimento = !empty($_POST['dataNascimentoEdit']) ? mysqli_real_escape_string($conn, $_POST['dataNascimentoEdit']) : null;
                 $telefone = !empty($_POST['telefoneEdit']) ? mysqli_real_escape_string($conn, $_POST['telefoneEdit']) : null;
                 $localizacao = !empty($_POST['localizacaoEdit']) ? mysqli_real_escape_string($conn, $_POST['localizacaoEdit']) : null;
@@ -104,7 +103,7 @@ $conn = mysqli_connect($hostname, $username, $password, $database);
                         $err[] = "Email já registrado!";
                     }
                 }
-        
+
                 // Verificação de username duplicado
                 if($user) {
                     $queryUser = "SELECT nomeDeUsuario FROM Usuario WHERE nomeDeUsuario = '$user' AND idUsuario != '$userId'";
@@ -115,13 +114,12 @@ $conn = mysqli_connect($hostname, $username, $password, $database);
                         $err[] = "Usuário já registrado!";
                     }
                 }
-        
+                
                 if(empty($err)){
                     $fields = [];
                     if($nome) $fields["nomeCompleto"] = $nome;
                     if($email) $fields["email"] = $email;
                     if($user) $fields["nomeDeUsuario"] = $user;
-                    if($senha) $fields["senha"] = $senha;
                     if($dataNascimento) $fields["dataNascimentoUsuario"] = $dataNascimento;
                     if($telefone) $fields["telefone"] = $telefone;
                     if($localizacao) $fields["estado"] = $localizacao;
@@ -149,6 +147,44 @@ $conn = mysqli_connect($hostname, $username, $password, $database);
                 }
             }
         }
+
+        function editPassword($conn, $userId){
+            $err = array();
+
+            $userId = mysqli_real_escape_string($conn, $userId);
+            $currentPassword = md5($_POST['currentPassword']);
+            $newPassword = md5($_POST['newPassword']);
+            $confirmPassword = md5($_POST['confirmNewPassword']);
+            
+            $searchUserPassword = "SELECT senha FROM Usuario WHERE id = $userId";
+            $result = mysqli_query($conn, $searchUserPassword);
+
+            if ($newPassword !== $confirmPassword) {
+                $err[] = "Senhas não conferem.";
+            }
+            
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                
+                if ($currentPassword !== $row['senha']) {
+                    $err[] = "A senha atual está incorreta.";
+                }
+                if (empty($err)) {
+                    $updateSenha = "UPDATE Usuario SET senha = '$newPassword' WHERE id = $userId";
+                    $executeUpdate = mysqli_query($conn, $updateSenha);
+                    if (!$executeUpdate){
+                        echo "Erro ao atualizar senha: " . mysqli_error($conn) . "!";
+                    }
+                } else {
+                    foreach ($err as $e) {
+                        echo "<p>$e</p><br>";
+                    }
+                }
+            } else {
+                echo "Não foi possível alterar a senha, tente novamente mais tarde.";
+            }
+        }
+
         
     // DELETE ACCOUNT - DELETE
         function deleteAccount($conn, $table, $id)

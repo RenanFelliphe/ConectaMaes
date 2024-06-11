@@ -60,7 +60,7 @@
     </main>
     <?php include_once ("../app/includes/footer.php");?>
 
-    <script src="../app/assets/js/loginRegister.js"></script>
+    <script src="../app/assets/js/system.js"></script>
     <script>        
         toggleTheme();
     </script>
