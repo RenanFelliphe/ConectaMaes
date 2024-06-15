@@ -180,7 +180,7 @@
 
                     <div class="Se-accountBottom" style="margin-bottom: 1rem;">
                         <span class="Se-dateCriation"> Criado em: <span class="Se-accountDate">28/05/2024</span></span>
-                        <a class="Se-accountDelete" name="deletar" href="./config.php?deletar=true">Excluir conta</a>
+                        <a class="Se-accountDelete">Excluir conta</a> <!--name="deletar" href="./config.php?deletar=true-->
                     </div>
                 </div>
                 <div class="Se-childInformations Se-subSection">
@@ -515,6 +515,29 @@
                 </div>
                 <button class="Se-modalSubmit" type="submit" name="editPasswordSubmit">Confirmar</button>
             </form>
+
+            <form class="Se-deleteAccountModal pageModal close">
+                <div class="modalHeader">  
+                    <i class="bi bi-arrow-left-circle closeModal"></i>
+                    <h1>Deletar Conta</h1>
+                </div>
+
+                <div class="Se-deleteInputs">
+                    <ul><li>Tem certeza que deseja deletar a conta?</li></ul>
+                    <div class="Se-deleteInput">
+                        <input type="text" id="confirmDelete" name="confirmDeleteText" placeholder="AS-x5s}wRRc2;a">
+                        <label class="Re-fakePlaceholder" for="confirmDelete">
+                            <img src="/ConectaMaesProject/app/assets/imagens/icons/conectamaes_icon_black.png"></img>  
+                        </label>
+                    </div>
+                    <div class="Se-deleteInput">
+                        <input type="text" id="confirmDeleteInput" name="deleteTextInput">
+                        <label class="Re-fakePlaceholder" for="confirmDeleteInput">Reescreva o texto acima para confirmar</label>
+                    </div>
+                </div>
+
+                <button class="Se-modalSubmit" type="submit" name="deleteAccountSubmit">Confirmar</button>
+            </form>
         </section>
 
         <script src="/ConectaMaesProject/app/assets/js/system.js"></script>
@@ -559,6 +582,16 @@
                     });
                 }
 
+                function openDeleteAccountModal() {
+                    const deleteAccountModal = document.querySelector('.Se-deleteAccountModal');
+                    const deleteAccountBtn = document.querySelector('.Se-accountDelete');
+
+                    deleteAccountBtn.addEventListener('click', () => {
+                        deleteAccountModal.classList.toggle('close');
+                        modalSection.classList.toggle('close');
+                    });
+                }
+
                 closeModalBtns.forEach(closeModalBtn => {
                     closeModalBtn.addEventListener('click', () => {
                         pageModals.forEach(pageModal => {
@@ -570,6 +603,7 @@
 
                 openAddChildModal();
                 openEditPasswordModal();
+                openDeleteAccountModal();
             }
 
             function sendPassword(){
@@ -582,6 +616,7 @@
                     console.log(data);
                 })
             }
+            
             openModal();
             toggleConfigSection();
             toggleTheme();

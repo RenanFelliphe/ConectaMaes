@@ -2786,3 +2786,60 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
 .modalSection .Se-addNewChildModal .Se-modalSubmit{
     top: 10%;
 }
+
+
+
+
+
+.modalSection .Se-deleteAccountModal .Se-deleteInputs {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.7rem;
+    bottom: -40%;
+    transform: translateY(-50%);
+}
+
+.modalSection .Se-deleteAccountModal .Se-deleteInputs .Se-deleteInput{
+    position: relative;
+    padding: 0.7rem 0.5rem 0.5rem 1rem;
+    width: 22rem;
+    height: 2.5rem;
+    border-radius: 0.7rem;
+    border: 1px solid var(--blackColor);
+}
+
+.modalSection .Se-deleteAccountModal .Se-deleteInputs .Se-deleteInput input{
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: none;
+}
+
+.modalSection .Se-deleteAccountModal .Se-deleteInputs .Se-deleteInput label{
+    position: absolute;
+    top: -0.5rem;
+    left: 1rem;
+    background-color: var(--whiteColor);
+    padding: 0 1rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.modalSection .Se-deleteAccountModal .Se-deleteInputs .Se-deleteInput:first-of-type{
+    display: flex;
+    pointer-events: none;
+}
+
+.modalSection .Se-deleteAccountModal .Se-deleteInputs .Se-deleteInput:first-of-type::placeholder{
+    color: var(--grayColor);
+    font-size: 1.5rem;
+}
+
+.modalSection .Se-deleteAccountModal .Se-deleteInputs .Se-deleteInput:first-of-type .Re-fakePlaceholder{
+    background-color: var(--whiteColor);
+}
+
+.modalSection .Se-deleteAccountModal .Se-deleteInputs .Se-deleteInput:first-of-type .Re-fakePlaceholder img{
+    width: 0.7rem;
+}
