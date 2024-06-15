@@ -367,7 +367,7 @@
         </main>
 
         <section class="modalSection close">
-            <form class="Se-editPasswordModal pageModal close" method="post">
+            <form class="Se-editPasswordModal pageModal close" method="post" id="formPassword">
                 <div class="modalHeader">  
                     <i class="bi bi-arrow-left-circle closeModal"></i>
                     <h1>Alterar a Senha</h1>
@@ -390,11 +390,6 @@
                 </div>
 
                 <button class="Se-modalSubmit" type="submit" name="editPasswordSubmit">Confirmar</button>
-                <?php
-                    if(isset($_POST["editPasswordSubmit"])){
-                        editPassword($conn, $currentUserData['idUsuario']);
-                    }
-                ?>
             </form>
 
             <form class="Se-addNewChildModal pageModal close">
@@ -577,6 +572,16 @@
                 openEditPasswordModal();
             }
 
+            function sendPassword(){
+                const formElements = document.getElementById('formPassword');
+
+                formElements.addEventListener('submit', event =>{
+                    event.preventDefault();
+                    const formData = new FormData(formElements);
+                    const data = Object.fromEntries(formData);
+                    console.log(data);
+                })
+            }
             openModal();
             toggleConfigSection();
             toggleTheme();

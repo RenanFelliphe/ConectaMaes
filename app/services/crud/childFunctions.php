@@ -16,14 +16,13 @@ $conn = mysqli_connect($hostname, $username, $password, $database);
             $nomeFilho = mysqli_real_escape_string($conn, $_POST['nomeFilho']);
             $dataNascimentoFilho = mysqli_real_escape_string($conn, $_POST['dataNascimentoFilho']);
             $sexoFilho= mysqli_real_escape_string($conn, $_POST['sexo']);
-            $idResponsavel= mysqli_real_escape_string($conn, $idParent);
             
             if (empty($err)) {
-                $insertNewUser = "INSERT INTO Filho (nomeFilho, dataNascimentoFilho, sexo, idUsuario) VALUES ('$nomeFilho','$dataNascimentoFilho', '$sexoFilho','$idResponsavel')";
-                $executeSignUp = mysqli_query($conn, $insertNewUser);
+                $insertNewUser = "INSERT INTO Filho (nomeFilho, dataNascimentoFilho, sexo, idUsuario) VALUES ('$nomeFilho','$dataNascimentoFilho', '$sexoFilho','$idParent')";
+                $executeChildSignUp = mysqli_query($conn, $insertNewUser);
     
-                if (!$executeSignUp) {
-                    echo "<p>Erro ao registrar usuário: " . mysqli_error($conn) . "!<p>";
+                if (!$executeChildSignUp) {
+                    echo "<p>Erro ao registrar filho: " . mysqli_error($conn) . "!<p>";
                 }
             }
         }

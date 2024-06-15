@@ -87,63 +87,47 @@
             </form>
             <?php
                 $count = 0;
-                $id = 1;
 
-                // Loop para mostrar publicações
-                while (true) {
-                    $stmt = $conn->prepare("SELECT * FROM Publicacao WHERE idPublicacao = ? AND tipoPublicacao = 'Relato'");
-                    $stmt->bind_param("i", $id);
-                    $stmt->execute();
-                    $result = $stmt->get_result();
+                // Consulta inicial para obter todas as publicações usando a função fornecida
+                $publicacoes = queryMultiplePosts($conn, "Publicacao", "tipoPublicacao = 'Relato'", "dataCriacaoPublicacao DESC");
 
-                    if ($result->num_rows > 0) {
-                        // Exibir a publicação
-                        $dadosPublicacao = $result->fetch_assoc();
+                if (count($publicacoes) > 0) {
+                    // Loop para mostrar publicações
+                    foreach ($publicacoes as $dadosPublicacao) {
                         $postOwner = queryUserData($conn, "Usuario", $dadosPublicacao["idUsuario"]);
                         ?>
-                            <article class="Ho-relato">
-                                <div class="postTimelineTop">
-                                    <div class="postOwnerInfo">
-                                        <div class="postOwnerImage"></div>
-                                        <div class="postOwnerName"><?php echo $postOwner['nomeCompleto'];?></div>
-                                        <div class="postOwnerUser"><?php echo $postOwner['nomeDeUsuario'];?></div>
-                                    </div>
-                                    
-                                    <div class="postMoreButton"></div>
-                                </div>
-                                <div class="postTimelineContent">
-                                    <h3 class="postTitle"><?php echo $dadosPublicacao['titulo'];?></h3>
-                                    <p class="textPost"><?php echo $dadosPublicacao['conteudo']?></p>
-                                </div>
-                                <div class="postTimelineBottom">
-                                    <div class="postLikes"></div>
-                                    <div class="postComments"></div>
+                        <article class="Ho-relato">
+                            <div class="postTimelineTop">
+                                <div class="postOwnerInfo">
+                                    <div class="postOwnerImage"></div>
+                                    <div class="postOwnerName"><?php echo $postOwner['nomeCompleto'];?></div>
+                                    <div class="postOwnerUser"><?php echo $postOwner['nomeDeUsuario'];?></div>
                                 </div>
                                 
-                            </article>
+                                <div class="postMoreButton"></div>
+                            </div>
+                            <div class="postTimelineContent">
+                                <h3 class="postTitle"><?php echo $dadosPublicacao['titulo'];?></h3>
+                                <p class="textPost"><?php echo $dadosPublicacao['conteudo']?></p>
+                            </div>
+                            <div class="postTimelineBottom">
+                                <div class="postLikes"></div>
+                                <div class="postComments"></div>
+                            </div>
+                            
+                        </article>
                         <?php
                         $count++;
 
-                        // A cada 50 publicações, mostrar "sugestões"
+                        // A cada 50 publicações, mostrar sugestões de pedidos
                         if ($count % 50 == 0) {
                             echo "Sugestões<br><br>";
                         }
                     }
 
-                    $id++;
-
-                    // Verificar se existem mais publicações
-                    $stmt = $conn->prepare("SELECT COUNT(*) as total FROM Publicacao WHERE idPublicacao >= ?");
-                    $stmt->bind_param("i", $id);
-                    $stmt->execute();
-                    $result = $stmt->get_result();
-                    $row = $result->fetch_assoc();
-                    $totalRestante = $row['total'];
-
-                    if ($totalRestante == 0) {
-                        echo "Seu feed acabou<br>";
-                        break;
-                    }
+                    echo "Seu feed acabou<br>";
+                } else {
+                    echo "Nenhuma publicação encontrada<br>";
                 }
             ?>
         </section>

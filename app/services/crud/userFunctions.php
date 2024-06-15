@@ -151,37 +151,33 @@ $conn = mysqli_connect($hostname, $username, $password, $database);
         function editPassword($conn, $userId){
             $err = array();
 
-            $userId = mysqli_real_escape_string($conn, $userId);
             $currentPassword = md5($_POST['currentPassword']);
             $newPassword = md5($_POST['newPassword']);
             $confirmPassword = md5($_POST['confirmNewPassword']);
             
             $searchUserPassword = "SELECT senha FROM Usuario WHERE id = $userId";
             $result = mysqli_query($conn, $searchUserPassword);
+            $row = $result->fetch_assoc();
 
-            if ($newPassword !== $confirmPassword) {
-                $err[] = "Senhas não conferem.";
-            }
-            
-            if ($result->num_rows > 0) {
-                $row = $result->fetch_assoc();
-                
-                if ($currentPassword !== $row['senha']) {
-                    $err[] = "A senha atual está incorreta.";
-                }
-                if (empty($err)) {
+            if($currentPassword == $row){
+                if($newPassword == $confirmPassword){
                     $updateSenha = "UPDATE Usuario SET senha = '$newPassword' WHERE id = $userId";
-                    $executeUpdate = mysqli_query($conn, $updateSenha);
-                    if (!$executeUpdate){
-                        echo "Erro ao atualizar senha: " . mysqli_error($conn) . "!";
-                    }
-                } else {
-                    foreach ($err as $e) {
-                        echo "<p>$e</p><br>";
-                    }
+                }else{
+                    $err[] = "Senha nova não confirmada corretamente.";
                 }
-            } else {
-                echo "Não foi possível alterar a senha, tente novamente mais tarde.";
+            }else{
+                $err[] = "Senha atual não confere.";
+            }
+                
+            if (empty($err)) {
+                $executeUpdate = mysqli_query($conn, $updateSenha);
+                if (!$executeUpdate){
+                    echo "Erro ao atualizar senha: " . mysqli_error($conn) . "!";
+                }
+            }else {
+                foreach ($err as $e) {
+                    echo "<p>$e</p><br>";
+                }
             }
         }
 
