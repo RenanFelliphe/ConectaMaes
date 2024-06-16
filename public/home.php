@@ -88,14 +88,21 @@
                     foreach ($publicacoes as $dadosPublicacao) {
                         $postOwner = queryUserData($conn, "Usuario", $dadosPublicacao["idUsuario"]);
                         ?>
-                        <article class="Ho-relato">
+                        <article class="Ho-post">
                             <div class="postTimelineTop">
                                 <div class="postOwnerInfo">
-                                    <div class="postOwnerImage"></div>
-                                    <div class="postOwnerName"><?php echo $postOwner['nomeCompleto'];?></div>
-                                    <div class="postOwnerUser"><?php echo $postOwner['nomeDeUsuario'];?></div>
+                                    <div class="postOwnerImage">
+                                        <img src="" alt="Foto de Perfil">
+                                    </div>
+                                    <div class="postUserNames">
+                                        <h4 class="postOwnerName"><?php echo $postOwner['nomeCompleto'];?></h4>
+                                        <p class="postOwnerUser"><?php echo $postOwner['nomeDeUsuario'];?></p>
+                                    </div>
+                                    
                                 </div>
                                 
+                                <ul class="postDate"><li><?php echo $dadosPublicacao["dataCriacaoPublicacao"];?></li></ul>
+
                                 <div class="postMoreButton"></div>
                             </div>
                             <div class="postTimelineContent">
@@ -103,18 +110,25 @@
                                 <p class="textPost"><?php echo $dadosPublicacao['conteudo']?></p>
                             </div>
                             <div class="postTimelineBottom">
-                                <div class="postLikes"></div>
-                                <div class="postComments"></div>
+                                <div class="postLikes">
+                                    <i class="bi bi-heart-fill"></i>
+                                    <p>50</p>
+                                </div>
+                                <div class="postComments">
+                                    <i class="bi bi-chat-fill"></i>
+                                    <p>10</p>
+                                </div>
                             </div>
                             
                         </article>
                         <?php
                         $count++;
 
-                        // A cada 50 publicações, mostrar "sugestões"
-                        if ($count % 50 == 0) {
-                            echo "Sugestões<br><br>";
-                        }
+                        /* A cada 50 publicações, mostrar "sugestões"
+                            if ($count % 50 == 0) {
+                                echo "Sugestões<br><br>";
+                            }
+                        */
                     }
 
                     echo "Seu feed acabou<br>";

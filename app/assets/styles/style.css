@@ -1844,6 +1844,44 @@ footer .A-footerRight li.A-footerPolitic h5{
     transition: 0.3s;
 }
 
+.Ho-post{
+    position: relative;
+    width: 100%;
+    background-color: green;
+}
+
+.Ho-post .postTimelineTop{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.Ho-post .postTimelineTop .postOwnerInfo .postUserNames{
+    position: relative;
+    display: flex;
+    gap: 0.5rem;
+    font-size: 1rem;
+}
+
+.Ho-post .postTimelineTop .postOwnerInfo .postUserNames p{
+    color: var(--grayColor);
+    font-size: 0.7rem;
+}
+
+.Ho-post .postTimelineTop .postDate{
+    color: var(--thirdColor);
+    font-size: 0.7rem
+}
+
+.Ho-post .postTimelineBottom{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    color: var(--grayColor);
+}
+
 .Ho-Main .asideLeft{
     width: 25vw;
     height: 100%;

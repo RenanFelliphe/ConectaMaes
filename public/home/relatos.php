@@ -111,10 +111,13 @@
                                 <p class="textPost"><?php echo $dadosPublicacao['conteudo']?></p>
                             </div>
                             <div class="postTimelineBottom">
-                                <div class="postLikes"></div>
-                                <div class="postComments"></div>
+                                <div class="postLikes">
+                                    <i class="bi bi-heart-fill"></i>
+                                </div>
+                                <div class="postComments">
+                                    <i class="bi bi-chat-fill"></i>
+                                </div>
                             </div>
-                            
                         </article>
                         <?php
                         $count++;
