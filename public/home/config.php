@@ -73,7 +73,7 @@
                 </div>
             </section>
             <section class="Se-asideRight infoAccount">
-                <div class="Se-accountInformations Se-subSection active">
+                <form class="Se-accountInformations Se-subSection active" method="post" enctype="multipart/form-data">
                     <div class="Se-sectionHeader">
                         <img src="/ConectaMaesProject/app/assets/imagens/icons/user_icon.png" class="pageIcon" alt="Ícone de usuário">
                         <h1>Informações da Conta</h1>
@@ -81,9 +81,9 @@
                     <div class="Se-userInfo">
                         <div class="Re-addImageProfile">
                             <div class="Re-userImageProfile">
-                                <img src="/ConectaMaesProject/app/assets/imagens/fotos/perfil/<?php echo $currentUserData['nomeDeUsuario'] . '-' . $currentUserData['dataNascimentoUsuario'] . '-perfil.'."png";?>" alt="" class="Re-userImage">
+                                <img src="/ConectaMaesProject/app/assets/imagens/fotos/perfil/<?php echo $currentUserData['linkFotoPerfil']; ?>" alt="" class="Re-userImage">
                             </div>
-                            <input type="file" id="imagesSelector" name="linkFotoPerfilEdit" accept="image/*">
+                            <input type="file" id="imagesSelector" name="fotoPerfilEdit" accept="image/png, image/jpeg">
                             <label for="imagesSelector" class="Re-addImageIcon">                        
                                 <i class="bi bi-camera-fill"></i>                    
                             </label>
@@ -109,7 +109,7 @@
                             </div>
                         </div>
                     </div>
-                    <form class="Se-editInfo" method="post">
+                    <div class="Se-editInfo">
                         <input type="hidden" class="updaterIdHiddenInput" name="updaterId" value="<?php echo $currentUserData['idUsuario']; ?>">    
                         <div class="Se-userInput full-width">
                             <input type="text" id="nomeCompletoUsuario" name="nomeEdit" value="<?php echo $currentUserData['nomeCompleto'];?>">
@@ -147,7 +147,7 @@
                             </div>
                         </div>
                         <button class="Se-accountEdit" type="submit" name="editar">Editar conta</button>
-                    </form>
+                    </div>
                     <?php
                         if(isset($_POST['editar'])) {   
                             if($_POST['updaterId'] === $currentUserData['idUsuario']) {
@@ -156,13 +156,13 @@
                                 echo "Algo deu errado!";
                             }
                         }
-                ?>
+                    ?>
                             
                     <div class="Se-accountBottom" style="margin-bottom: 1rem;">
                         <span class="Se-dateCriation"> Criado em: <span class="Se-accountDate">28/05/2024</span></span>
                         <a class="Se-accountDelete" onclick="openModal();">Excluir conta</a> <!--name="deletar" href="./config.php?deletar=true-->
                     </div>
-                </div>
+                </form>
                 <div class="Se-childInformations Se-subSection">
                     <div class="Se-sectionHeader">
                         <img src="/ConectaMaesProject/app/assets/imagens/icons/pram_icon.png" class="pageIcon" alt="Ícone de usuário">

@@ -68,8 +68,8 @@
                         <span class="Ho-titleCharactersNumber">0</span>/<span class="Ho-maxTitleCharacters">50</span>
                     </div>
                 </div>
-                
-                <textarea name="" id="" cols="62" rows="3" class="Ho-postTextContent" placeholder="Encontrou uma dificuldade? Peça ajuda!" oninput="postCharLimiter()"></textarea>
+                <textarea name="conteudoEnvio" id="postText" cols="62" rows="3" class="Ho-postTextContent" placeholder="Encontrou uma dificuldade? Peça ajuda!" oninput="postCharLimiter()"></textarea>
+
                 <div class="Ho-characters">
                     <span class="Ho-charactersNumber">0</span>/<span class="Ho-maxCharacters">200</span>
                 </div>
@@ -89,7 +89,7 @@
 
             <div class="Ho-submitArea">
                 <div class="Ho-submitPost">
-                    <button type="submit" value="submit" name ="postAuxilio" class="Ho-submitBtn">Pedir</button>
+                    <button type="submit" value="submit" name ="postRelato" class="Ho-submitBtn">Postar</button>
 
                     <div class="Ho-postStyle">
                         <i class="bi bi-caret-down-fill"></i>
@@ -107,8 +107,8 @@
             <span class="Ho-preview"></span>
         </div>
         <?php
-            if(isset($_POST['postAuxilio'])){
-                sendPost($conn,"Auxilio", $currentUserData['idUsuario']);
+            if(isset($_POST['postRelato'])){
+                sendPost($conn,"Relato", $currentUserData['idUsuario']);
             }
         ?>
     </form>
@@ -130,7 +130,7 @@
                     </div>
                 </div>
                 
-                <textarea name="" id="" cols="62" rows="3" class="Ho-postTextContent" placeholder="Encontrou uma dificuldade? Peça ajuda!" oninput="postCharLimiter()"></textarea>
+                <textarea name="conteudoEnvio" id="postText" cols="62" rows="3" class="Ho-postTextContent" placeholder="Encontrou uma dificuldade? Peça ajuda!" oninput="postCharLimiter()"></textarea>
                 <div class="Ho-characters">
                     <span class="Ho-charactersNumber">0</span>/<span class="Ho-maxCharacters">200</span>
                 </div>

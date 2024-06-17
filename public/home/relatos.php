@@ -42,7 +42,7 @@
                             </div>
                         </div>
 
-                        <textarea name="conteudoEnvio" id="" cols="62" rows="3" class="Ho-postTextContent" placeholder="Compartilhe sua experiência!" oninput="postCharLimiter()"></textarea>
+                        <textarea name="conteudoEnvio" id="" cols="65" rows="3" class="Ho-postTextContent" placeholder="Compartilhe sua experiência!" oninput="postCharLimiter()"></textarea>
                         <div class="Ho-characters">
                             <span class="Ho-charactersNumber">0</span>/<span class="Ho-maxCharacters">200</span>
                         </div>
@@ -101,7 +101,7 @@
                         ?>
                         <article class="Ho-post">
                             <div class="postOwnerImage">
-                                <img src="<?php echo htmlspecialchars($profileImage); ?>" alt="Profile Image">
+                                <img src="<?php echo htmlspecialchars($profileImage); ?>">
                             </div>
 
                             <div class="postContent">

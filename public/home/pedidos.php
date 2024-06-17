@@ -6,7 +6,6 @@
     $currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);   
 ?>
 
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -24,13 +23,80 @@
 
     <?php include_once ("../../app/includes/headerHome.php");?>
 
-    <main class="Ho-Main mainSystem">
+    <main class="Ho-Main Au-main mainSystem">
         <section class="asideLeft">
             <img src="" class="backCells cellsLeft">
         </section>
 
         <section class="timeline">
+            <section>
 
+            </section>
+            <section class="Au-allAuxilios">
+                <?php
+                    $count = 0;
+
+                    // Consulta inicial para obter todas as publicações usando a função fornecida
+                    $auxilios = queryMultiplePosts($conn, "Publicacao", "tipoPublicacao = 'Auxilio'", "dataCriacaoPublicacao DESC");
+
+                    if (count($auxilios) > 0) {
+                        // Loop para mostrar publicações
+                        foreach ($auxilios as $dadosPublicacao) {
+                            $postOwner = queryUserData($conn, "Usuario", $dadosPublicacao["idUsuario"]);
+                            // Verificar se o link da foto de perfil está presente
+                            $profileImage = !empty($postOwner['linkFotoPerfil']) ? $postOwner['linkFotoPerfil'] : 'caminho/padrao/para/imagem.png';
+                            ?>
+                            <article class="Au-auxilioCard">
+                                <ul class="postDate"><li><?php echo htmlspecialchars($dadosPublicacao["dataCriacaoPublicacao"]); ?></li></ul>
+
+                                <div class="postTimelineTop">
+                                    <div class="postOwnerImage">
+                                        <img src="<?php echo htmlspecialchars($profileImage); ?>">
+                                    </div>
+
+                                    <div class="postUserNames">
+                                        <p class="postOwnerName"><?php echo htmlspecialchars($postOwner['nomeCompleto']); ?></p>
+                                        <p class="postOwnerUser"><?php echo htmlspecialchars($postOwner['nomeDeUsuario']); ?></p>
+                                    </div>
+                                </div>
+
+                                <p class="postTitle"><?php echo htmlspecialchars($dadosPublicacao['titulo']); ?></p>
+
+                                <div class="postTimelineBottom">
+                                    <div class="postInteractions">
+                                        <div class="postLikes">
+                                            <i class="bi bi-heart-fill"></i>
+                                            <p>0</p>
+                                        </div>
+                                        <div class="postComments">
+                                            <i class="bi bi-chat-fill"></i>
+                                            <p>0</p>
+                                        </div>
+                                    </div>
+
+                                    <button name ="openAuxilio" class="Au-openAuxilio">Auxiliar</button>
+                                </div>
+                            </article>
+
+                            <?php
+                            $count++;
+
+                            /* A cada 50 publicações, mostrar "sugestões"
+                                if ($count % 50 == 0) {
+                                    echo "Sugestões<br><br>";
+                                }
+                            */
+                        }
+
+                        //criar html para 
+                        echo "FIM...<br>";
+                    } else {
+                        //criar html para 
+                        echo "Nenhuma publicação encontrada<br>";
+                    }
+                ?>
+            </section>
+            
         </section>
 
         <section class="asideRight">

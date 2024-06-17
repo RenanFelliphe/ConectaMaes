@@ -33,7 +33,15 @@
         }
     }
 
-    function updatePFP(){}
+    function updatePFP(){
+        /* 
+            se(mandoufotonoform){
+                pega a foto atual e troca pela foto no form, mantendo o msm nome
+            }se nao{
+                mantem a foto atual
+            }
+        */
+    }
 
     function uploadAnexo(){
         $diretorioAnexo = "/app/assets/imagens/fotos/anexos/";

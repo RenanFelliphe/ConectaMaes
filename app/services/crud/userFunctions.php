@@ -91,9 +91,9 @@
                 $dataNascimento = !empty($_POST['dataNascimentoEdit']) ? mysqli_real_escape_string($conn, $_POST['dataNascimentoEdit']) : null;
                 $telefone = !empty($_POST['telefoneEdit']) ? mysqli_real_escape_string($conn, $_POST['telefoneEdit']) : null;
                 $localizacao = !empty($_POST['localizacaoEdit']) ? mysqli_real_escape_string($conn, $_POST['localizacaoEdit']) : null;
-                $linkFotoPerfil = !empty($_POST['linkFotoPerfilEdit']) ? mysqli_real_escape_string($conn, $_POST['linkFotoPerfilEdit']) : null;
                 $biografiaUsuario = !empty($_POST['biografiaUsuarioEdit']) ? mysqli_real_escape_string($conn, $_POST['biografiaUsuarioEdit']) : null;
                 $tema = !empty($_POST['temaEdit']) ? mysqli_real_escape_string($conn, $_POST['temaEdit']) : null;
+                $linkFotoPerfil = !empty($_POST['fotoPerfilEdit']) ? mysqli_real_escape_string($conn, $_POST['fotoPerfilEdit']) : null;
         
                 // Verificação de email duplicado
                 if($email) {

@@ -14,12 +14,12 @@
             
             $tipoPublicacaoEnvio = mysqli_real_escape_string($conn, $postType);
             $conteudoEnvio = mysqli_real_escape_string($conn, $_POST['conteudoEnvio']);
-            $linkAnexoEnvio = mysqli_real_escape_string($conn, $_POST['linkAnexoEnvio']);
             $tituloEnvio = isset($_POST['tituloEnvio']) ? mysqli_real_escape_string($conn, $_POST['tituloEnvio']) : null;
             $isSensivelEnvio = isset($_POST['sensitiveContent']) ? mysqli_real_escape_string($conn, $_POST['sensitiveContent']) : 0;
             $isConcluido = isset($_POST['isConcluidoEnvio']) ? mysqli_real_escape_string($conn, $_POST['isConcluidoEnvio']) : 0;
             $idUsuarioQuePostou = mysqli_real_escape_string($conn, $currentUserId);
-    
+            $linkAnexoEnvio = '';
+            
             if(empty($err)){
                 $insertNewPost = "INSERT INTO Publicacao (tipoPublicacao, conteudo, linkAnexo, titulo, isSensivel, isConcluido, idUsuario) VALUES ('$tipoPublicacaoEnvio','$conteudoEnvio','$linkAnexoEnvio','$tituloEnvio','$isSensivelEnvio','$isConcluido','$idUsuarioQuePostou')";
                 $executeSendPost = mysqli_query($conn, $insertNewPost);
