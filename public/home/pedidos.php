@@ -83,7 +83,9 @@
                     <span class="Ho-preview"></span>
                 </div>
                 <?php
-                    sendPost($conn,"Auxílio", $currentUserData['idUsuario']);
+                    if(isset($_POST['postAuxilio'])){
+                        sendPost($conn,"Auxilio", $currentUserData['idUsuario']);
+                    }
                 ?>
             </form>
             

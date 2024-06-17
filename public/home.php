@@ -77,50 +77,56 @@
                     }
                 ?>
             </form>
+
             <?php
                 $count = 0;
 
                 // Consulta inicial para obter todas as publicações usando a função fornecida
-                $publicacoes = queryMultiplePosts($conn, "Publicacao", "1", "dataCriacaoPublicacao DESC");
+                $publicacoes = queryMultiplePosts($conn, "Publicacao", "tipoPublicacao <> 'Auxilio'", "dataCriacaoPublicacao DESC");
 
                 if (count($publicacoes) > 0) {
                     // Loop para mostrar publicações
                     foreach ($publicacoes as $dadosPublicacao) {
                         $postOwner = queryUserData($conn, "Usuario", $dadosPublicacao["idUsuario"]);
+                        // Verificar se o link da foto de perfil está presente
+                        $profileImage = !empty($postOwner['linkFotoPerfil']) ? $postOwner['linkFotoPerfil'] : 'caminho/padrao/para/imagem.png';
                         ?>
                         <article class="Ho-post">
-                            <div class="postTimelineTop">
-                                <div class="postOwnerInfo">
-                                    <div class="postOwnerImage">
-                                        <img src="" alt="Foto de Perfil">
-                                    </div>
-                                    <div class="postUserNames">
-                                        <h4 class="postOwnerName"><?php echo $postOwner['nomeCompleto'];?></h4>
-                                        <p class="postOwnerUser"><?php echo $postOwner['nomeDeUsuario'];?></p>
-                                    </div>
-                                    
-                                </div>
-                                
-                                <ul class="postDate"><li><?php echo $dadosPublicacao["dataCriacaoPublicacao"];?></li></ul>
+                            <div class="postOwnerImage">
+                                <img src="<?php echo htmlspecialchars($profileImage); ?>" alt="Profile Image">
+                            </div>
 
-                                <div class="postMoreButton"></div>
-                            </div>
-                            <div class="postTimelineContent">
-                                <h3 class="postTitle"><?php echo $dadosPublicacao['titulo'];?></h3>
-                                <p class="textPost"><?php echo $dadosPublicacao['conteudo']?></p>
-                            </div>
-                            <div class="postTimelineBottom">
-                                <div class="postLikes">
-                                    <i class="bi bi-heart-fill"></i>
-                                    <p>50</p>
+                            <div class="postContent">
+                                <div class="postTimelineTop">
+                                    <div class="postUserNames">
+                                        <p class="postOwnerName"><?php echo htmlspecialchars($postOwner['nomeCompleto']); ?></p>
+                                        <p class="postOwnerUser"><?php echo htmlspecialchars($postOwner['nomeDeUsuario']); ?></p>
+                                    </div>
+
+                                    <div class="postInfo">
+                                        <ul class="postDate"><li><?php echo htmlspecialchars($dadosPublicacao["dataCriacaoPublicacao"]); ?></li></ul>
+                                        <div class="bi bi-three-dots postMoreButton"></div>
+                                    </div>
                                 </div>
-                                <div class="postComments">
-                                    <i class="bi bi-chat-fill"></i>
-                                    <p>10</p>
+
+                                <div class="postTitles">  
+                                    <p class="postTitle"><?php echo htmlspecialchars($dadosPublicacao['titulo']); ?></p>
+                                    <p class="textPost"><?php echo htmlspecialchars($dadosPublicacao['conteudo']); ?></p>
+                                </div>
+
+                                <div class="postTimelineBottom">
+                                    <div class="postLikes">
+                                        <i class="bi bi-heart-fill"></i>
+                                        <p>50</p>
+                                    </div>
+                                    <div class="postComments">
+                                        <i class="bi bi-chat-fill"></i>
+                                        <p>10</p>
+                                    </div>
                                 </div>
                             </div>
-                            
                         </article>
+
                         <?php
                         $count++;
 
@@ -131,11 +137,14 @@
                         */
                     }
 
-                    echo "Seu feed acabou<br>";
+                    //criar html para 
+                    echo "FIM...<br>";
                 } else {
+                    //criar html para 
                     echo "Nenhuma publicação encontrada<br>";
                 }
             ?>
+
 
         </section>
 

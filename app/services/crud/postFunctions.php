@@ -34,7 +34,7 @@
 
     // SEARCH POSTS - READ
         function querySpecificPost($conn, $table, $id){
-            $sUQuery = "SELECT * FROM $table WHERE idPublicacao =" . (int) $id;
+            $sUQuery = "SELECT * FROM Publicacao WHERE idPublicacao =" . (int) $id;
 
             $sUExec = mysqli_query($conn, $sUQuery);
             $sUReturn = mysqli_fetch_assoc($sUExec);
@@ -47,7 +47,7 @@
                 $order = "ORDER BY $order";
             }
 
-            $gQuery = "SELECT * FROM $table WHERE $where $order ";
+            $gQuery = "SELECT * FROM Publicacao WHERE $where $order ";
 
             $gExec = mysqli_query($conn,$gQuery);
             $gReturn = mysqli_fetch_all($gExec, MYSQLI_ASSOC);
@@ -56,10 +56,10 @@
         }
 
     // DELETE POST - DELETE
-        function deletePost($conn, $table, $id)
+        function deletePost($conn, $id)
         {
             if(!empty($id)){         
-                $dQuery = "DELETE FROM $table WHERE idPublicacao = ". (int) $id;
+                $dQuery = "DELETE FROM Publicacao WHERE idPublicacao = ". (int) $id;
                 $dExec = mysqli_query($conn, $dQuery);
 
                 if(!$dExec){

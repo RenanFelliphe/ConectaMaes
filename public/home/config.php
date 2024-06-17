@@ -168,13 +168,13 @@
                     </form>
 
                     <?php
-                    if(isset($_POST['editar'])) {   
-                        if($_POST['updaterId'] === $currentUserData['idUsuario']) {
-                            editProfile($conn, $_POST['updaterId']);
-                        } else {
-                            echo "Algo deu errado!";
+                        if(isset($_POST['editar'])) {   
+                            if($_POST['updaterId'] === $currentUserData['idUsuario']) {
+                                editProfile($conn, $_POST['updaterId']);
+                            } else {
+                                echo "Algo deu errado!";
+                            }
                         }
-                    }
                 ?>
                             
 
