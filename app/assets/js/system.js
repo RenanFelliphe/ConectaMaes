@@ -1,3 +1,78 @@
+function postCharLimiter() {
+    const maxCharacters = Number(document.querySelector(".Ho-maxCharacters").textContent.trim());
+    const input = document.querySelector(".Ho-postTextContent");
+    const inputContent = input.value;
+    const numberOFCharacters = document.querySelector(".Ho-charactersNumber");
+    const characteres = document.querySelector(".Ho-characters");
+
+    numberOFCharacters.textContent = inputContent.length;
+
+    if (inputContent.length >= maxCharacters) {
+        input.value = inputContent.slice(0, maxCharacters);
+        numberOFCharacters.textContent = "Max";
+        numberOFCharacters.style.color = "var(--redColor)";
+        characteres.style.color = "var(--redColor)";
+        characteres.style.fontWeight = "bolder";
+
+        input.classList.add("characterBlocked");
+        characteres.classList.add("characterBlocked");
+        setTimeout(() => {
+            input.classList.remove("characterBlocked");
+            characteres.classList.remove("characterBlocked");
+        }, 700);
+
+    } else if (inputContent.length >= (maxCharacters * 0.75)) {
+        numberOFCharacters.style.color = "var(--middlePinkColor)";
+        characteres.style.fontWeight = "normal";
+    } else if (inputContent.length >= (maxCharacters * 0.5)) {
+        numberOFCharacters.style.color = "var(--middleYellowColor)";
+        characteres.style.fontWeight = "normal";
+    } else if (inputContent.length <= 0){
+        numberOFCharacters.style.color = "var(--grayColor)";
+        characteres.style.fontWeight = "normal";
+    } else {
+        numberOFCharacters.style.color = "var(--middleBlueColor)";
+        characteres.style.fontWeight = "normal";
+    }
+}
+
+function postTitleCharLimiter() {
+    const maxCharacters = Number(document.querySelector(".Ho-maxTitleCharacters").textContent.trim());
+    const input = document.querySelector(".Ho-postTitleInput");
+    const inputContent = input.value;
+    const numberOFCharacters = document.querySelector(".Ho-titleCharactersNumber");
+    const characteres = document.querySelector(".Ho-titleCharacters");
+    const postTitle = document.querySelector('.Ho-postTitle');
+
+    numberOFCharacters.textContent = inputContent.length;
+
+    if (inputContent.length >= maxCharacters) {
+        input.value = inputContent.slice(0, maxCharacters);
+        numberOFCharacters.textContent = "Max";
+        numberOFCharacters.style.color = "var(--redColor)";
+        characteres.style.color = "var(--redColor)";
+        characteres.style.fontWeight = "bolder";
+
+        postTitle.classList.add("characterBlocked")
+        setTimeout(() => {
+            postTitle.classList.remove("characterBlocked")
+        }, 700);
+
+    } else if (inputContent.length >= (maxCharacters * 0.75)) {
+        numberOFCharacters.style.color = "var(--middlePinkColor)";
+        characteres.style.fontWeight = "normal";
+    } else if (inputContent.length >= (maxCharacters * 0.5)) {
+        numberOFCharacters.style.color = "var(--middleYellowColor)";
+        characteres.style.fontWeight = "normal";
+    } else if (inputContent.length <= 0){
+        numberOFCharacters.style.color = "var(--grayColor)";
+        characteres.style.fontWeight = "normal";
+    } else {
+        numberOFCharacters.style.color = "var(--middleBlueColor)";
+        characteres.style.fontWeight = "normal";
+    }
+}
+
 function registerUser() {
     const registerNext = document.querySelector('.Re-registerNext');
     const backButton = document.querySelector('.Re-backButton');
@@ -154,81 +229,6 @@ function addPost(){
         });
     });
 }
-
-function postCharLimiter() {
-    const maxCharacters = Number(document.querySelector(".Ho-maxCharacters").textContent.trim());
-    const input = document.querySelector(".Ho-postTextContent");
-    const inputContent = input.value;
-    const numberOFCharacters = document.querySelector(".Ho-charactersNumber");
-    const characteres = document.querySelector(".Ho-characters");
-
-    numberOFCharacters.textContent = inputContent.length;
-
-    if (inputContent.length >= maxCharacters) {
-        input.value = inputContent.slice(0, maxCharacters);
-        numberOFCharacters.textContent = "Max";
-        numberOFCharacters.style.color = "var(--redColor)";
-        characteres.style.color = "var(--redColor)";
-        characteres.style.fontWeight = "bolder";
-
-        input.classList.add("characterBlocked");
-        characteres.classList.add("characterBlocked");
-        setTimeout(() => {
-            input.classList.remove("characterBlocked");
-            characteres.classList.remove("characterBlocked");
-        }, 700);
-
-    } else if (inputContent.length >= (maxCharacters * 0.75)) {
-        numberOFCharacters.style.color = "var(--middlePinkColor)";
-        characteres.style.fontWeight = "normal";
-    } else if (inputContent.length >= (maxCharacters * 0.5)) {
-        numberOFCharacters.style.color = "var(--middleYellowColor)";
-        characteres.style.fontWeight = "normal";
-    } else if (inputContent.length <= 0){
-        numberOFCharacters.style.color = "var(--grayColor)";
-        characteres.style.fontWeight = "normal";
-    } else {
-        numberOFCharacters.style.color = "var(--middleBlueColor)";
-        characteres.style.fontWeight = "normal";
-    }
-}
-
-function postTitleCharLimiter() {
-    const maxCharacters = Number(document.querySelector(".Ho-maxTitleCharacters").textContent.trim());
-    const input = document.querySelector(".Ho-postTitleInput");
-    const inputContent = input.value;
-    const numberOFCharacters = document.querySelector(".Ho-titleCharactersNumber");
-    const characteres = document.querySelector(".Ho-titleCharacters");
-    const postTitle = document.querySelector('.Ho-postTitle');
-
-    numberOFCharacters.textContent = inputContent.length;
-
-    if (inputContent.length >= maxCharacters) {
-        input.value = inputContent.slice(0, maxCharacters);
-        numberOFCharacters.textContent = "Max";
-        numberOFCharacters.style.color = "var(--redColor)";
-        characteres.style.color = "var(--redColor)";
-        characteres.style.fontWeight = "bolder";
-
-        postTitle.classList.add("characterBlocked")
-        setTimeout(() => {
-            postTitle.classList.remove("characterBlocked")
-        }, 700);
-
-    } else if (inputContent.length >= (maxCharacters * 0.75)) {
-        numberOFCharacters.style.color = "var(--middlePinkColor)";
-        characteres.style.fontWeight = "normal";
-    } else if (inputContent.length >= (maxCharacters * 0.5)) {
-        numberOFCharacters.style.color = "var(--middleYellowColor)";
-        characteres.style.fontWeight = "normal";
-    } else if (inputContent.length <= 0){
-        numberOFCharacters.style.color = "var(--grayColor)";
-        characteres.style.fontWeight = "normal";
-    } else {
-        numberOFCharacters.style.color = "var(--middleBlueColor)";
-        characteres.style.fontWeight = "normal";
-    }
-}
  
 function registerTheme(){
     const body = document.querySelector("body");
@@ -295,8 +295,35 @@ function toggleTheme(){
     
 }
 
+function toggleConfigSection() {
+    const sectionTitles = document.querySelectorAll('.Se-sectionTitle');
+    const subSections = document.querySelectorAll('.Se-subSection');
+
+    sectionTitles.forEach((title, index) => {
+        title.addEventListener('click', () => {
+            subSections.forEach(subSection => {
+                subSection.classList.remove('active');
+            });
+
+            subSections[index].classList.add('active');
+        });
+    });
+}
+
+function sendPassword(){
+    const formElements = document.getElementById('formPassword');
+
+    formElements.addEventListener('submit', event =>{
+        event.preventDefault();
+        const formData = new FormData(formElements);
+        const data = Object.fromEntries(formData);
+        console.log(data);
+    })
+}
+
 registerUser();
+addPost();
 registerTheme();
 toggleTheme();
-addPost();
 toggleConfigSection();
+sendPassword();
