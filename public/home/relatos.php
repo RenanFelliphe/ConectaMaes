@@ -27,7 +27,7 @@
         </section>
 
         <section class="timeline">
-            <form class="Ho-postSomething" method="post">
+            <form class="Ho-postSomething" method="post" enctype="multipart/form-data">
                 <div class="Ho-postTop">
                     <a class="Ho-userProfileImage" href="/ConectaMaesProject/public/home/perfil.php">
                         <img src="">
@@ -52,7 +52,7 @@
                 <div class="Ho-postBottom">
                     <div class="Ho-extraInputs">
                         <div class="Ho-imageInput">
-                            <input type="file" id="Ho-imageSelector" name="linkAnexoEnvio" accept="image/*">
+                        <input type="file" id="Ho-imageSelector" name="linkAnexoEnvio" accept="image/*" onchange="addPost()">
                             <label for="Ho-imageSelector">
                                 <i class="bi bi-images Ho-iconLabel"></i>
                                 <p> Imagem </p>
@@ -169,6 +169,8 @@
             </div>
         </section>
     </main>
+
+    <?php include_once ("../../app/includes/modais.php");?>
 
     <script src="/ConectaMaesProject/app/assets/js/system.js"></script>
     <script>        

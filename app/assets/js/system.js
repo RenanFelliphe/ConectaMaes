@@ -1,3 +1,67 @@
+document.addEventListener('DOMContentLoaded', function() {
+    toggleTheme();
+    openModal();
+});
+
+function headerFunctions() {
+    function toggleModals() {
+        const modals = document.querySelectorAll('.headerModal');
+        const makeAPostButton = document.querySelector('.makeAPost');
+        let closeTimeout;
+
+        function closeAllModals() {
+            modals.forEach(modal => modal.classList.add('close'));
+            makeAPostButton.classList.remove('active');
+        }
+
+        function toggleModal(modal, button = null) {
+            const isClosed = modal.classList.contains('close');
+            closeAllModals();
+            if (isClosed) {
+                modal.classList.remove('close');
+                if (button) {
+                    button.classList.add('active');
+                }
+            }
+        }
+
+        document.querySelector('.userAccount').addEventListener('click', () => {
+            toggleModal(document.querySelector('.userFunctionsModal'));
+        });
+
+        makeAPostButton.addEventListener('click', () => {
+            toggleModal(document.querySelector('.makeAPostModal'), makeAPostButton);
+        });
+
+        modals.forEach(modal => {
+            modal.addEventListener('mouseleave', () => {
+                closeTimeout = setTimeout(closeAllModals, 400);
+            });
+            modal.addEventListener('mouseenter', () => {
+                clearTimeout(closeTimeout);
+            });
+        });
+    }
+
+    function togglePages() {
+        const homePageLink = document.getElementById('homePageLink');
+        const reportPageLink = document.getElementById('reportPageLink');
+        const helpPageLink = document.getElementById('helpPageLink');
+        const currentUrl = window.location.href;
+
+        if (currentUrl.includes('/ConectaMaesProject/public/home.php')) {
+            homePageLink.classList.add('active');
+        } else if (currentUrl.includes('/ConectaMaesProject/public/home/relatos.php')) {
+            reportPageLink.classList.add('active');
+        } else if (currentUrl.includes('/ConectaMaesProject/public/home/pedidos.php')) {
+            helpPageLink.classList.add('active');
+        }
+    }
+
+    toggleModals();
+    togglePages();
+}
+
 function postCharLimiter() {
     const maxCharacters = Number(document.querySelector(".Ho-maxCharacters").textContent.trim());
     const input = document.querySelector(".Ho-postTextContent");
@@ -207,56 +271,44 @@ function registerUser() {
     validateSubmit();
 }
 
-function addPost(){
-    document.addEventListener("DOMContentLoaded", function() {
-        const input = document.querySelector("#Ho-imageSelector");
-        const preview = document.querySelector(".Ho-preview");
-    
-        input.addEventListener("change", function() {
-            while (preview.firstChild) {
-                preview.removeChild(preview.firstChild);
-            }
-    
-            const files = input.files;
-            if (files.length > 0) {
-                for (const file of files) {
-                    const img = document.createElement("img");
-                    img.src = URL.createObjectURL(file);
-                    img.alt = file.name;
-                    preview.appendChild(img);
-                }
-            }
-        });
-    });
+function addPost() {
+    const input = document.querySelector("#Ho-imageSelector");
+    const preview = document.querySelector(".Ho-preview");
+
+    while (preview.firstChild) {
+        preview.removeChild(preview.firstChild);
+    }
+
+    const files = input.files;
+    if (files.length > 0) {
+        for (const file of files) {
+            const img = document.createElement("img");
+            img.src = URL.createObjectURL(file);
+            img.alt = file.name;
+            preview.appendChild(img);
+        }
+    }
 }
- 
-function registerTheme(){
+
+function registerTheme(theme) {
     const body = document.querySelector("body");
-    const yellowTheme = document.querySelector("#Re-yellowTheme");
-    const blueTheme = document.querySelector("#Re-blueTheme");
-    const pinkTheme = document.querySelector("#Re-pinkTheme");
     
-    yellowTheme.addEventListener("click", () => {
+    if (theme === 'Y-theme') {
         body.classList.add("Y-theme");
         body.classList.remove("B-theme");
         body.classList.remove("P-theme");
-        toggleTheme();
-    });
-    
-    blueTheme.addEventListener("click", () => {
+    } else if (theme === 'B-theme') {
         body.classList.add("B-theme");
         body.classList.remove("P-theme");
         body.classList.remove("Y-theme");
-        toggleTheme();
-    });
-    
-    pinkTheme.addEventListener("click", () => {
+    } else if (theme === 'P-theme') {
         body.classList.add("P-theme");
         body.classList.remove("B-theme");
         body.classList.remove("Y-theme");
-        toggleTheme();
-    }); 
-}  
+    }
+
+    toggleTheme();
+}
 
 function toggleTheme(){
     const body = document.querySelector("body");
@@ -272,10 +324,13 @@ function toggleTheme(){
             cells.forEach(cell => {
                 cell.src = '/ConectaMaesProject/app/assets/imagens/figuras/cells_standart_first_pink.png';
             });
-        } else {
+        } else if(body.classList.contains("Y-theme")){
             cells.forEach(cell => {
                 cell.src = '/ConectaMaesProject/app/assets/imagens/figuras/cells_standart_first_yellow.png';
             });
+        } else{
+            body.classList.add("Y-theme");
+            toggleTheme();
         }
     } else if (main.classList.contains("mainSystem")){
         if(body.classList.contains("B-theme")){
@@ -286,10 +341,13 @@ function toggleTheme(){
             cells.forEach(cell => {
                 cell.src = '/ConectaMaesProject/app/assets/imagens/figuras/cells_standart_full_pink.png';
             });
-        } else {
+        } else if(body.classList.contains("Y-theme")){
             cells.forEach(cell => {
                 cell.src = '/ConectaMaesProject/app/assets/imagens/figuras/cells_standart_full_yellow.png';
             });
+        } else{
+            body.classList.add("Y-theme");
+            toggleTheme();
         }
     }
     
@@ -301,13 +359,90 @@ function toggleConfigSection() {
 
     sectionTitles.forEach((title, index) => {
         title.addEventListener('click', () => {
-            subSections.forEach(subSection => {
-                subSection.classList.remove('active');
-            });
+            sectionTitles.forEach(title => title.classList.remove('active'));
+            subSections.forEach(subSection => subSection.classList.remove('active'));
 
-            subSections[index].classList.add('active');
+            if (sectionTitles[index] && subSections[index]) {
+                sectionTitles[index].classList.add('active');
+                subSections[index].classList.add('active');
+            }
         });
     });
+}
+
+function openModal() {
+    const modalSection = document.querySelector('.modalSection');
+    const closeModalBtns = document.querySelectorAll('.closeModal');
+    const pageModals = document.querySelectorAll('.pageModal');
+    
+    function postModal(){
+        const postPostBtn = document.querySelector('.postPostBtn');
+        const postRelatoBtn = document.querySelector('.postRelatoBtn');
+        const postAuxilioBtn = document.querySelector('.postAuxilioBtn');
+
+        const postPostModal = document.querySelector('.postPostModal');
+        const postRelatosModal = document.querySelector('.postRelatosModal');
+        const postAuxilioModal = document.querySelector('.postAuxilioModal');
+
+        postPostBtn.addEventListener('click', () => {
+            postPostModal.classList.toggle('close');
+            modalSection.classList.toggle('close');
+        });
+
+        postRelatoBtn.addEventListener('click', () => {
+            postRelatosModal.classList.toggle('close');
+            modalSection.classList.toggle('close');
+        });
+
+        postAuxilioBtn.addEventListener('click', () => {
+            postAuxilioModal.classList.toggle('close');
+            modalSection.classList.toggle('close');
+        });
+    }
+
+    function openAddChildModal() {
+        const addChildModalBtn = document.querySelector('.Se-addNewChild');
+        const addChildModal = document.querySelector('.Se-addNewChildModal');
+
+        addChildModalBtn.addEventListener('click', () => {
+            addChildModal.classList.toggle('close');
+            modalSection.classList.toggle('close');
+        });
+    }
+
+    function openEditPasswordModal() {
+        const editPasswordModal = document.querySelector('.Se-editPasswordModal');
+        const editPasswordBtn = document.querySelector('.editPasswordInput');
+
+        editPasswordBtn.addEventListener('click', () => {
+            editPasswordModal.classList.toggle('close');
+            modalSection.classList.toggle('close');
+        });
+    }
+
+    function openDeleteAccountModal() {
+        const deleteAccountModal = document.querySelector('.Se-deleteAccountModal');
+        const deleteAccountBtn = document.querySelector('.Se-accountDelete');
+
+        deleteAccountBtn.addEventListener('click', () => {
+            deleteAccountModal.classList.toggle('close');
+            modalSection.classList.toggle('close');
+        });
+    }
+
+    closeModalBtns.forEach(closeModalBtn => {
+        closeModalBtn.addEventListener('click', () => {
+            pageModals.forEach(pageModal => {
+                pageModal.classList.add('close');
+                modalSection.classList.add('close');
+            });
+        });
+    });
+
+    postModal();
+    openAddChildModal();
+    openEditPasswordModal();
+    openDeleteAccountModal();
 }
 
 function sendPassword(){
@@ -321,9 +456,3 @@ function sendPassword(){
     })
 }
 
-registerUser();
-addPost();
-registerTheme();
-toggleTheme();
-toggleConfigSection();
-sendPassword();

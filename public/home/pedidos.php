@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/ConectaMaesProject/app/assets/styles/style.css">
     <link rel="icon" href="/ConectaMaesProject/app/assets/imagens/logos/final/Conecta_Mães_Logo_Icon.png">
-    <title>ConectaMães - Pedidos</title>
+    <title>ConectaMães - Auxílios</title>
     </meta>
 </head>
 
@@ -30,65 +30,7 @@
         </section>
 
         <section class="timeline">
-            <form class="Ho-postSomething">
-                <div class="Ho-postTop">
-                    <a class="Ho-userProfileImage" href="/ConectaMaesProject/public/home/perfil.php">
-                        <img src="">
-                    </a>
-    
-                    <div class="Ho-postText">
-                        <div class="Ho-postTitle">
-                            <label for="Ho-postTitleInput">Título:</label>
-                            <input type="text" id="Ho-postTitleInput" name="tituloEnvio" class="Ho-postTitleInput" oninput="postTitleCharLimiter()">
-                            <div class="Ho-titleCharacters">
-                                <span class="Ho-titleCharactersNumber">0</span>/<span class="Ho-maxTitleCharacters">50</span>
-                            </div>
-                        </div>
-                        
-                        <textarea name="" id="" cols="62" rows="3" class="Ho-postTextContent" placeholder="Encontrou uma dificuldade? Peça ajuda!" oninput="postCharLimiter()"></textarea>
-                        <div class="Ho-characters">
-                            <span class="Ho-charactersNumber">0</span>/<span class="Ho-maxCharacters">200</span>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="Ho-postBottom">
-                    <div class="Ho-extraInputs">
-                        <div class="Ho-imageInput">
-                            <input type="file" id="Ho-imageSelector" accept="image/*">
-                            <label for="Ho-imageSelector">
-                                <i class="bi bi-images Ho-iconLabel"></i>
-                                <p> Imagem </p>
-                            </label>
-                        </div>
-                    </div>
-    
-                    <div class="Ho-submitArea">
-                        <div class="Ho-submitPost">
-                            <button type="submit" value="submit" name ="postAuxilio" class="Ho-submitBtn">Pedir</button>
-    
-                            <div class="Ho-postStyle">
-                                <i class="bi bi-caret-down-fill"></i>
-                            </div>
-                        </div>
-        
-                        <div class="Ho-sensitiveContent">
-                            <input type="checkbox" name="sensitiveContent" id="sensitiveContent" class="Ho-sensitiveCheckbox">
-                            <label for="sensitiveContent">Conteúdo sensível</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="Ho-postAttachments">
-                    <span class="Ho-preview"></span>
-                </div>
-                <?php
-                    if(isset($_POST['postAuxilio'])){
-                        sendPost($conn,"Auxilio", $currentUserData['idUsuario']);
-                    }
-                ?>
-            </form>
-            
         </section>
 
         <section class="asideRight">
@@ -105,6 +47,8 @@
                 <h4>© 2024 ConectaMães do CEFET-MG</h4>
             </div>
     </main>
+
+    <?php include_once ("../../app/includes/modais.php");?>
 
     <script src="/ConectaMaesProject/app/assets/js/system.js"></script>
     <script>        

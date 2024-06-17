@@ -28,6 +28,8 @@
 
 
 
+    <?php include_once ("../../app/includes/modais.php");?>
+
     <script src="/ConectaMaesProject/app/assets/js/system.js"></script>
     <script>        
         toggleTheme();

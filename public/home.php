@@ -27,12 +27,12 @@
         </section>
 
         <section class="timeline">
-            <form class="Ho-postSomething" method="post">
+            <form class="Ho-postSomething" method="post" enctype="multipart/form-data">
                 <div class="Ho-postTop">
                     <a class="Ho-userProfileImage" href="/ConectaMaesProject/public/home/perfil.php">
                         <img src="">
                     </a>
-    
+
                     <div class="Ho-postText">
                         <textarea name="conteudoEnvio" id="postText" cols="62" rows="3" class="Ho-postTextContent" placeholder="Como você está se sentindo?" oninput="postCharLimiter()"></textarea>
                         <div class="Ho-characters">
@@ -44,23 +44,23 @@
                 <div class="Ho-postBottom">
                     <div class="Ho-extraInputs">
                         <div class="Ho-imageInput">
-                            <input type="file" id="Ho-imageSelector" name="linkAnexoEnvio" accept="image/*">
+                            <input type="file" id="Ho-imageSelector" name="linkAnexoEnvio" accept="image/*" onchange="addPost()">
                             <label for="Ho-imageSelector">
                                 <i class="bi bi-images Ho-iconLabel"></i>
                                 <p> Imagem </p>
                             </label>
                         </div>
                     </div>
-    
+
                     <div class="Ho-submitArea">
                         <div class="Ho-submitPost">
-                            <button type="submit" value="submit" name ="postPostagem" class="Ho-submitBtn">Postar</button>
-    
+                            <button type="submit" value="submit" name="postPostagem" class="Ho-submitBtn">Postar</button>
+
                             <div class="Ho-postStyle">
                                 <i class="bi bi-caret-down-fill"></i>
                             </div>
                         </div>
-        
+
                         <div class="Ho-sensitiveContent">
                             <input type="checkbox" name="sensitiveContent" id="sensitiveContent" class="Ho-sensitiveCheckbox">
                             <label for="sensitiveContent">Conteúdo sensível</label>
@@ -77,6 +77,7 @@
                     }
                 ?>
             </form>
+
 
             <?php
                 $count = 0;
@@ -164,7 +165,9 @@
         </section>
     </main>
 
-    <script src="../app/assets/js/system.js"></script>
+    <?php include_once ("../app/includes/modais.php");?>
+    
+    <script src="/ConectaMaesProject/app/assets/js/system.js"></script>
     <script>        
         toggleTheme();
     </script>

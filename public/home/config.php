@@ -5,7 +5,6 @@
     $table = "Usuario";
     $currentUserData = queryUserData($conn, $table, $_SESSION['idUsuario']);   
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -17,37 +16,32 @@
         <title>ConectaMães - Configurações</title>
         </meta>
     </head>
-
     <body class="<?php echo $currentUserData['tema'];?>">
         <?php include_once ("../../app/includes/headerHome.php");?>
-
         <main class="Ho-Main Se-main mainSystem">
             <section class="Se-asideLeft">
                 <img src="" class="backCells cellsLeft">
             </section>
-
             <section class="Se-settingsCenter">
                 <div class="Se-centerHeader">  
                     <a href="../home.php"><i class="bi bi-arrow-left-circle"></i></a>
                     <h1>Configurações</h1>
                 </div>
                 <div class="Se-centerSections">
-                    <a class="Se-sectionTitle active">
+                    <a class="Se-sectionTitle active" onclick="toggleConfigSection();">
                         <div>
                             <img src="/ConectaMaesProject/app/assets/imagens/icons/user_icon.png" class="pageIcon" alt="Ícone de usuário">
                             <p> Informações da Conta</p>
                         </div>
-                        <i class="bi bi-chevron-right"></i>
+                        <i class="bi bi-chevron-right" onclick="toggleConfigSection();"></i>
                     </a>
-
                     <a class="Se-sectionTitle">
                         <div>
                             <img src="/ConectaMaesProject/app/assets/imagens/icons/pram_icon.png" class="pageIcon" alt="Ícone de usuário">
                             <p> Informações dos Filhos</p>
                         </div>
-                        <i class="bi bi-chevron-right"></i>
+                        <i class="bi bi-chevron-right" onclick="toggleConfigSection();"></i>
                     </a>
-
                     <a class="Se-sectionTitle">
                         <div>
                             <img src="/ConectaMaesProject/app/assets/imagens/icons/chat_icon.png" class="pageIcon" alt="Ícone de usuário">
@@ -55,7 +49,6 @@
                         </div>
                         <i class="bi bi-chevron-right"></i>
                     </a>
-
                     <a class="Se-sectionTitle">
                         <div>
                             <img src="/ConectaMaesProject/app/assets/imagens/icons/notifications_icon.png" class="pageIcon" alt="Ícone de usuário">
@@ -63,7 +56,6 @@
                         </div>
                         <i class="bi bi-chevron-right"></i>
                     </a>
-
                     <a class="Se-sectionTitle" href="../index.php">
                         <div>
                             <img src="/ConectaMaesProject/app/assets/imagens/icons/conectamaes_icon.png" class="pageIcon" alt="Ícone de usuário">
@@ -71,7 +63,6 @@
                         </div>
                         <i class="bi bi-box-arrow-up-right"></i>
                     </a>
-
                     <a class="Se-sectionTitle" href="../suporte.php">
                         <div>
                             <img src="/ConectaMaesProject/app/assets/imagens/icons/support_icon.png" class="pageIcon" alt="Ícone de usuário">
@@ -80,11 +71,8 @@
                         <i class="bi bi-box-arrow-up-right"></i>
                     </a>
                 </div>
-
             </section>
-
             <section class="Se-asideRight infoAccount">
-
                 <div class="Se-accountInformations Se-subSection active">
                     <div class="Se-sectionHeader">
                         <img src="/ConectaMaesProject/app/assets/imagens/icons/user_icon.png" class="pageIcon" alt="Ícone de usuário">
@@ -95,13 +83,11 @@
                             <div class="Re-userImageProfile">
                                 <img src="/ConectaMaesProject/app/assets/imagens/fotos/perfil/<?php echo $currentUserData['nomeDeUsuario'] . '-' . $currentUserData['dataNascimentoUsuario'] . '-perfil.'."png";?>" alt="" class="Re-userImage">
                             </div>
-
                             <input type="file" id="imagesSelector" name="linkFotoPerfilEdit" accept="image/*">
                             <label for="imagesSelector" class="Re-addImageIcon">                        
                                 <i class="bi bi-camera-fill"></i>                    
                             </label>
                         </div>
-
                         <div class="Re-userInfoContainer">
                             <div class="Re-userInformations">
                                 <p class="Re-infoLabel">Usuário:</p>
@@ -117,14 +103,12 @@
                                     <?php 
                                         $data = new DateTime($currentUserData['dataNascimentoUsuario']);                                          
                                         $dataFormatada = $data->format('d/m/Y');
-
                                         echo $dataFormatada; 
                                     ?>
                                 </p>
                             </div>
                         </div>
                     </div>
-
                     <form class="Se-editInfo" method="post">
                         <input type="hidden" class="updaterIdHiddenInput" name="updaterId" value="<?php echo $currentUserData['idUsuario']; ?>">    
                         <div class="Se-userInput full-width">
@@ -142,7 +126,7 @@
                             <label class="Re-fakePlaceholder" for="localizacaoUsuario">Localização</label>
                             <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
                         </div>
-                        <div class="Se-userInput side-by-side editPasswordInput">
+                        <div class="Se-userInput side-by-side editPasswordInput" onclick="openModal();">
                             <label class="Re-fakePlaceholder">Senha</label>
                             <i class="bi bi-pencil-fill Se-editIcon pageIcon "></i>                 
                         </div>
@@ -151,22 +135,19 @@
                             <label class="Re-fakePlaceholder" for="telefoneUsuario">Telefone</label>
                             <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
                         </div>
-
                         <div class="Re-themeInfo">
                             <p> Tema </p>
                             <div class="Re-themeOptions">
-                                <input type="radio" name="temaRegistro" value="Y-theme" id="Re-yellowTheme">
+                                <input type="radio" name="temaEdit" value="Y-theme" id="Re-yellowTheme" <?php echo ($currentUserData['tema'] === 'Y-theme') ? 'checked' : ''; ?>>
                                 <label for="Re-yellowTheme"> Amarelo </label>
-                                <input type="radio" name="temaRegistro" value="B-theme" id="Re-blueTheme">
+                                <input type="radio" name="temaEdit" value="B-theme" id="Re-blueTheme" <?php echo ($currentUserData['tema'] === 'B-theme') ? 'checked' : ''; ?>>
                                 <label for="Re-blueTheme"> Azul </label>
-                                <input type="radio" name="temaRegistro" value="P-theme" id="Re-pinkTheme">
+                                <input type="radio" name="temaEdit" value="P-theme" id="Re-pinkTheme" <?php echo ($currentUserData['tema'] === 'P-theme') ? 'checked' : ''; ?>>
                                 <label for="Re-pinkTheme"> Rosa </label>
                             </div>
                         </div>
-
                         <button class="Se-accountEdit" type="submit" name="editar">Editar conta</button>
                     </form>
-
                     <?php
                         if(isset($_POST['editar'])) {   
                             if($_POST['updaterId'] === $currentUserData['idUsuario']) {
@@ -177,10 +158,9 @@
                         }
                 ?>
                             
-
                     <div class="Se-accountBottom" style="margin-bottom: 1rem;">
                         <span class="Se-dateCriation"> Criado em: <span class="Se-accountDate">28/05/2024</span></span>
-                        <a class="Se-accountDelete">Excluir conta</a> <!--name="deletar" href="./config.php?deletar=true-->
+                        <a class="Se-accountDelete" onclick="openModal();">Excluir conta</a> <!--name="deletar" href="./config.php?deletar=true-->
                     </div>
                 </div>
                 <div class="Se-childInformations Se-subSection">
@@ -188,14 +168,12 @@
                         <img src="/ConectaMaesProject/app/assets/imagens/icons/pram_icon.png" class="pageIcon" alt="Ícone de usuário">
                         <h1>Informações dos Filhos</h1>
                     </div>
-
                     <form class="Se-userChild" method="post">
                         <div class="Se-childHeader">
                             <img src="/ConectaMaesProject/app/assets/imagens/icons/boy_icon.png" class="pageIcon" alt="Ícone de usuário">
                             <input type="text" value="Nome do filho">
                             <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
                         </div>
-
                         <div class="Se-childInputs">
                             <div class="Se-childInfoContainer">
                                 <p> Sexo: </p>
@@ -208,7 +186,6 @@
                                     <label for="Re-childNullSex"> Não Informar </label>
                                 </div>
                             </div>
-
                             <div class="Se-childInfoContainer">
                                 <p class="Se-infoLabel">Data de Nascimento:</p>
                                 <p class="Se-childInfo">dd/mm/yyyy</p>
@@ -309,23 +286,19 @@
                                 </p>
                             </div>
                         </div>
-
                         <div class="Se-childBottom">
                             <p class="Se-deleteChild">Excluir Filho(a)</p>
                             <button class="Se-editSubmit" type="submit" name="editChildSubmit">Confirmar</button>
                         </div>
                     </form>
-
-                    <button class="Se-addNewChild">Adicionar Filho(a)</button>
+                    <button class="Se-addNewChild" onclick="openModal();">Adicionar Filho(a)</button>
                 </div>
-
                 <div class="Se-otherUsersInteractions Se-subSection">
                     <div class="Se-sectionHeader">
                         <img src="/ConectaMaesProject/app/assets/imagens/icons/chat_icon.png" class="pageIcon" alt="Ícone de usuário">
                         <h1>Interações com outros usuários</h1>
                     </div>
                 </div>
-
                 <div class="Se-notifications Se-subSection">
                     <div class="Se-sectionHeader">
                         <img src="/ConectaMaesProject/app/assets/imagens/icons/notifications_icon.png" class="pageIcon" alt="Ícone de usuário">
@@ -333,13 +306,11 @@
                     </div>
                 </div>
             </section>
-
             <?php 
                 if(isset($_GET['deletar'])){ 
                 ?>
                     <modal class="Se-accountDeleteModal">
                         <h2>Tem certeza que deseja deletar sua conta?</h2>
-
                         <form class="Se-accountDeleteModalForm" method="post">
                             <input type="hidden" name="deleterId" value=<?php echo $currentUserData['idUsuario'];?>>
                             <input type="text" placeholder="<?php echo "delete/".$currentUserData['idUsuario']."/".$currentUserData['nomeDeUsuario'];?>"
@@ -366,8 +337,13 @@
             ?>
         </main>
 
-        
+    <?php include_once ("../../app/includes/modais.php");?>
 
     <script src="/ConectaMaesProject/app/assets/js/system.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            toggleConfigSection();
+        });
+    </script>
     </body>
 </html>

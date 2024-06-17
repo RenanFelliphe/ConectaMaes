@@ -10,7 +10,7 @@
     <title>ConectaMães - Registro</title>
 </head>
 
-<body class="Y-theme">
+<body class="<?php echo $currentUserData['tema'];?>">
     <?php 
         include_once ("../app/includes/headerLanding.php");
         include_once ("../app/services/crud/userFunctions.php");
@@ -20,7 +20,7 @@
         <img src="" class="backCells">
         <img src="" class="backCells cellsLeft">
 
-        <form class="Re-registerForm" id="registerForm" method="post">
+        <form class="Re-registerForm" id="registerForm" method="post" enctype="multipart/form-data">
             <div class="Re-registerHeader">
                 <i class="bi bi-arrow-left-circle Re-backButton close"></i>
                 <h1 class="Re-registerTitle"> Registro </h1>
@@ -49,11 +49,11 @@
                     <div class="Re-themeInfo">
                         <p> Tema </p>
                         <div class="Re-themeOptions">
-                            <input type="radio" name="temaRegistro" value="Y-theme" id="Re-yellowTheme" checked>
+                            <input type="radio" name="temaRegistro" value="Y-theme" id="Re-yellowTheme" onclick="registerTheme('Y-theme')" checked>
                             <label for="Re-yellowTheme"> Amarelo </label>
-                            <input type="radio" name="temaRegistro" value="B-theme" id="Re-blueTheme">
+                            <input type="radio" name="temaRegistro" value="B-theme" id="Re-blueTheme" onclick="registerTheme('B-theme')">
                             <label for="Re-blueTheme"> Azul </label>
-                            <input type="radio" name="temaRegistro" value="P-theme" id="Re-pinkTheme">
+                            <input type="radio" name="temaRegistro" value="P-theme" id="Re-pinkTheme" onclick="registerTheme('P-theme')">
                             <label for="Re-pinkTheme"> Rosa </label>
                         </div>
                     </div>
@@ -251,7 +251,7 @@
                             <img src="../app/assets/imagens/icons/user_no_profile_image.png" alt="" class="Re-userImage">
                         </div>
 
-                        <input type="file" id="imagesSelector" name="linkFotoPerfilRegistro" accept="image/*">
+                        <input type="file" id="imagesSelector" name="fotoPerfilRegistro" accept="image/png, image/jpeg">
                         <label for="imagesSelector" class="Re-addImageIcon">                        
                             <i class="bi bi-camera-fill"></i>                    
                         </label>
@@ -296,17 +296,20 @@
                 <p class="Re-goLogin">Já possui uma conta? <a href="login.php">Entre</a></p>
             </div>
             <?php
-                signUp($conn);
+                if(isset($_POST['registrar'])){
+                    signUp($conn);
+                }
             ?>
         </form>    
     </main>
 
-    <?php include_once ("../app/includes/footer.php");?>
+    <?php 
+        include_once ("../app/includes/footer.php");
+        include_once ("../app/includes/modais.php");
+    ?>
 
-    <script src="../app/assets/js/system.js"></script>
+    <script src="/ConectaMaesProject/app/assets/js/system.js"></script>
     <script>        
-        toggleTheme();
-
         document.querySelectorAll('.Re-userInput').forEach(input => {
             const updateInfo = (event) => {
                 const inputId = event.target.id;
@@ -326,6 +329,10 @@
             if (input.tagName === 'SELECT') {
                 input.addEventListener('change', updateInfo);
             }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            registerUser();
         });
     </script>
 </body>

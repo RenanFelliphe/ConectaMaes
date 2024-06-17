@@ -58,13 +58,13 @@
             }
         ?>
     </main>
-    <?php include_once ("../app/includes/footer.php");?>
 
-    <script src="../app/assets/js/system.js"></script>
-    <script>        
-        toggleTheme();
-    </script>
-</body>
+    <?php 
+        include_once ("../app/includes/footer.php");
+        include_once ("../app/includes/modais.php");
+    ?>
+    
+    <script src="/ConectaMaesProject/app/assets/js/system.js"></script></body>
 
 
 </html>

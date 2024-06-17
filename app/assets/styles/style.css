@@ -1646,7 +1646,7 @@ footer .A-footerRight li.A-footerPolitic h5{
     display: none;
 }
 
-.Ho-Main .timeline .Ho-postSomething{
+.Ho-postSomething{
     position: relative;
     display: flex;
     flex-direction: column;
@@ -1654,7 +1654,7 @@ footer .A-footerRight li.A-footerPolitic h5{
     padding: 1rem 1rem 1rem 1.5rem;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postTop{
+.Ho-postSomething .Ho-postTop{
     position: relative;
     display: flex;
     justify-content: flex-start;
@@ -1664,7 +1664,7 @@ footer .A-footerRight li.A-footerPolitic h5{
     width: 100%;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postTop .Ho-userProfileImage{
+.Ho-postSomething .Ho-postTop .Ho-userProfileImage{
     position: relative;
     width: 3.5rem;
     height: 3.5rem;
@@ -1673,7 +1673,7 @@ footer .A-footerRight li.A-footerPolitic h5{
     overflow: hidden;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postTop .Ho-userProfileImage img{
+.Ho-postSomething .Ho-postTop .Ho-userProfileImage img{
     position: relative;
     width: 100%;
     height: 100%;
@@ -1681,7 +1681,7 @@ footer .A-footerRight li.A-footerPolitic h5{
     object-fit: cover;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postTop .Ho-postText{
+.Ho-postSomething .Ho-postTop .Ho-postText{
     position: relative;
     display: flex;
     flex-direction: column;
@@ -1697,15 +1697,15 @@ footer .A-footerRight li.A-footerPolitic h5{
     100% { transform: translateX(0); }
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postTop .Ho-postText .characterBlocked {
+.Ho-postSomething .Ho-postTop .Ho-postText .characterBlocked {
     animation: shake 0.7s;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postTop .Ho-postTitle label .characterBlocked {
+.Ho-postSomething .Ho-postTop .Ho-postTitle label .characterBlocked {
     animation: shake 0.7s;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postTop .Ho-postText .Ho-postTextContent{
+.Ho-postSomething .Ho-postTop .Ho-postText .Ho-postTextContent{
     position: relative;
     outline: none;
     border: 1px solid var(--grayColor);
@@ -1715,11 +1715,11 @@ footer .A-footerRight li.A-footerPolitic h5{
     font-size: 0.9rem;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postTop .Ho-postText .Ho-postTextContent::-webkit-scrollbar{
+.Ho-postSomething .Ho-postTop .Ho-postText .Ho-postTextContent::-webkit-scrollbar{
     display: none;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postTop .Ho-postText .Ho-characters{
+.Ho-postSomething .Ho-postTop .Ho-postText .Ho-characters{
     position: absolute;
     right: 0.5rem;
     bottom: 0.1rem;
@@ -1727,7 +1727,7 @@ footer .A-footerRight li.A-footerPolitic h5{
     font-size: 0.65rem;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postBottom{
+.Ho-postSomething .Ho-postBottom{
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -1735,26 +1735,26 @@ footer .A-footerRight li.A-footerPolitic h5{
     padding-left: 5rem;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-extraInputs{
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs{
     display: flex;
     gap: 1rem;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-iconLabel{
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-iconLabel{
     font-size: 1rem;
     cursor: pointer;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-imageInput{ 
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-imageInput{ 
     display: flex; 
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-imageInput input{
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-imageInput input{
     display: none
 }
   
-.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-imageInput label,
-.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput{
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-imageInput label,
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput{
     display: flex;
     gap: 0.5rem;
     width: fit-content;
@@ -1763,44 +1763,44 @@ footer .A-footerRight li.A-footerPolitic h5{
     font-size: 0.9rem;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-imageInput label img{
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-imageInput label img{
     width: 1.3rem;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput{
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput{
     cursor: text;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput input{
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput input{
     width: 5rem;
     outline: none;
     font-size: 1rem;
     border: none;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput input:focus{
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput input:focus{
     border-bottom: 1px solid var(--grayColor);
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput input::placeholder{
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput input::placeholder{
     color: var(--blackColor);
     font-size: 1rem;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-submitArea{
+.Ho-postSomething .Ho-postBottom .Ho-submitArea{
     display: flex;
     flex-direction: column;
     font-size: 0.8rem;
     gap: 0.3rem;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-submitArea .Ho-submitPost{
+.Ho-postSomething .Ho-postBottom .Ho-submitArea .Ho-submitPost{
     display: flex;
     gap: 0.2rem;
     cursor: pointer;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-submitArea .Ho-submitBtn{
+.Ho-postSomething .Ho-postBottom .Ho-submitArea .Ho-submitBtn{
     background-color: var(--secondColor);
     padding: 0.5rem 0.5rem 0.45rem 1rem;
     border: none;
@@ -1812,7 +1812,7 @@ footer .A-footerRight li.A-footerPolitic h5{
     cursor: pointer;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-submitArea .Ho-postStyle{
+.Ho-postSomething .Ho-postBottom .Ho-submitArea .Ho-postStyle{
     background-color: var(--secondColor);
     padding: 0.75rem 0.5rem 0.55rem 0.3rem;
     border-top-right-radius: 100rem;
@@ -1822,13 +1822,13 @@ footer .A-footerRight li.A-footerPolitic h5{
     cursor: pointer;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-submitArea .Ho-sensitiveContent{
+.Ho-postSomething .Ho-postBottom .Ho-submitArea .Ho-sensitiveContent{
     display: flex;
     gap: 0.3rem;
     font-size: 0.7rem;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-submitArea .Ho-sensitiveContent input{
+.Ho-postSomething .Ho-postBottom .Ho-submitArea .Ho-sensitiveContent input{
     height: 0.6rem;
 } 
 
@@ -1840,7 +1840,7 @@ footer .A-footerRight li.A-footerPolitic h5{
     padding-left: 1.5rem;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postAttachments .Ho-preview img {
+.Ho-postSomething .Ho-postAttachments .Ho-preview img {
     margin-top: -1rem;
     width: 4rem;
     opacity: 0.5;
@@ -1849,7 +1849,7 @@ footer .A-footerRight li.A-footerPolitic h5{
     cursor: pointer;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postAttachments .Ho-preview img:hover {
+.Ho-postSomething .Ho-postAttachments .Ho-preview img:hover {
     opacity: 1;
     transition: 0.3s;
 }
@@ -2037,7 +2037,23 @@ footer .A-footerRight li.A-footerPolitic h5{
 ========================================= PÁGINA DE PEDIDOS ==========================================
 ====================================================================================================*/
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postTop .Ho-postTitle{
+.Ho-postSomething .closeModal{
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 1.4rem;
+    color: var(--grayColor);
+    transition: 0.2s transform;
+    cursor: pointer;
+}
+
+.Ho-postSomething .closeModal:hover{
+    transform: scale(1.1);
+    color: var(--secondColor);
+    transition: 0.2s transform;
+}
+
+.Ho-postSomething .Ho-postTop .Ho-postTitle{
     position: relative;
     margin-bottom: 0.5rem;
     color: var(--grayColor);
@@ -2046,12 +2062,12 @@ footer .A-footerRight li.A-footerPolitic h5{
     gap: 0.5rem;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postTop .Ho-postTitle label{
+.Ho-postSomething .Ho-postTop .Ho-postTitle label{
     font-weight: 600;
     font-size: 0.9rem;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postTop .Ho-postTitle .Ho-postTitleInput{
+.Ho-postSomething .Ho-postTop .Ho-postTitle .Ho-postTitleInput{
     position: relative;
     outline: none;
     border: none;
@@ -2062,7 +2078,7 @@ footer .A-footerRight li.A-footerPolitic h5{
     padding-right: 3rem;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postTop .Ho-postTitle .Ho-titleCharacters{
+.Ho-postSomething .Ho-postTop .Ho-postTitle .Ho-titleCharacters{
     position: absolute;
     right: 0.5rem;
     bottom: 0.1rem;
@@ -2070,12 +2086,12 @@ footer .A-footerRight li.A-footerPolitic h5{
     font-size: 0.65rem;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-maxColabsInput{
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-maxColabsInput{
     cursor: text;
     margin-left: 1rem;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-maxColabsInput input{
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-maxColabsInput input{
     width: 3rem;
     outline: none;
     font-size: 1rem;
@@ -2083,11 +2099,11 @@ footer .A-footerRight li.A-footerPolitic h5{
     overflow: visible;
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-maxColabsInput input:focus{
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-maxColabsInput input:focus{
     border-bottom: 1px solid var(--grayColor);
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-maxColabsInput input::placeholder{
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-maxColabsInput input::placeholder{
     color: var(--blackColor);
     font-size: 1rem;
     overflow: visible;
@@ -2689,8 +2705,7 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
 
 .modalSection{
     position: fixed;
-    width: 100vw;
-    height: 100vh;
+    padding: 1rem;
     top: 0;
     display: flex;
     background-color: #00000060;
