@@ -9,7 +9,7 @@ Para a próxima reunião dia 21/05:
 
 Ideias Futuras
 - Algortimo de sujestão | Nath
-- Conectar com o Google | Nath
+- Conectar com o Google | Renan
 - Botões de emoji nas publicações | Renan
 - Chat para mensagens diretas | Renan
 - Imagens nos comentários | Renan
