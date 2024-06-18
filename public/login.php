@@ -31,7 +31,7 @@
                 <div class="Lo-userSection Lo-loginSections">
                     <div class="Lo-input">
                         <input type="email" id="email" name="email" required autofocus>
-                        <label class="Lo-fakePlaceholder" for="email">Email</label>
+                        <label class="Lo-fakePlaceholder" for="email">E-mail</label>
                     </div>
                     <div class="Lo-input">
                         <input type="password" id="senha" name="senha" required>

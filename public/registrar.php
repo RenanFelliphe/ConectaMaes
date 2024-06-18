@@ -35,7 +35,7 @@
                     </div>
                     <div class="Re-input">
                         <input class="Re-userInput" type="email" id="email" name="emailRegistro" autocomplete="email" required>
-                        <label class="Re-fakePlaceholder" for="email">Email</label>
+                        <label class="Re-fakePlaceholder" for="email">E-mail</label>
                     </div>
                     <div class="Re-input">
                         <input type="password" id="senha" name="senhaRegistro" required>
@@ -267,7 +267,7 @@
                             <p class="Re-userInfo" id="infoNomeUsuario"></p>
                         </div>
                         <div class="Re-userInformations">
-                            <p class="Re-infoLabel">Email:</p>
+                            <p class="Re-infoLabel">E-mail:</p>
                             <p class="Re-userInfo" id="infoEmail"></p>
                         </div>
                         <div class="Re-userInformations">

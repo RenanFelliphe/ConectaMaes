@@ -1,16 +1,60 @@
-Para a próxima reunião dia 21/05:
-- Texto artigo;
-//- finalizar a prototipação - Nathália e Renan
-//- solicitar ao Alexandre que crie uma estrutura para o projeto de PI - Nathália
-//- Manter Perfil - Nathália
-- Manter Pedido - Lívia
-- Manter Relato - Renan
-//- criar o banco de dados
-
-Ideias Futuras
-- Algortimo de sujestão | Nath
-- Conectar com o Google | Renan
-- Botões de emoji nas publicações | Renan
-- Chat para mensagens diretas | Renan
-- Imagens nos comentários | Renan
-- Seção para "Páginas" ou Grupos de usuários | Renan
+Ideias
+	Essenciais
+		postagem - compartilhamento
+		modo anônimo
+		visualização de postagens não sensíveis sem ter o log in necessário
+        validação com IA de post sensível
+	Futuras
+		algoritmo de sugestão - nath
+		conectar com o Google - renan
+		botões de emoji nas publicações - renan
+		chat (dm) - renan
+		imagens nos comentários - renan
+		seção de páginas e comunidades/grupos - renan
+---------------------------------------------------------------
+documentacao
+	documento de proposta
+	documento de termos
+	documento de direitos
+	completar o diario de bordo
+---------------------------------------------------------------
+prototipacao
+	!arrumar config.php para seção "Segurança da Conta"
+---------------------------------------------------------------
+implementacao
+	arquivos
+		arrumar a landing page - nath e renan
+		arrumar pagina de suporte - 
+		!arrumar registro
+		criar página de admin
+    interface
+        !arrumar header
+        !arrumar carregamento esquisito das sessões com a timeline
+	crud
+		usuario
+			!update senha - nath
+			!preview de update da pfp - renan
+			!update da pfp com uniqueId - nath
+			!validação de delete - nath
+		post
+			likes - nath
+			delete - nath
+			comentarios =>
+				insert
+				read
+				delete
+		!filho
+			!insert
+			read
+			update
+			delete
+		deficiencia
+			insert
+			read
+			update
+			delete
+---------------------------------------------------------------
+servidor
+	!arrumar o banco do servidor
+	!arrumar os arquivos do conectamaes.linceonline pelo WinSCP
+	

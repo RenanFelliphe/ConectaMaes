@@ -28,7 +28,7 @@
 
             <div class="Ho-submitArea">
                 <div class="Ho-submitPost">
-                    <button type="submit" value="submit" name="postPostagem" class="Ho-submitBtn">Postar</button>
+                    <button type="submit" value="submit" name="postPostagemModal" class="Ho-submitBtn">Postar</button>
 
                     <div class="Ho-postStyle">
                         <i class="bi bi-caret-down-fill"></i>
@@ -46,7 +46,7 @@
             <span class="Ho-preview"></span>
         </div>
         <?php
-            if(isset($_POST['postPostagem'])){
+            if(isset($_POST['postPostagemModal'])){
                 sendPost($conn,"Postagem", $currentUserData['idUsuario']);
             }
         ?>
@@ -89,7 +89,7 @@
 
             <div class="Ho-submitArea">
                 <div class="Ho-submitPost">
-                    <button type="submit" value="submit" name ="postRelato" class="Ho-submitBtn">Postar</button>
+                    <button type="submit" value="submit" name ="postRelatoModal" class="Ho-submitBtn">Postar</button>
 
                     <div class="Ho-postStyle">
                         <i class="bi bi-caret-down-fill"></i>
@@ -107,7 +107,7 @@
             <span class="Ho-preview"></span>
         </div>
         <?php
-            if(isset($_POST['postRelato'])){
+            if(isset($_POST['postRelatoModal'])){
                 sendPost($conn,"Relato", $currentUserData['idUsuario']);
             }
         ?>
@@ -150,7 +150,7 @@
 
             <div class="Ho-submitArea">
                 <div class="Ho-submitPost">
-                    <button type="submit" value="submit" name ="postAuxilio" class="Ho-submitBtn">Pedir</button>
+                    <button type="submit" value="submit" name ="postAuxilioModal" class="Ho-submitBtn">Pedir</button>
 
                     <div class="Ho-postStyle">
                         <i class="bi bi-caret-down-fill"></i>
@@ -168,7 +168,7 @@
             <span class="Ho-preview"></span>
         </div>
         <?php
-            if(isset($_POST['postAuxilio'])){
+            if(isset($_POST['postAuxilioModal'])){
                 sendPost($conn,"Auxilio", $currentUserData['idUsuario']);
             }
         ?>
