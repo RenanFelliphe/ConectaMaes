@@ -3,6 +3,7 @@
     $verify = isset($_SESSION['active']) ? true : header("Location:/ConectaMaesProject/public/login.php");
     require_once "../app/services/crud/userFunctions.php"; 
     require_once "../app/services/crud/postFunctions.php";
+    require_once '../app/services/helpers/dateChecker.php';
     $currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);
 ?>
 
@@ -30,7 +31,7 @@
             <form class="Ho-postSomething" method="post" enctype="multipart/form-data">
                 <div class="Ho-postTop">
                     <a class="Ho-userProfileImage" href="/ConectaMaesProject/public/home/perfil.php">
-                        <img src="">
+                        <img src="<?php echo "/ConectaMaesProject/app/assets/imagens/fotos/perfil/".$currentUserData['linkFotoPerfil'];?>">
                     </a>
 
                     <div class="Ho-postText">
@@ -83,29 +84,46 @@
                 $count = 0;
 
                 // Consulta inicial para obter todas as publicações usando a função fornecida
-                $publicacoes = queryMultiplePosts($conn, "Publicacao", "tipoPublicacao <> 'Auxilio'", "dataCriacaoPublicacao DESC");
+                $publicacoes = queryMultiplePosts($conn, "tipoPublicacao <> 'Auxilio'", "dataCriacaoPublicacao DESC");
 
                 if (count($publicacoes) > 0) {
                     // Loop para mostrar publicações
                     foreach ($publicacoes as $dadosPublicacao) {
                         $postOwner = queryUserData($conn, "Usuario", $dadosPublicacao["idUsuario"]);
+
                         // Verificar se o link da foto de perfil está presente
                         $profileImage = !empty($postOwner['linkFotoPerfil']) ? $postOwner['linkFotoPerfil'] : 'caminho/padrao/para/imagem.png';
+
+                        // Formatar a data da publicação utilizando a função do arquivo dateChecker.php
+                        $mensagemData = postDateMessage($dadosPublicacao["dataCriacaoPublicacao"]);
                         ?>
                         <article class="Ho-post">
                             <div class="postOwnerImage">
-                                <img src="<?php echo htmlspecialchars($profileImage); ?>">
+                                <img src="<?php echo "/ConectaMaesProject/app/assets/imagens/fotos/perfil/".$postOwner['linkFotoPerfil'];?>">
                             </div>
 
                             <div class="postContent">
                                 <div class="postTimelineTop">
                                     <div class="postUserNames">
-                                        <p class="postOwnerName"><?php echo htmlspecialchars($postOwner['nomeCompleto']); ?></p>
-                                        <p class="postOwnerUser"><?php echo htmlspecialchars($postOwner['nomeDeUsuario']); ?></p>
+                                        <p class="postOwnerName">
+                                            <?php 
+                                                $partesDoNomeCompletoOwner = explode(" ", $postOwner['nomeCompleto']);
+                                                $firstNameOwner = $partesDoNomeCompletoOwner[0];
+                                                $lastNameOwner = $partesDoNomeCompletoOwner[count($partesDoNomeCompletoOwner) - 1];
+                                                
+                                                // Concatena a primeira e a última palavra separadas por um espaço
+                                                $firstAndLastNameOwner = $firstNameOwner . " " . $lastNameOwner;
+
+                                                echo htmlspecialchars( $firstAndLastNameOwner); 
+                                            ?>
+                                        </p>
+                                        <p class="postOwnerUser">
+                                            <?php echo '@' . htmlspecialchars($postOwner['nomeDeUsuario']); ?>
+                                        </p>
                                     </div>
 
                                     <div class="postInfo">
-                                        <ul class="postDate"><li><?php echo htmlspecialchars($dadosPublicacao["dataCriacaoPublicacao"]); ?></li></ul>
+                                        <ul class="postDate"><li><?php echo htmlspecialchars($mensagemData); ?></li></ul>
                                         <div class="bi bi-three-dots postMoreButton"></div>
                                     </div>
                                 </div>

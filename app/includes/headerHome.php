@@ -16,9 +16,9 @@
             <span class="pageSelector"></span>
         </a>
 
-        <a class="helpPageLink pageLink" id="helpPageLink" href="/ConectaMaesProject/public/home/pedidos.php">
+        <a class="helpPageLink pageLink" id="helpPageLink" href="/ConectaMaesProject/public/home/auxilios.php">
             <img class="helpPageIcon headerIcon" src="/ConectaMaesProject/app/assets/imagens/icons/helps_off.png" alt="Ícone da página de pedidos">
-            <p>Pedidos</p>
+            <p>Auxilios</p>
             <span class="pageSelector"></span>
         </a>
     </div>
@@ -105,7 +105,7 @@
 
         <div class="userAccount">
             <div class="userProfileImage">
-                <img src="<?php echo $currentUserData['linkFotoPerfil'];?>">
+                <img src="<?php echo "/ConectaMaesProject/app/assets/imagens/fotos/perfil/".$currentUserData['linkFotoPerfil'];?>">
             </div>
             <i class="bi bi-chevron-down"></i>
         </div>
@@ -184,7 +184,7 @@
                 homePageLink.classList.add('active');
             } else if (currentUrl.includes('/ConectaMaesProject/public/home/relatos.php')) {
                 reportPageLink.classList.add('active');
-            } else if (currentUrl.includes('/ConectaMaesProject/public/home/pedidos.php')) {
+            } else if (currentUrl.includes('/ConectaMaesProject/public/home/auxilios.php')) {
                 helpPageLink.classList.add('active');
             }
         }

@@ -201,6 +201,20 @@ main{
     color: var(--grayColor);
 }
 
+body.P-theme .pageImageIcon.active,
+body.P-theme .pageImageIcon:hover {
+    filter: brightness(0) saturate(100%) invert(42%) sepia(61%) saturate(1820%) hue-rotate(302deg) brightness(87%) contrast(85%);
+}
+
+body.B-theme .pageImageIcon.active,
+body.B-theme .pageImageIcon:hover{
+    filter: brightness(0) saturate(100%) invert(63%) sepia(81%) saturate(331%) hue-rotate(139deg) brightness(83%) contrast(87%);
+}
+
+body.Y-theme .pageImageIcon.active,
+body.Y-theme .pageImageIcon:hover{
+    filter: brightness(0) saturate(100%) invert(66%) sepia(48%) saturate(459%) hue-rotate(16deg) brightness(97%) contrast(85%);
+}
 
 /*====================================================================================================
 ========================================== HEADER LANDING ============================================
@@ -1927,7 +1941,7 @@ footer .A-footerRight li.A-footerPolitic h5{
 
 .Ho-post .postContent .postTimelineTop .postInfo .postDate{
     color: var(--thirdColor);
-    font-size: 0.75rem
+    font-size: 0.75rem;
 }
 
 .Ho-post .postContent .postTimelineTop .postInfo .postMoreButton{
@@ -2058,6 +2072,43 @@ footer .A-footerRight li.A-footerPolitic h5{
     gap: 1rem;
 }
 
+.Au-auxilioFilter{
+    position: relative;
+    width: 100%;
+    height: 4.5rem;
+    display: flex;
+    justify-content: space-evenly;
+    border-bottom: 1px solid var(--grayColor);
+}
+
+.Au-auxilioFilter h1{
+    display: flex;
+    position: relative;
+    height: 100%;
+    width: 13rem;
+    font-size: 1.4rem;
+    cursor: pointer;
+    color: var(--grayColor);
+    transition: 0.2s;
+}
+
+.Au-auxilioFilter h1.active{
+    color: var(--secondColor);
+    transition: 0.2s;
+}
+
+.Au-auxilioFilter span{
+    position: absolute;
+    bottom: -2px;
+    width: 13rem;
+    height: 3px;
+    background-color: var(--secondColor);
+    border-radius: 10rem;
+    box-shadow: 0 0 2px 0px var(--firstColor);
+    left: 5rem;
+    transition: 0.2s;
+}
+
 .Au-allAuxilios{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -2080,7 +2131,7 @@ footer .A-footerRight li.A-footerPolitic h5{
     cursor: pointer;
 }
 
-.Au-allAuxilios .Au-auxilioCard .postContent .postTimelineTop{
+.Au-allAuxilios .Au-auxilioCard .postTimelineTop{
     position: relative;
     width: 100%;
     display: flex;
@@ -2088,7 +2139,7 @@ footer .A-footerRight li.A-footerPolitic h5{
     gap: 0.5rem;
 }
 
-.Au-allAuxilios .Au-auxilioCard .postContent .postTimelineTop .postOwnerImage{
+.Au-allAuxilios .Au-auxilioCard .postTimelineTop .postOwnerImage{
     position: relative;
     width: 3rem;
     height: 3rem;
@@ -2102,13 +2153,13 @@ footer .A-footerRight li.A-footerPolitic h5{
     overflow: hidden;
 }
 
-.Au-allAuxilios .Au-auxilioCard .postContent .postTimelineTop .postOwnerImage img{
+.Au-allAuxilios .Au-auxilioCard .postTimelineTop .postOwnerImage img{
     position: relative;
     width: 100%;
     object-fit: cover;
 }
 
-.Au-allAuxilios .Au-auxilioCard .postContent .postTimelineTop .postUserNames{
+.Au-allAuxilios .Au-auxilioCard .postTimelineTop .postUserNames{
     width: 100%;
     position: relative;
     display: flex;
@@ -2116,14 +2167,14 @@ footer .A-footerRight li.A-footerPolitic h5{
     align-items: flex-start;
 }
 
-.Au-allAuxilios .Au-auxilioCard .postContent .postTimelineTop .postUserNames p:first-of-type{
+.Au-allAuxilios .Au-auxilioCard .postTimelineTop .postUserNames p:first-of-type{
     font-size: 0.9em;
     font-weight: bolder;
     width: 100%;
     text-wrap: wrap;
 }
 
-.Au-allAuxilios .Au-auxilioCard .postContent .postTimelineTop .postUserNames p:last-of-type{
+.Au-allAuxilios .Au-auxilioCard .postTimelineTop .postUserNames p:last-of-type{
     color: var(--grayColor);
     font-size: 0.7rem;
 }
@@ -2142,7 +2193,7 @@ footer .A-footerRight li.A-footerPolitic h5{
     padding-left: 1.3rem;
 }
 
-.Au-allAuxilios .Au-auxilioCard .postContent .postTimelineBottom{
+.Au-allAuxilios .Au-auxilioCard .postTimelineBottom{
     position: relative;
     width: 100%;
     display: flex;
@@ -2150,25 +2201,25 @@ footer .A-footerRight li.A-footerPolitic h5{
     color: var(--grayColor);
 }
 
-.Au-allAuxilios .Au-auxilioCard .postContent .postTimelineBottom .postInteractions{
+.Au-allAuxilios .Au-auxilioCard .postTimelineBottom .postInteractions{
     position: relative;
     display: flex;
     gap: 1.5rem;
     padding-left: 1.3rem;
 }
 
-.Au-allAuxilios .Au-auxilioCard .postContent .postTimelineBottom .postInteractions div{
+.Au-allAuxilios .Au-auxilioCard .postTimelineBottom .postInteractions div{
     display: flex;
     font-size: 0.8rem;
     gap: 0.3rem;
     cursor: pointer;
 }
 
-.Au-allAuxilios .Au-auxilioCard .postContent .postTimelineBottom .postInteractions div:hover{
+.Au-allAuxilios .Au-auxilioCard .postTimelineBottom .postInteractions div:hover{
     color: var(--secondColor);
 }
 
-.Au-allAuxilios .Au-auxilioCard .postContent .postTimelineBottom .Au-openAuxilio{
+.Au-allAuxilios .Au-auxilioCard .postTimelineBottom .Au-openAuxilio{
     position: relative;
     right: 0;
     display: flex;
@@ -3123,4 +3174,254 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     color: var(--blackColor);
     font-size: 1rem;
     overflow: visible;
+}
+
+.Au-auxilioModalBack{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    display: flex;
+    background-color: #00000060;
+    backdrop-filter: blur(3px);
+    z-index: +999;
+    cursor: default;
+}
+
+.Au-auxilioModalBack.close{
+    display: none;
+}
+
+.Au-auxilioModalBack .Au-auxilioModal{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0.7rem;
+    width: 45vw;
+    height: 90vh;
+    background-color: var(--whiteColor);
+    padding: 1rem 1rem 2rem 1rem;
+    border-radius: 1rem;
+    border: 2px solid var(--firstColor);
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.Au-auxilioModalBack .Au-auxilioModal.close{
+    display: none;
+}
+
+.Au-auxilioModalBack .Au-auxilioModal .Au-modalHeader{
+    position: relative;
+    width: 100%;
+    display: flex;
+    height: 3rem;
+    background-color: var(--whiteColor);
+}
+
+.Au-auxilioModalBack .Au-auxilioModal .Au-modalHeader .auxilioDate{
+    position: absolute;
+    color: var(--blackColor);
+    left: 1rem;
+    top: 0;
+    font-size: 0.8rem;
+}
+
+.Au-auxilioModalBack .Au-auxilioModal .Au-modalHeader .auxilioTitle{
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--thirdColor);
+}
+
+.Au-auxilioModalBack .Au-auxilioModal .Au-modalHeader .Au-closeModal{
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 2rem;
+    color: var(--grayColor);
+    transition: 0.2s;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.Au-auxilioModalBack .Au-auxilioModal .Au-modalHeader .Au-closeModal:hover{
+    color: var(--secondColor);
+    transform: scale(1.2);
+    transition: 0.2s;
+}
+
+.Au-auxilioModalBack .Au-auxilioModal .Au-auxilioUser{
+    display: flex;
+    gap: 1rem;
+}
+
+.Au-auxilioModalBack .Au-auxilioModal .Au-auxilioUser .postOwnerImage{
+    position: relative;
+    width: 4rem;
+    height: 4rem;
+    min-width: 4rem;
+    min-height: 4rem;
+    max-width: 4rem;
+    max-height: 4rem;
+    float: left;
+    border-radius: 100%;
+    overflow: hidden;
+}
+
+.Au-auxilioModalBack .Au-auxilioModal .Au-auxilioUser img{
+    position: relative;
+    width: 100%;
+    object-fit: cover;
+}
+
+.Au-auxilioModalBack .Au-auxilioModal .Au-auxilioUser .postUserNames{
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.Au-auxilioModalBack .Au-auxilioModal .Au-auxilioUser .postUserNames p:first-of-type{
+    font-size: 1.1em;
+    font-weight: bolder;
+}
+
+.Au-auxilioModalBack .Au-auxilioModal .Au-auxilioUser .postUserNames p:last-of-type{
+    color: var(--grayColor);
+    font-size: 0.8rem;
+}
+
+.Au-auxilioModalBack .Au-auxilioModal .Au-auxilioUser .Au-follow{
+    position: relative;
+    display: flex;
+    color: var(--whiteColor);
+    background-color: var(--secondColor);
+    padding: 0.6rem 1.5rem 0.6rem 1.5rem;
+    border: none;
+    border-radius: 100rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.2s;
+    font-weight: 600;
+}
+
+.Au-auxilioModalBack .Au-auxilioModal .Au-textPost{
+    position: relative;
+    width: 100%;
+    height: fit-content;
+    font-size: 0.8rem;
+    text-align: justify;
+}
+
+.Au-auxilioModalBack .Au-auxilioModal .Au-childPostSection{
+    position: relative;
+    width: 100%;
+    height: max-content;
+    margin-bottom: 2rem;
+}
+
+.Au-auxilioModalBack .Au-auxilioModal .Au-childPostSection .Au-childrenName{
+    position: relative;
+    width: 100%;    
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.Au-auxilioModalBack .Au-auxilioModal .Au-childPostSection .Au-childrenName img{
+    width: 1.3rem;
+}   
+
+.Au-auxilioModalBack .Au-auxilioModal .Au-childPostSection .postsImages{
+    position: relative;
+    bottom: -1rem;
+    display: flex;
+    width: 20rem;
+    height: 15rem;
+    background-color: var(--grayColor);
+    border: 1px solid var(--thirdColor);
+    border-radius: 0.5rem;
+    font-size: 7rem;
+    color: white;
+    cursor: pointer;
+}
+
+.Au-auxilioModalBack .Au-auxilioModal .Au-postExtraInfos{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    right: 7rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.Au-auxilioModalBack .Au-auxilioModal .Au-postExtraInfos .Au-extraInfos{
+    position: relative;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.Au-auxilioModalBack .Au-auxilioModal .Au-childPostSection .Au-help{
+    position: absolute;
+    bottom: 0;
+    right: 1rem;
+    display: flex;
+    color: var(--whiteColor);
+    background-color: var(--secondColor);
+    padding: 0.6rem 2rem 0.6rem 2rem;
+    border: none;
+    border-radius: 100rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.2s;
+    font-weight: 600;
+}
+
+.Au-auxilioModalBack .Au-auxilioModal .postInteractions{
+    display: flex;
+    width: 100%;
+    gap: 0.5rem;
+    color: var(--grayColor);
+}
+
+.Au-auxilioModalBack .Au-auxilioModal .postInteractions h3{
+    color: var(--secondColor);
+}
+
+.Au-auxilioModalBack .Au-auxilioModal .postInteractions div{
+    display: flex;
+    gap: 0.5rem;
+}
+
+.Au-auxilioModalBack .Au-auxilioModal .postInteractions div{
+    display: flex;
+    font-size: 0.8rem;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.Au-auxilioModalBack .Au-auxilioModal .postInteractions div:hover{
+    color: var(--secondColor);
+}
+
+.Au-auxilioModalBack .Au-auxilioModal .postInteractions span{
+    height: 1px;
+    width: 3rem;
+    background-color: var(--grayColor);
+}
+
+.Au-auxilioModalBack .Au-auxilioModal .postInteractions span:nth-of-type(2){
+    width: 100%;
 }

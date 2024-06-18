@@ -456,3 +456,44 @@ function sendPassword(){
     })
 }
 
+function toggleAuxilioFilter(clickedFilter) {
+    const auxilioMainFilters = document.querySelectorAll('.Au-auxilioMainFilter');
+
+    auxilioMainFilters.forEach(filter => {
+        filter.classList.remove('active');
+    });
+
+    clickedFilter.classList.add('active');
+
+    const auxilioMainFiltersSelector = document.querySelector('.Au-auxilioFilter span');
+
+    if (clickedFilter.classList.contains('Au-auxilioMain')) {
+        auxilioMainFiltersSelector.style.transform = 'translateX(18.5rem)';
+    } else {
+        auxilioMainFiltersSelector.style.transform = 'translateX(0)';
+    }
+}
+
+function openAuxilioModal() {
+    const auxilioCards = document.querySelectorAll('.Au-auxilioCard');
+
+    auxilioCards.forEach(auxilioCard => {
+        auxilioCard.addEventListener('click', () => {
+            const auxilioModalBack = auxilioCard.querySelector('.Au-auxilioModalBack');
+            if (auxilioModalBack) {
+                auxilioModalBack.classList.remove('close');
+            }
+        });
+
+        const closeModal = auxilioCard.querySelector('.Au-closeModal');
+        if (closeModal) {
+            closeModal.addEventListener('click', (event) => {
+                event.stopPropagation(); // Impede a propagação do evento de clique para o card
+                const auxilioModalBack = auxilioCard.querySelector('.Au-auxilioModalBack');
+                if (auxilioModalBack) {
+                    auxilioModalBack.classList.add('close');
+                }
+            });
+        }
+    });
+}

@@ -33,7 +33,7 @@
     
 
     // SEARCH POSTS - READ
-        function querySpecificPost($conn, $table, $id){
+        function querySpecificPost($conn, $id){
             $sUQuery = "SELECT * FROM Publicacao WHERE idPublicacao =" . (int) $id;
 
             $sUExec = mysqli_query($conn, $sUQuery);
@@ -41,7 +41,7 @@
 
             return $sUReturn;
         }
-        function queryMultiplePosts($conn, $table, $where = 1, $order = ""){
+        function queryMultiplePosts($conn, $where = 1, $order = ""){
             if(!empty($order))
             {
                 $order = "ORDER BY $order";

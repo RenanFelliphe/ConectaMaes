@@ -4,7 +4,7 @@
 
         <div class="Ho-postTop">
             <a class="Ho-userProfileImage" href="/ConectaMaesProject/public/home/perfil.php">
-                <img src="">
+                <img src="<?php echo "/ConectaMaesProject/app/assets/imagens/fotos/perfil/".$currentUserData['linkFotoPerfil'];?>">
             </a>
 
             <div class="Ho-postText">
@@ -57,7 +57,7 @@
 
         <div class="Ho-postTop">
             <a class="Ho-userProfileImage" href="/ConectaMaesProject/public/home/perfil.php">
-                <img src="<?php echo $currentUserData['linkFotoPerfil'];?>">
+                <img src="<?php echo "/ConectaMaesProject/app/assets/imagens/fotos/perfil/".$currentUserData['linkFotoPerfil'];?>">
             </a>
 
             <div class="Ho-postText">
@@ -118,7 +118,7 @@
 
         <div class="Ho-postTop">
             <a class="Ho-userProfileImage" href="/ConectaMaesProject/public/home/perfil.php">
-                <img src="<?php echo $currentUserData['linkFotoPerfil'];?>">
+                <img src="<?php echo "/ConectaMaesProject/app/assets/imagens/fotos/perfil/".$currentUserData['linkFotoPerfil'];?>">
             </a>
 
             <div class="Ho-postText">
