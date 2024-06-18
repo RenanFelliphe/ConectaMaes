@@ -1,12 +1,12 @@
 <?php
-
     function postDateMessage($dataCriacaoPublicacao) {
-        // Converter a data de criação da publicação em um objeto DateTime
-        $dataPost = new DateTime($dataCriacaoPublicacao);
-        $dataAtual = new DateTime();
-        $dataAtual->setTimezone(new DateTimeZone('America/Sao_Paulo')); 
+        // Converter a data de criação da publicação em um objeto DateTime com o fuso horário correto
+        $dataPost = new DateTime($dataCriacaoPublicacao, new DateTimeZone('America/Sao_Paulo'));
+        
+        // Data e hora atual com o fuso horário correto
+        $dataAtual = new DateTime('now', new DateTimeZone('America/Sao_Paulo'));
 
-
+        // Calcula a diferença entre as datas
         $diffTime = $dataAtual->diff($dataPost);
 
         // Formatação da diferença
@@ -37,3 +37,4 @@
             return "agora";
         }
     }
+
