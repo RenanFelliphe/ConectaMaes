@@ -121,15 +121,41 @@
                             <label class="Re-fakePlaceholder" for="biografiaUsuario">Biografia</label>
                             <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
                         </div>
-                        <div class="Se-userInput full-width">
-                            <input type="text" id="localizacaoUsuario" name="localizacaoEdit" value="<?php echo $currentUserData['estado'];?>">
-                            <label class="Re-fakePlaceholder" for="localizacaoUsuario">Localização</label>
+                        <div class="Se-userInput side-by-side">
+                            <select class="Re-userInput" id="localizacaoUsuario" name="localizacaoEdit">
+                                <option value="">- - - - - -</option>
+                                <option value="Acre"> AC | Acre</option>
+                                <option value="Alagoas"> AL | Alagoas</option>
+                                <option value="Amapá"> AP | Amapá</option>
+                                <option value="Amazonas"> AM | Amazonas</option>
+                                <option value="Bahia"> BA | Bahia</option>
+                                <option value="Ceará"> CE | Ceará</option>
+                                <option value="Distrito Federal"> DF | Distrito Federal</option>
+                                <option value="Espírito Santo"> ES | Espírito Santo</option>
+                                <option value="Goiás"> GO | Goiás</option>
+                                <option value="Maranhão"> MA | Maranhão</option>
+                                <option value="Mato Grosso"> MT | Mato Grosso</option>
+                                <option value="Mato Grosso do Sul"> MS | Mato Grosso do Sul</option>
+                                <option value="Minas Gerais"> MG | Minas Gerais</option>
+                                <option value="Pará"> PA | Pará</option>
+                                <option value="Paraíba"> PB | Paraíba</option>
+                                <option value="Paraná"> PR | Paraná</option>
+                                <option value="Pernambuco"> PE | Pernambuco</option>
+                                <option value="Piauí"> PI | Piauí</option>
+                                <option value="Rio de Janeiro"> RJ | Rio de Janeiro</option>
+                                <option value="Rio Grande do Norte"> RN | Rio Grande do Norte</option>
+                                <option value="Rio Grande do Sul"> RS | Rio Grande do Sul</option>
+                                <option value="Rondônia"> RO | Rondônia</option>
+                                <option value="Roraima"> RR | Roraima</option>
+                                <option value="Santa Catarina"> SC | Santa Catarina</option>
+                                <option value="São Paulo"> SP | São Paulo</option>
+                                <option value="Sergipe"> SE | Sergipe</option>
+                                <option value="Tocantins"> TO | Tocantins</option>                 
+                            </select>
+                            <label class="Re-fakePlaceholder" for="localizacao" style="pointer-events: none;">Localização</label>
                             <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
                         </div>
-                        <div class="Se-userInput side-by-side editPasswordInput" onclick="openModal();">
-                            <label class="Re-fakePlaceholder">Senha</label>
-                            <i class="bi bi-pencil-fill Se-editIcon pageIcon "></i>                 
-                        </div>
+                        
                         <div class="Se-userInput side-by-side">
                             <input type="text" id="telefoneUsuario" name="telefoneEdit" value="<?php echo $currentUserData['telefone'];?>">
                             <label class="Re-fakePlaceholder" for="telefoneUsuario">Telefone</label>

@@ -32,18 +32,25 @@
                     <div class="Re-input">
                         <input class="Re-userInput" type="text" id="nomeUsuario" name="userRegistro" required>
                         <label class="Re-fakePlaceholder" for="nomeUsuario">Usuário</label>
+                        <span class="Re-error-message"></span>
+
                     </div>
                     <div class="Re-input">
                         <input class="Re-userInput" type="email" id="email" name="emailRegistro" autocomplete="email" required>
                         <label class="Re-fakePlaceholder" for="email">E-mail</label>
+                        <span class="Re-error-message"></span>
+
                     </div>
                     <div class="Re-input">
                         <input type="password" id="senha" name="senhaRegistro" required>
                         <label class="Re-fakePlaceholder" for="senha">Senha</label>
+                        <span class="Re-error-message"></span>
+
                     </div>
                     <div class="Re-input">
                         <input type="password" id="confirmarSenha" name="senhaRegistroConfirma" required>
                         <label class="Re-fakePlaceholder" for="confirmarSenha">Confirmar Senha</label>
+                        <span class="Re-error-message"></span>
                     </div>
 
                     <div class="Re-themeInfo">
@@ -63,14 +70,17 @@
                     <div class="Re-input inputName">
                         <input class="Re-userInput" type="text" id="nomeCompleto" name="nomeUsuarioRegistro" required>
                         <label class="Re-fakePlaceholder" for="nomeCompleto">Nome Completo</label>
+                        <span class="Re-error-message"></span>
                     </div>
                     <div class="Re-input inputCell">
                         <input class="Re-userInput" type="tel" id="telefone" name="telefoneRegistro"  required />
                         <label class="Re-fakePlaceholder" for="telefone">Telefone</label>
+                        <span class="Re-error-message"></span>
                     </div>
                     <div class="Re-input inputDataNasc">
                         <input class="Re-userInput" type="date" id="dataNascimento" name="dataNascimentoRegistro" required>
                         <label class="Re-fakePlaceholder" id="dataNascPlaceholder" for="dataNascimento">Data de Nascimento</label>
+                        <span class="Re-error-message"></span>
                     </div>
                     <div class="Re-input inputLocal">
                         <select class="Re-userInput" name="localizacaoRegistro" id="localizacao" >
