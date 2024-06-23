@@ -1,21 +1,21 @@
 <?php
-    function uploadPFP($conn, $userId){
+    function uploadPFP($conn, $userId, $nomeDeUsuario) {
         $diretorioPfP =  __DIR__ . '/../../assets/imagens/fotos/perfil/';
     
         if (isset($_FILES['fotoPerfilRegistro']) && $_FILES['fotoPerfilRegistro']['error'] == UPLOAD_ERR_OK) {
             $imgTemp = $_FILES['fotoPerfilRegistro']['tmp_name'];
             $imgNomeOriginal = $_FILES['fotoPerfilRegistro']['name'];
             $imgExtensao = strtolower(pathinfo($imgNomeOriginal, PATHINFO_EXTENSION));
-        
+    
             // Verifica se a extensão é permitida (.png ou .jpeg)
             if (in_array($imgExtensao, ['png', 'jpeg', 'jpg'])) {
-                $imgNomeUnico = uniqid() . "." . $imgExtensao;
+                $imgNomeUnico = $nomeDeUsuario . "." . $imgExtensao;
                 $caminhoDestino = $diretorioPfP . $imgNomeUnico;
     
                 // Move o arquivo para o diretório de destino
                 if (move_uploaded_file($imgTemp, $caminhoDestino)) {
                     $imgNomeUnicoDb = mysqli_real_escape_string($conn, $imgNomeUnico);
-                    
+    
                     // Atualiza o link da foto de perfil no banco de dados do usuário
                     $queryUpdate = "UPDATE Usuario SET linkFotoPerfil = '$imgNomeUnicoDb' WHERE idUsuario = $userId";
     
@@ -31,12 +31,24 @@
         } else {
             echo "Nenhuma imagem enviada ou erro no upload.<br>";
         }
-    }
-
-    //alterar updatePFP pra que quando salvar a imagem salvar com um uniqId, não com o nome do arquivo enviado
-    function updatePFP($conn, $userId) { 
-        $diretorioPfP =  __DIR__ . '/../../assets/imagens/fotos/perfil/';
+    }    
+    
+    function updatePFP($conn, $userId, $nomeDeUsuario = null) {
+        $diretorioPfP = __DIR__ . '/../../assets/imagens/fotos/perfil/';
         $linkFotoPerfil = null; // Inicializa com null para manter o valor existente se não houver upload
+    
+        // Busca o nome de usuário do banco de dados se não for fornecido
+        if (!$nomeDeUsuario) {
+            $query = "SELECT nomeDeUsuario FROM Usuario WHERE idUsuario = '$userId'";
+            $result = mysqli_query($conn, $query);
+            if ($result && mysqli_num_rows($result) > 0) {
+                $userData = mysqli_fetch_assoc($result);
+                $nomeDeUsuario = $userData['nomeDeUsuario'];
+            } else {
+                echo "Erro ao obter o nome de usuário do banco de dados.<br>";
+                return null;
+            }
+        }
     
         if (isset($_FILES['fotoPerfilEdit']) && $_FILES['fotoPerfilEdit']['error'] == UPLOAD_ERR_OK) {
             $imgTemp = $_FILES['fotoPerfilEdit']['tmp_name'];
@@ -51,9 +63,12 @@
                 $userData = mysqli_fetch_assoc($result);
                 $linkFotoPerfilAtual = $userData['linkFotoPerfil'];
     
-                // Define o caminho completo para o arquivo atual e novo
+                // Define o nome único para a nova imagem
+                $imgNomeUnico = $nomeDeUsuario . "." . $imgExtensao;
+                $caminhoDestino = $diretorioPfP . $imgNomeUnico;
+    
+                // Define o caminho completo para o arquivo atual
                 $caminhoArquivoAtual = $diretorioPfP . $linkFotoPerfilAtual;
-                $caminhoDestino = $diretorioPfP . $imgNomeOriginal;
     
                 // Remove o arquivo atual se existir
                 if (!empty($linkFotoPerfilAtual) && file_exists($caminhoArquivoAtual)) {
@@ -62,7 +77,7 @@
     
                 // Move o novo arquivo para o diretório de destino
                 if (move_uploaded_file($imgTemp, $caminhoDestino)) {
-                    $linkFotoPerfil = $imgNomeOriginal; // Define o link da nova foto para atualização no banco de dados
+                    $linkFotoPerfil = $imgNomeUnico; // Define o link da nova foto para atualização no banco de dados
     
                     // Atualiza o link da foto de perfil no banco de dados
                     $queryUpdate = "UPDATE Usuario SET linkFotoPerfil = '$linkFotoPerfil' WHERE idUsuario = '$userId'";
@@ -79,6 +94,7 @@
     
         return $linkFotoPerfil;
     }
+     
 
     function uploadAnexo(){
         $diretorioAnexo = "/app/assets/imagens/fotos/anexos/";

@@ -45,7 +45,7 @@
                     echo "Usuário registrado com sucesso!<br>";
 
                     // Chama a função uploadPFP para fazer o upload da foto de perfil
-                    uploadPFP($conn, $userId);
+                    uploadPFP($conn, $userId, $userRegistro);
                 } else {
                     echo "<p>Erro ao registrar usuário: " . mysqli_error($conn) . "!<p>";
                 }
@@ -95,7 +95,7 @@
             $tema = !empty($_POST['temaEdit']) ? mysqli_real_escape_string($conn, $_POST['temaEdit']) : null;
         
             // Chamando a função updatePFP para lidar com o upload da foto de perfil
-            $linkFotoPerfil = updatePFP($conn, $userId);
+            $linkFotoPerfil = updatePFP($conn, $userId, $user);
         
             // Verificação de email duplicado
             if ($email) {
