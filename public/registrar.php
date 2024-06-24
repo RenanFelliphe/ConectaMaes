@@ -10,7 +10,7 @@
     <title>ConectaMães - Registro</title>
 </head>
 
-<body class="<?php echo $currentUserData['tema'];?>">
+<body class="<?php if(isset( $currentUserData['tema'])) echo $currentUserData['tema'];?>">
     <?php 
         include_once ("../app/includes/headerLanding.php");
         include_once ("../app/services/crud/userFunctions.php");
@@ -78,7 +78,7 @@
                         <span class="Re-error-message"></span>
                     </div>
                     <div class="Re-input inputDataNasc">
-                        <input class="Re-userInput" type="date" id="dataNascimento" name="dataNascimentoRegistro" required>
+                        <input class="Re-userInput" type="text" id="dataNascimento" name="dataNascimentoRegistro" placeholder ="dd/mm/yyyy" required>
                         <label class="Re-fakePlaceholder" id="dataNascPlaceholder" for="dataNascimento">Data de Nascimento</label>
                         <span class="Re-error-message"></span>
                     </div>

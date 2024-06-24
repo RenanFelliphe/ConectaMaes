@@ -1,5 +1,4 @@
 <?php
-
     $hostname = '162.240.17.101';
     $username = 'projetos_nlessa';
     $password = 'Gc&sgY74PK$}';
@@ -23,7 +22,7 @@
             if(empty($err)){
                 $insertNewPost = "INSERT INTO Publicacao (tipoPublicacao, conteudo, linkAnexo, titulo, isSensivel, isConcluido, idUsuario) VALUES ('$tipoPublicacaoEnvio','$conteudoEnvio','$linkAnexoEnvio','$tituloEnvio','$isSensivelEnvio','$isConcluido','$idUsuarioQuePostou')";
                 $executeSendPost = mysqli_query($conn, $insertNewPost);
-    
+
                 if(!$executeSendPost){
                     echo "<p>Erro ao enviar publicação: " . mysqli_error($conn) . "!<p>";
                 }

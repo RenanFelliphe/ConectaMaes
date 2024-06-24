@@ -1,5 +1,7 @@
 <?php
     include_once(__DIR__ .'/../helpers/upload.php');
+    include_once(__DIR__ .'/../helpers/dateChecker.php');
+    include_once(__DIR__ .'/../helpers/validateUserInput.php');
 
     $hostname = '162.240.17.101';
     $username = 'projetos_nlessa';
@@ -16,7 +18,7 @@
             $emailRegistro = filter_input(INPUT_POST, "emailRegistro", FILTER_VALIDATE_EMAIL);
             $userRegistro = mysqli_real_escape_string($conn, $_POST['userRegistro']);
             $senhaRegistro = md5($_POST['senhaRegistro']);
-            $dataNascimentoRegistro = mysqli_real_escape_string($conn, $_POST['dataNascimentoRegistro']);
+            $dataNascimentoRegistro = validateDate(mysqli_real_escape_string($conn,$_POST['dataNascimentoRegistro']), $err);
             $telefoneRegistro = mysqli_real_escape_string($conn, $_POST['telefoneRegistro']);
             $biografiaUsuarioRegistro = mysqli_real_escape_string($conn, $_POST['biografiaUsuarioRegistro']);
             $temaRegistro = mysqli_real_escape_string($conn, $_POST['temaRegistro']);

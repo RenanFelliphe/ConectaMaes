@@ -1,4 +1,40 @@
 <?php
+    function validateDate($data, &$err) {
+        // Verifica se a data está no formato dd/mm/yyyy usando uma expressão regular
+        if (preg_match('/^(\d{2})\/(\d{2})\/(\d{4})$/', $data, $matches)) {
+            // Extrai o dia, mês e ano da data
+            $diaDataUser = $matches[1];
+            $mesDataUser = $matches[2];
+            $anoDataUser = $matches[3];
+    
+            // Verifica se a data é válida (considerando meses de 1 a 12 e dias válidos para cada mês)
+            if (!checkdate($mesDataUser, $diaDataUser, $anoDataUser)) {
+                $err[] = "Data inválida: o dia, mês ou ano não é válido.";
+                return false;
+            }
+    
+            $anoAtual = date("Y");
+            $anoMinimo = $anoAtual - 100;
+            $anoMaximo = $anoAtual;
+    
+            // Verifica se o ano está dentro do intervalo permitido
+            if ($anoDataUser < $anoMinimo) {
+                $err[] = "Ano inválido: o ano deve ser maior que " . ($anoMinimo - 1);
+                return false;
+            } elseif ($anoDataUser > $anoMaximo) {
+                $err[] = "Ano inválido: o ano deve ser menor que " . ($anoMaximo + 1);
+                return false;
+            }
+    
+            // Retorna a data no formato yyyy-mm-dd
+            return $anoDataUser . '-' . $mesDataUser . '-' . $diaDataUser;
+        } else {
+            $err[] = "Formato de data inválido. Lembre-se de usar dd/mm/yyyy.";
+            return false;
+        }
+    }
+    
+    
     function postDateMessage($dataCriacaoPublicacao) {
         // Converter a data de criação da publicação em um objeto DateTime com o fuso horário correto
         $dataPost = new DateTime($dataCriacaoPublicacao, new DateTimeZone('America/Sao_Paulo'));

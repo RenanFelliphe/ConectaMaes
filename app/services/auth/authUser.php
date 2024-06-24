@@ -34,26 +34,6 @@
         }
     }
 
-    function logInFromRegister($conn)
-    {
-        $email = filter_input(INPUT_POST, "emailRegistro", FILTER_VALIDATE_EMAIL);
-        $senha = md5($_POST['senhaRegistro']);
-
-        $query = "SELECT * FROM Usuario WHERE email = '$email' AND senha = '$senha' ";
-
-        $execute = mysqli_query($conn,$query);
-
-        $return = mysqli_fetch_assoc($execute);
-
-        if(!empty($return['email']))
-        {
-            $_SESSION['idUsuario'] = $return['idUsuario'];
-            $_SESSION['active'] = true;
-            echo 'Usuário registrado com sucesso!';
-            exit();
-        }
-    }
-
     function logOut()
     {
         session_start();
