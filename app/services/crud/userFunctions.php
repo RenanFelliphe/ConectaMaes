@@ -14,8 +14,8 @@
         function signUp($conn){
             $err = array();
 
-            $nomeRegistro = mysqli_real_escape_string($conn, $_POST['nomeUsuarioRegistro']);
-            $emailRegistro = filter_input(INPUT_POST, "emailRegistro", FILTER_VALIDATE_EMAIL);
+            $nomeRegistro = validateNome(mysqli_real_escape_string($conn, $_POST['nomeUsuarioRegistro']), $err);
+            $emailRegistro = validateEmail($_POST['emailRegistro'], $err);
             $userRegistro = mysqli_real_escape_string($conn, $_POST['userRegistro']);
             $senhaRegistro = md5($_POST['senhaRegistro']);
             $dataNascimentoRegistro = validateDate(mysqli_real_escape_string($conn,$_POST['dataNascimentoRegistro']), $err);
@@ -35,7 +35,7 @@
             $verifyRowNum = mysqli_num_rows($searchEmail);
 
             if (!empty($verifyRowNum)) {
-                $err[] = "Email já registrado!";
+                $err[] = "E-mail já registrado!";
             }
 
             if (empty($err)) {
@@ -53,7 +53,7 @@
                 }
             } else {
                 foreach ($err as $e) {
-                    echo "<p>$e</p><br>";
+                    echo "<p>$e</p>";
                 }
             }
             
