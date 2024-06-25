@@ -16,8 +16,8 @@
 
             $nomeRegistro = validateNome(mysqli_real_escape_string($conn, $_POST['nomeUsuarioRegistro']), $err);
             $emailRegistro = validateEmail($_POST['emailRegistro'], $err);
-            $userRegistro = mysqli_real_escape_string($conn, $_POST['userRegistro']);
-            $senhaRegistro = md5($_POST['senhaRegistro']);
+            $userRegistro = validateUser(mysqli_real_escape_string($conn, $_POST['userRegistro']),$err);
+            $senhaRegistro = validateSenha($_POST['senhaRegistro'], $_POST['senhaRegistroConfirma'], $err);
             $dataNascimentoRegistro = validateDate(mysqli_real_escape_string($conn,$_POST['dataNascimentoRegistro']), $err);
             $telefoneRegistro = mysqli_real_escape_string($conn, $_POST['telefoneRegistro']);
             $biografiaUsuarioRegistro = mysqli_real_escape_string($conn, $_POST['biografiaUsuarioRegistro']);
@@ -25,18 +25,25 @@
             $localizacaoRegistro = mysqli_real_escape_string($conn, $_POST['localizacaoRegistro']);
             $linkFotoPerfilRegistro = ''; // Inicialmente vazio
             $isAdminRegistro = false; // Não é possível definir a administração durante o registro
-
-            if ($_POST['senhaRegistro'] != $_POST['senhaRegistroConfirma']) {
-                $err[] = "Senhas não conferem!";
-            }
-
+            
             $queryEmail = "SELECT email FROM Usuario WHERE email = '$emailRegistro' ";
             $searchEmail = mysqli_query($conn, $queryEmail);
-            $verifyRowNum = mysqli_num_rows($searchEmail);
-
-            if (!empty($verifyRowNum)) {
-                $err[] = "E-mail já registrado!";
-            }
+            $verifyRowNumEmail = mysqli_num_rows($searchEmail);
+                if (!empty($verifyRowNumEmail)) {
+                    $err[] = "E-mail já registrado!";
+                }
+            $queryUser = "SELECT nomeDeUsuario FROM Usuario WHERE nomeDeUsuario = '$userRegistro' ";
+            $searchUser = mysqli_query($conn, $queryUser);
+            $verifyRowNumUser = mysqli_num_rows($searchUser);
+                if (!empty($verifyRowNumUser)) {
+                    $err[] = "Nome de usuário já registrado!";
+                }
+            $queryTel = "SELECT telefone FROM Usuario WHERE telefone = '$telefoneRegistro' ";
+            $searchTel = mysqli_query($conn, $queryTel);
+            $verifyRowNumTel = mysqli_num_rows($searchTel);
+                if (!empty($verifyRowNumTel)) {
+                    $err[] = "Telefone já registrado!";
+                }
 
             if (empty($err)) {
                 $insertNewUser = "INSERT INTO Usuario (nomeCompleto, email, senha, dataNascimentoUsuario, telefone, linkFotoPerfil, biografia, nomeDeUsuario, isAdmin, tema, estado) VALUES ('$nomeRegistro','$emailRegistro','$senhaRegistro','$dataNascimentoRegistro','$telefoneRegistro','$linkFotoPerfilRegistro','$biografiaUsuarioRegistro','$userRegistro','$isAdminRegistro','$temaRegistro','$localizacaoRegistro')";

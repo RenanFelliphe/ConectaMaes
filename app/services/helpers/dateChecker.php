@@ -22,7 +22,7 @@
                 $err[] = "Ano inválido: o ano deve ser maior que " . ($anoMinimo - 1);
                 return false;
             } elseif ($anoDataUser > $anoMaximo) {
-                $err[] = "Ano inválido: o ano deve ser menor que " . ($anoMaximo + 1);
+                $err[] = "Ano inválido: o ano deve ser menor que " . ($anoMaximo);
                 return false;
             }
     

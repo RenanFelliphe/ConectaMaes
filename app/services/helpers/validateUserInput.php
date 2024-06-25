@@ -2,7 +2,7 @@
     function validateUser($user, &$err) {
         // Nome de usuário deve ter mais que 3 caracteres e pode conter apenas letras, números e _
         if(mb_strlen($user, 'UTF-8')<4){
-            $err[] = "Nome de usuário tem que ter no mínimo 4 caracteres";
+            $err[] = "Nome de usuário deve ter mais de 3 caracteres!";
         }
         
         if (preg_match('/^[a-zA-Z0-9_]{4,}$/', $user)) {
@@ -17,23 +17,29 @@
     function validateEmail($emailInput, &$err) {
         // Valida e sanitiza o email
         $verifyEmail = filter_var($emailInput, FILTER_SANITIZE_EMAIL);
-        if (!filter_var($verifyEmail, FILTER_VALIDATE_EMAIL)) {
-            $err[] = "E-mail inválido. Utilize o formato example@email.com";
-        } else {
+        if (filter_var($emailInput, FILTER_VALIDATE_EMAIL)) {
             return $verifyEmail;
+        } else {
+            $err[] = "E-mail inválido. Utilize o formato example@email.com";
         }
+        return false;
     }
 
     function validateSenha($senha, $confirma, &$err) {
         // Senha deve ter pelo menos 8 caracteres, incluir letras e números
         if (preg_match('/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/', $senha)) {
-            return $senha;
+            if ($senha == $confirma) {
+                return md5($senha);
+            }else{
+                $err[] = "Senhas não conferem!";
+            }
         } else{
-            $err[] = "Senha deve conter letras e números";
+            if(strlen($senha)<8){
+                $err[] = "Senha deve conter pelo menos 8 caracteres!";
+            }
+            $err[] = "Senha deve conter apenas letras e números!";
         }
-        if ($senha != $confirma) {
-            $err[] = "Senhas não conferem!";
-        }
+        
         return false;
     }
 
@@ -61,13 +67,13 @@
                 if (count($partes_nome) >= 2) {
                     foreach ($partes_nome as $pn) {
                         if (!preg_match('/^[\p{L}]+$/u', $pn)) {
-                            $err[] = "Nome inválido";
+                            $err[] = "Nome inválido!";
                             return false;
                         }
                     }
                     return capitalizeString($nome);
                 }
-        $err[] = "Insira seu nome completo.";
+        $err[] = "Insira seu nome completo!";
         return false;
     }
 
@@ -76,7 +82,7 @@
         if (preg_match('/^\(\d{2}\) \d{4,5}-\d{4}$/', $telefone)) {
             return $telefone;
         } else {
-            $err[] = "Telefone inválido. Utilize o formato: (xx) xxxxx-xxxx";
+            $err[] = "Telefone inválido. Utilize o formato: (xx) xxxxx-xxxx!";
         }
         return false;
     }
