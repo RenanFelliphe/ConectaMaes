@@ -26,7 +26,6 @@
     }
 
     function validateSenha($senha, $confirma, &$err) {
-        // Senha deve ter pelo menos 8 caracteres, incluir letras e números
         if (preg_match('/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/', $senha)) {
             if ($senha == $confirma) {
                 return md5($senha);
@@ -37,7 +36,15 @@
             if(strlen($senha)<8){
                 $err[] = "Senha deve conter pelo menos 8 caracteres!";
             }
-            $err[] = "Senha deve conter apenas letras e números!";
+            if(!preg_match('/[A-Za-z]/', $senha)){
+                $err[] = "Senha deve conter letras também!";
+            }
+            if(!preg_match('/\d/', $senha)){
+                $err[] = "Senha deve conter números também!";
+            }
+            if (preg_match('/[^A-Za-z\d]/', $senha)) {
+                $err[] = "Senha deve conter apenas letras e números!";
+            }
         }
         
         return false;
@@ -77,13 +84,43 @@
         return false;
     }
 
-    function validateTelefone($telefone, &$err) {
-        // Valida um formato de telefone (xx) xxxxx-xxxx
-        if (preg_match('/^\(\d{2}\) \d{4,5}-\d{4}$/', $telefone)) {
+    function validateTelefone($telefoneInput, &$err) {
+        // Remove qualquer caractere que não seja um dígito
+        $telefone = preg_replace('/\D/', '', $telefoneInput);
+        
+        // Lista de DDDs válidos
+        $valid_ddds = [
+            '11', '12', '13', '14', '15', '16', '17', '18', '19',
+            '21', '22',       '24',             '27', '28',
+            '31', '32', '33', '34', '35',       '37', '38',
+            '41', '42', '43', '44', '45', '46', '47', '48', '49',
+            '51',       '53', '54', '55',
+            '61', '62', '63', '64', '65', '66', '67', '68', '69',
+            '71',       '73', '74', '75',       '77',       '79',
+            '81', '82', '83', '84', '85', '86', '87', '88', '89',
+            '91', '92', '93', '94', '95', '96', '97', '98', '99'
+        ];
+        
+        // Verifica o comprimento do telefone e extrai o DDD
+        if (strlen($telefone) == 10) {
+            $ddd = substr($telefone, 0, 2);
+            if (!in_array($ddd, $valid_ddds)) {
+                $err[] = "DDD inválido.";
+                return false;
+            }
+            // Retorna o número completo sem formatação
+            return $telefone;
+        } elseif (strlen($telefone) == 11 && $telefone[2] == '9') {
+            $ddd = substr($telefone, 0, 2);
+            if (!in_array($ddd, $valid_ddds)) {
+                $err[] = "DDD inválido.";
+                return false;
+            }
+            // Retorna o número completo sem formatação
             return $telefone;
         } else {
-            $err[] = "Telefone inválido. Utilize o formato: (xx) xxxxx-xxxx!";
+            $err[] = "Telefone inválido. Utilize o formato correto!";
+            return false;
         }
-        return false;
     }
-
+    

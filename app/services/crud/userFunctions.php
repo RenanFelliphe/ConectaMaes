@@ -19,7 +19,7 @@
             $userRegistro = validateUser(mysqli_real_escape_string($conn, $_POST['userRegistro']),$err);
             $senhaRegistro = validateSenha($_POST['senhaRegistro'], $_POST['senhaRegistroConfirma'], $err);
             $dataNascimentoRegistro = validateDate(mysqli_real_escape_string($conn,$_POST['dataNascimentoRegistro']), $err);
-            $telefoneRegistro = mysqli_real_escape_string($conn, $_POST['telefoneRegistro']);
+            $telefoneRegistro = validateTelefone(mysqli_real_escape_string($conn, $_POST['telefoneRegistro']), $err);
             $biografiaUsuarioRegistro = mysqli_real_escape_string($conn, $_POST['biografiaUsuarioRegistro']);
             $temaRegistro = mysqli_real_escape_string($conn, $_POST['temaRegistro']);
             $localizacaoRegistro = mysqli_real_escape_string($conn, $_POST['localizacaoRegistro']);
@@ -51,7 +51,7 @@
 
                 if ($executeSignUp) {
                     $userId = mysqli_insert_id($conn); // Obtém o ID do novo usuário inserido
-                    echo "Usuário registrado com sucesso!<br>";
+                    echo "<p>Usuário registrado com sucesso!</p><br>";
 
                     // Chama a função uploadPFP para fazer o upload da foto de perfil
                     uploadPFP($conn, $userId, $userRegistro);
