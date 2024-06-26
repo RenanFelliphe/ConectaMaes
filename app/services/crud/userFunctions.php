@@ -23,7 +23,7 @@
             $biografiaUsuarioRegistro = mysqli_real_escape_string($conn, $_POST['biografiaUsuarioRegistro']);
             $temaRegistro = mysqli_real_escape_string($conn, $_POST['temaRegistro']);
             $localizacaoRegistro = mysqli_real_escape_string($conn, $_POST['localizacaoRegistro']);
-            $linkFotoPerfilRegistro = ''; // Inicialmente vazio
+            $linkFotoPerfilRegistro = 'default.png'; // Inicialmente default.png
             $isAdminRegistro = false; // Não é possível definir a administração durante o registro
             
             $queryEmail = "SELECT email FROM Usuario WHERE email = '$emailRegistro' ";
