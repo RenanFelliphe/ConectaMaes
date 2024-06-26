@@ -69,11 +69,6 @@
                                 <i class="bi bi-caret-down-fill"></i>
                             </div>
                         </div>
-        
-                        <div class="Ho-sensitiveContent">
-                            <input type="checkbox" name="sensitiveContent" id="sensitiveContent" class="Ho-sensitiveCheckbox">
-                            <label for="sensitiveContent">Conteúdo sensível</label>
-                        </div>
                     </div>
                 </div>
 

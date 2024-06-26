@@ -95,10 +95,8 @@
             $err = array();
         
             $nome = !empty($_POST['nomeEdit']) ? mysqli_real_escape_string($conn, $_POST['nomeEdit']) : null;
-            $email = !empty($_POST['emailEdit']) ? filter_input(INPUT_POST, "emailEdit", FILTER_VALIDATE_EMAIL) : null;
             $user = !empty($_POST['userEdit']) ? mysqli_real_escape_string($conn, $_POST['userEdit']) : null;
-            $dataNascimento = !empty($_POST['dataNascimentoEdit']) ? mysqli_real_escape_string($conn, $_POST['dataNascimentoEdit']) : null;
-            $telefone = !empty($_POST['telefoneEdit']) ? mysqli_real_escape_string($conn, $_POST['telefoneEdit']) : null;
+            $telefone = !empty($_POST['telefoneEdit']) ? validateTelefone(mysqli_real_escape_string($conn, $_POST['telefoneEdit']), $err) : null;
             $localizacao = !empty($_POST['localizacaoEdit']) ? mysqli_real_escape_string($conn, $_POST['localizacaoEdit']) : null;
             $biografiaUsuario = !empty($_POST['biografiaUsuarioEdit']) ? mysqli_real_escape_string($conn, $_POST['biografiaUsuarioEdit']) : null;
             $tema = !empty($_POST['temaEdit']) ? mysqli_real_escape_string($conn, $_POST['temaEdit']) : null;
@@ -107,33 +105,19 @@
             $linkFotoPerfil = updatePFP($conn, $userId, $user);
         
             // Verificação de email duplicado
-            if ($email) {
-                $queryEmail = "SELECT email FROM Usuario WHERE email = '$email' AND idUsuario != '$userId'";
-                $searchEmail = mysqli_query($conn, $queryEmail);
-                $verifyEmailRowNum = mysqli_num_rows($searchEmail);
+            if ($telefone) {
+                $queryTelefone = "SELECT telefone FROM Usuario WHERE telefone = '$telefone' AND idUsuario != '$userId'";
+                $searchTelefone = mysqli_query($conn, $queryTelefone);
+                $verifytelefoneRowNum = mysqli_num_rows($searchTelefone);
         
-                if (!empty($verifyEmailRowNum)) {
-                    $err[] = "Email já registrado!";
-                }
-            }
-        
-            // Verificação de username duplicado
-            if ($user) {
-                $queryUser = "SELECT nomeDeUsuario FROM Usuario WHERE nomeDeUsuario = '$user' AND idUsuario != '$userId'";
-                $searchUser = mysqli_query($conn, $queryUser);
-                $verifyUserRowNum = mysqli_num_rows($searchUser);
-        
-                if (!empty($verifyUserRowNum)) {
-                    $err[] = "Usuário já registrado!";
+                if (!empty($verifytelefoneRowNum)) {
+                    $err[] = "Telefone já registrado!";
                 }
             }
         
             if (empty($err)) {
                 $fields = [];
                 if ($nome) $fields["nomeCompleto"] = $nome;
-                if ($email) $fields["email"] = $email;
-                if ($user) $fields["nomeDeUsuario"] = $user;
-                if ($dataNascimento) $fields["dataNascimentoUsuario"] = $dataNascimento;
                 if ($telefone) $fields["telefone"] = $telefone;
                 if ($localizacao) $fields["estado"] = $localizacao;
                 if ($biografiaUsuario) $fields["biografia"] = $biografiaUsuario;

@@ -1836,16 +1836,6 @@ footer .A-footerRight li.A-footerPolitic h5{
     cursor: pointer;
 }
 
-.Ho-postSomething .Ho-postBottom .Ho-submitArea .Ho-sensitiveContent{
-    display: flex;
-    gap: 0.3rem;
-    font-size: 0.7rem;
-}
-
-.Ho-postSomething .Ho-postBottom .Ho-submitArea .Ho-sensitiveContent input{
-    height: 0.6rem;
-} 
-
 .Ho-Main .timeline .Ho-postSomething .Ho-postAttachments{
     display: flex;
     align-items: flex-start;
