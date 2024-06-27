@@ -20,7 +20,7 @@
 <body class="<?php echo $currentUserData['tema'];?>">
     <?php include_once ("../../app/includes/headerHome.php");?>
 
-    <main class="mainSystem">
+    <main class="Ho-Main mainSystem">
         <section class="asideLeft"></section>
 
         <section class="asideRight"></section>

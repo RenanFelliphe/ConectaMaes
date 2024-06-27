@@ -49,14 +49,13 @@
                 <input class="Lo-loginSubmit" type="submit" name="logar" value="Entrar">
                 <span class="Lo-goRegister"> Não possui uma conta? <a href="registrar.php">Registre-se</a></span>
             </div>
-        </form>
-
-        <?php
+            <?php
             if(isset($_POST['logar']))
             {
                 logIn($conn);
             }
         ?>
+        </form> 
     </main>
 
     <?php 

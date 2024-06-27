@@ -317,14 +317,7 @@
             const updateInfo = (event) => {
                 const inputId = event.target.id;
                 const infoElement = document.getElementById('info' + inputId.charAt(0).toUpperCase() + inputId.slice(1));
-
-                if (inputId === 'dataNascimento') {
-                    const dateValue = new Date(event.target.value);
-                    const formattedDate = dateValue.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
-                    infoElement.textContent = formattedDate;
-                } else {
-                    infoElement.textContent = event.target.value;
-                }
+                infoElement.textContent = event.target.value;
             };
 
             input.addEventListener('input', updateInfo);
