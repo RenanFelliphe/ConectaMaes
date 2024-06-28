@@ -22,6 +22,7 @@
             <section class="Se-asideLeft">
                 <img src="" class="backCells cellsLeft">
             </section>
+
             <section class="Se-settingsCenter">
                 <div class="Se-centerHeader">  
                     <a href="../home.php"><i class="bi bi-arrow-left-circle"></i></a>
@@ -35,6 +36,7 @@
                         </div>
                         <i class="bi bi-chevron-right" onclick="toggleConfigSection();"></i>
                     </a>
+
                     <a class="Se-sectionTitle">
                         <div>
                             <img src="/ConectaMaesProject/app/assets/imagens/icons/pram_icon.png" class="pageIcon" alt="Ícone de usuário">
@@ -42,6 +44,7 @@
                         </div>
                         <i class="bi bi-chevron-right" onclick="toggleConfigSection();"></i>
                     </a>
+
                     <a class="Se-sectionTitle">
                         <div>
                             <img src="/ConectaMaesProject/app/assets/imagens/icons/chat_icon.png" class="pageIcon" alt="Ícone de usuário">
@@ -49,6 +52,15 @@
                         </div>
                         <i class="bi bi-chevron-right"></i>
                     </a>
+
+                    <a class="Se-sectionTitle">
+                        <div>
+                            <img src="/ConectaMaesProject/app/assets/imagens/icons/lock_icon.png" class="pageIcon" alt="Ícone de usuário">
+                            <p> Segurança</p>
+                        </div>
+                        <i class="bi bi-chevron-right"></i>
+                    </a>
+
                     <a class="Se-sectionTitle">
                         <div>
                             <img src="/ConectaMaesProject/app/assets/imagens/icons/notifications_icon.png" class="pageIcon" alt="Ícone de usuário">
@@ -56,6 +68,7 @@
                         </div>
                         <i class="bi bi-chevron-right"></i>
                     </a>
+
                     <a class="Se-sectionTitle" href="../index.php">
                         <div>
                             <img src="/ConectaMaesProject/app/assets/imagens/icons/conectamaes_icon.png" class="pageIcon" alt="Ícone de usuário">
@@ -63,6 +76,7 @@
                         </div>
                         <i class="bi bi-box-arrow-up-right"></i>
                     </a>
+
                     <a class="Se-sectionTitle" href="../suporte.php">
                         <div>
                             <img src="/ConectaMaesProject/app/assets/imagens/icons/support_icon.png" class="pageIcon" alt="Ícone de usuário">
@@ -72,6 +86,7 @@
                     </a>
                 </div>
             </section>
+
             <section class="Se-asideRight infoAccount">
                 <form class="Se-accountInformations Se-subSection active" method="post" enctype="multipart/form-data">
                     <div class="Se-sectionHeader">
@@ -109,6 +124,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="Se-editInfo">
                         <input type="hidden" class="updaterIdHiddenInput" name="updaterId" value="<?php echo $currentUserData['idUsuario']; ?>">    
                         <div class="Se-userInput full-width">
@@ -117,7 +133,7 @@
                             <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
                         </div>
                         <div class="Se-userInput full-width">
-                            <textarea name="biografiaUsuarioEdit" id="biografiaUsuario" cols="54" rows="4"><?php echo $currentUserData['biografia'];?></textarea>                        
+                            <textarea name="biografiaUsuarioEdit" id="biografiaUsuario" cols="54" rows="3"><?php echo $currentUserData['biografia'];?></textarea>                        
                             <label class="Re-fakePlaceholder" for="biografiaUsuario">Biografia</label>
                             <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
                         </div>
@@ -174,6 +190,7 @@
                         </div>
                         <button class="Se-accountEdit" type="submit" name="editar">Editar conta</button>
                     </div>
+
                     <?php
                         if(isset($_POST['editar'])) {   
                             if($_POST['updaterId'] === $currentUserData['idUsuario']) {
@@ -184,11 +201,12 @@
                         }
                     ?>
                             
-                    <div class="Se-accountBottom" style="margin-bottom: 1rem;">
+                    <div class="Se-accountBottom">
                         <span class="Se-dateCriation"> Criado em: <span class="Se-accountDate">28/05/2024</span></span>
                         <a class="Se-accountDelete" onclick="openModal();">Excluir conta</a> <!--name="deletar" href="./config.php?deletar=true-->
                     </div>
                 </form>
+
                 <div class="Se-childInformations Se-subSection">
                     <div class="Se-sectionHeader">
                         <img src="/ConectaMaesProject/app/assets/imagens/icons/pram_icon.png" class="pageIcon" alt="Ícone de usuário">
@@ -319,12 +337,64 @@
                     </form>
                     <button class="Se-addNewChild" onclick="openModal();">Adicionar Filho(a)</button>
                 </div>
+
                 <div class="Se-otherUsersInteractions Se-subSection">
                     <div class="Se-sectionHeader">
                         <img src="/ConectaMaesProject/app/assets/imagens/icons/chat_icon.png" class="pageIcon" alt="Ícone de usuário">
                         <h1>Interações com outros usuários</h1>
                     </div>
                 </div>
+
+                <div class="Se-security Se-subSection">
+                    <div class="Se-sectionHeader">
+                        <img src="/ConectaMaesProject/app/assets/imagens/icons/lock_icon.png" class="pageIcon" alt="Ícone de usuário">
+                        <h1>Segurança</h1>
+                    </div>
+
+                    <ul>
+                        <li><form class="Se-editPassword" method="post" id="formPassword">
+                                <h4> Senha </h4>
+                                <div class="Se-passwordInputs">
+                                    <div class="Se-passInput">
+                                        <input type="text" id="currentPassword" name="currentPassword">
+                                        <label class="Re-fakePlaceholder" for="currentPassword">Senha Atual</label>
+                                        <p class="Se-forgotPassword">Esqueceu a senha?</p>
+                                    </div>
+                                    <div class="Se-passInput">
+                                        <input type="text" id="newPassword" name="newPassword">
+                                        <label class="Re-fakePlaceholder" for="newPassword">Senha Nova</label>
+                                    </div>
+                                    <div class="Se-passInput">
+                                        <input type="text" id="confirmNewPassword" name="confirmNewPassword">
+                                        <label class="Re-fakePlaceholder" for="confirmNewPassword">Confirmar Senha Nova</label>
+                                    </div>
+                                </div>
+
+                                <button class="Se-editSubmit" type="submit" name="editPasswordSubmit">Confirmar</button>
+                        </form></li>
+
+                        <li><form class="Se-editPhoneNumber">
+                                <h4> Número de Telefone </h4>
+                                <div class="Se-phoneInput">
+                                    <input type="text" id="editTelephone" name="editTelephoneNumber">
+                                    <label class="Re-fakePlaceholder" for="telephoneNumber">Telefone</label>
+                                    <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
+                                </div>
+                                <button class="Se-editSubmit" type="submit" name="editTelephone Submit">Confirmar</button>
+                        </form></li>
+
+                        <li><div class="Re-themeInfo">
+                                <h4> Tipo de Conta </h4>
+                                <div class="Re-themeOptions">
+                                    <input type="radio" name="temaEdit" value="Y-theme" id="Re-yellowTheme" <?php /*echo ($currentUserData['tema'] === 'Y-theme') ? 'checked' : '';*/?>>
+                                    <label for="Re-yellowTheme"> Padrão </label>
+                                    <input type="radio" name="temaEdit" value="B-theme" id="Re-blueTheme" <?php /*echo ($currentUserData['tema'] === 'B-theme') ? 'checked' : '';*/?>>
+                                    <label for="Re-blueTheme"> Anônima </label>
+                                </div>
+                        </div></li>
+                    </ul>
+                </div>
+
                 <div class="Se-notifications Se-subSection">
                     <div class="Se-sectionHeader">
                         <img src="/ConectaMaesProject/app/assets/imagens/icons/notifications_icon.png" class="pageIcon" alt="Ícone de usuário">

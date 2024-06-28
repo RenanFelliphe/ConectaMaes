@@ -2355,7 +2355,7 @@ body.Y-theme  .Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover div i
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    gap: 2rem;
+    gap: 1rem;
     height: 100%;
     width: 100%;
     overflow-y: auto;
@@ -2499,7 +2499,8 @@ body.Y-theme .Se-asideRight  .Se-subSection .Se-sectionHeader .pageIcon{
 }
 
 .Se-asideRight .Se-accountInformations .Se-editInfo .Se-userInput input,
-.Se-asideRight .Se-accountInformations .Se-editInfo .Se-userInput textarea{
+.Se-asideRight .Se-accountInformations .Se-editInfo .Se-userInput textarea,
+.Se-asideRight .Se-accountInformations .Se-editInfo .Se-userInput select{
     position: relative;
     width: 100%;
     border: none;
@@ -2554,7 +2555,6 @@ body.Y-theme .Se-asideRight  .Se-subSection .Se-sectionHeader .pageIcon{
     box-shadow: 0 0 0 2px var(--whiteColor), 0 0 0 3px var(--thirdColor);
 }
 
-
 .Se-asideRight .Se-accountInformations .Re-themeInfo .Re-themeOptions label{
     cursor: pointer;
     margin-right: 0.4rem;
@@ -2581,8 +2581,6 @@ body.Y-theme .Se-asideRight  .Se-subSection .Se-sectionHeader .pageIcon{
     align-items: flex-end;
     width: 100%;
     height: fit-content;
-    margin-bottom: 2rem;
-    
 }
 
 .Se-asideRight .Se-accountInformations .Se-accountBottom .Se-dateCriation{
@@ -2813,6 +2811,86 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     border-color: var(--secondColor);
 }
 
+.Se-asideRight .Se-security .Se-editPassword h4,
+.Se-asideRight .Se-security .Se-editPhoneNumber h4{
+    margin-bottom: 1rem;
+}
+
+.Se-asideRight .Se-security .Se-editPassword .Se-passwordInputs {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.7rem;
+}
+
+.Se-asideRight .Se-security .Se-editPassword .Se-passwordInputs .Se-passInput{
+    position: relative;
+    padding: 0.7rem 0.5rem 0.5rem 1rem;
+    width: 22rem;
+    height: 2.5rem;
+    border-radius: 0.7rem;
+    border: 1px solid var(--blackColor);
+}
+
+.Se-asideRight .Se-security .Se-editPassword .Se-passwordInputs .Se-passInput input{
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: none;
+}
+
+.Se-asideRight .Se-security .Se-editPassword .Se-passwordInputs .Se-passInput label{
+    position: absolute;
+    top: -0.5rem;
+    left: 1rem;
+    background-color: var(--whiteColor);
+    padding: 0 1rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.Se-asideRight .Se-security .Se-editPassword .Se-passwordInputs .Se-passInput .Se-forgotPassword{
+    position: absolute;
+    right: 0;
+    bottom: -1rem;
+    font-size: 0.75rem;
+    cursor: pointer;
+}
+
+.Se-asideRight .Se-security .Se-editPhoneNumber .Se-phoneInput{
+    position: relative;
+    padding: 0.7rem 0.5rem 0.5rem 1rem;
+    width: 22rem;
+    height: 2.5rem;
+    border-radius: 0.7rem;
+    border: 1px solid var(--blackColor);
+}
+
+.Se-asideRight .Se-security .Se-editPhoneNumber .Se-phoneInput input{
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: none;
+}
+
+.Se-asideRight .Se-security .Se-editPhoneNumber .Se-phoneInput label{
+    position: absolute;
+    top: -0.5rem;
+    left: 1rem;
+    background-color: var(--whiteColor);
+    padding: 0 1rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.Se-asideRight .Se-security .Se-editPhoneNumber .Se-phoneInput .Se-editIcon{
+    position: absolute;
+    right: 1rem;
+    font-size: 0.7rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--secondColor);
+}
 /*====================================================================================================
 ===================================== MODAIS DAS CONFIGURAÇÕES =======================================
 ====================================================================================================*/
@@ -2889,47 +2967,6 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     transition: 0.2s;
     font-size: 1.2rem;
     background-color: var(--secondColor);
-}
-
-.modalSection .Se-editPasswordModal .Se-passwordInputs {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 1.7rem;
-}
-
-.modalSection .Se-editPasswordModal .Se-passwordInputs .Se-passInput{
-    position: relative;
-    padding: 0.7rem 0.5rem 0.5rem 1rem;
-    width: 22rem;
-    height: 2.5rem;
-    border-radius: 0.7rem;
-    border: 1px solid var(--blackColor);
-}
-
-.modalSection .Se-editPasswordModal .Se-passwordInputs .Se-passInput input{
-    width: 100%;
-    height: 100%;
-    outline: none;
-    border: none;
-}
-
-.modalSection .Se-editPasswordModal .Se-passwordInputs .Se-passInput label{
-    position: absolute;
-    top: -0.5rem;
-    left: 1rem;
-    background-color: var(--whiteColor);
-    padding: 0 1rem;
-    font-size: 0.8rem;
-    font-weight: 500;
-}
-
-.modalSection .Se-editPasswordModal .Se-passwordInputs .Se-passInput .Se-forgotPassword{
-    position: absolute;
-    right: 0;
-    bottom: -1rem;
-    font-size: 0.75rem;
-    cursor: pointer;
 }
 
 .modalSection .Se-addNewChildModal .Se-childInputs {

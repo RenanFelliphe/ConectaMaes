@@ -158,32 +158,7 @@
             }
         ?>
     </form>
-
-    <form class="Se-editPasswordModal pageModal close" method="post" id="formPassword">
-        <div class="modalHeader">  
-            <i class="bi bi-arrow-left-circle closeModal" onclick="openModal()"></i>
-            <h1>Alterar a Senha</h1>
-        </div>
-
-        <div class="Se-passwordInputs">
-            <div class="Se-passInput">
-                <input type="text" id="currentPassword" name="currentPassword">
-                <label class="Re-fakePlaceholder" for="currentPassword">Senha Atual</label>
-                <p class="Se-forgotPassword">Esqueceu a senha?</p>
-            </div>
-            <div class="Se-passInput">
-                <input type="text" id="newPassword" name="newPassword">
-                <label class="Re-fakePlaceholder" for="newPassword">Senha Nova</label>
-            </div>
-            <div class="Se-passInput">
-                <input type="text" id="confirmNewPassword" name="confirmNewPassword">
-                <label class="Re-fakePlaceholder" for="confirmNewPassword">Confirmar Senha Nova</label>
-            </div>
-        </div>
-
-        <button class="Se-modalSubmit" type="submit" name="editPasswordSubmit">Confirmar</button>
-    </form>
-
+    
     <form class="Se-addNewChildModal pageModal close">
         <div class="modalHeader">  
             <i class="bi bi-arrow-left-circle closeModal"></i>
