@@ -2560,17 +2560,7 @@ body.Y-theme .Se-asideRight  .Se-subSection .Se-sectionHeader .pageIcon{
     margin-right: 0.4rem;
 }
 
-.Se-asideRight .Se-accountInformations .Re-themeInfo .Re-themeOptions input#Re-yellowTheme:checked + label {
-    color: var(--thirdColor);
-    font-weight: 500;
-}
-
-.Se-asideRight .Se-accountInformations .Re-themeInfo .Re-themeOptions input#Re-blueTheme:checked + label {
-    color: var(--thirdColor);
-    font-weight: 500;
-}
-
-.Se-asideRight .Se-accountInformations .Re-themeInfo .Re-themeOptions input#Re-pinkTheme:checked + label {
+.Se-asideRight .Se-accountInformations .Re-themeInfo .Re-themeOptions input:checked + label {
     color: var(--thirdColor);
     font-weight: 500;
 }
@@ -2811,6 +2801,18 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     border-color: var(--secondColor);
 }
 
+.Se-asideRight .Se-security ul{
+    padding-left: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.Se-asideRight .Se-security ul{
+    padding: 1rem 0;
+}
+
 .Se-asideRight .Se-security .Se-editPassword h4,
 .Se-asideRight .Se-security .Se-editPhoneNumber h4{
     margin-bottom: 1rem;
@@ -2891,6 +2893,78 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     transform: translateY(-50%);
     color: var(--secondColor);
 }
+
+.Se-asideRight .Se-security .Se-editPassword .Se-editSubmit,
+.Se-asideRight .Se-security .Se-editPhoneNumber .Se-editSubmit{
+    position: relative;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    color: var(--whiteColor);
+    background-color: var(--secondColorLowOpacity);
+    padding: 0.6rem 1.5rem 0.6rem 1.5rem;
+    border: none;
+    border-radius: 100rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.2s;
+    font-weight: 600;
+}
+
+.Se-asideRight .Se-accountInformations .Se-accountType{
+    display: flex;
+    gap: 1.2rem;
+}
+
+.Se-asideRight .Se-accountInformations .Se-accountType p{
+    font-weight: 500;
+}
+
+.Se-asideRight .Se-accountInformations .Se-accountType .Se-accountOptions{
+    position: relative;
+    display: flex;
+    gap: 4rem;
+    font-size: 0.8rem;
+}
+
+.Se-asideRight .Se-accountInformations .Se-accountType .Se-accountOptions div{
+    position: relative;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.Se-asideRight .Se-accountInformations .Se-accountType .Se-accountOptions input {
+    cursor: pointer;
+    appearance: none;
+    background-color: var(--whiteColor);
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 100%;
+    border: none;
+    box-shadow: 0 0 0 1px var(--whiteColor), 0 0 0 2px var(--blackColor);
+}
+
+.Se-asideRight .Se-accountInformations .Se-accountType .Se-accountOptions input:checked {
+    background-color: var(--secondColor);
+    box-shadow: 0 0 0 2px var(--whiteColor), 0 0 0 3px var(--thirdColor);
+}
+
+.Se-asideRight .Se-accountInformations .Se-accountType .Se-accountOptions label{
+    cursor: pointer;
+    margin-right: 0.4rem;
+}
+
+.Se-asideRight .Se-accountInformations .Se-accountType .Se-accountOptions input:checked + label {
+    color: var(--thirdColor);
+    font-weight: 500;
+}
+
+.Se-asideRight .Se-accountInformations .Se-accountType .Se-accountOptions .pageIcon{
+    font-size: 0.7rem;
+}
+
+
 /*====================================================================================================
 ===================================== MODAIS DAS CONFIGURAÇÕES =======================================
 ====================================================================================================*/

@@ -383,13 +383,19 @@
                                 <button class="Se-editSubmit" type="submit" name="editTelephone Submit">Confirmar</button>
                         </form></li>
 
-                        <li><div class="Re-themeInfo">
+                        <li><div class="Se-accountType">
                                 <h4> Tipo de Conta </h4>
-                                <div class="Re-themeOptions">
-                                    <input type="radio" name="temaEdit" value="Y-theme" id="Re-yellowTheme" <?php /*echo ($currentUserData['tema'] === 'Y-theme') ? 'checked' : '';*/?>>
-                                    <label for="Re-yellowTheme"> Padrão </label>
-                                    <input type="radio" name="temaEdit" value="B-theme" id="Re-blueTheme" <?php /*echo ($currentUserData['tema'] === 'B-theme') ? 'checked' : '';*/?>>
-                                    <label for="Re-blueTheme"> Anônima </label>
+                                <div class="Se-accountOptions">
+                                    <div>
+                                        <input type="radio" name="accountType" value="padrao" id="Se-standartAccount" <?php /*echo ($currentUserData['isAnonimo'] === 'false') ? 'checked' : '';*/?>>
+                                        <label for="Se-standartAccount"> Padrão </label>
+                                        <i class="bi bi-info-circle-fill pageIcon"></i>                    
+                                    </div>
+                                    <div>
+                                        <input type="radio" name="accountType" value="anonima" id="Se-anonymousAccount" <?php /*echo ($currentUserData['isAnonimo'] === 'true') ? 'checked' : '';*/?>>
+                                        <label for="Se-anonymousAccount"> Anônima </label>
+                                        <i class="bi bi-info-circle-fill pageIcon"></i>                    
+                                    </div>
                                 </div>
                         </div></li>
                     </ul>
