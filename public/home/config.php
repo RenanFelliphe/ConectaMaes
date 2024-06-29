@@ -169,7 +169,6 @@
                                 <option value="Tocantins"> TO | Tocantins</option>                 
                             </select>
                             <label class="Re-fakePlaceholder" for="localizacao" style="pointer-events: none;">Localização</label>
-                            <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
                         </div>
                         
                         <div class="Se-userInput side-by-side">

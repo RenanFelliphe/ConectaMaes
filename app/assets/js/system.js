@@ -143,7 +143,6 @@ function registerUser() {
     const termsCheckbox = document.querySelector('.Re-termsBox');
     const accountInformations = document.querySelector('.Re-accountInformations');
     const userInformations = document.querySelector('.Re-userInformations');
-    const childInformations = document.querySelector('.Re-childInformations');
     const registerResult = document.querySelector('.Re-registerResult');
     const submitButton = document.querySelector('.Re-registerSubmit');
     const termsCheckboxInput = document.querySelector('#Re-terms');
@@ -172,16 +171,13 @@ function registerUser() {
             } else if (!userInformations.classList.contains('close')) {
                 if (areAllFieldsFilled(userInformations)) {
                     userInformations.classList.toggle('close');
-                    childInformations.classList.toggle('close');
+                    registerResult.classList.toggle('close');
+                    submitButton.classList.toggle('close');
+                    registerNext.classList.toggle('close');
+                    termsCheckbox.classList.toggle('close');
                 } else {
                     alert("Por favor, preencha todos os campos obrigatórios.");
                 }
-            } else if (!childInformations.classList.contains('close')) {
-                childInformations.classList.toggle('close');
-                registerResult.classList.toggle('close');
-                submitButton.classList.toggle('close');
-                registerNext.classList.toggle('close');
-                termsCheckbox.classList.toggle('close');
             }
         });
 
@@ -190,11 +186,8 @@ function registerUser() {
                 accountInformations.classList.toggle('close');
                 userInformations.classList.toggle('close');
                 backButton.classList.toggle('close');
-            } else if (!childInformations.classList.contains('close')) {
-                userInformations.classList.toggle('close');
-                childInformations.classList.toggle('close');
             } else if (!registerResult.classList.contains('close')) {
-                childInformations.classList.toggle('close');
+                userInformations.classList.toggle('close');
                 registerResult.classList.toggle('close');
                 termsCheckbox.classList.toggle('close');
                 submitButton.classList.toggle('close');
@@ -202,7 +195,8 @@ function registerUser() {
             }
         });
     }
-
+    
+    /*
     function addChild() {
         const addChildBox = document.querySelector('.Re-addChildBox');
         const addChildStart = document.querySelector('.Re-addChild');
@@ -238,7 +232,7 @@ function registerUser() {
         }
 
         openCloseAddChild();
-    }
+    }*/
 
     function showUserImageProfile() {
         const input = document.getElementById("imagesSelector");
