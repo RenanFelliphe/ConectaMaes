@@ -159,12 +159,12 @@ function registerUser() {
 
     function toggleRegisterSection() {
         registerNext.addEventListener('click', () => {
-            backButton.classList.remove('close');
 
             if (!accountInformations.classList.contains('close')) {
                 if (areAllFieldsFilled(accountInformations)) {
                     accountInformations.classList.toggle('close');
                     userInformations.classList.toggle('close');
+                    backButton.classList.remove('close');
                 } else {
                     alert("Por favor, preencha todos os campos obrigatórios.");
                 }
@@ -174,7 +174,6 @@ function registerUser() {
                     registerResult.classList.toggle('close');
                     submitButton.classList.toggle('close');
                     registerNext.classList.toggle('close');
-                    termsCheckbox.classList.toggle('close');
                 } else {
                     alert("Por favor, preencha todos os campos obrigatórios.");
                 }
@@ -189,50 +188,11 @@ function registerUser() {
             } else if (!registerResult.classList.contains('close')) {
                 userInformations.classList.toggle('close');
                 registerResult.classList.toggle('close');
-                termsCheckbox.classList.toggle('close');
                 submitButton.classList.toggle('close');
                 registerNext.classList.toggle('close');
             }
         });
     }
-    
-    /*
-    function addChild() {
-        const addChildBox = document.querySelector('.Re-addChildBox');
-        const addChildStart = document.querySelector('.Re-addChild');
-
-        function openCloseAddChild() {
-            const addChildCancel = document.querySelector('.Re-cancelAddChild');
-
-            addChildStart.addEventListener('click', () => {
-                addChildBox.classList.remove('close');
-                blockRegisterNext();
-            });
-
-            addChildCancel.addEventListener('click', () => {
-                addChildBox.classList.add('close');
-                blockRegisterNext();
-            });
-
-            function blockRegisterNext() {
-                if (!addChildBox.classList.contains('close')) {
-                    registerNext.style.backgroundColor = "#808080";
-                    registerNext.style.pointerEvents = "none";
-
-                    backButton.style.color = "#808080";
-                    backButton.style.pointerEvents = "none";
-                } else {
-                    registerNext.style.backgroundColor = 'var(--secondColor)';
-                    registerNext.style.pointerEvents = "all";
-
-                    backButton.style.color = 'var(--secondColor)';
-                    backButton.style.pointerEvents = "all";
-                }
-            }
-        }
-
-        openCloseAddChild();
-    }*/
 
     function showUserImageProfile() {
         const input = document.getElementById("imagesSelector");
@@ -491,3 +451,42 @@ function openAuxilioModal() {
         }
     });
 }
+
+/* FUNÇÃO ANTIGA PARA ADICIONAR FILHO NO REGISTRO
+function addChild() {
+    const addChildBox = document.querySelector('.Re-addChildBox');
+    const addChildStart = document.querySelector('.Re-addChild');
+
+    function openCloseAddChild() {
+        const addChildCancel = document.querySelector('.Re-cancelAddChild');
+
+        addChildStart.addEventListener('click', () => {
+            addChildBox.classList.remove('close');
+            blockRegisterNext();
+        });
+
+        addChildCancel.addEventListener('click', () => {
+            addChildBox.classList.add('close');
+            blockRegisterNext();
+        });
+
+        function blockRegisterNext() {
+            if (!addChildBox.classList.contains('close')) {
+                registerNext.style.backgroundColor = "#808080";
+                registerNext.style.pointerEvents = "none";
+
+                backButton.style.color = "#808080";
+                backButton.style.pointerEvents = "none";
+            } else {
+                registerNext.style.backgroundColor = 'var(--secondColor)';
+                registerNext.style.pointerEvents = "all";
+
+                backButton.style.color = 'var(--secondColor)';
+                backButton.style.pointerEvents = "all";
+            }
+        }
+    }
+
+    openCloseAddChild();
+}
+*/

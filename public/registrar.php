@@ -152,16 +152,17 @@
                             <p class="Re-userInfo" id="infoLocalizacao"></p>
                         </div>
                     </div>
+
+                    <div class="Re-termsBox">
+                        <input type="checkbox" id="Re-terms">
+                        <label for="Re-terms">Eu li e concordo com os Termos e Condições</label>
+                    </div>
                 </div>
             </div>
-
+            
             <div class="Re-registerBottom">
-                <div class="Re-termsBox close">
-                    <input type="checkbox" id="Re-terms">
-                    <label for="Re-terms">Eu li e concordo com os Termos e Condições</label>
-                </div>
-                <button class="Re-registerNext" name="proximo" type="button">Próximo</button>
-                <button class="Re-registerSubmit close" type="submit" name="registrar">Registrar</button>
+                <button class="Re-registerNext confirmBtn" name="proximo" type="button">Próximo</button>
+                <button class="Re-registerSubmit confirmBtn close" type="submit" name="registrar">Registrar</button>
                 <p class="Re-goLogin">Já possui uma conta? <a href="login.php">Entre</a></p>
             </div>
             <?php

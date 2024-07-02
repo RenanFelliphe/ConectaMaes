@@ -55,7 +55,7 @@
 
                     <div class="Ho-submitArea">
                         <div class="Ho-submitPost">
-                            <button type="submit" value="submit" name="postPostagem" class="Ho-submitBtn">Postar</button>
+                            <button type="submit" value="submit" name="postPostagem" class="Ho-submitBtn confirmBtn">Postar</button>
 
                             <div class="Ho-postStyle">
                                 <i class="bi bi-caret-down-fill"></i>

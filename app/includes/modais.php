@@ -28,7 +28,7 @@
 
             <div class="Ho-submitArea">
                 <div class="Ho-submitPost">
-                    <button type="submit" value="submit" name="postPostagemModal" class="Ho-submitBtn">Postar</button>
+                    <button type="submit" value="submit" name="postPostagemModal" class="Ho-submitBtn confirmBtn">Postar</button>
 
                     <div class="Ho-postStyle">
                         <i class="bi bi-caret-down-fill"></i>
@@ -84,7 +84,7 @@
 
             <div class="Ho-submitArea">
                 <div class="Ho-submitPost">
-                    <button type="submit" value="submit" name ="postRelatoModal" class="Ho-submitBtn">Postar</button>
+                    <button type="submit" value="submit" name ="postRelatoModal" class="Ho-submitBtn confirmBtn">Postar</button>
 
                     <div class="Ho-postStyle">
                         <i class="bi bi-caret-down-fill"></i>
@@ -140,7 +140,7 @@
 
             <div class="Ho-submitArea">
                 <div class="Ho-submitPost">
-                    <button type="submit" value="submit" name ="postAuxilioModal" class="Ho-submitBtn">Pedir</button>
+                    <button type="submit" value="submit" name ="postAuxilioModal" class="Ho-submitBtn confirmBtn">Pedir</button>
 
                     <div class="Ho-postStyle">
                         <i class="bi bi-caret-down-fill"></i>
@@ -288,8 +288,8 @@
                 </div>
 
                 <div class="Re-childBoxButtons">
-                    <button class="Re-cancelAddChild"> Cancelar </button>
-                    <button> Confirmar </button>
+                    <button class="Re-cancelAddChild confirmBtn"> Cancelar </button>
+                    <button class="confirmBtn"> Confirmar </button>
                 </div>
             </div>
         </div>
@@ -416,7 +416,7 @@
                 <label for="newChildDeficiencyInput">Deficiência</label>
             </div>
         </div>
-        <button class="Se-modalSubmit" type="submit" name="editPasswordSubmit">Confirmar</button>
+        <button class="Se-modalSubmit" type="submit" name="editPasswordSubmit confirmBtn">Confirmar</button>
     </form>
 
     <form class="Se-deleteAccountModal pageModal close">
@@ -439,6 +439,6 @@
             </div>
         </div>
 
-        <button class="Se-modalSubmit" type="submit" name="deleteAccountSubmit">Confirmar</button>
+        <button class="Se-modalSubmit" type="submit" name="deleteAccountSubmit confirmBtn">Confirmar</button>
     </form>
 </section>

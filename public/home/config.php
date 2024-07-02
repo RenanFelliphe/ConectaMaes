@@ -187,7 +187,7 @@
                                 <label for="Re-pinkTheme"> Rosa </label>
                             </div>
                         </div>
-                        <button class="Se-accountEdit" type="submit" name="editar">Editar conta</button>
+                        <button class="Se-accountEdit confirmBtn" type="submit" name="editar">Editar conta</button>
                     </div>
 
                     <?php
@@ -202,7 +202,7 @@
                             
                     <div class="Se-accountBottom">
                         <span class="Se-dateCriation"> Criado em: <span class="Se-accountDate">28/05/2024</span></span>
-                        <a class="Se-accountDelete" onclick="openModal();">Excluir conta</a> <!--name="deletar" href="./config.php?deletar=true-->
+                        <button class="Se-accountDelete" onclick="openModal();">Excluir conta</button> <!--name="deletar" href="./config.php?deletar=true-->
                     </div>
                 </form>
 
@@ -331,10 +331,10 @@
                         </div>
                         <div class="Se-childBottom">
                             <p class="Se-deleteChild">Excluir Filho(a)</p>
-                            <button class="Se-editSubmit" type="submit" name="editChildSubmit">Confirmar</button>
+                            <button class="Se-editSubmit confirmBtn" type="submit" name="editChildSubmit">Confirmar</button>
                         </div>
                     </form>
-                    <button class="Se-addNewChild" onclick="openModal();">Adicionar Filho(a)</button>
+                    <button class="Se-addNewChild confirmBtn" onclick="openModal();">Adicionar Filho(a)</button>
                 </div>
 
                 <div class="Se-otherUsersInteractions Se-subSection">
@@ -369,7 +369,7 @@
                                     </div>
                                 </div>
 
-                                <button class="Se-editSubmit" type="submit" name="editPasswordSubmit">Confirmar</button>
+                                <button class="Se-editSubmit confirmBtn" type="submit" name="editPasswordSubmit">Confirmar</button>
                         </form></li>
 
                         <li><form class="Se-editPhoneNumber">
@@ -379,7 +379,7 @@
                                     <label class="Re-fakePlaceholder" for="telephoneNumber">Telefone</label>
                                     <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
                                 </div>
-                                <button class="Se-editSubmit" type="submit" name="editTelephone Submit">Confirmar</button>
+                                <button class="Se-editSubmit confirmBtn" type="submit" name="editTelephone Submit">Confirmar</button>
                         </form></li>
 
                         <li><div class="Se-accountType">

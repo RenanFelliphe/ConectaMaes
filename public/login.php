@@ -46,7 +46,7 @@
             </div>
 
             <div class="Lo-loginBottom">
-                <input class="Lo-loginSubmit" type="submit" name="logar" value="Entrar">
+                <input class="Lo-loginSubmit confirmBtn" type="submit" name="logar" value="Entrar">
                 <span class="Lo-goRegister"> Não possui uma conta? <a href="registrar.php">Registre-se</a></span>
             </div>
             <?php

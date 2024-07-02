@@ -96,7 +96,7 @@
                                         </div>
                                     </div>
 
-                                    <button name ="openAuxilio" class="Au-openAuxilio">Auxiliar</button>
+                                    <button name ="openAuxilio" class="Au-openAuxilio confirmBtn">Auxiliar</button>
                                 </div>
 
                                 <section class="Au-auxilioModalBack close">
@@ -117,7 +117,7 @@
                                                 <p class="postOwnerUser"><?php echo htmlspecialchars($postOwner['nomeDeUsuario']); ?></p>
                                             </div>
 
-                                            <button name="followUser" class="Au-follow">Seguir</button>
+                                            <button name="followUser" class="Au-follow confirmBtn">Seguir</button>
                                         </div>
 
                                         <p class="Au-textPost"><?php echo htmlspecialchars($dadosPublicacao['conteudo']); ?></p>
@@ -142,7 +142,7 @@
                                                     <p>N/a</p>
                                                 </div>
                                             </div>
-                                            <button name="helpUser" class="Au-help">Auxiliar</button>
+                                            <button name="helpUser" class="Au-help confirmBtn">Auxiliar</button>
                                         </div>
                                         
                                         <div class="postInteractions">
