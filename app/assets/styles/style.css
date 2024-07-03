@@ -1367,12 +1367,16 @@ footer .A-footerRight li.A-footerPolitic h5{
     font-size: 0.9rem;
 }
 
+.Re-registerForm .Re-registerResult{
+    height: 100%;
+}
+
 .Re-registerForm .Re-registerResult .Re-termsBox{
     position: absolute;
     display: flex;
     gap: 10px;
     font-size: 0.8rem;
-    bottom: -2rem;
+    bottom: -3vh;
 }
 
 .Re-registerResult .Re-addImageProfile {
@@ -1406,13 +1410,15 @@ footer .A-footerRight li.A-footerPolitic h5{
 }
 
 .Lo-loginForm .Lo-loginBottom .confirmBtn{
-    padding: 0.5rem 1.5rem;
+    padding: 0.5rem 2rem;
     font-size: 1.3rem;
     box-shadow: 0 2px 4px 0px #00000040;
 }
 
-.Lo-loginForm .Lo-loginBottom .confirmBtn{
-    padding: 0.5rem 2rem 0.5rem 2rem;
+.Re-registerForm .Re-registerBottom .confirmBtn{
+    padding: 0.5rem 1.5rem;
+    font-size: 1.3rem;
+    box-shadow: 0 2px 4px 0px #00000040;
 }
 
 .Re-registerForm .Re-registerBottom .confirmBtn.close{
@@ -1604,6 +1610,11 @@ footer .A-footerRight li.A-footerPolitic h5{
     display: flex;
     gap: 0.2rem;
     cursor: pointer;
+}
+
+.Ho-postSomething .Ho-postBottom .confirmBtn{
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
 }
 
 .Ho-postSomething .Ho-postBottom .Ho-submitArea .confirmBtn{
@@ -2289,6 +2300,7 @@ body.Y-theme .Se-asideRight  .Se-subSection .Se-sectionHeader .pageIcon{
     position: relative;
     width: 100%;
     border: none;
+    border-color: transparent;
     outline: none;
     cursor: pointer;
     padding-right: 2rem;
@@ -2372,18 +2384,26 @@ body.Y-theme .Se-asideRight  .Se-subSection .Se-sectionHeader .pageIcon{
     font-weight: 600;
 }
 
-.Se-asideRight .Se-accountInformations .confirmBtn{
+.Se-asideRight .Se-accountInformations .Se-accountEdit.confirmBtn{
     background-color: var(--secondColorLowOpacity);
     padding: 0.6rem 1.3rem 0.6rem 1.3rem;
 }
 
-.Se-asideRight .Se-accountInformations .confirmBtn:hover{
-    background-color: var(--secondColor);
+.Se-asideRight .Se-accountInformations .Se-accountEdit.confirmBtn:hover{
+    background-color: var(--whiteColor);
 }
 
 .Se-asideRight .Se-accountInformations .Se-accountBottom .confirmBtn{
     background-color: var(--redColor);
     padding: 0.6rem 1.3rem 0.6rem 1.3rem;
+}
+
+.Se-asideRight .Se-accountInformations .Se-accountBottom .confirmBtn:hover,
+.Se-asideRight .Se-accountInformations .Se-accountBottom .confirmBtn.active{
+    transition: 0.3s;
+    background-color: var(--whiteColor);
+    color: var(--redColor);
+    border-color: var(--redColor); 
 }
 
 .Se-asideRight .Se-childInformations .Se-userChild{
@@ -2519,7 +2539,6 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     padding: 0.5rem 1.2rem 0.5rem 1.2rem;
     font-size: 0.7rem;
 }
-
 
 .Se-asideRight .Se-childInformations .confirmBtn{
     position: fixed;
@@ -2748,6 +2767,39 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     background-color: var(--secondColorLowOpacity);
     padding: 0.6rem 1.5rem;
     font-size: 1rem;
+}
+
+.modalSection .Ho-postSomething.pageModal .confirmBtn{
+    background-color: var(--secondColor);
+    padding: 0.45rem 1.3rem;
+    font-size: 1rem;
+}
+
+.modalSection .Ho-postSomething.pageModal .confirmBtn:hover{
+    background-color: var(--whiteColor);
+}
+
+
+.headerHome .userContainer .makeAPostModal .postStyleSummary .postBtn{
+    position: relative;
+    display: flex;
+    color: var(--whiteColor);
+    background-color: var(--secondColorLowOpacity);
+    padding: 0.4rem 1.3rem 0.4rem 1.3rem;
+    border: none;
+    border-radius: 100rem;
+    font-size: 0.7rem;
+    transition: 0.2s;
+    font-weight: 600;
+    border: 1px solid transparent;
+}
+
+.modalSection .Ho-postSomething.pageModal .Ho-postBottom .Ho-submitArea .confirmBtn:hover,
+.modalSection .Ho-postSomething.pageModal .Ho-postBottom .Ho-submitArea:hover .confirmBtn{
+    transition: 0.3s;
+    background-color: var(--whiteColor);
+    color: var(--secondColor);
+    border-color: var(--secondColor);
 }
 
 .modalSection .Se-addNewChildModal .Se-childInputs {

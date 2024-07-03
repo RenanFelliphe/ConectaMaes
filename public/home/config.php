@@ -138,7 +138,7 @@
                             <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
                         </div>
                         <div class="Se-userInput side-by-side">
-                            <select class="Re-userInput" id="localizacaoUsuario" name="localizacaoEdit">
+                            <select id="localizacaoUsuario" name="localizacaoEdit">
                                 <option value="">- - - - - -</option>
                                 <option value="Acre"> AC | Acre</option>
                                 <option value="Alagoas"> AL | Alagoas</option>
@@ -202,7 +202,7 @@
                             
                     <div class="Se-accountBottom">
                         <span class="Se-dateCriation"> Criado em: <span class="Se-accountDate">28/05/2024</span></span>
-                        <button class="Se-accountDelete" onclick="openModal();">Excluir conta</button> <!--name="deletar" href="./config.php?deletar=true-->
+                        <button class="Se-accountDelete confirmBtn" onclick="openModal();">Excluir conta</button> <!--name="deletar" href="./config.php?deletar=true-->
                     </div>
                 </form>
 
