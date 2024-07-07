@@ -49,11 +49,11 @@ function headerFunctions() {
         const helpPageLink = document.getElementById('helpPageLink');
         const currentUrl = window.location.href;
 
-        if (currentUrl.includes('/ConectaMaesProject/public/home.php')) {
+        if (currentUrl.includes('/public/home.php')) {
             homePageLink.classList.add('active');
-        } else if (currentUrl.includes('/ConectaMaesProject/public/home/relatos.php')) {
+        } else if (currentUrl.includes('/public/home/relatos.php')) {
             reportPageLink.classList.add('active');
-        } else if (currentUrl.includes('/ConectaMaesProject/public/home/pedidos.php')) {
+        } else if (currentUrl.includes('/public/home/pedidos.php')) {
             helpPageLink.classList.add('active');
         }
     }

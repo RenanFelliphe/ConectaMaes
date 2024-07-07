@@ -1,6 +1,7 @@
 <?php
     session_start();
-    $verify = isset($_SESSION['active']) ? true : header("Location:/ConectaMaesProject/public/login.php");
+    include_once __DIR__ . "/../../app/services/helpers/paths.php";
+    $verify = isset($_SESSION['active']) ? true : header("Location:" . $relativePublicPath . "/login.php");
     require_once "../../app/services/crud/userFunctions.php"; 
     $table = "Usuario";
     $currentUserData = queryUserData($conn, $table, $_SESSION['idUsuario']);   
@@ -11,8 +12,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-        <link rel="stylesheet" href="/ConectaMaesProject/app/assets/styles/style.css">
-        <link rel="icon" href="/ConectaMaesProject/app/assets/imagens/logos/final/Conecta_Mães_Logo_Icon.png">
+        <link rel="stylesheet" href="../../app/assets/styles/style.css">
+        <link rel="icon" href="../../app/assets/imagens/logos/final/Conecta_Mães_Logo_Icon.png">
         <title>ConectaMães - Configurações</title>
         </meta>
     </head>
@@ -31,7 +32,7 @@
                 <div class="Se-centerSections">
                     <a class="Se-sectionTitle active" onclick="toggleConfigSection();">
                         <div>
-                            <img src="/ConectaMaesProject/app/assets/imagens/icons/user_icon.png" class="pageIcon" alt="Ícone de usuário">
+                            <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/user_icon.png" class="pageIcon" alt="Ícone de usuário">
                             <p> Informações da Conta</p>
                         </div>
                         <i class="bi bi-chevron-right" onclick="toggleConfigSection();"></i>
@@ -39,7 +40,7 @@
 
                     <a class="Se-sectionTitle">
                         <div>
-                            <img src="/ConectaMaesProject/app/assets/imagens/icons/pram_icon.png" class="pageIcon" alt="Ícone de usuário">
+                            <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/pram_icon.png" class="pageIcon" alt="Ícone de usuário">
                             <p> Informações dos Filhos</p>
                         </div>
                         <i class="bi bi-chevron-right" onclick="toggleConfigSection();"></i>
@@ -47,7 +48,7 @@
 
                     <a class="Se-sectionTitle">
                         <div>
-                            <img src="/ConectaMaesProject/app/assets/imagens/icons/chat_icon.png" class="pageIcon" alt="Ícone de usuário">
+                            <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/chat_icon.png" class="pageIcon" alt="Ícone de usuário">
                             <p> Interações com outros usuários</p>
                         </div>
                         <i class="bi bi-chevron-right"></i>
@@ -55,7 +56,7 @@
 
                     <a class="Se-sectionTitle">
                         <div>
-                            <img src="/ConectaMaesProject/app/assets/imagens/icons/lock_icon.png" class="pageIcon" alt="Ícone de usuário">
+                            <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/lock_icon.png" class="pageIcon" alt="Ícone de usuário">
                             <p> Segurança</p>
                         </div>
                         <i class="bi bi-chevron-right"></i>
@@ -63,15 +64,15 @@
 
                     <a class="Se-sectionTitle">
                         <div>
-                            <img src="/ConectaMaesProject/app/assets/imagens/icons/notifications_icon.png" class="pageIcon" alt="Ícone de usuário">
+                            <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/notifications_icon.png" class="pageIcon" alt="Ícone de usuário">
                             <p> Notificações</p>
                         </div>
                         <i class="bi bi-chevron-right"></i>
                     </a>
 
-                    <a class="Se-sectionTitle" href="../index.php">
+                    <a class="Se-sectionTitle" href="../../index.php">
                         <div>
-                            <img src="/ConectaMaesProject/app/assets/imagens/icons/conectamaes_icon.png" class="pageIcon" alt="Ícone de usuário">
+                            <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/conectamaes_icon.png" class="pageIcon" alt="Ícone de usuário">
                             <p> Sobre o ConectaMães</p>
                         </div>
                         <i class="bi bi-box-arrow-up-right"></i>
@@ -79,7 +80,7 @@
 
                     <a class="Se-sectionTitle" href="../suporte.php">
                         <div>
-                            <img src="/ConectaMaesProject/app/assets/imagens/icons/support_icon.png" class="pageIcon" alt="Ícone de usuário">
+                            <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/support_icon.png" class="pageIcon" alt="Ícone de usuário">
                             <p> Suporte</p>
                         </div>
                         <i class="bi bi-box-arrow-up-right"></i>
@@ -90,13 +91,13 @@
             <section class="Se-asideRight infoAccount">
                 <form class="Se-accountInformations Se-subSection active" method="post" enctype="multipart/form-data">
                     <div class="Se-sectionHeader">
-                        <img src="/ConectaMaesProject/app/assets/imagens/icons/user_icon.png" class="pageIcon" alt="Ícone de usuário">
+                        <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/user_icon.png" class="pageIcon" alt="Ícone de usuário">
                         <h1>Informações da Conta</h1>
                     </div>
                     <div class="Se-userInfo">
                         <div class="Re-addImageProfile">
                             <div class="Re-userImageProfile">
-                                <img src="/ConectaMaesProject/app/assets/imagens/fotos/perfil/<?php echo $currentUserData['linkFotoPerfil']; ?>" alt="" class="Re-userImage">
+                                <img src="<?php echo $relativeAssetsPath; ?>/imagens/fotos/perfil/<?php echo $currentUserData['linkFotoPerfil']; ?>" alt="" class="Re-userImage">
                             </div>
                             <input type="file" id="imagesSelector" name="fotoPerfilEdit" accept="image/png, image/jpeg">
                             <label for="imagesSelector" class="Re-addImageIcon">                        
@@ -208,12 +209,12 @@
 
                 <div class="Se-childInformations Se-subSection">
                     <div class="Se-sectionHeader">
-                        <img src="/ConectaMaesProject/app/assets/imagens/icons/pram_icon.png" class="pageIcon" alt="Ícone de usuário">
+                        <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/pram_icon.png" class="pageIcon" alt="Ícone de usuário">
                         <h1>Informações dos Filhos</h1>
                     </div>
                     <form class="Se-userChild" method="post">
                         <div class="Se-childHeader">
-                            <img src="/ConectaMaesProject/app/assets/imagens/icons/boy_icon.png" class="pageIcon" alt="Ícone de usuário">
+                            <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/boy_icon.png" class="pageIcon" alt="Ícone de usuário">
                             <input type="text" value="Nome do filho">
                             <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
                         </div>
@@ -339,14 +340,14 @@
 
                 <div class="Se-otherUsersInteractions Se-subSection">
                     <div class="Se-sectionHeader">
-                        <img src="/ConectaMaesProject/app/assets/imagens/icons/chat_icon.png" class="pageIcon" alt="Ícone de usuário">
+                        <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/chat_icon.png" class="pageIcon" alt="Ícone de usuário">
                         <h1>Interações com outros usuários</h1>
                     </div>
                 </div>
 
                 <div class="Se-security Se-subSection">
                     <div class="Se-sectionHeader">
-                        <img src="/ConectaMaesProject/app/assets/imagens/icons/lock_icon.png" class="pageIcon" alt="Ícone de usuário">
+                        <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/lock_icon.png" class="pageIcon" alt="Ícone de usuário">
                         <h1>Segurança</h1>
                     </div>
 
@@ -402,7 +403,7 @@
 
                 <div class="Se-notifications Se-subSection">
                     <div class="Se-sectionHeader">
-                        <img src="/ConectaMaesProject/app/assets/imagens/icons/notifications_icon.png" class="pageIcon" alt="Ícone de usuário">
+                        <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/notifications_icon.png" class="pageIcon" alt="Ícone de usuário">
                         <h1>Notificações</h1>
                     </div>
                 </div>
@@ -440,7 +441,7 @@
 
     <?php include_once ("../../app/includes/modais.php");?>
 
-    <script src="/ConectaMaesProject/app/assets/js/system.js"></script>
+    <script src="<?php echo $relativeAssetsPath; ?>/js/system.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             toggleConfigSection();

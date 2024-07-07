@@ -1,6 +1,7 @@
 <?php 
     session_start();
-    $verify = isset($_SESSION['active']) ? true : header("Location:/ConectaMaesProject/public/login.php");
+    include_once __DIR__ . "/../../app/services/helpers/paths.php";
+    $verify = isset($_SESSION['active']) ? true : header("Location:".$relativePublicPath."/login.php");
     require_once "../../app/services/crud/userFunctions.php"; 
     require_once "../../app/services/crud/postFunctions.php";
     require_once '../../app/services/helpers/dateChecker.php';
@@ -14,8 +15,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="/ConectaMaesProject/app/assets/styles/style.css">
-    <link rel="icon" href="/ConectaMaesProject/app/assets/imagens/logos/final/Conecta_Mães_Logo_Icon.png">
+    <link rel="stylesheet" href="<?php echo $relativeAssetsPath; ?>/styles/style.css">
+    <link rel="icon" href="<?php echo $relativeAssetsPath; ?>/imagens/logos/final/Conecta_Mães_Logo_Icon.png">
     <title>ConectaMães - Auxílios</title>
     </meta>
 </head>
@@ -60,7 +61,7 @@
 
                                 <div class="postTimelineTop">
                                     <div class="postOwnerImage">
-                                        <img src="<?php echo "/ConectaMaesProject/app/assets/imagens/fotos/perfil/".$postOwner['linkFotoPerfil'];?>">
+                                        <img src="<?php echo $relativeAssetsPath."/imagens/fotos/perfil/".$postOwner['linkFotoPerfil'];?>">
                                     </div>
 
                                     <div class="postUserNames">
@@ -109,7 +110,7 @@
 
                                         <div class="Au-auxilioUser">
                                             <div class="postOwnerImage">
-                                                <img src="<?php echo "/ConectaMaesProject/app/assets/imagens/fotos/perfil/".$postOwner['linkFotoPerfil'];?>">
+                                                <img src="<?php echo $relativeAssetsPath."/imagens/fotos/perfil/".$postOwner['linkFotoPerfil'];?>">
                                             </div>
 
                                             <div class="postUserNames">
@@ -124,7 +125,7 @@
                                         
                                         <div class="Au-childPostSection">
                                             <div class="Au-childrenName">
-                                                <img src="/ConectaMaesProject/app/assets/imagens/icons/pram_icon.png" class="pageImageIcon active" alt="Ícone de Criança">
+                                                <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/pram_icon.png" class="pageImageIcon active" alt="Ícone de Criança">
                                                 <p class="Au-childName">Nome da Criança</p>
                                             </div>
 
@@ -134,11 +135,11 @@
 
                                             <div class="Au-postExtraInfos">
                                                 <div class="Au-extraInfos">
-                                                    <img src="/ConectaMaesProject/app/assets/imagens/icons/local_icon.png" class="pageImageIcon active" alt="Ícone de Local">
+                                                    <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/local_icon.png" class="pageImageIcon active" alt="Ícone de Local">
                                                     <p><?php echo htmlspecialchars($postOwner['estado']); ?></p>
                                                 </div>
                                                 <div class="Au-extraInfos">
-                                                    <img src="/ConectaMaesProject/app/assets/imagens/icons/pix_icon.png" class="pageImageIcon active" alt="Ícone de Pix">
+                                                    <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/pix_icon.png" class="pageImageIcon active" alt="Ícone de Pix">
                                                     <p>N/a</p>
                                                 </div>
                                             </div>
@@ -203,7 +204,7 @@
 
     <?php include_once ("../../app/includes/modais.php");?>
 
-    <script src="/ConectaMaesProject/app/assets/js/system.js"></script>
+    <script src="<?php echo $relativeAssetsPath; ?>/js/system.js"></script>
     <script>        
         document.addEventListener('DOMContentLoaded', function() {
             openAuxilioModal();

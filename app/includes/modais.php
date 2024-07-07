@@ -1,10 +1,13 @@
+<?php
+    include_once __DIR__ . "/../services/helpers/paths.php";
+?>
 <section class="modalSection close">
     <form class="Ho-postSomething postPostModal pageModal close" method="post" enctype="multipart/form-data">
         <i class="bi bi-x closeModal" onclick="openModal()"></i>
 
         <div class="Ho-postTop">
-            <a class="Ho-userProfileImage" href="/ConectaMaesProject/public/home/perfil.php">
-                <img src="<?php echo "/ConectaMaesProject/app/assets/imagens/fotos/perfil/".$currentUserData['linkFotoPerfil'];?>">
+            <a class="Ho-userProfileImage" href="<?php echo $relativePublicPath; ?>/home/perfil.php">
+                <img src="<?php echo $relativeAssetsPath . "/imagens/fotos/perfil/" . $currentUserData['linkFotoPerfil'];?>">
             </a>
 
             <div class="Ho-postText">
@@ -51,8 +54,8 @@
         <i class="bi bi-x closeModal" onclick="openModal()"></i>
 
         <div class="Ho-postTop">
-            <a class="Ho-userProfileImage" href="/ConectaMaesProject/public/home/perfil.php">
-                <img src="<?php echo "/ConectaMaesProject/app/assets/imagens/fotos/perfil/".$currentUserData['linkFotoPerfil'];?>">
+            <a class="Ho-userProfileImage" href="<?php echo $relativePublicPath; ?>/home/perfil.php">
+                <img src="<?php echo $relativeAssetsPath."/imagens/fotos/perfil/".$currentUserData['linkFotoPerfil'];?>">
             </a>
 
             <div class="Ho-postText">
@@ -107,8 +110,8 @@
         <i class="bi bi-x closeModal" onclick="openModal()"></i>
 
         <div class="Ho-postTop">
-            <a class="Ho-userProfileImage" href="/ConectaMaesProject/public/home/perfil.php">
-                <img src="<?php echo "/ConectaMaesProject/app/assets/imagens/fotos/perfil/".$currentUserData['linkFotoPerfil'];?>">
+            <a class="Ho-userProfileImage" href="<?php echo $relativePublicPath; ?>/home/perfil.php">
+                <img src="<?php echo $relativeAssetsPath."/imagens/fotos/perfil/".$currentUserData['linkFotoPerfil'];?>">
             </a>
 
             <div class="Ho-postText">
@@ -316,7 +319,7 @@
             <div class="Se-childInput">
                 <input type="text" id="newChildNameInput" name="newChildName" placeholder="- - - - - - - - - - - -">
                 <label class="Re-fakePlaceholder" for="newChildNameInput">Nome Completo</label>
-                <img src="/ConectaMaesProject/app/assets/imagens/icons/pram_icon.png" class="pageIcon" alt="Ícone de usuário">
+                <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/pram_icon.png" class="pageIcon" alt="Ícone de usuário">
             </div>
             <div class="Se-childInput">
                 <input type="date" id="newChildDateInput" name="newChildDate">
@@ -430,7 +433,7 @@
             <div class="Se-deleteInput">
                 <input type="text" id="confirmDelete" name="confirmDeleteText" placeholder="AS-x5s}wRRc2;a">
                 <label class="Re-fakePlaceholder" for="confirmDelete">
-                    <img src="/ConectaMaesProject/app/assets/imagens/icons/conectamaes_icon_black.png"></img>  
+                    <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/conectamaes_icon_black.png"></img>  
                 </label>
             </div>
             <div class="Se-deleteInput">

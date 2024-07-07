@@ -1,30 +1,33 @@
+<?php
+    include_once __DIR__ . "/../services/helpers/paths.php";
+?>
 <header class="headerHome">
-    <a href="/ConectaMaesProject/public/index.php">
-        <img src="/ConectaMaesProject/app/assets/imagens/logos/final/Conecta_Mães_Logo_Black.png" class="A-headerLogo" alt="Logo do ConectaMães">
-    </a>
+    
+        <img src="<?php echo $relativeAssetsPath; ?>/imagens/logos/final/Conecta_Mães_Logo_Black.png" class="A-headerLogo" alt="Logo do ConectaMães">
+   
 
     <div class="headerPageLinks">
-        <a class="homePageLink pageLink" id="homePageLink" href="/ConectaMaesProject/public/home.php">
-            <img class="homePageIcon headerIcon" src="/ConectaMaesProject/app/assets/imagens/icons/home_off.png" alt="Ícone da página inicial">
+        <a class="homePageLink pageLink" id="homePageLink" href="<?php echo $relativePublicPath; ?>/home.php">
+            <img class="homePageIcon headerIcon" src="<?php echo $relativeAssetsPath; ?>/imagens/icons/home_off.png" alt="Ícone da página inicial">
             <p>Home</p>
             <span class="pageSelector"></span>
         </a>
 
-        <a class="reportPageLink pageLink" id="reportPageLink" href="/ConectaMaesProject/public/home/relatos.php">
-            <img class="reportPageIcon headerIcon" src="/ConectaMaesProject/app/assets/imagens/icons/reports_off.png" alt="Ícone da página de relatos">
+        <a class="reportPageLink pageLink" id="reportPageLink" href="<?php echo $relativePublicPath; ?>/home/relatos.php">
+            <img class="reportPageIcon headerIcon" src="<?php echo $relativeAssetsPath; ?>/imagens/icons/reports_off.png" alt="Ícone da página de relatos">
             <p>Relatos</p>
             <span class="pageSelector"></span>
         </a>
 
-        <a class="helpPageLink pageLink" id="helpPageLink" href="/ConectaMaesProject/public/home/auxilios.php">
-            <img class="helpPageIcon headerIcon" src="/ConectaMaesProject/app/assets/imagens/icons/helps_off.png" alt="Ícone da página de pedidos">
+        <a class="helpPageLink pageLink" id="helpPageLink" href="<?php echo $relativePublicPath; ?>/home/auxilios.php">
+            <img class="helpPageIcon headerIcon" src="<?php echo $relativeAssetsPath; ?>/imagens/icons/helps_off.png" alt="Ícone da página de pedidos">
             <p>Auxilios</p>
             <span class="pageSelector"></span>
         </a>
     </div>
 
     <div class="userContainer">
-        <img class="notificationsModalIcon headerIcon" src="/ConectaMaesProject/app/assets/imagens/icons/notifications_off.png" alt="Ícone do modal de notificações">
+        <img class="notificationsModalIcon headerIcon" src="<?php echo $relativeAssetsPath; ?>/imagens/icons/notifications_off.png" alt="Ícone do modal de notificações">
         
         <div class="makeAPost">
             <button name ="postPostagem" class="makeAPostBtn">Postar</button>
@@ -43,7 +46,7 @@
             <div class="postStyleSummary postPostBtn" onclick="openModal();">
                 <div class="postStyleTitle">
                     <span></span>
-                    <img class="homePageIcon headerIcon" src="/ConectaMaesProject/app/assets/imagens/icons/home_off.png" alt="Ícone da página inicial">
+                    <img class="homePageIcon headerIcon" src="<?php echo $relativeAssetsPath; ?>/imagens/icons/home_off.png" alt="Ícone da página inicial">
                     <h4>Post</h4>
                     <span></span>
                 </div>
@@ -57,7 +60,7 @@
             <div class="postStyleSummary postRelatoBtn" onclick="openModal();">
                 <div class="postStyleTitle">
                     <span></span>
-                    <img class="reportPageIcon headerIcon" src="/ConectaMaesProject/app/assets/imagens/icons/reports_off.png" alt="Ícone da página de relatos">
+                    <img class="reportPageIcon headerIcon" src="<?php echo $relativeAssetsPath; ?>/imagens/icons/reports_off.png" alt="Ícone da página de relatos">
                     <h4>Relato</h4>
                     <span></span>
                 </div>
@@ -71,7 +74,7 @@
             <div class="postStyleSummary postAuxilioBtn" onclick="openModal();">
                 <div class="postStyleTitle">
                     <span></span>
-                    <img class="helpPageIcon headerIcon" src="/ConectaMaesProject/app/assets/imagens/icons/helps_off.png" alt="Ícone da página de pedidos">
+                    <img class="helpPageIcon headerIcon" src="<?php echo $relativeAssetsPath; ?>/imagens/icons/helps_off.png" alt="Ícone da página de pedidos">
                     <h4>Auxílio</h4>
                     <span></span>
                 </div>
@@ -105,27 +108,27 @@
 
         <div class="userAccount">
             <div class="userProfileImage">
-                <img src="<?php echo "/ConectaMaesProject/app/assets/imagens/fotos/perfil/".$currentUserData['linkFotoPerfil'];?>">
+                <img src="<?php echo $relativeAssetsPath . "/imagens/fotos/perfil/". $currentUserData['linkFotoPerfil'];?>">
             </div>
             <i class="bi bi-chevron-down"></i>
         </div>
     </div>
 
     <div class="userFunctionsModal headerModal close">
-        <a href="/ConectaMaesProject/public/home/perfil.php" class="userFunctions">
+        <a href="<?php echo $relativePublicPath; ?>/home/perfil.php" class="userFunctions">
             <i class="bi bi-person-fill pageIcon"></i>
             <p>Perfil</p>
         </a>
-        <a href="/ConectaMaesProject/public/admin.php" class="userFunctions">
+        <a href="<?php echo $relativePublicPath; ?>/admin.php" class="userFunctions">
             <i class="bi bi-key-fill pageIcon"></i>
             <p>Administração</p>
         </a>
-        <a href="/ConectaMaesProject/public/home/config.php" class="userFunctions">
+        <a href="<?php echo $relativePublicPath; ?>/home/config.php" class="userFunctions">
             <i class="bi bi-gear-fill pageIcon"></i>
             <p>Configurações</p>
         </a>
         <span></span>
-        <a href="/ConectaMaesProject/app/services/helpers/logOut.php" class="userFunctions">
+        <a href="<?php echo $relativeServicesPath; ?>/helpers/logOut.php" class="userFunctions">
             <i class="bi bi-arrow-left-circle pageIcon"></i>
             <p>Sair</p>
         </a>
@@ -180,11 +183,11 @@
             const helpPageLink = document.getElementById('helpPageLink');
             const currentUrl = window.location.href;
 
-            if (currentUrl.includes('/ConectaMaesProject/public/home.php')) {
+            if (currentUrl.includes('home.php')) {
                 homePageLink.classList.add('active');
-            } else if (currentUrl.includes('/ConectaMaesProject/public/home/relatos.php')) {
+            } else if (currentUrl.includes('/home/relatos.php')) {
                 reportPageLink.classList.add('active');
-            } else if (currentUrl.includes('/ConectaMaesProject/public/home/auxilios.php')) {
+            } else if (currentUrl.includes('/home/auxilios.php')) {
                 helpPageLink.classList.add('active');
             }
         }

@@ -1,6 +1,7 @@
 <?php
     session_start();
-    $verify = isset($_SESSION['active']) ? true : header("Location:/ConectaMaesProject/public/login.php");
+    include_once __DIR__ . "/../app/services/helpers/paths.php";
+    $verify = isset($_SESSION['active']) ? true : header("Location:".$relativePublicPath."/login.php");
     require_once "../app/services/crud/userFunctions.php"; 
     require_once "../app/services/crud/postFunctions.php";
     require_once '../app/services/helpers/dateChecker.php';
@@ -13,8 +14,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="/ConectaMaesProject/app/assets/styles/style.css">
-    <link rel="icon" href="/ConectaMaesProject/app/assets/imagens/logos/final/Conecta_Mães_Logo_Icon.png">
+    <link rel="stylesheet" href="<?php echo $relativeAssetsPath; ?>/styles/style.css">
+    <link rel="icon" href="<?php echo $relativeAssetsPath; ?>/imagens/logos/final/Conecta_Mães_Logo_Icon.png">
     <title>ConectaMães - Home</title>
 </head>
 
@@ -30,8 +31,8 @@
         <section class="timeline">
             <form class="Ho-postSomething" method="post" enctype="multipart/form-data">
                 <div class="Ho-postTop">
-                    <a class="Ho-userProfileImage" href="/ConectaMaesProject/public/home/perfil.php">
-                        <img src="<?php echo "/ConectaMaesProject/app/assets/imagens/fotos/perfil/".$currentUserData['linkFotoPerfil'];?>">
+                    <a class="Ho-userProfileImage" href="<?php echo $relativePublicPath; ?>/home/perfil.php">
+                        <img src="<?php echo $relativeAssetsPath."/imagens/fotos/perfil/".$currentUserData['linkFotoPerfil'];?>">
                     </a>
 
                     <div class="Ho-postText">
@@ -94,7 +95,7 @@
                         ?>
                         <article class="Ho-post">
                             <div class="postOwnerImage">
-                                <img src="<?php echo "/ConectaMaesProject/app/assets/imagens/fotos/perfil/".$postOwner['linkFotoPerfil'];?>">
+                                <img src="<?php echo $relativeAssetsPath."/imagens/fotos/perfil/".$postOwner['linkFotoPerfil'];?>">
                             </div>
 
                             <div class="postContent">
@@ -180,7 +181,7 @@
 
     <?php include_once ("../app/includes/modais.php");?>
     
-    <script src="/ConectaMaesProject/app/assets/js/system.js"></script>
+    <script src="<?php echo $relativeAssetsPath; ?>/js/system.js"></script>
     <script>        
         toggleTheme();
     </script>
