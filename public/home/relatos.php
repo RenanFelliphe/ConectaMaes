@@ -62,15 +62,7 @@
                         </div>
                     </div>
     
-                    <div class="Ho-submitArea">
-                        <div class="Ho-submitPost">
-                            <button type="submit" value="submit" name ="postRelato" class="Ho-submitBtn">Postar</button>
-    
-                            <div class="Ho-postStyle">
-                                <i class="bi bi-caret-down-fill"></i>
-                            </div>
-                        </div>
-                    </div>
+                    <button type="submit" value="submit" name ="postRelato" class="Ho-submitBtn confirmBtn">Postar</button>
                 </div>
 
                 <div class="Ho-postAttachments">
