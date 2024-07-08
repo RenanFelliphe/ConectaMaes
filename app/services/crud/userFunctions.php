@@ -10,10 +10,9 @@
 
     $conn = mysqli_connect($hostname, $username, $password, $database);
 
-        // Função para registrar um novo usuário
+    // Função para registrar um novo usuário
         function signUp($conn){
             $err = array();
-
             $nomeRegistro = validateNome(mysqli_real_escape_string($conn, $_POST['nomeUsuarioRegistro']), $err);
             $emailRegistro = validateEmail($_POST['emailRegistro'], $err);
             $userRegistro = validateUser(mysqli_real_escape_string($conn, $_POST['userRegistro']),$err);
@@ -25,7 +24,6 @@
             $localizacaoRegistro = mysqli_real_escape_string($conn, $_POST['localizacaoRegistro']);
             $linkFotoPerfilRegistro = 'default.png'; // Inicialmente default.png
             $isAdminRegistro = false; // Não é possível definir a administração durante o registro
-            
             $queryEmail = "SELECT email FROM Usuario WHERE email = '$emailRegistro' ";
             $searchEmail = mysqli_query($conn, $queryEmail);
             $verifyRowNumEmail = mysqli_num_rows($searchEmail);
@@ -65,47 +63,38 @@
             }
             
         }
+    // USER QUERY FUNCTIONS - READ
+        function queryUserData($conn, $table, $id){
+            $sUQuery = "SELECT * FROM $table WHERE idUsuario =" . (int) $id;
+            $sUExec = mysqli_query($conn, $sUQuery);
+            $sUReturn = mysqli_fetch_assoc($sUExec);
 
-
-        // USER QUERY FUNCTIONS - READ
-            function queryUserData($conn, $table, $id){
-                $sUQuery = "SELECT * FROM $table WHERE idUsuario =" . (int) $id;
-
-                $sUExec = mysqli_query($conn, $sUQuery);
-                $sUReturn = mysqli_fetch_assoc($sUExec);
-
-                return $sUReturn;
-            }
+            return $sUReturn;
+        }
             function queryMultipleUsersData($conn, $table, $where = 1, $order = ""){
-                if(!empty($order))
-                {
+                if(!empty($order)){
                     $order = "ORDER BY $order";
                 }
 
                 $gQuery = "SELECT * FROM $table WHERE $where $order ";
-
                 $gExec = mysqli_query($conn,$gQuery);
                 $gReturn = mysqli_fetch_all($gExec, MYSQLI_ASSOC);
 
                 return $gReturn;
             }
 
-        // EDIT ACCOUNT - UPDATE
+    // EDIT ACCOUNT - UPDATE
         function editProfile($conn, $userId) {
             $err = array();
-        
             $nome = !empty($_POST['nomeEdit']) ? mysqli_real_escape_string($conn, $_POST['nomeEdit']) : null;
             $user = !empty($_POST['userEdit']) ? mysqli_real_escape_string($conn, $_POST['userEdit']) : null;
             $telefone = !empty($_POST['telefoneEdit']) ? validateTelefone(mysqli_real_escape_string($conn, $_POST['telefoneEdit']), $err) : null;
             $localizacao = !empty($_POST['localizacaoEdit']) ? mysqli_real_escape_string($conn, $_POST['localizacaoEdit']) : null;
             $biografiaUsuario = !empty($_POST['biografiaUsuarioEdit']) ? mysqli_real_escape_string($conn, $_POST['biografiaUsuarioEdit']) : null;
             $tema = !empty($_POST['temaEdit']) ? mysqli_real_escape_string($conn, $_POST['temaEdit']) : null;
-        
-            // Chamando a função updatePFP para lidar com o upload da foto de perfil
-            $linkFotoPerfil = updatePFP($conn, $userId, $user);
-        
-            // Verificação de email duplicado
-            if ($telefone) {
+            $linkFotoPerfil = updatePFP($conn, $userId, $user);// Chamando a função updatePFP para lidar com o upload da foto de perfil
+            
+            if ($telefone) {// Verificação de email duplicado
                 $queryTelefone = "SELECT telefone FROM Usuario WHERE telefone = '$telefone' AND idUsuario != '$userId'";
                 $searchTelefone = mysqli_query($conn, $queryTelefone);
                 $verifytelefoneRowNum = mysqli_num_rows($searchTelefone);
@@ -114,7 +103,6 @@
                     $err[] = "Telefone já registrado!";
                 }
             }
-        
             if (empty($err)) {
                 $fields = [];
                 if ($nome) $fields["nomeCompleto"] = $nome;
@@ -123,13 +111,12 @@
                 if ($biografiaUsuario) $fields["biografia"] = $biografiaUsuario;
                 if ($tema) $fields["tema"] = $tema;
                 if ($linkFotoPerfil) $fields["linkFotoPerfil"] = $linkFotoPerfil;
-        
                 if (!empty($fields)) {
                     $setFields = [];
                     foreach ($fields as $field => $value) {
                         $setFields[] = "$field = '$value'";
                     }
-        
+
                     $setFieldsStr = implode(", ", $setFields);
                     $updateUser = "UPDATE Usuario SET $setFieldsStr WHERE idUsuario = '$userId'";
                     $executeUpdate = mysqli_query($conn, $updateUser);
@@ -145,11 +132,9 @@
         }
             function editPassword($conn, $userId){
                 $err = array();
-
                 $currentPassword = md5($_POST['currentPassword']);
                 $newPassword = md5($_POST['newPassword']);
                 $confirmPassword = md5($_POST['confirmNewPassword']);
-                
                 $searchUserPassword = "SELECT senha FROM Usuario WHERE idUsuario = $userId";
                 $result = mysqli_query($conn, $searchUserPassword);
                 $row = $result->fetch_assoc();
@@ -162,37 +147,29 @@
                     }
                 }else{
                     $err[] = "Senha atual não confere.";
-                }
-                    
+                }  
                 if (empty($err)) {
                     $executeUpdate = mysqli_query($conn, $updateSenha);
                     if (!$executeUpdate){
                         echo "Erro ao atualizar senha: " . mysqli_error($conn) . "!";
                     }
-                }else {
+                }else{
                     foreach ($err as $e) {
                         echo "<p>$e</p><br>";
                     }
                 }
-            }
+            }    
+    // DELETE ACCOUNT - DELETE
+        function deleteAccount($conn, $table, $id){
+            if(!empty($id)){         
+                $dQuery = "DELETE FROM $table WHERE idUsuario = ". (int) $id;
+                $dExec = mysqli_query($conn, $dQuery);
 
-            
-        // DELETE ACCOUNT - DELETE
-            function deleteAccount($conn, $table, $id)
-            {
-                if(!empty($id))
-                {         
-                    $dQuery = "DELETE FROM $table WHERE idUsuario = ". (int) $id;
-                    $dExec = mysqli_query($conn, $dQuery);
-
-                    if($dExec)
-                    {
-                        session_unset();
-                        session_destroy();
-                    }
-                    else
-                    {
-                        echo "Não foi possível deletar a conta!";
-                    }
-                }    
-            }
+                if($dExec){
+                    session_unset();
+                    session_destroy();
+                }else{
+                    echo "Não foi possível deletar a conta!";
+                }
+            }    
+        }

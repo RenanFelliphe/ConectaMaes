@@ -1,10 +1,9 @@
 <?php
     include_once __DIR__ . "/../services/helpers/paths.php";
 ?>
+
 <header class="headerHome">
-    
-        <img src="<?php echo $relativeAssetsPath; ?>/imagens/logos/final/Conecta_Mães_Logo_Black.png" class="A-headerLogo" alt="Logo do ConectaMães">
-   
+    <img src="<?php echo $relativeAssetsPath; ?>/imagens/logos/final/Conecta_Mães_Logo_Black.png" class="A-headerLogo" alt="Logo do ConectaMães">
 
     <div class="headerPageLinks">
         <a class="homePageLink pageLink" id="homePageLink" href="<?php echo $relativePublicPath; ?>/home.php">
@@ -92,9 +91,7 @@
                     $partesDoNomeCompleto = explode(" ", $currentUserData['nomeCompleto']);
                     $firstName = $partesDoNomeCompleto[0];
                     $lastName = $partesDoNomeCompleto[count($partesDoNomeCompleto) - 1];
-                    
-                    // Concatena a primeira e a última palavra separadas por um espaço
-                    $firstAndLastName = $firstName . " " . $lastName;
+                    $firstAndLastName = $firstName . " " . $lastName;// Concatena a primeira e a última palavra separadas por um espaço
                     
                     echo $firstAndLastName;
                 ?>
@@ -136,6 +133,7 @@
     </div>
 
 </header>
+
 <script>
     function headerFunctions() {
         function toggleModals() {

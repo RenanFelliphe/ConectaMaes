@@ -17,6 +17,7 @@
         <title>ConectaMães - Configurações</title>
         </meta>
     </head>
+
     <body class="<?php echo $currentUserData['tema'];?>">
         <?php include_once ("../../app/includes/headerHome.php");?>
         <main class="Ho-Main Se-main mainSystem">
@@ -439,13 +440,13 @@
             ?>
         </main>
 
-    <?php include_once ("../../app/includes/modais.php");?>
+        <?php include_once ("../../app/includes/modais.php");?>
 
-    <script src="<?php echo $relativeAssetsPath; ?>/js/system.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            toggleConfigSection();
-        });
-    </script>
+        <script src="<?php echo $relativeAssetsPath; ?>/js/system.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                toggleConfigSection();
+            });
+        </script>
     </body>
 </html>

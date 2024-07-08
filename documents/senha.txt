@@ -1,4 +1,0 @@
-<div class="Se-userInput side-by-side editPasswordInput" onclick="openModal();">
-    <label class="Re-fakePlaceholder">Senha</label>
-    <i class="bi bi-pencil-fill Se-editIcon pageIcon "></i>                 
-</div>

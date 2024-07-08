@@ -25,11 +25,11 @@ implementacao
 	arquivos
 		arrumar a landing page - nath e renan
 		arrumar pagina de suporte - 
-		!arrumar registro
+		arrumar registro
 		criar página de admin
     interface
-        !arrumar header
-        !arrumar carregamento esquisito das sessões com a timeline
+        arrumar header
+        arrumar carregamento esquisito das sessões com a timeline
 	crud
 		usuario
 			!update senha - nath
@@ -55,6 +55,6 @@ implementacao
 			delete
 ---------------------------------------------------------------
 servidor
-	!arrumar o banco do servidor
-	!arrumar os arquivos do conectamaes.linceonline pelo WinSCP
+	arrumar o banco do servidor
+	arrumar os arquivos do conectamaes.linceonline pelo WinSCP
 	
