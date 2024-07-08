@@ -383,22 +383,6 @@
                                 </div>
                                 <button class="Se-editSubmit confirmBtn" type="submit" name="editTelephone Submit">Confirmar</button>
                         </form></li>
-
-                        <li><div class="Se-accountType">
-                                <h4> Tipo de Conta </h4>
-                                <div class="Se-accountOptions">
-                                    <div>
-                                        <input type="radio" name="accountType" value="padrao" id="Se-standartAccount" <?php /*echo ($currentUserData['isAnonimo'] === 'false') ? 'checked' : '';*/?>>
-                                        <label for="Se-standartAccount"> Padrão </label>
-                                        <i class="bi bi-info-circle-fill pageIcon"></i>                    
-                                    </div>
-                                    <div>
-                                        <input type="radio" name="accountType" value="anonima" id="Se-anonymousAccount" <?php /*echo ($currentUserData['isAnonimo'] === 'true') ? 'checked' : '';*/?>>
-                                        <label for="Se-anonymousAccount"> Anônima </label>
-                                        <i class="bi bi-info-circle-fill pageIcon"></i>                    
-                                    </div>
-                                </div>
-                        </div></li>
                     </ul>
                 </div>
 
