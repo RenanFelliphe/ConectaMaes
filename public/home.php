@@ -67,7 +67,6 @@
                     ?>
                 </form>
 
-
                 <?php
                     $count = 0;
 
@@ -98,10 +97,7 @@
                                                     $partesDoNomeCompletoOwner = explode(" ", $postOwner['nomeCompleto']);
                                                     $firstNameOwner = $partesDoNomeCompletoOwner[0];
                                                     $lastNameOwner = $partesDoNomeCompletoOwner[count($partesDoNomeCompletoOwner) - 1];
-                                                    
-                                                    // Concatena a primeira e a última palavra separadas por um espaço
-                                                    $firstAndLastNameOwner = $firstNameOwner . " " . $lastNameOwner;
-
+                                                    $firstAndLastNameOwner = $firstNameOwner . " " . $lastNameOwner;// Concatena a primeira e a última palavra separadas por um espaço
                                                     echo htmlspecialchars( $firstAndLastNameOwner); 
                                                 ?>
                                             </p>
