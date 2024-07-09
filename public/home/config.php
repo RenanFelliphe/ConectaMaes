@@ -202,10 +202,7 @@
                         }
                     ?>
                             
-                    <div class="Se-accountBottom">
-                        <span class="Se-dateCriation"> Criado em: <span class="Se-accountDate">28/05/2024</span></span>
-                        <button class="Se-accountDelete confirmBtn" onclick="openModal();">Excluir conta</button> <!--name="deletar" href="./config.php?deletar=true-->
-                    </div>
+                    <span class="Se-dateCriation"> Criado em: <span class="Se-accountDate">28/05/2024</span></span>
                 </form>
 
                 <div class="Se-childInformations Se-subSection">
@@ -384,6 +381,8 @@
                                 <button class="Se-editSubmit confirmBtn" type="submit" name="editTelephone Submit">Confirmar</button>
                         </form></li>
                     </ul>
+
+                    <button class="Se-accountDelete confirmBtn" onclick="openModal();">Excluir conta</button> <!--name="deletar" href="./config.php?deletar=true-->
                 </div>
 
                 <div class="Se-notifications Se-subSection">

@@ -2363,20 +2363,10 @@ body.Y-theme .Se-asideRight  .Se-subSection .Se-sectionHeader .pageIcon{
     font-weight: 500;
 }
 
-.Se-asideRight .Se-accountInformations .Se-accountBottom{
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    width: 100%;
-    height: fit-content;
-}
-
-.Se-asideRight .Se-accountInformations .Se-accountBottom .Se-dateCriation{
+.Se-asideRight .Se-accountInformations .Se-dateCriation{
     position: relative;
     display: flex;
-    flex-wrap: nowrap;
     gap: 0.5rem;
-    width: fit-content;
     font-size: 0.8rem;
 }
 
@@ -2392,19 +2382,6 @@ body.Y-theme .Se-asideRight  .Se-subSection .Se-sectionHeader .pageIcon{
 
 .Se-asideRight .Se-accountInformations .Se-accountEdit.confirmBtn:hover{
     background-color: var(--whiteColor);
-}
-
-.Se-asideRight .Se-accountInformations .Se-accountBottom .confirmBtn{
-    background-color: var(--redColor);
-    padding: 0.6rem 1.3rem 0.6rem 1.3rem;
-}
-
-.Se-asideRight .Se-accountInformations .Se-accountBottom .confirmBtn:hover,
-.Se-asideRight .Se-accountInformations .Se-accountBottom .confirmBtn.active{
-    transition: 0.3s;
-    background-color: var(--whiteColor);
-    color: var(--redColor);
-    border-color: var(--redColor);
 }
 
 .Se-asideRight .Se-childInformations .Se-userChild{
@@ -2653,6 +2630,22 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     padding: 0.6rem 1.5rem;
     font-size: 1rem;
     margin: 1rem 0 0 0;
+}
+
+.Se-asideRight .Se-security .Se-accountDelete.confirmBtn{
+    position: fixed;
+    bottom: 0.5rem;
+    right: 1rem;
+    background-color: var(--redColor);
+    padding: 0.6rem 1.3rem 0.6rem 1.3rem;
+}
+
+.Se-asideRight .Se-security .Se-accountDelete.confirmBtn:hover,
+.Se-asideRight .Se-security .Se-accountDelete.confirmBtn.active{
+    transition: 0.3s;
+    background-color: var(--whiteColor);
+    color: var(--redColor);
+    border-color: var(--redColor);
 }
 
 /*====================================================================================================

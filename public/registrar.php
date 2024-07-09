@@ -174,7 +174,6 @@
 
         <?php 
             include_once ("../app/includes/footer.php");
-            include_once ("../app/includes/modais.php");
         ?>
 
         <script src="<?php echo $relativeAssetsPath; ?>/js/system.js"></script>
