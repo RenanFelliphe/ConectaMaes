@@ -1,10 +1,5 @@
 <?php
-    $hostname = '162.240.17.101';
-    $username = 'projetos_nlessa';
-    $password = 'Gc&sgY74PK$}';
-    $database = 'projetos_INF2023_G10';
-
-    $conn = mysqli_connect($hostname, $username, $password, $database);
+    include_once(__DIR__ .'/../helpers/conn.php');
 
     // Função para registrar uma novo deficiência
         function signUpDef($conn)
