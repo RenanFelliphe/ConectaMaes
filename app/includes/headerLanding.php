@@ -3,7 +3,7 @@
 ?>
 
 <header class="headerLanding">
-    <a href="<?php echo $relativeRootPath; ?>/index.php"><img src="<?php echo $relativeAssetsPath; ?>/imagens/Logos/Final/Conecta_Mães_Logo_Black.png" class="A-headerLogo" alt="Logo do ConectaMães"></a>
+    <a href="<?php echo $relativeRootPath; ?>/index.php"><img src="<?php echo $relativeAssetsPath; ?>/imagens/logos/Final/Conecta_Mães_Logo_Black.png" class="A-headerLogo" alt="Logo do ConectaMães"></a>
     <div class="A-headerLinks">
         <h4><a href="<?php echo $relativeRootPath; ?>/index.php#La-articleEquip">Equipe</a></h4>
         <h4><a href="#">Contato</a></h4>
