@@ -27,24 +27,24 @@
                 </div>
 
                 <div class="Re-registerCenter">
-                    <div class="Re-accountInformations Re-registerSections ">
+                    <div class="Re-accountInformations Re-registerSections">
                         <div class="Re-input">
                             <input class="Re-userInput" type="text" id="nomeUsuario" name="userRegistro" required>
                             <label class="Re-fakePlaceholder" for="nomeUsuario">Usuário</label>
-
                         </div>
+
                         <div class="Re-input">
                             <input class="Re-userInput" type="email" id="email" name="emailRegistro" autocomplete="email" required>
                             <label class="Re-fakePlaceholder" for="email">E-mail</label>
-
                         </div>
+
                         <div class="Re-input">
-                            <input type="password" id="senha" name="senhaRegistro" required>
+                            <input class="Re-userInput" type="password" id="senha" name="senhaRegistro" required>
                             <label class="Re-fakePlaceholder" for="senha">Senha</label>
-
                         </div>
+
                         <div class="Re-input">
-                            <input type="password" id="confirmarSenha" name="senhaRegistroConfirma" required>
+                            <input class="Re-userInput" type="password" id="confirmarSenha" name="senhaRegistroConfirma" required>
                             <label class="Re-fakePlaceholder" for="confirmarSenha">Confirmar Senha</label>
                         </div>
 
@@ -71,7 +71,7 @@
                             <label class="Re-fakePlaceholder" for="telefone">Telefone</label>
                         </div>
                         <div class="Re-input inputDataNasc">
-                            <input class="Re-userInput" type="text" id="dataNascimento" name="dataNascimentoRegistro" placeholder ="dd/mm/yyyy" required>
+                            <input class="Re-userInput" type="date" id="dataNascimento" name="dataNascimentoRegistro" required>
                             <label class="Re-fakePlaceholder" id="dataNascPlaceholder" for="dataNascimento">Data de Nascimento</label>
                         </div>
                         <div class="Re-input inputLocal">

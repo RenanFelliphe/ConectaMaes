@@ -272,15 +272,15 @@ function toggleTheme(){
     if(main.classList.contains("Lo-Login") || main.classList.contains("Re-register")){
         if(body.classList.contains("B-theme")){
             cells.forEach(cell => {
-                cell.src = '/app/assets/imagens/figuras/cells_standart_first_blue.png';
+                cell.src = '../app/assets/imagens/figuras/cells_standart_first_blue.png';
             });
         } else if(body.classList.contains("P-theme")){
             cells.forEach(cell => {
-                cell.src = '/app/assets/imagens/figuras/cells_standart_first_pink.png';
+                cell.src = '../app/assets/imagens/figuras/cells_standart_first_pink.png';
             });
         } else if(body.classList.contains("Y-theme")){
             cells.forEach(cell => {
-                cell.src = '/app/assets/imagens/figuras/cells_standart_first_yellow.png';
+                cell.src = '../app/assets/imagens/figuras/cells_standart_first_yellow.png';
             });
         } else{
             body.classList.add("Y-theme");
@@ -289,15 +289,15 @@ function toggleTheme(){
     } else if (main.classList.contains("mainSystem")){
         if(body.classList.contains("B-theme")){
             cells.forEach(cell => {
-                cell.src = '/app/assets/imagens/figuras/cells_standart_full_blue.png';
+                cell.src = '../app/assets/imagens/figuras/cells_standart_full_blue.png';
             });
         } else if(body.classList.contains("P-theme")){
             cells.forEach(cell => {
-                cell.src = '/app/assets/imagens/figuras/cells_standart_full_pink.png';
+                cell.src = '../app/assets/imagens/figuras/cells_standart_full_pink.png';
             });
         } else if(body.classList.contains("Y-theme")){
             cells.forEach(cell => {
-                cell.src = '/app/assets/imagens/figuras/cells_standart_full_yellow.png';
+                cell.src = '../app/assets/imagens/figuras/cells_standart_full_yellow.png';
             });
         } else{
             body.classList.add("Y-theme");

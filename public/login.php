@@ -29,15 +29,15 @@
                 <div class="Lo-loginCenter">
                     <div class="Lo-userSection Lo-loginSections">
                         <div class="Lo-input">
-                            <input type="email" id="email" name="email" required autofocus>
+                            <input class="Lo-userInput" type="email" id="email" name="email" required autofocus>
                             <label class="Lo-fakePlaceholder" for="email">E-mail</label>
                         </div>
                         <div class="Lo-input">
-                            <input type="password" id="senha" name="senha" required>
+                            <input class="Lo-userInput" type="password" id="senha" name="senha" required>
                             <label class="Lo-fakePlaceholder" for="senha">Senha</label>
                         </div>
 
-                        <div class="Lo-input Lo-loginAssistants">
+                        <div class="Lo-loginAssistants">
                             <span class="Lo-rememberMe"><input type="checkbox" name="lembrar"> Lembrar de mim</span>
                             <a href="" class="Lo-forgetPassword">Esqueceu sua senha?</a>
                         </div>

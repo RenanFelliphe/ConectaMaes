@@ -176,7 +176,6 @@ body::-webkit-scrollbar{
 main{
     position: relative;
     width: 100vw;
-    height: 100vh;
     overflow: hidden;
     scroll-behavior: smooth;
 }
@@ -186,7 +185,9 @@ main{
     right: 0;
     top: -4rem;
     width: 19vw;
+    min-width: 13rem;
     height: max-content;
+    
 }
 
 .backCells.cellsLeft{
@@ -252,11 +253,10 @@ button.confirmBtn:hover{
     height: 4rem;
     padding: 0.5rem 1rem;
     z-index: 1;
-    background: #ffffff66;
-    backdrop-filter: blur(1px);
-    box-shadow: 0 5px 15px 3px #ffffff66;
-    border-bottom: 1px solid #ffffff33;
+    background: linear-gradient(#ffffff95 95%, transparent 100%);
+    backdrop-filter: blur(4px);
 }
+
 
 .headerLanding .A-headerLogo{
     width: 10rem;
@@ -1051,10 +1051,10 @@ footer .A-footerRight li.A-footerPolitic h5{
 
 .Lo-Login,
 .Re-register{
-    padding: 0;
     position: relative;
     display: flex;
     background: linear-gradient(var(--whiteColor) 0%, var(--firstColorLowOpacity) 95%);
+    padding: 1rem 0 5vh 0;
 }
 
 .Lo-loginForm,
@@ -1067,13 +1067,14 @@ footer .A-footerRight li.A-footerPolitic h5{
     border: 2px solid transparent;
     background: linear-gradient(var(--whiteColor), var(--whiteColor)) padding-box, linear-gradient(var(--pastelYellowColor), var(--pastelBlueColor), var(--pastelPinkColor)) border-box;
     border-radius: 1rem;
-    width: 35vw;   
-    height: 80vh;
+    min-width: 28.5rem;
+    width: 33.5vw;      
+    min-height: 31.5rem;
+    height: 83vh;
     box-shadow: 0 4px 16px 0px #00000040;
     overflow-x: hidden;
     overflow-y: hidden;
-    gap: 2rem;
-    margin-top: 1rem;
+    gap: 1.5rem;
 }
 
 .Lo-loginForm .Lo-loginHeader,
@@ -1123,6 +1124,7 @@ footer .A-footerRight li.A-footerPolitic h5{
 .Lo-loginForm .Lo-loginCenter,
 .Re-registerForm .Re-registerCenter{
     height: 20rem;
+    width: 100%;
 }
 
 .Lo-loginForm .Lo-loginCenter .Lo-userSection{
@@ -1133,62 +1135,42 @@ footer .A-footerRight li.A-footerPolitic h5{
     padding-top: 1rem;
 }
 
-.Re-registerForm .Re-registerCenter .Re-registerSections{
-    position: relative;
-    padding: 0 1.3rem;
+.Re-registerForm .Re-registerCenter .Re-registerSections {
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    gap: 1rem;
+    width: 100%;
+    padding: 0 1.5rem;
 }
 
 .Re-registerForm .Re-registerCenter .Re-registerSections.close{
     display: none;
 }
 
-
-
-.Lo-loginForm .Lo-loginCenter .Lo-userSection .Lo-input,
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input{
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input {
     position: relative;
-}
-
-.Lo-loginForm .Lo-loginCenter .Lo-userSection .Lo-input{
-    width: 23rem;
-}
-
-.Lo-loginForm .Lo-loginCenter .Lo-userSection .Lo-input input,
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input input,
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input textarea,
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input select{
-    position: relative;
-    padding: 0.8rem 0rem 0.8rem 1rem;
-    border-radius: 1.3rem;
+    border-radius: 1.1rem;
     border: 2px solid transparent;
     background: linear-gradient(var(--whiteColor), var(--whiteColor)) padding-box, linear-gradient(to right, var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
     outline: none;
     color: var(--blackColor);
     opacity: 0.5;
-}
-
-.Lo-loginForm .Lo-loginCenter .Lo-userSection .Lo-input input{
     width: 100%;
 }
 
-.Lo-loginForm .Lo-loginCenter .Lo-userSection .Lo-input input:focus,
-.Lo-loginForm .Lo-loginCenter .Lo-userSection .Lo-input input:hover,
-.Lo-loginForm .Lo-loginCenter .Lo-userSection .Lo-input input:valid,
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input input:focus,
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input input:hover,
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input input:valid,
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input textarea:focus,
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input textarea:hover,
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input textarea:valid,
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input select:hover{
-    opacity: 1;
-    background: linear-gradient(var(--whiteColor), var(--whiteColor)) padding-box, linear-gradient(to right, var(--pastelYellowColor), var(--pastelBlueColor), var(--pastelPinkColor)) border-box;
-    transition: 0.15s ease-in-out, 0 background-image;
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.inputBio {
+    grid-column: span 2;
 }
 
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input input#dataNascimento,
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input input#localizacao{
-    width: 12.5rem;
+.Lo-loginForm .Lo-loginCenter .Lo-userSection .Lo-input .Lo-userInput,
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-userInput{
+    position: relative;
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: 100rem;
+    outline: none;
+    border: none;
+    color: var(--blackColor);
 }
 
 .Lo-loginForm .Lo-loginCenter .Lo-userSection .Lo-input .Lo-fakePlaceholder,
@@ -1199,26 +1181,27 @@ footer .A-footerRight li.A-footerPolitic h5{
     cursor: text;
     transition: 0.25s ease-in-out, 0.3s ease-in-out text-shadow;
     font-size: 15px;
-    top: 14px;
+    top: 50%;
+    transform: translateY(-50%);
     left: 1rem;
-    opacity: 0.65;
     font-weight: 400;
+    width: fit-content;
+    padding: 0 0.3rem;
 }
 
-.Lo-loginForm .Lo-loginCenter .Lo-userSection .Lo-input input:focus + .Lo-fakePlaceholder,
-.Lo-loginForm .Lo-loginCenter .Lo-userSection .Lo-input input:valid + .Lo-fakePlaceholder,
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input input:focus + .Re-fakePlaceholder,
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input input:valid + .Re-fakePlaceholder,
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input textarea:focus + .Re-fakePlaceholder,
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input textarea:valid + .Re-fakePlaceholder,
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-fakePlaceholder#dataNascPlaceholder{
-    top: -6px;
+.Lo-loginForm .Lo-loginCenter .Lo-userSection .Lo-input .Re-userInput:focus + .Lo-fakePlaceholder,
+.Lo-loginForm .Lo-loginCenter .Lo-userSection .Lo-input .Re-userInput:valid + .Lo-fakePlaceholder,
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-userInput:focus + .Re-fakePlaceholder,
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-userInput:valid + .Re-fakePlaceholder{
+    top: -3px;
     font-size: 12px;
-    opacity: 1;
-    text-shadow: 3px 0 0 var(--whiteColor), -3px 0 0 var(--whiteColor), 0 3px 0 var(--whiteColor), 0 -3px 0 var(--whiteColor), 3px 3px 0 var(--whiteColor), -3px -3px 0 var(--whiteColor), 3px -3px 0 var(--whiteColor), -3px 3px 0 var(--whiteColor),
-                4px 0 0 var(--whiteColor), -4px 0 0 var(--whiteColor), 0 4px 0 var(--whiteColor), 0 -4px 0 var(--whiteColor), 4px 4px 0 var(--whiteColor), -4px -4px 0 var(--whiteColor), 4px -4px 0 var(--whiteColor), -4px 4px 0 var(--whiteColor);
+    background-color: var(--whiteColor);
     transition: 0.25s ease-in-out, 0.3s ease-in-out text-shadow;
 }
+
+
+
+
 
 .Lo-loginForm .Lo-loginCenter .Lo-loginAssistants{
     position: relative;
@@ -1244,14 +1227,6 @@ footer .A-footerRight li.A-footerPolitic h5{
 .Lo-loginForm .Lo-loginCenter .Lo-loginAssistants .Lo-forgetPassword{
     text-decoration: none;
     color: var(--blackColor);
-}
-
-.Re-registerForm .Re-registerCenter .Re-accountInformations,
-.Re-registerForm .Re-registerCenter .Re-userInformations{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    row-gap: 0.5rem;
 }
 
 .Re-registerForm .Re-registerCenter .Re-accountInformations .Re-themeInfo{
@@ -1315,6 +1290,7 @@ footer .A-footerRight li.A-footerPolitic h5{
 }
 
 .Re-registerForm .Re-registerCenter .Re-registerResult{
+    position: relative;
     display: flex;
     align-items: flex-start;
     gap: 1rem;
@@ -1368,16 +1344,12 @@ footer .A-footerRight li.A-footerPolitic h5{
     font-size: 0.9rem;
 }
 
-.Re-registerForm .Re-registerResult{
-    height: 100%;
-}
-
 .Re-registerForm .Re-registerResult .Re-termsBox{
     position: absolute;
     display: flex;
     gap: 10px;
     font-size: 0.8rem;
-    bottom: -3vh;
+    bottom: -16.5vh;
 }
 
 .Re-registerResult .Re-addImageProfile {
@@ -1410,14 +1382,12 @@ footer .A-footerRight li.A-footerPolitic h5{
     font-size: 0.8rem;
 }
 
+.Re-registerForm .Re-registerBottom .confirmBtn,
 .Lo-loginForm .Lo-loginBottom .confirmBtn{
-    padding: 0.5rem 2rem;
-    font-size: 1.3rem;
-    box-shadow: 0 2px 4px 0px #00000040;
-}
-
-.Re-registerForm .Re-registerBottom .confirmBtn{
-    padding: 0.5rem 1.5rem;
+    padding: 0;
+    width: 8.5rem;
+    height: 2.7rem;
+    display: flex;
     font-size: 1.3rem;
     box-shadow: 0 2px 4px 0px #00000040;
 }
@@ -1611,11 +1581,6 @@ footer .A-footerRight li.A-footerPolitic h5{
     display: flex;
     gap: 0.2rem;
     cursor: pointer;
-}
-
-.Ho-postSomething .Ho-postBottom .confirmBtn{
-    padding: 0.5rem 1.5rem;
-    font-size: 1rem;
 }
 
 .Ho-postSomething .Ho-postBottom .Ho-submitArea .confirmBtn{
@@ -2301,7 +2266,6 @@ body.Y-theme .Se-asideRight  .Se-subSection .Se-sectionHeader .pageIcon{
     position: relative;
     width: 100%;
     border: none;
-    border-color: transparent;
     outline: none;
     cursor: pointer;
     padding-right: 2rem;
@@ -2363,10 +2327,20 @@ body.Y-theme .Se-asideRight  .Se-subSection .Se-sectionHeader .pageIcon{
     font-weight: 500;
 }
 
-.Se-asideRight .Se-accountInformations .Se-dateCriation{
+.Se-asideRight .Se-accountInformations .Se-accountBottom{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+    height: fit-content;
+}
+
+.Se-asideRight .Se-accountInformations .Se-accountBottom .Se-dateCriation{
     position: relative;
     display: flex;
+    flex-wrap: nowrap;
     gap: 0.5rem;
+    width: fit-content;
     font-size: 0.8rem;
 }
 
@@ -2375,13 +2349,18 @@ body.Y-theme .Se-asideRight  .Se-subSection .Se-sectionHeader .pageIcon{
     font-weight: 600;
 }
 
-.Se-asideRight .Se-accountInformations .Se-accountEdit.confirmBtn{
+.Se-asideRight .Se-accountInformations .confirmBtn{
     background-color: var(--secondColorLowOpacity);
     padding: 0.6rem 1.3rem 0.6rem 1.3rem;
 }
 
-.Se-asideRight .Se-accountInformations .Se-accountEdit.confirmBtn:hover{
-    background-color: var(--whiteColor);
+.Se-asideRight .Se-accountInformations .confirmBtn:hover{
+    background-color: var(--secondColor);
+}
+
+.Se-asideRight .Se-accountInformations .Se-accountBottom .confirmBtn{
+    background-color: var(--redColor);
+    padding: 0.6rem 1.3rem 0.6rem 1.3rem;
 }
 
 .Se-asideRight .Se-childInformations .Se-userChild{
@@ -2518,6 +2497,7 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     font-size: 0.7rem;
 }
 
+
 .Se-asideRight .Se-childInformations .confirmBtn{
     position: fixed;
     bottom: 0.5rem;
@@ -2554,8 +2534,7 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
 .Se-asideRight .Se-security .Se-editPassword .Se-passwordInputs .Se-passInput{
     position: relative;
     padding: 0.7rem 0.5rem 0.5rem 1rem;
-    min-width: 22rem;
-    max-width: 40rem;    
+    width: 22rem;
     height: 2.5rem;
     border-radius: 0.7rem;
     border: 1px solid var(--blackColor);
@@ -2589,8 +2568,7 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
 .Se-asideRight .Se-security .Se-editPhoneNumber .Se-phoneInput{
     position: relative;
     padding: 0.7rem 0.5rem 0.5rem 1rem;
-    min-width: 22rem;
-    max-width: 40rem;
+    width: 22rem;
     height: 2.5rem;
     border-radius: 0.7rem;
     border: 1px solid var(--blackColor);
@@ -2624,29 +2602,66 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
 
 .Se-asideRight .Se-security .Se-editPassword .confirmBtn,
 .Se-asideRight .Se-security .Se-editPhoneNumber .confirmBtn{
-    position: relative;
-    float: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
     background-color: var(--secondColorLowOpacity);
-    padding: 0.6rem 1.5rem;
+    padding: 0.6rem 1.5rem 0.6rem 1.5rem;
     font-size: 1rem;
-    margin: 1rem 0 0 0;
 }
 
-.Se-asideRight .Se-security .Se-accountDelete.confirmBtn{
-    position: fixed;
-    bottom: 0.5rem;
-    right: 1rem;
-    background-color: var(--redColor);
-    padding: 0.6rem 1.3rem 0.6rem 1.3rem;
+.Se-asideRight .Se-accountInformations .Se-accountType{
+    display: flex;
+    gap: 1.2rem;
 }
 
-.Se-asideRight .Se-security .Se-accountDelete.confirmBtn:hover,
-.Se-asideRight .Se-security .Se-accountDelete.confirmBtn.active{
-    transition: 0.3s;
+.Se-asideRight .Se-accountInformations .Se-accountType p{
+    font-weight: 500;
+}
+
+.Se-asideRight .Se-accountInformations .Se-accountType .Se-accountOptions{
+    position: relative;
+    display: flex;
+    gap: 4rem;
+    font-size: 0.8rem;
+}
+
+.Se-asideRight .Se-accountInformations .Se-accountType .Se-accountOptions div{
+    position: relative;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.Se-asideRight .Se-accountInformations .Se-accountType .Se-accountOptions input {
+    cursor: pointer;
+    appearance: none;
     background-color: var(--whiteColor);
-    color: var(--redColor);
-    border-color: var(--redColor);
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 100%;
+    border: none;
+    box-shadow: 0 0 0 1px var(--whiteColor), 0 0 0 2px var(--blackColor);
 }
+
+.Se-asideRight .Se-accountInformations .Se-accountType .Se-accountOptions input:checked {
+    background-color: var(--secondColor);
+    box-shadow: 0 0 0 2px var(--whiteColor), 0 0 0 3px var(--thirdColor);
+}
+
+.Se-asideRight .Se-accountInformations .Se-accountType .Se-accountOptions label{
+    cursor: pointer;
+    margin-right: 0.4rem;
+}
+
+.Se-asideRight .Se-accountInformations .Se-accountType .Se-accountOptions input:checked + label {
+    color: var(--thirdColor);
+    font-weight: 500;
+}
+
+.Se-asideRight .Se-accountInformations .Se-accountType .Se-accountOptions .pageIcon{
+    font-size: 0.7rem;
+}
+
 
 /*====================================================================================================
 ===================================== MODAIS DAS CONFIGURAÇÕES =======================================
@@ -2710,39 +2725,6 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     background-color: var(--secondColorLowOpacity);
     padding: 0.6rem 1.5rem;
     font-size: 1rem;
-}
-
-.modalSection .Ho-postSomething.pageModal .confirmBtn{
-    background-color: var(--secondColor);
-    padding: 0.45rem 1.3rem;
-    font-size: 1rem;
-}
-
-.modalSection .Ho-postSomething.pageModal .confirmBtn:hover{
-    background-color: var(--whiteColor);
-}
-
-
-.headerHome .userContainer .makeAPostModal .postStyleSummary .postBtn{
-    position: relative;
-    display: flex;
-    color: var(--whiteColor);
-    background-color: var(--secondColorLowOpacity);
-    padding: 0.4rem 1.3rem 0.4rem 1.3rem;
-    border: none;
-    border-radius: 100rem;
-    font-size: 0.7rem;
-    transition: 0.2s;
-    font-weight: 600;
-    border: 1px solid transparent;
-}
-
-.modalSection .Ho-postSomething.pageModal .Ho-postBottom .Ho-submitArea .confirmBtn:hover,
-.modalSection .Ho-postSomething.pageModal .Ho-postBottom .Ho-submitArea:hover .confirmBtn{
-    transition: 0.3s;
-    background-color: var(--whiteColor);
-    color: var(--secondColor);
-    border-color: var(--secondColor);
 }
 
 .modalSection .Se-addNewChildModal .Se-childInputs {
