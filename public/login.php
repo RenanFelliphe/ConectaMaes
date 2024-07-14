@@ -28,11 +28,11 @@
 
                 <div class="Lo-loginCenter">
                     <div class="Lo-userSection Lo-loginSections">
-                        <div class="Lo-input">
+                        <div class="Lo-input input-full">
                             <input class="Lo-userInput" type="email" id="email" name="email" required autofocus>
                             <label class="Lo-fakePlaceholder" for="email">E-mail</label>
                         </div>
-                        <div class="Lo-input">
+                        <div class="Lo-input input-full">
                             <input class="Lo-userInput" type="password" id="senha" name="senha" required>
                             <label class="Lo-fakePlaceholder" for="senha">Senha</label>
                         </div>

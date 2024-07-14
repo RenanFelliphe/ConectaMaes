@@ -3,6 +3,57 @@ document.addEventListener('DOMContentLoaded', function() {
     openModal();
 });
 
+function userValidations(){
+    const registerForm = document.querySelector('.Re-registerForm');
+    const validateInputs = document.querySelectorAll('.validate');
+    const inputContainers = document.querySelectorAll('.Re-input');
+    const placeholders = document.querySelectorAll('.Re-fakePlaceholder');
+    const errorMessage = document.querySelectorAll('.errorMessage');
+    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+    function setError(index){
+        inputContainers[index].style.border = "2px solid var(--redColor)";
+        placeholders[index].style.color = "var(--redColor)";
+        errorMessage[index].style.display = "block";
+    }
+
+    function removeError(index){
+        inputContainers[index].style.border = "2px solid transparent";
+        placeholders[index].style.color = "var(--secondColor)";
+        errorMessage[index].style.display = "none";
+    }
+
+    function validateName(){
+        if(validateInputs[0].value.length > 3){
+            setError(0);
+        } else {
+            removeError(0);
+        }
+    }
+
+    function validateEmail(){
+        if(!emailRegex.test(validateInputs[1].value)){
+            setError(1);
+        } else{
+            removeError(1);
+        }
+    }
+
+    function validatePassword(){
+        if(!validateInputs[2].value == validateInputs[3].value){
+            setError(3);
+        } else{
+            removeError(3);
+        }
+    }
+
+    validatePassword();
+    validateEmail();
+    validateName();
+}
+
+userValidations();
+
 function headerFunctions() {
     function toggleModals() {
         const modals = document.querySelectorAll('.headerModal');
@@ -220,7 +271,6 @@ function registerUser() {
     }
 
     toggleRegisterSection();
-    addChild();
     showUserImageProfile();
     validateSubmit();
 }

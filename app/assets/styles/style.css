@@ -1135,7 +1135,8 @@ footer .A-footerRight li.A-footerPolitic h5{
     padding-top: 1rem;
 }
 
-.Re-registerForm .Re-registerCenter .Re-registerSections {
+.Re-registerForm .Re-registerCenter .Re-registerSections,
+.Lo-loginForm .Lo-loginCenter .Lo-loginSections{
     display: grid;
     grid-template-columns: repeat(2, 50%);
     gap: 1rem;
@@ -1147,7 +1148,8 @@ footer .A-footerRight li.A-footerPolitic h5{
     display: none;
 }
 
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input {
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input,
+.Lo-loginForm .Lo-loginCenter .Lo-userSection .Lo-input{
     position: relative;
     border-radius: 1.1rem;
     border: 2px solid transparent;
@@ -1158,7 +1160,8 @@ footer .A-footerRight li.A-footerPolitic h5{
     width: 100%;
 }
 
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.inputBio {
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.input-full,
+.Lo-loginForm .Lo-loginCenter .Lo-userSection .Lo-input.input-full{
     grid-column: span 2;
 }
 
@@ -1189,8 +1192,8 @@ footer .A-footerRight li.A-footerPolitic h5{
     padding: 0 0.3rem;
 }
 
-.Lo-loginForm .Lo-loginCenter .Lo-userSection .Lo-input .Re-userInput:focus + .Lo-fakePlaceholder,
-.Lo-loginForm .Lo-loginCenter .Lo-userSection .Lo-input .Re-userInput:valid + .Lo-fakePlaceholder,
+.Lo-loginForm .Lo-loginCenter .Lo-userSection .Lo-input .Lo-userInput:focus + .Lo-fakePlaceholder,
+.Lo-loginForm .Lo-loginCenter .Lo-userSection .Lo-input .Lo-userInput:valid + .Lo-fakePlaceholder,
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-userInput:focus + .Re-fakePlaceholder,
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-userInput:valid + .Re-fakePlaceholder{
     top: -3px;
@@ -1199,9 +1202,14 @@ footer .A-footerRight li.A-footerPolitic h5{
     transition: 0.25s ease-in-out, 0.3s ease-in-out text-shadow;
 }
 
-
-
-
+.errorMessage{
+    display: none;
+    position: absolute;
+    font-size: 0.6rem;
+    bottom: -5px;
+    left: 0;
+    color: var(--redColor);
+}
 
 .Lo-loginForm .Lo-loginCenter .Lo-loginAssistants{
     position: relative;
