@@ -120,11 +120,11 @@
                                     <div class="postTimelineBottom">
                                         <div class="postLikes">
                                             <i class="bi bi-heart-fill"></i>
-                                            <p>50</p>
+                                            <p>0</p>
                                         </div>
                                         <div class="postComments">
                                             <i class="bi bi-chat-fill"></i>
-                                            <p>10</p>
+                                            <p>0</p>
                                         </div>
                                     </div>
                                 </div>

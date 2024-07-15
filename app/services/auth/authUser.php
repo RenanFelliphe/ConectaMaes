@@ -11,9 +11,14 @@
             $return = mysqli_fetch_assoc($execute);
 
             if(!empty($return['email'])){
-                session_start();
+                if(session_status() === PHP_SESSION_NONE) {
+                    session_start();
+                }
                 $_SESSION['idUsuario'] = $return['idUsuario'];
                 $_SESSION['active'] = true;
+                ?>
+                    <script>window.location.href = '../public/home.php'</script>
+                <?php
             }else{
                 echo "Usuário ou senha não encontrados!";
             }
@@ -21,7 +26,9 @@
     }
     
     function logOut() {
-        session_start();
+        if(session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
         session_unset();
         session_destroy();
     

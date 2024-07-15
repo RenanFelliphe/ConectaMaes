@@ -52,11 +52,6 @@
                 if(isset($_POST['logar']))
                 {
                     logIn($conn);
-                    if($_SESSION['active']){
-                        ?>
-                            <script>window.location.href = '../public/home.php'</script>
-                        <?php
-                    }
                 }
             ?>
             </form> 

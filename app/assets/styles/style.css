@@ -1157,6 +1157,7 @@ footer .A-footerRight li.A-footerPolitic h5{
     color: var(--blackColor);
     width: 100%;
     opacity: 0.5;
+    padding-right: 1rem;
 }
 
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input:hover,
@@ -1206,6 +1207,24 @@ footer .A-footerRight li.A-footerPolitic h5{
     transition: 0.25s ease-in-out, 0.3s ease-in-out text-shadow;
 }
 
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.userNameInput{
+    padding-left: 0.8rem;
+}
+
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-fakePlaceholder.notEmpty + span.userArroba{
+    display: block;
+}
+
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input span.userArroba{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 0.8rem;
+    transform: translateY(-50%);
+    color: var(--grayColor);
+    font-size: 0.85rem;
+}
+
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .errorIcon{
     display: none;
     font-size: 0.8rem;
@@ -1228,6 +1247,7 @@ footer .A-footerRight li.A-footerPolitic h5{
     display: none;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: flex-start;
     border: 1px solid transparent;
     background: linear-gradient(var(--whiteColor), var(--whiteColor)) padding-box, linear-gradient(var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
     border-radius: 1rem;
@@ -1239,9 +1259,11 @@ footer .A-footerRight li.A-footerPolitic h5{
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .errorMessageContainer .errorMessageContent{
     position: relative;
     display: none;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 10vw;
+    text-wrap: wrap;
     gap: 0.5rem;
-    width: 100%;
-    text-wrap: nowrap;
     color: var(--redColor);
     font-size: 0.8rem;
 }

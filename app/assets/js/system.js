@@ -12,9 +12,6 @@ function userValidations(){
     const errorMessageContainers = document.querySelectorAll('.errorMessageContainer');
     const errorMessageContent = document.querySelectorAll('.errorMessageContent');
     const errorIcon = document.querySelectorAll('.errorIcon');
-    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-
-
         
     function setError(index, message){
         inputContainers[index].style.border = "2px solid var(--redColor)";
@@ -58,28 +55,52 @@ function userValidations(){
         checkEmptyInput(0);
         if(validateInputs[0].value.length <= 3){
             setError(0, "Nome curto demais.");
+        } else if(validateInputs[0].value.length > 50){
+            setError(0, "Nome longo demais.");
+            validateInputs[0].value = validateInputs[0].value.slice(0, 50);
         } else {
             removeError(0);
         }
     }
 
-    function validateEmail(){
+    function validateEmail() {
+        const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
         checkEmptyInput(1);
-        if(!emailRegex.test(validateInputs[1].value)){
+
+        if (!emailRegex.test(validateInputs[1].value)) {
             setError(1, "Insira um endereço de e-mail válido.");
-        } else{
+        } else if (validateInputs[1].value.length > 50) {
+            setError(1, "O endereço de e-mail é muito longo.");
+            validateInputs[1].value = validateInputs[1].value.slice(0, 50);
+        } else {
             removeError(1);
         }
-    }
+    }    
 
-    function validatePassword(){
+    function validatePassword() {
+        const password = validateInputs[2].value;
+        const hasUpperCase = /[A-Z]/.test(password);
+        const hasLowerCase = /[a-z]/.test(password);
+        const hasDigit = /\d/.test(password);
+        const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    
         checkEmptyInput(2);
-        if(validateInputs[2].value.length < 8){
+
+        if (password.length < 8) {
             setError(2, "A senha deve ter mais de 8 caracteres.");
-        } else{
+        } else if (!hasUpperCase) {
+            setError(2, "A senha deve conter ao menos uma letra maiúscula.");
+        } else if (!hasLowerCase) {
+            setError(2, "A senha deve conter ao menos uma letra minúscula.");
+        } else if (!hasDigit) {
+            setError(2, "A senha deve conter ao menos um número.");
+        } else if (!hasSpecialChar) {
+            setError(2, "A senha deve conter ao menos um caractere especial (!@#$%^&*).");
+        } else {
             removeError(2);
         }
-    }
+    }    
 
     function validateConfirmPassword(){
         checkEmptyInput(2);
