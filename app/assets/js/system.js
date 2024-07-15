@@ -9,28 +9,45 @@ function userValidations(){
     const inputContainers = document.querySelectorAll('.Re-input');
     const placeholders = document.querySelectorAll('.Re-fakePlaceholder');
     const errorMessage = document.querySelectorAll('.errorMessage');
+    const errorMessageContainers = document.querySelectorAll('.errorMessageContainer');
+    const errorMessageContent = document.querySelectorAll('.errorMessageContent');
     const errorIcon = document.querySelectorAll('.errorIcon');
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
+
+        
     function setError(index, message){
         inputContainers[index].style.border = "2px solid var(--redColor)";
+        inputContainers[index].style.opacity = "1";
         placeholders[index].style.color = "var(--redColor)";
-        errorMessage[index].style.display = "block";
+        errorMessageContent[index].style.display = "flex";
         errorMessage[index].textContent = message;
         errorIcon[index].style.display = "block";
+
+        function toggleErrorModal(index, show) { errorMessageContainers[index].style.display = show ? 'flex' : 'none'; }
+        
+        errorIcon.forEach((icon, index) => {
+            icon.addEventListener('mouseover', () => {
+                toggleErrorModal(index, true);
+            });
+        
+            icon.addEventListener('mouseout', () => {
+                toggleErrorModal(index, false);
+            });
+        });
     }
 
     function removeError(index){
         inputContainers[index].style.border = "2px solid transparent";
         placeholders[index].style.color = "var(--secondColor)";
-        errorMessage[index].style.display = "none";
-        errorMessage[index].textContent = "";
+        errorMessageContent[index].style.display = "none";
         errorIcon[index].style.display = "none";
     }
     
     function checkEmptyInput(index){
         if(validateInputs[index].value != ""){
             placeholders[index].classList.add('notEmpty');
+            inputContainers[index].style.opacity = "1";
         } else {
             placeholders[index].classList.remove('notEmpty');
             removeError(index);

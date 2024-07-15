@@ -15,6 +15,7 @@
                 $_SESSION['idUsuario'] = $return['idUsuario'];
                 $_SESSION['active'] = true;
                 header('Location: home.php');
+                exit();
             }else{
                 echo "Usuário ou senha não encontrados!";
             }
