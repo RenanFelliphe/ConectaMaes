@@ -74,6 +74,15 @@ function userValidations(){
 
     function validatePassword(){
         checkEmptyInput(2);
+        if(validateInputs[2].value.length < 8){
+            setError(2, "A senha deve ter mais de 8 caracteres.");
+        } else{
+            removeError(2);
+        }
+    }
+
+    function validateConfirmPassword(){
+        checkEmptyInput(2);
         checkEmptyInput(3);
         if(validateInputs[2].value != validateInputs[3].value){
             setError(3, "As senhas não coincidem.");
@@ -85,6 +94,7 @@ function userValidations(){
     window.validateName = validateName;
     window.validateEmail = validateEmail;
     window.validatePassword = validatePassword;
+    window.validateConfirmPassword = validateConfirmPassword;
 }
 
 function headerFunctions() {

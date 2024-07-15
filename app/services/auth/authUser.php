@@ -14,8 +14,6 @@
                 session_start();
                 $_SESSION['idUsuario'] = $return['idUsuario'];
                 $_SESSION['active'] = true;
-                header('Location: home.php');
-                exit();
             }else{
                 echo "Usuário ou senha não encontrados!";
             }
@@ -29,7 +27,6 @@
     
         // Caminho relativo ao arquivo login.php na pasta public
         include_once "../helpers/paths.php";
-        
         header("Location:" . $relativePublicPath ."/login.php");
         exit();
     }

@@ -65,7 +65,7 @@
                         </div>
 
                         <div class="Re-input">
-                            <input class="Re-userInput validate" type="password" id="confirmarSenha" name="senhaRegistroConfirma" oninput="validatePassword()" required>
+                            <input class="Re-userInput validate" type="password" id="confirmarSenha" name="senhaRegistroConfirma" oninput="validateConfirmPassword()" required>
                             <label class="Re-fakePlaceholder" for="confirmarSenha">Confirmar Senha</label>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
                             <div class="errorMessageContainer">
