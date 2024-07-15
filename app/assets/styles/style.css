@@ -1193,9 +1193,9 @@ footer .A-footerRight li.A-footerPolitic h5{
 }
 
 .Lo-loginForm .Lo-loginCenter .Lo-userSection .Lo-input .Lo-userInput:focus + .Lo-fakePlaceholder,
-.Lo-loginForm .Lo-loginCenter .Lo-userSection .Lo-input .Lo-userInput:valid + .Lo-fakePlaceholder,
+.Lo-loginForm .Lo-loginCenter .Lo-userSection .Lo-input .Lo-fakePlaceholder.notEmpty,
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-userInput:focus + .Re-fakePlaceholder,
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-userInput:valid + .Re-fakePlaceholder{
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-fakePlaceholder.notEmpty {
     top: -3px;
     font-size: 12px;
     background-color: var(--whiteColor);
@@ -1205,8 +1205,8 @@ footer .A-footerRight li.A-footerPolitic h5{
 .errorMessage{
     display: none;
     position: absolute;
-    font-size: 0.6rem;
-    bottom: -5px;
+    font-size: 0.55rem;
+    bottom: -0.7rem;
     left: 0;
     color: var(--redColor);
 }

@@ -29,25 +29,25 @@
                 <div class="Re-registerCenter">
                     <div class="Re-accountInformations Re-registerSections">
                         <div class="Re-input">
-                            <input class="Re-userInput validate" type="text" id="nomeUsuario" name="userRegistro" oninput="validateName()" required>
+                            <input class="Re-userInput validate" type="text" id="nomeUsuario" name="userRegistro" oninput="validateName()">
                             <label class="Re-fakePlaceholder" for="nomeUsuario">Usuário</label>
                             <span class="errorMessage">Informação Inválida</span>
                         </div>
 
                         <div class="Re-input">
-                            <input class="Re-userInput validate" type="email" id="email" name="emailRegistro" autocomplete="email" oninput="validateEmail()" required>
+                            <input class="Re-userInput validate" type="email" id="email" name="emailRegistro" autocomplete="email" oninput="validateEmail()">
                             <label class="Re-fakePlaceholder" for="email">E-mail</label>
                             <span class="errorMessage">Informação Inválida</span>
                         </div>
 
                         <div class="Re-input">
-                            <input class="Re-userInput validate" type="password" id="senha" name="senhaRegistro" required>
+                            <input class="Re-userInput validate" type="password" id="senha" name="senhaRegistro" oninput="validatePassword()">
                             <label class="Re-fakePlaceholder" for="senha">Senha</label>
                             <span class="errorMessage">Informação Inválida</span>
                         </div>
 
                         <div class="Re-input">
-                            <input class="Re-userInput validate" type="password" id="confirmarSenha" name="senhaRegistroConfirma" oninput="validatePassword()" required>
+                            <input class="Re-userInput validate" type="password" id="confirmarSenha" name="senhaRegistroConfirma" oninput="validatePassword()">
                             <label class="Re-fakePlaceholder" for="confirmarSenha">Confirmar Senha</label>
                             <span class="errorMessage">Informação Inválida</span>
                         </div>
@@ -76,7 +76,7 @@
                         </div>
                         <div class="Re-input inputDataNasc">
                             <input class="Re-userInput" type="date" id="dataNascimento" name="dataNascimentoRegistro">
-                            <label class="Re-fakePlaceholder" id="dataNascPlaceholder" for="dataNascimento">Data de Nascimento</label>
+                            <label class="Re-fakePlaceholder notEmpty" id="dataNascPlaceholder" for="dataNascimento">Data de Nascimento</label>
                         </div>
                         <div class="Re-input inputLocal">
                             <select class="Re-userInput" name="localizacaoRegistro" id="localizacao" >
@@ -109,7 +109,7 @@
                                 <option value="Sergipe"> SE | Sergipe</option>
                                 <option value="Tocantins"> TO | Tocantins</option>                 
                             </select>
-                            <label class="Re-fakePlaceholder" for="localizacao" style="pointer-events: none;">Localização</label>
+                            <label class="Re-fakePlaceholder notEmpty" for="localizacao" style="pointer-events: none;">Localização</label>
                         </div>
                         <div class="Re-input input-full inputBio">
                             <textarea class="Re-userInput" name="biografiaUsuarioRegistro" id="biografiaUsuario" cols="54" rows="4"></textarea>                        
@@ -198,6 +198,7 @@
 
             document.addEventListener('DOMContentLoaded', function() {
                 registerUser();
+                userValidations();
             });
         </script>
     </body>

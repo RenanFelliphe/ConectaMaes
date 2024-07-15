@@ -11,48 +11,61 @@ function userValidations(){
     const errorMessage = document.querySelectorAll('.errorMessage');
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
-    function setError(index){
+    function setError(index, message){
         inputContainers[index].style.border = "2px solid var(--redColor)";
         placeholders[index].style.color = "var(--redColor)";
         errorMessage[index].style.display = "block";
+        errorMessage[index].textContent = message;
     }
 
     function removeError(index){
         inputContainers[index].style.border = "2px solid transparent";
         placeholders[index].style.color = "var(--secondColor)";
         errorMessage[index].style.display = "none";
+        errorMessage[index].textContent = "";
     }
+    
+    function checkEmptyInput(index){
+        if(validateInputs[index].value != ""){
+            placeholders[index].classList.add('notEmpty');
+        } else {
+            placeholders[index].classList.remove('notEmpty');
+            removeError(index);
+        }
+    }    
 
     function validateName(){
-        if(validateInputs[0].value.length > 3){
-            setError(0);
+        checkEmptyInput(0);
+        if(validateInputs[0].value.length <= 3){
+            setError(0, "Nome curto demais.");
         } else {
             removeError(0);
         }
     }
 
     function validateEmail(){
+        checkEmptyInput(1);
         if(!emailRegex.test(validateInputs[1].value)){
-            setError(1);
+            setError(1, "Insira um endereço de e-mail válido.");
         } else{
             removeError(1);
         }
     }
 
     function validatePassword(){
-        if(!validateInputs[2].value == validateInputs[3].value){
-            setError(3);
+        checkEmptyInput(2);
+        checkEmptyInput(3);
+        if(validateInputs[2].value != validateInputs[3].value){
+            setError(3, "As senhas não coincidem.");
         } else{
             removeError(3);
         }
     }
 
-    validatePassword();
-    validateEmail();
-    validateName();
+    window.validateName = validateName;
+    window.validateEmail = validateEmail;
+    window.validatePassword = validatePassword;
 }
-
-userValidations();
 
 function headerFunctions() {
     function toggleModals() {
