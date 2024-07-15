@@ -1174,7 +1174,7 @@ footer .A-footerRight li.A-footerPolitic h5{
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-userInput{
     position: relative;
     width: 100%;
-    padding: 0.8rem 1rem;
+    padding: 0.8rem 1.5rem;
     border-radius: 100rem;
     outline: none;
     border: none;
@@ -1205,10 +1205,6 @@ footer .A-footerRight li.A-footerPolitic h5{
     font-size: 12px;
     background-color: var(--whiteColor);
     transition: 0.25s ease-in-out, 0.3s ease-in-out text-shadow;
-}
-
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.userNameInput{
-    padding-left: 0.8rem;
 }
 
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-fakePlaceholder.notEmpty + span.userArroba{
