@@ -9,6 +9,7 @@ function userValidations(){
     const inputContainers = document.querySelectorAll('.Re-input');
     const placeholders = document.querySelectorAll('.Re-fakePlaceholder');
     const errorMessage = document.querySelectorAll('.errorMessage');
+    const errorIcon = document.querySelectorAll('.errorIcon');
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
     function setError(index, message){
@@ -16,6 +17,7 @@ function userValidations(){
         placeholders[index].style.color = "var(--redColor)";
         errorMessage[index].style.display = "block";
         errorMessage[index].textContent = message;
+        errorIcon[index].style.display = "block";
     }
 
     function removeError(index){
@@ -23,6 +25,7 @@ function userValidations(){
         placeholders[index].style.color = "var(--secondColor)";
         errorMessage[index].style.display = "none";
         errorMessage[index].textContent = "";
+        errorIcon[index].style.display = "none";
     }
     
     function checkEmptyInput(index){

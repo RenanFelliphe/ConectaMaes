@@ -31,25 +31,31 @@
                         <div class="Re-input">
                             <input class="Re-userInput validate" type="text" id="nomeUsuario" name="userRegistro" oninput="validateName()">
                             <label class="Re-fakePlaceholder" for="nomeUsuario">Usuário</label>
-                            <span class="errorMessage">Informação Inválida</span>
-                        </div>
+                            <i class="bi bi-info-circle-fill errorIcon"></i>
+                            <div class="errorMessageContainer">
+                                <div class="errorMessageContent">
+                                    <i class="bi bi-x-circle-fill"></i>
+                                    <span class="errorMessage">Tem erro aí!</span>
+                                </div>
+                            </div>
+                            </div>
 
                         <div class="Re-input">
                             <input class="Re-userInput validate" type="email" id="email" name="emailRegistro" autocomplete="email" oninput="validateEmail()">
                             <label class="Re-fakePlaceholder" for="email">E-mail</label>
-                            <span class="errorMessage">Informação Inválida</span>
+                            <i class="bi bi-info-circle-fill errorIcon"></i>
                         </div>
 
                         <div class="Re-input">
                             <input class="Re-userInput validate" type="password" id="senha" name="senhaRegistro" oninput="validatePassword()">
                             <label class="Re-fakePlaceholder" for="senha">Senha</label>
-                            <span class="errorMessage">Informação Inválida</span>
+                            <i class="bi bi-info-circle-fill errorIcon"></i>
                         </div>
 
                         <div class="Re-input">
                             <input class="Re-userInput validate" type="password" id="confirmarSenha" name="senhaRegistroConfirma" oninput="validatePassword()">
                             <label class="Re-fakePlaceholder" for="confirmarSenha">Confirmar Senha</label>
-                            <span class="errorMessage">Informação Inválida</span>
+                            <i class="bi bi-info-circle-fill errorIcon"></i>
                         </div>
 
                         <div class="Re-themeInfo">
