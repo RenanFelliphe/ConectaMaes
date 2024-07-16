@@ -36,25 +36,20 @@
 
                 <div class="Lo-loginCenter">
                     <div class="Lo-userSection Lo-loginSections">
-                        <div class="Lo-input input-full">
-                            <input class="Lo-userInput" type="email" id="email" name="email" required autofocus>
-                            <label class="Lo-fakePlaceholder" for="email">E-mail</label>
-                            <i class="bi bi-info-circle-fill errorIcon"></i>
-                            <div class="errorMessageContainer">
-                                <div class="errorMessageContent"></div>
-                            </div>
+                        <div class="Re-input input-full">
+                            <input class="Re-userInput" type="email" id="email" name="email" oninput="checkEmptyInputLogin(0)" required autofocus>
+                            <label class="Re-fakePlaceholder" for="email">E-mail</label>
                         </div>
-                        <div class="Lo-input input-full">
-                            <input class="Lo-userInput" type="password" id="senha" name="senha" required>
-                            <label class="Lo-fakePlaceholder" for="senha">Senha</label>
-                            <i class="bi bi-info-circle-fill errorIcon"></i>
-                            <div class="errorMessageContainer">
-                                <div class="errorMessageContent"></div>
-                            </div>
+                        <div class="Re-input input-full">
+                            <input class="Re-userInput" type="password" id="senha" name="senha" oninput="checkEmptyInputLogin(1)" required>
+                            <label class="Re-fakePlaceholder" for="senha">Senha</label>
                         </div>
 
-                        <div class="Lo-loginAssistants">
-                            <span class="Lo-rememberMe"><input type="checkbox" name="lembrar"> Lembrar de mim</span>
+                        <div class="Re-input Lo-loginAssistants">
+                            <div class="Lo-rememberMe" style="cursor: pointer">
+                                <input type="checkbox" name="lembrar" id="rememberMeCheckbox" style="cursor: pointer"> 
+                                <label for="rememberMeCheckbox" style="cursor: pointer;"> Lembrar de mim?</label>
+                            </div>
                             <a href="" class="Lo-forgetPassword">Esqueceu sua senha?</a>
                         </div>
                     </div>
@@ -71,6 +66,8 @@
             include_once("../app/includes/footer.php");
         ?>
         
-        <script src="../app/assets/js/system.js"></script>
+        <script src="../app/assets/js/system.js">
+            
+        </script>
     </body>
 </html>

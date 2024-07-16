@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', function() {
     openModal();
 });
 
+userValidations();
+
 function userValidations(){
     const validateInputs = document.querySelectorAll('.validate');
     const inputContainers = document.querySelectorAll('.Re-input');
@@ -90,6 +92,7 @@ function userValidations(){
         const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
 
         checkEmptyInput(2);
+        validateConfirmPassword();
 
         if(password.length === 0){
             removeError(2);
@@ -118,11 +121,26 @@ function userValidations(){
             removeError(3);
         }
     }
+    
+    function checkEmptyInputLogin(index) {
+        const loginInputs = document.querySelectorAll('.Lo-loginForm .Re-userInput');
+        const loginContainers = document.querySelectorAll('.Lo-loginForm .Re-input');
+        const loginPlaceholders = document.querySelectorAll('.Lo-loginForm .Re-fakePlaceholder');
+        
+        if (loginInputs[index].value !== "") {
+            loginPlaceholders[index].classList.add('notEmpty');
+            loginContainers[index].style.opacity = "1";
+        } else {
+            loginPlaceholders[index].classList.remove('notEmpty');
+            loginContainers[index].style.opacity = "0.5";
+        }
+    }
 
     window.validateName = validateName;
     window.validateEmail = validateEmail;
     window.validatePassword = validatePassword;
     window.validateConfirmPassword = validateConfirmPassword;
+    window.checkEmptyInputLogin = checkEmptyInputLogin;
 }
 
 function headerFunctions() {
