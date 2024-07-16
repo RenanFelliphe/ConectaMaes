@@ -754,9 +754,16 @@ footer{
     align-items: flex-start;
     gap: 1rem;
     width: 100%;
-    padding: 1rem 2rem 0.5rem 0.5rem;
+    height: 20vh;
+    padding: 0 2rem 0.5rem 0.5rem;
     background-color: var(--blackColor);
     color: var(--whiteColor);
+}
+
+footer h4{
+    font-size: 1.4em;
+    line-height: 3rem;
+    pointer-events: none;
 }
 
 footer .A-footerLeft img.A-footerLogo{
@@ -767,11 +774,6 @@ footer .A-footerLeft img.A-footerLogo{
 footer .A-footerLeft .A-footerContact{
     padding: 0 0 4rem 1rem;
     width: 14rem;
-    font-size: 1.625rem;
-}
-
-footer .A-footerLeft .A-footerContact h4{
-    padding: 0.5rem 0 1rem 0;
 }
 
 footer .A-footerLeft .A-footerContact .A-footerSocialMedias{
@@ -814,27 +816,21 @@ footer .A-footerRight{
     height: 100%;
 }
 
-footer .A-footerRight li h5{
-    font-size: 1.438rem;
-    line-height: 3rem;
-    pointer-events: none;
-}
-
 footer .A-footerRight li p{
     font-size: 1rem;
     line-height: 1.5rem;
     cursor: pointer;
 }
 
-footer .A-footerRight li.A-footerAbout h5{
+footer .A-footerRight li.A-footerAbout h4{
     color: var(--pastelYellowColor);
 }
 
-footer .A-footerRight li.A-footerHelp h5{
+footer .A-footerRight li.A-footerHelp h4{
     color: var(--pastelBlueColor);
 }
 
-footer .A-footerRight li.A-footerPolitic h5{
+footer .A-footerRight li.A-footerPolitic h4{
     color: var(--pastelPinkColor);
 }
 
@@ -1056,8 +1052,8 @@ footer .A-footerRight li.A-footerPolitic h5{
     position: relative;
     display: flex;
     background: linear-gradient(var(--whiteColor) 0%, var(--firstColorLowOpacity) 95%);
-    padding: 1rem 0 5vh 0;
-    min-height: 100vh;
+    padding: 2vh 0;
+    min-height: 88vh;
 }
 
 .Lo-loginForm,
@@ -1224,6 +1220,7 @@ footer .A-footerRight li.A-footerPolitic h5{
     transform: translateY(-50%);
     color: var(--grayColor);
     font-size: 0.85rem;
+    margin-bottom: 2px;
 }
 
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .errorIcon{
@@ -1251,12 +1248,11 @@ footer .A-footerRight li.A-footerPolitic h5{
     align-items: flex-start;
     justify-content: flex-start;
     border: 1px solid transparent;
-    gap: 0.5rem;
+    gap: 1rem;
     background: linear-gradient(var(--whiteColor), var(--whiteColor)) padding-box, linear-gradient(var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
     border-radius: 1rem;
     box-shadow: 0 2px 6px 0px #00000010;
     cursor: pointer;
-    color: var(--redColor);
     font-size: 0.8rem;
     z-index: +2;
 }
@@ -1269,6 +1265,11 @@ footer .A-footerRight li.A-footerPolitic h5{
     width: 10vw;
     text-wrap: wrap;
     gap: 0.5rem;
+}
+
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .errorMessageContainer .errorMessageContent .mainError{
+    color: var(--redColor);
+    font-weight: bold;
 }
 
 .Lo-loginForm .Lo-loginCenter .Lo-loginAssistants{

@@ -11,22 +11,21 @@
     </div>
     
     <span class="A-copyrightSign">
-        <i class="bi bi-c-circle"></i>
-        <p>2024 ConectaMães do CEFET-MG</p>
+        <p>ConectaMães do CEFET-MG | 2024</p>
     </span>
 
     <ul class="A-footerRight">
         <li class="A-footerAbout">
-            <h5>Sobre</h5>
+            <h4>Sobre</h4>
             <p class="A-footerAboutProject">Projeto</p>
             <p class="A-footerAboutEquip">CEFET-MG</p>
         </li>
         <li class="A-footerHelp">
-            <h5>Ajuda</h5>
+            <h4>Ajuda</h4>
             <p class="A-footerHelpSuport">Suporte</p>
         </li>
         <li class="A-footerPolitic">
-            <h5>Política</h5>
+            <h4>Política</h4>
             <p class="A-footerPoliticPrivacy">Privacidade</p>
             <p class="A-footerPoliticTerms">Termos de Uso</p>
         </li>

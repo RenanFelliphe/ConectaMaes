@@ -42,18 +42,16 @@
                 $executeSignUp = mysqli_query($conn, $insertNewUser);
 
                 if ($executeSignUp) {
-                    $userId = mysqli_insert_id($conn); // Obtém o ID do novo usuário inserido
-                    echo "<p>Usuário registrado com sucesso!</p><br>";
+                    $userId = mysqli_insert_id($conn);
+                    $insertUser_successful = "<p>Usuário registrado com sucesso!</p>"; //mensagem a ser exibida caso seja inserido com sucesso
 
                     // Chama a função uploadPFP para fazer o upload da foto de perfil
                     uploadPFP($conn, $userId, $userRegistro);
                 } else {
-                    echo "<p>Erro ao registrar usuário: " . mysqli_error($conn) . "!<p>";
+                    $mysqli_error = "<p>Erro ao registrar usuário: " . mysqli_error($conn) . "!<p>";
                 }
             } else {
-                foreach ($err as $e) {
-                    echo "<p>$e</p>";
-                }
+                //salvar error em variaveis pra imprimir no html
             }
             
         }
@@ -119,9 +117,7 @@
                     }
                 }
             } else {
-                foreach ($err as $e) {
-                    echo "<p>$e</p>";
-                }
+                //salvar error em variaveis pra imprimir no html
             }
         }
             function editPassword($conn, $userId){
@@ -148,9 +144,7 @@
                         echo "Erro ao atualizar senha: " . mysqli_error($conn) . "!";
                     }
                 }else{
-                    foreach ($err as $e) {
-                        echo "<p>$e</p><br>";
-                    }
+                    //salvar error em variaveis pra imprimir no html
                 }
             }    
     // DELETE ACCOUNT - DELETE
@@ -163,7 +157,7 @@
                     session_unset();
                     session_destroy();
                 }else{
-                    echo "Não foi possível deletar a conta!";
+                    $notPossibleDelete_error = "Não foi possível deletar a conta!";
                 }
             }    
         }

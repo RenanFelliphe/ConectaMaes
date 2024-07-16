@@ -1,7 +1,7 @@
 <?php
     require_once("../app/services/auth/authUser.php");
-    require_once("../app/helpers/conn.php");
-    require_once("../app/helpers/paths.php");
+    require_once("../app/services/helpers/conn.php");
+    require_once("../app/services/helpers/paths.php");
 
     if(isset($_POST['logar'])) {
         logIn($conn);

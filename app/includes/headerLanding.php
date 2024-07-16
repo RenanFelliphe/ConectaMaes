@@ -9,10 +9,6 @@
         <h4><a href="#">Contato</a></h4>
         <h4><a href="#">Direitos</a></h4>
     </div>
-    <div class="A-searchBar">
-        <i class="bi bi-search"></i>
-        <input type="search" class="A-searchBarInput" name="pesquisar" placeholder="Pesquisar">
-    </div>
     <div class="A-signButtons">
         <a href="<?php echo $relativePublicPath; ?>/registrar.php"><h4 class="A-signUp">Cadastrar</h4></a>
         <a href="<?php echo $relativePublicPath; ?>/login.php"><h4 class="A-signIn">Login</h4></a>

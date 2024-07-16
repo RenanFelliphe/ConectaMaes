@@ -28,7 +28,7 @@
 
                 <div class="Re-registerCenter">
                     <div class="Re-accountInformations Re-registerSections">
-                        <div class="Re-input userNameInput">
+                        <div class="Re-input inputUserName">
                             <input class="Re-userInput validate" type="text" id="nomeUsuario" name="userRegistro" oninput="validateName()" onclick="validateName()" required autofocus>
                             <label class="Re-fakePlaceholder" for="nomeUsuario">Usuário</label>
                             <span class="userArroba">@</span>
