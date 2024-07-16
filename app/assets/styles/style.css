@@ -1067,10 +1067,12 @@ footer .A-footerRight li.A-footerPolitic h5{
     border: 2px solid transparent;
     background: linear-gradient(var(--whiteColor), var(--whiteColor)) padding-box, linear-gradient(var(--pastelYellowColor), var(--pastelBlueColor), var(--pastelPinkColor)) border-box;
     border-radius: 1rem;
-    min-width: 28.5rem;
-    width: 33.5vw;      
     min-height: 31.5rem;
+    width: 33.5vw;
+    max-width: 35rem;      
+    min-height: 33rem;
     height: 83vh;
+    max-height: 38rem;
     box-shadow: 0 4px 16px 0px #00000040;
     overflow-y: hidden;
     gap: 1.5rem;
@@ -1215,7 +1217,7 @@ footer .A-footerRight li.A-footerPolitic h5{
     display: none;
     position: absolute;
     top: 50%;
-    left: 0.8rem;
+    left: 0.6rem;
     transform: translateY(-50%);
     color: var(--grayColor);
     font-size: 0.85rem;
