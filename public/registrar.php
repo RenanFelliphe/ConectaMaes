@@ -34,49 +34,33 @@
                             <span class="userArroba">@</span>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
                             <div class="errorMessageContainer">
-                                <div class="errorMessageContent">
-                                    <i class="bi bi-x-circle-fill"></i>
-                                    <span class="errorMessage"></span>
-                                </div>
+                                <div class="errorMessageContent"></div>
                             </div>
                         </div>
-
                         <div class="Re-input">
                             <input class="Re-userInput validate" type="email" id="email" name="emailRegistro" autocomplete="email" oninput="validateEmail()" required>
                             <label class="Re-fakePlaceholder" for="email">E-mail</label>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
                             <div class="errorMessageContainer">
-                                <div class="errorMessageContent">
-                                    <i class="bi bi-x-circle-fill"></i>
-                                    <span class="errorMessage"></span>
-                                </div>
+                                <div class="errorMessageContent"></div>
                             </div>
                         </div>
-
                         <div class="Re-input">
                             <input class="Re-userInput validate" type="password" id="senha" name="senhaRegistro" oninput="validatePassword()" required>
                             <label class="Re-fakePlaceholder" for="senha">Senha</label>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
                             <div class="errorMessageContainer">
-                                <div class="errorMessageContent">
-                                    <i class="bi bi-x-circle-fill"></i>
-                                    <span class="errorMessage"></span>
-                                </div>
+                                <div class="errorMessageContent"></div>
                             </div>
                         </div>
-
                         <div class="Re-input">
                             <input class="Re-userInput validate" type="password" id="confirmarSenha" name="senhaRegistroConfirma" oninput="validateConfirmPassword()" required>
                             <label class="Re-fakePlaceholder" for="confirmarSenha">Confirmar Senha</label>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
                             <div class="errorMessageContainer">
-                                <div class="errorMessageContent">
-                                    <i class="bi bi-x-circle-fill"></i>
-                                    <span class="errorMessage"></span>
-                                </div>
+                                <div class="errorMessageContent"></div>
                             </div>
                         </div>
-
                         <div class="Re-themeInfo">
                             <p> Tema </p>
                             <div class="Re-themeOptions">

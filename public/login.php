@@ -1,3 +1,12 @@
+<?php
+    require_once("../app/services/auth/authUser.php");
+    require_once("../app/helpers/conn.php");
+    require_once("../app/helpers/paths.php");
+
+    if(isset($_POST['logar'])) {
+        logIn($conn);
+    }
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -11,8 +20,7 @@
 
     <body class="Y-theme">
         <?php 
-            include_once ("../app/includes/headerLanding.php");
-            include_once ("../app/services/auth/authUser.php");
+            include_once("../app/includes/headerLanding.php");
         ?>
 
         <main class="Lo-Login">
@@ -48,17 +56,11 @@
                     <button type="submit" class="Lo-loginSubmit confirmBtn" name="logar">Entrar</button>
                     <span class="Lo-goRegister"> Não possui uma conta? <a href="registrar.php">Registre-se</a></span>
                 </div>
-                <?php
-                if(isset($_POST['logar']))
-                {
-                    logIn($conn);
-                }
-            ?>
             </form> 
         </main>
 
         <?php 
-            include_once ("../app/includes/footer.php");
+            include_once("../app/includes/footer.php");
         ?>
         
         <script src="../app/assets/js/system.js"></script>

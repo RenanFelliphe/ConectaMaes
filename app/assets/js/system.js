@@ -4,30 +4,29 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function userValidations(){
-    const registerForm = document.querySelector('.Re-registerForm');
     const validateInputs = document.querySelectorAll('.validate');
     const inputContainers = document.querySelectorAll('.Re-input');
     const placeholders = document.querySelectorAll('.Re-fakePlaceholder');
-    const errorMessage = document.querySelectorAll('.errorMessage');
     const errorMessageContainers = document.querySelectorAll('.errorMessageContainer');
     const errorMessageContent = document.querySelectorAll('.errorMessageContent');
     const errorIcon = document.querySelectorAll('.errorIcon');
-        
+    
     function setError(index, message){
         inputContainers[index].style.border = "2px solid var(--redColor)";
-        inputContainers[index].style.opacity = "1";
         placeholders[index].style.color = "var(--redColor)";
+        errorMessageContent[index].innerHTML = `<i class="bi bi-x-circle-fill"></i><span class="errorMessage">${message}</span>`;
         errorMessageContent[index].style.display = "flex";
-        errorMessage[index].textContent = message;
         errorIcon[index].style.display = "block";
 
-        function toggleErrorModal(index, show) { errorMessageContainers[index].style.display = show ? 'flex' : 'none'; }
-        
+        function toggleErrorModal(index, show) {
+            errorMessageContainers[index].style.display = show ? 'flex' : 'none';
+        }
+    
         errorIcon.forEach((icon, index) => {
             icon.addEventListener('mouseover', () => {
                 toggleErrorModal(index, true);
             });
-        
+    
             icon.addEventListener('mouseout', () => {
                 toggleErrorModal(index, false);
             });
@@ -37,23 +36,26 @@ function userValidations(){
     function removeError(index){
         inputContainers[index].style.border = "2px solid transparent";
         placeholders[index].style.color = "var(--secondColor)";
-        errorMessageContent[index].style.display = "none";
+        errorMessageContent[index].innerHTML = '';
         errorIcon[index].style.display = "none";
     }
-    
+
     function checkEmptyInput(index){
-        if(validateInputs[index].value != ""){
+        if(validateInputs[index].value !== ""){
             placeholders[index].classList.add('notEmpty');
             inputContainers[index].style.opacity = "1";
         } else {
             placeholders[index].classList.remove('notEmpty');
+            inputContainers[index].style.opacity = "0.5";
             removeError(index);
         }
-    }    
+    }
 
     function validateName(){
         checkEmptyInput(0);
-        if(validateInputs[0].value.length <= 3){
+        if(validateInputs[0].value.length === 0){
+            removeError(0);
+        } else if(validateInputs[0].value.length <= 3){
             setError(0, "Nome curto demais.");
         } else if(validateInputs[0].value.length > 50){
             setError(0, "Nome longo demais.");
@@ -68,7 +70,9 @@ function userValidations(){
 
         checkEmptyInput(1);
 
-        if (!emailRegex.test(validateInputs[1].value)) {
+        if(validateInputs[1].value.length === 0){
+            removeError(1);
+        } else if (!emailRegex.test(validateInputs[1].value)) {
             setError(1, "Insira um endereço de e-mail válido.");
         } else if (validateInputs[1].value.length > 50) {
             setError(1, "O endereço de e-mail é muito longo.");
@@ -84,10 +88,12 @@ function userValidations(){
         const hasLowerCase = /[a-z]/.test(password);
         const hasDigit = /\d/.test(password);
         const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-    
+
         checkEmptyInput(2);
 
-        if (password.length < 8) {
+        if(password.length === 0){
+            removeError(2);
+        } else if (password.length < 8) {
             setError(2, "A senha deve ter mais de 8 caracteres.");
         } else if (!hasUpperCase) {
             setError(2, "A senha deve conter ao menos uma letra maiúscula.");
@@ -100,12 +106,13 @@ function userValidations(){
         } else {
             removeError(2);
         }
-    }    
+    }
 
     function validateConfirmPassword(){
-        checkEmptyInput(2);
         checkEmptyInput(3);
-        if(validateInputs[2].value != validateInputs[3].value){
+        if(validateInputs[3].value.length === 0){
+            removeError(3);
+        } else if(validateInputs[2].value !== validateInputs[3].value){
             setError(3, "As senhas não coincidem.");
         } else{
             removeError(3);

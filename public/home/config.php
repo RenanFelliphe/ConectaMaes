@@ -1,8 +1,11 @@
 <?php
-    session_start();
+    if(session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
     include_once __DIR__ . "/../../app/services/helpers/paths.php";
     $verify = isset($_SESSION['active']) ? true : header("Location:" . $relativePublicPath . "/login.php");
     require_once "../../app/services/crud/userFunctions.php"; 
+    require_once "../../app/services/auth/authUser.php";
     $table = "Usuario";
     $currentUserData = queryUserData($conn, $table, $_SESSION['idUsuario']);   
 ?>
@@ -71,7 +74,7 @@
                         <i class="bi bi-chevron-right"></i>
                     </a>
 
-                    <a class="Se-sectionTitle" href="../../index.php">
+                    <a class="Se-sectionTitle" href="<?php echo $relativeServicesPath; ?>/helpers/logOut.php">
                         <div>
                             <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/conectamaes_icon.png" class="pageIcon" alt="Ícone de usuário">
                             <p> Sobre o ConectaMães</p>

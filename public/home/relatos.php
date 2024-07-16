@@ -1,5 +1,7 @@
 <?php 
-    session_start();
+    if(session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
     include_once __DIR__ . "/../../app/services/helpers/paths.php";
     $verify = isset($_SESSION['active']) ? true : header("Location:".$relativePublicPath."/login.php");
     require_once "../../app/services/crud/userFunctions.php"; 
@@ -176,7 +178,7 @@
                     <a href="">Suporte</a>
                     <a href="">Termos de Privacidade</a>
                     <a href="">CEFET-MG</a>
-                    <h4>© 2024 ConectaMães do CEFET-MG</h4>
+                    <h4> 2024 ConectaMães do CEFET-MG</h4>
                 </div>
             </section>
         </main>
