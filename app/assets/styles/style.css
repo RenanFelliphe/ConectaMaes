@@ -845,6 +845,8 @@ footer .A-footerRight li.A-footerPolitic h5{
 .La-landing{
     background: linear-gradient(var(--whiteColor) 8%, #80752350 16%, #03718050 45%, #a3155f50 75%, #80752350 85%);
     padding-left: 3rem;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .La-landingSections .La-quote{

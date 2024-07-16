@@ -37,7 +37,7 @@
                                 <div class="errorMessageContent"></div>
                             </div>
                         </div>
-                        <div class="Re-input">
+                        <div class="Re-input inputName">
                             <input class="Re-userInput validate" type="email" id="email" name="emailRegistro" autocomplete="email" oninput="validateEmail()" required>
                             <label class="Re-fakePlaceholder" for="email">E-mail</label>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
@@ -45,7 +45,7 @@
                                 <div class="errorMessageContent"></div>
                             </div>
                         </div>
-                        <div class="Re-input">
+                        <div class="Re-input inputPassword">
                             <input class="Re-userInput validate" type="password" id="senha" name="senhaRegistro" oninput="validatePassword()" required>
                             <label class="Re-fakePlaceholder" for="senha">Senha</label>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
@@ -53,7 +53,7 @@
                                 <div class="errorMessageContent"></div>
                             </div>
                         </div>
-                        <div class="Re-input">
+                        <div class="Re-input inputConfirmPassword">
                             <input class="Re-userInput validate" type="password" id="confirmarSenha" name="senhaRegistroConfirma" oninput="validateConfirmPassword()" required>
                             <label class="Re-fakePlaceholder" for="confirmarSenha">Confirmar Senha</label>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
@@ -76,19 +76,19 @@
 
                     <div class="Re-userInformations Re-registerSections close">
                         <div class="Re-input inputName">
-                            <input class="Re-userInput" type="text" id="nomeCompleto" name="nomeUsuarioRegistro" required>
+                            <input class="Re-userInput validate" type="text" id="nomeCompleto" name="nomeUsuarioRegistro" required>
                             <label class="Re-fakePlaceholder" for="nomeCompleto">Nome Completo</label>
                         </div>
                         <div class="Re-input inputCell">
-                            <input class="Re-userInput" type="text" id="telefone" name="telefoneRegistro" required />
+                            <input class="Re-userInput validate" type="text" id="telefone" name="telefoneRegistro" required />
                             <label class="Re-fakePlaceholder" for="telefone">Telefone</label>
                         </div>
                         <div class="Re-input inputDataNasc">
-                            <input class="Re-userInput" type="date" id="dataNascimento" name="dataNascimentoRegistro">
+                            <input class="Re-userInput validate" type="text" id="dataNascimento" name="dataNascimentoRegistro">
                             <label class="Re-fakePlaceholder notEmpty" id="dataNascPlaceholder" for="dataNascimento">Data de Nascimento</label>
                         </div>
                         <div class="Re-input inputLocal">
-                            <select class="Re-userInput" name="localizacaoRegistro" id="localizacao" >
+                            <select class="Re-userInput" name="localizacaoRegistro" id="localizacao">
                                 <option value="">- - - - - -</option>
                                 <option value="Acre"> AC | Acre</option>
                                 <option value="Alagoas"> AL | Alagoas</option>

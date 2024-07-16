@@ -39,10 +39,18 @@
                         <div class="Lo-input input-full">
                             <input class="Lo-userInput" type="email" id="email" name="email" required autofocus>
                             <label class="Lo-fakePlaceholder" for="email">E-mail</label>
+                            <i class="bi bi-info-circle-fill errorIcon"></i>
+                            <div class="errorMessageContainer">
+                                <div class="errorMessageContent"></div>
+                            </div>
                         </div>
                         <div class="Lo-input input-full">
                             <input class="Lo-userInput" type="password" id="senha" name="senha" required>
                             <label class="Lo-fakePlaceholder" for="senha">Senha</label>
+                            <i class="bi bi-info-circle-fill errorIcon"></i>
+                            <div class="errorMessageContainer">
+                                <div class="errorMessageContent"></div>
+                            </div>
                         </div>
 
                         <div class="Lo-loginAssistants">
