@@ -1,4 +1,5 @@
 <footer>
+    <a href="#A-copyrightSign" class="footerLink"></a>
     <div class="A-footerLeft">
         <div class="A-footerContact">
             <h4>Contato</h4>
@@ -10,7 +11,7 @@
         </div>    
     </div>
     
-    <span class="A-copyrightSign">
+    <span id="A-copyrightSign">
         <p>ConectaMães do CEFET-MG | 2024</p>
     </span>
 

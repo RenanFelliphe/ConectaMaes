@@ -23,15 +23,17 @@ function userValidations(){
         function toggleErrorModal(index, show) {
             errorMessageContainers[index].style.display = show ? 'flex' : 'none';
         }
-    
-        errorIcon.forEach((icon, index) => {
-            icon.addEventListener('mouseover', () => {
-                toggleErrorModal(index, true);
-            });
-    
-            icon.addEventListener('mouseout', () => {
-                toggleErrorModal(index, false);
-            });
+
+        errorIcon.forEach((icon, idx) => {
+            if (idx === index) {
+                icon.addEventListener('mouseover', () => {
+                    toggleErrorModal(index, true);
+                });
+
+                icon.addEventListener('mouseout', () => {
+                    toggleErrorModal(index, false);
+                });
+            }
         });
     }
 
@@ -49,19 +51,31 @@ function userValidations(){
         } else {
             placeholders[index].classList.remove('notEmpty');
             inputContainers[index].style.opacity = "0.5";
-            removeError(index);
+            removeError(index); // Remove error if the input is empty
         }
     }
 
     function validateName(){
+        const username = validateInputs[0].value;
+
         checkEmptyInput(0);
-        if(validateInputs[0].value.length === 0){
-            removeError(0);
-        } else if(validateInputs[0].value.length <= 3){
+        if(username.length === 0){
+            removeError(0); // Remove error if the input is empty
+        } else if(username.length <= 3){
             setError(0, "O nome de usuário deve ter mais de <span class='mainError'>3 caracteres.</span>");
-        } else if(validateInputs[0].value.length > 50){
-            setError(0, "O nome de usuário deve ter menos de <span class='mainError'>50 caracteres.</span>");
-            validateInputs[0].value = validateInputs[0].value.slice(0, 50);
+        } else if(username.length > 50){
+            setError(0, "O nome de usuário é <span class='mainError'>longo demais.</span>");
+            validateInputs[0].value = username.slice(0, 50);
+        } else if(/[áàâãäéèêëíìîïóòôõöúùûü]/i.test(username)){
+            setError(0, "O nome de usuário não pode ter <span class='mainError'>acentos.</span>");
+        } else if(/[ç]/i.test(username)){
+            setError(0, "O nome de usuário não pode ter <span class='mainError'>cedilha.</span>");
+        } else if(/[-]/.test(username)){
+            setError(0, "O nome de usuário não pode ter <span class='mainError'>hífens.</span>");
+        } else if(/\s/.test(username)){
+            setError(0, "O nome de usuário não pode ter <span class='mainError'>espaços.</span>");
+        } else if(/[^a-zA-Z0-9_]/.test(username)){
+            setError(0, "O nome de usuário não pode ter <span class='mainError'>caracteres especiais exceto underline (_).</span>");
         } else {
             removeError(0);
         }
@@ -73,12 +87,12 @@ function userValidations(){
         checkEmptyInput(1);
 
         if(validateInputs[1].value.length === 0){
-            removeError(1);
+            removeError(1); // Remove error if the input is empty
         } else if (!emailRegex.test(validateInputs[1].value)) {
-            setError(1, "Insira um endereço de <span class='mainError'>e-mail válido.</span>");
-        } else if (validateInputs[1].value.length > 50) {
-            setError(1, "O endereço de e-mail é <span class='mainError'>muito longo.</span>");
-            validateInputs[1].value = validateInputs[1].value.slice(0, 50);
+            setError(1, "Insira um <span class='mainError'>e-mail válido.</span>");
+        } else if (validateInputs[1].value.length > 256) {
+            setError(1, "O e-mail é <span class='mainError'>longo demais.</span>");
+            validateInputs[1].value = validateInputs[1].value.slice(0, 256);
         } else {
             removeError(1);
         }
@@ -95,7 +109,7 @@ function userValidations(){
         validateConfirmPassword();
 
         if(password.length === 0){
-            removeError(2);
+            removeError(2); // Remove error if the input is empty
         } else if (password.length < 8) {
             setError(2, "A senha deve ter mais de <span class='mainError'>8 caracteres.</span>");
         } else if (!hasUpperCase) {
@@ -106,6 +120,9 @@ function userValidations(){
             setError(2, "A senha deve conter <span class='mainError'>números.</span>");
         } else if (!hasSpecialChar) {
             setError(2, "A senha deve conter caracteres especiais <span class='mainError'>(!@#$%^&*).</span>");
+        } else if (validateInputs[2].value.length > 100) {
+            setError(2, "A senha é <span class='mainError'>longa demais.</span>");
+            validateInputs[2].value = validateInputs[2].value.slice(0, 100);
         } else {
             removeError(2);
         }
@@ -114,7 +131,7 @@ function userValidations(){
     function validateConfirmPassword(){
         checkEmptyInput(3);
         if(validateInputs[3].value.length === 0){
-            removeError(3);
+            removeError(3); // Remove error if the input is empty
         } else if(validateInputs[2].value !== validateInputs[3].value){
             setError(3, "As senhas <span class='mainError'>não coincidem.</span>");
         } else{
