@@ -5,6 +5,9 @@
 
     if(isset($_POST['logar'])) {
         logIn($conn);
+        if(empty($return['email'])){
+            $loginErrorMsg = "Usuário ou senha não encontrados!";
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -58,6 +61,10 @@
                 <div class="Lo-loginBottom">
                     <button type="submit" class="Lo-loginSubmit confirmBtn" name="logar">Entrar</button>
                     <span class="Lo-goRegister"> Não possui uma conta? <a href="registrar.php">Registre-se</a></span>
+                </div>
+                <?php if(isset($loginErrorMsg)){?>
+                <div class="Lo-errorMessage">
+                    <?php echo $loginErrorMsg;}?>
                 </div>
             </form> 
         </main>

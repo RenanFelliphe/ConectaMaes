@@ -7,12 +7,12 @@
     // Função para registrar um novo usuário
         function signUp($conn){
             $err = array();
-            $nomeRegistro = validateNome(mysqli_real_escape_string($conn, $_POST['nomeUsuarioRegistro']), $err);
-            $emailRegistro = validateEmail($_POST['emailRegistro'], $err);
-            $userRegistro = validateUser(mysqli_real_escape_string($conn, $_POST['userRegistro']),$err);
-            $senhaRegistro = validateSenha($_POST['senhaRegistro'], $_POST['senhaRegistroConfirma'], $err);
-            $dataNascimentoRegistro = validateDate(mysqli_real_escape_string($conn,$_POST['dataNascimentoRegistro']), $err);
-            $telefoneRegistro = validateTelefone(mysqli_real_escape_string($conn, $_POST['telefoneRegistro']), $err);
+            $nomeRegistro = mysqli_real_escape_string($conn, $_POST['nomeUsuarioRegistro']);
+            $emailRegistro = $_POST['emailRegistro'];
+            $userRegistro = mysqli_real_escape_string($conn, $_POST['userRegistro']);
+            $senhaRegistro = $_POST['senhaRegistro'];
+            $dataNascimentoRegistro = mysqli_real_escape_string($conn,$_POST['dataNascimentoRegistro']);
+            $telefoneRegistro = mysqli_real_escape_string($conn, $_POST['telefoneRegistro']);
             $biografiaUsuarioRegistro = mysqli_real_escape_string($conn, $_POST['biografiaUsuarioRegistro']);
             $temaRegistro = mysqli_real_escape_string($conn, $_POST['temaRegistro']);
             $localizacaoRegistro = mysqli_real_escape_string($conn, $_POST['localizacaoRegistro']);
@@ -43,12 +43,12 @@
 
                 if ($executeSignUp) {
                     $userId = mysqli_insert_id($conn);
-                    $insertUser_successful = "<p>Usuário registrado com sucesso!</p>"; //mensagem a ser exibida caso seja inserido com sucesso
+                    $insertUser_successful = "Usuário registrado com sucesso!";
 
                     // Chama a função uploadPFP para fazer o upload da foto de perfil
                     uploadPFP($conn, $userId, $userRegistro);
                 } else {
-                    $mysqli_error = "<p>Erro ao registrar usuário: " . mysqli_error($conn) . "!<p>";
+                    $mysqli_error = "Erro ao registrar usuário: " . mysqli_error($conn) . "!";
                 }
             } else {
                 //salvar error em variaveis pra imprimir no html

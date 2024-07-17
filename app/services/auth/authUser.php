@@ -17,8 +17,6 @@
                 $_SESSION['idUsuario'] = $return['idUsuario'];
                 $_SESSION['active'] = true;
                 header("Location: home.php");
-            }else{
-                $loginErrorMsg = "Usuário ou senha não encontrados!";
             }
         }
     }
