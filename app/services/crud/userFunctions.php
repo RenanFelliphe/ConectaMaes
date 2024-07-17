@@ -43,7 +43,7 @@
 
                 if ($executeSignUp) {
                     $userId = mysqli_insert_id($conn);
-                    $insertUser_successful = "Usuário registrado com sucesso!";
+                    echo "Usuário registrado com sucesso!";
 
                     // Chama a função uploadPFP para fazer o upload da foto de perfil
                     uploadPFP($conn, $userId, $userRegistro);
@@ -51,6 +51,9 @@
                     $mysqli_error = "Erro ao registrar usuário: " . mysqli_error($conn) . "!";
                 }
             } else {
+                foreach($err as $e){
+                    echo "<p>$e</p>";
+                }
                 //salvar error em variaveis pra imprimir no html
             }
             
@@ -80,7 +83,7 @@
             $err = array();
             $nome = !empty($_POST['nomeEdit']) ? mysqli_real_escape_string($conn, $_POST['nomeEdit']) : null;
             $user = !empty($_POST['userEdit']) ? mysqli_real_escape_string($conn, $_POST['userEdit']) : null;
-            $telefone = !empty($_POST['telefoneEdit']) ? validateTelefone(mysqli_real_escape_string($conn, $_POST['telefoneEdit']), $err) : null;
+            $telefone = !empty($_POST['telefoneEdit']) ? mysqli_real_escape_string($conn, $_POST['telefoneEdit']) : null;
             $localizacao = !empty($_POST['localizacaoEdit']) ? mysqli_real_escape_string($conn, $_POST['localizacaoEdit']) : null;
             $biografiaUsuario = !empty($_POST['biografiaUsuarioEdit']) ? mysqli_real_escape_string($conn, $_POST['biografiaUsuarioEdit']) : null;
             $tema = !empty($_POST['temaEdit']) ? mysqli_real_escape_string($conn, $_POST['temaEdit']) : null;
@@ -118,6 +121,9 @@
                 }
             } else {
                 //salvar error em variaveis pra imprimir no html
+                foreach($err as $e){
+                    echo "<p>$e</p>";
+                }
             }
         }
             function editPassword($conn, $userId){
@@ -145,6 +151,9 @@
                     }
                 }else{
                     //salvar error em variaveis pra imprimir no html
+                    foreach($err as $e){
+                        echo "<p>$e</p>";
+                    }
                 }
             }    
     // DELETE ACCOUNT - DELETE
@@ -157,7 +166,8 @@
                     session_unset();
                     session_destroy();
                 }else{
-                    $notPossibleDelete_error = "Não foi possível deletar a conta!";
+                    echo "Não foi possível deletar a conta!";
                 }
             }    
         }
+        

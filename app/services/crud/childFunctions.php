@@ -6,7 +6,7 @@
         function addChild($conn,$idParent){
             $err = array();
             $nomeFilho = mysqli_real_escape_string($conn, $_POST['nomeFilho']);
-            $dataNascimentoFilho = validateDate(mysqli_real_escape_string($conn, $_POST['dataNascimentoFilho']), $err);
+            $dataNascimentoFilho = mysqli_real_escape_string($conn, $_POST['dataNascimentoFilho']);
             $sexoFilho= mysqli_real_escape_string($conn, $_POST['sexo']);
             
             if (empty($err)) {
@@ -44,7 +44,7 @@
                 $err = array();
                 $nomeFilho = !empty($_POST['nomeEditFilho']) ? mysqli_real_escape_string($conn, $_POST['nomeEditFilho']) : null;
                 $sexoFilho = !empty($_POST['sexoEditFilho']) ? mysqli_real_escape_string($conn, $_POST['sexoEditFilho']) : null;
-                $dataNascimentoFilho = !empty($_POST['dataNascimentoEditFilho']) ? validateDate(mysqli_real_escape_string($conn, $_POST['dataNascimentoEdit']), $err) : null;
+                $dataNascimentoFilho = !empty($_POST['dataNascimentoEditFilho']) ? mysqli_real_escape_string($conn, $_POST['dataNascimentoEdit']) : null;
 
                 if(empty($err)){
                     $fields = [];
