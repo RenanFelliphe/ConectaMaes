@@ -74,7 +74,7 @@
                         <i class="bi bi-chevron-right"></i>
                     </a>
 
-                    <a class="Se-sectionTitle" href="<?php echo $relativeServicesPath; ?>/helpers/logOut.php">
+                    <a class="Se-sectionTitle" href="../../index.php">
                         <div>
                             <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/conectamaes_icon.png" class="pageIcon" alt="Ícone de usuário">
                             <p> Sobre o ConectaMães</p>
