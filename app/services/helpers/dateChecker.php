@@ -52,3 +52,9 @@
         }
     }
 
+    function dateMessage($data){
+        $dt = new DateTime($data);
+        $dataFormatada = $dt->format('d/m/Y');
+        return $dataFormatada;
+    }
+

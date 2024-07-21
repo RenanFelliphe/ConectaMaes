@@ -6,6 +6,7 @@
     $verify = isset($_SESSION['active']) ? true : header("Location:" . $relativePublicPath . "/login.php");
     require_once "../../app/services/crud/userFunctions.php"; 
     require_once "../../app/services/auth/authUser.php";
+    require_once "../../app/services/helpers/dateChecker.php";
     $table = "Usuario";
     $currentUserData = queryUserData($conn, $table, $_SESSION['idUsuario']);   
 ?>
@@ -205,7 +206,13 @@
                         }
                     ?>
                             
-                    <span class="Se-dateCriation"> Criado em: <span class="Se-accountDate">28/05/2024</span></span>
+                    <span class="Se-dateCriation"> Criado em: 
+                        <span class="Se-accountDate">
+                            <?php 
+                                echo dateMessage($currentUserData['dataCriacaoUsuario']);
+                            ?>
+                        </span>
+                    </span>
                 </form>
 
                 <div class="Se-childInformations Se-subSection">

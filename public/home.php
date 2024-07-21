@@ -70,59 +70,53 @@
                 </form>
 
                 <?php
-                    $count = 0;
-
-                    // Consulta inicial para obter todas as publicações usando a função fornecida
-                    $publicacoes = queryMultiplePosts($conn, "tipoPublicacao <> 'Auxilio'", "dataCriacaoPublicacao DESC");
-
+                    $publicacoes = queryPostsAndUserData($conn,'');
                     if (count($publicacoes) > 0) {
-                        // Loop para mostrar publicações
+                        $count = 0;
                         foreach ($publicacoes as $dadosPublicacao) {
-                            $postOwner = queryUserData($conn, "Usuario", $dadosPublicacao["idUsuario"]);
-
                             // Verificar se o link da foto de perfil está presente
-                            $profileImage = !empty($postOwner['linkFotoPerfil']) ? $postOwner['linkFotoPerfil'] : 'caminho/padrao/para/imagem.png';
-
+                            $profileImage = !empty($dadosPublicacao['linkFotoPerfil']) ? $dadosPublicacao['linkFotoPerfil'] : 'caminho/padrao/para/imagem.png';
+                    
                             // Formatar a data da publicação utilizando a função do arquivo dateChecker.php
                             $mensagemData = postDateMessage($dadosPublicacao["dataCriacaoPublicacao"]);
                             ?>
                             <article class="Ho-post">
                                 <div class="postOwnerImage">
-                                    <img src="<?php echo $relativeAssetsPath."/imagens/fotos/perfil/".$postOwner['linkFotoPerfil'];?>">
+                                    <img src="<?php echo $relativeAssetsPath."/imagens/fotos/perfil/".$dadosPublicacao['linkFotoPerfil'];?>">
                                 </div>
-
+                    
                                 <div class="postContent">
                                     <div class="postTimelineTop">
                                         <div class="postUserNames">
                                             <p class="postOwnerName">
                                                 <?php 
-                                                    $partesDoNomeCompletoOwner = explode(" ", $postOwner['nomeCompleto']);
+                                                    $partesDoNomeCompletoOwner = explode(" ", $dadosPublicacao['nomeCompleto']);
                                                     $firstNameOwner = $partesDoNomeCompletoOwner[0];
                                                     $lastNameOwner = $partesDoNomeCompletoOwner[count($partesDoNomeCompletoOwner) - 1];
-                                                    $firstAndLastNameOwner = $firstNameOwner . " " . $lastNameOwner;// Concatena a primeira e a última palavra separadas por um espaço
-                                                    echo htmlspecialchars( $firstAndLastNameOwner); 
+                                                    $firstAndLastNameOwner = $firstNameOwner . " " . $lastNameOwner; // Concatena a primeira e a última palavra separadas por um espaço
+                                                    echo htmlspecialchars($firstAndLastNameOwner); 
                                                 ?>
                                             </p>
                                             <p class="postOwnerUser">
-                                                <?php echo '@' . htmlspecialchars($postOwner['nomeDeUsuario']); ?>
+                                                <?php echo '@' . htmlspecialchars($dadosPublicacao['nomeDeUsuario']); ?>
                                             </p>
                                         </div>
-
+                    
                                         <div class="postInfo">
                                             <ul class="postDate"><li><?php echo htmlspecialchars($mensagemData); ?></li></ul>
                                             <div class="bi bi-three-dots postMoreButton"></div>
                                         </div>
                                     </div>
-
+                    
                                     <div class="postTitles">  
                                         <p class="postTitle"><?php echo htmlspecialchars($dadosPublicacao['titulo']); ?></p>
                                         <p class="textPost"><?php echo htmlspecialchars($dadosPublicacao['conteudo']); ?></p>
                                     </div>
-
+                    
                                     <div class="postTimelineBottom">
                                         <div class="postLikes">
                                             <i class="bi bi-heart-fill"></i>
-                                            <p>0</p>
+                                            <p><?php echo htmlspecialchars($dadosPublicacao['totalLikes']); ?></p>
                                         </div>
                                         <div class="postComments">
                                             <i class="bi bi-chat-fill"></i>
@@ -131,24 +125,18 @@
                                     </div>
                                 </div>
                             </article>
-
                             <?php
                             $count++;
-
-                            /* A cada 50 publicações, mostrar "sugestões"
-                                if ($count % 50 == 0) {
-                                    echo "Sugestões<br><br>";
-                                }
-                            */
+                            // A cada 50 publicações, mostrar "sugestões"
+                            /* if ($count % 50 == 0) {
+                                echo "Sugestões<br><br>";
+                            } */
                         }
-
-                        //criar html para 
                         echo "FIM...<br>";
                     } else {
-                        //criar html para 
                         echo "Nenhuma publicação encontrada<br>";
                     }
-                ?>
+                    ?>
 
 
             </section>
@@ -164,7 +152,7 @@
                     <a href="">Suporte</a>
                     <a href="">Termos de Privacidade</a>
                     <a href="">CEFET-MG</a>
-                    <h4> 2024 ConectaMães do CEFET-MG</h4>
+                    <h4>ConectaMães do CEFET-MG | 2024</h4>
                 </div>
             </section>
         </main>

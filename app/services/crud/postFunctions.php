@@ -31,17 +31,58 @@
 
             return $sUReturn;
         }
-            function queryMultiplePosts($conn, $where = 1, $order = ""){
-                if(!empty($order)){
-                    $order = "ORDER BY $order";
-                }
-
-                $gQuery = "SELECT * FROM Publicacao WHERE $where $order ";
-                $gExec = mysqli_query($conn,$gQuery);
-                $gReturn = mysqli_fetch_all($gExec, MYSQLI_ASSOC);
-
-                return $gReturn;
+        function queryPostsAndUserData($conn, $postType) {
+            if (empty($postType)) {
+                $query = "
+                    SELECT 
+                        p.idPublicacao, 
+                        p.tipoPublicacao, 
+                        p.conteudo, 
+                        p.titulo, 
+                        p.dataCriacaoPublicacao, 
+                        u.idUsuario, 
+                        u.nomeCompleto, 
+                        u.nomeDeUsuario, 
+                        u.linkFotoPerfil,
+                        u.estado,
+                        (SELECT COUNT(*) FROM curtirPublicacao c WHERE c.idPublicacao = p.idPublicacao) as totalLikes
+                    FROM 
+                        Publicacao p
+                    JOIN 
+                        Usuario u ON p.idUsuario = u.idUsuario
+                    WHERE 
+                        p.tipoPublicacao <> 'Auxilio'
+                    ORDER BY 
+                        p.dataCriacaoPublicacao DESC
+                ";
+            } else {
+                $query = "
+                    SELECT 
+                        p.idPublicacao, 
+                        p.tipoPublicacao, 
+                        p.conteudo, 
+                        p.titulo, 
+                        p.dataCriacaoPublicacao, 
+                        u.idUsuario, 
+                        u.nomeCompleto, 
+                        u.nomeDeUsuario, 
+                        u.linkFotoPerfil,
+                        u.estado,
+                        (SELECT COUNT(*) FROM curtirPublicacao c WHERE c.idPublicacao = p.idPublicacao) as totalLikes
+                    FROM 
+                        Publicacao p
+                    JOIN 
+                        Usuario u ON p.idUsuario = u.idUsuario
+                    WHERE 
+                        p.tipoPublicacao = '$postType'
+                    ORDER BY 
+                        p.dataCriacaoPublicacao DESC
+                ";
             }
+            
+            $result = mysqli_query($conn, $query);
+            return mysqli_fetch_all($result, MYSQLI_ASSOC);
+        }
 
     // DELETE POST - DELETE
         function deletePost($conn, $id){

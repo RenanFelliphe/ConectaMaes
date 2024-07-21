@@ -38,43 +38,42 @@
             </section>
                 <section class="Au-allAuxilios">
                     <?php
-                        $count = 0;
-                        // Consulta inicial para obter todas as publicações usando a função fornecida
-                        $auxilios = queryMultiplePosts($conn, "tipoPublicacao = 'Auxilio'", "dataCriacaoPublicacao DESC");
-
+                        $auxilios = queryPostsAndUserData($conn, 'Auxilio');
                         if (count($auxilios) > 0) {
-                            
-                            foreach ($auxilios as $dadosPublicacao) {// Loop para mostrar publicações
-                                $postOwner = queryUserData($conn, "Usuario", $dadosPublicacao["idUsuario"]);                               
-                                $profileImage = !empty($postOwner['linkFotoPerfil']) ? $postOwner['linkFotoPerfil'] : 'caminho/padrao/para/imagem.png'; // Verificar se o link da foto de perfil está presente
-                                $mensagemData = postDateMessage($dadosPublicacao["dataCriacaoPublicacao"]);// Formatar a data da publicação utilizando a função do arquivo dateChecker.php
+                            $count = 0;
+                            foreach ($auxilios as $dadosPublicacao) {
+                                // Verificar se o link da foto de perfil está presente
+                                $profileImage = !empty($dadosPublicacao['linkFotoPerfil']) ? $dadosPublicacao['linkFotoPerfil'] : 'caminho/padrao/para/imagem.png';
+                        
+                                // Formatar a data da publicação utilizando a função do arquivo dateChecker.php
+                                $mensagemData = postDateMessage($dadosPublicacao["dataCriacaoPublicacao"]);
                                 ?>
                                 <article class="Au-auxilioCard" onclick="openAuxilioModal();">
                                     <ul class="postDate"><li><?php echo htmlspecialchars($mensagemData); ?></li></ul>
-
+                        
                                     <div class="postTimelineTop">
                                         <div class="postOwnerImage">
-                                            <img src="<?php echo $relativeAssetsPath."/imagens/fotos/perfil/".$postOwner['linkFotoPerfil'];?>">
+                                            <img src="<?php echo $relativeAssetsPath."/imagens/fotos/perfil/".$dadosPublicacao['linkFotoPerfil'];?>">
                                         </div>
-
+                        
                                         <div class="postUserNames">
                                             <p class="postOwnerName">
                                                 <?php 
-                                                    $partesDoNomeCompletoOwner = explode(" ", $postOwner['nomeCompleto']);
+                                                    $partesDoNomeCompletoOwner = explode(" ", $dadosPublicacao['nomeCompleto']);
                                                     $firstNameOwner = $partesDoNomeCompletoOwner[0];
                                                     $lastNameOwner = $partesDoNomeCompletoOwner[count($partesDoNomeCompletoOwner) - 1];
                                                     $firstAndLastNameOwner = $firstNameOwner . " " . $lastNameOwner;// Concatena a primeira e a última palavra separadas por um espaço
-                                                    echo htmlspecialchars( $firstAndLastNameOwner); 
+                                                    echo htmlspecialchars($firstAndLastNameOwner); 
                                                 ?>
                                             </p>
                                             <p class="postOwnerUser">
-                                                <?php echo '@' . htmlspecialchars($postOwner['nomeDeUsuario']); ?>
+                                                <?php echo '@' . htmlspecialchars($dadosPublicacao['nomeDeUsuario']); ?>
                                             </p>
                                         </div>
                                     </div>
-
+                        
                                     <p class="postTitle"><?php echo htmlspecialchars($dadosPublicacao['titulo']); ?></p>
-
+                        
                                     <div class="postTimelineBottom">
                                         <div class="postInteractions">
                                             <div class="postLikes">
@@ -86,10 +85,10 @@
                                                 <p>0</p>
                                             </div>
                                         </div>
-
-                                        <button name ="openAuxilio" class="Au-openAuxilio confirmBtn">Auxiliar</button>
+                        
+                                        <button name="openAuxilio" class="Au-openAuxilio confirmBtn">Auxiliar</button>
                                     </div>
-
+                        
                                     <section class="Au-auxilioModalBack close">
                                         <article class="Au-auxilioModal">
                                             <div class="Au-modalHeader">
@@ -97,20 +96,20 @@
                                                 <p class="auxilioTitle"><?php echo htmlspecialchars($dadosPublicacao['titulo']); ?></p>
                                                 <i class="bi bi-x Au-closeModal" onclick="openAuxilioModal()"></i>
                                             </div>
-
+                        
                                             <div class="Au-auxilioUser">
                                                 <div class="postOwnerImage">
-                                                    <img src="<?php echo $relativeAssetsPath."/imagens/fotos/perfil/".$postOwner['linkFotoPerfil'];?>">
+                                                    <img src="<?php echo $relativeAssetsPath."/imagens/fotos/perfil/".$dadosPublicacao['linkFotoPerfil'];?>">
                                                 </div>
-
+                        
                                                 <div class="postUserNames">
-                                                    <p class="postOwnerName"><?php echo htmlspecialchars($postOwner['nomeCompleto']); ?></p>
-                                                    <p class="postOwnerUser"><?php echo htmlspecialchars($postOwner['nomeDeUsuario']); ?></p>
+                                                    <p class="postOwnerName"><?php echo htmlspecialchars($dadosPublicacao['nomeCompleto']); ?></p>
+                                                    <p class="postOwnerUser"><?php echo htmlspecialchars($dadosPublicacao['nomeDeUsuario']); ?></p>
                                                 </div>
-
+                        
                                                 <button name="followUser" class="Au-follow confirmBtn">Seguir</button>
                                             </div>
-
+                        
                                             <p class="Au-textPost"><?php echo htmlspecialchars($dadosPublicacao['conteudo']); ?></p>
                                             
                                             <div class="Au-childPostSection">
@@ -118,15 +117,15 @@
                                                     <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/pram_icon.png" class="pageImageIcon active" alt="Ícone de Criança">
                                                     <p class="Au-childName">Nome da Criança</p>
                                                 </div>
-
+                        
                                                 <div class="postsImages">
                                                     <p>+</p>
                                                 </div>
-
+                        
                                                 <div class="Au-postExtraInfos">
                                                     <div class="Au-extraInfos">
                                                         <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/local_icon.png" class="pageImageIcon active" alt="Ícone de Local">
-                                                        <p><?php echo htmlspecialchars($postOwner['estado']); ?></p>
+                                                        <p><?php echo htmlspecialchars($dadosPublicacao['estado']); ?></p>
                                                     </div>
                                                     <div class="Au-extraInfos">
                                                         <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/pix_icon.png" class="pageImageIcon active" alt="Ícone de Pix">
@@ -142,9 +141,9 @@
                                                     <i class="bi bi-chat-fill"></i>
                                                     <p>0</p>
                                                 </div>
-
+                        
                                                 <h3>Comentários</h3>
-
+                        
                                                 <span></span>
                                                 
                                                 <div class="postComments">
@@ -158,21 +157,18 @@
                                 </article>
                                 <?php
                                 $count++;
-
+                        
                                 /* A cada 50 publicações, mostrar "sugestões"
                                     if ($count % 50 == 0) {
                                         echo "Sugestões<br><br>";
                                     }
                                 */
                             }
-
-                            //criar html para 
                             echo "FIM...<br>";
                         } else {
-                            //criar html para 
                             echo "Nenhuma publicação encontrada<br>";
                         }
-                    ?>
+                        ?>
                 </section>
                 
             </section>
@@ -188,7 +184,7 @@
                     <a href="">Suporte</a>
                     <a href="">Termos de Privacidade</a>
                     <a href="">CEFET-MG</a>
-                    <h4>2024 ConectaMães do CEFET-MG</h4>
+                    <h4>ConectaMães do CEFET-MG | 2024</h4>
                 </div>
         </main>
 
