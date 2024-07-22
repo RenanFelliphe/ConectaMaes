@@ -95,3 +95,13 @@
                 }
             }    
         }
+
+    // LIKES
+        function handlePostLike($idUser, $idPost){
+            //se não curtido, curtir
+                //insere na tabela curtirPublicacao - muda cor do ícone e do texto para a cor do tema
+            //já curtido, descurtir
+                //deleta da tabela curtirPublicacao - volta a cor para cinza
+        }
+
+    // COMMENTS

@@ -1153,13 +1153,15 @@ footer .A-footerRight li.A-footerPolitic h4{
     padding: 0 1.5rem;
 }
 
+.Re-registerForm .Re-registerCenter .Re-registerSections.close{
+    display: none;
+}
+
 .Lo-loginForm .Lo-loginCenter .Lo-loginSections{
     padding: 0 2rem;
 }
 
-.Re-registerForm .Re-registerCenter .Re-registerSections.close{
-    display: none;
-}
+
 
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input,
 .Lo-loginForm .Lo-loginCenter .Lo-userSection .Re-input{

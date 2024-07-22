@@ -76,12 +76,20 @@
 
                     <div class="Re-userInformations Re-registerSections close">
                         <div class="Re-input inputName">
-                            <input class="Re-userInput validate" type="text" id="nomeCompleto" name="nomeUsuarioRegistro" required>
+                            <input class="Re-userInput validate" type="text" id="nomeCompleto" name="nomeUsuarioRegistro" oninput="validateFullName()" required>
                             <label class="Re-fakePlaceholder" for="nomeCompleto">Nome Completo</label>
+                            <i class="bi bi-info-circle-fill errorIcon"></i>
+                            <div class="errorMessageContainer">
+                                <div class="errorMessageContent"></div>
+                            </div>
                         </div>
                         <div class="Re-input inputCell">
-                            <input class="Re-userInput validate" type="text" id="telefone" name="telefoneRegistro" required />
+                            <input class="Re-userInput validate" type="text" id="telefone" name="telefoneRegistro" oninput="validatePhone()" required />
                             <label class="Re-fakePlaceholder" for="telefone">Telefone</label>
+                            <i class="bi bi-info-circle-fill errorIcon"></i>
+                            <div class="errorMessageContainer">
+                                <div class="errorMessageContent"></div>
+                            </div>
                         </div>
                         <div class="Re-input inputDataNasc">
                             <input class="Re-userInput validate" type="text" id="dataNascimento" name="dataNascimentoRegistro">
@@ -190,7 +198,12 @@
         ?>
 
         <script src="<?php echo $relativeAssetsPath; ?>/js/system.js"></script>
-        <script>        
+        <script>  
+            document.addEventListener('DOMContentLoaded', function() {
+                registerUser();
+                userValidations();
+            });
+
             document.querySelectorAll('.Re-userInput').forEach(input => {
                 const updateInfo = (event) => {
                     const inputId = event.target.id;
@@ -205,10 +218,183 @@
                 }
             });
 
-            document.addEventListener('DOMContentLoaded', function() {
-                registerUser();
-                userValidations();
-            });
+            function userValidations(){
+                const validateInputs = document.querySelectorAll('.validate');
+                const inputContainers = document.querySelectorAll('.Re-input');
+                const placeholders = document.querySelectorAll('.Re-fakePlaceholder');
+                const errorMessageContainers = document.querySelectorAll('.errorMessageContainer');
+                const errorMessageContent = document.querySelectorAll('.errorMessageContent');
+                const errorIcon = document.querySelectorAll('.errorIcon');
+
+                function setError(index, message){
+                    inputContainers[index].style.border = "2px solid var(--redColor)";
+                    placeholders[index].style.color = "var(--redColor)";
+                    errorMessageContent[index].innerHTML = `<i class="bi bi-x-circle-fill mainError"></i><span class="errorMessage">${message}</span>`;
+                    errorMessageContent[index].style.display = "flex";
+                    errorIcon[index].style.display = "block";
+
+                    function toggleErrorModal(index, show) {
+                        errorMessageContainers[index].style.display = show ? 'flex' : 'none';
+                    }
+
+                    errorIcon.forEach((icon, idx) => {
+                        if (idx === index) {
+                            icon.addEventListener('mouseover', () => {
+                                toggleErrorModal(index, true);
+                            });
+
+                            icon.addEventListener('mouseout', () => {
+                                toggleErrorModal(index, false);
+                            });
+                        }
+                    });
+                }
+
+                function removeError(index){
+                    inputContainers[index].style.border = "2px solid transparent";
+                    placeholders[index].style.color = "var(--secondColor)";
+                    errorMessageContent[index].innerHTML = '';
+                    errorIcon[index].style.display = "none";
+                }
+
+                function checkEmptyInput(index){
+                    if(validateInputs[index].value !== ""){
+                        placeholders[index].classList.add('notEmpty');
+                        inputContainers[index].style.opacity = "1";
+                    } else {
+                        placeholders[index].classList.remove('notEmpty');
+                        inputContainers[index].style.opacity = "0.5";
+                        removeError(index);
+                    }
+                }
+
+                function validateName(){
+                    const username = validateInputs[0].value;
+
+                    checkEmptyInput(0);
+                    if(username.length === 0){
+                        removeError(0);
+                    } else if(username.length <= 3){
+                        setError(0, "O nome de usuário deve ter mais de <span class='mainError'>3 caracteres.</span>");
+                    } else if(username.length > 50){
+                        setError(0, "O nome de usuário é <span class='mainError'>longo demais.</span>");
+                        username = username.slice(0, 50);
+                    } else if(/[áàâãäéèêëíìîïóòôõöúùûü]/i.test(username)){
+                        setError(0, "O nome de usuário não pode ter <span class='mainError'>acentos.</span>");
+                    } else if(/[ç]/i.test(username)){
+                        setError(0, "O nome de usuário não pode ter <span class='mainError'>cedilha.</span>");
+                    } else if(/[-]/.test(username)){
+                        setError(0, "O nome de usuário não pode ter <span class='mainError'>hífens.</span>");
+                    } else if(/\s/.test(username)){
+                        setError(0, "O nome de usuário não pode ter <span class='mainError'>espaços.</span>");
+                    } else if(/[^a-zA-Z0-9_]/.test(username)){
+                        setError(0, "O nome de usuário não pode ter <span class='mainError'>caracteres especiais exceto underline (_).</span>");
+                    } else {
+                        removeError(0);
+                    }
+                }
+
+                function validateEmail() {
+                    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+                    const email = validateInputs[1].value;
+                    checkEmptyInput(1);
+
+                    if(email.length === 0){
+                        removeError(1);
+                    } else if (!emailRegex.test(email)) {
+                        setError(1, "Insira um <span class='mainError'>e-mail válido.</span>");
+                    } else if (email.length > 256) {
+                        setError(1, "O e-mail é <span class='mainError'>longo demais.</span>");
+                        email = email.slice(0, 256);
+                    } else {
+                        removeError(1);
+                    }
+                }    
+
+                function validatePassword() {
+                    const password = validateInputs[2].value;
+                    const hasUpperCase = /[A-Z]/.test(password);
+                    const hasLowerCase = /[a-z]/.test(password);
+                    const hasDigit = /\d/.test(password);
+                    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+                    checkEmptyInput(2);
+                    validateConfirmPassword();
+
+                    if(password.length === 0){
+                        removeError(2);
+                    } else if (password.length < 8) {
+                        setError(2, "A senha deve ter mais de <span class='mainError'>8 caracteres.</span>");
+                    } else if (!hasUpperCase) {
+                        setError(2, "A senha deve conter <span class='mainError'>letras maiúsculas.</span>");
+                    } else if (!hasLowerCase) {
+                        setError(2, "A senha deve conter <span class='mainError'>letras minúsculas.</span>");
+                    } else if (!hasDigit) {
+                        setError(2, "A senha deve conter <span class='mainError'>números.</span>");
+                    } else if (!hasSpecialChar) {
+                        setError(2, "A senha deve conter caracteres especiais <span class='mainError'>(!@#$%^&*).</span>");
+                    } else if (password.length > 100) {
+                        setError(2, "A senha é <span class='mainError'>longa demais.</span>");
+                        password = password.slice(0, 100);
+                    } else {
+                        removeError(2);
+                    }
+                }
+
+                function validateConfirmPassword(){
+                    const confirmPassword = validateInputs[3].value;
+                    const password = validateInputs[2].value;
+
+                    checkEmptyInput(3);
+                    if(confirmPassword.length === 0){
+                        removeError(3);
+                    } else if(password !== confirmPassword){
+                        setError(3, "As senhas <span class='mainError'>não coincidem.</span>");
+                    } else{
+                        removeError(3);
+                    }
+                }
+                
+                function validateFullName() {
+                    const fullName = validateInputs[4].value;
+                
+                    checkEmptyInput(4);
+                    if (fullName.length === 0) {
+                        removeError(4);
+                    } else if (/\d/.test(fullName)) {
+                        setError(4, "O nome completo não pode possuir <span class='mainError'>números.</span>");
+                    } else if (/[^a-zA-Z\s]/.test(fullName)) {
+                        setError(4, "O nome completo não pode conter <span class='mainError'>caracteres especiais.</span>");
+                    } else if (!/^(\w+\s\w+.*)$/.test(fullName)) {
+                        setError(4, "Insira o <span class='mainError'>nome completo.</span> (pelo menos 2 palavras separadas por espaço)");
+                    } else if (fullName.length > 100) {
+                        setError(4, "O nome completo é <span class='mainError'>longo demais.</span>");
+                    } else {
+                        removeError(4);
+                    }
+                }
+
+                function validatePhone() {
+                    const phone = validateInputs[5].value;
+                    const phoneRegex = /^\d{10,11}$/; // Aceita números com 10 ou 11 dígitos
+
+                    checkEmptyInput(5);
+                    if (phone.length === 0) {
+                        removeError(5);
+                    } else if (!phoneRegex.test(phone)) {
+                        setError(5, "Insira um <span class='mainError'>telefone válido.</span>");
+                    } else {
+                        removeError(5);
+                    }
+                }
+
+                validateInputs[0].addEventListener('input', validateName);
+                validateInputs[1].addEventListener('input', validateEmail);
+                validateInputs[2].addEventListener('input', validatePassword);
+                validateInputs[3].addEventListener('input', validateConfirmPassword);
+                validateInputs[4].addEventListener('input', validateFullName);
+                validateInputs[5].addEventListener('input', validatePhone);
+            }
         </script>
     </body>
 </html>
