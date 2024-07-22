@@ -113,16 +113,16 @@
                                         <p class="textPost"><?php echo htmlspecialchars($dadosPublicacao['conteudo']); ?></p>
                                     </div>
                     
-                                    <div class="postTimelineBottom">
-                                        <div class="postLikes">
-                                            <i class="bi bi-heart-fill" type ="submit"></i>
+                                    <form class="postTimelineBottom" method='post'>
+                                        <button class="postLikes" type="submit">
+                                            <i class="bi bi-heart-fill"></i>
                                             <p><?php echo htmlspecialchars($dadosPublicacao['totalLikes']); ?></p>
-                                        </div>
-                                        <div class="postComments">
+                                        </button>
+                                        <button class="postComments"type ="submit">
                                             <i class="bi bi-chat-fill"></i>
                                             <p>0</p>
-                                        </div>
-                                    </div>
+                                        </button>
+                                    </form>
                                 </div>
                             </article>
                             <?php

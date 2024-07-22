@@ -39,7 +39,7 @@
                             </div>
                         </div>
 
-                        <div class="Re-input inputName">
+                        <div class="Re-input inputeMAIL">
                             <input class="Re-userInput validate" type="email" id="email" name="emailRegistro" autocomplete="email" oninput="validateEmail()" required>
                             <label class="Re-fakePlaceholder" for="email">E-mail</label>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
@@ -97,7 +97,7 @@
                             </div>
                         </div>
                         <div class="Re-input inputDataNasc">
-                            <input class="Re-userInput validate" type="text" id="dataNascimento" name="dataNascimentoRegistro">
+                            <input class="Re-userInput validate" type="date" id="dataNascimento" name="dataNascimentoRegistro">
                             <label class="Re-fakePlaceholder notEmpty" id="dataNascPlaceholder" for="dataNascimento">Data de Nascimento</label>
                         </div>
                         <div class="Re-input inputLocal">
@@ -204,11 +204,6 @@
 
         <script src="<?php echo $relativeAssetsPath; ?>/js/system.js"></script>
         <script>  
-            document.addEventListener('DOMContentLoaded', function() {
-                registerUser();
-                userValidations();
-            });
-
             document.querySelectorAll('.Re-userInput').forEach(input => {
                 const updateInfo = (event) => {
                     const inputId = event.target.id;
@@ -223,7 +218,7 @@
                 }
             });
 
-            userValidations();
+            
 
             function userValidations(){
                 const validateInputs = document.querySelectorAll('.validate');
@@ -412,51 +407,38 @@
                 const nextButton = document.querySelector('.Re-registerNext');
                 const backButton = document.querySelector('.Re-backButton');
                 const submitButton = document.querySelector('.Re-registerSubmit');
-                
+
                 let currentSectionIndex = 0;
-                
+
                 function updateButtonVisibility() {
-                    if (currentSectionIndex > 0) {
-                        backButton.classList.remove('close');
-                    } else {
-                        backButton.classList.add('close');
-                    }
-
-                    if (currentSectionIndex === registerSections.length - 1) {
-                        nextButton.classList.add('close');
-                    } else {
-                        nextButton.classList.remove('close');
-                    }
-
-                    if (currentSectionIndex === registerSections.length - 1) {
-                        submitButton.classList.remove('close');
-                    } else {
-                        submitButton.classList.add('close');
-                    }
+                    backButton.classList.toggle('close', currentSectionIndex === 0);
+                    nextButton.classList.toggle('close', currentSectionIndex === registerSections.length - 1);
+                    submitButton.classList.toggle('close', currentSectionIndex !== registerSections.length - 1);
                 }
 
-                updateButtonVisibility();
+                function showSection(index) {
+                    registerSections[currentSectionIndex].classList.add('close');
+                    registerSections[index].classList.remove('close');
+                    currentSectionIndex = index;
+                    updateButtonVisibility();
+                }
+
 
                 nextButton.addEventListener('click', () => {
                     if (currentSectionIndex < registerSections.length - 1) {
-                        registerSections[currentSectionIndex].classList.toggle('close');
-                        registerSections[currentSectionIndex + 1].classList.toggle('close');
-                        currentSectionIndex++;
-                        updateButtonVisibility();
+                        showSection(currentSectionIndex + 1);
                     }
                 });
 
                 backButton.addEventListener('click', () => {
                     if (currentSectionIndex > 0) {
-                        registerSections[currentSectionIndex].classList.toggle('close');
-                        registerSections[currentSectionIndex - 1].classList.toggle('close');
-                        currentSectionIndex--;
-                        updateButtonVisibility();
+                        showSection(currentSectionIndex - 1);
                     }
                 });
             }
 
-            toggleRegisterSections()
+            userValidations();
+            toggleRegisterSections();
         </script>
     </body>
 </html>
