@@ -73,8 +73,21 @@
             include_once("../app/includes/footer.php");
         ?>
         
-        <script src="../app/assets/js/system.js">
-            
+        <script src="../app/assets/js/system.js"></script>
+        <script>  
+            function checkEmptyInputLogin(index) {
+                const loginInputs = document.querySelectorAll('.Lo-loginForm .Re-userInput');
+                const loginContainers = document.querySelectorAll('.Lo-loginForm .Re-input');
+                const loginPlaceholders = document.querySelectorAll('.Lo-loginForm .Re-fakePlaceholder');
+                
+                if (loginInputs[index].value !== "") {
+                    loginPlaceholders[index].classList.add('notEmpty');
+                    loginContainers[index].style.opacity = "1";
+                } else {
+                    loginPlaceholders[index].classList.remove('notEmpty');
+                    loginContainers[index].style.opacity = "0.5";
+                }
+            }            
         </script>
     </body>
 </html>

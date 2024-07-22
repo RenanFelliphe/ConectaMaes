@@ -115,7 +115,7 @@
                     
                                     <div class="postTimelineBottom">
                                         <div class="postLikes">
-                                            <i class="bi bi-heart-fill"></i>
+                                            <i class="bi bi-heart-fill" type ="submit"></i>
                                             <p><?php echo htmlspecialchars($dadosPublicacao['totalLikes']); ?></p>
                                         </div>
                                         <div class="postComments">

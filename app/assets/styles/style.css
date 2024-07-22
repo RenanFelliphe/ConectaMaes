@@ -1094,30 +1094,30 @@ footer .A-footerRight li.A-footerPolitic h4{
     color: var(--thirdColor);
 }
 
-.Lo-loginForm .Lo-loginHeader .Lo-backButton,
-.Re-registerForm .Re-registerHeader .Re-backButton{
+.Lo-loginForm .Lo-backButton,
+.Re-registerForm .Re-backButton{
     position: absolute;
-    left: -3.5rem;
-    top: -2rem;
+    left: 2rem;
+    top: 2rem;
     font-size: 1.5rem;  
     cursor: pointer;
     transition: 0.2s;
     color: var(--secondColor);
 }
 
-.Lo-loginForm .Lo-loginHeader .Lo-backButton{
+.Lo-loginForm .Lo-backButton{
     left: -0;
     top: -2rem;
 }
 
-.Lo-loginForm .Lo-loginHeader .Lo-backButton:hover,
-.Re-registerForm .Re-registerHeader .Re-backButton:hover{
+.Lo-loginForm .Lo-backButton:hover,
+.Re-registerForm .Re-backButton:hover{
     transform: scale(1.2);    
     transition: 0.2s;
 }
 
-.Lo-loginForm .Lo-loginHeader .Lo-backButton.close,
-.Re-registerForm .Re-registerHeader .Re-backButton.close{
+.Lo-loginForm .Lo-backButton.close,
+.Re-registerForm .Re-backButton.close{
     display: none;
 }
 
@@ -1440,7 +1440,7 @@ footer .A-footerRight li.A-footerPolitic h4{
     display: flex;
     gap: 10px;
     font-size: 0.8rem;
-    bottom: -16.5vh;
+    bottom: -150%;
 }
 
 .Re-registerResult .Re-addImageProfile {

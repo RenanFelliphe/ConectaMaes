@@ -20,8 +20,9 @@
             <img src="" class="backCells cellsLeft">
 
             <form class="Re-registerForm" id="registerForm" method="post" enctype="multipart/form-data">
+                <i class="bi bi-arrow-left-circle Re-backButton close"></i>
+
                 <div class="Re-registerHeader">
-                    <i class="bi bi-arrow-left-circle Re-backButton close"></i>
                     <h1 class="Re-registerTitle"> Registro </h1>
                     <p>Venha logo fazer parte desta comunidade!</p>
                 </div>
@@ -37,6 +38,7 @@
                                 <div class="errorMessageContent"></div>
                             </div>
                         </div>
+
                         <div class="Re-input inputName">
                             <input class="Re-userInput validate" type="email" id="email" name="emailRegistro" autocomplete="email" oninput="validateEmail()" required>
                             <label class="Re-fakePlaceholder" for="email">E-mail</label>
@@ -45,6 +47,7 @@
                                 <div class="errorMessageContent"></div>
                             </div>
                         </div>
+
                         <div class="Re-input inputPassword">
                             <input class="Re-userInput validate" type="password" id="senha" name="senhaRegistro" oninput="validatePassword()" required>
                             <label class="Re-fakePlaceholder" for="senha">Senha</label>
@@ -53,6 +56,7 @@
                                 <div class="errorMessageContent"></div>
                             </div>
                         </div>
+
                         <div class="Re-input inputConfirmPassword">
                             <input class="Re-userInput validate" type="password" id="confirmarSenha" name="senhaRegistroConfirma" oninput="validateConfirmPassword()" required>
                             <label class="Re-fakePlaceholder" for="confirmarSenha">Confirmar Senha</label>
@@ -61,6 +65,7 @@
                                 <div class="errorMessageContent"></div>
                             </div>
                         </div>
+
                         <div class="Re-themeInfo">
                             <p> Tema </p>
                             <div class="Re-themeOptions">
@@ -84,7 +89,7 @@
                             </div>
                         </div>
                         <div class="Re-input inputCell">
-                            <input class="Re-userInput validate" type="text" id="telefone" name="telefoneRegistro" oninput="validatePhone()" required />
+                            <input class="Re-userInput validate" type="number" id="telefone" name="telefoneRegistro" oninput="validatePhone()" required />
                             <label class="Re-fakePlaceholder" for="telefone">Telefone</label>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
                             <div class="errorMessageContainer">
@@ -218,6 +223,8 @@
                 }
             });
 
+            userValidations();
+
             function userValidations(){
                 const validateInputs = document.querySelectorAll('.validate');
                 const inputContainers = document.querySelectorAll('.Re-input');
@@ -232,6 +239,8 @@
                     errorMessageContent[index].innerHTML = `<i class="bi bi-x-circle-fill mainError"></i><span class="errorMessage">${message}</span>`;
                     errorMessageContent[index].style.display = "flex";
                     errorIcon[index].style.display = "block";
+
+                    inputContainers[index].classList.add('withError');
 
                     function toggleErrorModal(index, show) {
                         errorMessageContainers[index].style.display = show ? 'flex' : 'none';
@@ -255,6 +264,8 @@
                     placeholders[index].style.color = "var(--secondColor)";
                     errorMessageContent[index].innerHTML = '';
                     errorIcon[index].style.display = "none";
+
+                    inputContainers[index].classList.remove('withError');
                 }
 
                 function checkEmptyInput(index){
@@ -376,7 +387,7 @@
 
                 function validatePhone() {
                     const phone = validateInputs[5].value;
-                    const phoneRegex = /^\d{10,11}$/; // Aceita números com 10 ou 11 dígitos
+                    const phoneRegex = /^\d{10,11}$/;
 
                     checkEmptyInput(5);
                     if (phone.length === 0) {
@@ -395,6 +406,57 @@
                 validateInputs[4].addEventListener('input', validateFullName);
                 validateInputs[5].addEventListener('input', validatePhone);
             }
+
+            function toggleRegisterSections() {
+                const registerSections = document.querySelectorAll('.Re-registerSections');
+                const nextButton = document.querySelector('.Re-registerNext');
+                const backButton = document.querySelector('.Re-backButton');
+                const submitButton = document.querySelector('.Re-registerSubmit');
+                
+                let currentSectionIndex = 0;
+                
+                function updateButtonVisibility() {
+                    if (currentSectionIndex > 0) {
+                        backButton.classList.remove('close');
+                    } else {
+                        backButton.classList.add('close');
+                    }
+
+                    if (currentSectionIndex === registerSections.length - 1) {
+                        nextButton.classList.add('close');
+                    } else {
+                        nextButton.classList.remove('close');
+                    }
+
+                    if (currentSectionIndex === registerSections.length - 1) {
+                        submitButton.classList.remove('close');
+                    } else {
+                        submitButton.classList.add('close');
+                    }
+                }
+
+                updateButtonVisibility();
+
+                nextButton.addEventListener('click', () => {
+                    if (currentSectionIndex < registerSections.length - 1) {
+                        registerSections[currentSectionIndex].classList.toggle('close');
+                        registerSections[currentSectionIndex + 1].classList.toggle('close');
+                        currentSectionIndex++;
+                        updateButtonVisibility();
+                    }
+                });
+
+                backButton.addEventListener('click', () => {
+                    if (currentSectionIndex > 0) {
+                        registerSections[currentSectionIndex].classList.toggle('close');
+                        registerSections[currentSectionIndex - 1].classList.toggle('close');
+                        currentSectionIndex--;
+                        updateButtonVisibility();
+                    }
+                });
+            }
+
+            toggleRegisterSections()
         </script>
     </body>
 </html>
