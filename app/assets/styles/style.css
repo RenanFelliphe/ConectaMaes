@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch&family=Montserrat&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
-*{
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -22,7 +23,7 @@
     --thirdColor: #;
     --thirdColorLowOpacity: #;
     --thirdColorTransparent: #;
-    
+
     /* ============ TEMA AMARELO ============ */
     --pastelYellowColor: #F9EC7C;
     --pastelYellowColorLowOpacity: #F9EC7C80;
@@ -48,7 +49,7 @@
 
     --darkBlueColor: #037180;
     --darkBlueColorLowOpacity: #03718080;
-    --darkBlueColorTransparent: #03718020;  
+    --darkBlueColorTransparent: #03718020;
 
 
     /* ============= TEMA ROSA ============= */
@@ -81,7 +82,7 @@
     /* ============= Variaveis de Substituicao ============= */
 
     --firstColor: #F9EC7C;
-    --firstColorLowOpacity: #F9EC7C80; 
+    --firstColorLowOpacity: #F9EC7C80;
     --firstColorTransparent: #F9EC7C20;
 
     --secondColor: #BDB150;
@@ -120,8 +121,8 @@
 
     --thirdColor: #037180;
     --thirdColorLowOpacity: #03718080;
-    --thirdColorTransparent: #03718020; 
-    
+    --thirdColorTransparent: #03718020;
+
     /* ================== Variaveis Fixas =================== */
 
     --pastelBlueColor: #7DEBFA;
@@ -134,7 +135,7 @@
 
     --darkBlueColor: #037180;
     --darkBlueColorLowOpacity: #03718080;
-    --darkBlueColorTransparent: #03718020;  
+    --darkBlueColorTransparent: #03718020;
 }
 
 .P-theme {
@@ -171,37 +172,37 @@ html {
     scroll-behavior: smooth;
 }
 
-body::-webkit-scrollbar{
+body::-webkit-scrollbar {
     position: relative;
     display: none;
 }
 
-main{
+main {
     position: relative;
     width: 100vw;
     overflow: hidden;
 }
 
-.backCells{
+.backCells {
     position: absolute;
     right: 0;
     top: -4rem;
     width: 19vw;
     min-width: 13rem;
     height: max-content;
-    
+
 }
 
-.backCells.cellsLeft{
+.backCells.cellsLeft {
     left: 0;
     transform: scaleX(-1);
 }
 
-.Ho-iconLabel{
+.Ho-iconLabel {
     color: var(--secondColor);
 }
 
-.pageIcon{
+.pageIcon {
     color: var(--grayColor);
 }
 
@@ -211,16 +212,16 @@ body.P-theme .pageImageIcon:hover {
 }
 
 body.B-theme .pageImageIcon.active,
-body.B-theme .pageImageIcon:hover{
+body.B-theme .pageImageIcon:hover {
     filter: brightness(0) saturate(100%) invert(63%) sepia(81%) saturate(331%) hue-rotate(139deg) brightness(83%) contrast(87%);
 }
 
 body.Y-theme .pageImageIcon.active,
-body.Y-theme .pageImageIcon:hover{
+body.Y-theme .pageImageIcon:hover {
     filter: brightness(0) saturate(100%) invert(66%) sepia(48%) saturate(459%) hue-rotate(16deg) brightness(97%) contrast(85%);
 }
 
-button.confirmBtn{
+button.confirmBtn {
     position: relative;
     display: flex;
     background-color: var(--secondColor);
@@ -235,7 +236,7 @@ button.confirmBtn{
 }
 
 button.confirmBtn.active,
-button.confirmBtn:hover{
+button.confirmBtn:hover {
     transition: 0.3s;
     background-color: var(--whiteColor);
     color: var(--secondColor);
@@ -246,7 +247,7 @@ button.confirmBtn:hover{
 ========================================== HEADER LANDING ============================================
 ====================================================================================================*/
 
-.headerLanding{
+.headerLanding {
     position: sticky;
     top: 0;
     display: flex;
@@ -260,27 +261,27 @@ button.confirmBtn:hover{
 }
 
 
-.headerLanding .A-headerLogo{
+.headerLanding .A-headerLogo {
     width: 10rem;
     cursor: pointer;
 }
 
-.headerLanding .A-headerLinks{
+.headerLanding .A-headerLinks {
     display: flex;
     gap: 2.5rem;
 }
 
-.headerLanding .A-headerLinks h4{
+.headerLanding .A-headerLinks h4 {
     cursor: pointer;
     font-weight: 500;
 }
 
-.headerLanding .A-headerLinks h4 a{
+.headerLanding .A-headerLinks h4 a {
     text-decoration: none;
     color: var(--blackColor);
 }
 
-.headerLanding .A-searchBar{
+.headerLanding .A-searchBar {
     display: flex;
     background-color: #e4e4e4;
     border-radius: 10rem;
@@ -295,7 +296,7 @@ button.confirmBtn:hover{
     border: 1px solid #d1d1d1;
 }
 
-.headerLanding .A-searchBarInput{
+.headerLanding .A-searchBarInput {
     background-color: transparent;
     border: none;
     color: var(--blackColor);
@@ -306,23 +307,23 @@ button.confirmBtn:hover{
 }
 
 .headerLanding .A-searchBar .bi,
-.headerLanding .A-searchBarInput::placeholder{
-    color:var(--blackColor);
-}   
+.headerLanding .A-searchBarInput::placeholder {
+    color: var(--blackColor);
+}
 
-.headerLanding .A-signButtons{
+.headerLanding .A-signButtons {
     display: flex;
     gap: 1rem;
 }
 
-.headerLanding .A-signButtons a{
+.headerLanding .A-signButtons a {
     text-decoration: none;
 }
 
-.headerLanding .A-signButtons h4{
+.headerLanding .A-signButtons h4 {
     display: flex;
     height: 2rem;
-    width: 7rem;    
+    width: 7rem;
     color: var(--secondColor);
     border: 1px solid var(--secondColor);
     border-radius: 10rem;
@@ -330,7 +331,7 @@ button.confirmBtn:hover{
     text-decoration: none;
 }
 
-.headerLanding .A-signButtons .A-signIn{
+.headerLanding .A-signButtons .A-signIn {
     color: var(--whiteColor);
     background-color: var(--secondColor);
 }
@@ -340,7 +341,7 @@ button.confirmBtn:hover{
 ============================================ HEADER HOME =============================================
 ====================================================================================================*/
 
-.headerHome{
+.headerHome {
     position: sticky;
     top: 0;
     display: flex;
@@ -353,22 +354,22 @@ button.confirmBtn:hover{
     z-index: 999;
 }
 
-.headerHome .A-headerLogo{
+.headerHome .A-headerLogo {
     width: 10rem;
     cursor: pointer;
 }
 
-.headerHome .headerIcon{
+.headerHome .headerIcon {
     width: 2rem;
     cursor: pointer;
 }
 
-.headerHome .headerPageLinks{
+.headerHome .headerPageLinks {
     display: flex;
     gap: 3rem;
 }
 
-.headerHome .headerPageLinks .pageLink{
+.headerHome .headerPageLinks .pageLink {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -381,11 +382,11 @@ button.confirmBtn:hover{
 }
 
 .headerHome .headerPageLinks .pageLink.active,
-.headerHome .headerPageLinks .pageLink:hover{
+.headerHome .headerPageLinks .pageLink:hover {
     color: var(--secondColor);
 }
 
-.headerHome .headerPageLinks .pageLink .pageSelector{
+.headerHome .headerPageLinks .pageLink .pageSelector {
     position: absolute;
     width: 150%;
     height: 3px;
@@ -393,7 +394,7 @@ button.confirmBtn:hover{
     border-radius: 100rem;
 }
 
-.headerHome .headerPageLinks .pageLink.active .pageSelector{
+.headerHome .headerPageLinks .pageLink.active .pageSelector {
     background-color: var(--secondColor);
 }
 
@@ -403,27 +404,27 @@ body.P-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon {
 }
 
 body.B-theme .headerHome .headerPageLinks .pageLink.active .headerIcon,
-body.B-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon{
+body.B-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon {
     filter: brightness(0) saturate(100%) invert(63%) sepia(81%) saturate(331%) hue-rotate(139deg) brightness(83%) contrast(87%);
 }
 
 body.Y-theme .headerHome .headerPageLinks .pageLink.active .headerIcon,
-body.Y-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon{
+body.Y-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon {
     filter: brightness(0) saturate(100%) invert(66%) sepia(48%) saturate(459%) hue-rotate(16deg) brightness(97%) contrast(85%);
 }
 
-.headerHome .userContainer{
+.headerHome .userContainer {
     display: flex;
     gap: 0.7rem;
     height: 4rem;
 }
 
-.headerHome .userContainer .notificationsModalIcon{
+.headerHome .userContainer .notificationsModalIcon {
     width: 1.5rem;
     margin-right: 2rem;
 }
 
-.headerHome .userContainer .userInformations{
+.headerHome .userContainer .userInformations {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -432,19 +433,19 @@ body.Y-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon{
     white-space: nowrap;
 }
 
-.headerHome .userContainer .userInformations .userNickname{
+.headerHome .userContainer .userInformations .userNickname {
     font-size: 0.65rem;
     font-weight: 500;
     color: var(--grayColor);
 }
 
-.headerHome .userContainer .userAccount{
+.headerHome .userContainer .userAccount {
     position: relative;
-    width: 3.3rem;  
+    width: 3.3rem;
     height: 3.3rem;
 }
 
-.headerHome .userContainer .userAccount .userProfileImage{
+.headerHome .userContainer .userAccount .userProfileImage {
     position: relative;
     width: 3rem;
     height: 3rem;
@@ -453,15 +454,15 @@ body.Y-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon{
     overflow: hidden;
 }
 
-.headerHome .userContainer .userAccount .userProfileImage img{
+.headerHome .userContainer .userAccount .userProfileImage img {
     position: relative;
     width: 100%;
     height: 100%;
-    cursor: pointer;  
+    cursor: pointer;
     object-fit: cover;
 }
 
-.headerHome .userContainer .userAccount .bi-chevron-down{
+.headerHome .userContainer .userAccount .bi-chevron-down {
     position: absolute;
     display: flex;
     width: 1.2rem;
@@ -476,13 +477,13 @@ body.Y-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon{
     cursor: pointer;
 }
 
-.headerHome .userFunctionsModal{
+.headerHome .userFunctionsModal {
     position: fixed;
     right: 1rem;
     top: 3.95rem;
     height: fit-content;
     padding: 1rem;
-    display: flex;    
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
@@ -491,7 +492,7 @@ body.Y-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon{
     background-color: var(--whiteColor);
 }
 
-.headerHome .userFunctionsModal:after{
+.headerHome .userFunctionsModal:after {
     content: '';
     position: absolute;
     top: 0;
@@ -507,11 +508,11 @@ body.Y-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon{
     opacity: 0.4;
 }
 
-.headerHome .userFunctionsModal.close{
+.headerHome .userFunctionsModal.close {
     display: none;
 }
 
-.headerHome .userFunctionsModal a{
+.headerHome .userFunctionsModal a {
     display: flex;
     justify-content: flex-start;
     gap: 0.5rem;
@@ -527,7 +528,7 @@ body.Y-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon{
     text-decoration: none;
 }
 
-.headerHome .userFunctionsModal span{
+.headerHome .userFunctionsModal span {
     text-align: center;
     position: relative;
     width: 100%;
@@ -537,20 +538,20 @@ body.Y-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon{
     transform: translateX(-50%);
 }
 
-.headerHome .userFunctionsModal span:last-of-type{
+.headerHome .userFunctionsModal span:last-of-type {
     width: 50%;
 }
 
-.headerHome .userFunctionsModal a .pageIcon{
+.headerHome .userFunctionsModal a .pageIcon {
     font-size: 0.9rem;
 }
 
-.headerHome .userContainer .makeAPost{
+.headerHome .userContainer .makeAPost {
     display: flex;
     gap: 0.2rem;
 }
 
-.headerHome .userContainer .makeAPost .makeAPostBtn{
+.headerHome .userContainer .makeAPost .makeAPostBtn {
     background-color: var(--secondColor);
     padding: 0.5rem 0.5rem 0.45rem 1rem;
     border: 2px solid transparent;
@@ -562,7 +563,7 @@ body.Y-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon{
     cursor: pointer;
 }
 
-.headerHome .userContainer .makeAPost .postStyle{
+.headerHome .userContainer .makeAPost .postStyle {
     border: 2px solid transparent;
     background-color: var(--secondColor);
     padding: 0.75rem 0.5rem 0.55rem 0.3rem;
@@ -572,14 +573,14 @@ body.Y-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon{
     cursor: pointer;
 }
 
-.headerHome .userContainer .makeAPost .postStyle .pageIcon{
+.headerHome .userContainer .makeAPost .postStyle .pageIcon {
     color: var(--whiteColor);
 }
 
 .headerHome .userContainer .makeAPost:hover .makeAPostBtn,
 .headerHome .userContainer .makeAPost:hover .postStyle,
 .headerHome .userContainer .makeAPost.active .makeAPostBtn,
-.headerHome .userContainer .makeAPost.active .postStyle{
+.headerHome .userContainer .makeAPost.active .postStyle {
     transition: 0.3s;
     background-color: var(--whiteColor);
     color: var(--secondColor);
@@ -587,22 +588,22 @@ body.Y-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon{
 }
 
 .headerHome .userContainer .makeAPost:hover .postStyle .pageIcon,
-.headerHome .userContainer .makeAPost.active .postStyle .pageIcon{
+.headerHome .userContainer .makeAPost.active .postStyle .pageIcon {
     color: var(--secondColor);
 }
 
-.headerHome .headerModal.close{
+.headerHome .headerModal.close {
     display: none;
 }
 
-.headerHome .userContainer .makeAPostModal{
+.headerHome .userContainer .makeAPostModal {
     position: fixed;
     right: 3.5rem;
     top: 3.95rem;
     height: fit-content;
     width: min-content;
     padding: 1rem;
-    display: flex;    
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
@@ -611,11 +612,11 @@ body.Y-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon{
     background-color: var(--whiteColor);
 }
 
-.headerHome .userContainer .makeAPostModal.close{
+.headerHome .userContainer .makeAPostModal.close {
     display: none;
 }
 
-.headerHome .userContainer .makeAPostModal:after{
+.headerHome .userContainer .makeAPostModal:after {
     content: '';
     position: absolute;
     top: 0;
@@ -631,7 +632,7 @@ body.Y-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon{
     opacity: 0.4;
 }
 
-.headerHome .userContainer .makeAPostModal .modalHeader{
+.headerHome .userContainer .makeAPostModal .modalHeader {
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -639,11 +640,11 @@ body.Y-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon{
     width: 100%;
 }
 
-.headerHome .userContainer .makeAPostModal .modalHeader h1{
+.headerHome .userContainer .makeAPostModal .modalHeader h1 {
     font-size: 1.8rem;
 }
 
-.headerHome .userContainer .makeAPostModal .postStyleSummary{
+.headerHome .userContainer .makeAPostModal .postStyleSummary {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -653,7 +654,7 @@ body.Y-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon{
     cursor: pointer;
 }
 
-.headerHome .userContainer .makeAPostModal .postStyleSummary .postStyleTitle{
+.headerHome .userContainer .makeAPostModal .postStyleSummary .postStyleTitle {
     position: relative;
     display: flex;
     gap: 0.7rem;
@@ -661,7 +662,7 @@ body.Y-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon{
     width: 100%;
 }
 
-.headerHome .userContainer .makeAPostModal .postStyleSummary .postStyleTitle span{
+.headerHome .userContainer .makeAPostModal .postStyleSummary .postStyleTitle span {
     position: relative;
     width: 100%;
     height: 1px;
@@ -669,41 +670,41 @@ body.Y-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon{
     border-radius: 100%;
 }
 
-.headerHome .userContainer .makeAPostModal .postStyleSummary .postStyleTitle span:first-of-type{
+.headerHome .userContainer .makeAPostModal .postStyleSummary .postStyleTitle span:first-of-type {
     width: 2rem;
 }
 
-.headerHome .userContainer .makeAPostModal .postStyleSummary .postStyleTitle h4{
+.headerHome .userContainer .makeAPostModal .postStyleSummary .postStyleTitle h4 {
     color: var(--grayColor);
     transition: 0.2s;
 }
 
-.headerHome .userContainer .makeAPostModal .postStyleSummary:hover .postStyleTitle h4{
+.headerHome .userContainer .makeAPostModal .postStyleSummary:hover .postStyleTitle h4 {
     color: var(--secondColor);
     transition: 0.2s;
 }
 
-.headerHome .userContainer .makeAPostModal .postStyleSummary .postStyleTitle img{
+.headerHome .userContainer .makeAPostModal .postStyleSummary .postStyleTitle img {
     width: 1.1rem;
     transition: 0.2s;
 }
 
-body.P-theme .headerHome  .userContainer .makeAPostModal .postStyleSummary:hover .postStyleTitle img {
+body.P-theme .headerHome .userContainer .makeAPostModal .postStyleSummary:hover .postStyleTitle img {
     filter: brightness(0) saturate(100%) invert(42%) sepia(61%) saturate(1820%) hue-rotate(302deg) brightness(87%) contrast(85%);
     transition: 0.2s;
 }
 
-body.B-theme .headerHome .userContainer .makeAPostModal .postStyleSummary:hover .postStyleTitle img{
+body.B-theme .headerHome .userContainer .makeAPostModal .postStyleSummary:hover .postStyleTitle img {
     filter: brightness(0) saturate(100%) invert(63%) sepia(81%) saturate(331%) hue-rotate(139deg) brightness(83%) contrast(87%);
     transition: 0.2s;
 }
 
-body.Y-theme .headerHome .userContainer .makeAPostModal .postStyleSummary:hover .postStyleTitle img{
+body.Y-theme .headerHome .userContainer .makeAPostModal .postStyleSummary:hover .postStyleTitle img {
     filter: brightness(0) saturate(100%) invert(66%) sepia(48%) saturate(459%) hue-rotate(16deg) brightness(97%) contrast(85%);
     transition: 0.2s;
 }
 
-.headerHome .userContainer .makeAPostModal .postStyleSummary p{
+.headerHome .userContainer .makeAPostModal .postStyleSummary p {
     position: relative;
     width: 100%;
     white-space: wrap;
@@ -712,16 +713,16 @@ body.Y-theme .headerHome .userContainer .makeAPostModal .postStyleSummary:hover 
     transition: 0.2s;
 }
 
-.headerHome .userContainer .makeAPostModal .postStyleSummary p span{
+.headerHome .userContainer .makeAPostModal .postStyleSummary p span {
     font-weight: 600;
 }
 
-.headerHome .userContainer .makeAPostModal .postStyleSummary:hover p span{
+.headerHome .userContainer .makeAPostModal .postStyleSummary:hover p span {
     color: var(--secondColor);
     transition: 0.2s;
 }
 
-.headerHome .userContainer .makeAPostModal .postStyleSummary .postBtn{
+.headerHome .userContainer .makeAPostModal .postStyleSummary .postBtn {
     position: relative;
     display: flex;
     color: var(--whiteColor);
@@ -736,7 +737,7 @@ body.Y-theme .headerHome .userContainer .makeAPostModal .postStyleSummary:hover 
 }
 
 .headerHome .userContainer .makeAPostModal .postStyleSummary .postBtn:hover,
-.headerHome .userContainer .makeAPostModal .postStyleSummary:hover .postBtn{
+.headerHome .userContainer .makeAPostModal .postStyleSummary:hover .postBtn {
     transition: 0.3s;
     transform: scale(1.1);
     padding: 0.43rem 1.3rem 0.37rem 1.3rem;
@@ -749,7 +750,7 @@ body.Y-theme .headerHome .userContainer .makeAPostModal .postStyleSummary:hover 
 ============================================== FOOTER ================================================
 ====================================================================================================*/
 
-footer{
+footer {
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -762,51 +763,51 @@ footer{
     color: var(--whiteColor);
 }
 
-footer .footerLink{
+footer .footerLink {
     position: absolute;
     height: 3rem;
     width: 100%;
     scroll-behavior: smooth;
 }
 
-footer h4{
+footer h4 {
     font-size: 1.4em;
     line-height: 3rem;
     pointer-events: none;
 }
 
-footer .A-footerLeft img.A-footerLogo{
+footer .A-footerLeft img.A-footerLogo {
     width: 15rem;
     cursor: pointer;
 }
 
-footer .A-footerLeft .A-footerContact{
+footer .A-footerLeft .A-footerContact {
     padding: 0 0 4rem 1rem;
     width: 14rem;
 }
 
-footer .A-footerLeft .A-footerContact .A-footerSocialMedias{
+footer .A-footerLeft .A-footerContact .A-footerSocialMedias {
     display: flex;
     justify-content: space-between;
-    font-size: 1.3rem;   
+    font-size: 1.3rem;
 }
 
-footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-instagram{
+footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-instagram {
     color: var(--pastelYellowColor);
     cursor: pointer;
 }
 
-footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-facebook{
+footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-facebook {
     color: var(--pastelBlueColor);
     cursor: pointer;
 }
 
-footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-envelope-fill{
+footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-envelope-fill {
     color: var(--pastelPinkColor);
     cursor: pointer;
 }
 
-footer #A-copyrightSign{
+footer #A-copyrightSign {
     position: absolute;
     display: flex;
     gap: 0.5rem;
@@ -817,7 +818,7 @@ footer #A-copyrightSign{
     font-size: 0.7rem;
 }
 
-footer .A-footerRight{
+footer .A-footerRight {
     display: flex;
     align-items: flex-start;
     gap: 6.25rem;
@@ -825,21 +826,21 @@ footer .A-footerRight{
     height: 100%;
 }
 
-footer .A-footerRight li p{
+footer .A-footerRight li p {
     font-size: 1rem;
     line-height: 1.5rem;
     cursor: pointer;
 }
 
-footer .A-footerRight li.A-footerAbout h4{
+footer .A-footerRight li.A-footerAbout h4 {
     color: var(--pastelYellowColor);
 }
 
-footer .A-footerRight li.A-footerHelp h4{
+footer .A-footerRight li.A-footerHelp h4 {
     color: var(--pastelBlueColor);
 }
 
-footer .A-footerRight li.A-footerPolitic h4{
+footer .A-footerRight li.A-footerPolitic h4 {
     color: var(--pastelPinkColor);
 }
 
@@ -847,20 +848,60 @@ footer .A-footerRight li.A-footerPolitic h4{
 ====================================== PÁGINA DE APRESENTAÇÃO ========================================
 ====================================================================================================*/
 
-.La-landing{
+.La-landing {
     background: linear-gradient(var(--whiteColor) 8%, #80752350 16%, #03718050 45%, #a3155f50 75%, #80752350 85%);
     padding-left: 3rem;
-    height: 100vh;
+    height: auto;
     overflow: hidden;
 }
 
-.La-landingSections .La-quote{
-    padding:  5rem 0 3rem 5rem;
-    width: 75vw;
-    font-size: 10vh;
+.La-quote {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    text-align: center;
 }
 
-.La-landingSections article{
+.La-quote::before {
+
+    content: '';
+    top: 50%;
+    width: 20%;
+    height: 3px;
+    border-radius: 15%;
+    margin-top: 4.5rem;
+    background: linear-gradient(to left, #BDB150,  #ffffff);
+    z-index: 0;
+
+}
+.La-quote::after  {
+
+    content: '';
+    top: 50%;
+    width: 20%;
+    height: 3px;
+    border-radius: 15%;
+    margin-top: 4.5rem;
+    background: linear-gradient(to right, #BDB150,  #ffffff);
+    z-index: 0;
+}
+
+.La-quote::before{
+    left: 0;
+}
+
+.La-quote{
+    right: 0;
+}
+
+.La-landingSections .La-quote {
+    padding: 5rem 0 3rem 5rem;
+    width: 75vw;
+    font-size: 7vh;
+}
+
+.La-landingSections article {
     display: flex;
     justify-content: flex-start;
     gap: 3rem;
@@ -869,16 +910,46 @@ footer .A-footerRight li.A-footerPolitic h4{
     text-align: justify;
 }
 
-.La-landingSections  article .La-momImageRight{
-    width: 9rem;
-    margin-right: -15rem;
+.La-landingSections article .La-momImageRight {
+    width: 35rem;
+    margin-right: -25rem;
+    margin-left: -8rem;
+    margin-bottom: -8rem;
+    margin-top: -8rem;
 }
 
-.La-landingSections  article .La-momImageLeft{
-    width: 12rem;
+.La-landingSections article .La-momImageLeft {
+    width: 35rem;
+    margin-left: -8rem;
+    margin-right: -8rem;
+    margin-bottom: -8rem;
+    margin-top: -8rem;
 }
 
-.La-landingSections .La-articleHighlight{
+.La-seccaoDeTextoEsquerda{
+    text-align: left;
+    margin-right: auto;
+}
+
+.La-seccaoDeTextoDireita{
+    text-align: right;
+    margin-left: auto;
+}
+.La-tituloSeccao{
+    font-size: 2.3rem;
+    margin-bottom: 1.3rem;
+}
+
+.La-subtituloSeccao{
+    font-size: 1.9rem;
+    font-weight: 100;
+    margin-bottom: 1.3rem;
+}
+
+.La-paragrafo{
+    font-size: 1.3rem;
+}
+.La-landingSections .La-articleHighlight {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -886,7 +957,7 @@ footer .A-footerRight li.A-footerPolitic h4{
     padding-top: 1rem;
 }
 
-.La-landingSections .La-articleHighlight .La-articleBar{
+.La-landingSections .La-articleHighlight .La-articleBar {
     position: relative;
     height: 20rem;
     width: 3px;
@@ -905,68 +976,69 @@ footer .A-footerRight li.A-footerPolitic h4{
 }
 
 .La-landingSections .La-articleConectaMaes .La-articleHighlight .La-articleBar,
-.La-landingSections .La-articleEquip .La-articleHighlight .La-articleBar{
+.La-landingSections .La-articleEquip .La-articleHighlight .La-articleBar {
     background: var(--middleYellowColor);
 }
+
 .La-landingSections .La-articleConectaMaes .La-articleHighlight .La-articleBar::before,
-.La-landingSections .La-articleEquip .La-articleHighlight .La-articleBar::before{
+.La-landingSections .La-articleEquip .La-articleHighlight .La-articleBar::before {
     background: var(--pastelYellowColor);
 }
 
-.La-landingSections .La-Sharing .La-articleHighlight .La-articleBar{
+.La-landingSections .La-Sharing .La-articleHighlight .La-articleBar {
     background: linear-gradient(var(--middleYellowColor) 30%, var(--middleBlueColor) 100%);
 }
 
-.La-landingSections .La-Sharing .La-articleHighlight .La-articleBar::before{
+.La-landingSections .La-Sharing .La-articleHighlight .La-articleBar::before {
     background: linear-gradient(var(--pastelYellowColor) 30%, var(--pastelBlueColor) 100%);
 }
 
-.La-landingSections .La-articleFollowing .La-articleHighlight .La-articleBar{
+.La-landingSections .La-articleFollowing .La-articleHighlight .La-articleBar {
     background-color: var(--middleBlueColor);
 }
 
-.La-landingSections .La-articleFollowing .La-articleHighlight .La-articleBar::before{
+.La-landingSections .La-articleFollowing .La-articleHighlight .La-articleBar::before {
     background-color: var(--pastelBlueColor);
 }
 
-.La-landingSections .La-articleHelping .La-articleHighlight .La-articleBar{
+.La-landingSections .La-articleHelping .La-articleHighlight .La-articleBar {
     background: linear-gradient(var(--middleBlueColor) 30%, var(--middlePinkColor) 100%);
 }
 
-.La-landingSections .La-articleHelping .La-articleHighlight .La-articleBar::before{
+.La-landingSections .La-articleHelping .La-articleHighlight .La-articleBar::before {
     background: linear-gradient(var(--pastelBlueColor) 30%, var(--pastelPinkColor) 100%);
 }
 
-.La-landingSections .La-articleRating .La-articleHighlight .La-articleBar{
+.La-landingSections .La-articleRating .La-articleHighlight .La-articleBar {
     background: linear-gradient(var(--middlePinkColor), transparent);
 }
 
-.La-landingSections .La-articleRating .La-articleHighlight .La-articleBar::before{
+.La-landingSections .La-articleRating .La-articleHighlight .La-articleBar::before {
     background: linear-gradient(var(--pastelPinkColor), transparent);
 }
 
 .La-landingSections .La-articleConectaMaes .La-focus,
-.La-landingSections .La-Sharing .La-focus{
+.La-landingSections .La-Sharing .La-focus {
     font-weight: bolder;
     color: var(--middleYellowColor);
 }
 
 .La-landingSections .La-articleFollowing .La-focus,
-.La-landingSections .La-articleHelping .La-focus{
+.La-landingSections .La-articleHelping .La-focus {
     font-weight: bolder;
     color: var(--middleBlueColor);
 }
 
-.La-landingSections .La-articleRating .La-focus{
+.La-landingSections .La-articleRating .La-focus {
     font-weight: bolder;
     color: var(--middlePinkColor);
 }
 
-.La-landingSections:nth-of-type(2){
+.La-landingSections:nth-of-type(2) {
     align-items: center;
 }
 
-.La-landingSections .La-createAccountSign{
+.La-landingSections .La-createAccountSign {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -976,13 +1048,13 @@ footer .A-footerRight li.A-footerPolitic h4{
     transform: translate(-50%);
 }
 
-.La-landingSections .La-createAccountSign p{
+.La-landingSections .La-createAccountSign p {
     width: 20rem;
     text-align: center;
     font-size: 1.2rem;
 }
 
-.La-landingSections .La-createAccountSign .La-createAccountButton{
+.La-landingSections .La-createAccountSign .La-createAccountButton {
     display: flex;
     padding: 0.7rem 1.2rem;
     border-radius: 10rem;
@@ -996,14 +1068,14 @@ footer .A-footerRight li.A-footerPolitic h4{
     text-decoration: none;
 }
 
-.La-landingSections .La-articleEquip{
+.La-landingSections .La-articleEquip {
     position: relative;
     justify-content: center;
     padding: 10rem 2rem 0 0;
     width: 100vw;
 }
 
-.La-landingSections .La-articleEquip .La-articleHighlight{
+.La-landingSections .La-articleEquip .La-articleHighlight {
     flex-direction: row;
     align-items: flex-end;
     gap: 2rem;
@@ -1012,52 +1084,162 @@ footer .A-footerRight li.A-footerPolitic h4{
     top: 0;
 }
 
-.La-landingSections .La-articleEquip .La-articleHighlight .La-articleBar{
+.La-landingSections .La-articleEquip .La-articleHighlight .La-articleBar {
     height: 6.25rem;
-    background: linear-gradient(transparent,var(--middleYellowColor));
+    background: linear-gradient(transparent, var(--middleYellowColor));
 }
 
-.La-landingSections .La-articleEquip .La-articleHighlight h2{
+.La-landingSections .La-articleEquip .La-articleHighlight h2 {
     font-size: 2rem;
 }
 
-.La-landingSections .La-articleEquip .La-equipContainer{
+.La-landingSections .La-articleEquip .La-equipContainer {
     display: flex;
     flex-wrap: wrap;
     width: 40rem;
     gap: 3rem;
 }
 
-.La-landingSections .La-articleEquip .La-equipContainer .La-equipMember .La-memberImage img{
+.La-landingSections .La-articleEquip .La-equipContainer .La-equipMember .La-memberImage img {
     width: 10rem;
 }
 
-.La-landingSections .La-articleEquip .La-equipContainer .La-equipMember .La-memberInformation{
+.La-landingSections .La-articleEquip .La-equipContainer .La-equipMember .La-memberInformation {
     line-height: 1.4rem;
     text-align: center;
 }
 
-.La-landingSections .La-articleEquip .La-equipContainer .La-equipMember .La-memberInformation .La-memberName{
+.La-landingSections .La-articleEquip .La-equipContainer .La-equipMember .La-memberInformation .La-memberName {
     font-size: 1.7rem;
     font-weight: 600;
 }
 
-.La-landingSections .La-articleEquip .La-equipContainer .La-equipMember .La-memberInformation .La-memberFamilyName{
+.La-landingSections .La-articleEquip .La-equipContainer .La-equipMember .La-memberInformation .La-memberFamilyName {
     font-weight: 500;
     font-size: 1.2rem;
 }
 
-.La-landingSections .La-articleEquip .La-equipContainer .La-equipMember .La-memberInformation .La-memberFunction{
+.La-landingSections .La-articleEquip .La-equipContainer .La-equipMember .La-memberInformation .La-memberFunction {
     font-weight: 400;
     font-size: 1rem;
 }
+
+/*responsividade da landing page
+
+@media (max-width: 1200px) {
+
+    .La-landing {
+        padding-left: 1rem;
+    }
+
+    .La-landingSections .La-quote {
+        padding: 3rem 0 2 rem 3 rem;
+        font-size: 8vh;
+        width: 90vw;
+    }
+
+    .La-landingSections article {
+        flex-direction: colunm;
+        align-items: center;
+        gap: 1rem;
+        width: 80vw;
+    }
+
+    .La-landingSections article .La-momImageRight,
+    .La-landingSections article .La-momImageLeft {
+        margin-right: 0;
+        width: 100%;
+    }
+
+    .La-landingSections .La-createAccountSign {
+        width: 80vw;
+    }
+
+    .La-landingSections .La-createAccountSign p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .La-landingSections .La-quote {
+        font-size: 6vh;
+        padding: 2rem 0 1rem 2rem;
+    }
+
+    .La-landingSections article {
+        width: 90vw;
+        font-size: 1rem;
+    }
+
+    .La-landingSections .La-createAccountSign p {
+        font-size: 0.9rem;
+        width: 90%;
+    }
+
+    .La-landingSections .La-createAccountSign .La-createAccountButton {
+        width: 100%;
+        font-size: 1.1rem;
+    }
+
+    .La-landingSections .La-articleEquip .La-equipContainer {
+        width: 100%;
+        gap: 1rem;
+    }
+
+    .La-landingSections .La-articleEquip .La-equipContainer .La-equipMember .La-memberImage img {
+        width: 8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .La-landingSections .La-quote {
+        font-size: 4vh;
+        padding: 1rem 0 1rem 1rem;
+    }
+
+    .La-landingSections article {
+        width: 95vw;
+        font-size: 0.9rem;
+    }
+
+    .La-landingSections .La-createAccountSign p {
+        font-size: 0.8rem;
+        width: 95%;
+    }
+
+    .La-landingSections .La-createAccountSign .La-createAccountButton {
+        font-size: 1rem;
+    }
+
+    .La-landingSections .La-articleEquip .La-equipContainer {
+        width: 100%;
+        gap: 0.5rem;
+    }
+
+    .La-landingSections .La-articleEquip .La-equipContainer .La-equipMember .La-memberImage img {
+        width: 6rem;
+    }
+
+    .La-landingSections .La-articleEquip .La-equipContainer .La-equipMember .La-memberInformation .La-memberName {
+        font-size: 1.4rem;
+    }
+
+    .La-landingSections .La-articleEquip .La-equipContainer .La-equipMember .La-memberInformation .La-memberFamilyName {
+        font-size: 1rem;
+    }
+
+    .La-landingSections .La-articleEquip .La-equipContainer .La-equipMember .La-memberInformation .La-memberFunction {
+        font-size: 0.8rem;
+    }
+}
+*/
 
 /*====================================================================================================
 ==================================== PÁGINAS DE LOGIN/REGISTRO =======================================
 ====================================================================================================*/
 
 .Lo-Login,
-.Re-register{
+.Re-register {
     position: relative;
     display: flex;
     background: linear-gradient(var(--whiteColor) 0%, var(--firstColorLowOpacity) 95%);
@@ -1066,7 +1248,7 @@ footer .A-footerRight li.A-footerPolitic h4{
 }
 
 .Lo-loginForm,
-.Re-registerForm{
+.Re-registerForm {
     position: relative;
     display: flex;
     justify-content: flex-start;
@@ -1077,7 +1259,7 @@ footer .A-footerRight li.A-footerPolitic h4{
     border-radius: 1rem;
     min-width: 28rem;
     width: 33.5vw;
-    max-width: 35rem;      
+    max-width: 35rem;
     min-height: 29rem;
     height: 78vh;
     max-height: 42rem;
@@ -1087,7 +1269,7 @@ footer .A-footerRight li.A-footerPolitic h4{
 }
 
 .Lo-loginForm .Lo-loginHeader,
-.Re-registerForm .Re-registerHeader{
+.Re-registerForm .Re-registerHeader {
     position: relative;
     text-align: center;
     font-size: 0.8rem;
@@ -1095,34 +1277,34 @@ footer .A-footerRight li.A-footerPolitic h4{
 }
 
 .Lo-loginForm .Lo-backButton,
-.Re-registerForm .Re-backButton{
+.Re-registerForm .Re-backButton {
     position: absolute;
     left: 2rem;
     top: 2rem;
-    font-size: 1.5rem;  
+    font-size: 1.5rem;
     cursor: pointer;
     transition: 0.2s;
     color: var(--secondColor);
 }
 
-.Lo-loginForm .Lo-backButton{
+.Lo-loginForm .Lo-backButton {
     left: -0;
     top: -2rem;
 }
 
 .Lo-loginForm .Lo-backButton:hover,
-.Re-registerForm .Re-backButton:hover{
-    transform: scale(1.2);    
+.Re-registerForm .Re-backButton:hover {
+    transform: scale(1.2);
     transition: 0.2s;
 }
 
 .Lo-loginForm .Lo-backButton.close,
-.Re-registerForm .Re-backButton.close{
+.Re-registerForm .Re-backButton.close {
     display: none;
 }
 
 .Lo-loginForm .Lo-loginHeader .Lo-loginTitle,
-.Re-registerForm .Re-registerHeader .Re-registerTitle{
+.Re-registerForm .Re-registerHeader .Re-registerTitle {
     position: relative;
     color: var(--secondColor);
     text-transform: uppercase;
@@ -1131,12 +1313,12 @@ footer .A-footerRight li.A-footerPolitic h4{
 }
 
 .Lo-loginForm .Lo-loginCenter,
-.Re-registerForm .Re-registerCenter{
+.Re-registerForm .Re-registerCenter {
     height: 20rem;
     width: 100%;
 }
 
-.Lo-loginForm .Lo-loginCenter .Lo-userSection{
+.Lo-loginForm .Lo-loginCenter .Lo-userSection {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -1145,7 +1327,7 @@ footer .A-footerRight li.A-footerPolitic h4{
 }
 
 .Re-registerForm .Re-registerCenter .Re-registerSections,
-.Lo-loginForm .Lo-loginCenter .Lo-loginSections{
+.Lo-loginForm .Lo-loginCenter .Lo-loginSections {
     display: grid;
     grid-template-columns: repeat(2, 50%);
     gap: 1rem;
@@ -1153,18 +1335,18 @@ footer .A-footerRight li.A-footerPolitic h4{
     padding: 0 1.5rem;
 }
 
-.Re-registerForm .Re-registerCenter .Re-registerSections.close{
+.Re-registerForm .Re-registerCenter .Re-registerSections.close {
     display: none;
 }
 
-.Lo-loginForm .Lo-loginCenter .Lo-loginSections{
+.Lo-loginForm .Lo-loginCenter .Lo-loginSections {
     padding: 0 2rem;
 }
 
 
 
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input,
-.Lo-loginForm .Lo-loginCenter .Lo-userSection .Re-input{
+.Lo-loginForm .Lo-loginCenter .Lo-userSection .Re-input {
     position: relative;
     border-radius: 1.1rem;
     border: 2px solid transparent;
@@ -1177,17 +1359,17 @@ footer .A-footerRight li.A-footerPolitic h4{
 }
 
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input:hover,
-.Lo-loginForm .Lo-loginCenter .Lo-userSection .Re-input:hover{
+.Lo-loginForm .Lo-loginCenter .Lo-userSection .Re-input:hover {
     opacity: 1;
 }
 
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.input-full,
-.Lo-loginForm .Lo-loginCenter .Lo-userSection .Re-input.input-full{
+.Lo-loginForm .Lo-loginCenter .Lo-userSection .Re-input.input-full {
     grid-column: span 2;
 }
 
 .Lo-loginForm .Lo-loginCenter .Lo-userSection .Re-input .Re-userInput,
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-userInput{
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-userInput {
     position: relative;
     width: 100%;
     padding: 0.8rem 1.5rem;
@@ -1198,7 +1380,7 @@ footer .A-footerRight li.A-footerPolitic h4{
 }
 
 .Lo-loginForm .Lo-loginCenter .Lo-userSection .Re-input .Re-fakePlaceholder,
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-fakePlaceholder{
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-fakePlaceholder {
     position: absolute;
     color: var(--secondColor);
     font-weight: 600;
@@ -1213,9 +1395,9 @@ footer .A-footerRight li.A-footerPolitic h4{
     padding: 0 0.3rem;
 }
 
-.Lo-loginForm .Lo-loginCenter .Lo-userSection .Re-input .Re-userInput:focus + .Re-fakePlaceholder,
+.Lo-loginForm .Lo-loginCenter .Lo-userSection .Re-input .Re-userInput:focus+.Re-fakePlaceholder,
 .Lo-loginForm .Lo-loginCenter .Lo-userSection .Re-input .Re-fakePlaceholder.notEmpty,
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-userInput:focus + .Re-fakePlaceholder,
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-userInput:focus+.Re-fakePlaceholder,
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-fakePlaceholder.notEmpty {
     top: -3px;
     font-size: 12px;
@@ -1223,11 +1405,11 @@ footer .A-footerRight li.A-footerPolitic h4{
     transition: 0.25s ease-in-out, 0.3s ease-in-out text-shadow;
 }
 
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-fakePlaceholder.notEmpty + span.userArroba{
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-fakePlaceholder.notEmpty+span.userArroba {
     display: block;
 }
 
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input span.userArroba{
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input span.userArroba {
     display: none;
     position: absolute;
     top: 50%;
@@ -1238,7 +1420,7 @@ footer .A-footerRight li.A-footerPolitic h4{
     margin-bottom: 2px;
 }
 
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .errorIcon{
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .errorIcon {
     display: none;
     font-size: 0.8rem;
     color: var(--redColor);
@@ -1250,7 +1432,7 @@ footer .A-footerRight li.A-footerPolitic h4{
     cursor: pointer;
 }
 
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .errorMessageContainer{
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .errorMessageContainer {
     position: absolute;
     top: 112%;
     right: 0;
@@ -1272,7 +1454,7 @@ footer .A-footerRight li.A-footerPolitic h4{
     z-index: +2;
 }
 
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .errorMessageContainer .errorMessageContent{
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .errorMessageContainer .errorMessageContent {
     position: relative;
     display: none;
     align-items: flex-start;
@@ -1282,19 +1464,19 @@ footer .A-footerRight li.A-footerPolitic h4{
     gap: 0.5rem;
 }
 
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .errorMessageContainer .errorMessageContent .mainError{
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .errorMessageContainer .errorMessageContent .mainError {
     color: var(--redColor);
     font-weight: bold;
 }
 
-.Lo-loginForm .Lo-loginCenter .Re-input.Lo-loginAssistants{
+.Lo-loginForm .Lo-loginCenter .Re-input.Lo-loginAssistants {
     position: relative;
     width: 200%;
     background-color: gold;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding: 0 0rem 0 1rem ;
+    padding: 0 0rem 0 1rem;
     font-size: 0.7rem;
     margin-top: -0.5rem;
     color: var(--blackColor);
@@ -1304,34 +1486,34 @@ footer .A-footerRight li.A-footerPolitic h4{
     opacity: 1;
 }
 
-.Lo-loginForm .Lo-loginCenter .Lo-loginAssistants .Lo-rememberMe{
+.Lo-loginForm .Lo-loginCenter .Lo-loginAssistants .Lo-rememberMe {
     display: flex;
     gap: 5px;
     white-space: nowrap;
 }
 
-.Lo-loginForm .Lo-loginCenter .Lo-loginAssistants .Lo-rememberMe input{
+.Lo-loginForm .Lo-loginCenter .Lo-loginAssistants .Lo-rememberMe input {
     background: linear-gradient(var(--whiteColor) 8%, #80752350 16%, #03718050 45%, #a3155f50 75%, #80752350 85%);
 }
 
-.Lo-loginForm .Lo-loginCenter .Lo-loginAssistants .Lo-forgetPassword{
+.Lo-loginForm .Lo-loginCenter .Lo-loginAssistants .Lo-forgetPassword {
     text-decoration: none;
     color: var(--blackColor);
     white-space: nowrap;
 }
 
-.Re-registerForm .Re-registerCenter .Re-accountInformations .Re-themeInfo{
+.Re-registerForm .Re-registerCenter .Re-accountInformations .Re-themeInfo {
     width: fit-content;
     height: fit-content;
 }
 
-.Re-registerForm .Re-registerCenter .Re-accountInformations .Re-themeInfo p{
+.Re-registerForm .Re-registerCenter .Re-accountInformations .Re-themeInfo p {
     font-weight: 400;
     line-height: 2.5rem;
     font-size: 1rem;
 }
 
-.Re-registerForm .Re-registerCenter .Re-accountInformations .Re-themeInfo .Re-themeOptions{
+.Re-registerForm .Re-registerCenter .Re-accountInformations .Re-themeInfo .Re-themeOptions {
     display: flex;
     gap: 1.5rem;
     font-size: 0.8rem;
@@ -1355,39 +1537,39 @@ footer .A-footerRight li.A-footerPolitic h4{
     box-shadow: 0 0 0 2px var(--whiteColor), 0 0 0 3px var(--thirdColor);
 }
 
-.Re-registerForm .Re-registerCenter .Re-accountInformations .Re-themeInfo .Re-themeOptions label{
+.Re-registerForm .Re-registerCenter .Re-accountInformations .Re-themeInfo .Re-themeOptions label {
     margin-left: -0.8rem;
     cursor: pointer;
 }
 
-.Re-registerForm .Re-registerCenter .Re-accountInformations .Re-themeInfo .Re-themeOptions input#Re-yellowTheme:checked + label {
+.Re-registerForm .Re-registerCenter .Re-accountInformations .Re-themeInfo .Re-themeOptions input#Re-yellowTheme:checked+label {
     color: var(--thirdColor);
     font-weight: 500;
 }
 
-.Re-registerForm .Re-registerCenter .Re-accountInformations .Re-themeInfo .Re-themeOptions input#Re-blueTheme:checked + label {
+.Re-registerForm .Re-registerCenter .Re-accountInformations .Re-themeInfo .Re-themeOptions input#Re-blueTheme:checked+label {
     color: var(--thirdColor);
     font-weight: 500;
 }
 
-.Re-registerForm .Re-registerCenter .Re-accountInformations .Re-themeInfo .Re-themeOptions input#Re-pinkTheme:checked + label {
+.Re-registerForm .Re-registerCenter .Re-accountInformations .Re-themeInfo .Re-themeOptions input#Re-pinkTheme:checked+label {
     color: var(--thirdColor);
     font-weight: 500;
 }
 
-.Re-registerForm .Re-registerCenter .Re-userInformations .Re-input input#biografiaUsuario{
+.Re-registerForm .Re-registerCenter .Re-userInformations .Re-input input#biografiaUsuario {
     position: relative;
     width: 25.3rem;
 }
 
-.Re-registerForm .Re-registerCenter .Re-registerResult{
+.Re-registerForm .Re-registerCenter .Re-registerResult {
     position: relative;
     display: flex;
     align-items: flex-start;
     gap: 1rem;
 }
 
-.Re-registerForm .Re-registerCenter .Re-registerResult .Re-addImageProfile .Re-userImageProfile{
+.Re-registerForm .Re-registerCenter .Re-registerResult .Re-addImageProfile .Re-userImageProfile {
     position: relative;
     display: flex;
     width: 7rem;
@@ -1406,7 +1588,7 @@ footer .A-footerRight li.A-footerPolitic h4{
     display: none;
 }
 
-.Re-registerForm .Re-registerCenter .Re-registerResult .Re-addImageProfile .Re-addImageIcon{
+.Re-registerForm .Re-registerCenter .Re-registerResult .Re-addImageProfile .Re-addImageIcon {
     position: absolute;
     display: flex;
     right: 0rem;
@@ -1419,7 +1601,7 @@ footer .A-footerRight li.A-footerPolitic h4{
     color: var(--grayColor);
 }
 
-.Re-registerForm .Re-registerCenter .Re-registerResult .Re-userInfoContainer .Re-userInformations{
+.Re-registerForm .Re-registerCenter .Re-registerResult .Re-userInfoContainer .Re-userInformations {
     display: flex;
     gap: 0.5rem;
     justify-content: flex-start;
@@ -1429,13 +1611,13 @@ footer .A-footerRight li.A-footerPolitic h4{
     line-height: 1.2rem;
 }
 
-.Re-registerForm .Re-registerCenter .Re-registerResult .Re-userInfoContainer .Re-userInformations .Re-infoLabel{
+.Re-registerForm .Re-registerCenter .Re-registerResult .Re-userInfoContainer .Re-userInformations .Re-infoLabel {
     font-weight: 600;
     color: var(--thirdColor);
     font-size: 0.9rem;
 }
 
-.Re-registerForm .Re-registerResult .Re-termsBox{
+.Re-registerForm .Re-registerResult .Re-termsBox {
     position: absolute;
     display: flex;
     gap: 10px;
@@ -1465,7 +1647,7 @@ footer .A-footerRight li.A-footerPolitic h4{
 }
 
 .Lo-loginForm .Lo-loginBottom,
-.Re-registerForm .Re-registerBottom{
+.Re-registerForm .Re-registerBottom {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -1474,7 +1656,7 @@ footer .A-footerRight li.A-footerPolitic h4{
 }
 
 .Re-registerForm .Re-registerBottom .confirmBtn,
-.Lo-loginForm .Lo-loginBottom .confirmBtn{
+.Lo-loginForm .Lo-loginBottom .confirmBtn {
     padding: 0;
     width: 8.5rem;
     height: 2.7rem;
@@ -1483,12 +1665,12 @@ footer .A-footerRight li.A-footerPolitic h4{
     box-shadow: 0 2px 4px 0px #00000040;
 }
 
-.Re-registerForm .Re-registerBottom .confirmBtn.close{
+.Re-registerForm .Re-registerBottom .confirmBtn.close {
     display: none;
 }
 
 .Lo-loginForm .Lo-loginBottom .Lo-goRegister a,
-.Re-registerForm .Re-registerBottom .Re-goLogin a{
+.Re-registerForm .Re-registerBottom .Re-goLogin a {
     position: relative;
     color: var(--secondColor);
     font-weight: 700;
@@ -1498,7 +1680,7 @@ footer .A-footerRight li.A-footerPolitic h4{
 ======================================= PÁGINA INICIAL (HOME) ========================================
 ====================================================================================================*/
 
-.Ho-Main{
+.Ho-Main {
     position: relative;
     width: 100vw;
     display: flex;
@@ -1506,7 +1688,7 @@ footer .A-footerRight li.A-footerPolitic h4{
     overflow: hidden;
 }
 
-.Ho-Main .timeline{
+.Ho-Main .timeline {
     position: relative;
     border: 1px solid var(--grayColor);
     border-bottom: none;
@@ -1516,11 +1698,11 @@ footer .A-footerRight li.A-footerPolitic h4{
     overflow: auto;
 }
 
-.Ho-Main .timeline::-webkit-scrollbar{
+.Ho-Main .timeline::-webkit-scrollbar {
     display: none;
 }
 
-.Ho-postSomething{
+.Ho-postSomething {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -1528,7 +1710,7 @@ footer .A-footerRight li.A-footerPolitic h4{
     padding: 1rem;
 }
 
-.Ho-postSomething .Ho-postTop{
+.Ho-postSomething .Ho-postTop {
     position: relative;
     display: flex;
     justify-content: flex-start;
@@ -1538,7 +1720,7 @@ footer .A-footerRight li.A-footerPolitic h4{
     width: 100%;
 }
 
-.Ho-postSomething .Ho-postTop .Ho-userProfileImage{
+.Ho-postSomething .Ho-postTop .Ho-userProfileImage {
     position: relative;
     width: 4rem;
     height: 4rem;
@@ -1547,15 +1729,15 @@ footer .A-footerRight li.A-footerPolitic h4{
     overflow: hidden;
 }
 
-.Ho-postSomething .Ho-postTop .Ho-userProfileImage img{
+.Ho-postSomething .Ho-postTop .Ho-userProfileImage img {
     position: relative;
     width: 100%;
     height: 100%;
-    cursor: pointer;  
+    cursor: pointer;
     object-fit: cover;
 }
 
-.Ho-postSomething .Ho-postTop .Ho-postText{
+.Ho-postSomething .Ho-postTop .Ho-postText {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -1564,11 +1746,25 @@ footer .A-footerRight li.A-footerPolitic h4{
 }
 
 @keyframes shake {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    50% { transform: translateX(5px); }
-    75% { transform: translateX(-5px); }
-    100% { transform: translateX(0); }
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    50% {
+        transform: translateX(5px);
+    }
+
+    75% {
+        transform: translateX(-5px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
 }
 
 .Ho-postSomething .Ho-postTop .Ho-postText .characterBlocked {
@@ -1579,7 +1775,7 @@ footer .A-footerRight li.A-footerPolitic h4{
     animation: shake 0.7s;
 }
 
-.Ho-postSomething .Ho-postTop .Ho-postText .Ho-postTextContent{
+.Ho-postSomething .Ho-postTop .Ho-postText .Ho-postTextContent {
     position: relative;
     outline: none;
     border: 1px solid var(--grayColor);
@@ -1589,11 +1785,11 @@ footer .A-footerRight li.A-footerPolitic h4{
     font-size: 0.9rem;
 }
 
-.Ho-postSomething .Ho-postTop .Ho-postText .Ho-postTextContent::-webkit-scrollbar{
+.Ho-postSomething .Ho-postTop .Ho-postText .Ho-postTextContent::-webkit-scrollbar {
     display: none;
 }
 
-.Ho-postSomething .Ho-postTop .Ho-postText .Ho-characters{
+.Ho-postSomething .Ho-postTop .Ho-postText .Ho-characters {
     position: absolute;
     right: 0.5rem;
     bottom: 0.1rem;
@@ -1601,7 +1797,7 @@ footer .A-footerRight li.A-footerPolitic h4{
     font-size: 0.65rem;
 }
 
-.Ho-postSomething .Ho-postBottom{
+.Ho-postSomething .Ho-postBottom {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -1609,26 +1805,26 @@ footer .A-footerRight li.A-footerPolitic h4{
     padding-left: 5rem;
 }
 
-.Ho-postSomething .Ho-postBottom .Ho-extraInputs{
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs {
     display: flex;
     gap: 1rem;
 }
 
-.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-iconLabel{
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-iconLabel {
     font-size: 1rem;
     cursor: pointer;
 }
 
-.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-imageInput{ 
-    display: flex; 
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-imageInput {
+    display: flex;
 }
 
-.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-imageInput input{
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-imageInput input {
     display: none
 }
-  
+
 .Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-imageInput label,
-.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput{
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput {
     display: flex;
     gap: 0.5rem;
     width: fit-content;
@@ -1637,50 +1833,50 @@ footer .A-footerRight li.A-footerPolitic h4{
     font-size: 0.9rem;
 }
 
-.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-imageInput label img{
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-imageInput label img {
     width: 1.3rem;
 }
 
-.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput{
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput {
     cursor: text;
 }
 
-.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput input{
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput input {
     width: 5rem;
     outline: none;
     font-size: 1rem;
     border: none;
 }
 
-.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput input:focus{
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput input:focus {
     border-bottom: 1px solid var(--grayColor);
 }
 
-.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput input::placeholder{
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput input::placeholder {
     color: var(--blackColor);
     font-size: 1rem;
 }
 
-.Ho-postSomething .Ho-postBottom .Ho-submitArea{
+.Ho-postSomething .Ho-postBottom .Ho-submitArea {
     display: flex;
     flex-direction: column;
     font-size: 0.8rem;
     gap: 0.3rem;
 }
 
-.Ho-postSomething .Ho-postBottom .Ho-submitArea .Ho-submitPost{
+.Ho-postSomething .Ho-postBottom .Ho-submitArea .Ho-submitPost {
     display: flex;
     gap: 0.2rem;
     cursor: pointer;
 }
 
-.Ho-postSomething .Ho-postBottom .Ho-submitArea .confirmBtn{
+.Ho-postSomething .Ho-postBottom .Ho-submitArea .confirmBtn {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     font-size: 1rem;
 }
 
-.Ho-postSomething .Ho-postBottom .Ho-submitArea .Ho-postStyle{
+.Ho-postSomething .Ho-postBottom .Ho-submitArea .Ho-postStyle {
     background-color: var(--secondColor);
     padding: 0.75rem 0.5rem 0.55rem 0.3rem;
     border-top-right-radius: 100rem;
@@ -1692,14 +1888,14 @@ footer .A-footerRight li.A-footerPolitic h4{
 }
 
 .Ho-postSomething .Ho-postBottom .Ho-submitArea .Ho-postStyle.active,
-.Ho-postSomething .Ho-postBottom .Ho-submitArea .Ho-postStyle:hover{
+.Ho-postSomething .Ho-postBottom .Ho-submitArea .Ho-postStyle:hover {
     transition: 0.3s;
     background-color: var(--whiteColor);
     color: var(--secondColor);
     border-color: var(--secondColor);
 }
 
-.Ho-Main .timeline .Ho-postSomething .Ho-postAttachments{
+.Ho-Main .timeline .Ho-postSomething .Ho-postAttachments {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -1721,8 +1917,8 @@ footer .A-footerRight li.A-footerPolitic h4{
     transition: 0.3s;
 }
 
-.Ho-post{
-    position: relative; 
+.Ho-post {
+    position: relative;
     width: 100%;
     display: flex;
     align-items: flex-start;
@@ -1731,7 +1927,7 @@ footer .A-footerRight li.A-footerPolitic h4{
     cursor: pointer;
 }
 
-.Ho-post .postOwnerImage{
+.Ho-post .postOwnerImage {
     position: relative;
     width: 3rem;
     height: 3rem;
@@ -1745,19 +1941,19 @@ footer .A-footerRight li.A-footerPolitic h4{
     overflow: hidden;
 }
 
-.Ho-post .postOwnerImage img{
+.Ho-post .postOwnerImage img {
     position: relative;
     width: 100%;
     object-fit: cover;
 }
 
-.Ho-post .postContent{
+.Ho-post .postContent {
     position: relative;
     height: 100%;
     width: 100%;
 }
 
-.Ho-post .postContent .postTimelineTop{
+.Ho-post .postContent .postTimelineTop {
     position: relative;
     width: 100%;
     display: flex;
@@ -1766,7 +1962,7 @@ footer .A-footerRight li.A-footerPolitic h4{
     padding-top: 0.1rem;
 }
 
-.Ho-post .postContent .postTimelineTop .postUserNames{
+.Ho-post .postContent .postTimelineTop .postUserNames {
     position: relative;
     display: flex;
     flex-wrap: wrap;
@@ -1777,33 +1973,33 @@ footer .A-footerRight li.A-footerPolitic h4{
     width: 20rem;
 }
 
-.Ho-post .postContent .postTimelineTop .postUserNames p:first-of-type{
+.Ho-post .postContent .postTimelineTop .postUserNames p:first-of-type {
     font-size: 1em;
     font-weight: bolder;
 }
 
-.Ho-post .postContent .postTimelineTop .postUserNames p:last-of-type{
+.Ho-post .postContent .postTimelineTop .postUserNames p:last-of-type {
     color: var(--grayColor);
     font-size: 0.7rem;
 }
 
-.Ho-post .postContent .postTimelineTop .postInfo{
+.Ho-post .postContent .postTimelineTop .postInfo {
     display: flex;
     gap: 7rem;
 }
 
-.Ho-post .postContent .postTimelineTop .postInfo .postDate{
+.Ho-post .postContent .postTimelineTop .postInfo .postDate {
     color: var(--thirdColor);
     font-size: 0.75rem;
 }
 
-.Ho-post .postContent .postTimelineTop .postInfo .postMoreButton{
+.Ho-post .postContent .postTimelineTop .postInfo .postMoreButton {
     font-size: 1.2rem;
     color: var(--grayColor);
     float: right;
 }
 
-.Ho-post .postContent .postTitles{
+.Ho-post .postContent .postTitles {
     position: relative;
     font-size: 0.85rem;
     display: flex;
@@ -1814,12 +2010,12 @@ footer .A-footerRight li.A-footerPolitic h4{
     flex-wrap: wrap;
 }
 
-.Ho-post .postContent .postTitles .postTitle{
+.Ho-post .postContent .postTitles .postTitle {
     font-weight: bolder;
     font-size: 0.9rem;
 }
 
-.Ho-post .postContent .postTimelineBottom{
+.Ho-post .postContent .postTimelineBottom {
     width: 50%;
     position: relative;
     height: 2.5rem;
@@ -1829,27 +2025,27 @@ footer .A-footerRight li.A-footerPolitic h4{
     color: var(--grayColor);
 }
 
-.Ho-post .postContent .postTimelineBottom div{
+.Ho-post .postContent .postTimelineBottom div {
     display: flex;
     font-size: 0.8rem;
     gap: 0.3rem;
     cursor: pointer;
 }
 
-.Ho-post .postContent .postTimelineBottom div:hover{
+.Ho-post .postContent .postTimelineBottom div:hover {
     color: var(--secondColor);
 }
 
-.Ho-Main .asideLeft{
+.Ho-Main .asideLeft {
     width: 20vw;
     height: 100%;
 }
 
-.Ho-Main .asideLeft .backCells{
+.Ho-Main .asideLeft .backCells {
     top: -2rem;
 }
 
-.Ho-Main .asideRight{
+.Ho-Main .asideRight {
     width: 30vw;
     height: 100%;
     display: flex;
@@ -1858,7 +2054,7 @@ footer .A-footerRight li.A-footerPolitic h4{
     padding: 2rem 0 0.3rem 0;
 }
 
-.asideRight .searchBar{
+.asideRight .searchBar {
     display: flex;
     background-color: #e4e4e4;
     border-radius: 100rem;
@@ -1873,7 +2069,7 @@ footer .A-footerRight li.A-footerPolitic h4{
     border: 1px solid var(--grayColor);
 }
 
-.asideRight .searchBarInput{
+.asideRight .searchBarInput {
     background-color: transparent;
     outline: none;
     border: none;
@@ -1883,16 +2079,16 @@ footer .A-footerRight li.A-footerPolitic h4{
     font-size: 0.9rem;
 }
 
-.asideRight .searchBar .bi-search{
+.asideRight .searchBar .bi-search {
     font-size: 0.8rem;
 }
 
 .asideRight .searchBar .bi-search,
-.asideRight .searchBarInput::placeholder{
-    color:var(--blackColor);
-}   
+.asideRight .searchBarInput::placeholder {
+    color: var(--blackColor);
+}
 
-.asideRight .asideRightFooter{
+.asideRight .asideRightFooter {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -1901,16 +2097,16 @@ footer .A-footerRight li.A-footerPolitic h4{
     row-gap: 0.4rem;
 }
 
-.asideRight .asideRightFooter a{
+.asideRight .asideRightFooter a {
     color: var(--blackColor);
     text-decoration: none;
 }
 
-.asideRight .asideRightFooter a:hover{
+.asideRight .asideRightFooter a:hover {
     text-decoration: underline;
 }
 
-.asideRight .asideRightFooter h4{
+.asideRight .asideRightFooter h4 {
     color: var(--thirdColor);
 }
 
@@ -1918,14 +2114,14 @@ footer .A-footerRight li.A-footerPolitic h4{
 ========================================= PÁGINA DE PEDIDOS ==========================================
 ====================================================================================================*/
 
-.Au-main{
-    position: relative; 
+.Au-main {
+    position: relative;
     display: flex;
     align-items: flex-start;
     gap: 1rem;
 }
 
-.Au-auxilioFilter{
+.Au-auxilioFilter {
     position: relative;
     width: 100%;
     height: 4.5rem;
@@ -1934,7 +2130,7 @@ footer .A-footerRight li.A-footerPolitic h4{
     border-bottom: 1px solid var(--grayColor);
 }
 
-.Au-auxilioFilter h1{
+.Au-auxilioFilter h1 {
     display: flex;
     position: relative;
     height: 100%;
@@ -1945,12 +2141,12 @@ footer .A-footerRight li.A-footerPolitic h4{
     transition: 0.2s;
 }
 
-.Au-auxilioFilter h1.active{
+.Au-auxilioFilter h1.active {
     color: var(--secondColor);
     transition: 0.2s;
 }
 
-.Au-auxilioFilter span{
+.Au-auxilioFilter span {
     position: absolute;
     bottom: -2px;
     width: 13rem;
@@ -1962,7 +2158,7 @@ footer .A-footerRight li.A-footerPolitic h4{
     transition: 0.2s;
 }
 
-.Au-allAuxilios{
+.Au-allAuxilios {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
@@ -1970,7 +2166,7 @@ footer .A-footerRight li.A-footerPolitic h4{
     align-items: flex-start;
 }
 
-.Au-allAuxilios .Au-auxilioCard{
+.Au-allAuxilios .Au-auxilioCard {
     position: relative;
     width: 19rem;
     height: fit-content;
@@ -1984,7 +2180,7 @@ footer .A-footerRight li.A-footerPolitic h4{
     cursor: pointer;
 }
 
-.Au-allAuxilios .Au-auxilioCard .postTimelineTop{
+.Au-allAuxilios .Au-auxilioCard .postTimelineTop {
     position: relative;
     width: 100%;
     display: flex;
@@ -1992,7 +2188,7 @@ footer .A-footerRight li.A-footerPolitic h4{
     gap: 0.5rem;
 }
 
-.Au-allAuxilios .Au-auxilioCard .postTimelineTop .postOwnerImage{
+.Au-allAuxilios .Au-auxilioCard .postTimelineTop .postOwnerImage {
     position: relative;
     width: 3rem;
     height: 3rem;
@@ -2006,13 +2202,13 @@ footer .A-footerRight li.A-footerPolitic h4{
     overflow: hidden;
 }
 
-.Au-allAuxilios .Au-auxilioCard .postTimelineTop .postOwnerImage img{
+.Au-allAuxilios .Au-auxilioCard .postTimelineTop .postOwnerImage img {
     position: relative;
     width: 100%;
     object-fit: cover;
 }
 
-.Au-allAuxilios .Au-auxilioCard .postTimelineTop .postUserNames{
+.Au-allAuxilios .Au-auxilioCard .postTimelineTop .postUserNames {
     width: 100%;
     position: relative;
     display: flex;
@@ -2020,19 +2216,19 @@ footer .A-footerRight li.A-footerPolitic h4{
     align-items: flex-start;
 }
 
-.Au-allAuxilios .Au-auxilioCard .postTimelineTop .postUserNames p:first-of-type{
+.Au-allAuxilios .Au-auxilioCard .postTimelineTop .postUserNames p:first-of-type {
     font-size: 0.9em;
     font-weight: bolder;
     width: 100%;
     text-wrap: wrap;
 }
 
-.Au-allAuxilios .Au-auxilioCard .postTimelineTop .postUserNames p:last-of-type{
+.Au-allAuxilios .Au-auxilioCard .postTimelineTop .postUserNames p:last-of-type {
     color: var(--grayColor);
     font-size: 0.7rem;
 }
 
-.Au-allAuxilios .Au-auxilioCard .postDate{
+.Au-allAuxilios .Au-auxilioCard .postDate {
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
@@ -2040,13 +2236,13 @@ footer .A-footerRight li.A-footerPolitic h4{
     font-size: 0.75rem
 }
 
-.Au-allAuxilios .Au-auxilioCard .postTitle{
+.Au-allAuxilios .Au-auxilioCard .postTitle {
     font-size: 0.8rem;
     text-align: start;
     padding-left: 1.3rem;
 }
 
-.Au-allAuxilios .Au-auxilioCard .postTimelineBottom{
+.Au-allAuxilios .Au-auxilioCard .postTimelineBottom {
     position: relative;
     width: 100%;
     display: flex;
@@ -2054,25 +2250,25 @@ footer .A-footerRight li.A-footerPolitic h4{
     color: var(--grayColor);
 }
 
-.Au-allAuxilios .Au-auxilioCard .postTimelineBottom .postInteractions{
+.Au-allAuxilios .Au-auxilioCard .postTimelineBottom .postInteractions {
     position: relative;
     display: flex;
     gap: 1.5rem;
     padding-left: 1.3rem;
 }
 
-.Au-allAuxilios .Au-auxilioCard .postTimelineBottom .postInteractions div{
+.Au-allAuxilios .Au-auxilioCard .postTimelineBottom .postInteractions div {
     display: flex;
     font-size: 0.8rem;
     gap: 0.3rem;
     cursor: pointer;
 }
 
-.Au-allAuxilios .Au-auxilioCard .postTimelineBottom .postInteractions div:hover{
+.Au-allAuxilios .Au-auxilioCard .postTimelineBottom .postInteractions div:hover {
     color: var(--secondColor);
 }
 
-.Au-allAuxilios .Au-auxilioCard .postTimelineBottom .confirmBtn{
+.Au-allAuxilios .Au-auxilioCard .postTimelineBottom .confirmBtn {
     right: 0;
     padding: 0.5rem 1.5rem 0.5rem 1.5rem;
 }
@@ -2081,7 +2277,7 @@ footer .A-footerRight li.A-footerPolitic h4{
 ====================================== PÁGINA DE CONFIGURAÇÕES =======================================
 ====================================================================================================*/
 
-.Se-settingsCenter{
+.Se-settingsCenter {
     border: 1px solid var(--grayColor);
     border-bottom: none;
     border-top: none;
@@ -2090,18 +2286,18 @@ footer .A-footerRight li.A-footerPolitic h4{
     padding-top: 2rem;
 }
 
-.Se-asideLeft{
+.Se-asideLeft {
     position: relative;
     width: 20vw;
     height: 100%;
     overflow-y: hidden;
 }
 
-.Ho-Main .Se-asideLeft .backCells{
+.Ho-Main .Se-asideLeft .backCells {
     top: -2rem;
 }
 
-.Ho-Main .Se-asideRight{
+.Ho-Main .Se-asideRight {
     position: relative;
     width: 40vw;
     height: 100%;
@@ -2112,7 +2308,7 @@ footer .A-footerRight li.A-footerPolitic h4{
     overflow-x: hidden;
 }
 
-.Se-settingsCenter .Se-centerHeader{
+.Se-settingsCenter .Se-centerHeader {
     position: relative;
     display: flex;
     gap: 1.5rem;
@@ -2120,25 +2316,25 @@ footer .A-footerRight li.A-footerPolitic h4{
     padding: 2rem 2rem;
 }
 
-.Se-settingsCenter .Se-centerHeader .bi-arrow-left-circle{
+.Se-settingsCenter .Se-centerHeader .bi-arrow-left-circle {
     font-size: 1.2rem;
     color: var(--grayColor);
     transition: 0.2s transform;
     cursor: pointer;
 }
 
-.Se-settingsCenter .Se-centerHeader .bi-arrow-left-circle:hover{
+.Se-settingsCenter .Se-centerHeader .bi-arrow-left-circle:hover {
     transform: scale(1.1);
     color: var(--secondColor);
     transition: 0.2s transform;
 }
 
 
-.Se-settingsCenter .Se-centerHeader h1{
+.Se-settingsCenter .Se-centerHeader h1 {
     font-size: 1.8rem;
 }
 
-.Se-settingsCenter .Se-centerSections .Se-sectionTitle{
+.Se-settingsCenter .Se-centerSections .Se-sectionTitle {
     display: flex;
     justify-content: space-between;
     padding: 0rem 2rem;
@@ -2151,58 +2347,58 @@ footer .A-footerRight li.A-footerPolitic h4{
 }
 
 .Se-settingsCenter .Se-centerSections .Se-sectionTitle.active,
-.Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover{
+.Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover {
     border-color: var(--secondColor);
     color: var(--secondColor);
     font-weight: 700;
 }
 
-.Se-settingsCenter .Se-centerSections .Se-sectionTitle:last-of-type{
+.Se-settingsCenter .Se-centerSections .Se-sectionTitle:last-of-type {
     border-bottom: 1px solid var(--grayColor);
 }
 
-.Se-settingsCenter .Se-centerSections .Se-sectionTitle div{
+.Se-settingsCenter .Se-centerSections .Se-sectionTitle div {
     display: flex;
     gap: 1rem;
 }
 
-.Se-settingsCenter .Se-centerSections .Se-sectionTitle div img.pageIcon{
+.Se-settingsCenter .Se-centerSections .Se-sectionTitle div img.pageIcon {
     width: 1.2rem;
 }
 
 .Se-settingsCenter .Se-centerSections .Se-sectionTitle.active div img.pageIcon,
-.Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover div img.pageIcon{
+.Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover div img.pageIcon {
     width: 1.3rem;
 }
 
-.Se-settingsCenter .Se-centerSections .Se-sectionTitle.active .bi{
+.Se-settingsCenter .Se-centerSections .Se-sectionTitle.active .bi {
     transform: rotate(0);
 }
 
-.Se-settingsCenter .Se-centerSections .Se-sectionTitle .bi-chevron-right{
+.Se-settingsCenter .Se-centerSections .Se-sectionTitle .bi-chevron-right {
     transform: rotate(90deg);
 }
 
-.Se-settingsCenter .Se-centerSections .Se-sectionTitle .bi-box-arrow-up-right{
+.Se-settingsCenter .Se-centerSections .Se-sectionTitle .bi-box-arrow-up-right {
     font-size: 0.8rem;
 }
 
 body.P-theme .Se-settingsCenter .Se-centerSections .Se-sectionTitle.active div img.pageIcon,
-body.P-theme .Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover div img.pageIcon{
+body.P-theme .Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover div img.pageIcon {
     filter: brightness(0) saturate(100%) invert(42%) sepia(61%) saturate(1820%) hue-rotate(302deg) brightness(87%) contrast(85%);
 }
 
-body.B-theme  .Se-settingsCenter .Se-centerSections .Se-sectionTitle.active div img.pageIcon,
-body.B-theme  .Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover div img.pageIcon{
+body.B-theme .Se-settingsCenter .Se-centerSections .Se-sectionTitle.active div img.pageIcon,
+body.B-theme .Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover div img.pageIcon {
     filter: brightness(0) saturate(100%) invert(63%) sepia(81%) saturate(331%) hue-rotate(139deg) brightness(83%) contrast(87%);
 }
 
-body.Y-theme  .Se-settingsCenter .Se-centerSections .Se-sectionTitle.active div img.pageIcon,
-body.Y-theme  .Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover div img.pageIcon{
+body.Y-theme .Se-settingsCenter .Se-centerSections .Se-sectionTitle.active div img.pageIcon,
+body.Y-theme .Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover div img.pageIcon {
     filter: brightness(0) saturate(100%) invert(66%) sepia(48%) saturate(459%) hue-rotate(16deg) brightness(97%) contrast(85%);
 }
 
-.Se-asideRight .Se-subSection{
+.Se-asideRight .Se-subSection {
     position: relative;
     display: none;
     flex-direction: column;
@@ -2216,11 +2412,11 @@ body.Y-theme  .Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover div i
     padding: 0 2rem;
 }
 
-.Se-asideRight .Se-subSection.active{
+.Se-asideRight .Se-subSection.active {
     display: flex;
 }
 
-.Se-asideRight .Se-subSection .Se-sectionHeader{
+.Se-asideRight .Se-subSection .Se-sectionHeader {
     position: relative;
     display: flex;
     justify-content: flex-start;
@@ -2229,26 +2425,28 @@ body.Y-theme  .Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover div i
     width: 100%;
 }
 
-.Se-asideRight  .Se-subSection .Se-sectionHeader .pageIcon{
+.Se-asideRight .Se-subSection .Se-sectionHeader .pageIcon {
     width: 1.5rem;
 }
 
-body.P-theme .Se-asideRight  .Se-subSection .Se-sectionHeader .pageIcon{
+body.P-theme .Se-asideRight .Se-subSection .Se-sectionHeader .pageIcon {
     filter: brightness(0) saturate(100%) invert(42%) sepia(61%) saturate(1820%) hue-rotate(302deg) brightness(87%) contrast(85%);
 }
-body.B-theme .Se-asideRight  .Se-subSection .Se-sectionHeader .pageIcon{
+
+body.B-theme .Se-asideRight .Se-subSection .Se-sectionHeader .pageIcon {
     filter: brightness(0) saturate(100%) invert(63%) sepia(81%) saturate(331%) hue-rotate(139deg) brightness(83%) contrast(87%);
 }
-body.Y-theme .Se-asideRight  .Se-subSection .Se-sectionHeader .pageIcon{
+
+body.Y-theme .Se-asideRight .Se-subSection .Se-sectionHeader .pageIcon {
     filter: brightness(0) saturate(100%) invert(66%) sepia(48%) saturate(459%) hue-rotate(16deg) brightness(97%) contrast(85%);
 }
 
-.Se-asideRight .Se-accountInformations .Se-userInfo{
+.Se-asideRight .Se-accountInformations .Se-userInfo {
     display: flex;
     gap: 1rem;
 }
 
-.Se-asideRight .Se-accountInformations .Se-userInfo .Re-addImageProfile .Re-userImageProfile{
+.Se-asideRight .Se-accountInformations .Se-userInfo .Re-addImageProfile .Re-userImageProfile {
     position: relative;
     display: flex;
     width: 7rem;
@@ -2266,7 +2464,7 @@ body.Y-theme .Se-asideRight  .Se-subSection .Se-sectionHeader .pageIcon{
     display: none;
 }
 
-.Se-asideRight .Se-accountInformations .Se-userInfo .Re-addImageProfile .Re-addImageIcon{
+.Se-asideRight .Se-accountInformations .Se-userInfo .Re-addImageProfile .Re-addImageIcon {
     position: absolute;
     display: flex;
     right: 0rem;
@@ -2280,7 +2478,7 @@ body.Y-theme .Se-asideRight  .Se-subSection .Se-sectionHeader .pageIcon{
     cursor: pointer;
 }
 
-.Se-asideRight .Se-accountInformations .Se-userInfo .Re-userInfoContainer .Re-userInformations{
+.Se-asideRight .Se-accountInformations .Se-userInfo .Re-userInfoContainer .Re-userInformations {
     display: flex;
     gap: 0.5rem;
     justify-content: flex-start;
@@ -2290,7 +2488,7 @@ body.Y-theme .Se-asideRight  .Se-subSection .Se-sectionHeader .pageIcon{
     line-height: 2rem;
 }
 
-.Se-asideRight .Se-accountInformations .Se-userInfo .Re-userInfoContainer .Re-userInformations .Re-infoLabel{
+.Se-asideRight .Se-accountInformations .Se-userInfo .Re-userInfoContainer .Re-userInformations .Re-infoLabel {
     font-weight: 500;
     font-size: 0.95rem;
 }
@@ -2323,7 +2521,7 @@ body.Y-theme .Se-asideRight  .Se-subSection .Se-sectionHeader .pageIcon{
     gap: 1rem;
 }
 
-.Se-asideRight .Se-accountInformations .Se-editInfo .Se-userInput{
+.Se-asideRight .Se-accountInformations .Se-editInfo .Se-userInput {
     position: relative;
     padding: 0.7rem 0rem 0.5rem 1rem;
     border-radius: 0.7rem;
@@ -2339,8 +2537,8 @@ body.Y-theme .Se-asideRight  .Se-subSection .Se-sectionHeader .pageIcon{
 .Se-asideRight .Se-accountInformations .Se-editInfo .Se-userInput.side-by-side {
     grid-column: span 1;
 }
-  
-.Se-asideRight .Se-accountInformations .Se-editInfo .Se-userInput label{
+
+.Se-asideRight .Se-accountInformations .Se-editInfo .Se-userInput label {
     position: absolute;
     top: -0.5rem;
     left: 1rem;
@@ -2353,7 +2551,7 @@ body.Y-theme .Se-asideRight  .Se-subSection .Se-sectionHeader .pageIcon{
 
 .Se-asideRight .Se-accountInformations .Se-editInfo .Se-userInput input,
 .Se-asideRight .Se-accountInformations .Se-editInfo .Se-userInput textarea,
-.Se-asideRight .Se-accountInformations .Se-editInfo .Se-userInput select{
+.Se-asideRight .Se-accountInformations .Se-editInfo .Se-userInput select {
     position: relative;
     width: 100%;
     border: none;
@@ -2362,11 +2560,11 @@ body.Y-theme .Se-asideRight  .Se-subSection .Se-sectionHeader .pageIcon{
     padding-right: 2rem;
 }
 
-.Se-asideRight .Se-accountInformations .Se-editInfo .Se-userInput textarea::-webkit-scrollbar{
+.Se-asideRight .Se-accountInformations .Se-editInfo .Se-userInput textarea::-webkit-scrollbar {
     display: none;
 }
 
-.Se-asideRight .Se-accountInformations .Se-editInfo .Se-userInput .Se-editIcon{
+.Se-asideRight .Se-accountInformations .Se-editInfo .Se-userInput .Se-editIcon {
     position: absolute;
     right: 1rem;
     font-size: 0.7rem;
@@ -2375,16 +2573,16 @@ body.Y-theme .Se-asideRight  .Se-subSection .Se-sectionHeader .pageIcon{
     color: var(--secondColor);
 }
 
-.Se-asideRight .Se-accountInformations .Re-themeInfo{
+.Se-asideRight .Se-accountInformations .Re-themeInfo {
     display: flex;
     gap: 1.2rem;
 }
 
-.Se-asideRight .Se-accountInformations .Re-themeInfo p{
+.Se-asideRight .Se-accountInformations .Re-themeInfo p {
     font-weight: 500;
 }
 
-.Se-asideRight .Se-accountInformations .Re-themeInfo .Re-themeOptions{
+.Se-asideRight .Se-accountInformations .Re-themeInfo .Re-themeOptions {
     position: relative;
     display: flex;
     gap: 0.5rem;
@@ -2408,17 +2606,17 @@ body.Y-theme .Se-asideRight  .Se-subSection .Se-sectionHeader .pageIcon{
     box-shadow: 0 0 0 2px var(--whiteColor), 0 0 0 3px var(--thirdColor);
 }
 
-.Se-asideRight .Se-accountInformations .Re-themeInfo .Re-themeOptions label{
+.Se-asideRight .Se-accountInformations .Re-themeInfo .Re-themeOptions label {
     cursor: pointer;
     margin-right: 0.4rem;
 }
 
-.Se-asideRight .Se-accountInformations .Re-themeInfo .Re-themeOptions input:checked + label {
+.Se-asideRight .Se-accountInformations .Re-themeInfo .Re-themeOptions input:checked+label {
     color: var(--thirdColor);
     font-weight: 500;
 }
 
-.Se-asideRight .Se-accountInformations .Se-accountBottom{
+.Se-asideRight .Se-accountInformations .Se-accountBottom {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -2426,7 +2624,7 @@ body.Y-theme .Se-asideRight  .Se-subSection .Se-sectionHeader .pageIcon{
     height: fit-content;
 }
 
-.Se-asideRight .Se-accountInformations .Se-accountBottom .Se-dateCriation{
+.Se-asideRight .Se-accountInformations .Se-accountBottom .Se-dateCriation {
     position: relative;
     display: flex;
     flex-wrap: nowrap;
@@ -2435,32 +2633,32 @@ body.Y-theme .Se-asideRight  .Se-subSection .Se-sectionHeader .pageIcon{
     font-size: 0.8rem;
 }
 
-.Se-asideRight .Se-accountInformations .Se-accountDate{
+.Se-asideRight .Se-accountInformations .Se-accountDate {
     color: var(--thirdColor);
     font-weight: 600;
 }
 
-.Se-asideRight .Se-accountInformations .confirmBtn{
+.Se-asideRight .Se-accountInformations .confirmBtn {
     background-color: var(--secondColorLowOpacity);
     padding: 0.6rem 1.3rem 0.6rem 1.3rem;
 }
 
-.Se-asideRight .Se-accountInformations .confirmBtn:hover{
+.Se-asideRight .Se-accountInformations .confirmBtn:hover {
     background-color: var(--secondColor);
 }
 
-.Se-asideRight .Se-accountInformations .Se-accountBottom .confirmBtn{
+.Se-asideRight .Se-accountInformations .Se-accountBottom .confirmBtn {
     background-color: var(--redColor);
     padding: 0.6rem 1.3rem 0.6rem 1.3rem;
 }
 
-.Se-asideRight .Se-childInformations .Se-userChild{
+.Se-asideRight .Se-childInformations .Se-userChild {
     position: relative;
     width: 100%;
     height: fit-content;
 }
 
-.Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader{
+.Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader {
     position: relative;
     display: flex;
     justify-content: flex-start;
@@ -2469,23 +2667,23 @@ body.Y-theme .Se-asideRight  .Se-subSection .Se-sectionHeader .pageIcon{
     width: 100%;
 }
 
-.Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader img{
+.Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader img {
     width: 1.5rem;
 }
 
-body.P-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader img{
+body.P-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader img {
     filter: brightness(0) saturate(100%) invert(42%) sepia(61%) saturate(1820%) hue-rotate(302deg) brightness(87%) contrast(85%);
 }
 
-body.B-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader img{
+body.B-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader img {
     filter: brightness(0) saturate(100%) invert(63%) sepia(81%) saturate(331%) hue-rotate(139deg) brightness(83%) contrast(87%);
 }
 
-body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader img{
+body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader img {
     filter: brightness(0) saturate(100%) invert(66%) sepia(48%) saturate(459%) hue-rotate(16deg) brightness(97%) contrast(85%);
 }
 
-.Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader input{
+.Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader input {
     position: relative;
     font-size: 1.1rem;
     font-weight: 600;
@@ -2496,19 +2694,19 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     cursor: pointer;
 }
 
-.Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader .Se-editIcon{
+.Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader .Se-editIcon {
     position: absolute;
     right: 1rem;
     color: var(--secondColor);
     font-size: 0.8rem;
 }
 
-.Se-asideRight .Se-childInformations .Se-childInputs{
+.Se-asideRight .Se-childInformations .Se-childInputs {
     position: relative;
     padding-left: 2rem;
 }
 
-.Se-asideRight .Se-childInformations .Se-childInputs .Se-childInfoContainer{
+.Se-asideRight .Se-childInformations .Se-childInputs .Se-childInfoContainer {
     position: relative;
     display: flex;
     justify-content: flex-start;
@@ -2517,15 +2715,15 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     transform: translateY(2px);
 }
 
-.Se-asideRight .Se-childInformations .Se-childInputs .Se-childInfoContainer p{
+.Se-asideRight .Se-childInformations .Se-childInputs .Se-childInfoContainer p {
     font-size: 0.9rem;
     font-weight: 500;
 }
 
-.Se-asideRight .Se-childInformations .Se-childInputs .Se-childInfoContainer .Re-sexOptions{
+.Se-asideRight .Se-childInformations .Se-childInputs .Se-childInfoContainer .Re-sexOptions {
     position: relative;
     display: flex;
-    gap: 0.7rem; 
+    gap: 0.7rem;
 }
 
 .Se-asideRight .Se-childInformations .Se-childInputs .Se-childInfoContainer .Re-sexOptions input {
@@ -2546,29 +2744,29 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
 }
 
 
-.Se-asideRight .Se-childInformations .Se-childInputs .Se-childInfoContainer .Re-sexOptions label{
+.Se-asideRight .Se-childInformations .Se-childInputs .Se-childInfoContainer .Re-sexOptions label {
     cursor: pointer;
     margin-right: 0.4rem;
     font-size: 0.8rem;
 }
 
-.Se-asideRight .Se-childInformations .Se-childInputs .Se-childInfoContainer .Re-sexOptions input:checked + label {
+.Se-asideRight .Se-childInformations .Se-childInputs .Se-childInfoContainer .Re-sexOptions input:checked+label {
     font-weight: 500;
 }
 
-.Se-asideRight .Se-childInformations .Se-childInputs .Se-childInfoContainer .Se-childInfo{
+.Se-asideRight .Se-childInformations .Se-childInputs .Se-childInfoContainer .Se-childInfo {
     font-size: 0.8rem;
     font-weight: 400;
 }
 
-.Se-asideRight .Se-childInformations .Se-childInputs .Se-childInfoContainer select{
+.Se-asideRight .Se-childInformations .Se-childInputs .Se-childInfoContainer select {
     position: relative;
     width: 97%;
     border: none;
     transform: translateY(1px);
 }
 
-.Se-asideRight .Se-childInformations .Se-childBottom{
+.Se-asideRight .Se-childInformations .Se-childBottom {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -2578,25 +2776,25 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     font-weight: 600;
 }
 
-.Se-asideRight .Se-childInformations .Se-childBottom .Se-deleteChild{
+.Se-asideRight .Se-childInformations .Se-childBottom .Se-deleteChild {
     color: var(--redColor);
 }
 
-.Se-asideRight .Se-childInformations .Se-childBottom .confirmBtn{
+.Se-asideRight .Se-childInformations .Se-childBottom .confirmBtn {
     background-color: var(--secondColorLowOpacity);
     padding: 0.5rem 1.2rem 0.5rem 1.2rem;
     font-size: 0.7rem;
 }
 
 
-.Se-asideRight .Se-childInformations .confirmBtn{
+.Se-asideRight .Se-childInformations .confirmBtn {
     position: fixed;
     bottom: 0.5rem;
     right: 0.5rem;
     padding: 0.7rem 1rem;
 }
 
-.Se-asideRight .Se-security ul{
+.Se-asideRight .Se-security ul {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -2605,13 +2803,13 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     padding: 0 2rem;
 }
 
-.Se-asideRight .Se-security ul li form{
+.Se-asideRight .Se-security ul li form {
     position: relative;
     padding: 1.5rem 0;
 }
 
 .Se-asideRight .Se-security .Se-editPassword h4,
-.Se-asideRight .Se-security .Se-editPhoneNumber h4{
+.Se-asideRight .Se-security .Se-editPhoneNumber h4 {
     margin-bottom: 1rem;
 }
 
@@ -2622,7 +2820,7 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     gap: 1.7rem;
 }
 
-.Se-asideRight .Se-security .Se-editPassword .Se-passwordInputs .Se-passInput{
+.Se-asideRight .Se-security .Se-editPassword .Se-passwordInputs .Se-passInput {
     position: relative;
     padding: 0.7rem 0.5rem 0.5rem 1rem;
     width: 22rem;
@@ -2631,14 +2829,14 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     border: 1px solid var(--blackColor);
 }
 
-.Se-asideRight .Se-security .Se-editPassword .Se-passwordInputs .Se-passInput input{
+.Se-asideRight .Se-security .Se-editPassword .Se-passwordInputs .Se-passInput input {
     width: 100%;
     height: 100%;
     outline: none;
     border: none;
 }
 
-.Se-asideRight .Se-security .Se-editPassword .Se-passwordInputs .Se-passInput label{
+.Se-asideRight .Se-security .Se-editPassword .Se-passwordInputs .Se-passInput label {
     position: absolute;
     top: -0.5rem;
     left: 1rem;
@@ -2648,7 +2846,7 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     font-weight: 500;
 }
 
-.Se-asideRight .Se-security .Se-editPassword .Se-passwordInputs .Se-passInput .Se-forgotPassword{
+.Se-asideRight .Se-security .Se-editPassword .Se-passwordInputs .Se-passInput .Se-forgotPassword {
     position: absolute;
     right: 0;
     bottom: -1rem;
@@ -2656,7 +2854,7 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     cursor: pointer;
 }
 
-.Se-asideRight .Se-security .Se-editPhoneNumber .Se-phoneInput{
+.Se-asideRight .Se-security .Se-editPhoneNumber .Se-phoneInput {
     position: relative;
     padding: 0.7rem 0.5rem 0.5rem 1rem;
     width: 22rem;
@@ -2665,14 +2863,14 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     border: 1px solid var(--blackColor);
 }
 
-.Se-asideRight .Se-security .Se-editPhoneNumber .Se-phoneInput input{
+.Se-asideRight .Se-security .Se-editPhoneNumber .Se-phoneInput input {
     width: 100%;
     height: 100%;
     outline: none;
     border: none;
 }
 
-.Se-asideRight .Se-security .Se-editPhoneNumber .Se-phoneInput label{
+.Se-asideRight .Se-security .Se-editPhoneNumber .Se-phoneInput label {
     position: absolute;
     top: -0.5rem;
     left: 1rem;
@@ -2682,7 +2880,7 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     font-weight: 500;
 }
 
-.Se-asideRight .Se-security .Se-editPhoneNumber .Se-phoneInput .Se-editIcon{
+.Se-asideRight .Se-security .Se-editPhoneNumber .Se-phoneInput .Se-editIcon {
     position: absolute;
     right: 1rem;
     font-size: 0.7rem;
@@ -2692,7 +2890,7 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
 }
 
 .Se-asideRight .Se-security .Se-editPassword .confirmBtn,
-.Se-asideRight .Se-security .Se-editPhoneNumber .confirmBtn{
+.Se-asideRight .Se-security .Se-editPhoneNumber .confirmBtn {
     position: absolute;
     bottom: 0;
     right: 0;
@@ -2701,23 +2899,23 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     font-size: 1rem;
 }
 
-.Se-asideRight .Se-accountInformations .Se-accountType{
+.Se-asideRight .Se-accountInformations .Se-accountType {
     display: flex;
     gap: 1.2rem;
 }
 
-.Se-asideRight .Se-accountInformations .Se-accountType p{
+.Se-asideRight .Se-accountInformations .Se-accountType p {
     font-weight: 500;
 }
 
-.Se-asideRight .Se-accountInformations .Se-accountType .Se-accountOptions{
+.Se-asideRight .Se-accountInformations .Se-accountType .Se-accountOptions {
     position: relative;
     display: flex;
     gap: 4rem;
     font-size: 0.8rem;
 }
 
-.Se-asideRight .Se-accountInformations .Se-accountType .Se-accountOptions div{
+.Se-asideRight .Se-accountInformations .Se-accountType .Se-accountOptions div {
     position: relative;
     display: flex;
     gap: 0.5rem;
@@ -2739,17 +2937,17 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     box-shadow: 0 0 0 2px var(--whiteColor), 0 0 0 3px var(--thirdColor);
 }
 
-.Se-asideRight .Se-accountInformations .Se-accountType .Se-accountOptions label{
+.Se-asideRight .Se-accountInformations .Se-accountType .Se-accountOptions label {
     cursor: pointer;
     margin-right: 0.4rem;
 }
 
-.Se-asideRight .Se-accountInformations .Se-accountType .Se-accountOptions input:checked + label {
+.Se-asideRight .Se-accountInformations .Se-accountType .Se-accountOptions input:checked+label {
     color: var(--thirdColor);
     font-weight: 500;
 }
 
-.Se-asideRight .Se-accountInformations .Se-accountType .Se-accountOptions .pageIcon{
+.Se-asideRight .Se-accountInformations .Se-accountType .Se-accountOptions .pageIcon {
     font-size: 0.7rem;
 }
 
@@ -2758,7 +2956,7 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
 ===================================== MODAIS DAS CONFIGURAÇÕES =======================================
 ====================================================================================================*/
 
-.modalSection{
+.modalSection {
     position: fixed;
     width: 100vw;
     height: 100vh;
@@ -2769,11 +2967,11 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     z-index: +999;
 }
 
-.modalSection.close{
+.modalSection.close {
     display: none;
 }
 
-.pageModal{
+.pageModal {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -2783,11 +2981,11 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     border: 2px solid var(--firstColor);
 }
 
-.pageModal.close{
+.pageModal.close {
     display: none;
 }
 
-.modalSection .pageModal .modalHeader{
+.modalSection .pageModal .modalHeader {
     position: relative;
     display: flex;
     gap: 1.5rem;
@@ -2795,24 +2993,24 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     width: 100%;
 }
 
-.modalSection .pageModal .modalHeader .bi-arrow-left-circle{
+.modalSection .pageModal .modalHeader .bi-arrow-left-circle {
     font-size: 1.4rem;
     color: var(--grayColor);
     transition: 0.2s transform;
     cursor: pointer;
 }
 
-.modalSection .pageModal .modalHeader .bi-arrow-left-circle:hover{
+.modalSection .pageModal .modalHeader .bi-arrow-left-circle:hover {
     transform: scale(1.1);
     color: var(--secondColor);
     transition: 0.2s transform;
 }
 
-.modalSection .pageModal .modalHeader h1{
+.modalSection .pageModal .modalHeader h1 {
     font-size: 1.8rem;
 }
 
-.modalSection .pageModal .confirmBtn{
+.modalSection .pageModal .confirmBtn {
     background-color: var(--secondColorLowOpacity);
     padding: 0.6rem 1.5rem;
     font-size: 1rem;
@@ -2825,7 +3023,7 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     gap: 1.5rem;
 }
 
-.modalSection .Se-addNewChildModal .Se-childInputs .Se-childInput{
+.modalSection .Se-addNewChildModal .Se-childInputs .Se-childInput {
     position: relative;
     padding: 0.7rem 0.5rem 0.5rem 1.5rem;
     width: 22rem;
@@ -2835,21 +3033,21 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
 }
 
 .modalSection .Se-addNewChildModal .Se-childInputs .Se-childInput input,
-.modalSection .Se-addNewChildModal .Se-childInputs .Se-childInput select{
+.modalSection .Se-addNewChildModal .Se-childInputs .Se-childInput select {
     width: 100%;
     height: 100%;
     outline: none;
     border: none;
 }
 
-.modalSection .Se-addNewChildModal .Se-childInputs .Se-childInput .pageIcon{
+.modalSection .Se-addNewChildModal .Se-childInputs .Se-childInput .pageIcon {
     position: absolute;
     right: 0.65rem;
     width: 0.9rem;
     filter: brightness(0) saturate(100%)
 }
 
-.modalSection .Se-addNewChildModal .Se-childInputs .Se-childInput label{
+.modalSection .Se-addNewChildModal .Se-childInputs .Se-childInput label {
     position: absolute;
     top: -0.5rem;
     left: 1rem;
@@ -2859,7 +3057,7 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     font-weight: 500;
 }
 
-.modalSection .Se-addNewChildModal .Se-childInputs .Re-childBoxSex{
+.modalSection .Se-addNewChildModal .Se-childInputs .Re-childBoxSex {
     position: relative;
     display: flex;
     gap: 1rem;
@@ -2867,16 +3065,16 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     transform: translateY(2px);
 }
 
-.modalSection .Se-addNewChildModal .Se-childInputs .Re-childBoxSex p{
+.modalSection .Se-addNewChildModal .Se-childInputs .Re-childBoxSex p {
     font-size: 1rem;
     font-weight: 600;
     color: var(--secondColor);
 }
 
-.modalSection .Se-addNewChildModal .Se-childInputs .Re-childBoxSex .Re-sexOptions{
+.modalSection .Se-addNewChildModal .Se-childInputs .Re-childBoxSex .Re-sexOptions {
     position: relative;
     display: flex;
-    gap: 0.7rem; 
+    gap: 0.7rem;
 }
 
 .modalSection .Se-addNewChildModal .Se-childInputs .Re-childBoxSex .Re-sexOptions input {
@@ -2897,20 +3095,20 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
 }
 
 
-.modalSection .Se-addNewChildModal .Se-childInputs .Re-childBoxSex .Re-sexOptions label{
+.modalSection .Se-addNewChildModal .Se-childInputs .Re-childBoxSex .Re-sexOptions label {
     cursor: pointer;
     margin-right: 0.4rem;
 }
 
-.modalSection .Se-addNewChildModal .Se-childInputs .Re-childBoxSex .Re-sexOptions input:checked + label {
+.modalSection .Se-addNewChildModal .Se-childInputs .Re-childBoxSex .Re-sexOptions input:checked+label {
     font-weight: 600;
 }
 
-.modalSection .Se-addNewChildModal .Se-modalSubmit{
+.modalSection .Se-addNewChildModal .Se-modalSubmit {
     top: 10%;
 }
 
-.modalSection .Se-deleteAccountModal{
+.modalSection .Se-deleteAccountModal {
     border-color: var(--redColor);
 }
 
@@ -2921,7 +3119,7 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     gap: 2rem;
 }
 
-.modalSection .Se-deleteAccountModal .Se-deleteInputs .Se-deleteInput{
+.modalSection .Se-deleteAccountModal .Se-deleteInputs .Se-deleteInput {
     position: relative;
     padding: 0.7rem 0.5rem 0.5rem 1rem;
     width: 22rem;
@@ -2930,14 +3128,14 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     border: 1px solid var(--blackColor);
 }
 
-.modalSection .Se-deleteAccountModal .Se-deleteInputs .Se-deleteInput input{
+.modalSection .Se-deleteAccountModal .Se-deleteInputs .Se-deleteInput input {
     width: 100%;
     height: 100%;
     outline: none;
     border: none;
 }
 
-.modalSection .Se-deleteAccountModal .Se-deleteInputs .Se-deleteInput label{
+.modalSection .Se-deleteAccountModal .Se-deleteInputs .Se-deleteInput label {
     position: absolute;
     top: -0.5rem;
     left: 1rem;
@@ -2947,40 +3145,40 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     font-weight: 500;
 }
 
-.modalSection .Se-deleteAccountModal .Se-deleteInputs .Se-deleteInput:first-of-type{
+.modalSection .Se-deleteAccountModal .Se-deleteInputs .Se-deleteInput:first-of-type {
     display: flex;
     pointer-events: none;
 }
 
-.modalSection .Se-deleteAccountModal .Se-deleteInputs .Se-deleteInput:first-of-type::placeholder{
+.modalSection .Se-deleteAccountModal .Se-deleteInputs .Se-deleteInput:first-of-type::placeholder {
     color: var(--redColor);
     font-size: 2rem;
     text-align: center;
 }
 
-.modalSection .Se-deleteAccountModal .Se-deleteInputs .Se-deleteInput:first-of-type .Re-fakePlaceholder{
+.modalSection .Se-deleteAccountModal .Se-deleteInputs .Se-deleteInput:first-of-type .Re-fakePlaceholder {
     background-color: var(--whiteColor);
 }
 
-.modalSection .Se-deleteAccountModal .Se-deleteInputs .Se-deleteInput:first-of-type .Re-fakePlaceholder img{
+.modalSection .Se-deleteAccountModal .Se-deleteInputs .Se-deleteInput:first-of-type .Re-fakePlaceholder img {
     width: 0.7rem;
 }
 
-.modalSection .Se-deleteAccountModal .Se-modalSubmit{
+.modalSection .Se-deleteAccountModal .Se-modalSubmit {
     background-color: var(--redColor);
     opacity: 0.5;
 }
 
-.modalSection .Se-deleteAccountModal .Se-modalSubmit:hover{
+.modalSection .Se-deleteAccountModal .Se-modalSubmit:hover {
     background-color: var(--redColor);
     opacity: 1;
 }
 
-.modalSection .Ho-postSomething{
+.modalSection .Ho-postSomething {
     padding: 2.5rem 1rem 0 0.8rem;
 }
 
-.Ho-postSomething .closeModal{
+.Ho-postSomething .closeModal {
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
@@ -2990,13 +3188,13 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     cursor: pointer;
 }
 
-.Ho-postSomething .closeModal:hover{
+.Ho-postSomething .closeModal:hover {
     transform: scale(1.2);
     color: var(--secondColor);
     transition: 0.2s transform;
 }
 
-.Ho-postSomething .Ho-postTop .Ho-postTitle{
+.Ho-postSomething .Ho-postTop .Ho-postTitle {
     position: relative;
     margin-bottom: 0.5rem;
     color: var(--grayColor);
@@ -3005,12 +3203,12 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     gap: 0.5rem;
 }
 
-.Ho-postSomething .Ho-postTop .Ho-postTitle label{
+.Ho-postSomething .Ho-postTop .Ho-postTitle label {
     font-weight: 600;
     font-size: 0.9rem;
 }
 
-.Ho-postSomething .Ho-postTop .Ho-postTitle .Ho-postTitleInput{
+.Ho-postSomething .Ho-postTop .Ho-postTitle .Ho-postTitleInput {
     position: relative;
     outline: none;
     border: none;
@@ -3021,7 +3219,7 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     padding-right: 3rem;
 }
 
-.Ho-postSomething .Ho-postTop .Ho-postTitle .Ho-titleCharacters{
+.Ho-postSomething .Ho-postTop .Ho-postTitle .Ho-titleCharacters {
     position: absolute;
     right: 0.5rem;
     bottom: 0.1rem;
@@ -3029,12 +3227,12 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     font-size: 0.65rem;
 }
 
-.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-maxColabsInput{
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-maxColabsInput {
     cursor: text;
     margin-left: 1rem;
 }
 
-.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-maxColabsInput input{
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-maxColabsInput input {
     width: 3rem;
     outline: none;
     font-size: 1rem;
@@ -3042,17 +3240,17 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     overflow: visible;
 }
 
-.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-maxColabsInput input:focus{
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-maxColabsInput input:focus {
     border-bottom: 1px solid var(--grayColor);
 }
 
-.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-maxColabsInput input::placeholder{
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-maxColabsInput input::placeholder {
     color: var(--blackColor);
     font-size: 1rem;
     overflow: visible;
 }
 
-.Au-auxilioModalBack{
+.Au-auxilioModalBack {
     position: fixed;
     width: 100vw;
     height: 100vh;
@@ -3065,11 +3263,11 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     cursor: default;
 }
 
-.Au-auxilioModalBack.close{
+.Au-auxilioModalBack.close {
     display: none;
 }
 
-.Au-auxilioModalBack .Au-auxilioModal{
+.Au-auxilioModalBack .Au-auxilioModal {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -3085,11 +3283,11 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     overflow-y: auto;
 }
 
-.Au-auxilioModalBack .Au-auxilioModal.close{
+.Au-auxilioModalBack .Au-auxilioModal.close {
     display: none;
 }
 
-.Au-auxilioModalBack .Au-auxilioModal .Au-modalHeader{
+.Au-auxilioModalBack .Au-auxilioModal .Au-modalHeader {
     position: relative;
     width: 100%;
     display: flex;
@@ -3097,7 +3295,7 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     background-color: var(--whiteColor);
 }
 
-.Au-auxilioModalBack .Au-auxilioModal .Au-modalHeader .auxilioDate{
+.Au-auxilioModalBack .Au-auxilioModal .Au-modalHeader .auxilioDate {
     position: absolute;
     color: var(--blackColor);
     left: 1rem;
@@ -3105,7 +3303,7 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     font-size: 0.8rem;
 }
 
-.Au-auxilioModalBack .Au-auxilioModal .Au-modalHeader .auxilioTitle{
+.Au-auxilioModalBack .Au-auxilioModal .Au-modalHeader .auxilioTitle {
     position: relative;
     height: 100%;
     display: flex;
@@ -3116,7 +3314,7 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     color: var(--thirdColor);
 }
 
-.Au-auxilioModalBack .Au-auxilioModal .Au-modalHeader .Au-closeModal{
+.Au-auxilioModalBack .Au-auxilioModal .Au-modalHeader .Au-closeModal {
     position: absolute;
     right: 0;
     top: 0;
@@ -3127,18 +3325,18 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     cursor: pointer;
 }
 
-.Au-auxilioModalBack .Au-auxilioModal .Au-modalHeader .Au-closeModal:hover{
+.Au-auxilioModalBack .Au-auxilioModal .Au-modalHeader .Au-closeModal:hover {
     color: var(--secondColor);
     transform: scale(1.2);
     transition: 0.2s;
 }
 
-.Au-auxilioModalBack .Au-auxilioModal .Au-auxilioUser{
+.Au-auxilioModalBack .Au-auxilioModal .Au-auxilioUser {
     display: flex;
     gap: 1rem;
 }
 
-.Au-auxilioModalBack .Au-auxilioModal .Au-auxilioUser .postOwnerImage{
+.Au-auxilioModalBack .Au-auxilioModal .Au-auxilioUser .postOwnerImage {
     position: relative;
     width: 4rem;
     height: 4rem;
@@ -3151,13 +3349,13 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     overflow: hidden;
 }
 
-.Au-auxilioModalBack .Au-auxilioModal .Au-auxilioUser img{
+.Au-auxilioModalBack .Au-auxilioModal .Au-auxilioUser img {
     position: relative;
     width: 100%;
     object-fit: cover;
 }
 
-.Au-auxilioModalBack .Au-auxilioModal .Au-auxilioUser .postUserNames{
+.Au-auxilioModalBack .Au-auxilioModal .Au-auxilioUser .postUserNames {
     width: 100%;
     position: relative;
     display: flex;
@@ -3165,22 +3363,22 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     align-items: flex-start;
 }
 
-.Au-auxilioModalBack .Au-auxilioModal .Au-auxilioUser .postUserNames p:first-of-type{
+.Au-auxilioModalBack .Au-auxilioModal .Au-auxilioUser .postUserNames p:first-of-type {
     font-size: 1.1em;
     font-weight: bolder;
 }
 
-.Au-auxilioModalBack .Au-auxilioModal .Au-auxilioUser .postUserNames p:last-of-type{
+.Au-auxilioModalBack .Au-auxilioModal .Au-auxilioUser .postUserNames p:last-of-type {
     color: var(--grayColor);
     font-size: 0.8rem;
 }
 
-.Au-auxilioModalBack .Au-auxilioModal .Au-auxilioUser .confirmBtn{
+.Au-auxilioModalBack .Au-auxilioModal .Au-auxilioUser .confirmBtn {
     padding: 0.6rem 1.5rem;
     font-size: 1rem;
 }
 
-.Au-auxilioModalBack .Au-auxilioModal .Au-textPost{
+.Au-auxilioModalBack .Au-auxilioModal .Au-textPost {
     position: relative;
     width: 100%;
     height: fit-content;
@@ -3188,16 +3386,16 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     text-align: justify;
 }
 
-.Au-auxilioModalBack .Au-auxilioModal .Au-childPostSection{
+.Au-auxilioModalBack .Au-auxilioModal .Au-childPostSection {
     position: relative;
     width: 100%;
     height: max-content;
     margin-bottom: 2rem;
 }
 
-.Au-auxilioModalBack .Au-auxilioModal .Au-childPostSection .Au-childrenName{
+.Au-auxilioModalBack .Au-auxilioModal .Au-childPostSection .Au-childrenName {
     position: relative;
-    width: 100%;    
+    width: 100%;
     display: flex;
     justify-content: flex-start;
     gap: 1rem;
@@ -3205,11 +3403,11 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     font-size: 1rem;
 }
 
-.Au-auxilioModalBack .Au-auxilioModal .Au-childPostSection .Au-childrenName img{
+.Au-auxilioModalBack .Au-auxilioModal .Au-childPostSection .Au-childrenName img {
     width: 1.3rem;
-}   
+}
 
-.Au-auxilioModalBack .Au-auxilioModal .Au-childPostSection .postsImages{
+.Au-auxilioModalBack .Au-auxilioModal .Au-childPostSection .postsImages {
     position: relative;
     bottom: -1rem;
     display: flex;
@@ -3223,7 +3421,7 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     cursor: pointer;
 }
 
-.Au-auxilioModalBack .Au-auxilioModal .Au-postExtraInfos{
+.Au-auxilioModalBack .Au-auxilioModal .Au-postExtraInfos {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -3234,13 +3432,13 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     transform: translateY(-50%);
 }
 
-.Au-auxilioModalBack .Au-auxilioModal .Au-postExtraInfos .Au-extraInfos{
+.Au-auxilioModalBack .Au-auxilioModal .Au-postExtraInfos .Au-extraInfos {
     position: relative;
     display: flex;
     gap: 0.5rem;
 }
 
-.Au-auxilioModalBack .Au-auxilioModal .Au-childPostSection .confirmBtn{
+.Au-auxilioModalBack .Au-auxilioModal .Au-childPostSection .confirmBtn {
     position: absolute;
     bottom: 0;
     right: 1rem;
@@ -3248,40 +3446,40 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     font-size: 1.1rem;
 }
 
-.Au-auxilioModalBack .Au-auxilioModal .postInteractions{
+.Au-auxilioModalBack .Au-auxilioModal .postInteractions {
     display: flex;
     width: 100%;
     gap: 0.5rem;
     color: var(--grayColor);
 }
 
-.Au-auxilioModalBack .Au-auxilioModal .postInteractions h3{
+.Au-auxilioModalBack .Au-auxilioModal .postInteractions h3 {
     color: var(--secondColor);
 }
 
-.Au-auxilioModalBack .Au-auxilioModal .postInteractions div{
+.Au-auxilioModalBack .Au-auxilioModal .postInteractions div {
     display: flex;
     gap: 0.5rem;
 }
 
-.Au-auxilioModalBack .Au-auxilioModal .postInteractions div{
+.Au-auxilioModalBack .Au-auxilioModal .postInteractions div {
     display: flex;
     font-size: 0.8rem;
     gap: 0.5rem;
     cursor: pointer;
 }
 
-.Au-auxilioModalBack .Au-auxilioModal .postInteractions div:hover{
+.Au-auxilioModalBack .Au-auxilioModal .postInteractions div:hover {
     color: var(--secondColor);
 }
 
-.Au-auxilioModalBack .Au-auxilioModal .postInteractions span{
+.Au-auxilioModalBack .Au-auxilioModal .postInteractions span {
     height: 1px;
     width: 3rem;
     background-color: var(--grayColor);
 }
 
-.Au-auxilioModalBack .Au-auxilioModal .postInteractions span:nth-of-type(2){
+.Au-auxilioModalBack .Au-auxilioModal .postInteractions span:nth-of-type(2) {
     width: 100%;
 }
 

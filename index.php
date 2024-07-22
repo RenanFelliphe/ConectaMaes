@@ -23,9 +23,15 @@
                         <img src="app/assets/imagens/icons/icons8-amigos-90.png" alt="" width="30px">
                         <span class="La-articleBar La-focus"></span>
                     </div>
-                    
-                    <p>O <span class="La-focus">ConectaMães</span> é uma plataforma online onde mães podem se conectar, compartilhar experiências e oferecer apoio mútuo por meio de postagens e comentários. O objetivo é criar uma comunidade virtual inclusiva e solidária, proporcionando um espaço seguro para as mães compartilharem suas histórias e buscarem conselhos.</p>
-                    <img src="app/assets/imagens/figuras/mom_boy.png" class="La-momBoy La-momImageRight">
+                    <div class = "La-seccaoDeTextoDireita">
+                        <h1 class="La-tituloSeccao">Todos por uma maternidade mais fácil!</h1>
+                        <h2 class ="La-subtituloSeccao"><span class="La-focus">Busque ajuda de semelhantes!</span></h2>
+                        <p class = "La-paragrafo">O <span class="La-focus">
+                        ConectaMães</span> permite  <span class="La-focus">oferecer e receber apoio</span></br>
+                        de mães que já passaram por experiências</br>
+                        semelhantes às suas.</p>
+                    </div>
+                    <img src="app/assets/imagens/figuras/maeLevantandoCrianca.png" class="La-maeLevantandoCrianca La-momImageRight">
                 </article>
 
                 <article class="La-Sharing">
@@ -33,8 +39,15 @@
                         <img src="app/assets/imagens/icons/icons8-pessoas-trabalhando-juntas-90.png" alt="" width="30px">
                         <span class="La-articleBar La-focus"></span>
                     </div>
-                    <img src="app/assets/imagens/figuras/mom_style.png" class="La-momStyle La-momImageLeft">
-                    <p><span class="La-focus">Compartilhe</span> experiências na seção de <span class="La-focus">Relatos</span> para criar sua rede de apoio virtual e contribuir para a comunidade de mães. A plataforma oferece um espaço acolhedor para compartilhar, oferecer conselhos e encontrar conforto nas histórias compartilhadas. A conexão e interação com essa rede promovem um senso de comunidade solidária.</p> 
+                    <img src="app/assets/imagens/figuras/maeConversando.png" class="La-momStyle La-momImageLeft">
+                    <div class = "La-seccaoDeTextoEsquerda">
+                    <h1 class="La-tituloSeccao">Uma  rede social colaborativa!</h1>
+                        <h2 class ="La-subtituloSeccao"> <span class="La-focus">Crie uma rede de apoio virtual!</span></h2>
+                        <p class = "La-paragrafo">A plataforma oferece um novo espaço para o</br>
+                         compartilhamento, anônimo ou não, de <span class="La-focus"> Relatos</span>  e</br>
+                         interação entre as mães. Um espaço para a formação</br>
+                         de uma nova <span class="La-focus">rede de apoio maternal</span> .  </p>
+                    </div>
                 </article>
 
                 <article class="La-articleFollowing">
@@ -42,8 +55,14 @@
                         <img src="app/assets/imagens/icons/icons8-adicionar-grupo-de-usuários-mulher-homem-90.png" alt="Icone Adicionar Grupo de Usuarios Mulher Homem azul" width="30px">
                         <span class="La-articleBar La-focus"></span>
                     </div>
-                    <p>Ao <span class="La-focus">seguir</span> outros usuários, você amplia sua rede de apoio virtual e cria novas conexões. Interagindo, você fortalece esses laços, compartilha experiências e recebe suporte mútuo, contribuindo para uma comunidade mais inclusiva e solidária.</p> 
-                    <img src="app/assets/imagens/figuras/mom_group.png" class="La-momGroup La-momImageRight">
+                    <div class = "La-seccaoDeTextoDireita">
+                        <h1 class="La-tituloSeccao">Conecte-se com outras mães! </h1>
+                        <h2 class ="La-subtituloSeccao"><span class="La-focus">Compartilhe suas experiências!</span> </h2>
+                        <p class = "La-paragrafo">Uma oportunidade para <span class="La-focus">relatar com outras mães os</span></br>
+                         momentos mais felizes, tristes, engraçados e difíceis</br>
+                         da sua vida como mãe.</p>
+                    </div>
+                    <img src="app/assets/imagens/figuras/maeCelular.png" class="La-maecelular La-momImageRight">
                 </article>
 
                 <article class="La-articleHelping">
@@ -51,7 +70,13 @@
                         <img src="app/assets/imagens/icons/icons8-confiança-90.png" alt="Icone Confiança azul" width="30px">
                         <span class="La-articleBar La-focus"></span>
                     </div>
-                    <p>Na seção de <span class="La-focus">Pedidos</span>, você pode solicitar e oferecer apoio às outras mães. É um espaço para compartilhar necessidades, experiências e colaborar mutuamente. Participando dessa seção, você busca orientação e suporte, ao mesmo tempo em que contribui com seu conhecimento e solidariedade para ajudar outras mães.</p>
+                    <div class = "La-seccaoDeTextoDireita">
+                        <h1 class="La-tituloSeccao">Encontre ajuda anonimamente!</h1>
+                        <h2 class ="La-subtituloSeccao"><span class="La-focus"> Ajude os outros sem se expor!</span></h2>
+                        <p class = "La-paragrafo">No <span class="La-focus">ConectaMães</span> você consegue descrever as suas</br>
+                         dificuldades e conseguir ajuda ou ajudar mesmo <span class="La-focus">sem</br> precisar se expor publicamente</span>. </p>
+                    </div>
+                    <img src="app/assets/imagens/figuras/maePresente.png" class="La-maePresente La-momImageRight">
                 </article>
 
                 <article class="La-articleRating">
@@ -59,9 +84,15 @@
                         <img src="app/assets/imagens/icons/icons8-estrela-90.png" alt="Icone de Estrela rosa" width="30px">
                         <span class="La-articleBar La-focus"></span>
                     </div>
-                    <p>Avalie os <span class="La-focus">Relatos</span> e <span class="La-focus">Pedidos</span> para identificar conteúdos relevantes e contribuir para a comunidade. Sua participação é essencial para promover interações significativas e oferecer suporte mútuo entre os membros.</p>
-                    <img src="app/assets/imagens/figuras/mom_opinion.png" class="La-momOpinion La-momImageRight">
-                </article>
+                    <img src="app/assets/imagens/figuras/maeEstela.png" class="La-maeEstrela La-momImageLeft">
+                    <div class = "La-seccaoDeTextoEsquerda">
+                        <h1 class="La-tituloSeccao">Sua opinião é importante!</h1>
+                        <h2 class ="La-subtituloSeccao"><span class="La-focus">Ajude a manter a comunidade ativa!</span></h2>
+                        <p class = "La-paragrafo">Avalie e interaja com os <span class="La-focus">Relatos</span> e <span class="La-focus">Pedidos</span> e ajude na</br>
+                         identificação de conteúdos relevantes para a</br>
+                         comunidade.</p>
+                    </div>
+                  </article>
             </section>
 
             <section class="La-landingSections">
