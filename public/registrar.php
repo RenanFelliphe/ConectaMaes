@@ -98,7 +98,7 @@
                         </div>
                         <div class="Re-input inputDataNasc">
                             <input class="Re-userInput validate" type="date" id="dataNascimento" name="dataNascimentoRegistro" onchange="validateBornDate()" required>
-                            <label class="Re-fakePlaceholder notEmpty" id="dataNascPlaceholder" for="dataNascimento">Data de Nascimento</label>
+                            <label class="Re-fakePlaceholder notEmpty" for="dataNascimento">Data de Nascimento</label>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
                             <div class="errorMessageContainer">
                                 <div class="errorMessageContent"></div>
@@ -145,6 +145,9 @@
                         <div class="Re-input input-full inputBio">
                             <textarea class="Re-userInput validate" name="biografiaUsuarioRegistro" id="biografiaUsuario" style="resize: none;" oninput="validateBio()"></textarea>                        
                             <label class="Re-fakePlaceholder" for="biografiaUsuario">Biografia</label>
+                            <div class="Re-charactersCounter">
+                                <span class="Re-charactersNumber">0</span>/<span class="Re-maxCharacters">257</span>
+                            </div>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
                             <div class="errorMessageContainer">
                                 <div class="errorMessageContent"></div>
@@ -190,18 +193,13 @@
                                 <p class="Re-userInfo" id="infoLocalizacao"></p>
                             </div>
                         </div>
-
-                        <div class="Re-termsBox">
-                            <input type="checkbox" id="Re-terms">
-                            <label for="Re-terms">Eu li e concordo com os Termos e Condições</label>
-                        </div>
                     </div>
                 </div>
                 
                 <div class="Re-registerBottom">
                     <button class="Re-registerNext confirmBtn" name="proximo" type="button">Próximo</button>
                     <button class="Re-registerSubmit confirmBtn close" type="submit" name="registrar">Registrar</button>
-                    <p class="Re-goLogin">Já possui uma conta? <a href="login.php">Entre</a></p>
+                    <p class="Re-goLogin">Já possui uma conta?  <a href="login.php">Entre</a></p>
                 </div>
                 <?php
                     if(isset($_POST['registrar'])){
@@ -238,6 +236,8 @@
                 const errorMessageContainers = document.querySelectorAll('.errorMessageContainer');
                 const errorMessageContent = document.querySelectorAll('.errorMessageContent');
                 const errorIcon = document.querySelectorAll('.errorIcon');
+
+                var maxChar = 0;
 
                 function setError(index, message){
                     inputContainers[index].style.border = "2px solid var(--redColor)";
@@ -283,15 +283,16 @@
 
                 function validateName(){
                     const username = validateInputs[0].value;
+                    maxChar = 50;
 
                     checkEmptyInput(0);
                     if(username.length === 0){
                         removeError(0);
                     } else if(username.length <= 3){
                         setError(0, "O nome de usuário deve ter mais de <span class='mainError'>3 caracteres.</span>");
-                    } else if(username.length > 50){
+                    } else if(username.length > maxChar){
                         setError(0, "O nome de usuário é <span class='mainError'>longo demais.</span>");
-                        username = username.slice(0, 50);
+                        username = username.slice(0, maxChar);
                     } else if(/[áàâãäéèêëíìîïóòôõöúùûü]/i.test(username)){
                         setError(0, "O nome de usuário não pode ter <span class='mainError'>acentos.</span>");
                     } else if(/[ç]/i.test(username)){
@@ -310,15 +311,17 @@
                 function validateEmail() {
                     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
                     const email = validateInputs[1].value;
+                    maxChar = 256;
+
                     checkEmptyInput(1);
 
                     if(email.length === 0){
                         removeError(1);
+                    } else if (email.length > maxChar) {
+                        setError(1, "O e-mail é <span class='mainError'>longo demais.</span>");
+                        email = email.slice(0, maxChar);
                     } else if (!emailRegex.test(email)) {
                         setError(1, "Insira um <span class='mainError'>e-mail válido.</span>");
-                    } else if (email.length > 256) {
-                        setError(1, "O e-mail é <span class='mainError'>longo demais.</span>");
-                        email = email.slice(0, 256);
                     } else {
                         removeError(1);
                     }
@@ -330,7 +333,8 @@
                     const hasLowerCase = /[a-z]/.test(password);
                     const hasDigit = /\d/.test(password);
                     const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-
+                    maxChar = 100;
+                    
                     checkEmptyInput(2);
                     validateConfirmPassword();
 
@@ -338,6 +342,9 @@
                         removeError(2);
                     } else if (password.length < 8) {
                         setError(2, "A senha deve ter mais de <span class='mainError'>8 caracteres.</span>");
+                    } else if (password.length > maxChar) {
+                        setError(2, "A senha é <span class='mainError'>longa demais.</span>");
+                        password = password.slice(0, maxChar);
                     } else if (!hasUpperCase) {
                         setError(2, "A senha deve conter <span class='mainError'>letras maiúsculas.</span>");
                     } else if (!hasLowerCase) {
@@ -346,9 +353,6 @@
                         setError(2, "A senha deve conter <span class='mainError'>números.</span>");
                     } else if (!hasSpecialChar) {
                         setError(2, "A senha deve conter caracteres especiais <span class='mainError'>(!@#$%^&*).</span>");
-                    } else if (password.length > 100) {
-                        setError(2, "A senha é <span class='mainError'>longa demais.</span>");
-                        password = password.slice(0, 100);
                     } else {
                         removeError(2);
                     }
@@ -370,6 +374,7 @@
                 
                 function validateFullName() {
                     const fullName = validateInputs[4].value;
+                    maxChar = 100;
 
                     checkEmptyInput(4);
 
@@ -378,14 +383,14 @@
 
                     if (fullName.length === 0) {
                         removeError(4);
+                    } else if (fullName.length > maxChar) {
+                        setError(4, "O nome é <span class='mainError'>longo demais.</span>");
                     } else if (/\d/.test(fullName)) {
                         setError(4, "O nome não pode possuir <span class='mainError'>números.</span>");
                     } else if (!nameRegex.test(fullName)) {
                         setError(4, "O nome pode conter apenas <span class='mainError'>letras, espaços, acentos, hífens, cedilhas e apóstrofos.</span>");
                     } else if (!/^(\w+\s\w+.*)$/.test(fullName)) {
                         setError(4, "Insira o seu <span class='mainError'>nome completo.</span>");
-                    } else if (fullName.length > 100) {
-                        setError(4, "O nome é <span class='mainError'>longo demais.</span>");
                     } else {
                         removeError(4);
                     }
@@ -404,12 +409,16 @@
                     ];
 
                     const phone = validateInputs[5].value;
-                    const ddd = phone.substring(0, 2); // Extrair os primeiros dois dígitos como DDD
-                    const phoneRegex = /^\d{2}9\d{8}$/;
+                    const ddd = phone.substring(0, 2); // Extrai os primeiros dois dígitos como DDD
+                    const phoneRegex = /^\d{10,11}$/;
+
+                    maxChar = 11;
 
                     checkEmptyInput(5);
                     if (phone.length === 0) {
                         removeError(5);
+                    } else if (phone.length > maxChar) {
+                        setError(5, "O número de telefone é <span class='mainError'>longo demais.</span>");
                     } else if (!phoneRegex.test(phone)) {
                         setError(5, "Insira um <span class='mainError'>telefone válido.</span>");
                     } else if (!validDDDs.includes(ddd)) {
@@ -422,14 +431,16 @@
                 function validateBornDate() {
                     const birthDate = new Date(validateInputs[6].value);
                     const today = new Date();
-                    const hundredYearsAgo = new Date(today.getFullYear() - 100, today.getMonth(), today.getDate());
-
+                    const hundredYearsAgo = new Date(today.setFullYear(today.getFullYear() - 100));
+                    
                     checkEmptyInput(6);
 
-                    if (birthDate > today) {
-                        setError(6, "A data de nascimento não pode ser futura.");
+                    if (validateInputs[6].value === "") {
+                        removeError(6);
+                    } else if (birthDate > new Date()) {
+                        setError(6, "A data de nascimento não pode ser uma <span class='mainError'>data futura.</span>");
                     } else if (birthDate < hundredYearsAgo) {
-                        setError(6, "A data de nascimento é muito antiga.");
+                        setError(6, "A data de nascimento é <span class='mainError'>muito antiga.</span>");
                     } else {
                         removeError(6);
                     }
@@ -449,14 +460,22 @@
                 }
 
                 function validateBio() {
+                    const bioInput = document.querySelector('.Re-userInput.validate');
+                    const characters = document.querySelector('.Re-charactersCounter');
+                    const charactersNumber = document.querySelector('.Re-charactersNumber');
+                    const maxCharacters = document.querySelector('.Re-maxCharacters');
                     const biography = validateInputs[8].value;
+                    
+                    charactersNumber.textContent = biography.length;
+                    maxChar = 257;
 
                     checkEmptyInput(8);
 
-                    if (biography.length > 257) {
+                    if (biography.length > maxChar) {
+                        characters.style.color = "var(--redColor)";
                         setError(8, "A biografia é <span class='mainError'>muito longa.</span>");
-                        biography = biography.slice(0, 257);
                     } else {
+                        characters.style.color = "";
                         removeError(8);
                     }
                 }
@@ -532,7 +551,6 @@
                 });
             }
 
-            validateSubmit();
             userValidations();
             toggleRegisterSections();
         </script>

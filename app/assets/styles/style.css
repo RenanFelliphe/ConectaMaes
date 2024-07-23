@@ -765,14 +765,15 @@ footer {
 
 footer .footerLink {
     position: absolute;
-    height: 3rem;
+    height: 7vh;
     width: 100%;
     scroll-behavior: smooth;
+    margin-left: -0.5rem;
 }
 
 footer h4 {
     font-size: 1.4em;
-    line-height: 3rem;
+    line-height: 4rem;
     pointer-events: none;
 }
 
@@ -810,8 +811,6 @@ footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-envelope-fill {
 footer #A-copyrightSign {
     position: absolute;
     display: flex;
-    gap: 0.5rem;
-    width: 30rem;
     bottom: 1rem;
     left: 50%;
     transform: translate(-50%);
@@ -821,15 +820,27 @@ footer #A-copyrightSign {
 footer .A-footerRight {
     display: flex;
     align-items: flex-start;
-    gap: 6.25rem;
+    gap: 6rem;
     list-style: none;
     height: 100%;
 }
 
-footer .A-footerRight li p {
+footer .A-footerRight li{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0.8rem;
+}
+
+footer .A-footerRight li a {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
     font-size: 1rem;
-    line-height: 1.5rem;
     cursor: pointer;
+    text-decoration: none;
+    color: var(--whiteColor);
 }
 
 footer .A-footerRight li.A-footerAbout h4 {
@@ -1364,9 +1375,9 @@ footer .A-footerRight li.A-footerPolitic h4 {
 }
 
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.inputBio{
-    min-height: 10rem;
-    height: 18vh;
-    max-height: 13rem;
+    min-height: 9rem;
+    height: 9rem;
+    max-height: 9rem;
     padding: 0.5rem 0;
 }
 
@@ -1396,10 +1407,6 @@ footer .A-footerRight li.A-footerPolitic h4 {
     color: var(--blackColor);
 }
 
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-userInput:valid{
-    opacity: 1;
-}
-
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.inputDataNasc .Re-userInput{
     padding-right: 1rem;
 }
@@ -1408,10 +1415,12 @@ footer .A-footerRight li.A-footerPolitic h4 {
     cursor: pointer;
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator {
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.inputDataNasc .Re-userInput::-webkit-calendar-picker-indicator {
     cursor: pointer;
+    transform: translateY(2px);
 }
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input input[type=number]::-webkit-inner-spin-button { 
+
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.inputCell .Re-userInput::-webkit-inner-spin-button { 
     -webkit-appearance: none;
 }
 
@@ -1419,31 +1428,38 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-fakePlaceholder {
     position: absolute;
     color: var(--secondColor);
-    font-weight: 600;
+    font-weight: 400;
     cursor: text;
-    transition: 0.25s ease-out;
-    font-size: 15px;
+    transition: 0.25s, 0s color;
+    font-size: 1rem;
     top: 50%;
     transform: translateY(-50%);
     left: 1rem;
-    font-weight: 400;
-    width: fit-content;
-    padding: 0.2rem 0.3rem 0 0.3rem;
+    padding: 0 0.3rem;
     white-space: nowrap;
-    background: linear-gradient(var(--whiteColor) 70%, transparent 70%);
 }
 
 .Lo-loginForm .Lo-loginCenter .Lo-userSection .Re-input .Re-userInput:focus + .Re-fakePlaceholder,
 .Lo-loginForm .Lo-loginCenter .Lo-userSection .Re-input .Re-fakePlaceholder.notEmpty,
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-userInput:focus + .Re-fakePlaceholder,
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-fakePlaceholder.notEmpty {
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-fakePlaceholder.notEmpty,
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.inputBio .Re-fakePlaceholder.notEmpty {
     top: -3px;
-    font-size: 12px;
-    transition: 0.3s;
+    font-size: 0.8rem;
+    transition: 0.3s, 0s color;
+    background: linear-gradient(var(--whiteColor) 70%, transparent 70%);
+    font-weight: 500;
 }
 
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.inputBio .Re-fakePlaceholder{
     top: 1.5rem;
+}
+
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.inputBio .Re-charactersCounter{
+    position: absolute;
+    font-size: 0.65rem;
+    bottom: 0.5rem;
+    right: 0.5rem;
 }
 
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-fakePlaceholder.notEmpty + span.userArroba {
@@ -1475,7 +1491,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.inputDataNasc .errorIcon,
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.inputLocal .errorIcon{
-    right: 2.2rem;
+    right: 2.5rem;
+}
+
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.inputBio .errorIcon{
+    top: 1.5rem;
 }
 
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .errorMessageContainer {
@@ -1498,6 +1518,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     cursor: pointer;
     font-size: 0.8rem;
     z-index: +2;
+}
+
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.inputBio .errorMessageContainer{
+    top: 30%;
 }
 
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .errorMessageContainer .errorMessageContent {
@@ -1588,17 +1612,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     cursor: pointer;
 }
 
-.Re-registerForm .Re-registerCenter .Re-accountInformations .Re-themeInfo .Re-themeOptions input#Re-yellowTheme:checked+label {
-    color: var(--thirdColor);
-    font-weight: 500;
-}
-
-.Re-registerForm .Re-registerCenter .Re-accountInformations .Re-themeInfo .Re-themeOptions input#Re-blueTheme:checked+label {
-    color: var(--thirdColor);
-    font-weight: 500;
-}
-
-.Re-registerForm .Re-registerCenter .Re-accountInformations .Re-themeInfo .Re-themeOptions input#Re-pinkTheme:checked+label {
+.Re-registerForm .Re-registerCenter .Re-accountInformations .Re-themeInfo .Re-themeOptions input#Re-yellowTheme:checked + label,
+.Re-registerForm .Re-registerCenter .Re-accountInformations .Re-themeInfo .Re-themeOptions input#Re-blueTheme:checked + label,
+.Re-registerForm .Re-registerCenter .Re-accountInformations .Re-themeInfo .Re-themeOptions input#Re-pinkTheme:checked + label {
     color: var(--thirdColor);
     font-weight: 500;
 }
@@ -1661,14 +1677,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     font-weight: 600;
     color: var(--thirdColor);
     font-size: 0.9rem;
-}
-
-.Re-registerForm .Re-registerResult .Re-termsBox {
-    position: absolute;
-    display: flex;
-    gap: 10px;
-    font-size: 0.8rem;
-    bottom: -150%;
 }
 
 .Re-registerResult .Re-addImageProfile {
