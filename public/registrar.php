@@ -89,7 +89,7 @@
                             </div>
                         </div>
                         <div class="Re-input inputCell">
-                            <input class="Re-userInput validate" type="number" id="telefone" name="telefoneRegistro" oninput="validatePhone()" required />
+                            <input class="Re-userInput validate" type="number" id="telefone" name="telefoneRegistro" oninput="validatePhone()" required/>
                             <label class="Re-fakePlaceholder" for="telefone">Telefone</label>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
                             <div class="errorMessageContainer">
@@ -97,12 +97,16 @@
                             </div>
                         </div>
                         <div class="Re-input inputDataNasc">
-                            <input class="Re-userInput validate" type="date" id="dataNascimento" name="dataNascimentoRegistro" max="2024-07-23" min="1924-07-23">
+                            <input class="Re-userInput validate" type="date" id="dataNascimento" name="dataNascimentoRegistro" onchange="validateBornDate()" required>
                             <label class="Re-fakePlaceholder notEmpty" id="dataNascPlaceholder" for="dataNascimento">Data de Nascimento</label>
+                            <i class="bi bi-info-circle-fill errorIcon"></i>
+                            <div class="errorMessageContainer">
+                                <div class="errorMessageContent"></div>
+                            </div>
                         </div>
                         <div class="Re-input inputLocal">
-                            <select class="Re-userInput" name="localizacaoRegistro" id="localizacao">
-                                <option value="">- - - - - -</option>
+                            <select class="Re-userInput validate" name="localizacaoRegistro" id="localizacao" onchange="validateLocal()" required>
+                                <option value=""></option>
                                 <option value="Acre"> AC | Acre</option>
                                 <option value="Alagoas"> AL | Alagoas</option>
                                 <option value="Amapá"> AP | Amapá</option>
@@ -131,11 +135,15 @@
                                 <option value="Sergipe"> SE | Sergipe</option>
                                 <option value="Tocantins"> TO | Tocantins</option>                 
                             </select>
-                            <label class="Re-fakePlaceholder notEmpty" for="localizacao" style="pointer-events: none;">Localização</label>
+                            <label class="Re-fakePlaceholder" for="localizacao" style="pointer-events: none;">Localização</label>
                         </div>
                         <div class="Re-input input-full inputBio">
-                            <textarea class="Re-userInput" name="biografiaUsuarioRegistro" id="biografiaUsuario" style="resize: none;"></textarea>                        
+                            <textarea class="Re-userInput validate" name="biografiaUsuarioRegistro" id="biografiaUsuario" style="resize: none;" oninput="validateBio()"></textarea>                        
                             <label class="Re-fakePlaceholder" for="biografiaUsuario">Biografia</label>
+                            <i class="bi bi-info-circle-fill errorIcon"></i>
+                            <div class="errorMessageContainer">
+                                <div class="errorMessageContent"></div>
+                            </div>
                         </div>
                     </div>
 
@@ -235,8 +243,6 @@
                     errorMessageContent[index].style.display = "flex";
                     errorIcon[index].style.display = "block";
 
-                    inputContainers[index].classList.add('withError');
-
                     function toggleErrorModal(index, show) {
                         errorMessageContainers[index].style.display = show ? 'flex' : 'none';
                     }
@@ -259,8 +265,6 @@
                     placeholders[index].style.color = "var(--secondColor)";
                     errorMessageContent[index].innerHTML = '';
                     errorIcon[index].style.display = "none";
-
-                    inputContainers[index].classList.remove('withError');
                 }
 
                 function checkEmptyInput(index){
@@ -363,43 +367,107 @@
                 
                 function validateFullName() {
                     const fullName = validateInputs[4].value;
-                
+
                     checkEmptyInput(4);
+
+                    // Regex para permitir acentos, hífens, cedilhas e apóstrofos no Nome Completo
+                    const nameRegex = /^[a-zA-ZÀ-ÖØ-ÿ' -]+$/;
+
                     if (fullName.length === 0) {
                         removeError(4);
                     } else if (/\d/.test(fullName)) {
-                        setError(4, "O nome completo não pode possuir <span class='mainError'>números.</span>");
-                    } else if (/[^a-zA-Z\s]/.test(fullName)) {
-                        setError(4, "O nome completo não pode conter <span class='mainError'>caracteres especiais.</span>");
+                        setError(4, "O nome não pode possuir <span class='mainError'>números.</span>");
+                    } else if (!nameRegex.test(fullName)) {
+                        setError(4, "O nome pode conter apenas <span class='mainError'>letras, espaços, acentos, hífens, cedilhas e apóstrofos.</span>");
                     } else if (!/^(\w+\s\w+.*)$/.test(fullName)) {
-                        setError(4, "Insira o <span class='mainError'>nome completo.</span> (pelo menos 2 palavras separadas por espaço)");
+                        setError(4, "Insira o seu <span class='mainError'>nome completo.</span>");
                     } else if (fullName.length > 100) {
-                        setError(4, "O nome completo é <span class='mainError'>longo demais.</span>");
+                        setError(4, "O nome é <span class='mainError'>longo demais.</span>");
                     } else {
                         removeError(4);
                     }
                 }
 
+
                 function validatePhone() {
+                    const validDDDs = [
+                        '61', '62', '64', '65', '66', '67', // Centro-Oeste
+                        '82', '71', '73', '74', '75', '77', // Nordeste
+                        '85', '88', '98', '99', '83', '81', '87', '86', '89', '84', '79', // Nordeste
+                        '68', '96', '92', '97', '91', '93', '94', '69', '95', '63', // Norte
+                        '27', '28', '31', '32', '33', '34', '35', '37', '38', // Sudeste
+                        '21', '22', '24', '11', '12', '13', '14', '15', '16', '17', '18', '19', // Sudeste
+                        '41', '42', '43', '44', '45', '46', // Sul
+                        '51', '53', '54', '55', '47', '48', '49' // Sul
+                    ];
+
                     const phone = validateInputs[5].value;
-                    const phoneRegex = /^\d{11,11}$/;
+                    const ddd = phone.substring(0, 2); // Extrair os primeiros dois dígitos como DDD
+                    const phoneRegex = /^\d{2}9\d{8}$/;
 
                     checkEmptyInput(5);
                     if (phone.length === 0) {
                         removeError(5);
                     } else if (!phoneRegex.test(phone)) {
                         setError(5, "Insira um <span class='mainError'>telefone válido.</span>");
+                    } else if (!validDDDs.includes(ddd)) {
+                        setError(5, "Insira um <span class='mainError'>DDD válido.</span>");
                     } else {
                         removeError(5);
                     }
                 }
 
+                function validateBornDate() {
+                    const birthDate = new Date(validateInputs[6].value);
+                    const today = new Date();
+                    const hundredYearsAgo = new Date(today.getFullYear() - 100, today.getMonth(), today.getDate());
+
+                    checkEmptyInput(6);
+
+                    if (birthDate > today) {
+                        setError(6, "A data de nascimento não pode ser futura.");
+                    } else if (birthDate < hundredYearsAgo) {
+                        setError(6, "A data de nascimento é muito antiga.");
+                    } else {
+                        removeError(6);
+                    }
+                }
+
+                function validateLocal() {
+                    const localizacao = validateInputs[7].value;
+
+                    checkEmptyInput(7);
+
+                    if (localizacao === "") {
+                        setError(7, "Selecione um <span class='mainError'>estado válido.</span>");
+                    } else {
+                        removeError(7);
+                    }
+                }
+
+
+                function validateBio() {
+                    const biography = validateInputs[8].value;
+
+                    checkEmptyInput(8);
+
+                    if (biography.length > 257) {
+                        setError(8, "A biografia é <span class='mainError'>muito longa.</span>");
+                        biography = biography.slice(0, 257);
+                    } else {
+                        removeError(8);
+                    }
+                }
+                
                 validateInputs[0].addEventListener('input', validateName);
                 validateInputs[1].addEventListener('input', validateEmail);
                 validateInputs[2].addEventListener('input', validatePassword);
                 validateInputs[3].addEventListener('input', validateConfirmPassword);
                 validateInputs[4].addEventListener('input', validateFullName);
                 validateInputs[5].addEventListener('input', validatePhone);
+                validateInputs[6].addEventListener('change', validateBornDate);
+                validateInputs[7].addEventListener('change', validateLocal);
+                validateInputs[8].addEventListener('input', validateBio);
             }
 
             function toggleRegisterSections() {
@@ -439,6 +507,7 @@
 
             userValidations();
             toggleRegisterSections();
+            
         </script>
     </body>
 </html>

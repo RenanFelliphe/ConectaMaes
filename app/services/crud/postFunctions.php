@@ -84,7 +84,7 @@
             return mysqli_fetch_all($result, MYSQLI_ASSOC);
         }
         function queryUserLike($conn, $idUser, $idPost){
-            $queryLike = "SELECT * FROM curtirPublicacao WHERE idPublicacao =".(int) $idPost . "AND idUsuario =" . (int) $idUser;
+            $queryLike = "SELECT * FROM curtirPublicacao WHERE idPublicacao = $idPost AND idUsuario = $idUser";
             $execQuery = mysqli_query($conn, $queryLike);
             $returnExec = mysqli_fetch_assoc($execQuery);
 
@@ -104,13 +104,25 @@
         }
 
     // LIKES
-        function handlePostLike($conn, $idUser, $idPost){
-            if(!(queryUserLike($conn, $idUser, $idPost) > 0)){
-                $insertLike = "INSERT INTO curtirPublicacao (idPublicacao, idUsuario) VALUES (".(int)$idPost.", ".(int) $idUser.")";
+        function handlePostLike($conn, $idUser, $idPost) {
+            // Verificar se o usuário já deu like na publicação
+            $userLike = queryUserLike($conn, $idUser, $idPost);
+            if(!$userLike) {
+                // Inserir like
+                $insertLike = "INSERT INTO curtirPublicacao (idPublicacao, idUsuario) VALUES ($idPost , $idUser)";
                 $execQuery = mysqli_query($conn, $insertLike);
+                
+                if (!$execQuery) {
+                    die("Erro ao registrar curtida: " . mysqli_error($conn));
+                }
             } else {
-                $deleteLike = "DELETE FROM curtirPublicacao WHERE idPublicacao =".(int) $idPost ." AND idUsuario = ".(int) $idUser;
+                // Remover like
+                $deleteLike = "DELETE FROM curtirPublicacao WHERE idPublicacao = $idPost AND idUsuario = $idUser";
                 $execQuery = mysqli_query($conn, $deleteLike);
+                
+                if (!$execQuery) {
+                    die("Erro ao remover curtida: " . mysqli_error($conn));
+                }
             }
         }
 

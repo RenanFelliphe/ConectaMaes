@@ -1396,6 +1396,10 @@ footer .A-footerRight li.A-footerPolitic h4 {
     color: var(--blackColor);
 }
 
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-userInput:valid{
+    opacity: 1;
+}
+
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.inputDataNasc .Re-userInput{
     padding-right: 1rem;
 }
@@ -1467,6 +1471,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     transform: translateY(-50%);
     z-index: +1;
     cursor: pointer;
+}
+
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.inputDataNasc .errorIcon{
+    right: 2.2rem;
 }
 
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .errorMessageContainer {

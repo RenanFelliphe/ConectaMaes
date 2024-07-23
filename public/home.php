@@ -115,15 +115,7 @@
                     
                                     <form class="postTimelineBottom" method='post'>
                                         <button class="postLikes" type="submit" name="like">
-                                            <i class="bi bi-heart-fill 
-                                                <?php
-                                                     if(queryUserLike($currentUserData['idUsuario'],$dadosPublicacao['idPublicacao'])>0){
-                                                        echo "postLiked";
-                                                     } else {
-                                                        echo "postNotLiked";
-                                                     }
-                                                ?>
-                                            "></i>
+                                            <i class="bi bi-heart-fill <?= queryUserLike($conn,$currentUserData['idUsuario'],$dadosPublicacao['idPublicacao']) ? 'postLiked' : 'postNotLiked'; ?>"></i>
                                             <p><?php echo htmlspecialchars($dadosPublicacao['totalLikes']); ?></p>
                                         </button>
                                         <button class="postComments"type ="submit" name="comment">
@@ -131,8 +123,8 @@
                                             <p>0</p>
                                         </button>
                                         <?php
-                                            if(){
-                                                
+                                            if (isset($_POST['like'])) {
+                                                handlePostLike($conn, $currentUserData['idUsuario'], $dadosPublicacao['idPublicacao']);
                                             }
                                         ?>
                                     </form>
