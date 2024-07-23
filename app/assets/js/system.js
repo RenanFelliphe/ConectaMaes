@@ -136,93 +136,6 @@ function postTitleCharLimiter() {
         characteres.style.fontWeight = "normal";
     }
 }
-/*
-function registerUser() {
-    const registerNext = document.querySelector('.Re-registerNext');
-    const backButton = document.querySelector('.Re-backButton');
-    const termsCheckbox = document.querySelector('.Re-termsBox');
-    const accountInformations = document.querySelector('.Re-accountInformations');
-    const userInformations = document.querySelector('.Re-userInformations');
-    const registerResult = document.querySelector('.Re-registerResult');
-    const submitButton = document.querySelector('.Re-registerSubmit');
-    const termsCheckboxInput = document.querySelector('#Re-terms');
-
-    function areAllFieldsFilled(section) {
-        const inputs = section.querySelectorAll('input[required]');
-        for (let input of inputs) {
-            if (!input.value) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    function toggleRegisterSection() {
-        registerNext.addEventListener('click', () => {
-
-            if (!accountInformations.classList.contains('close')) {
-                if (areAllFieldsFilled(accountInformations)) {
-                    accountInformations.classList.toggle('close');
-                    userInformations.classList.toggle('close');
-                    backButton.classList.remove('close');
-                } else {
-                    alert("Por favor, preencha todos os campos obrigatórios.");
-                }
-            } else if (!userInformations.classList.contains('close')) {
-                if (areAllFieldsFilled(userInformations)) {
-                    userInformations.classList.toggle('close');
-                    registerResult.classList.toggle('close');
-                    submitButton.classList.toggle('close');
-                    registerNext.classList.toggle('close');
-                } else {
-                    alert("Por favor, preencha todos os campos obrigatórios.");
-                }
-            }
-        });
-
-        backButton.addEventListener('click', () => {
-            if (!userInformations.classList.contains('close')) {
-                accountInformations.classList.toggle('close');
-                userInformations.classList.toggle('close');
-                backButton.classList.toggle('close');
-            } else if (!registerResult.classList.contains('close')) {
-                userInformations.classList.toggle('close');
-                registerResult.classList.toggle('close');
-                submitButton.classList.toggle('close');
-                registerNext.classList.toggle('close');
-            }
-        });
-    }
-
-    function showUserImageProfile() {
-        const input = document.getElementById("imagesSelector");
-        const preview = document.querySelector(".Re-userImage");
-
-        input.addEventListener("change", function () {
-            const file = input.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    preview.src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-    }
-
-    function validateSubmit() {
-        submitButton.addEventListener('click', (event) => {
-            if (!termsCheckboxInput.checked) {
-                event.preventDefault();
-                alert("Você deve ler e concordar com os termos e condições antes de completar o registro!");
-            }
-        });
-    }
-
-    toggleRegisterSection();
-    showUserImageProfile();
-    validateSubmit();
-}*/
 
 function addPost() {
     const input = document.querySelector("#Ho-imageSelector");
@@ -489,6 +402,67 @@ function addChild() {
     openCloseAddChild();
 }
 */
+
+/* FUNÇÃO ANTIGA PARA REGISTRAR USUÁRIO
+function registerUser() {
+    const registerNext = document.querySelector('.Re-registerNext');
+    const backButton = document.querySelector('.Re-backButton');
+    const termsCheckbox = document.querySelector('.Re-termsBox');
+    const accountInformations = document.querySelector('.Re-accountInformations');
+    const userInformations = document.querySelector('.Re-userInformations');
+    const registerResult = document.querySelector('.Re-registerResult');
+    const submitButton = document.querySelector('.Re-registerSubmit');
+    const termsCheckboxInput = document.querySelector('#Re-terms');
+
+    function areAllFieldsFilled(section) {
+        const inputs = section.querySelectorAll('input[required]');
+        for (let input of inputs) {
+            if (!input.value) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function toggleRegisterSection() {
+        registerNext.addEventListener('click', () => {
+
+            if (!accountInformations.classList.contains('close')) {
+                if (areAllFieldsFilled(accountInformations)) {
+                    accountInformations.classList.toggle('close');
+                    userInformations.classList.toggle('close');
+                    backButton.classList.remove('close');
+                } else {
+                    alert("Por favor, preencha todos os campos obrigatórios.");
+                }
+            } else if (!userInformations.classList.contains('close')) {
+                if (areAllFieldsFilled(userInformations)) {
+                    userInformations.classList.toggle('close');
+                    registerResult.classList.toggle('close');
+                    submitButton.classList.toggle('close');
+                    registerNext.classList.toggle('close');
+                } else {
+                    alert("Por favor, preencha todos os campos obrigatórios.");
+                }
+            }
+        });
+
+        backButton.addEventListener('click', () => {
+            if (!userInformations.classList.contains('close')) {
+                accountInformations.classList.toggle('close');
+                userInformations.classList.toggle('close');
+                backButton.classList.toggle('close');
+            } else if (!registerResult.classList.contains('close')) {
+                userInformations.classList.toggle('close');
+                registerResult.classList.toggle('close');
+                submitButton.classList.toggle('close');
+                registerNext.classList.toggle('close');
+            }
+        });
+    }
+
+    
+}*/
 
 function handlePostLike(idUser, idPost){
     //quando clica no bi, busca no banco se o usuário da sessão já curtiu o post

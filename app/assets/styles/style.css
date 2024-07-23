@@ -1473,7 +1473,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     cursor: pointer;
 }
 
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.inputDataNasc .errorIcon{
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.inputDataNasc .errorIcon,
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.inputLocal .errorIcon{
     right: 2.2rem;
 }
 

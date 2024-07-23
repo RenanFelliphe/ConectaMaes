@@ -107,6 +107,7 @@
                         <div class="Re-input inputLocal">
                             <select class="Re-userInput validate" name="localizacaoRegistro" id="localizacao" onchange="validateLocal()" required>
                                 <option value=""></option>
+                                <option value="Não Informar"> Não Informar</option>
                                 <option value="Acre"> AC | Acre</option>
                                 <option value="Alagoas"> AL | Alagoas</option>
                                 <option value="Amapá"> AP | Amapá</option>
@@ -136,6 +137,10 @@
                                 <option value="Tocantins"> TO | Tocantins</option>                 
                             </select>
                             <label class="Re-fakePlaceholder" for="localizacao" style="pointer-events: none;">Localização</label>
+                            <i class="bi bi-info-circle-fill errorIcon"></i>
+                            <div class="errorMessageContainer">
+                                <div class="errorMessageContent"></div>
+                            </div>
                         </div>
                         <div class="Re-input input-full inputBio">
                             <textarea class="Re-userInput validate" name="biografiaUsuarioRegistro" id="biografiaUsuario" style="resize: none;" oninput="validateBio()"></textarea>                        
@@ -225,8 +230,6 @@
                     input.addEventListener('change', updateInfo);
                 }
             });
-
-            
 
             function userValidations(){
                 const validateInputs = document.querySelectorAll('.validate');
@@ -388,7 +391,6 @@
                     }
                 }
 
-
                 function validatePhone() {
                     const validDDDs = [
                         '61', '62', '64', '65', '66', '67', // Centro-Oeste
@@ -438,13 +440,13 @@
 
                     checkEmptyInput(7);
 
-                    if (localizacao === "") {
-                        setError(7, "Selecione um <span class='mainError'>estado válido.</span>");
+                    if (localizacao == "") {
+                        inputContainers[7].style.opacity = '1';
+                        setError(7, "Selecione ao menos <span class='mainError'>uma opção.</span>");
                     } else {
                         removeError(7);
                     }
                 }
-
 
                 function validateBio() {
                     const biography = validateInputs[8].value;
@@ -468,6 +470,22 @@
                 validateInputs[6].addEventListener('change', validateBornDate);
                 validateInputs[7].addEventListener('change', validateLocal);
                 validateInputs[8].addEventListener('input', validateBio);
+
+                function showUserImageProfile() {
+                    const input = document.getElementById("imagesSelector");
+                    const preview = document.querySelector(".Re-userImage");
+
+                    input.addEventListener("change", function () {
+                        const file = input.files[0];
+                        if (file) {
+                            const reader = new FileReader();
+                            reader.onload = function (e) {
+                                preview.src = e.target.result;
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                    });
+                }
             }
 
             function toggleRegisterSections() {
@@ -505,9 +523,18 @@
                 });
             }
 
+            function validateSubmit() {
+                submitButton.addEventListener('click', (event) => {
+                    if (!termsCheckboxInput.checked) {
+                        event.preventDefault();
+                        alert("Você deve ler e concordar com os termos e condições antes de completar o registro!");
+                    }
+                });
+            }
+
+            validateSubmit();
             userValidations();
             toggleRegisterSections();
-            
         </script>
     </body>
 </html>
