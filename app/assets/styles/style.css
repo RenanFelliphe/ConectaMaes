@@ -347,7 +347,7 @@ button.confirmBtn:hover {
     display: flex;
     gap: 5rem;
     justify-content: space-between;
-    height: 4rem;
+    height: 10vh;
     padding: 0.5rem 1rem;
     background: var(--whiteColor);
     border-bottom: 1px solid var(--grayColor);
@@ -850,7 +850,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
 
 .La-landing {
     background: linear-gradient(var(--whiteColor) 8%, #80752350 16%, #03718050 45%, #a3155f50 75%, #80752350 85%);
-    padding-left: 3rem;
+    padding: 0 0 3rem 3rem;
     height: auto;
     overflow: hidden;
 }
@@ -1243,7 +1243,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     position: relative;
     display: flex;
     background: linear-gradient(var(--whiteColor) 0%, var(--firstColorLowOpacity) 95%);
-    min-height: 84vh;
+    height: 86vh;
     padding: 3vh;
 }
 
@@ -1343,8 +1343,6 @@ footer .A-footerRight li.A-footerPolitic h4 {
     padding: 0 2rem;
 }
 
-
-
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input,
 .Lo-loginForm .Lo-loginCenter .Lo-userSection .Re-input {
     position: relative;
@@ -1354,8 +1352,26 @@ footer .A-footerRight li.A-footerPolitic h4 {
     outline: none;
     color: var(--blackColor);
     width: 100%;
+    min-height: 3rem;
+    height: 5vh;
+    max-height: 4.5rem;
     opacity: 0.5;
+}
+
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.inputLocal{
     padding-right: 1rem;
+    cursor: pointer;
+}
+
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.inputBio{
+    min-height: 10rem;
+    height: 18vh;
+    max-height: 13rem;
+    padding: 0.5rem 0;
+}
+
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.inputBio textarea::-webkit-scrollbar{
+    display: none;
 }
 
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input:hover,
@@ -1372,11 +1388,27 @@ footer .A-footerRight li.A-footerPolitic h4 {
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-userInput {
     position: relative;
     width: 100%;
-    padding: 0.8rem 1.5rem;
-    border-radius: 100rem;
+    height: 100%;
+    padding: 0.8rem 2rem 0.8rem 1.5rem;
+    border-radius: 1rem;
     outline: none;
     border: none;
     color: var(--blackColor);
+}
+
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.inputDataNasc .Re-userInput{
+    padding-right: 1rem;
+}
+
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.inputLocal .Re-userInput{
+    cursor: pointer;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+}
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input input[type=number]::-webkit-inner-spin-button { 
+    -webkit-appearance: none;
 }
 
 .Lo-loginForm .Lo-loginCenter .Lo-userSection .Re-input .Re-fakePlaceholder,
@@ -1385,27 +1417,32 @@ footer .A-footerRight li.A-footerPolitic h4 {
     color: var(--secondColor);
     font-weight: 600;
     cursor: text;
-    transition: 0.25s ease-in-out, 0.3s ease-in-out text-shadow;
+    transition: 0.25s ease-out;
     font-size: 15px;
     top: 50%;
     transform: translateY(-50%);
     left: 1rem;
     font-weight: 400;
     width: fit-content;
-    padding: 0 0.3rem;
+    padding: 0.2rem 0.3rem 0 0.3rem;
+    white-space: nowrap;
+    background: linear-gradient(var(--whiteColor) 70%, transparent 70%);
 }
 
-.Lo-loginForm .Lo-loginCenter .Lo-userSection .Re-input .Re-userInput:focus+.Re-fakePlaceholder,
+.Lo-loginForm .Lo-loginCenter .Lo-userSection .Re-input .Re-userInput:focus + .Re-fakePlaceholder,
 .Lo-loginForm .Lo-loginCenter .Lo-userSection .Re-input .Re-fakePlaceholder.notEmpty,
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-userInput:focus+.Re-fakePlaceholder,
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-userInput:focus + .Re-fakePlaceholder,
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-fakePlaceholder.notEmpty {
     top: -3px;
     font-size: 12px;
-    background-color: var(--whiteColor);
-    transition: 0.25s ease-in-out, 0.3s ease-in-out text-shadow;
+    transition: 0.3s;
 }
 
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-fakePlaceholder.notEmpty+span.userArroba {
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.inputBio .Re-fakePlaceholder{
+    top: 1.5rem;
+}
+
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-fakePlaceholder.notEmpty + span.userArroba {
     display: block;
 }
 
@@ -1663,6 +1700,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     display: flex;
     font-size: 1.3rem;
     box-shadow: 0 2px 4px 0px #00000040;
+    transition: 0s background-color;
 }
 
 .Re-registerForm .Re-registerBottom .confirmBtn.close {

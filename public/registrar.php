@@ -97,7 +97,7 @@
                             </div>
                         </div>
                         <div class="Re-input inputDataNasc">
-                            <input class="Re-userInput validate" type="date" id="dataNascimento" name="dataNascimentoRegistro">
+                            <input class="Re-userInput validate" type="date" id="dataNascimento" name="dataNascimentoRegistro" max="2024-07-23" min="1924-07-23">
                             <label class="Re-fakePlaceholder notEmpty" id="dataNascPlaceholder" for="dataNascimento">Data de Nascimento</label>
                         </div>
                         <div class="Re-input inputLocal">
@@ -134,7 +134,7 @@
                             <label class="Re-fakePlaceholder notEmpty" for="localizacao" style="pointer-events: none;">Localização</label>
                         </div>
                         <div class="Re-input input-full inputBio">
-                            <textarea class="Re-userInput" name="biografiaUsuarioRegistro" id="biografiaUsuario" cols="54" rows="4"></textarea>                        
+                            <textarea class="Re-userInput" name="biografiaUsuarioRegistro" id="biografiaUsuario" style="resize: none;"></textarea>                        
                             <label class="Re-fakePlaceholder" for="biografiaUsuario">Biografia</label>
                         </div>
                     </div>
@@ -382,7 +382,7 @@
 
                 function validatePhone() {
                     const phone = validateInputs[5].value;
-                    const phoneRegex = /^\d{10,11}$/;
+                    const phoneRegex = /^\d{11,11}$/;
 
                     checkEmptyInput(5);
                     if (phone.length === 0) {
