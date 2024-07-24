@@ -480,17 +480,7 @@
                     }
                 }
                 
-                validateInputs[0].addEventListener('input', validateName);
-                validateInputs[1].addEventListener('input', validateEmail);
-                validateInputs[2].addEventListener('input', validatePassword);
-                validateInputs[3].addEventListener('input', validateConfirmPassword);
-                validateInputs[4].addEventListener('input', validateFullName);
-                validateInputs[5].addEventListener('input', validatePhone);
-                validateInputs[6].addEventListener('change', validateBornDate);
-                validateInputs[7].addEventListener('change', validateLocal);
-                validateInputs[8].addEventListener('input', validateBio);
-
-                function showUserImageProfile() {
+                function validateImageProfile() {
                     const input = document.getElementById("imagesSelector");
                     const preview = document.querySelector(".Re-userImage");
 
@@ -505,7 +495,18 @@
                         }
                     });
                 }
-            }
+
+                validateInputs[0].addEventListener('input', validateName);
+                validateInputs[1].addEventListener('input', validateEmail);
+                validateInputs[2].addEventListener('input', validatePassword);
+                validateInputs[3].addEventListener('input', validateConfirmPassword);
+                validateInputs[4].addEventListener('input', validateFullName);
+                validateInputs[5].addEventListener('input', validatePhone);
+                validateInputs[6].addEventListener('change', validateBornDate);
+                validateInputs[7].addEventListener('change', validateLocal);
+                validateInputs[8].addEventListener('input', validateBio);
+                validateImageProfile();
+}
 
             function toggleRegisterSections() {
                 const registerSections = document.querySelectorAll('.Re-registerSections');
