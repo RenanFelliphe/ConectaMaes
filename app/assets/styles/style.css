@@ -789,7 +789,7 @@ footer .A-footerLeft .A-footerContact {
 footer .A-footerLeft .A-footerContact .A-footerSocialMedias {
     display: flex;
     justify-content: space-evenly;
-    gap: 1rem;
+    gap: 5rem;
     font-size: 1.3rem;
     width: fit-content;
 }
@@ -800,7 +800,7 @@ footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-instagram {
 }
 
 footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-envelope-fill {
-    color: var(--pastelPinkColor);
+    color: var(--pastelBlueColor);
     cursor: pointer;
 }
 
