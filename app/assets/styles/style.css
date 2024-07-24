@@ -784,22 +784,18 @@ footer .A-footerLeft img.A-footerLogo {
 
 footer .A-footerLeft .A-footerContact {
     padding: 0 0 4rem 1rem;
-    width: 14rem;
 }
 
 footer .A-footerLeft .A-footerContact .A-footerSocialMedias {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    gap: 1rem;
     font-size: 1.3rem;
+    width: fit-content;
 }
 
 footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-instagram {
     color: var(--pastelYellowColor);
-    cursor: pointer;
-}
-
-footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-facebook {
-    color: var(--pastelBlueColor);
     cursor: pointer;
 }
 
@@ -1375,9 +1371,9 @@ footer .A-footerRight li.A-footerPolitic h4 {
 }
 
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.inputBio{
-    min-height: 9rem;
-    height: 9rem;
-    max-height: 9rem;
+    min-height: 5rem;
+    height: 100%;
+    max-height: 10rem;
     padding: 0.5rem 0;
 }
 
@@ -1530,7 +1526,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     align-items: flex-start;
     justify-content: flex-start;
     width: 10vw;
-    text-wrap: wrap;
+    white-space: wrap;
     gap: 0.5rem;
 }
 
@@ -2275,7 +2271,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     font-size: 0.9em;
     font-weight: bolder;
     width: 100%;
-    text-wrap: wrap;
+    white-space: wrap;
 }
 
 .Au-allAuxilios .Au-auxilioCard .postTimelineTop .postUserNames p:last-of-type {

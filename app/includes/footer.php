@@ -4,9 +4,8 @@
         <div class="A-footerContact">
             <h4>Contato</h4>
             <div class="A-footerSocialMedias">
-                <a class="bi bi-instagram"></a>
-                <a class="bi bi-facebook"></a>
-                <a class="bi bi-envelope-fill"></a>
+                <a href="https://www.instagram.com/conectamaes2024/" target="_blank" class="bi bi-instagram"></a>
+                <a href="mailto:conectamaes2024@gmail.com" target="_blank" class="bi bi-envelope-fill"></a>
             </div>
         </div>    
     </div>
@@ -16,12 +15,12 @@
     <ul class="A-footerRight">
         <li class="A-footerAbout">
             <h4>Sobre</h4>
-            <a class="A-footerAboutProject">Projeto</a>
-            <a class="A-footerAboutEquip">CEFET-MG</a>
+            <a href="https://www.inflp.cefetmg.br/projetos/projetos-interdisciplinares/" target="_blank" class="A-footerAboutProject">Projeto</a>
+            <a href="https://www.leopoldina.cefetmg.br/" target="_blank" class="A-footerAboutEquip">CEFET-MG</a>
         </li>
         <li class="A-footerHelp">
             <h4>Ajuda</h4>
-            <a class="A-footerHelpSuport">Suporte</a>
+            <a href="../public\suporte.php" class="A-footerHelpSuport">Suporte</a>
         </li>
         <li class="A-footerPolitic">
             <h4>Política</h4>

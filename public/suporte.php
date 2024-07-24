@@ -10,10 +10,22 @@
         <title>ConectaMães - Suporte</title>
     </head>
 
-    <body>
+    <body class="Y-theme">
         <?php include_once ("../app/includes/headerLanding.php");?>
 
-        <main class="Su-suporte">
+        <main class="Su-suporte" style="height: 82vh;">
+            <img src="../app\assets\imagens\figuras\cells_standart_first_blue.png" class="backCells">
+            <img src="../app\assets\imagens\figuras\cells_standart_first_blue.png" class="backCells cellsLeft">
+
+            <div style="position: absolute;
+                        left: 50%; top: 40%;
+                        transform: translate(-50%);
+                        display: flex; flex-direction:
+                        column; cursor: pointer;">
+                <h1> EM DESENVOLVIMENTO </h1>
+                <h4> Suporte </h4>
+            </div>
+            
         </main>
 
         <?php 
