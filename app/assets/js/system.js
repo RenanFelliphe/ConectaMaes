@@ -364,45 +364,6 @@ function openAuxilioModal() {
     });
 }
 
-/* FUNÇÃO ANTIGA PARA ADICIONAR FILHO NO REGISTRO
-function addChild() {
-    const addChildBox = document.querySelector('.Re-addChildBox');
-    const addChildStart = document.querySelector('.Re-addChild');
-
-    function openCloseAddChild() {
-        const addChildCancel = document.querySelector('.Re-cancelAddChild');
-
-        addChildStart.addEventListener('click', () => {
-            addChildBox.classList.remove('close');
-            blockRegisterNext();
-        });
-
-        addChildCancel.addEventListener('click', () => {
-            addChildBox.classList.add('close');
-            blockRegisterNext();
-        });
-
-        function blockRegisterNext() {
-            if (!addChildBox.classList.contains('close')) {
-                registerNext.style.backgroundColor = "#808080";
-                registerNext.style.pointerEvents = "none";
-
-                backButton.style.color = "#808080";
-                backButton.style.pointerEvents = "none";
-            } else {
-                registerNext.style.backgroundColor = 'var(--secondColor)';
-                registerNext.style.pointerEvents = "all";
-
-                backButton.style.color = 'var(--secondColor)';
-                backButton.style.pointerEvents = "all";
-            }
-        }
-    }
-
-    openCloseAddChild();
-}
-*/
-
 /* FUNÇÃO ANTIGA PARA REGISTRAR USUÁRIO
 function registerUser() {
     const registerNext = document.querySelector('.Re-registerNext');

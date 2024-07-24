@@ -32,55 +32,32 @@
             return $sUReturn;
         }
         function queryPostsAndUserData($conn, $postType) {
-            if (empty($postType)) {
-                $query = "
-                    SELECT 
-                        p.idPublicacao, 
-                        p.tipoPublicacao, 
-                        p.conteudo, 
-                        p.titulo, 
-                        p.dataCriacaoPublicacao, 
-                        u.idUsuario, 
-                        u.nomeCompleto, 
-                        u.nomeDeUsuario, 
-                        u.linkFotoPerfil,
-                        u.estado,
-                        (SELECT COUNT(*) FROM curtirPublicacao c WHERE c.idPublicacao = p.idPublicacao) as totalLikes
-                    FROM 
-                        Publicacao p
-                    JOIN 
-                        Usuario u ON p.idUsuario = u.idUsuario
-                    WHERE 
-                        p.tipoPublicacao <> 'Auxilio'
-                    ORDER BY 
-                        p.dataCriacaoPublicacao DESC
-                ";
-            } else {
-                $query = "
-                    SELECT 
-                        p.idPublicacao, 
-                        p.tipoPublicacao, 
-                        p.conteudo, 
-                        p.titulo, 
-                        p.dataCriacaoPublicacao, 
-                        u.idUsuario, 
-                        u.nomeCompleto, 
-                        u.nomeDeUsuario, 
-                        u.linkFotoPerfil,
-                        u.estado,
-                        (SELECT COUNT(*) FROM curtirPublicacao c WHERE c.idPublicacao = p.idPublicacao) as totalLikes
-                    FROM 
-                        Publicacao p
-                    JOIN 
-                        Usuario u ON p.idUsuario = u.idUsuario
-                    WHERE 
-                        p.tipoPublicacao = '$postType'
-                    ORDER BY 
-                        p.dataCriacaoPublicacao DESC
-                ";
-            }
+            $baseQuery = "
+                SELECT 
+                    p.idPublicacao, 
+                    p.tipoPublicacao, 
+                    p.conteudo, 
+                    p.titulo, 
+                    p.dataCriacaoPublicacao, 
+                    u.idUsuario, 
+                    u.nomeCompleto, 
+                    u.nomeDeUsuario, 
+                    u.linkFotoPerfil,
+                    u.estado,
+                    (SELECT COUNT(*) FROM curtirPublicacao c WHERE c.idPublicacao = p.idPublicacao) as totalLikes
+                FROM 
+                    Publicacao p
+                JOIN 
+                    Usuario u ON p.idUsuario = u.idUsuario
+            ";
+
+            // Ajusta a cláusula WHERE de acordo com o tipo de publicação
+            $whereClause = ($postType === '') ? "p.tipoPublicacao <> 'Auxilio'" : "p.tipoPublicacao = '$postType'";
             
-            $result = mysqli_query($conn, $query);
+            // Combina a query base com a cláusula WHERE
+            $finalQuery = $baseQuery . " WHERE " . $whereClause . " ORDER BY p.dataCriacaoPublicacao DESC";
+            
+            $result = mysqli_query($conn, $finalQuery);
             return mysqli_fetch_all($result, MYSQLI_ASSOC);
         }
         function queryUserLike($conn, $idUser, $idPost){

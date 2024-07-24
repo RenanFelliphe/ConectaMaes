@@ -161,7 +161,7 @@
                                 <img src="../app/assets/imagens/icons/user_no_profile_image.png" alt="" class="Re-userImage">
                             </div>
 
-                            <input type="file" id="imagesSelector" name="fotoPerfilRegistro" accept="image/png, image/jpeg">
+                            <input type="file" class="validate" id="imagesSelector" name="fotoPerfilRegistro" input="validateImageProfile();" accept="image/png, image/jpeg">
                             <label for="imagesSelector" class="Re-addImageIcon">                        
                                 <i class="bi bi-camera-fill"></i>                    
                             </label>
@@ -505,8 +505,8 @@
                 validateInputs[6].addEventListener('change', validateBornDate);
                 validateInputs[7].addEventListener('change', validateLocal);
                 validateInputs[8].addEventListener('input', validateBio);
-                validateImageProfile();
-}
+                validateInputs[9].addEventListener('input', validateImageProfile);
+            }
 
             function toggleRegisterSections() {
                 const registerSections = document.querySelectorAll('.Re-registerSections');
