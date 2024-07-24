@@ -73,6 +73,13 @@
                     $publicacoes = queryPostsAndUserData($conn,'');
                     if (count($publicacoes) > 0) {
                         $count = 0;
+
+                        // Otimização do processamento de likes
+                        if ($likedPost = array_keys($_POST, 'like', true)) {
+                            $postId = str_replace('like_', '', $likedPost[0]); // Extrai o ID da publicação
+                            handlePostLike($conn, $currentUserData['idUsuario'], (int)$postId); // Lida com o like
+                        }
+
                         foreach ($publicacoes as $dadosPublicacao) {
                             // Verificar se o link da foto de perfil está presente
                             $profileImage = !empty($dadosPublicacao['linkFotoPerfil']) ? $dadosPublicacao['linkFotoPerfil'] : 'caminho/padrao/para/imagem.png';
@@ -114,7 +121,7 @@
                                     </div>
                     
                                     <form class="postTimelineBottom" method='post'>
-                                        <button class="postLikes" type="submit" name="like">
+                                        <button class="postLikes" type="submit" name="like_<?= $dadosPublicacao['idPublicacao']; ?> " value="like">
                                             <i class="bi bi-heart-fill <?= queryUserLike($conn,$currentUserData['idUsuario'],$dadosPublicacao['idPublicacao']) ? 'postLiked' : 'postNotLiked'; ?>"></i>
                                             <p><?php echo htmlspecialchars($dadosPublicacao['totalLikes']); ?></p>
                                         </button>
@@ -122,11 +129,6 @@
                                             <i class="bi bi-chat-fill"></i>
                                             <p>0</p>
                                         </button>
-                                        <?php
-                                            if (isset($_POST['like'])) {
-                                                handlePostLike($conn, $currentUserData['idUsuario'], $dadosPublicacao['idPublicacao']);
-                                            }
-                                        ?>
                                     </form>
                                 </div>
                             </article>
@@ -140,10 +142,8 @@
                         echo "FIM...<br>";
                     } else {
                         echo "Nenhuma publicação encontrada<br>";
-                    }
+                    }      
                     ?>
-
-
             </section>
 
             <section class="asideRight">
@@ -153,8 +153,8 @@
                 </div>
 
                 <div class="asideRightFooter">
-                    <a href="">Sobre o ConectaMães</a>
-                    <a href="">Suporte</a>
+                    <a href="<?php echo $relativeRootPath."/index.php"?>">Sobre o ConectaMães</a>
+                    <a href="<?php echo $relativePublicPath."/suporte.php"?>">Suporte</a>
                     <a href="">Termos de Privacidade</a>
                     <a href="">CEFET-MG</a>
                     <h4>ConectaMães do CEFET-MG | 2024</h4>

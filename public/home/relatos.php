@@ -165,8 +165,8 @@
                 </div>
 
                 <div class="asideRightFooter">
-                    <a href="">Sobre o ConectaMães</a>
-                    <a href="">Suporte</a>
+                    <a href="<?php echo $relativeRootPath."/index.php"?>">Sobre o ConectaMães</a>
+                    <a href="<?php echo $relativePublicPath."/suporte.php"?>">Suporte</a>
                     <a href="">Termos de Privacidade</a>
                     <a href="">CEFET-MG</a>
                     <h4>ConectaMães do CEFET-MG | 2024</h4>
