@@ -2087,6 +2087,14 @@ footer .A-footerRight li.A-footerPolitic h4 {
     color: var(--secondColor);
 }
 
+.Ho-post .postLikes,
+.Ho-post .postComments{
+    display: flex;
+    gap: 0.5rem;
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+}
 .Ho-Main .asideLeft {
     width: 20vw;
     height: 100%;
@@ -3558,14 +3566,16 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
 
 .Re-registerChild {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
     background-color: var(--whiteColor);
     padding: 3rem;
     border-radius: 1rem;
     border: 2px solid var(--firstColor);
-    height: max-content;
 }
 
-.Re-registerChild .closeModal{
+.Re-registerChild .closeChildModal:first-of-type{
     position: absolute;
     font-size: 2rem;
     top: 1rem;
@@ -3574,21 +3584,14 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     transition: 0.3s;
 }
 
-.Re-registerChild .closeModal{
+.Re-registerChild .closeChildModal:first-of-type{
     color: var(--secondColor);
     transition: 0.3s;
     transform: scale(1.2);
 }
 
-.Re-registerChild .Re-childInformations .Re-childInfo{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: flex-start;
-    gap: 0.5rem;
-}
-
-.Re-registerChild .Re-childInformations .Re-childInfo .Re-addChild{
+.Re-registerChild .Re-addChildBtn,
+.Re-registerChild .Re-myChild{
     position: relative;
     display: flex;
     background: linear-gradient(to right, var(--pastelYellowColor) 0%, var(--pastelBlueColor) 50%, var(--pastelPinkColor) 100%);
@@ -3601,15 +3604,26 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     text-shadow: 0 0 3px #00000050;
     color: var(--whiteColor);
     cursor: pointer;
+    padding: 1rem;
 }
 
-.Re-registerChild .Re-childInformations .Re-childInfo .Re-haveNoChildBox{
-    display: flex;
-    gap: 10px;
-    font-size: 0.8rem;
+.Re-registerChild .Re-myChild{
+    justify-content: space-between;
+    background: var(--secondColor);
 }
 
-.Re-registerChild .Re-childInformations .Re-addChildBox{
+.Re-registerChild p{
+    position: relative;
+    width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.Re-registerChild .Re-myChild i{
+    font-size: 1.5rem;
+}
+
+.Re-registerChild .Re-addChildBox{
     position: absolute;
     border: 1px solid var(--blackColor);
     display: flex;
@@ -3629,41 +3643,47 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     overflow: hidden;
 }
 
-.Re-registerChild .Re-childInformations .Re-addChildBox.close{
+.Re-registerChild .Re-addChildBox.close{
     display: none;
 }
 
-.Re-registerChild .Re-childInformations .Re-addChildBox .Re-childBoxHeader{
+.Re-registerChild .Re-addChildBox .Re-childBoxHeader{
     position: relative;
     display: flex;
     width: 100%;
-    padding: 0.8rem 2rem 0.8rem 1rem;
+    padding: 0.6rem 1rem;
     border-bottom: 1px solid transparent;
     background: linear-gradient(to right, var(--pastelYellowColor), var(--pastelBlueColor), var(--pastelPinkColor)) padding-box, linear-gradient(to right, var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
 }
 
-.Re-registerChild .Re-childInformations .Re-addChildBox .Re-childBoxHeader .Re-childIcon{
+.Re-registerChild .Re-addChildBox .Re-childBoxHeader i{
     color: var(--whiteColor);
-    font-weight: 700;
-    font-size: 1.2rem;
+    font-weight: 900;
+    font-size: 1.5rem;
+    width: 1.5rem;
 }
 
-.Re-registerChild .Re-childInformations .Re-addChildBox .Re-childBoxHeader .Re-childName{
+.Re-registerChild .Re-addChildBox .Re-childBoxHeader .toggleAddChildModal{
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.Re-registerChild .Re-addChildBox .Re-childBoxHeader .Re-childName{
     display: flex;
     position: relative;
     width: 100%;
     height: 100%;
-    background-color: transparent;
     border: none;
     outline: none;
     font-size: 1.1rem;
     font-weight: 550;
     color: var(--whiteColor);
+    background-color: transparent;
     text-shadow: 0 0 3px #00000050;
     text-align: center;
 }
 
-.Re-registerChild .Re-childInformations .Re-addChildBox .Re-childBoxHeader .Re-childName::placeholder{
+.Re-registerChild .Re-addChildBox .Re-childBoxHeader .Re-childName::placeholder{
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -3674,7 +3694,7 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     text-shadow: 0 0 3px #00000050;
 }
 
-.Re-registerChild .Re-childInformations .Re-addChildBox .Re-childBoxSex{
+.Re-registerChild .Re-addChildBox .Re-childBoxSex{
     display: flex;
     gap: 0.8rem;
     width: fit-content;
@@ -3682,30 +3702,30 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     padding: 1.2rem 0;
 }
 
-.Re-registerChild .Re-childInformations .Re-addChildBox .Re-childBoxSex p{
+.Re-registerChild .Re-addChildBox .Re-childBoxSex p{
     font-weight: 600;
     font-size: 1.1rem;
     color: var(--secondColor);
 }
 
-.Re-registerChild .Re-childInformations .Re-addChildBox .Re-childBoxSex .Re-sexOptions{
+.Re-registerChild .Re-addChildBox .Re-childBoxSex .Re-sexOptions{
     display: flex;
     gap: 1rem;
     font-size: 0.8rem;
     padding-left: 1rem;
 }
 
-.Re-registerChild .Re-childInformations .Re-addChildBox .Re-childBoxSex .Re-sexOptions label{
+.Re-registerChild .Re-addChildBox .Re-childBoxSex .Re-sexOptions label{
     margin-left: -0.8rem;
 }
 
-.Re-registerChild .Re-childInformations .Re-addChildBox .Re-childBoxInputs{
+.Re-registerChild .Re-addChildBox .Re-childBoxInputs{
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-.Re-registerChild .Re-childInformations .Re-addChildBox .Re-childBoxInputs .Re-input{
+.Re-registerChild .Re-addChildBox .Re-childBoxInputs .Re-input{
     position: relative;
     border: 1px solid transparent;
     background: linear-gradient(var(--whiteColor), var(--whiteColor)) padding-box, linear-gradient(to right, var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
@@ -3715,8 +3735,8 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     padding-right: 1.4rem;
 }
 
-.Re-registerChild .Re-childInformations .Re-addChildBox .Re-childBoxInputs .Re-input input,
-.Re-registerChild .Re-childInformations .Re-addChildBox .Re-childBoxInputs .Re-input select{
+.Re-registerChild .Re-addChildBox .Re-childBoxInputs .Re-input input,
+.Re-registerChild .Re-addChildBox .Re-childBoxInputs .Re-input select{
     position: relative;
     background-color: transparent;
     outline: none;
@@ -3727,7 +3747,7 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     border-radius: 10rem;
 }
 
-.Re-registerChild .Re-childInformations .Re-addChildBox .Re-childBoxInputs .Re-input label{
+.Re-registerChild .Re-addChildBox .Re-childBoxInputs .Re-input label{
     position: absolute;
     top: -10px;
     left: 1rem;
@@ -3738,7 +3758,7 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     font-weight: 500;
 }
 
-.Re-registerChild .Re-childInformations .Re-addChildBox .Re-childBoxInputs .Re-input .Re-inputIcon{
+.Re-registerChild.Re-addChildBox .Re-childBoxInputs .Re-input .Re-inputIcon{
     position: absolute;
     font-size: 0.8rem;
     right: 1.6rem;
@@ -3746,27 +3766,14 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     transform: translateY(-50%);
 }
 
-.Re-registerChild .Re-childInformations .Re-childBoxButtons{
+.Re-registerChild .Re-confirmAddChild {
     position: absolute;
     display: flex;
-    gap: 1rem;
     bottom: 1rem;
     right: 2rem;
-}
-
-.Re-registerChild .Re-childInformations .Re-childBoxButtons .confirmBtn{
     height: 2rem;
     width: 6rem;    
     padding: 0;
-    background-color: transparent;
-}
-
-.Re-registerChild .Re-childInformations .Re-childBoxButtons .Re-cancelAddChild{
-    transition: 0.2s;
-    color: var(--secondColor);
-}
-
-.Re-registerChild .Re-childInformations .Re-childBoxButtons .Re-confirmAddChild {
     color: var(--whiteColor);
     background-color: var(--secondColor);
     border: 2px solid var(--secondColor);
@@ -3774,7 +3781,7 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     transition: 0.2s;
 }
 
-.Re-registerChild .Re-childInformations .Re-childBoxButtons .Re-confirmAddChild:hover {
+.Re-registerChild .Re-confirmAddChild:hover {
     color: var(--secondColor);
     background-color: var(--whiteColor);
     border-color: var(--secondColor);
