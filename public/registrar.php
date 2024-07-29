@@ -30,7 +30,7 @@
                 <div class="Re-registerCenter">
                     <div class="Re-accountInformations Re-registerSections">
                         <div class="Re-input inputUserName">
-                            <input class="Re-userInput validate" type="text" id="nomeUsuario" name="userRegistro" oninput="validateName()" onclick="validateName()" required autofocus>
+                            <input class="Re-userInput validate blank" type="text" id="nomeUsuario" name="userRegistro" oninput="validateName()" onclick="validateName()" required autofocus>
                             <label class="Re-fakePlaceholder" for="nomeUsuario">Usuário</label>
                             <span class="userArroba">@</span>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
@@ -40,7 +40,7 @@
                         </div>
 
                         <div class="Re-input inputeMAIL">
-                            <input class="Re-userInput validate" type="email" id="email" name="emailRegistro" autocomplete="email" oninput="validateEmail()" required>
+                            <input class="Re-userInput validate blank" type="email" id="email" name="emailRegistro" autocomplete="email" oninput="validateEmail()" required>
                             <label class="Re-fakePlaceholder" for="email">E-mail</label>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
                             <div class="errorMessageContainer">
@@ -49,7 +49,7 @@
                         </div>
 
                         <div class="Re-input inputPassword">
-                            <input class="Re-userInput validate" type="password" id="senha" name="senhaRegistro" oninput="validatePassword()" required>
+                            <input class="Re-userInput validate blank" type="password" id="senha" name="senhaRegistro" oninput="validatePassword()" required>
                             <label class="Re-fakePlaceholder" for="senha">Senha</label>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
                             <div class="errorMessageContainer">
@@ -58,7 +58,7 @@
                         </div>
 
                         <div class="Re-input inputConfirmPassword">
-                            <input class="Re-userInput validate" type="password" id="confirmarSenha" name="senhaRegistroConfirma" oninput="validateConfirmPassword()" required>
+                            <input class="Re-userInput validate blank" type="password" id="confirmarSenha" name="senhaRegistroConfirma" oninput="validateConfirmPassword()" required>
                             <label class="Re-fakePlaceholder" for="confirmarSenha">Confirmar Senha</label>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
                             <div class="errorMessageContainer">
@@ -81,7 +81,7 @@
 
                     <div class="Re-userInformations Re-registerSections close">
                         <div class="Re-input inputName">
-                            <input class="Re-userInput validate" type="text" id="nomeCompleto" name="nomeUsuarioRegistro" oninput="validateFullName()" required>
+                            <input class="Re-userInput validate blank" type="text" id="nomeCompleto" name="nomeUsuarioRegistro" oninput="validateFullName()" required>
                             <label class="Re-fakePlaceholder" for="nomeCompleto">Nome Completo</label>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
                             <div class="errorMessageContainer">
@@ -97,7 +97,7 @@
                             </div>
                         </div>
                         <div class="Re-input inputDataNasc">
-                            <input class="Re-userInput validate" type="date" id="dataNascimento" name="dataNascimentoRegistro" onchange="validateBornDate()" required>
+                            <input class="Re-userInput validate blank" type="date" id="dataNascimento" name="dataNascimentoRegistro" onchange="validateBornDate()" required>
                             <label class="Re-fakePlaceholder notEmpty" for="dataNascimento">Data de Nascimento</label>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
                             <div class="errorMessageContainer">
@@ -105,7 +105,7 @@
                             </div>
                         </div>
                         <div class="Re-input inputLocal">
-                            <select class="Re-userInput validate" name="localizacaoRegistro" id="localizacao" onchange="validateLocal()" required>
+                            <select class="Re-userInput validate blank" name="localizacaoRegistro" id="localizacao" onchange="validateLocal()" required>
                                 <option value=""></option>
                                 <option value="Não Informar"> Não Informar</option>
                                 <option value="Acre"> AC | Acre</option>
@@ -246,6 +246,8 @@
                     errorMessageContent[index].style.display = "flex";
                     errorIcon[index].style.display = "block";
 
+                    validateInputs[index].classList.add('wEror');
+
                     function toggleErrorModal(index, show) {
                         errorMessageContainers[index].style.display = show ? 'flex' : 'none';
                     }
@@ -268,6 +270,9 @@
                     placeholders[index].style.color = "var(--secondColor)";
                     errorMessageContent[index].innerHTML = '';
                     errorIcon[index].style.display = "none";
+
+                    validateInputs[index].classList.remove('wEror');
+                    validateInputs[index].classList.remove('blank');
                 }
 
                 function checkEmptyInput(index){
@@ -277,8 +282,10 @@
                     } else {
                         placeholders[index].classList.remove('notEmpty');
                         inputContainers[index].style.opacity = "0.5";
-                        removeError(index);
-                    }
+                        inputContainers[index].style.border = "2px solid transparent";
+                        placeholders[index].style.color = "var(--secondColor)";
+                        errorMessageContent[index].innerHTML = '';
+                        errorIcon[index].style.display = "none";                    }
                 }
 
                 function validateName(){
@@ -287,7 +294,7 @@
 
                     checkEmptyInput(0);
                     if(username.length === 0){
-                        removeError(0);
+                        checkEmptyInput(0);
                     } else if(username.length <= 3){
                         setError(0, "O nome de usuário deve ter mais de <span class='mainError'>3 caracteres.</span>");
                     } else if(username.length > maxChar){
@@ -316,7 +323,7 @@
                     checkEmptyInput(1);
 
                     if(email.length === 0){
-                        removeError(1);
+                        checkEmptyInput(1);
                     } else if (email.length > maxChar) {
                         setError(1, "O e-mail é <span class='mainError'>longo demais.</span>");
                         email = email.slice(0, maxChar);
@@ -339,7 +346,7 @@
                     validateConfirmPassword();
 
                     if(password.length === 0){
-                        removeError(2);
+                        checkEmptyInput(2);
                     } else if (password.length < 8) {
                         setError(2, "A senha deve ter mais de <span class='mainError'>8 caracteres.</span>");
                     } else if (password.length > maxChar) {
@@ -364,7 +371,7 @@
 
                     checkEmptyInput(3);
                     if(confirmPassword.length === 0){
-                        removeError(3);
+                        checkEmptyInput(3);
                     } else if(password !== confirmPassword){
                         setError(3, "As senhas <span class='mainError'>não coincidem.</span>");
                     } else{
@@ -378,11 +385,10 @@
 
                     checkEmptyInput(4);
 
-                    // Regex para permitir acentos, hífens, cedilhas e apóstrofos no Nome Completo
                     const nameRegex = /^[a-zA-ZÀ-ÖØ-ÿ' -]+$/;
 
                     if (fullName.length === 0) {
-                        removeError(4);
+                        checkEmptyInput(4);
                     } else if (fullName.length > maxChar) {
                         setError(4, "O nome é <span class='mainError'>longo demais.</span>");
                     } else if (/\d/.test(fullName)) {
@@ -416,7 +422,7 @@
 
                     checkEmptyInput(5);
                     if (phone.length === 0) {
-                        removeError(5);
+                        checkEmptyInput(5);
                     } else if (phone.length > maxChar) {
                         setError(5, "O número de telefone é <span class='mainError'>longo demais.</span>");
                     } else if (!phoneRegex.test(phone)) {
@@ -436,7 +442,7 @@
                     checkEmptyInput(6);
 
                     if (validateInputs[6].value === "") {
-                        removeError(6);
+                        checkEmptyInput(6);
                     } else if (birthDate > new Date()) {
                         setError(6, "A data de nascimento não pode ser uma <span class='mainError'>data futura.</span>");
                     } else if (birthDate < hundredYearsAgo) {
@@ -471,11 +477,15 @@
 
                     checkEmptyInput(8);
 
-                    if (biography.length > maxChar) {
-                        characters.style.color = "var(--redColor)";
+                    if (biography.length === 0) {
+                        validateInputs[8].style.color = "";
+                        checkEmptyInput(8);
+                    } else if (biography.length > maxChar) {
+                        validateInputs[8].style.color = "var(--redColor)";
                         setError(8, "A biografia é <span class='mainError'>muito longa.</span>");
                     } else {
                         characters.style.color = "";
+                        validateInputs[8].style.color = "";
                         removeError(8);
                     }
                 }
@@ -529,10 +539,26 @@
                     updateButtonVisibility();
                 }
 
+                function validateSection(sectionIndex) {
+                    let isValid = true;
+                    const sectionInputs = registerSections[sectionIndex].querySelectorAll('.validate');
+
+                    sectionInputs.forEach(input => {
+                        if (input.classList.contains('wEror') || input.classList.contains('blank') || input.value.trim() === '') {
+                            isValid = false;
+                        }
+                    });
+
+                    return isValid;
+                }
 
                 nextButton.addEventListener('click', () => {
-                    if (currentSectionIndex < registerSections.length - 1) {
-                        showSection(currentSectionIndex + 1);
+                    if (validateSection(currentSectionIndex)) {
+                        if (currentSectionIndex < registerSections.length - 1) {
+                            showSection(currentSectionIndex + 1);
+                        }
+                    } else {
+                        alert("Preencha todos os campos corretamente antes de prosseguir");
                     }
                 });
 
@@ -542,6 +568,7 @@
                     }
                 });
             }
+
 
             function validateSubmit() {
                 submitButton.addEventListener('click', (event) => {
