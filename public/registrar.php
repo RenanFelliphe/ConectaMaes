@@ -157,39 +157,38 @@
 
                     <div class="Re-registerResult Re-registerSections close">
                         <div class="Re-addImageProfile">
-                            <div class="Re-userImageProfile">
-                                <img src="../app/assets/imagens/icons/user_no_profile_image.png" alt="" class="Re-userImage">
-                            </div>
-
                             <input type="file" class="validate" id="imagesSelector" name="fotoPerfilRegistro" input="validateImageProfile();" accept="image/png, image/jpeg">
-                            <label for="imagesSelector" class="Re-addImageIcon">                        
-                                <i class="bi bi-camera-fill"></i>                    
+                            <label for="imagesSelector" class="Re-userImageProfile">
+                                <div>
+                                    <img src="../app/assets/imagens/icons/user_no_profile_image.png" class="Re-userImage">
+                                </div>
+                                <i class="bi bi-camera-fill Re-addImageIcon"></i>                    
                             </label>
                         </div>
 
                         <div class="Re-userInfoContainer">
                             <div class="Re-userInformations">
-                                <p class="Re-infoLabel">Nome:</p>
+                                <p class="Re-infoLabel infoName">Nome:</p>
                                 <p class="Re-userInfo" id="infoNomeCompleto"></p>
                             </div>
                             <div class="Re-userInformations">
-                                <p class="Re-infoLabel">Usuário:</p>
+                                <p class="Re-infoLabel infoUser">Usuário:</p>
                                 <p class="Re-userInfo" id="infoNomeUsuario"></p>
                             </div>
                             <div class="Re-userInformations">
-                                <p class="Re-infoLabel">E-mail:</p>
+                                <p class="Re-infoLabel infoEmail">E-mail:</p>
                                 <p class="Re-userInfo" id="infoEmail"></p>
                             </div>
                             <div class="Re-userInformations">
-                                <p class="Re-infoLabel">Telefone:</p>
+                                <p class="Re-infoLabel infoPhone">Telefone:</p>
                                 <p class="Re-userInfo" id="infoTelefone"></p>
                             </div>
                             <div class="Re-userInformations">
-                                <p class="Re-infoLabel">Data de Nascimento:</p>
+                                <p class="Re-infoLabel infoDate">Data de Nascimento:</p>
                                 <p class="Re-userInfo" id="infoDataNascimento"></p>
                             </div>
                             <div class="Re-userInformations">
-                                <p class="Re-infoLabel">Localização:</p>
+                                <p class="Re-infoLabel infoLocal">Localização:</p>
                                 <p class="Re-userInfo" id="infoLocalizacao"></p>
                             </div>
                         </div>
@@ -339,7 +338,6 @@
                     const hasUpperCase = /[A-Z]/.test(password);
                     const hasLowerCase = /[a-z]/.test(password);
                     const hasDigit = /\d/.test(password);
-                    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
                     maxChar = 100;
                     
                     checkEmptyInput(2);
@@ -358,8 +356,6 @@
                         setError(2, "A senha deve conter <span class='mainError'>letras minúsculas.</span>");
                     } else if (!hasDigit) {
                         setError(2, "A senha deve conter <span class='mainError'>números.</span>");
-                    } else if (!hasSpecialChar) {
-                        setError(2, "A senha deve conter caracteres especiais <span class='mainError'>(!@#$%^&*).</span>");
                     } else {
                         removeError(2);
                     }
