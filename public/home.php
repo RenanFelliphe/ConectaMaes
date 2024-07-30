@@ -168,22 +168,22 @@
             </section>
 
             <div class="modalBack">
-                <div class="Re-registerChild" method="post" enctype="multipart/form-data">
+                <div class="Re-registerChild">
                     <i class="bi bi-x closeChildModal" onclick="registerChildModal()"></i>
                     <div class="Re-addChildBtn toggleAddChildModal"> Adicionar filho +</div>
-                    <div class="Re-myChild">
-                        <i class="bi bi-x deleteChild"></i>
+                    <div class="Re-myChildBtn">
+                        <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/boy_icon.png" class="pageIcon" alt="Ícone de usuário">
                         <p>Nome da Criança</p>
                         <i class="bi bi-x deleteChild"></i>
                     </div>
-                    <div class="Re-myChild">
-                        <i class="bi bi-x deleteChild"></i>
+                    <div class="Re-myChildBtn">
+                        <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/girl_icon.png" class="pageIcon" alt="Ícone de usuário">
                         <p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p>
                         <i class="bi bi-x deleteChild"></i>
                     </div>
 
-                    <div class="Re-myChild">
-                        <i class="bi bi-x deleteChild"></i>
+                    <div class="Re-myChildBtn">
+                        <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/pram_icon.png" class="pageIcon" alt="Ícone de usuário">
                         <p>AAAAA</p>
                         <i class="bi bi-x deleteChild"></i>
                     </div>
@@ -197,8 +197,8 @@
 
                         <div class="Re-childBoxSex">
                             <p> Sexo: </p>
-                            <div class="Re-sexOptions">
-                                <input type="radio" name="childSex" value="boy" id="Re-childBoySex">
+                            <div class="Re-sexOptions" >
+                                <input type="radio" name="childSex" value="boy" id="Re-childBoySex" required>
                                 <label for="Re-childBoySex"> Menino </label>
                                 <input type="radio" name="childSex" value="girl" id="Re-childGirlSex">
                                 <label for="Re-childGirlSex"> Menina </label>

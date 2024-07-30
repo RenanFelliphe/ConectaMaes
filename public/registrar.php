@@ -39,7 +39,7 @@
                             </div>
                         </div>
 
-                        <div class="Re-input inputeMAIL">
+                        <div class="Re-input inputEmail">
                             <input class="Re-userInput validate blank" type="email" id="email" name="emailRegistro" autocomplete="email" oninput="validateEmail()" required>
                             <label class="Re-fakePlaceholder" for="email">E-mail</label>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
@@ -89,7 +89,7 @@
                             </div>
                         </div>
                         <div class="Re-input inputCell">
-                            <input class="Re-userInput validate" type="number" id="telefone" name="telefoneRegistro" oninput="validatePhone()" required/>
+                            <input class="Re-userInput validate" type="number" id="telefone" name="telefoneRegistro" oninput="validatePhone()"/>
                             <label class="Re-fakePlaceholder" for="telefone">Telefone</label>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
                             <div class="errorMessageContainer">
@@ -443,6 +443,7 @@
 
                     if (validateInputs[6].value === "") {
                         checkEmptyInput(6);
+                        placeholders[6].classList.add('notEmpty');
                     } else if (birthDate > new Date()) {
                         setError(6, "A data de nascimento não pode ser uma <span class='mainError'>data futura.</span>");
                     } else if (birthDate < hundredYearsAgo) {
@@ -519,64 +520,43 @@
             }
 
             function toggleRegisterSections() {
-                const registerSections = document.querySelectorAll('.Re-registerSections');
+                const sections = document.querySelectorAll('.Re-registerSections');
                 const nextButton = document.querySelector('.Re-registerNext');
                 const backButton = document.querySelector('.Re-backButton');
                 const submitButton = document.querySelector('.Re-registerSubmit');
+                let currentIndex = 0;
 
-                let currentSectionIndex = 0;
+                const updateButtonVisibility = () => {
+                    backButton.classList.toggle('close', currentIndex === 0);
+                    nextButton.classList.toggle('close', currentIndex === sections.length - 1);
+                    submitButton.classList.toggle('close', currentIndex !== sections.length - 1);
+                };
 
-                function updateButtonVisibility() {
-                    backButton.classList.toggle('close', currentSectionIndex === 0);
-                    nextButton.classList.toggle('close', currentSectionIndex === registerSections.length - 1);
-                    submitButton.classList.toggle('close', currentSectionIndex !== registerSections.length - 1);
-                }
-
-                function showSection(index) {
-                    registerSections[currentSectionIndex].classList.add('close');
-                    registerSections[index].classList.remove('close');
-                    currentSectionIndex = index;
+                const showSection = (index) => {
+                    sections[currentIndex].classList.add('close');
+                    sections[index].classList.remove('close');
+                    currentIndex = index;
                     updateButtonVisibility();
-                }
+                };
 
-                function validateSection(sectionIndex) {
-                    let isValid = true;
-                    const sectionInputs = registerSections[sectionIndex].querySelectorAll('.validate');
-
-                    sectionInputs.forEach(input => {
-                        if (input.classList.contains('wEror') || input.classList.contains('blank') || input.value.trim() === '') {
-                            isValid = false;
-                        }
-                    });
-
-                    return isValid;
-                }
+                const validateSection = (index) => {
+                    return Array.from(sections[index].querySelectorAll('.validate')).every(input =>
+                        !input.hasAttribute('required') || (!input.classList.contains('wEror') && !input.classList.contains('blank') && input.value.trim() !== '')
+                    );
+                };
 
                 nextButton.addEventListener('click', () => {
-                    if (validateSection(currentSectionIndex)) {
-                        if (currentSectionIndex < registerSections.length - 1) {
-                            showSection(currentSectionIndex + 1);
-                        }
+                    if (validateSection(currentIndex)) {
+                        if (currentIndex < sections.length - 1) showSection(currentIndex + 1);
                     } else {
                         alert("Preencha todos os campos corretamente antes de prosseguir");
                     }
                 });
 
                 backButton.addEventListener('click', () => {
-                    if (currentSectionIndex > 0) {
-                        showSection(currentSectionIndex - 1);
-                    }
+                    if (currentIndex > 0) showSection(currentIndex - 1);
                 });
-            }
 
-
-            function validateSubmit() {
-                submitButton.addEventListener('click', (event) => {
-                    if (!termsCheckboxInput.checked) {
-                        event.preventDefault();
-                        alert("Você deve ler e concordar com os termos e condições antes de completar o registro!");
-                    }
-                });
             }
 
             userValidations();

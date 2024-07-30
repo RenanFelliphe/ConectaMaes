@@ -1538,17 +1538,16 @@ footer .A-footerRight li.A-footerPolitic h4 {
 .Lo-loginForm .Lo-loginCenter .Re-input.Lo-loginAssistants {
     position: relative;
     width: 200%;
-    background-color: gold;
+    background: transparent;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     padding: 0 0rem 0 1rem;
     font-size: 0.7rem;
-    margin-top: -0.5rem;
+    margin-top: -1.3rem;
     color: var(--blackColor);
     gap: 0.4rem;
     border: none;
-    border-radius: 1.1rem;
     opacity: 1;
 }
 
@@ -3573,6 +3572,8 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     padding: 3rem;
     border-radius: 1rem;
     border: 2px solid var(--firstColor);
+    height: fit-content;
+    width: fit-content;
 }
 
 .Re-registerChild .closeChildModal:first-of-type{
@@ -3591,7 +3592,7 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
 }
 
 .Re-registerChild .Re-addChildBtn,
-.Re-registerChild .Re-myChild{
+.Re-registerChild .Re-myChildBtn{
     position: relative;
     display: flex;
     background: linear-gradient(to right, var(--pastelYellowColor) 0%, var(--pastelBlueColor) 50%, var(--pastelPinkColor) 100%);
@@ -3605,11 +3606,23 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     color: var(--whiteColor);
     cursor: pointer;
     padding: 1rem;
+    transition: 0.2s;
 }
 
-.Re-registerChild .Re-myChild{
+.Re-registerChild .Re-myChildBtn{
     justify-content: space-between;
     background: var(--secondColor);
+}
+
+.Re-registerChild .Re-myChildBtn:hover,
+.Re-registerChild .Re-addChildBtn:hover{
+    transform: scale(1.06);
+    transition: 0.2s;
+}
+
+.Re-registerChild .Re-myChildBtn img{
+    width: 1.3rem;
+    filter: brightness(0) saturate(100%) invert(98%) sepia(100%) saturate(10%) hue-rotate(183deg) brightness(102%) contrast(100%);
 }
 
 .Re-registerChild p{
@@ -3617,6 +3630,7 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     width: 80%;
     overflow: hidden;
     text-overflow: ellipsis;
+    text-align: center;
 }
 
 .Re-registerChild .Re-myChild i{
@@ -3717,6 +3731,7 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
 
 .Re-registerChild .Re-addChildBox .Re-childBoxSex .Re-sexOptions label{
     margin-left: -0.8rem;
+    white-space: nowrap;
 }
 
 .Re-registerChild .Re-addChildBox .Re-childBoxInputs{
