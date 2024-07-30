@@ -31,11 +31,11 @@
             </section>
 
             <section class="timeline">
-            <section class="Au-auxilioFilter">
-                <h1 class="Au-auxilioRecent Au-auxilioMainFilter active" onclick="toggleAuxilioFilter(this);">Recentes</h1>
-                <h1 class="Au-auxilioMain Au-auxilioMainFilter" onclick="toggleAuxilioFilter(this);">Principais</h1>
-                <span></span>
-            </section>
+                <section class="Ho-postFilter">
+                    <h1 class="Ho-postRecent Ho-mainFilters active" onclick="toggleAuxilioFilter(this);">Recentes</h1>
+                    <h1 class="Ho-postMain Ho-mainFilters" onclick="toggleAuxilioFilter(this);">Principais</h1>
+                </section>
+
                 <section class="Au-allAuxilios">
                     <?php
                         $auxilios = queryPostsAndUserData($conn, 'Auxilio');

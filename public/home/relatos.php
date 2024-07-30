@@ -30,51 +30,10 @@
             </section>
 
             <section class="timeline">
-                <form class="Ho-postSomething" method="post" enctype="multipart/form-data">
-                    <div class="Ho-postTop">
-                        <a class="Ho-userProfileImage" href="<?php echo $relativePublicPath; ?>/home/perfil.php">
-                            <img src="<?php echo $relativeAssetsPath."/imagens/fotos/perfil/".$currentUserData['linkFotoPerfil'];?>">
-                        </a>
-        
-                        <div class="Ho-postText">
-                            <div class="Ho-postTitle">
-                                <label for="Ho-postTitleInput">Título:</label>
-                                <input type="text" id="Ho-postTitleInput" name="tituloEnvio" class="Ho-postTitleInput" oninput="postTitleCharLimiter()">
-                                <div class="Ho-titleCharacters">
-                                    <span class="Ho-titleCharactersNumber">0</span>/<span class="Ho-maxTitleCharacters">50</span>
-                                </div>
-                            </div>
-
-                            <textarea name="conteudoEnvio" id="" cols="65" rows="3" class="Ho-postTextContent" placeholder="Compartilhe sua experiência!" oninput="postCharLimiter()"></textarea>
-                            <div class="Ho-characters">
-                                <span class="Ho-charactersNumber">0</span>/<span class="Ho-maxCharacters">200</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="Ho-postBottom">
-                        <div class="Ho-extraInputs">
-                            <div class="Ho-imageInput">
-                            <input type="file" id="Ho-imageSelector" name="linkAnexoEnvio" accept="image/*" onchange="addPost()">
-                                <label for="Ho-imageSelector">
-                                    <i class="bi bi-images Ho-iconLabel"></i>
-                                    <p> Imagem </p>
-                                </label>
-                            </div>
-                        </div>
-        
-                        <button type="submit" value="submit" name ="postRelato" class="Ho-submitBtn confirmBtn">Postar</button>
-                    </div>
-
-                    <div class="Ho-postAttachments">
-                        <span class="Ho-preview"></span>
-                    </div>
-                    <?php
-                        if(isset($_POST['postRelato'])){
-                            sendPost($conn,"Relato", $currentUserData['idUsuario']);
-                        }
-                    ?>
-                </form>
+                <section class="Ho-postFilter">
+                    <h1 class="Ho-postRecent Ho-mainFilters active" onclick="toggleAuxilioFilter(this);">Recentes</h1>
+                    <h1 class="Ho-postMain Ho-mainFilters" onclick="toggleAuxilioFilter(this);">Principais</h1>
+                </section>
 
                 <?php
                     $publicacoes = queryPostsAndUserData($conn, 'Relato');

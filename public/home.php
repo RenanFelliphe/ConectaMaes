@@ -46,38 +46,10 @@
             </section>
 
             <section class="timeline">
-                <form class="Ho-postSomething" method="post" enctype="multipart/form-data">
-                    <div class="Ho-postTop">
-                        <a class="Ho-userProfileImage" href="<?php echo $relativePublicPath; ?>/home/perfil.php">
-                            <img src="<?php echo $relativeAssetsPath."/imagens/fotos/perfil/".$currentUserData['linkFotoPerfil'];?>">
-                        </a>
-
-                        <div class="Ho-postText">
-                            <textarea name="conteudoEnvio" id="postText" cols="65" rows="3" class="Ho-postTextContent" placeholder="Como você está se sentindo?" oninput="postCharLimiter()"></textarea>
-                            <div class="Ho-characters">
-                                <span class="Ho-charactersNumber">0</span>/<span class="Ho-maxCharacters">200</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="Ho-postBottom">
-                        <div class="Ho-extraInputs">
-                            <div class="Ho-imageInput">
-                                <input type="file" id="Ho-imageSelector" name="linkAnexoEnvio" accept="image/*" onchange="addPost()">
-                                <label for="Ho-imageSelector">
-                                    <i class="bi bi-images Ho-iconLabel"></i>
-                                    <p> Imagem </p>
-                                </label>
-                            </div>
-                        </div>
-
-                        <button type="submit" value="submit" name="postPostagem" class="Ho-submitBtn confirmBtn">Postar</button>
-                    </div>
-
-                    <div class="Ho-postAttachments">
-                        <span class="Ho-preview"></span>
-                    </div>
-                </form>
+                <section class="Ho-postFilter">
+                    <h1 class="Ho-postRecent Ho-mainFilters active" onclick="toggleAuxilioFilter(this);">Recentes</h1>
+                    <h1 class="Ho-postMain Ho-mainFilters" onclick="toggleAuxilioFilter(this);">Principais</h1>
+                </section>
 
                 <?php
                     if (count($publicacoes) > 0) {
@@ -171,20 +143,14 @@
                 <div class="Re-registerChild">
                     <i class="bi bi-x closeChildModal" onclick="registerChildModal()"></i>
                     <div class="Re-addChildBtn toggleAddChildModal"> Adicionar filho +</div>
+                    <?php
+                        foreach ($publicacoes as $dadosPublicacao){
+
+                        }
+                    ?>
                     <div class="Re-myChildBtn">
                         <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/boy_icon.png" class="pageIcon" alt="Ícone de usuário">
                         <p>Nome da Criança</p>
-                        <i class="bi bi-x deleteChild"></i>
-                    </div>
-                    <div class="Re-myChildBtn">
-                        <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/girl_icon.png" class="pageIcon" alt="Ícone de usuário">
-                        <p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p>
-                        <i class="bi bi-x deleteChild"></i>
-                    </div>
-
-                    <div class="Re-myChildBtn">
-                        <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/pram_icon.png" class="pageIcon" alt="Ícone de usuário">
-                        <p>AAAAA</p>
                         <i class="bi bi-x deleteChild"></i>
                     </div>
 
@@ -317,7 +283,7 @@
         <?php include_once ("../app/includes/modais.php");?>
         
         <script src="<?php echo $relativeAssetsPath; ?>/js/system.js"></script>
-        <script>        
+        <script>       
             function registerChildModal() {
                 const addChildModal = document.querySelector('.modalBack');
                 const closeModalBtn = document.querySelector('.closeChildModal');

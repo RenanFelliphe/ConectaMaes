@@ -348,7 +348,7 @@ button.confirmBtn:hover {
     gap: 5rem;
     justify-content: space-between;
     height: 10vh;
-    padding: 0.5rem 1rem;
+    padding: 0rem 1rem;
     background: var(--whiteColor);
     border-bottom: 1px solid var(--grayColor);
     z-index: 999;
@@ -365,20 +365,24 @@ button.confirmBtn:hover {
 }
 
 .headerHome .headerPageLinks {
+    position: relative;
     display: flex;
-    gap: 3rem;
+    gap: 5vw;
+    height: 100%;
 }
 
 .headerHome .headerPageLinks .pageLink {
     position: relative;
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
     cursor: pointer;
-    height: 4rem;
+    height: 100%;
     font-weight: 500;
     color: var(--grayColor);
     text-decoration: none;
     cursor: pointer;
+    padding: 1rem 0 0.5rem 0;
 }
 
 .headerHome .headerPageLinks .pageLink.active,
@@ -388,14 +392,18 @@ button.confirmBtn:hover {
 
 .headerHome .headerPageLinks .pageLink .pageSelector {
     position: absolute;
-    width: 150%;
+    width: 200%;
     height: 3px;
-    bottom: -1px;
+    bottom: -2px;
     border-radius: 100rem;
 }
 
 .headerHome .headerPageLinks .pageLink.active .pageSelector {
     background-color: var(--secondColor);
+}
+
+.headerHome .headerPageLinks .pageLink .headerIcon{
+    width: 4vh;
 }
 
 body.P-theme .headerHome .headerPageLinks .pageLink.active .headerIcon,
@@ -480,7 +488,7 @@ body.Y-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon {
 .headerHome .userFunctionsModal {
     position: fixed;
     right: 1rem;
-    top: 3.95rem;
+    top: 9.9vh;
     height: fit-content;
     padding: 1rem;
     display: flex;
@@ -566,7 +574,7 @@ body.Y-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon {
 .headerHome .userContainer .makeAPost .postStyle {
     border: 2px solid transparent;
     background-color: var(--secondColor);
-    padding: 0.75rem 0.5rem 0.55rem 0.3rem;
+    padding: 0.7rem 0.5rem 0.45rem 0.3rem;
     border-top-right-radius: 100rem;
     border-bottom-right-radius: 100rem;
     font-size: 0.5rem;
@@ -599,7 +607,7 @@ body.Y-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon {
 .headerHome .userContainer .makeAPostModal {
     position: fixed;
     right: 3.5rem;
-    top: 3.95rem;
+    top: 9.9vh;
     height: fit-content;
     width: min-content;
     padding: 1rem;
@@ -1752,6 +1760,33 @@ footer .A-footerRight li.A-footerPolitic h4 {
     display: none;
 }
 
+.Ho-postFilter {
+    position: relative;
+    width: 100%;
+    height: 4.5rem;
+    display: flex;
+    justify-content: space-evenly;
+    border-bottom: 1px solid var(--grayColor);
+}
+
+.Ho-postFilter h1 {
+    display: flex;
+    position: relative;
+    height: 100%;
+    width: 13rem;
+    font-size: 1.3rem;
+    cursor: pointer;
+    color: var(--grayColor);
+    transition: 0.2s, color 0.15s;
+}
+
+.Ho-postFilter h1.active {
+    color: var(--secondColor);
+    transform: scale(1.25);
+    letter-spacing: 1px;
+    transition: 0.2s;
+}
+
 .Ho-postSomething {
     position: relative;
     display: flex;
@@ -2152,7 +2187,8 @@ footer .A-footerRight li.A-footerPolitic h4 {
     justify-content: space-evenly;
     font-size: 0.6rem;
     font-weight: 700;
-    row-gap: 0.4rem;
+    gap: 1.5vw;
+    row-gap: 0.35vw;
 }
 
 .asideRight .asideRightFooter a {
@@ -2177,43 +2213,6 @@ footer .A-footerRight li.A-footerPolitic h4 {
     display: flex;
     align-items: flex-start;
     gap: 1rem;
-}
-
-.Au-auxilioFilter {
-    position: relative;
-    width: 100%;
-    height: 4.5rem;
-    display: flex;
-    justify-content: space-evenly;
-    border-bottom: 1px solid var(--grayColor);
-}
-
-.Au-auxilioFilter h1 {
-    display: flex;
-    position: relative;
-    height: 100%;
-    width: 13rem;
-    font-size: 1.4rem;
-    cursor: pointer;
-    color: var(--grayColor);
-    transition: 0.2s;
-}
-
-.Au-auxilioFilter h1.active {
-    color: var(--secondColor);
-    transition: 0.2s;
-}
-
-.Au-auxilioFilter span {
-    position: absolute;
-    bottom: -2px;
-    width: 13rem;
-    height: 3px;
-    background-color: var(--secondColor);
-    border-radius: 10rem;
-    box-shadow: 0 0 2px 0px var(--firstColor);
-    left: 5rem;
-    transition: 0.2s;
 }
 
 .Au-allAuxilios {

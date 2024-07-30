@@ -323,22 +323,15 @@ function sendPassword(){
 }
 
 function toggleAuxilioFilter(clickedFilter) {
-    const auxilioMainFilters = document.querySelectorAll('.Au-auxilioMainFilter');
-
-    auxilioMainFilters.forEach(filter => {
+    const filters = document.querySelectorAll('.Ho-mainFilters');
+    
+    filters.forEach(filter => {
         filter.classList.remove('active');
     });
 
     clickedFilter.classList.add('active');
-
-    const auxilioMainFiltersSelector = document.querySelector('.Au-auxilioFilter span');
-
-    if (clickedFilter.classList.contains('Au-auxilioMain')) {
-        auxilioMainFiltersSelector.style.transform = 'translateX(18.5rem)';
-    } else {
-        auxilioMainFiltersSelector.style.transform = 'translateX(0)';
-    }
 }
+
 
 function openAuxilioModal() {
     const auxilioCards = document.querySelectorAll('.Au-auxilioCard');
