@@ -1725,13 +1725,15 @@ footer .A-footerRight li.A-footerPolitic h4 {
     min-height: 25rem;
     height: 55vh;
     max-height: 35rem;
-    border: 1px solid var(--grayColor);
-    border-radius: 1rem;
-    background-color: var(--whiteColor);
+    border-radius: 0.7rem;
+    border: 1px solid transparent;
+    background: linear-gradient(var(--whiteColor), var(--whiteColor)) padding-box, linear-gradient(var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
     z-index: 999;
     top: 50%;
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
+    box-shadow: 0 3px 9px 0px #00000040;
+    overflow: hidden;
 }
 
 .Re-registerTerms.close{
@@ -1794,7 +1796,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     padding: 1rem;
     background-color: #F8F8F8;
     border: 1px solid var(--grayColor);
-    border-radius: 0.3rem;
+    border-radius: 0.4rem;
     left: 50%;
     transform: translateX(-50%);
     margin-top: 1rem;
@@ -1841,14 +1843,11 @@ footer .A-footerRight li.A-footerPolitic h4 {
 }
 
 .Re-registerTerms .Re-termsBottom .Re-termsButtons .Re-denyTermsBtn{
-    background-color: var(--whiteColor);
-    border: none;
     color: var(--secondColor);
+    cursor: pointer;
 }
 
 .Re-registerTerms .Re-termsBottom .Re-termsButtons .Re-denyTermsBtn:hover{
-    background-color: var(--whiteColor);
-    border: none;
     color: var(--grayColor);
 }
 

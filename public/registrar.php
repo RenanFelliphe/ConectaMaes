@@ -210,17 +210,17 @@
                     <div class="Re-termsBottom">
                         <div class="Re-termsCheckboxes">
                             <div class="Re-termsCheckbox">
-                                <input type="checkbox" id="usingTermsCheckbox">
+                                <input type="checkbox" id="usingTermsCheckbox" required>
                                 <label for="usingTermsCheckbox">Eu li e concordo com os <a href="../documents\termos_de_uso_ConectaMaes.pdf" target="_blank">termos de uso</a>.</label>
                             </div>
                             <div class="Re-termsCheckbox">
-                                <input type="checkbox" id="privacyTermsCheckbox">
+                                <input type="checkbox" id="privacyTermsCheckbox" required>
                                 <label for="privacyTermsCheckbox">Eu li e concordo com as <a href="../documents\politicas_de_privacidade_ConectaMaes.pdf" target="_blank">políticas de privacidade</a>.</label>
                             </div>
                         </div>
 
                         <div class="Re-termsButtons">
-                            <button class="Re-denyTermsBtn confirmBtn">Cancelar</button>
+                            <h1 class="Re-denyTermsBtn confirmBtn">Cancelar</h1>
                             <button class="Re-registerSubmit confirmBtn" type="submit" name="registrar">Confirmar</button>                    
                         </div>
                     </div>
@@ -228,7 +228,7 @@
 
                 <div class="Re-registerBottom">
                     <button class="Re-registerNext confirmBtn" name="proximo" type="button">Próximo</button>
-                    <p class="Re-goLogin">Já possui uma conta?  <a href="login.php">Entre</a></p>
+                    <p class="Re-goLogin">Já possui uma conta? <a id="Re-goLoginLink" href="login.php">Entre</a></p>
                 </div>
                 <?php
                     if(isset($_POST['registrar'])){
@@ -555,15 +555,11 @@
 
                 let currentIndex = 0;
 
-                const updateButtonVisibility = () => {
-                    backButton.classList.toggle('close', currentIndex === 0);
-                };
-
                 const showSection = (index) => {
                     sections[currentIndex].classList.add('close');
                     sections[index].classList.remove('close');
                     currentIndex = index;
-                    updateButtonVisibility();
+                    backButton.classList.toggle('close', currentIndex === 0);
                 };
 
                 const validateSection = (index) => {
@@ -620,6 +616,20 @@
                         });
                     });
 
+                    function validateSubmit() {
+                        const privacyTermsCheckbox = document.querySelector('#privacyTermsCheckbox');
+                        const usingTermsCheckbox = document.querySelector('#usingTermsCheckbox');
+                        const submitButton = document.querySelector('.Re-registerSubmit');
+
+                        submitButton.addEventListener('click', (event) => {
+                            if (!privacyTermsCheckbox.checked || !usingTermsCheckbox.checked) {
+                                event.preventDefault();
+                                alert("Você deve ler e concordar com os termos de uso e as políticas de privacidade antes de completar o registro!");
+                            }
+                        });
+                    }
+
+
                     if (!termsSection.classList.contains('close')) {
                         backButton.style.pointerEvents = 'none';
                         backButton.style.color = 'var(--grayColor)';
@@ -633,8 +643,9 @@
                         nextButton.style.pointerEvents = 'all';
                         nextButton.style.backgroundColor = '';
                     }
-                }
 
+                    validateSubmit();
+                }
             }
 
             /*function toggleRegisterSections() {
@@ -717,17 +728,6 @@
                 }
 
             }*/
-
-            /*function validateSubmit() {
-                submitButton.addEventListener('click', (event) => {
-                    if (!termsCheckboxInput.checked) {
-                        event.preventDefault();
-                        alert("Você deve ler e concordar com os termos e condições antes de completar o registro!");
-                    }
-                });
-            }*/
-
-
             userValidations();
             toggleRegisterSections();
         </script>
