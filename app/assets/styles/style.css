@@ -1722,8 +1722,8 @@ footer .A-footerRight li.A-footerPolitic h4 {
     min-width: 24rem;
     width: 24vw;
     max-width: 30rem;
-    min-height: 25rem;
-    height: 55vh;
+    min-height: 29rem;
+    height: 60vh;
     max-height: 35rem;
     border-radius: 0.7rem;
     border: 1px solid transparent;
@@ -1791,7 +1791,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     width: 20vw;
     max-width: 26rem;
     min-height: 15rem;
-    height: 33vh;
+    height: 35vh;
     max-height: 20rem;
     padding: 1rem;
     background-color: #F8F8F8;
@@ -1799,19 +1799,19 @@ footer .A-footerRight li.A-footerPolitic h4 {
     border-radius: 0.4rem;
     left: 50%;
     transform: translateX(-50%);
-    margin-top: 1rem;
+    margin-top: 4vh;
 }
 
-.Re-registerTerms .Re-termsBottom .Re-termsCheckboxes{
+.Re-registerTerms .Re-termsCheckboxes{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
     font-size: 0.85rem;
-    padding: 1rem;
+    padding: 3vh;
 }
 
-.Re-registerTerms .Re-termsBottom .Re-termsCheckboxes .Re-termsCheckbox{
+.Re-registerTerms .Re-termsCheckboxes .Re-termsCheckbox{
     display: flex;
     flex-wrap: nowrap;
     width: fit-content;
@@ -1819,18 +1819,18 @@ footer .A-footerRight li.A-footerPolitic h4 {
     cursor: pointer;
 }
 
-.Re-registerTerms .Re-termsBottom .Re-termsCheckboxes .Re-termsCheckbox label{
+.Re-registerTerms .Re-termsCheckboxes .Re-termsCheckbox label{
     width: fit-content;
     white-space: nowrap;
     cursor: pointer;
 }
 
-.Re-registerTerms .Re-termsBottom .Re-termsCheckboxes .Re-termsCheckbox label a{
+.Re-registerTerms .Re-termsCheckboxes .Re-termsCheckbox label a{
     color: var(--thirdColor);
     font-weight: 500;
 }
 
-.Re-registerTerms .Re-termsBottom .Re-termsButtons{
+.Re-registerTerms .Re-termsButtons{
     position: relative;
     float: right;
     display: flex;
@@ -1838,16 +1838,16 @@ footer .A-footerRight li.A-footerPolitic h4 {
     padding: 0rem 1rem;
 }
 
-.Re-registerTerms .Re-termsBottom .Re-termsButtons .confirmBtn{
+.Re-registerTerms .Re-termsButtons .confirmBtn{
     font-size: 1rem;
 }
 
-.Re-registerTerms .Re-termsBottom .Re-termsButtons .Re-denyTermsBtn{
+.Re-registerTerms .Re-termsButtons .Re-denyTermsBtn{
     color: var(--secondColor);
     cursor: pointer;
 }
 
-.Re-registerTerms .Re-termsBottom .Re-termsButtons .Re-denyTermsBtn:hover{
+.Re-registerTerms .Re-termsButtons .Re-denyTermsBtn:hover{
     color: var(--grayColor);
 }
 

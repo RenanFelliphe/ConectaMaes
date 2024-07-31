@@ -207,22 +207,20 @@
                         <div class="Re-privacyTermsPDF"></div>
                     </div>
 
-                    <div class="Re-termsBottom">
-                        <div class="Re-termsCheckboxes">
-                            <div class="Re-termsCheckbox">
-                                <input type="checkbox" id="usingTermsCheckbox" required>
-                                <label for="usingTermsCheckbox">Eu li e concordo com os <a href="../documents\termos_de_uso_ConectaMaes.pdf" target="_blank">termos de uso</a>.</label>
-                            </div>
-                            <div class="Re-termsCheckbox">
-                                <input type="checkbox" id="privacyTermsCheckbox" required>
-                                <label for="privacyTermsCheckbox">Eu li e concordo com as <a href="../documents\politicas_de_privacidade_ConectaMaes.pdf" target="_blank">políticas de privacidade</a>.</label>
-                            </div>
+                    <div class="Re-termsCheckboxes">
+                        <div class="Re-termsCheckbox">
+                            <input type="checkbox" id="usingTermsCheckbox" required>
+                            <label for="usingTermsCheckbox">Eu li e concordo com os <a href="../documents\termos_de_uso_ConectaMaes.pdf" target="_blank">termos de uso</a>.</label>
                         </div>
+                        <div class="Re-termsCheckbox">
+                            <input type="checkbox" id="privacyTermsCheckbox" required>
+                            <label for="privacyTermsCheckbox">Eu li e concordo com as <a href="../documents\politicas_de_privacidade_ConectaMaes.pdf" target="_blank">políticas de privacidade</a>.</label>
+                        </div>
+                    </div>
 
-                        <div class="Re-termsButtons">
-                            <h1 class="Re-denyTermsBtn confirmBtn">Cancelar</h1>
-                            <button class="Re-registerSubmit confirmBtn" type="submit" name="registrar">Confirmar</button>                    
-                        </div>
+                    <div class="Re-termsButtons">
+                        <h1 class="Re-denyTermsBtn confirmBtn">Cancelar</h1>
+                        <button class="Re-registerSubmit confirmBtn" type="submit" name="registrar">Confirmar</button>                    
                     </div>
                 </div>
 
