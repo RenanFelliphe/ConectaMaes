@@ -195,9 +195,39 @@
                     </div>
                 </div>
                 
+                <div class="Re-registerTerms close">
+                    <div class="Re-termsHeader">
+                        <h4 class="Re-termsType Re-usingTerms active" onclick="toggleTermsType(this)">Termos de Uso</h4>
+                        <h4 class="Re-termsType Re-privacyTerms" onclick="toggleTermsType(this)">Políticas de Privacidade</h4>
+                        <span class="Re-termsSelector"></span>
+                    </div>
+                    
+                    <div class="Re-termsPDF">
+                        <div class="Re-usingTermsPDF"></div>
+                        <div class="Re-privacyTermsPDF"></div>
+                    </div>
+
+                    <div class="Re-termsBottom">
+                        <div class="Re-termsCheckboxes">
+                            <div class="Re-termsCheckbox">
+                                <input type="checkbox" id="usingTermsCheckbox">
+                                <label for="usingTermsCheckbox">Eu li e concordo com os <a href="../documents\termos_de_uso_ConectaMaes.pdf" target="_blank">termos de uso</a>.</label>
+                            </div>
+                            <div class="Re-termsCheckbox">
+                                <input type="checkbox" id="privacyTermsCheckbox">
+                                <label for="privacyTermsCheckbox">Eu li e concordo com as <a href="../documents\politicas_de_privacidade_ConectaMaes.pdf" target="_blank">políticas de privacidade</a>.</label>
+                            </div>
+                        </div>
+
+                        <div class="Re-termsButtons">
+                            <button class="Re-denyTermsBtn confirmBtn">Cancelar</button>
+                            <button class="Re-registerSubmit confirmBtn" type="submit" name="registrar">Confirmar</button>                    
+                        </div>
+                    </div>
+                </div>
+
                 <div class="Re-registerBottom">
                     <button class="Re-registerNext confirmBtn" name="proximo" type="button">Próximo</button>
-                    <button class="Re-registerSubmit confirmBtn close" type="submit" name="registrar">Registrar</button>
                     <p class="Re-goLogin">Já possui uma conta?  <a href="login.php">Entre</a></p>
                 </div>
                 <?php
@@ -519,13 +549,14 @@
                 const sections = document.querySelectorAll('.Re-registerSections');
                 const nextButton = document.querySelector('.Re-registerNext');
                 const backButton = document.querySelector('.Re-backButton');
-                const submitButton = document.querySelector('.Re-registerSubmit');
+
+                const termsSection = document.querySelector('.Re-registerTerms');
+                const denyTermsBtn = document.querySelector('.Re-denyTermsBtn');
+
                 let currentIndex = 0;
 
                 const updateButtonVisibility = () => {
                     backButton.classList.toggle('close', currentIndex === 0);
-                    nextButton.classList.toggle('close', currentIndex === sections.length - 1);
-                    submitButton.classList.toggle('close', currentIndex !== sections.length - 1);
                 };
 
                 const showSection = (index) => {
@@ -542,10 +573,17 @@
                 };
 
                 nextButton.addEventListener('click', () => {
-                    if (validateSection(currentIndex)) {
-                        if (currentIndex < sections.length - 1) showSection(currentIndex + 1);
+                    if (currentIndex === sections.length - 1) {
+                        if (validateSection(currentIndex)) {
+                            termsSection.classList.remove('close');
+                            registerTerms();
+                        }
                     } else {
-                        alert("Preencha todos os campos corretamente antes de prosseguir");
+                        if (validateSection(currentIndex)) {
+                            if (currentIndex < sections.length - 1) showSection(currentIndex + 1);
+                        } else {
+                            alert("Preencha todos os campos corretamente antes de prosseguir");
+                        }
                     }
                 });
 
@@ -553,7 +591,142 @@
                     if (currentIndex > 0) showSection(currentIndex - 1);
                 });
 
+                function registerTerms() {
+                    denyTermsBtn.addEventListener('click', () => {
+                        termsSection.classList.add('close');
+                        registerTerms();
+                    });
+
+                    function toggleTermsType(clicked) {
+                        const termsType = document.querySelectorAll('.Re-termsType');
+                        const termsSelector = document.querySelector('.Re-termsSelector');
+
+                        termsType.forEach(termType => {
+                            termType.classList.remove('active');
+                        });
+
+                        clicked.classList.add('active');
+
+                        if (clicked.classList.contains('Re-usingTerms')) {
+                            termsSelector.style.transform = 'translateX(0)';
+                        } else if (clicked.classList.contains('Re-privacyTerms')) {
+                            termsSelector.style.transform = 'translateX(100%)';
+                        }
+                    }
+
+                    document.querySelectorAll('.Re-termsType').forEach(termType => {
+                        termType.addEventListener('click', () => {
+                            toggleTermsType(termType);
+                        });
+                    });
+
+                    if (!termsSection.classList.contains('close')) {
+                        backButton.style.pointerEvents = 'none';
+                        backButton.style.color = 'var(--grayColor)';
+
+                        nextButton.style.pointerEvents = 'none';
+                        nextButton.style.backgroundColor = 'var(--grayColor)';
+                    } else {
+                        backButton.style.pointerEvents = 'all';
+                        backButton.style.color = '';
+
+                        nextButton.style.pointerEvents = 'all';
+                        nextButton.style.backgroundColor = '';
+                    }
+                }
+
             }
+
+            /*function toggleRegisterSections() {
+                const registerSections = document.querySelectorAll('.Re-registerSections');
+                const nextButton = document.querySelector('.Re-registerNext');
+                const backButton = document.querySelector('.Re-backButton');
+
+                const termsSection = document.querySelector('.Re-registerTerms');
+                const denyTermsBtn = document.querySelector('.Re-denyTermsBtn');
+
+                let currentSectionIndex = 0;
+
+                function updateButtonVisibility() {
+                    backButton.classList.toggle('close', currentSectionIndex === 0);
+                }
+                function showSection(index) {
+                    registerSections[currentSectionIndex].classList.add('close');
+                    registerSections[index].classList.remove('close');
+                    currentSectionIndex = index;
+                    updateButtonVisibility();
+                }
+
+                nextButton.addEventListener('click', () => {
+                    if (currentSectionIndex === 2){
+                        termsSection.classList.remove('close');
+                        registerTerms();
+                    } else if (currentSectionIndex < registerSections.length - 1) {
+                        showSection(currentSectionIndex + 1);
+                    }
+                });
+
+                backButton.addEventListener('click', () => {
+                    if (currentSectionIndex > 0) {
+                        showSection(currentSectionIndex - 1);
+                    }
+                });
+
+                function registerTerms() {
+                    denyTermsBtn.addEventListener('click', () => {
+                        termsSection.classList.add('close');
+                        registerTerms();
+                    });
+
+                    function toggleTermsType(clicked) {
+                        const termsType = document.querySelectorAll('.Re-termsType');
+                        const termsSelector = document.querySelector('.Re-termsSelector');
+
+                        termsType.forEach(termType => {
+                            termType.classList.remove('active');
+                        });
+
+                        clicked.classList.add('active');
+
+                        if (clicked.classList.contains('Re-usingTerms')) {
+                            termsSelector.style.transform = 'translateX(0)';
+                        } else if (clicked.classList.contains('Re-privacyTerms')) {
+                            termsSelector.style.transform = 'translateX(100%)';
+                        }
+                    }
+
+                    document.querySelectorAll('.Re-termsType').forEach(termType => {
+                        termType.addEventListener('click', () => {
+                            toggleTermsType(termType);
+                        });
+                    });
+
+                    if (!termsSection.classList.contains('close')) {
+                        backButton.style.pointerEvents = 'none';
+                        backButton.style.color = 'var(--grayColor)';
+
+                        nextButton.style.pointerEvents = 'none';
+                        nextButton.style.backgroundColor = 'var(--grayColor)';
+                    } else {
+                        backButton.style.pointerEvents = 'all';
+                        backButton.style.color = '';
+
+                        nextButton.style.pointerEvents = 'all';
+                        nextButton.style.backgroundColor = '';
+                    }
+                }
+
+            }*/
+
+            /*function validateSubmit() {
+                submitButton.addEventListener('click', (event) => {
+                    if (!termsCheckboxInput.checked) {
+                        event.preventDefault();
+                        alert("Você deve ler e concordar com os termos e condições antes de completar o registro!");
+                    }
+                });
+            }*/
+
 
             userValidations();
             toggleRegisterSections();

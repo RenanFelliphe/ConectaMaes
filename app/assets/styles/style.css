@@ -225,7 +225,7 @@ button.confirmBtn {
     position: relative;
     display: flex;
     background-color: var(--secondColor);
-    padding: 0.5rem 0.5rem 0.45rem 1rem;
+    padding: 0.5rem 1rem;
     border: 2px solid transparent;
     border-radius: 100rem;
     color: var(--whiteColor);
@@ -1717,6 +1717,141 @@ footer .A-footerRight li.A-footerPolitic h4 {
     cursor: pointer;
 }
 
+.Re-registerTerms{
+    position: absolute;
+    min-width: 24rem;
+    width: 24vw;
+    max-width: 30rem;
+    min-height: 25rem;
+    height: 55vh;
+    max-height: 35rem;
+    border: 1px solid var(--grayColor);
+    border-radius: 1rem;
+    background-color: var(--whiteColor);
+    z-index: 999;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+}
+
+.Re-registerTerms.close{
+    display: none;
+}
+
+.Re-registerTerms .Re-termsHeader {
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 3.5rem;
+    color: var(--grayColor);
+    border-bottom: 1px solid var(--grayColor);
+    padding-left: 1.8rem;
+    gap: 1.5rem;
+}
+
+.Re-termsHeader h4 {
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    height: 100%;
+    cursor: pointer;
+}
+
+.Re-termsHeader h4.active {
+    color: var(--secondColor);
+}
+
+.Re-termsHeader .Re-termsSelector{
+    position: absolute;
+    width: 50%;
+    height: 3px;
+    bottom: -2px;
+    background-color: var(--secondColor);
+    border-radius: 1rem;
+    transition: 0.2s ease;
+    left: 0;
+}
+
+.Re-termsHeader .Re-usingTerms.active ~ .Re-termsSelector{
+    transform: translateX(0);
+    transition: 0.2s ease;
+}
+
+.Re-termsHeader .Re-privacyTerms.active ~ .Re-termsSelector{
+    transform: translateX(100%);
+    transition: 0.2s ease;
+}
+
+.Re-registerTerms .Re-termsPDF{
+    position: relative;
+    min-width: 20rem;
+    width: 20vw;
+    max-width: 26rem;
+    min-height: 15rem;
+    height: 33vh;
+    max-height: 20rem;
+    padding: 1rem;
+    background-color: #F8F8F8;
+    border: 1px solid var(--grayColor);
+    border-radius: 0.3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 1rem;
+}
+
+.Re-registerTerms .Re-termsBottom .Re-termsCheckboxes{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    padding: 1rem;
+}
+
+.Re-registerTerms .Re-termsBottom .Re-termsCheckboxes .Re-termsCheckbox{
+    display: flex;
+    flex-wrap: nowrap;
+    width: fit-content;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.Re-registerTerms .Re-termsBottom .Re-termsCheckboxes .Re-termsCheckbox label{
+    width: fit-content;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.Re-registerTerms .Re-termsBottom .Re-termsCheckboxes .Re-termsCheckbox label a{
+    color: var(--thirdColor);
+    font-weight: 500;
+}
+
+.Re-registerTerms .Re-termsBottom .Re-termsButtons{
+    position: relative;
+    float: right;
+    display: flex;
+    gap: 1rem;
+    padding: 0rem 1rem;
+}
+
+.Re-registerTerms .Re-termsBottom .Re-termsButtons .confirmBtn{
+    font-size: 1rem;
+}
+
+.Re-registerTerms .Re-termsBottom .Re-termsButtons .Re-denyTermsBtn{
+    background-color: var(--whiteColor);
+    border: none;
+    color: var(--secondColor);
+}
+
+.Re-registerTerms .Re-termsBottom .Re-termsButtons .Re-denyTermsBtn:hover{
+    background-color: var(--whiteColor);
+    border: none;
+    color: var(--grayColor);
+}
+
 .Lo-loginForm .Lo-loginBottom,
 .Re-registerForm .Re-registerBottom {
     position: relative;
@@ -1756,7 +1891,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     position: relative;
     width: 100vw;
     display: flex;
-    height: 89.5vh;
+    height: 90vh;
     overflow: hidden;
 }
 
@@ -2143,6 +2278,18 @@ footer .A-footerRight li.A-footerPolitic h4 {
     cursor: pointer;
     border: none;
 }
+
+.endTimeline{
+    position: relative;
+    display: flex;
+    text-align: center;
+    font-size: 1.2rem;
+    color: var(--secondColor);
+    letter-spacing: 2px;
+    cursor: default;
+    padding: 1.5rem;
+}
+
 .Ho-Main .asideLeft {
     width: 20vw;
     height: 100%;
@@ -2196,26 +2343,37 @@ footer .A-footerRight li.A-footerPolitic h4 {
 }
 
 .asideRight .asideRightFooter {
+    position: relative;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+    flex-direction: column;
+    gap: 0.5rem;
     font-size: 0.6rem;
     font-weight: 700;
-    gap: 1.5vw;
-    row-gap: 0.35vw;
+    width: 100%;
+}
+
+.asideRight .asideRightFooter div{
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 1rem;
+    width: 100%;
 }
 
 .asideRight .asideRightFooter a {
     color: var(--blackColor);
     text-decoration: none;
+    white-space: nowrap;
 }
 
 .asideRight .asideRightFooter a:hover {
     text-decoration: underline;
+    color: var(--thirdColor);
 }
 
 .asideRight .asideRightFooter h4 {
     color: var(--thirdColor);
+    white-space: nowrap;
 }
 
 /*====================================================================================================

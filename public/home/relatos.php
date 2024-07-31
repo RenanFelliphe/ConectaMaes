@@ -110,10 +110,13 @@
                                 }
                             */
                         }
-                        echo "FIM...<br>";
+                        ?><p class="endTimeline">...</p>
+                        <?php
                     } else {
-                        echo "Nenhuma publicação encontrada<br>";
-                    }
+                        ?>
+                            <p class="noPublicationsOnHome">Nenhuma publicação encontrada!</p>
+                        <?php
+                    }   
                     ?>
             </section>
 
@@ -124,10 +127,12 @@
                 </div>
 
                 <div class="asideRightFooter">
-                    <a href="<?php echo $relativeRootPath."/index.php"?>">Sobre o ConectaMães</a>
-                    <a href="<?php echo $relativePublicPath."/suporte.php"?>">Suporte</a>
-                    <a href="">Termos de Privacidade</a>
-                    <a href="">CEFET-MG</a>
+                    <div>
+                        <a href="<?php echo $relativeRootPath."/index.php"?>">Sobre o ConectaMães</a>
+                        <a href="<?php echo $relativePublicPath."/suporte.php"?>">Suporte</a>
+                        <a href="">Termos de Privacidade</a>
+                        <a href="">CEFET-MG</a>
+                    </div>
                     <h4>ConectaMães do CEFET-MG | 2024</h4>
                 </div>
             </section>
