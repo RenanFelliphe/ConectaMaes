@@ -1033,7 +1033,9 @@ footer .A-footerRight li.A-footerPolitic h4 {
 }
 
 .La-landingSections .La-articleConectaMaes .La-focus,
-.La-landingSections .La-Sharing .La-focus {
+.La-landingSections .La-Sharing .La-focus,
+.La-landingSections .La-testSing .La-focus,
+.La-landingSections .La-creatAccountSing .La-focus {
     font-weight: bolder;
     color: var(--middleYellowColor);
 }
@@ -1044,7 +1046,9 @@ footer .A-footerRight li.A-footerPolitic h4 {
     color: var(--middleBlueColor);
 }
 
-.La-landingSections .La-articleRating .La-focus {
+.La-landingSections .La-articleRating .La-focus,
+.La-landingSections .La-contactSection .La-focus
+{
     font-weight: bolder;
     color: var(--middlePinkColor);
 }
@@ -1053,7 +1057,99 @@ footer .A-footerRight li.A-footerPolitic h4 {
     align-items: center;
 }
 
-.La-landingSections .La-createAccountSign {
+/*Estilo secçao de teste*/
+
+.La-tituloSeccaoMeio{
+    text-align: center;
+    font-size: 3rem;
+}
+
+.La-landingSections .La-testSing  p {
+    text-align: center;
+    font-size: 1.3rem;
+}
+
+.La-landingSections .La-testSing {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    left: 50%;
+    transform: translate(-50%);
+    width: 50%;
+}
+
+.La-landingSections .La-testSing .La-testButton {
+    display: flex;
+    padding: 0.7rem 1.2rem;
+    border-radius: 10rem;
+    cursor: pointer;
+    color: var(--whiteColor);
+    background-color: var(--middleYellowColor);
+    width: 13rem;
+    box-shadow: 0 0 5px 1px var(--darkYellowColor);
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.La-testSing{
+    margin-top: 4rem;
+    margin-bottom: 8rem;
+}
+/*Estilo secção perguntas frequentes*/
+.La-landingSections .La-frequentQuestions {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    left: 50%;
+    transform: translate(-50%);
+}
+.La-landingSections .La-frequentQuestions .La-tituloSeccaoMeio{
+    margin-bottom: 1rem;
+}
+
+.faq-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.faq-list li {
+    margin: 0;
+    border-bottom: 1px solid #333; 
+}
+
+.faq-list li:last-child {
+    border-bottom: none;
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    color: #000000;
+    text-decoration: none;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    width: 50rem;
+}
+
+.faq-question:hover {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.faq-question::after {
+    content: '\276F'; 
+    font-size: 16px;
+    color: #333333;
+}
+/*Estilo secção de contacto*/
+
+.La-landingSections .La-contactSection {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -1063,25 +1159,114 @@ footer .A-footerRight li.A-footerPolitic h4 {
     transform: translate(-50%);
 }
 
-.La-landingSections .La-createAccountSign p {
-    width: 20rem;
-    text-align: center;
-    font-size: 1.2rem;
+form {
+    display: flex;
+    flex-direction: column;
 }
 
-.La-landingSections .La-createAccountSign .La-createAccountButton {
+.row {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    width: 48%; 
+}
+
+label {
+    margin: 10px 0 5px;
+    text-align: left;
+}
+
+.La-contactSection input, .La-contactSection textarea {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 0;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: transparent; 
+    box-shadow: 0 2px 5px -2px rgba(255, 0, 127, 0.5); 
+    transition: box-shadow 0.3s ease;
+}
+
+.La-contactSection input:focus, .La-contactSection textarea:focus {
+    outline: none; 
+    box-shadow: 0 2px 5px -2px rgba(255, 0, 127, 1);
+}
+
+button {
+    padding: 10px;
+    background-color: #ff007f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #e60070;
+}
+
+p {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+p a {
+    color: #ff007f;
+    text-decoration: none;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
+/*Estilo da secção de criar conta*/
+
+.La-tituloSeccaoMeio{
+    text-align: center;
+    font-size: 3rem;
+}
+
+.La-landingSections .La-creatAccountSing  p {
+    text-align: center;
+    font-size: 1.3rem;
+}
+
+.La-landingSections .La-creatAccountSing{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    left: 50%;
+    transform: translate(-50%);
+    width: 50%;
+}
+
+.La-landingSections .La-creatAccountSing .La-creatAccountButton {
     display: flex;
     padding: 0.7rem 1.2rem;
     border-radius: 10rem;
     cursor: pointer;
     color: var(--whiteColor);
-    background-color: var(--middlePinkColor);
+    background-color: var(--middleYellowColor);
     width: 13rem;
-    box-shadow: 0 0 5px 1px var(--darkPinkColor);
+    box-shadow: 0 0 5px 1px var(--darkYellowColor);
     font-size: 1.3rem;
     font-weight: 600;
     text-decoration: none;
 }
+
+.La-creatAccountSing{
+    margin-top: 4rem;
+    margin-bottom: 8rem;
+}
+
+/*Estilo secção da equipe*/
 
 .La-landingSections .La-articleEquip {
     position: relative;

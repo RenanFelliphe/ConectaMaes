@@ -45,7 +45,7 @@
                         <h2 class ="La-subtituloSeccao"> <span class="La-focus">Crie uma rede de apoio virtual!</span></h2>
                         <p class = "La-paragrafo">A plataforma oferece um novo espaço para o</br>
                          compartilhamento, anônimo ou não, de <span class="La-focus"> Relatos</span>  e</br>
-                         interação entre as mães. Um espaço para a formação</br>
+                         interação entre as mães. Um espaço para a formação
                          de uma nova <span class="La-focus">rede de apoio maternal</span> .  </p>
                     </div>
                 </article>
@@ -88,17 +88,77 @@
                     <div class = "La-seccaoDeTextoEsquerda">
                         <h1 class="La-tituloSeccao">Sua opinião é importante!</h1>
                         <h2 class ="La-subtituloSeccao"><span class="La-focus">Ajude a manter a comunidade ativa!</span></h2>
-                        <p class = "La-paragrafo">Avalie e interaja com os <span class="La-focus">Relatos</span> e <span class="La-focus">Pedidos</span> e ajude na</br>
-                         identificação de conteúdos relevantes para a</br>
-                         comunidade.</p>
+                        <p class = "La-paragrafo">Avalie e interaja com os <span class="La-focus">Relatos</span> e <span class="La-focus">Pedidos</span> e ajude na
+                         identificação de conteúdos relevantes para a comunidade.</p>
                     </div>
                   </article>
             </section>
 
             <section class="La-landingSections">
-                <article class="La-createAccountSign">
-                    <p>Seja parte desta comunidade, conecte-se com outras mães!</p>
-                    <a href="register.php" class="La-createAccountButton">Crie sua conta</a>
+                <article class="La-testSing">
+                    <h1 class = "La-tituloSeccaoMeio"> Que tal fazer um teste?</h1>
+                    <p>No <span class="La-focus">ConectaMães</span> você consegue experimentar o sistema sem criar uma conta!</p>
+                    <a href="register.php" class="La-testButton">Entre</a>
+                </article>  
+            </section>
+
+            <section class="La-landingSections">
+                <article class="La-frequentQuestions">
+                    <h1 class = "La-tituloSeccaoMeio"> Perguntas Frequentes</h1>
+                    <ul class="faq-list">
+                    <?php
+                    $faqs = [
+                        "O que é o ConectaMães?",
+                        "Mulheres grávidas também podem usar o site?",
+                        "Homens ou pessoas sem filho também podem usar o site?",
+                        "Pergunta 4",
+                        "Pergunta 5"
+                    ];
+
+                    foreach ($faqs as $faq) {
+                        echo "<li><a href='#' class='faq-question'>$faq</a></li>";
+                    }
+                    ?>
+                    </ul>
+                </article>  
+            </section>
+
+            <section class="La-landingSections">
+                <article class="La-contactSection">
+                    <h1 class = "La-tituloSeccaoMeio">Contato</h1>
+                    <form action="send_email.php" method="POST">
+                    <div class="row">
+                        <div class="field">
+                            <label for="nome">Nome</label>
+                            <input type="text" id="nome" name="nome" required>
+                        </div>
+                        <div class="field">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    </div>
+
+                    <label for="assunto">Assunto</label>
+                    <input type="text" id="assunto" name="assunto" required>
+                    
+                    <label for="mensagem">Mensagem</label>
+                    <textarea id="mensagem" name="mensagem" required></textarea>
+                    
+                    <button type="submit">Enviar</button>
+                </form>
+                <p class = "paragrafo">Você também pode nos contatar nas nossas <a href="#"><span class="La-focus">redes sociais oficiais</span></a>!</p>
+        
+                </article>  
+            </section>
+
+            <section class="La-landingSections">
+                <article class="La-creatAccountSing">
+                    <h1 class = "La-tituloSeccaoMeio"> NÃO PERCA ESSA CHANCE!</h1>
+                    <p><span class="La-focus">Participe da nossa comunidade</span>, 
+                    compartilhe suas experiências, conheça outras mães e encontre histórias 
+                    semelhantes às suas. Facilite sua jornada materna ao se conectar com
+                    uma <span class="La-focus">rede de apoio solidária</span>.</p>
+                    <a href="register.php" class="La-creatAccountButton">Criar uma conta</a>
                 </article>  
             </section>
 
