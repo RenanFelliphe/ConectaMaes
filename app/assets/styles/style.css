@@ -2511,6 +2511,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     flex-direction: column;
     gap: 1rem;
     padding: 2rem 0 1rem 0;
+    color:var(--whiteColor);
 }
 
 .asideRight .myAuxilios .auxilioListItem{
@@ -2526,6 +2527,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     background: var(--whiteColor);
     padding: 0.25rem 3rem 0.25rem 1rem;
     justify-content: left;
+    color:var(--blackColor);
 }
 
 .asideRight .myAuxilios .myAuxTitle{
