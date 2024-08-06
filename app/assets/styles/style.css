@@ -2686,6 +2686,51 @@ p a:hover {
     padding: 0.5rem 1.5rem 0.5rem 1.5rem;
 }
 
+.asideRight .myAuxilios{
+    position: absolute;
+    top: 6rem;
+}
+
+.asideRight .myAuxilios .auxiliosAside{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem 0 1rem 0;
+    color:var(--whiteColor);
+}
+
+.asideRight .myAuxilios .auxilioListItem{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 0.5rem 1.5rem;
+    background: var(--secondColor);
+    border-radius: 1.5rem;
+}
+
+.asideRight .myAuxilios .auxilioListItem .estado{
+    background: var(--whiteColor);
+    padding: 0.25rem 3rem 0.25rem 1rem;
+    justify-content: left;
+    color:var(--secondColor);
+    font-weight: bold;
+    border-radius: 1rem;
+    position:relative;
+    right:-3.25rem;
+}
+
+.asideRight .myAuxilios .myAuxTitle{
+    text-align: left;
+}
+.asideRight .myAuxilios .verMaisAuxilios{
+    text-align: right;
+}
+.asideRight .myAuxilios .verMaisAuxilios a{
+    text-decoration: none;
+    color: var(--secondColor);
+    font-weight: bold;
+}
+
 /*====================================================================================================
 ====================================== PÁGINA DE CONFIGURAÇÕES =======================================
 ====================================================================================================*/
