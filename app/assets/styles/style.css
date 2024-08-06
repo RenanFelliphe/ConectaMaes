@@ -2722,9 +2722,11 @@ p a:hover {
 .asideRight .myAuxilios .myAuxTitle{
     text-align: left;
 }
+
 .asideRight .myAuxilios .verMaisAuxilios{
     text-align: right;
 }
+
 .asideRight .myAuxilios .verMaisAuxilios a{
     text-decoration: none;
     color: var(--secondColor);
