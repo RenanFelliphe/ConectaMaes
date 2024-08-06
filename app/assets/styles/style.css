@@ -2501,6 +2501,39 @@ footer .A-footerRight li.A-footerPolitic h4 {
     padding: 0.5rem 1.5rem 0.5rem 1.5rem;
 }
 
+.asideRight .myAuxilios{
+    position: absolute;
+    top: 6rem;
+}
+
+.asideRight .myAuxilios .auxiliosAside{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem 0 1rem 0;
+}
+
+.asideRight .myAuxilios .auxilioListItem{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 0.5rem 1.5rem;
+    background: var(--secondColor);
+    border-radius: 1rem;
+}
+
+.asideRight .myAuxilios .auxilioListItem .estado{
+    background: var(--whiteColor);
+    padding: 0.25rem 3rem 0.25rem 1rem;
+    justify-content: left;
+}
+
+.asideRight .myAuxilios .myAuxTitle{
+    text-align: left;
+}
+.asideRight .myAuxilios .verMaisAuxilios{
+    text-align: right;
+}
 /*====================================================================================================
 ====================================== PÁGINA DE CONFIGURAÇÕES =======================================
 ====================================================================================================*/

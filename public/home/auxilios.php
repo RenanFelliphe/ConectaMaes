@@ -172,14 +172,36 @@
                         <?php
                     }   
                     ?>
-                </section>
-                
+                </section>   
             </section>
 
             <section class="asideRight">
                 <div class="searchBar">
                     <i class="bi bi-search"></i>
                     <input type="search" class="searchBarInput" placeholder="Pesquisar">
+                </div>
+
+                <div class="myAuxilios">
+                    <h2 class="myAuxTitle">Meus Auxílios</h2>
+                    <ul class="auxiliosAside">
+                        <?php
+                            for ($l = 0; $l < 3; $l++) { // Loop para repetir 3 vezes
+                        ?>
+                            <li class="auxilioListItem" id="auxilioAside<?php echo $l + 1; ?>">
+                                <div class="comentarios">
+                                    <i class="bi bi-chat-fill"></i>
+                                    <span class="quantComentarios">0</span>
+                                </div>
+                                <div class="titulo">Meu filho está com 49° de Febre!</div>
+                                <span class="estado">Aberto</span>
+                            </li>
+                        <?php
+                            }
+                        ?>
+                    </ul>
+                    <div class="verMaisAuxilios">
+                        <a href="#">Ver todos</a>
+                    </div>
                 </div>
 
                 <div class="asideRightFooter">
