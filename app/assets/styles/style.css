@@ -870,7 +870,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     overflow: hidden;
 }
 
-.La-quote {
+.La-landing .La-quote {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -878,7 +878,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     text-align: center;
 }
 
-.La-quote::before {
+.La-landing .La-quote::before {
 
     content: '';
     top: 50%;
@@ -890,7 +890,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     z-index: 0;
 
 }
-.La-quote::after  {
+.La-landing .La-quote::after  {
 
     content: '';
     top: 50%;
@@ -902,11 +902,11 @@ footer .A-footerRight li.A-footerPolitic h4 {
     z-index: 0;
 }
 
-.La-quote::before{
+.La-landing .La-quote::before{
     left: 0;
 }
 
-.La-quote{
+.La-landing .La-quote{
     right: 0;
 }
 
@@ -941,29 +941,31 @@ footer .A-footerRight li.A-footerPolitic h4 {
     margin-top: -8rem;
 }
 
-.La-seccaoDeTextoEsquerda{
+.La-landing .La-seccaoDeTextoEsquerda{
     text-align: left;
     margin-right: auto;
 }
 
-.La-seccaoDeTextoDireita{
+.La-landing .La-seccaoDeTextoDireita{
     text-align: right;
     margin-left: auto;
 }
-.La-tituloSeccao{
+
+.La-landing .La-tituloSeccao{
     font-size: 2.3rem;
     margin-bottom: 1.3rem;
 }
 
-.La-subtituloSeccao{
+.La-landing .La-subtituloSeccao{
     font-size: 1.9rem;
     font-weight: 100;
     margin-bottom: 1.3rem;
 }
 
-.La-paragrafo{
+.La-landing .La-paragrafo{
     font-size: 1.3rem;
 }
+
 .La-landingSections .La-articleHighlight {
     position: relative;
     display: flex;
@@ -1047,8 +1049,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
 }
 
 .La-landingSections .La-articleRating .La-focus,
-.La-landingSections .La-contactSection .La-focus
-{
+.La-landingSections .La-contactSection .La-focus {
     font-weight: bolder;
     color: var(--middlePinkColor);
 }
@@ -1059,17 +1060,17 @@ footer .A-footerRight li.A-footerPolitic h4 {
 
 /*Estilo secçao de teste*/
 
-.La-tituloSeccaoMeio{
+.La-landing .La-tituloSeccaoMeio{
     text-align: center;
     font-size: 3rem;
 }
 
-.La-landingSections .La-testSing  p {
+.La-landing .La-landingSections .La-testSing  p {
     text-align: center;
     font-size: 1.3rem;
 }
 
-.La-landingSections .La-testSing {
+.La-landing .La-landingSections .La-testSing {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -1080,7 +1081,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     width: 50%;
 }
 
-.La-landingSections .La-testSing .La-testButton {
+.La-landing .La-landingSections .La-testSing .La-testButton {
     display: flex;
     padding: 0.7rem 1.2rem;
     border-radius: 10rem;
@@ -1094,12 +1095,14 @@ footer .A-footerRight li.A-footerPolitic h4 {
     text-decoration: none;
 }
 
-.La-testSing{
+.La-landing .La-testSing{
     margin-top: 4rem;
     margin-bottom: 8rem;
 }
+
 /*Estilo secção perguntas frequentes*/
-.La-landingSections .La-frequentQuestions {
+
+.La-landing .La-landingSections .La-frequentQuestions {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -1108,25 +1111,25 @@ footer .A-footerRight li.A-footerPolitic h4 {
     left: 50%;
     transform: translate(-50%);
 }
-.La-landingSections .La-frequentQuestions .La-tituloSeccaoMeio{
+.La-landing .La-landingSections .La-frequentQuestions .La-tituloSeccaoMeio{
     margin-bottom: 1rem;
 }
 
-.faq-list {
+.La-landing .faq-list {
     list-style-type: none;
     padding: 0;
 }
 
-.faq-list li {
+.La-landing .faq-list li {
     margin: 0;
     border-bottom: 1px solid #333; 
 }
 
-.faq-list li:last-child {
+.La-landing .faq-list li:last-child {
     border-bottom: none;
 }
 
-.faq-question {
+.La-landing .faq-question {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1138,15 +1141,12 @@ footer .A-footerRight li.A-footerPolitic h4 {
     width: 50rem;
 }
 
-.faq-question:hover {
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-}
-
-.faq-question::after {
+.La-landing .faq-question::after {
     content: '\276F'; 
     font-size: 16px;
     color: #333333;
 }
+
 /*Estilo secção de contacto*/
 
 .La-landingSections .La-contactSection {
@@ -1159,26 +1159,38 @@ footer .A-footerRight li.A-footerPolitic h4 {
     transform: translate(-50%);
 }
 
-form {
+.La-landing form {
     display: flex;
     flex-direction: column;
 }
 
-.row {
+.La-landing .row {
     display: flex;
     justify-content: space-between;
     gap: 10px;
 }
 
-.field {
+.La-landing .field {
+    position: relative;
     display: flex;
     flex-direction: column;
     width: 48%; 
+    border-bottom: 2px solid transparent;
+    margin: 1rem 0;
 }
 
-label {
-    margin: 10px 0 5px;
-    text-align: left;
+.La-landing .field:after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    bottom: 0;
+    background: linear-gradient(transparent, transparent) padding-box, linear-gradient(to left, var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
+}
+
+.La-landing label {
+    position: absolute;
+    top: 0;
 }
 
 .La-contactSection input, .La-contactSection textarea {
@@ -1189,16 +1201,10 @@ label {
     width: 100%;
     box-sizing: border-box;
     background-color: transparent; 
-    box-shadow: 0 2px 5px -2px rgba(255, 0, 127, 0.5); 
     transition: box-shadow 0.3s ease;
 }
 
-.La-contactSection input:focus, .La-contactSection textarea:focus {
-    outline: none; 
-    box-shadow: 0 2px 5px -2px rgba(255, 0, 127, 1);
-}
-
-button {
+.La-landing button {
     padding: 10px;
     background-color: #ff007f;
     color: white;
@@ -1207,23 +1213,24 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+.La-landing button:hover {
     background-color: #e60070;
 }
 
-p {
+.La-landing p {
     margin-top: 20px;
     font-size: 14px;
 }
 
-p a {
+.La-landing p a {
     color: #ff007f;
     text-decoration: none;
 }
 
-p a:hover {
+.La-landing p a:hover {
     text-decoration: underline;
 }
+
 /*Estilo da secção de criar conta*/
 
 .La-tituloSeccaoMeio{

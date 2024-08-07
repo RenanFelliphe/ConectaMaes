@@ -111,8 +111,6 @@
                         "O que é o ConectaMães?",
                         "Mulheres grávidas também podem usar o site?",
                         "Homens ou pessoas sem filho também podem usar o site?",
-                        "Pergunta 4",
-                        "Pergunta 5"
                     ];
 
                     foreach ($faqs as $faq) {
@@ -129,20 +127,25 @@
                     <form action="send_email.php" method="POST">
                     <div class="row">
                         <div class="field">
-                            <label for="nome">Nome</label>
                             <input type="text" id="nome" name="nome" required>
+                            <label for="nome">Nome</label>
                         </div>
                         <div class="field">
-                            <label for="email">Email</label>
                             <input type="email" id="email" name="email" required>
+                            <label for="email">Email</label>
                         </div>
                     </div>
 
-                    <label for="assunto">Assunto</label>
-                    <input type="text" id="assunto" name="assunto" required>
+                    <div class="field">
+                        <input type="text" id="assunto" name="assunto" required>
+                        <label for="assunto">Assunto</label>
+                    </div>
                     
-                    <label for="mensagem">Mensagem</label>
-                    <textarea id="mensagem" name="mensagem" required></textarea>
+                    <div class="field">
+                        <textarea id="mensagem" name="mensagem" required></textarea>
+                        <label for="mensagem">Mensagem</label>
+                    </div>
+                    
                     
                     <button type="submit">Enviar</button>
                 </form>
