@@ -1081,7 +1081,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     width: 50%;
 }
 
-.La-landing .La-landingSections .La-testSing .La-testButton {
+.La-landing .La-landingSections .La-testSing .La-testButton{
     display: flex;
     padding: 0.7rem 1.2rem;
     border-radius: 10rem;
@@ -1135,6 +1135,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     align-items: center;
     padding: 15px;
     color: #000000;
+    font-size: 1.6rem;
     text-decoration: none;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
@@ -1167,14 +1168,14 @@ footer .A-footerRight li.A-footerPolitic h4 {
 .La-landing .row {
     display: flex;
     justify-content: space-between;
-    gap: 10px;
+    gap: 2rem;
 }
 
 .La-landing .field {
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 48%; 
+    width: 100%; 
     border-bottom: 2px solid transparent;
     margin: 1rem 0;
 }
@@ -1204,31 +1205,36 @@ footer .A-footerRight li.A-footerPolitic h4 {
     transition: box-shadow 0.3s ease;
 }
 
-.La-landing button {
-    padding: 10px;
-    background-color: #ff007f;
-    color: white;
-    border: none;
-    border-radius: 5px;
+
+.La-landing .La-landingSections .La-contactSection .La-contactSectionButton{
+    display: flex;
+    padding: 0.7rem 1.2rem;
+    border-radius: 10rem;
     cursor: pointer;
+    color: var(--whiteColor);
+    background-color: var(--middlePinkColor);
+    width: 13rem;
+    box-shadow: 0 0 5px 1px var(--darkPinkColor);
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-decoration: none; 
 }
 
-.La-landing button:hover {
-    background-color: #e60070;
-}
-
-.La-landing p {
-    margin-top: 20px;
-    font-size: 14px;
-}
-
-.La-landing p a {
+.La-landing .La-contactSectionLink {
     color: #ff007f;
     text-decoration: none;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
-.La-landing p a:hover {
-    text-decoration: underline;
+.La-cantactSectionIcon {
+    display: inline-block;
+    margin: 1rem 0.5rem 0;
+}
+
+.La-cantactSectionIcon img {
+    width: 40px;
+    height: 40px;
 }
 
 /*Estilo da secção de criar conta*/

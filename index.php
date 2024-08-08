@@ -111,6 +111,8 @@
                         "O que é o ConectaMães?",
                         "Mulheres grávidas também podem usar o site?",
                         "Homens ou pessoas sem filho também podem usar o site?",
+                        "Que tipo de auxílios podem ser pedidos no site?",
+                        "Eu posso relatar algo sem precisar me expor?",
                     ];
 
                     foreach ($faqs as $faq) {
@@ -147,10 +149,17 @@
                     </div>
                     
                     
-                    <button type="submit">Enviar</button>
+                    <a href="#" class="La-contactSectionButton">Enviar</a>
                 </form>
-                <p class = "paragrafo">Você também pode nos contatar nas nossas <a href="#"><span class="La-focus">redes sociais oficiais</span></a>!</p>
-        
+                <p class = "paragrafo">Você também pode nos contatar nas nossas <a href="#" class = "La-contactSectionLink"><span class="La-focus">redes sociais oficiais</span></a>!</p>
+                
+                <a href = "#" class="La-cantactSectionIcon">
+                    <img src="app/assets/imagens/icons/instagram_pink_icon.png" alt = "Instagram">
+                </a>
+                <a href = "#" class="La-cantactSectionIcon">
+                    <img src="app/assets/imagens/icons/gmail_grey_icon.png" alt = "Email">
+                </a>
+
                 </article>  
             </section>
 
