@@ -864,7 +864,15 @@ footer .A-footerRight li.A-footerPolitic h4 {
 ====================================================================================================*/
 
 .La-landing {
-    background: linear-gradient(var(--whiteColor) 8%, #80752350 16%, #03718050 45%, #a3155f50 75%, #80752350 85%);
+    background: linear-gradient(var(--whiteColor) 4%,
+     #80752350 10%,
+     #03718050 20%,
+     #a3155f50 40%,
+     #80752350 45%,
+     #03718050 60%, 
+     var(--whiteColor) 70%, 
+     #80752350 80%,
+     #03718050 90%);
     padding: 0 0 3rem 3rem;
     height: auto;
     overflow: hidden;
@@ -992,14 +1000,16 @@ footer .A-footerRight li.A-footerPolitic h4 {
     z-index: -1;
 }
 
-.La-landingSections .La-articleConectaMaes .La-articleHighlight .La-articleBar,
-.La-landingSections .La-articleEquip .La-articleHighlight .La-articleBar {
+.La-landingSections .La-articleConectaMaes .La-articleHighlight .La-articleBar {
     background: var(--middleYellowColor);
 }
 
-.La-landingSections .La-articleConectaMaes .La-articleHighlight .La-articleBar::before,
-.La-landingSections .La-articleEquip .La-articleHighlight .La-articleBar::before {
+.La-landingSections .La-articleConectaMaes .La-articleHighlight .La-articleBar::before{
     background: var(--pastelYellowColor);
+}
+
+.La-landingSections .La-articleEquip .La-articleHighlight .La-articleBar::before {
+    background: var(--pastelBlueColor);
 }
 
 .La-landingSections .La-Sharing .La-articleHighlight .La-articleBar {
@@ -1110,6 +1120,8 @@ footer .A-footerRight li.A-footerPolitic h4 {
     padding: 2rem;
     left: 50%;
     transform: translate(-50%);
+    margin-bottom: 5rem;
+    margin-top: 10rem;
 }
 .La-landing .La-landingSections .La-frequentQuestions .La-tituloSeccaoMeio{
     margin-bottom: 1rem;
@@ -1228,11 +1240,22 @@ footer .A-footerRight li.A-footerPolitic h4 {
 }
 
 .La-cantactSectionIcon {
-    display: inline-block;
-    margin: 1rem 0.5rem 0;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    gap: 0.9rem; 
+    margin-top: -0.5rem; 
+    margin-bottom: 2rem; 
 }
 
-.La-cantactSectionIcon img {
+.La-cantactSectionIconLink {
+    text-decoration: none; 
+    display: flex; 
+    justify-content: center;
+    align-items: center; 
+}
+
+.La-cantactSectionIconLink img {
     width: 40px;
     height: 40px;
 }
@@ -1289,20 +1312,34 @@ footer .A-footerRight li.A-footerPolitic h4 {
 }
 
 .La-landingSections .La-articleEquip .La-articleHighlight {
+    display: flex;
     flex-direction: row;
-    align-items: flex-end;
-    gap: 2rem;
+    gap: 1rem;
     position: absolute;
     left: 1rem;
     top: 0;
 }
-
-.La-landingSections .La-articleEquip .La-articleHighlight .La-articleBar {
-    height: 6.25rem;
-    background: linear-gradient(transparent, var(--middleYellowColor));
+.La-equipeSectionCollum{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
 }
 
-.La-landingSections .La-articleEquip .La-articleHighlight h2 {
+.La-landingSections .La-articleEquip .La-articleHighlight .La-articleBar {
+    height: 8rem;
+    background: linear-gradient(var(--middleBlueColor), transparent);
+    border-radius: 15%;
+}
+
+.La-equipIcon {
+    width: 60px;
+    height: auto;
+    align-items: start;
+}
+
+.La-equipSectionTitle {
+    margin: 0;
     font-size: 2rem;
 }
 

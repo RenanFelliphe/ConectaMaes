@@ -153,13 +153,14 @@
                 </form>
                 <p class = "paragrafo">Você também pode nos contatar nas nossas <a href="#" class = "La-contactSectionLink"><span class="La-focus">redes sociais oficiais</span></a>!</p>
                 
-                <a href = "#" class="La-cantactSectionIcon">
-                    <img src="app/assets/imagens/icons/instagram_pink_icon.png" alt = "Instagram">
-                </a>
-                <a href = "#" class="La-cantactSectionIcon">
-                    <img src="app/assets/imagens/icons/gmail_grey_icon.png" alt = "Email">
-                </a>
-
+                <div class="La-cantactSectionIcon">
+                    <a href="https://www.instagram.com/conectamaes2024?igsh=MXdnbW50bXNxNzdoMA==" target="_blank" class="La-cantactSectionIconLink">
+                        <img src="app/assets/imagens/icons/instagram_pink_icon.png" alt="Instagram">
+                    </a>
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=conectamaes2024@gmail.com" target="_blank" class="La-cantactSectionIconLink">
+                        <img src="app/assets/imagens/icons/gmail_grey_icon.png" alt="Email">
+                    </a>
+                </div>
                 </article>  
             </section>
 
@@ -177,8 +178,11 @@
             <section class="La-landingSections" id="La-articleEquip">
                 <article class="La-articleEquip">
                     <div class="La-articleHighlight">
-                        <span class="La-articleBar La-focus"></span>
-                        <h2>Equipe</h2>
+                        <div class ="La-equipeSectionCollum">
+                            <img class = "La-equipIcon" src = "app/assets/imagens/icons/people_icon.png" alt="">
+                            <span class="La-articleBar La-focus"></span>
+                        </div>
+                        <h2 class = "La-equipSectionTitle">Equipe</h2>
                     </div>
 
                     <div class="La-equipContainer">
