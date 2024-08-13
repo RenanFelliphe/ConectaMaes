@@ -185,15 +185,20 @@
                     <h2 class="myAuxTitle">Meus Auxílios</h2>
                     <ul class="auxiliosAside">
                         <?php
-                            for ($l = 0; $l < 3; $l++) { // Loop para repetir 3 vezes
+                            // Chama a função para obter os auxílios
+                            $result = specificPostQuery($conn, "titulo, estado", "tipoPublicacao = 'Auxilio'", "ORDER BY dataCriacaoPublicacao DESC LIMIT 3");
+                            $q = 0;
+                            // Itera sobre os resultados e exibe cada auxílio
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                $q++;
                         ?>
-                            <li class="auxilioListItem" id="auxilioAside<?php echo $l + 1; ?>">
+                            <li class="auxilioListItem" id="auxilioAside<?= $q;?>">
                                 <div class="comentarios">
                                     <i class="bi bi-chat-fill"></i>
                                     <span class="quantComentarios">0</span>
                                 </div>
-                                <div class="titulo">Meu filho está com 49° de Febre!</div>
-                                <span class="estado">Aberto</span>
+                                <div class="titulo"><?php echo $row['titulo']; ?></div>
+                                <span class="estado"><?php echo $row['estado']; ?></span>
                             </li>
                         <?php
                             }

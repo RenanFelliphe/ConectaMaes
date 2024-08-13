@@ -24,12 +24,11 @@
         }
 
     // SEARCH POSTS - READ
-        function querySpecificPost($conn, $id){
-            $sUQuery = "SELECT * FROM Publicacao WHERE idPublicacao =" . (int) $id;
+        function specificPostQuery($conn, $data, $where, $order){
+            $sUQuery = "SELECT $data FROM Publicacao WHERE $where $order";
             $sUExec = mysqli_query($conn, $sUQuery);
-            $sUReturn = mysqli_fetch_assoc($sUExec);
-
-            return $sUReturn;
+        
+            return $sUExec;
         }
         function queryPostsAndUserData($conn, $postType) {
             $baseQuery = "
