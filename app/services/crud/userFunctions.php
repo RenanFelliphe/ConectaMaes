@@ -10,7 +10,7 @@
             $nomeRegistro = mysqli_real_escape_string($conn, $_POST['nomeUsuarioRegistro']);
             $emailRegistro = $_POST['emailRegistro'];
             $userRegistro = mysqli_real_escape_string($conn, $_POST['userRegistro']);
-            $senhaRegistro = $_POST['senhaRegistro'];
+            $senhaRegistro = md5($_POST['senhaRegistro']);
             $dataNascimentoRegistro = mysqli_real_escape_string($conn,$_POST['dataNascimentoRegistro']);
             $telefoneRegistro = mysqli_real_escape_string($conn, $_POST['telefoneRegistro']);
             $biografiaUsuarioRegistro = mysqli_real_escape_string($conn, $_POST['biografiaUsuarioRegistro']);
