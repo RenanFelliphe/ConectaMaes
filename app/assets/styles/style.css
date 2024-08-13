@@ -2756,6 +2756,10 @@ footer .A-footerRight li.A-footerPolitic h4 {
     padding: 0.5rem 1.5rem;
     background: var(--secondColor);
     border-radius: 1.5rem;
+    min-width: 27.5rem;
+}
+.asideRight .myAuxilios .auxilioListItem.hidden{
+    display: none;
 }
 
 .asideRight .myAuxilios .auxilioListItem .estado{
@@ -2766,7 +2770,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     font-weight: bold;
     border-radius: 1rem;
     position:relative;
-    right:-3.25rem;
+    right:-6rem;
 }
 
 .asideRight .myAuxilios .myAuxTitle{
@@ -2777,7 +2781,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     text-align: right;
 }
 
-.asideRight .myAuxilios .verMaisAuxilios a{
+.asideRight .myAuxilios .verMaisAuxilios #verTodosBtn{
     text-decoration: none;
     color: var(--secondColor);
     font-weight: bold;

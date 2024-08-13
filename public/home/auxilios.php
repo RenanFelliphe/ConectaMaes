@@ -185,27 +185,36 @@
                     <h2 class="myAuxTitle">Meus Auxílios</h2>
                     <ul class="auxiliosAside">
                         <?php
-                            // Chama a função para obter os auxílios
-                            $result = specificPostQuery($conn, "titulo, estado", "tipoPublicacao = 'Auxilio'", "ORDER BY dataCriacaoPublicacao DESC LIMIT 3");
+                            // Chama a função para obter todos os auxílios (sem limite aqui)
+                            $result = specificPostQuery($conn, "titulo, isConcluido", "tipoPublicacao = 'Auxilio' AND idUsuario = '".$currentUserData['idUsuario']."'", "ORDER BY dataCriacaoPublicacao DESC");
                             $q = 0;
+
                             // Itera sobre os resultados e exibe cada auxílio
                             while ($row = mysqli_fetch_assoc($result)) {
                                 $q++;
                         ?>
-                            <li class="auxilioListItem" id="auxilioAside<?= $q;?>">
+                            <li class="auxilioListItem <?php echo $q > 3 ? 'hidden' : ''; ?>" id="auxilioAside<?= $q;?>">
                                 <div class="comentarios">
                                     <i class="bi bi-chat-fill"></i>
                                     <span class="quantComentarios">0</span>
                                 </div>
                                 <div class="titulo"><?php echo $row['titulo']; ?></div>
-                                <span class="estado"><?php echo $row['estado']; ?></span>
+                                <span class="estado">
+                                    <?php 
+                                        if($row['isConcluido'] == 0){
+                                            echo "Aberto";
+                                        } else {
+                                            echo "Concluído";
+                                        }
+                                    ?>
+                                </span>
                             </li>
                         <?php
                             }
                         ?>
                     </ul>
                     <div class="verMaisAuxilios">
-                        <a href="#">Ver todos</a>
+                        <a href="#" id="verTodosBtn">Ver todos</a>
                     </div>
                 </div>
 
@@ -227,6 +236,28 @@
             document.addEventListener('DOMContentLoaded', function() {
                 openAuxilioModal();
             });    
+
+            document.getElementById('verTodosBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+
+                var btn = e.target;
+                var hiddenItems = document.querySelectorAll('.myAuxilios .auxilioListItem.hidden');
+                var allItems = document.querySelectorAll('.myAuxilios .auxilioListItem');
+
+                if (btn.textContent === 'Ver todos') {
+                    hiddenItems.forEach(function(item) {
+                        item.classList.remove('hidden');
+                    });
+                    btn.textContent = 'Ver menos';
+                } else {
+                    allItems.forEach(function(item, index) {
+                        if (index >= 3) {
+                            item.classList.add('hidden');
+                        }
+                    });
+                    btn.textContent = 'Ver todos';
+                }
+            });
         </script>   
     </body>
 </html>
