@@ -176,47 +176,31 @@ function registerTheme(theme) {
     toggleTheme();
 }
 
-function toggleTheme(){
+function toggleTheme() {
     const body = document.querySelector("body");
     const main = document.querySelector("main");
     const cells = document.querySelectorAll('.backCells');
+    const currentUrl = window.location.href;
 
-    if(main.classList.contains("Lo-Login") || main.classList.contains("Re-register")){
-        if(body.classList.contains("B-theme")){
-            cells.forEach(cell => {
-                cell.src = '../app/assets/imagens/figuras/cells_standart_first_blue.png';
-            });
-        } else if(body.classList.contains("P-theme")){
-            cells.forEach(cell => {
-                cell.src = '../app/assets/imagens/figuras/cells_standart_first_pink.png';
-            });
-        } else if(body.classList.contains("Y-theme")){
-            cells.forEach(cell => {
-                cell.src = '../app/assets/imagens/figuras/cells_standart_first_yellow.png';
-            });
-        } else{
-            body.classList.add("Y-theme");
-            toggleTheme();
-        }
-    } else if (main.classList.contains("mainSystem")){
-        if(body.classList.contains("B-theme")){
-            cells.forEach(cell => {
-                cell.src = '../app/assets/imagens/figuras/cells_standart_full_blue.png';
-            });
-        } else if(body.classList.contains("P-theme")){
-            cells.forEach(cell => {
-                cell.src = '../app/assets/imagens/figuras/cells_standart_full_pink.png';
-            });
-        } else if(body.classList.contains("Y-theme")){
-            cells.forEach(cell => {
-                cell.src = '../app/assets/imagens/figuras/cells_standart_full_yellow.png';
-            });
-        } else{
-            body.classList.add("Y-theme");
-            toggleTheme();
-        }
+    const theme = body.classList.contains("B-theme") ? "blue" :
+                  body.classList.contains("P-theme") ? "pink" :
+                  body.classList.contains("Y-theme") ? "yellow" : null;
+
+    if (!theme) {
+        body.classList.add("Y-theme");
+        toggleTheme();
+        return;
     }
-    
+
+    const pathPrefix = main.classList.contains("Lo-Login") || main.classList.contains("Re-register")
+        ? '../app/assets/imagens/figuras/cells_standart_first_'
+        : main.classList.contains("mainSystem") && currentUrl.includes('/public/home.php')
+        ? '../app/assets/imagens/figuras/cells_standart_full_'
+        : '../../app/assets/imagens/figuras/cells_standart_full_';
+
+    cells.forEach(cell => {
+        cell.src = `${pathPrefix}${theme}.png`;
+    });
 }
 
 function toggleConfigSection() {
@@ -331,7 +315,6 @@ function toggleAuxilioFilter(clickedFilter) {
 
     clickedFilter.classList.add('active');
 }
-
 
 function openAuxilioModal() {
     const auxilioCards = document.querySelectorAll('.Au-auxilioCard');

@@ -4,9 +4,3 @@ Options -Indexes
 Order allow,deny
 Deny from all
 </Files>
-
-<FilesMatch "config|documents|app">
-Order allow,deny
-Deny from all
-</FilesMatch>
-

@@ -184,11 +184,28 @@
                         </div>
                         <h2 class = "La-equipSectionTitle">Equipe</h2>
                     </div>
-
+                    
                     <div class="La-equipContainer">
                         <div class="La-equipMember">
                             <div class="La-memberImage">
-                                <img src="app/assets/imagens/fotos/Image-livia.png" alt="Foto da Lívia Braga">
+                                <img class ="La-memberImageIcon" src="app/assets/imagens/fotos/image_livia_roundBorder.png" alt="Foto da Lívia Braga">
+                                <div class = "La-memberSocialMidia">
+                                    <div class = "La-memberSocialMidiaIcon">
+                                        <a href = "#">
+                                        <img  src = "app/assets/imagens/icons/lattes_icon.png" alt ="image 1">
+                                        </a>
+                                    </div>
+                                    <div class = "La-memberSocialMidiaIcon">
+                                        <a href = "#">
+                                        <img  src = "app/assets/imagens/icons/instagram_grey_icon.png" alt ="image 2">
+                                        </a>
+                                    </div>
+                                    <div class = "La-memberSocialMidiaIcon">
+                                        <a href = "#">
+                                        <img  src = "app/assets/imagens/icons/linkedIn_icon.png" alt ="image 3">
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="La-memberInformation">
@@ -200,7 +217,7 @@
 
                         <div class="La-equipMember">
                             <div class="La-memberImage">
-                                <img src="app/assets/imagens/fotos/Image-nath.png" alt="Foto da Nathália Lessa">
+                                <img class ="La-memberImageIcon" src="app/assets/imagens/fotos/image_nath_roundBorder.png" alt="Foto da Nathália Lessa">
                             </div>
 
                             <div class="La-memberInformation">
@@ -212,7 +229,7 @@
 
                         <div class="La-equipMember">
                             <div class="La-memberImage">
-                                <img src="app/assets/imagens/fotos/Image-renan.png" alt="Foto o Renan Moura">
+                                <img class ="La-memberImageIcon" src="app/assets/imagens/fotos/image_renan_roundBorder.png" alt="Foto o Renan Moura">
                             </div>
 
                             <div class="La-memberInformation">
@@ -224,7 +241,7 @@
 
                         <div class="La-equipMember">
                             <div class="La-memberImage">
-                                <img src="app/assets/imagens/fotos/Image-luis.png" alt="Foto do Luís Mendes">
+                                <img class ="La-memberImageIcon" src="app/assets/imagens/fotos/image_luis_roundBorder.png" alt="Foto do Luís Mendes">
                             </div>
 
                             <div class="La-memberInformation">
@@ -236,7 +253,7 @@
 
                         <div class="La-equipMember">
                             <div class="La-memberImage">
-                                <img src="app/assets/imagens/fotos/Image-tati.png" alt="Foto da Tatiana Azevedo">
+                                <img class ="La-memberImageIcon" src="app/assets/imagens/fotos/image_tati_roundBorder.png" alt="Foto da Tatiana Azevedo">
                             </div>
 
                             <div class="La-memberInformation">
@@ -254,7 +271,5 @@
             include_once 'app/includes/footer.php';
             include_once 'app/includes/modais.php';
         ?>
-
-        <script src="app/assets/js/system.js"></script>
     </body>
 </html>

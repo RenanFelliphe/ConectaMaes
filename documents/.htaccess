@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# Redireciona qualquer acesso a arquivos dentro dos subdiretórios
+RewriteCond %{REQUEST_URI} ^/ConectaMaes/documents/.*
+RewriteRule ^.*$ /ConectaMaes/public/home.php [L,R=302]
+
+# Para o servidor
+RewriteCond %{REQUEST_URI} ^/documents/.*
+RewriteRule ^.*$ /public/home.php [L,R=302]

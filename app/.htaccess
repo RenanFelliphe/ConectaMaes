@@ -1,0 +1,6 @@
+RewriteEngine On
+
+# Redireciona o acesso ao conn.php para a home.php
+RewriteCond %{REQUEST_URI} ^/ConectaMaes/app/services/helpers/conn\.php$ [NC,OR]
+RewriteCond %{REQUEST_URI} ^/app/services/helpers/conn\.php$ [NC]
+RewriteRule ^(.*)$ /ConectaMaes/public/home.php [L,R=302]

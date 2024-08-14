@@ -187,10 +187,6 @@ main {
     position: absolute;
     right: 0;
     top: -4rem;
-    width: 19vw;
-    min-width: 13rem;
-    height: max-content;
-
 }
 
 .backCells.cellsLeft {
@@ -1350,8 +1346,41 @@ footer .A-footerRight li.A-footerPolitic h4 {
     gap: 3rem;
 }
 
-.La-landingSections .La-articleEquip .La-equipContainer .La-equipMember .La-memberImage img {
+.La-landingSections .La-articleEquip .La-equipContainer .La-equipMember .La-memberImage .La-memberImageIcon{
     width: 10rem;
+}
+
+.La-memberImageComponents{
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 20px auto;
+}
+
+.La-memberSocialMidiaIcon{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    transform-origin: 50% 20px;
+}
+
+.La-landingSections .La-articleEquip .La-equipContainer .La-equipMember .La-memberImage .La-memberSocialMidia .La-memberSocialMidiaIcon img
+{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.La-memberSocialMidiaIcon:nth-child(1) {
+    transform: rotate(0deg) translate(0, -100px);
+}
+.La-memberSocialMidiaIcon:nth-child(2) {
+    transform: rotate(45deg) translate(0, -100px);
+}
+.La-memberSocialMidiaIcon:nth-child(3) {
+    transform: rotate(90deg) translate(0, -100px);
 }
 
 .La-landingSections .La-articleEquip .La-equipContainer .La-equipMember .La-memberInformation {
@@ -2616,6 +2645,12 @@ footer .A-footerRight li.A-footerPolitic h4 {
 
 .Au-main {
     position: relative;
+    width: 100vw;
+    display: flex;
+    height: 90vh;
+    overflow: hidden;
+    
+    position: relative;
     display: flex;
     align-items: flex-start;
     gap: 1rem;
@@ -3157,15 +3192,6 @@ body.Y-theme .Se-asideRight .Se-subSection .Se-sectionHeader .pageIcon {
     padding: 0.6rem 1.3rem 0.6rem 1.3rem;
 }
 
-.Se-asideRight .Se-accountInformations .confirmBtn:hover {
-    background-color: var(--secondColor);
-}
-
-.Se-asideRight .Se-accountInformations .Se-accountBottom .confirmBtn {
-    background-color: var(--redColor);
-    padding: 0.6rem 1.3rem 0.6rem 1.3rem;
-}
-
 .Se-asideRight .Se-childInformations .Se-userChild {
     position: relative;
     width: 100%;
@@ -3300,26 +3326,29 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     font-size: 0.7rem;
 }
 
-
 .Se-asideRight .Se-childInformations .confirmBtn {
     position: fixed;
-    bottom: 0.5rem;
-    right: 0.5rem;
+    bottom: 1.5vh;
+    right: 1.5vh;
     padding: 0.7rem 1rem;
 }
 
 .Se-asideRight .Se-security ul {
     position: relative;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     gap: 1rem;
     padding: 0 2rem;
 }
 
 .Se-asideRight .Se-security ul li form {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
     padding: 1.5rem 0;
+    
 }
 
 .Se-asideRight .Se-security .Se-editPassword h4,
@@ -3405,66 +3434,17 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
 
 .Se-asideRight .Se-security .Se-editPassword .confirmBtn,
 .Se-asideRight .Se-security .Se-editPhoneNumber .confirmBtn {
-    position: absolute;
-    bottom: 0;
-    right: 0;
     background-color: var(--secondColorLowOpacity);
     padding: 0.6rem 1.5rem 0.6rem 1.5rem;
     font-size: 1rem;
 }
 
-.Se-asideRight .Se-accountInformations .Se-accountType {
-    display: flex;
-    gap: 1.2rem;
+.Se-asideRight .Se-accountInformations .confirmBtn{
+    position: fixed;
+    bottom: 1.5vh;
+    right: 1.5vh;
+    padding: 0.7rem 1rem;
 }
-
-.Se-asideRight .Se-accountInformations .Se-accountType p {
-    font-weight: 500;
-}
-
-.Se-asideRight .Se-accountInformations .Se-accountType .Se-accountOptions {
-    position: relative;
-    display: flex;
-    gap: 4rem;
-    font-size: 0.8rem;
-}
-
-.Se-asideRight .Se-accountInformations .Se-accountType .Se-accountOptions div {
-    position: relative;
-    display: flex;
-    gap: 0.5rem;
-}
-
-.Se-asideRight .Se-accountInformations .Se-accountType .Se-accountOptions input {
-    cursor: pointer;
-    appearance: none;
-    background-color: var(--whiteColor);
-    width: 0.4rem;
-    height: 0.4rem;
-    border-radius: 100%;
-    border: none;
-    box-shadow: 0 0 0 1px var(--whiteColor), 0 0 0 2px var(--blackColor);
-}
-
-.Se-asideRight .Se-accountInformations .Se-accountType .Se-accountOptions input:checked {
-    background-color: var(--secondColor);
-    box-shadow: 0 0 0 2px var(--whiteColor), 0 0 0 3px var(--thirdColor);
-}
-
-.Se-asideRight .Se-accountInformations .Se-accountType .Se-accountOptions label {
-    cursor: pointer;
-    margin-right: 0.4rem;
-}
-
-.Se-asideRight .Se-accountInformations .Se-accountType .Se-accountOptions input:checked+label {
-    color: var(--thirdColor);
-    font-weight: 500;
-}
-
-.Se-asideRight .Se-accountInformations .Se-accountType .Se-accountOptions .pageIcon {
-    font-size: 0.7rem;
-}
-
 
 /*====================================================================================================
 ===================================== MODAIS DAS CONFIGURAÇÕES =======================================
