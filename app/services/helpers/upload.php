@@ -1,7 +1,12 @@
 <?php
     function uploadPFP($conn, $userId, $nomeDeUsuario) {
         $diretorioPfP =  __DIR__ . '/../../assets/imagens/fotos/perfil/';
-    
+        
+        if (isset($_FILES['fotoPerfilRegistro']) && $_FILES['fotoPerfilRegistro']['error'] != UPLOAD_ERR_OK) {
+            echo "Erro no envio do arquivo.<br>";
+            exit; // Sai do script se houve erro no upload
+        }
+
         if (isset($_FILES['fotoPerfilRegistro']) && $_FILES['fotoPerfilRegistro']['error'] == UPLOAD_ERR_OK) {
             $imgTemp = $_FILES['fotoPerfilRegistro']['tmp_name'];
             $imgNomeOriginal = $_FILES['fotoPerfilRegistro']['name'];
@@ -28,8 +33,6 @@
             } else {
                 echo "Formato de imagem não suportado. Apenas .png e .jpeg são permitidos.<br>";
             }
-        } else {
-            echo "Nenhuma imagem enviada ou erro no upload.<br>";
         }
     }    
     

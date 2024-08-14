@@ -864,7 +864,8 @@ footer .A-footerRight li.A-footerPolitic h4 {
 ====================================================================================================*/
 
 .La-landing {
-    background: linear-gradient(var(--whiteColor) 4%,
+    background: linear-gradient(
+     var(--whiteColor) 4%,
      #80752350 10%,
      #03718050 20%,
      #a3155f50 40%,
@@ -1216,7 +1217,6 @@ footer .A-footerRight li.A-footerPolitic h4 {
     background-color: transparent; 
     transition: box-shadow 0.3s ease;
 }
-
 
 .La-landing .La-landingSections .La-contactSection .La-contactSectionButton{
     display: flex;

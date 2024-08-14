@@ -417,9 +417,3 @@ function registerUser() {
 
     
 }*/
-
-function handlePostLike(idUser, idPost){
-    //quando clica no bi, busca no banco se o usuário da sessão já curtiu o post
-        // se não curtiu, insere no banco e troca a cor do bi
-        // se curtiu, deleta do banco e volta a cor pra cinza
-}
