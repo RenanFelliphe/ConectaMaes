@@ -1200,6 +1200,10 @@ footer .A-footerRight li.A-footerPolitic h4 {
 
 .La-landing label {
     position: absolute;
+    color: #CF4A8E;
+    font-size: 1rem;
+    text-align: top left;
+    left: 0;
     top: 0;
 }
 
@@ -1212,6 +1216,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     box-sizing: border-box;
     background-color: transparent; 
     transition: box-shadow 0.3s ease;
+    resize: none;
 }
 
 .La-landing .La-landingSections .La-contactSection .La-contactSectionButton{
@@ -1307,6 +1312,11 @@ footer .A-footerRight li.A-footerPolitic h4 {
     width: 100vw;
 }
 
+.La-landingSections .La-articleEquip .La-equipCells{
+    position: absolute;
+    right: 0;
+}
+
 .La-landingSections .La-articleEquip .La-articleHighlight {
     display: flex;
     flex-direction: row;
@@ -1347,23 +1357,25 @@ footer .A-footerRight li.A-footerPolitic h4 {
 }
 
 .La-landingSections .La-articleEquip .La-equipContainer .La-equipMember .La-memberImage .La-memberImageIcon{
-    width: 10rem;
+    width: 10rem; 
+    border-radius: 50%;
+    position: relative;
+    display: block;
 }
 
-.La-memberImageComponents{
+.La-memberImage{
     position: relative;
-    width: 150px;
-    height: 150px;
-    margin: 20px auto;
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    margin-bottom: 0.5rem;
 }
 
 .La-memberSocialMidiaIcon{
     position: absolute;
     width: 20px;
     height: 20px;
-    border-radius: 50%;
-    overflow: hidden;
-    transform-origin: 50% 20px;
+    transform-origin: center 20px;
 }
 
 .La-landingSections .La-articleEquip .La-equipContainer .La-equipMember .La-memberImage .La-memberSocialMidia .La-memberSocialMidiaIcon img
@@ -1374,13 +1386,21 @@ footer .A-footerRight li.A-footerPolitic h4 {
 }
 
 .La-memberSocialMidiaIcon:nth-child(1) {
-    transform: rotate(0deg) translate(0, -100px);
+    top: 60%;
+    right: -15px;
+    transform: translate(-50%, -50%);
 }
+
 .La-memberSocialMidiaIcon:nth-child(2) {
-    transform: rotate(45deg) translate(0, -100px);
+    bottom: 9px;
+    right: 2%;
+    transform: translate(-50%, -50%);
 }
+
 .La-memberSocialMidiaIcon:nth-child(3) {
-    transform: rotate(90deg) translate(0, -100px);
+    bottom: -13px;
+    left: 52%;
+    transform: translate(50%, -50%);
 }
 
 .La-landingSections .La-articleEquip .La-equipContainer .La-equipMember .La-memberInformation {

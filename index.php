@@ -123,7 +123,7 @@
                 </article>  
             </section>
 
-            <section class="La-landingSections">
+            <section class="La-landingSections" id="La-contactSection">
                 <article class="La-contactSection">
                     <h1 class = "La-tituloSeccaoMeio">Contato</h1>
                     <form action="send_email.php" method="POST">
@@ -151,6 +151,7 @@
                     
                     <a href="#" class="La-contactSectionButton">Enviar</a>
                 </form>
+
                 <p class = "paragrafo">Você também pode nos contatar nas nossas <a href="#" class = "La-contactSectionLink"><span class="La-focus">redes sociais oficiais</span></a>!</p>
                 
                 <div class="La-cantactSectionIcon">
@@ -218,6 +219,23 @@
                         <div class="La-equipMember">
                             <div class="La-memberImage">
                                 <img class ="La-memberImageIcon" src="app/assets/imagens/fotos/image_nath_roundBorder.png" alt="Foto da Nathália Lessa">
+                                <div class = "La-memberSocialMidia">
+                                    <div class = "La-memberSocialMidiaIcon">
+                                        <a href = "#">
+                                        <img  src = "app/assets/imagens/icons/lattes_icon.png" alt ="image 1">
+                                        </a>
+                                    </div>
+                                    <div class = "La-memberSocialMidiaIcon">
+                                        <a href = "#">
+                                        <img  src = "app/assets/imagens/icons/instagram_grey_icon.png" alt ="image 2">
+                                        </a>
+                                    </div>
+                                    <div class = "La-memberSocialMidiaIcon">
+                                        <a href = "#">
+                                        <img  src = "app/assets/imagens/icons/linkedIn_icon.png" alt ="image 3">
+                                        </a>
+                                    </div>
+                                </div>                           
                             </div>
 
                             <div class="La-memberInformation">
@@ -230,6 +248,23 @@
                         <div class="La-equipMember">
                             <div class="La-memberImage">
                                 <img class ="La-memberImageIcon" src="app/assets/imagens/fotos/image_renan_roundBorder.png" alt="Foto o Renan Moura">
+                                <div class = "La-memberSocialMidia">
+                                    <div class = "La-memberSocialMidiaIcon">
+                                        <a href = "#">
+                                        <img  src = "app/assets/imagens/icons/lattes_icon.png" alt ="image 1">
+                                        </a>
+                                    </div>
+                                    <div class = "La-memberSocialMidiaIcon">
+                                        <a href = "#">
+                                        <img  src = "app/assets/imagens/icons/instagram_grey_icon.png" alt ="image 2">
+                                        </a>
+                                    </div>
+                                    <div class = "La-memberSocialMidiaIcon">
+                                        <a href = "#">
+                                        <img  src = "app/assets/imagens/icons/linkedIn_icon.png" alt ="image 3">
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="La-memberInformation">
@@ -242,6 +277,23 @@
                         <div class="La-equipMember">
                             <div class="La-memberImage">
                                 <img class ="La-memberImageIcon" src="app/assets/imagens/fotos/image_luis_roundBorder.png" alt="Foto do Luís Mendes">
+                                <div class = "La-memberSocialMidia">
+                                    <div class = "La-memberSocialMidiaIcon">
+                                        <a href = "#">
+                                        <img  src = "app/assets/imagens/icons/lattes_icon.png" alt ="image 1">
+                                        </a>
+                                    </div>
+                                    <div class = "La-memberSocialMidiaIcon">
+                                        <a href = "#">
+                                        <img  src = "app/assets/imagens/icons/instagram_grey_icon.png" alt ="image 2">
+                                        </a>
+                                    </div>
+                                    <div class = "La-memberSocialMidiaIcon">
+                                        <a href = "#">
+                                        <img  src = "app/assets/imagens/icons/linkedIn_icon.png" alt ="image 3">
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="La-memberInformation">
@@ -254,6 +306,23 @@
                         <div class="La-equipMember">
                             <div class="La-memberImage">
                                 <img class ="La-memberImageIcon" src="app/assets/imagens/fotos/image_tati_roundBorder.png" alt="Foto da Tatiana Azevedo">
+                                <div class = "La-memberSocialMidia">
+                                    <div class = "La-memberSocialMidiaIcon">
+                                        <a href = "#">
+                                        <img  src = "app/assets/imagens/icons/lattes_icon.png" alt ="image 1">
+                                        </a>
+                                    </div>
+                                    <div class = "La-memberSocialMidiaIcon">
+                                        <a href = "#">
+                                        <img  src = "app/assets/imagens/icons/instagram_grey_icon.png" alt ="image 2">
+                                        </a>
+                                    </div>
+                                    <div class = "La-memberSocialMidiaIcon">
+                                        <a href = "#">
+                                        <img  src = "app/assets/imagens/icons/linkedIn_icon.png" alt ="image 3">
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="La-memberInformation">
@@ -263,6 +332,7 @@
                             </div>
                         </div>
                     </div>
+                    <img src ="app/assets/imagens/figuras/cells_equipe.png" class ="La-equipCells">
                 </article>
             </section>
         </main>
