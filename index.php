@@ -126,26 +126,26 @@
             <section class="La-landingSections" id="La-contactSection">
                 <article class="La-contactSection">
                     <h1 class = "La-tituloSeccaoMeio">Contato</h1>
-                    <form action="send_email.php" method="POST">
+                    <form class ="La-contactForm" action="send_email.php" method="POST">
                     <div class="row">
                         <div class="field">
-                            <input type="text" id="nome" name="nome" required>
-                            <label for="nome">Nome</label>
+                            <input class="La-contactDados" type="text" id="nome" name="nome" required>
+                            <label class="La-contactfakePlaceHolder" for="nome">Nome</label>
                         </div>
                         <div class="field">
-                            <input type="email" id="email" name="email" required>
-                            <label for="email">Email</label>
+                            <input class="La-contactDados" type="email" id="email" name="email" required>
+                            <label class="La-contactfakePlaceHolder" for="email">Email</label>
                         </div>
                     </div>
 
                     <div class="field">
-                        <input type="text" id="assunto" name="assunto" required>
-                        <label for="assunto">Assunto</label>
+                        <input class="La-contactDados" type="text" id="assunto" name="assunto" required>
+                        <label class="La-contactfakePlaceHolder" for="assunto">Assunto</label>
                     </div>
                     
                     <div class="field">
-                        <textarea id="mensagem" name="mensagem" required></textarea>
-                        <label for="mensagem">Mensagem</label>
+                        <textarea class="La-contactDados" id="mensagem" name="mensagem" required></textarea>
+                        <label class="La-contactfakePlaceHolder" for="mensagem">Mensagem</label>
                     </div>
                     
                     

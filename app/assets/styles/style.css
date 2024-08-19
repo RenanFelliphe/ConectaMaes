@@ -1169,7 +1169,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     transform: translate(-50%);
 }
 
-.La-landing form {
+.La-landing .La-contactForm {
     display: flex;
     flex-direction: column;
 }
@@ -1198,19 +1198,31 @@ footer .A-footerRight li.A-footerPolitic h4 {
     background: linear-gradient(transparent, transparent) padding-box, linear-gradient(to left, var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
 }
 
-.La-landing label {
+.La-landing .La-contactfakePlaceHolder {
     position: absolute;
-    color: #CF4A8E;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
     font-size: 1rem;
-    text-align: top left;
-    left: 0;
-    top: 0;
+    color: #CF4A8E;
+    padding: 0 5px;
+    transition: 0.3s ease;
+    pointer-events: none;
+}
+
+.La-contactDados:focus + .La-contactfakePlaceHolder,
+.La-contactDados:not(:placeholder-shown) .La-contactfakePlaceHolder {
+    top: -10px;
+    left: 10px;
+    font-size: 12px;
+    color: #e067a6;
 }
 
 .La-contactSection input, .La-contactSection textarea {
     padding: 10px;
     margin-bottom: 10px;
-    border: none;
+    border: 0 none;
+    outline: 0;
     border-radius: 0;
     width: 100%;
     box-sizing: border-box;
@@ -1230,7 +1242,8 @@ footer .A-footerRight li.A-footerPolitic h4 {
     box-shadow: 0 0 5px 1px var(--darkPinkColor);
     font-size: 1.3rem;
     font-weight: 600;
-    text-decoration: none; 
+    text-decoration: none;
+    margin: 2rem; 
 }
 
 .La-landing .La-contactSectionLink {
