@@ -124,6 +124,7 @@
             </section>
 
             <section class="La-landingSections" id="La-contactSection">
+                    <img class="La-contactSectionBackgroundImage" src="app/assets/imagens/figuras/icone.png" alt=" ">
                 <article class="La-contactSection">
                     <h1 class = "La-tituloSeccaoMeio">Contato</h1>
                     <form class ="La-contactForm" action="send_email.php" method="POST">
