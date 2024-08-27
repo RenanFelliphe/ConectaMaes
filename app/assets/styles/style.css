@@ -1172,10 +1172,10 @@ footer .A-footerRight li.A-footerPolitic h4 {
 
 .La-contactSectionBackgroundImage{
     position: absolute;
-    height: 150vh;
-    left: -25rem;
+    height: 135vh;
+    left: -20rem;
     opacity: 0.6;
-    top: 430vh;
+    top: 435vh;
 }
 
 .La-landing .La-contactForm {
