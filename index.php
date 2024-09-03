@@ -173,7 +173,7 @@
                     compartilhe suas experiências, conheça outras mães e encontre histórias 
                     semelhantes às suas. Facilite sua jornada materna ao se conectar com
                     uma <span class="La-focus">rede de apoio solidária</span>.</p>
-                    <a href="register.php" class="La-creatAccountButton">Criar uma conta</a>
+                    <a href="registrar.php" class="La-creatAccountButton">Criar uma conta</a>
                 </article>  
             </section>
 
@@ -198,7 +198,7 @@
                                         </a>
                                     </div>
                                     <div class = "La-memberSocialMidiaIcon">
-                                        <a href = "#">
+                                        <a href = "https://www.instagram.com/liviabrg?igsh=MXF5cmE1ZHNyaW1ibA==">
                                         <img  src = "app/assets/imagens/icons/instagram_grey_icon.png" alt ="image 2">
                                         </a>
                                     </div>
@@ -227,8 +227,8 @@
                                         </a>
                                     </div>
                                     <div class = "La-memberSocialMidiaIcon">
-                                        <a href = "#">
-                                        <img  src = "app/assets/imagens/icons/instagram_grey_icon.png" alt ="image 2">
+                                    <a href = "https://www.instagram.com/mirror.nl2?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">
+                                    <img  src = "app/assets/imagens/icons/instagram_grey_icon.png" alt ="image 2">
                                         </a>
                                     </div>
                                     <div class = "La-memberSocialMidiaIcon">
@@ -256,7 +256,7 @@
                                         </a>
                                     </div>
                                     <div class = "La-memberSocialMidiaIcon">
-                                        <a href = "#">
+                                        <a href = "https://www.instagram.com/renan_felliphe11?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">
                                         <img  src = "app/assets/imagens/icons/instagram_grey_icon.png" alt ="image 2">
                                         </a>
                                     </div>
@@ -285,7 +285,7 @@
                                         </a>
                                     </div>
                                     <div class = "La-memberSocialMidiaIcon">
-                                        <a href = "#">
+                                        <a href = "https://www.instagram.com/laug_br?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">
                                         <img  src = "app/assets/imagens/icons/instagram_grey_icon.png" alt ="image 2">
                                         </a>
                                     </div>
@@ -314,7 +314,7 @@
                                         </a>
                                     </div>
                                     <div class = "La-memberSocialMidiaIcon">
-                                        <a href = "#">
+                                        <a href = "https://www.instagram.com/tatianabazevedo?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">
                                         <img  src = "app/assets/imagens/icons/instagram_grey_icon.png" alt ="image 2">
                                         </a>
                                     </div>

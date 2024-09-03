@@ -861,15 +861,15 @@ footer .A-footerRight li.A-footerPolitic h4 {
 
 .La-landing {
     background: linear-gradient(
-     var(--whiteColor) 4%,
-     #80752350 10%,
-     #03718050 20%,
-     #a3155f50 40%,
-     #80752350 45%,
-     #03718050 60%, 
+     var(--whiteColor) 2%,
+     #F9EC7C66 12%,
+     #7DEBFA33 28%,
+     #FA7EBD4D 36%,
+     #F9EC7C4D 45%,
+     #7DEBFA33 53%, 
      var(--whiteColor) 70%, 
-     #80752350 80%,
-     #03718050 90%);
+     #F9EC7C4D 80%,
+     #7DEBFA33 94%);
     padding: 0 0 3rem 3rem;
     height: auto;
     overflow: hidden;
@@ -1164,7 +1164,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    padding: 0 2rem 0 2rem;
+    padding: 8rem 2rem 7rem 2rem;
     left: 50%;
     transform: translate(-50%);
     overflow: hidden;
@@ -1172,10 +1172,10 @@ footer .A-footerRight li.A-footerPolitic h4 {
 
 .La-contactSectionBackgroundImage{
     position: absolute;
-    height: 135vh;
+    height: 145vh;
     left: -20rem;
     opacity: 0.6;
-    top: 435vh;
+    top: 445vh;
 }
 
 .La-landing .La-contactForm {
