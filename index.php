@@ -14,7 +14,7 @@
 
         <main class="La-landing">
             <img src="app/assets/imagens/figuras/cells_standart_first_yellow.png" class="backCells">
-            
+
             <section class="La-landingSections">
                 <h1 class="La-quote">Mães ajudando mães a cuidar da vida materna</h1>
 
@@ -123,7 +123,9 @@
                 </article>  
             </section>
 
-            <section class="La-landingSections" id="La-contactSection">
+            <div class="La-separador" id="La-contactSection"></div>      
+
+            <section class="La-landingSections">
                     <img class="La-contactSectionBackgroundImage" src="app/assets/imagens/figuras/icone.png" alt=" ">
                 <article class="La-contactSection">
                     <h1 class = "La-tituloSeccaoMeio">Contato</h1>
@@ -157,10 +159,12 @@
                 
                 <div class="La-cantactSectionIcon">
                     <a href="https://www.instagram.com/conectamaes2024?igsh=MXdnbW50bXNxNzdoMA==" target="_blank" class="La-cantactSectionIconLink">
-                        <img src="app/assets/imagens/icons/instagram_pink_icon.png" alt="Instagram">
+                    <img src="app/assets/imagens/icons/icons8-instagram-grey.png" alt="img1" class="base">
+                        <img src="app/assets/imagens/icons/instagram_pink_icon.png" alt="img2" class = "overlay">
                     </a>
                     <a href="https://mail.google.com/mail/?view=cm&fs=1&to=conectamaes2024@gmail.com" target="_blank" class="La-cantactSectionIconLink">
-                        <img src="app/assets/imagens/icons/gmail_grey_icon.png" alt="Email">
+                        <img src="app/assets/imagens/icons/gmail_grey_icon.png" alt="img1" class="base">
+                        <img src="app/assets/imagens/icons/icons8-envelope-pink.png" alt="img2" class="overlay">
                     </a>
                 </div>
                 </article>  
@@ -173,11 +177,13 @@
                     compartilhe suas experiências, conheça outras mães e encontre histórias 
                     semelhantes às suas. Facilite sua jornada materna ao se conectar com
                     uma <span class="La-focus">rede de apoio solidária</span>.</p>
-                    <a href="registrar.php" class="La-creatAccountButton">Criar uma conta</a>
+                    <a href="./public/registrar.php" class="La-creatAccountButton">Criar uma conta</a>
                 </article>  
             </section>
 
-            <section class="La-landingSections" id="La-articleEquip">
+            <div class="La-separador" id="La-articleEquip"></div>
+
+            <section class="La-landingSections">
                 <article class="La-articleEquip">
                     <div class="La-articleHighlight">
                         <div class ="La-equipeSectionCollum">
@@ -280,7 +286,7 @@
                                 <img class ="La-memberImageIcon" src="app/assets/imagens/fotos/image_luis_roundBorder.png" alt="Foto do Luís Mendes">
                                 <div class = "La-memberSocialMidia">
                                     <div class = "La-memberSocialMidiaIcon">
-                                        <a href = "#">
+                                        <a href = "http://lattes.cnpq.br/6368472217617839">
                                         <img  src = "app/assets/imagens/icons/lattes_icon.png" alt ="image 1">
                                         </a>
                                     </div>
