@@ -875,6 +875,13 @@ footer .A-footerRight li.A-footerPolitic h4 {
     overflow: hidden;
 }
 
+.La-landing .backCells {
+    position: absolute;
+    right: 0;
+    top: -4rem;
+    height: 50vh;
+}
+
 .La-landing .La-quote {
     display: flex;
     align-items: center;
@@ -1107,8 +1114,6 @@ footer .A-footerRight li.A-footerPolitic h4 {
     margin-bottom: 8rem;
 }
 
-/*Estilo secção perguntas frequentes*/
-
 .La-landing .La-landingSections .La-frequentQuestions {
     position: relative;
     display: flex;
@@ -1123,41 +1128,31 @@ footer .A-footerRight li.A-footerPolitic h4 {
 .La-landing .La-landingSections .La-frequentQuestions .La-tituloSeccaoMeio{
     margin-bottom: 1rem;
 }
-
-.La-landing .faq-list {
+.La-landing .La-landingSections .La-frequentQuestions .faqList {
     list-style-type: none;
     padding: 0;
 }
 
-.La-landing .faq-list li {
+.La-landing .La-landingSections .La-frequentQuestions .faqList li {
     margin: 0;
     border-bottom: 1px solid #333; 
 }
 
-.La-landing .faq-list li:last-child {
-    border-bottom: none;
+.La-landing .La-landingSections .La-frequentQuestions .faqList .La-faqQuestions{
+    position: relative;
+    margin: 1rem 0;
+    height: 5rem;
+    border-bottom: 2px solid var(--grayColor);
+    overflow: hidden;
 }
 
-.La-landing .faq-question {
+.La-landing .La-landingSections .La-frequentQuestions .faqList .La-faqQuestions p{
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    color: #000000;
+    justify-content: flex-start;
     font-size: 1.6rem;
-    text-decoration: none;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    width: 50rem;
+    line-height: 5rem;
+    padding-left: 0.5rem;
 }
-
-.La-landing .faq-question::after {
-    content: '\276F'; 
-    font-size: 16px;
-    color: #333333;
-}
-
-/*Estilo secção de contacto*/
 
 .La-landingSections .La-contactSection {
     position: relative;
@@ -1312,7 +1307,6 @@ footer .A-footerRight li.A-footerPolitic h4 {
 .La-cantactSectionIconLink:hover img.base {
     opacity: 0;
 }
-/*Estilo da secção de criar conta*/
 
 .La-tituloSeccaoMeio{
     text-align: center;

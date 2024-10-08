@@ -1,3 +1,4 @@
+<?php require_once "app/services/helpers/mail.php";?>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -105,20 +106,27 @@
             <section class="La-landingSections">
                 <article class="La-frequentQuestions">
                     <h1 class = "La-tituloSeccaoMeio"> Perguntas Frequentes</h1>
-                    <ul class="faq-list">
-                    <?php
-                    $faqs = [
-                        "O que é o ConectaMães?",
-                        "Mulheres grávidas também podem usar o site?",
-                        "Homens ou pessoas sem filho também podem usar o site?",
-                        "Que tipo de auxílios podem ser pedidos no site?",
-                        "Eu posso relatar algo sem precisar me expor?",
-                    ];
-
-                    foreach ($faqs as $faq) {
-                        echo "<li><a href='#' class='faq-question'>$faq</a></li>";
-                    }
-                    ?>
+                    <ul class="faqList">
+                        <li class="La-faqQuestions">
+                            <p>O que é o ConectaMães?</p>
+                            <div class="La-faqAnswers">sadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfas</div>
+                        </li>
+                        <li class="La-faqQuestions">
+                            <p>Mulheres grávidas também podem usar o site?</p>
+                            <div class="La-faqAnswers">sadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfas</div>
+                        </li>
+                        <li class="La-faqQuestions">
+                            <p>Homens ou pessoas sem filho também podem usar o site?</p>
+                            <div class="La-faqAnswers">sadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfas</div>
+                        </li>
+                        <li class="La-faqQuestions">
+                            <p>Que tipo de auxílios podem ser pedidos no site?</p>
+                            <div class="La-faqAnswers">sadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfas</div>
+                        </li>
+                        <li class="La-faqQuestions">
+                            <p>Eu posso relatar algo sem precisar me expor?</p>
+                            <div class="La-faqAnswers">sadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfas</div>
+                        </li>
                     </ul>
                 </article>  
             </section>
@@ -126,33 +134,34 @@
             <div class="La-separador" id="La-contactSection"></div>      
 
             <section class="La-landingSections">
-                    <img class="La-contactSectionBackgroundImage" src="app/assets/imagens/figuras/icone.png" alt=" ">
+                <img class="La-contactSectionBackgroundImage" src="app/assets/imagens/figuras/icone.png" alt=" ">
                 <article class="La-contactSection">
-                    <h1 class = "La-tituloSeccaoMeio">Contato</h1>
-                    <form class ="La-contactForm" action="send_email.php" method="POST">
+                <h1 class = "La-tituloSeccaoMeio">Contato</h1>
+
+                <form class ="La-contactForm" method="POST">
                     <div class="row">
                         <div class="field">
-                            <input class="La-contactDados" type="text" id="nome" name="nome" required>
-                            <label class="La-contactfakePlaceHolder" for="nome">Nome</label>
+                            <input class="La-contactDados" type="text" id="nomeContato" name="nomeContato" required>
+                            <label class="La-contactfakePlaceHolder" for="nomeContato">Nome</label>
                         </div>
                         <div class="field">
-                            <input class="La-contactDados" type="email" id="email" name="email" required>
-                            <label class="La-contactfakePlaceHolder" for="email">Email</label>
+                            <input class="La-contactDados" type="email" id="emailContato" name="emailContato" required>
+                            <label class="La-contactfakePlaceHolder" for="emailContato">Email</label>
                         </div>
                     </div>
 
                     <div class="field">
-                        <input class="La-contactDados" type="text" id="assunto" name="assunto" required>
-                        <label class="La-contactfakePlaceHolder" for="assunto">Assunto</label>
+                        <input class="La-contactDados" type="text" id="assuntoContato" name="assuntoContato" required>
+                        <label class="La-contactfakePlaceHolder" for="assuntoContato">Assunto</label>
                     </div>
                     
                     <div class="field">
-                        <textarea class="La-contactDados" id="mensagem" name="mensagem" required></textarea>
-                        <label class="La-contactfakePlaceHolder" for="mensagem">Mensagem</label>
+                        <textarea class="La-contactDados" id="mensagemContato" name="mensagemContato" required></textarea>
+                        <label class="La-contactfakePlaceHolder" for="mensagemContato">Mensagem</label>
                     </div>
                     
-                    
-                    <a href="#" class="La-contactSectionButton">Enviar</a>
+                    <button type="submit"  name="envioContato">Enviar</button>
+                    <?php if (isset($_POST['envioContato'])) {enviarEmailContato();} ?>
                 </form>
 
                 <p class = "paragrafo">Você também pode nos contatar nas nossas <a href="#" class = "La-contactSectionLink"><span class="La-focus">redes sociais oficiais</span></a>!</p>
