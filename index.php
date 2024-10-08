@@ -14,9 +14,9 @@
         <?php include_once __DIR__.'/app/includes/headerLanding.php'; ?>
 
         <main class="La-landing">
+            <section class="La-landingSections">
             <img src="app/assets/imagens/figuras/cells_standart_first_yellow.png" class="backCells">
 
-            <section class="La-landingSections">
                 <h1 class="La-quote">Mães ajudando mães a cuidar da vida materna</h1>
 
                 <article class="La-articleConectaMaes">
@@ -109,23 +109,28 @@
                     <ul class="faqList">
                         <li class="La-faqQuestions">
                             <p>O que é o ConectaMães?</p>
+                            <i class="bi bi-chevron-right"></i>
                             <div class="La-faqAnswers">sadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfas</div>
                         </li>
                         <li class="La-faqQuestions">
                             <p>Mulheres grávidas também podem usar o site?</p>
-                            <div class="La-faqAnswers">sadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfas</div>
+                            <i class="bi bi-chevron-right"></i>
+                            <div class="La-faqAnswers">sadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfas</div>
                         </li>
                         <li class="La-faqQuestions">
                             <p>Homens ou pessoas sem filho também podem usar o site?</p>
-                            <div class="La-faqAnswers">sadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfas</div>
+                            <i class="bi bi-chevron-right"></i>
+                            <div class="La-faqAnswers">sadacscvdavfassadacscvdavfassadavdavfas</div>
                         </li>
                         <li class="La-faqQuestions">
                             <p>Que tipo de auxílios podem ser pedidos no site?</p>
-                            <div class="La-faqAnswers">sadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfas</div>
+                            <i class="bi bi-chevron-right"></i>
+                            <div class="La-faqAnswers">sadacscvdavfassadacscvdavfassadacsadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfasscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfas</div>
                         </li>
                         <li class="La-faqQuestions">
                             <p>Eu posso relatar algo sem precisar me expor?</p>
-                            <div class="La-faqAnswers">sadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfas</div>
+                            <i class="bi bi-chevron-right"></i>
+                            <div class="La-faqAnswers">sadacscvdavfassadacscvdavfassadacscvdavsadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfasfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfas</div>
                         </li>
                     </ul>
                 </article>  
@@ -358,4 +363,13 @@
             include_once 'app/includes/modais.php';
         ?>
     </body>
+
+    <script>
+        document.querySelectorAll('.La-faqQuestions').forEach((question) => {
+            question.addEventListener('click', () => {
+                question.classList.toggle('active');
+            });
+        });
+
+    </script>
 </html>

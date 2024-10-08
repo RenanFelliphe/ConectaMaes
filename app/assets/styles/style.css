@@ -875,13 +875,6 @@ footer .A-footerRight li.A-footerPolitic h4 {
     overflow: hidden;
 }
 
-.La-landing .backCells {
-    position: absolute;
-    right: 0;
-    top: -4rem;
-    height: 50vh;
-}
-
 .La-landing .La-quote {
     display: flex;
     align-items: center;
@@ -891,7 +884,6 @@ footer .A-footerRight li.A-footerPolitic h4 {
 }
 
 .La-landing .La-quote::before {
-
     content: '';
     top: 50%;
     width: 20%;
@@ -903,7 +895,6 @@ footer .A-footerRight li.A-footerPolitic h4 {
 
 }
 .La-landing .La-quote::after  {
-
     content: '';
     top: 50%;
     width: 20%;
@@ -920,6 +911,16 @@ footer .A-footerRight li.A-footerPolitic h4 {
 
 .La-landing .La-quote{
     right: 0;
+}
+
+.La-landingSections{
+    position: relative;
+}
+
+.La-landingSections .backCells {
+    position: absolute;
+    right: 0;
+    height: 107%;
 }
 
 .La-landingSections .La-quote {
@@ -1072,8 +1073,6 @@ footer .A-footerRight li.A-footerPolitic h4 {
     align-items: center;
 }
 
-/*Estilo secçao de teste*/
-
 .La-landing .La-tituloSeccaoMeio{
     text-align: center;
     font-size: 3rem;
@@ -1125,33 +1124,65 @@ footer .A-footerRight li.A-footerPolitic h4 {
     margin-bottom: 5rem;
     margin-top: 10rem;
 }
-.La-landing .La-landingSections .La-frequentQuestions .La-tituloSeccaoMeio{
-    margin-bottom: 1rem;
-}
-.La-landing .La-landingSections .La-frequentQuestions .faqList {
-    list-style-type: none;
-    padding: 0;
-}
-
-.La-landing .La-landingSections .La-frequentQuestions .faqList li {
-    margin: 0;
-    border-bottom: 1px solid #333; 
-}
 
 .La-landing .La-landingSections .La-frequentQuestions .faqList .La-faqQuestions{
     position: relative;
-    margin: 1rem 0;
-    height: 5rem;
+    max-height: 5rem;
+    max-width: 60vw;
     border-bottom: 2px solid var(--grayColor);
+    cursor: pointer;
     overflow: hidden;
+    padding: 0 2rem 1.5rem 1.5rem;
+    transition: 0.3s ease-out;
+}
+
+.La-landing .La-landingSections .La-frequentQuestions .faqList .La-faqQuestions.active{
+    max-height: 25rem;
+    transition: 0.3s ease-out;
+    border-color: var(--middleBlueColor);
 }
 
 .La-landing .La-landingSections .La-frequentQuestions .faqList .La-faqQuestions p{
+    position: relative;
     display: flex;
     justify-content: flex-start;
-    font-size: 1.6rem;
-    line-height: 5rem;
-    padding-left: 0.5rem;
+    font-size: 1.5rem;
+    height: 5rem;
+    transition: 0.1s color;
+    word-wrap: break-word;
+    width: 100%;
+}
+
+.La-landing .La-landingSections .La-frequentQuestions .faqList .La-faqQuestions:hover p{
+    color: var(--darkBlueColor);
+    transition: 0.1s color;
+}
+
+.La-landing .La-landingSections .La-frequentQuestions .faqList .La-faqQuestions.active p{
+    color: var(--middleBlueColor);
+    font-weight: 500;
+}
+
+.La-landing .La-landingSections .La-frequentQuestions .faqList .La-faqQuestions .bi-chevron-right{
+    position: absolute;
+    right: 0;
+    top: 1.7rem;
+    font-size: 1.5rem;
+    transition: 0.2s;
+}
+
+.La-landing .La-landingSections .La-frequentQuestions .faqList .La-faqQuestions.active .bi-chevron-right{
+    color: var(--middleBlueColor);
+    font-weight: 600;
+    transform: rotate(90deg);
+    transition: 0.2s;
+}
+
+.La-landing .La-landingSections .La-frequentQuestions .faqList .La-faqQuestions .La-faqAnswers{
+    position: relative;
+    width: 90%;
+    word-wrap: break-word;
+    padding-left: 1rem;
 }
 
 .La-landingSections .La-contactSection {
