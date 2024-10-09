@@ -15,8 +15,7 @@
 
         <main class="La-landing">
             <section class="La-landingSections">
-            <img src="app/assets/imagens/figuras/cells_standart_first_yellow.png" class="backCells">
-
+                <img src="app/assets/imagens/figuras/cells_standart_first_yellow.png" class="backCells">
                 <h1 class="La-quote">Mães ajudando mães a cuidar da vida materna</h1>
 
                 <article class="La-articleConectaMaes">
@@ -136,51 +135,46 @@
                 </article>  
             </section>
 
-            <div class="La-separador" id="La-contactSection"></div>      
-
             <section class="La-landingSections">
                 <img class="La-contactSectionBackgroundImage" src="app/assets/imagens/figuras/icone.png" alt=" ">
                 <article class="La-contactSection">
-                <h1 class = "La-tituloSeccaoMeio">Contato</h1>
-
-                <form class ="La-contactForm" method="POST">
-                    <div class="row">
-                        <div class="field">
-                            <input class="La-contactDados" type="text" id="nomeContato" name="nomeContato" required>
+                    <h1 class = "La-tituloSeccaoMeio">Contato</h1>
+                    <form class ="La-contactForm" method="POST">
+                        <div class="La-contactField">
+                            <textarea class="La-contactDados" type="text" id="nomeContato" name="nomeContato" required></textarea>
                             <label class="La-contactfakePlaceHolder" for="nomeContato">Nome</label>
                         </div>
-                        <div class="field">
-                            <input class="La-contactDados" type="email" id="emailContato" name="emailContato" required>
+                        <div class="La-contactField">
+                            <textarea class="La-contactDados" type="email" id="emailContato" name="emailContato" required></textarea>
                             <label class="La-contactfakePlaceHolder" for="emailContato">Email</label>
                         </div>
-                    </div>
 
-                    <div class="field">
-                        <input class="La-contactDados" type="text" id="assuntoContato" name="assuntoContato" required>
-                        <label class="La-contactfakePlaceHolder" for="assuntoContato">Assunto</label>
-                    </div>
-                    
-                    <div class="field">
-                        <textarea class="La-contactDados" id="mensagemContato" name="mensagemContato" required></textarea>
-                        <label class="La-contactfakePlaceHolder" for="mensagemContato">Mensagem</label>
-                    </div>
-                    
-                    <button type="submit"  name="envioContato">Enviar</button>
-                    <?php if (isset($_POST['envioContato'])) {enviarEmailContato();} ?>
-                </form>
+                        <div class="La-contactField fullField">
+                            <textarea class="La-contactDados" type="text" id="assuntoContato" name="assuntoContato" required></textarea>
+                            <label class="La-contactfakePlaceHolder" for="assuntoContato">Assunto</label>
+                        </div>
+                        
+                        <div class="La-contactField fullField">
+                            <textarea class="La-contactDados" id="mensagemContato" name="mensagemContato" required></textarea>
+                            <label class="La-contactfakePlaceHolder" for="mensagemContato">Mensagem</label>
+                        </div>
+                        
+                        <button type="submit"  name="envioContato">Enviar</button>
+                        <?php if (isset($_POST['envioContato'])) {enviarEmailContato();} ?>
+                    </form>
 
-                <p class = "paragrafo">Você também pode nos contatar nas nossas <a href="#" class = "La-contactSectionLink"><span class="La-focus">redes sociais oficiais</span></a>!</p>
-                
-                <div class="La-cantactSectionIcon">
-                    <a href="https://www.instagram.com/conectamaes2024?igsh=MXdnbW50bXNxNzdoMA==" target="_blank" class="La-cantactSectionIconLink">
-                    <img src="app/assets/imagens/icons/icons8-instagram-grey.png" alt="img1" class="base">
-                        <img src="app/assets/imagens/icons/instagram_pink_icon.png" alt="img2" class = "overlay">
-                    </a>
-                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=conectamaes2024@gmail.com" target="_blank" class="La-cantactSectionIconLink">
-                        <img src="app/assets/imagens/icons/gmail_grey_icon.png" alt="img1" class="base">
-                        <img src="app/assets/imagens/icons/icons8-envelope-pink.png" alt="img2" class="overlay">
-                    </a>
-                </div>
+                    <p class = "paragrafo">Você também pode nos contatar nas nossas <a href="#" class = "La-contactSectionLink"><span class="La-focus">redes sociais oficiais</span></a>!</p>
+                    
+                    <div class="La-cantactSectionIcon">
+                        <a href="https://www.instagram.com/conectamaes2024?igsh=MXdnbW50bXNxNzdoMA==" target="_blank" class="La-cantactSectionIconLink">
+                        <img src="app/assets/imagens/icons/icons8-instagram-grey.png" alt="img1" class="base">
+                            <img src="app/assets/imagens/icons/instagram_pink_icon.png" alt="img2" class = "overlay">
+                        </a>
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=conectamaes2024@gmail.com" target="_blank" class="La-cantactSectionIconLink">
+                            <img src="app/assets/imagens/icons/gmail_grey_icon.png" alt="img1" class="base">
+                            <img src="app/assets/imagens/icons/icons8-envelope-pink.png" alt="img2" class="overlay">
+                        </a>
+                    </div>
                 </article>  
             </section>
 
@@ -194,8 +188,6 @@
                     <a href="./public/registrar.php" class="La-creatAccountButton">Criar uma conta</a>
                 </article>  
             </section>
-
-            <div class="La-separador" id="La-articleEquip"></div>
 
             <section class="La-landingSections">
                 <article class="La-articleEquip">
@@ -365,11 +357,25 @@
     </body>
 
     <script>
+        //FAQ Section
+
         document.querySelectorAll('.La-faqQuestions').forEach((question) => {
             question.addEventListener('click', () => {
                 question.classList.toggle('active');
             });
         });
+
+        //Contact Section
+
+        document.querySelectorAll('.La-contactDados').forEach(textarea => {
+            textarea.addEventListener('input', autoResize);
+            autoResize.call(textarea);
+        });
+
+        function autoResize() {
+            this.style.height = 'auto';
+            this.style.height = this.scrollHeight + 'px';
+        }
 
     </script>
 </html>
