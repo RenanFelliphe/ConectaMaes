@@ -251,7 +251,7 @@ button.confirmBtn:hover {
     gap: 3rem;
     height: 4rem;
     padding: 0.5rem 1rem;
-    z-index: 1;
+    z-index: 999;
     background: linear-gradient(#ffffff95 95%, transparent 100%);
     backdrop-filter: blur(4px);
 }
@@ -870,20 +870,26 @@ footer .A-footerRight li.A-footerPolitic h4 {
      var(--whiteColor) 70%, 
      #F9EC7C4D 80%,
      #7DEBFA33 94%);
-    padding: 0 0 3rem 3rem;
     height: auto;
     overflow: hidden;
 }
 
 .La-landing .La-quote {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     text-align: center;
+    padding: 5rem;
+    width: 80vw;
+    font-size: 8vh;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
-.La-landing .La-quote::before {
+.La-landing .La-quote::before,
+.La-landing .La-quote::after {
     content: '';
     top: 50%;
     width: 20%;
@@ -892,17 +898,9 @@ footer .A-footerRight li.A-footerPolitic h4 {
     margin-top: 4.5rem;
     background: linear-gradient(to left, #BDB150,  #ffffff);
     z-index: 0;
-
 }
-.La-landing .La-quote::after  {
-    content: '';
-    top: 50%;
-    width: 20%;
-    height: 3px;
-    border-radius: 15%;
-    margin-top: 4.5rem;
+.La-landing .La-quote::after {
     background: linear-gradient(to right, #BDB150,  #ffffff);
-    z-index: 0;
 }
 
 .La-landing .La-quote::before{
@@ -918,16 +916,15 @@ footer .A-footerRight li.A-footerPolitic h4 {
     padding: 5vh 0 5vh 0;
 }
 
-.La-landingSections .backCells {
-    position: absolute;
-    right: 0;
-    height: 107%;
+.La-landingSections:first-of-type{
+    padding: 0 0 3rem 3rem;
 }
 
-.La-landingSections .La-quote {
-    padding: 5rem 0 3rem 5rem;
-    width: 75vw;
-    font-size: 7vh;
+.La-landingSections:first-of-type .backCells {
+    position: absolute;
+    right: 0;
+    top: -20rem;
+    height: 125%;
 }
 
 .La-landingSections article {
@@ -949,10 +946,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
 
 .La-landingSections article .La-momImageLeft {
     width: 35rem;
-    margin-left: -8rem;
-    margin-right: -8rem;
-    margin-bottom: -8rem;
-    margin-top: -8rem;
+    margin: -8rem;
 }
 
 .La-landing .La-seccaoDeTextoEsquerda{
@@ -1070,13 +1064,14 @@ footer .A-footerRight li.A-footerPolitic h4 {
     color: var(--middlePinkColor);
 }
 
-.La-landingSections:nth-of-type(2) {
-    align-items: center;
-}
-
-.La-landing .La-tituloSeccaoMeio{
+.La-landingSections .La-articleTitle{
     text-align: center;
     font-size: 3rem;
+    margin: 1.5rem;
+}
+
+.La-landingSections:nth-of-type(2) {
+    align-items: center;
 }
 
 .La-landing .La-landingSections .La-testSing  p {
@@ -1095,18 +1090,37 @@ footer .A-footerRight li.A-footerPolitic h4 {
     width: 50%;
 }
 
-.La-landing .La-landingSections .La-testSing .La-testButton{
+.La-landing .La-landingButtons{
     display: flex;
-    padding: 0.7rem 1.2rem;
+    padding: 0.7rem 3.5rem;
     border-radius: 10rem;
-    cursor: pointer;
     color: var(--whiteColor);
-    background-color: var(--middleYellowColor);
-    width: 13rem;
-    box-shadow: 0 0 5px 1px var(--darkYellowColor);
-    font-size: 1.3rem;
+    background-color: transparent;
+    box-shadow: 0 0 30px 2px transparent;
+    font-size: 1.5rem;
     font-weight: 600;
+    cursor: pointer;
+    border: 1px solid transparent;
+    margin: 2rem;
     text-decoration: none;
+    transition: 0.2s;
+}
+
+.La-landing .La-landingButtons:hover{
+    transform: scale(1.1);
+    transition: 0.2s;
+}
+
+.La-landing .La-landingSections .La-testSing .La-landingButtons,
+.La-landingSections .La-creatAccountSing .La-landingButtons{
+    background-color: var(--middleYellowColor);
+    box-shadow: 0 0 30px 1px var(--pastelYellowColor);
+    border-color: var(--darkYellowColor);
+}
+
+.La-landing .La-landingSections .La-testSing .La-landingButtons:hover,
+.La-landingSections .La-creatAccountSing .La-landingButtons:hover{
+    box-shadow: 0 0 60px 3px var(--pastelYellowColor);
 }
 
 .La-landing .La-landingSections .La-frequentQuestions {
@@ -1117,6 +1131,10 @@ footer .A-footerRight li.A-footerPolitic h4 {
     padding: 2rem;
     left: 50%;
     transform: translate(-50%);
+}
+
+.La-landing .La-landingSections:nth-of-type(3){
+    z-index: 1;
 }
 
 .La-landing .La-landingSections .La-frequentQuestions .faqList .La-faqQuestions{
@@ -1186,15 +1204,14 @@ footer .A-footerRight li.A-footerPolitic h4 {
     gap: 1rem;
     left: 50%;
     transform: translate(-50%);
-    overflow: hidden;
 }
 
 .La-contactSectionBackgroundImage{
     position: absolute;
-    height: 140vh;
-    right: 60%;
+    height: 110vh;
+    right: 66%;
     opacity: 0.5;
-    top: 50%;
+    top: 40%;
     transform: translateY(-50%);
 }
 
@@ -1202,21 +1219,24 @@ footer .A-footerRight li.A-footerPolitic h4 {
     position: relative;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    row-gap: 2.5rem;
     width: 41vw;
     max-width: 50rem;
 }
 
-.La-landing .La-contactForm .La-contactField {
+.La-contactInfos{
     position: relative;
     display: flex;
-    flex-direction: column;
-    border-bottom: 2px solid transparent;
-    margin: 1rem 0;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.La-landing .La-contactForm .La-contactField {
+    position: relative;
     width: 45%;
-    word-wrap: break-word;
-    height: auto;
     background-color: transparent;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .La-landing .La-contactForm .La-contactField.fullField {
@@ -1224,23 +1244,24 @@ footer .A-footerRight li.A-footerPolitic h4 {
 }
 
 .La-landing .La-contactField:after{
-    content: '';
     position: absolute;
+    content: '';
     width: 100%;
     height: 0.21vh;
     bottom: 0;
+    left: 0;
     background: linear-gradient(transparent, transparent) padding-box, linear-gradient(to left, var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
 }
 
-.La-landing .La-contactField .La-contactDados{
+.La-landing .La-contactField .La-contactDados{    
     border: none;
     outline: none;
     width: 100%;
     height: 100%;
-    transition: box-shadow 0.3s ease;
     resize: none;
-    padding: 0.5rem;
     background-color: transparent;
+    font-size: 1rem;
+    padding: 0.5rem;
 }
 
 .La-landing .La-contactField .La-contactfakePlaceHolder {
@@ -1248,39 +1269,33 @@ footer .A-footerRight li.A-footerPolitic h4 {
     left: 10px;
     top: 40%;
     transform: translateY(-50%);
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: var(--middlePinkColor);
     padding: 0 5px;
     transition: 0.3s ease;
     pointer-events: none;
-    font-weight: 500;
 }
 
 .La-contactDados:focus + .La-contactfakePlaceHolder,
 .La-contactDados:valid + .La-contactfakePlaceHolder {
     top: -10px;
     left: 10px;
-    font-size: 12px;
+    font-size: 1rem;
     color: var(--pastelPinkColor);
 }
 
-.La-landing .La-landingSections .La-contactSection .La-contactSectionButton{
-    display: flex;
-    padding: 0.7rem 1.2rem;
-    border-radius: 10rem;
-    cursor: pointer;
-    color: var(--whiteColor);
+.La-landing .La-landingSections .La-contactSection .La-landingButtons{
     background-color: var(--middlePinkColor);
-    width: 13rem;
-    box-shadow: 0 0 5px 1px var(--darkPinkColor);
-    font-size: 1.3rem;
-    font-weight: 600;
-    text-decoration: none;
-    margin: 2rem; 
+    box-shadow: 0 0 30px 1px var(--pastelPinkColor);
+    border-color: var(--darkPinkColor);
+}
+
+.La-landing .La-landingSections .La-contactSection .La-landingButtons:hover{
+    box-shadow: 0 0 60px 3px var(--pastelPinkColor);
 }
 
 .La-landing .La-contactSectionLink {
-    color: #ff007f;
+    color: var(--middlePinkColor);
     text-decoration: none;
     margin-top: 2rem;
     margin-bottom: 2rem;
@@ -1297,24 +1312,30 @@ footer .A-footerRight li.A-footerPolitic h4 {
 
 .La-cantactSectionIconLink {
     text-decoration: none; 
-    display: inline-block; 
     position: relative;
     width: 40px;
-    height: 40px;
+    transition: 0.2s;
+}
+
+.La-cantactSectionIconLink:hover{
+    box-shadow: 0 0 30px 1px var(--middlePinkColor);
+    border-radius: 100%;
+    transition: 0.2s;
 }
 
 .La-cantactSectionIconLink img {
     width: 100%;
-    height: 100%;
-    transition: opacity 0.3s ease;
     display: block;
+    transition: 0.2s;
 }
 
 .La-cantactSectionIconLink img.overlay {
     position: absolute;
-    top: 0;
-    left: 0;
+    width: 110%;
+    top: -5%;
+    left: -5%;
     opacity: 0;
+    transition: 0.2s;
 }
 
 .La-cantactSectionIconLink:hover img.overlay {
@@ -1323,11 +1344,6 @@ footer .A-footerRight li.A-footerPolitic h4 {
 
 .La-cantactSectionIconLink:hover img.base {
     opacity: 0;
-}
-
-.La-tituloSeccaoMeio{
-    text-align: center;
-    font-size: 3rem;
 }
 
 .La-landingSections .La-creatAccountSing  p {
@@ -1346,22 +1362,6 @@ footer .A-footerRight li.A-footerPolitic h4 {
     width: 50%;
 }
 
-.La-landingSections .La-creatAccountSing .La-creatAccountButton {
-    display: flex;
-    padding: 0.7rem 1.2rem;
-    border-radius: 10rem;
-    cursor: pointer;
-    color: var(--whiteColor);
-    background-color: var(--middleYellowColor);
-    width: 13rem;
-    box-shadow: 0 0 5px 1px var(--darkYellowColor);
-    font-size: 1.3rem;
-    font-weight: 600;
-    text-decoration: none;
-}
-
-/*Estilo secção da equipe*/
-
 .La-landingSections .La-articleEquip {
     position: relative;
     justify-content: center;
@@ -1372,7 +1372,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
 .La-landingSections .La-articleEquip .La-equipCells{
     position: absolute;
     width: 15rem;
-    right: 3rem;
+    right: 0;
 }
 
 .La-landingSections .La-articleEquip .La-articleHighlight {

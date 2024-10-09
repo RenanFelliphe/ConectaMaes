@@ -14,9 +14,10 @@
         <?php include_once __DIR__.'/app/includes/headerLanding.php'; ?>
 
         <main class="La-landing">
+            <h1 class="La-quote">Mães ajudando mães a cuidar da vida materna</h1>
+
             <section class="La-landingSections">
                 <img src="app/assets/imagens/figuras/cells_standart_first_yellow.png" class="backCells">
-                <h1 class="La-quote">Mães ajudando mães a cuidar da vida materna</h1>
 
                 <article class="La-articleConectaMaes">
                     <div class="La-articleHighlight">
@@ -96,15 +97,15 @@
 
             <section class="La-landingSections">
                 <article class="La-testSing">
-                    <h1 class = "La-tituloSeccaoMeio"> Que tal fazer um teste?</h1>
+                    <h1 class = "La-articleTitle"> Que tal fazer um teste?</h1>
                     <p>No <span class="La-focus">ConectaMães</span> você consegue experimentar o sistema sem criar uma conta!</p>
-                    <a href="register.php" class="La-testButton">Entre</a>
+                    <a href="./public/registrar.php" class="La-landingButtons">Entre</a>
                 </article>  
             </section>
 
             <section class="La-landingSections">
                 <article class="La-frequentQuestions">
-                    <h1 class = "La-tituloSeccaoMeio"> Perguntas Frequentes</h1>
+                    <h1 class = "La-articleTitle"> Perguntas Frequentes</h1>
                     <ul class="faqList">
                         <li class="La-faqQuestions">
                             <p>O que é o ConectaMães?</p>
@@ -138,15 +139,17 @@
             <section class="La-landingSections">
                 <img class="La-contactSectionBackgroundImage" src="app/assets/imagens/figuras/icone.png" alt=" ">
                 <article class="La-contactSection">
-                    <h1 class = "La-tituloSeccaoMeio">Contato</h1>
+                    <h1 class = "La-articleTitle">Contato</h1>
                     <form class ="La-contactForm" method="POST">
-                        <div class="La-contactField">
-                            <textarea class="La-contactDados" type="text" id="nomeContato" name="nomeContato" required></textarea>
-                            <label class="La-contactfakePlaceHolder" for="nomeContato">Nome</label>
-                        </div>
-                        <div class="La-contactField">
-                            <textarea class="La-contactDados" type="email" id="emailContato" name="emailContato" required></textarea>
-                            <label class="La-contactfakePlaceHolder" for="emailContato">Email</label>
+                        <div class="La-contactInfos">
+                            <div class="La-contactField">
+                                <textarea class="La-contactDados" type="text" id="nomeContato" name="nomeContato" required></textarea>
+                                <label class="La-contactfakePlaceHolder" for="nomeContato">Nome</label>
+                            </div>
+                            <div class="La-contactField">
+                                <textarea class="La-contactDados" type="email" id="emailContato" name="emailContato" required></textarea>
+                                <label class="La-contactfakePlaceHolder" for="emailContato">E-mail</label>
+                            </div>
                         </div>
 
                         <div class="La-contactField fullField">
@@ -159,15 +162,15 @@
                             <label class="La-contactfakePlaceHolder" for="mensagemContato">Mensagem</label>
                         </div>
                         
-                        <button type="submit"  name="envioContato">Enviar</button>
+                        <button type="submit" class="La-landingButtons" name="envioContato">Enviar</button>
                         <?php if (isset($_POST['envioContato'])) {enviarEmailContato();} ?>
                     </form>
 
-                    <p class = "paragrafo">Você também pode nos contatar nas nossas <a href="#" class = "La-contactSectionLink"><span class="La-focus">redes sociais oficiais</span></a>!</p>
+                    <p class = "paragrafo">Você também pode nos contatar nas nossas <span class="La-focus">redes sociais oficiais!</span></p>
                     
                     <div class="La-cantactSectionIcon">
                         <a href="https://www.instagram.com/conectamaes2024?igsh=MXdnbW50bXNxNzdoMA==" target="_blank" class="La-cantactSectionIconLink">
-                        <img src="app/assets/imagens/icons/icons8-instagram-grey.png" alt="img1" class="base">
+                            <img src="app/assets/imagens/icons/icons8-instagram-grey.png" alt="img1" class="base">
                             <img src="app/assets/imagens/icons/instagram_pink_icon.png" alt="img2" class = "overlay">
                         </a>
                         <a href="https://mail.google.com/mail/?view=cm&fs=1&to=conectamaes2024@gmail.com" target="_blank" class="La-cantactSectionIconLink">
@@ -180,12 +183,12 @@
 
             <section class="La-landingSections">
                 <article class="La-creatAccountSing">
-                    <h1 class = "La-tituloSeccaoMeio"> NÃO PERCA ESSA CHANCE!</h1>
+                    <h1 class = "La-articleTitle"> NÃO PERCA ESSA CHANCE!</h1>
                     <p><span class="La-focus">Participe da nossa comunidade</span>, 
                     compartilhe suas experiências, conheça outras mães e encontre histórias 
                     semelhantes às suas. Facilite sua jornada materna ao se conectar com
                     uma <span class="La-focus">rede de apoio solidária</span>.</p>
-                    <a href="./public/registrar.php" class="La-creatAccountButton">Criar uma conta</a>
+                    <a href="./public/registrar.php" class="La-landingButtons">Criar conta</a>
                 </article>  
             </section>
 
@@ -196,7 +199,7 @@
                             <img class = "La-equipIcon" src = "app/assets/imagens/icons/people_icon.png" alt="">
                             <span class="La-articleBar La-focus"></span>
                         </div>
-                        <h2 class = "La-equipSectionTitle">Equipe</h2>
+                        <h2 class="La-equipSectionTitle">Equipe</h2>
                     </div>
                     
                     <div class="La-equipContainer">
@@ -205,17 +208,17 @@
                                 <img class ="La-memberImageIcon" src="app/assets/imagens/fotos/image_livia_roundBorder.png" alt="Foto da Lívia Braga">
                                 <div class = "La-memberSocialMidia">
                                     <div class = "La-memberSocialMidiaIcon">
-                                        <a href = "#">
+                                        <a href = "#" target=_blank>
                                         <img  src = "app/assets/imagens/icons/lattes_icon.png" alt ="image 1">
                                         </a>
                                     </div>
                                     <div class = "La-memberSocialMidiaIcon">
-                                        <a href = "https://www.instagram.com/liviabrg?igsh=MXF5cmE1ZHNyaW1ibA==">
+                                        <a href = "https://www.instagram.com/liviabrg/" target=_blank>
                                         <img  src = "app/assets/imagens/icons/instagram_grey_icon.png" alt ="image 2">
                                         </a>
                                     </div>
                                     <div class = "La-memberSocialMidiaIcon">
-                                        <a href = "#">
+                                        <a href = "#" target=_blank>
                                         <img  src = "app/assets/imagens/icons/linkedIn_icon.png" alt ="image 3">
                                         </a>
                                     </div>
@@ -234,17 +237,17 @@
                                 <img class ="La-memberImageIcon" src="app/assets/imagens/fotos/image_nath_roundBorder.png" alt="Foto da Nathália Lessa">
                                 <div class = "La-memberSocialMidia">
                                     <div class = "La-memberSocialMidiaIcon">
-                                        <a href = "#">
+                                        <a href = "http://lattes.cnpq.br/1408213143619083" target=_blank>
                                         <img  src = "app/assets/imagens/icons/lattes_icon.png" alt ="image 1">
                                         </a>
                                     </div>
                                     <div class = "La-memberSocialMidiaIcon">
-                                    <a href = "https://www.instagram.com/mirror.nl2?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">
+                                    <a href = "https://www.instagram.com/mirror.nl2/" target=_blank>
                                     <img  src = "app/assets/imagens/icons/instagram_grey_icon.png" alt ="image 2">
                                         </a>
                                     </div>
                                     <div class = "La-memberSocialMidiaIcon">
-                                        <a href = "#">
+                                        <a href = "https://www.linkedin.com/in/nath%C3%A1lia-c-lessa-20878a236/" target=_blank>
                                         <img  src = "app/assets/imagens/icons/linkedIn_icon.png" alt ="image 3">
                                         </a>
                                     </div>
@@ -263,17 +266,17 @@
                                 <img class ="La-memberImageIcon" src="app/assets/imagens/fotos/image_renan_roundBorder.png" alt="Foto o Renan Moura">
                                 <div class = "La-memberSocialMidia">
                                     <div class = "La-memberSocialMidiaIcon">
-                                        <a href = "#">
+                                        <a href = "http://lattes.cnpq.br/1685057836344732" target=_blank>
                                         <img  src = "app/assets/imagens/icons/lattes_icon.png" alt ="image 1">
                                         </a>
                                     </div>
                                     <div class = "La-memberSocialMidiaIcon">
-                                        <a href = "https://www.instagram.com/renan_felliphe11?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">
+                                        <a href = "https://www.instagram.com/renan_felliphe11/" target=_blank>
                                         <img  src = "app/assets/imagens/icons/instagram_grey_icon.png" alt ="image 2">
                                         </a>
                                     </div>
                                     <div class = "La-memberSocialMidiaIcon">
-                                        <a href = "#">
+                                        <a href = "https://www.linkedin.com/in/renan-felliphe-34ab1126a/" target=_blank>
                                         <img  src = "app/assets/imagens/icons/linkedIn_icon.png" alt ="image 3">
                                         </a>
                                     </div>
@@ -292,17 +295,17 @@
                                 <img class ="La-memberImageIcon" src="app/assets/imagens/fotos/image_luis_roundBorder.png" alt="Foto do Luís Mendes">
                                 <div class = "La-memberSocialMidia">
                                     <div class = "La-memberSocialMidiaIcon">
-                                        <a href = "http://lattes.cnpq.br/6368472217617839">
+                                        <a href = "http://lattes.cnpq.br/6368472217617839" target=_blank>
                                         <img  src = "app/assets/imagens/icons/lattes_icon.png" alt ="image 1">
                                         </a>
                                     </div>
                                     <div class = "La-memberSocialMidiaIcon">
-                                        <a href = "https://www.instagram.com/laug_br?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">
+                                        <a href = "https://www.instagram.com/laug_br/" target=_blank>
                                         <img  src = "app/assets/imagens/icons/instagram_grey_icon.png" alt ="image 2">
                                         </a>
                                     </div>
                                     <div class = "La-memberSocialMidiaIcon">
-                                        <a href = "#">
+                                        <a href = "https://www.linkedin.com/in/luis-augusto-mendes-b010b7b4/" target=_blank>
                                         <img  src = "app/assets/imagens/icons/linkedIn_icon.png" alt ="image 3">
                                         </a>
                                     </div>
@@ -321,17 +324,17 @@
                                 <img class ="La-memberImageIcon" src="app/assets/imagens/fotos/image_tati_roundBorder.png" alt="Foto da Tatiana Azevedo">
                                 <div class = "La-memberSocialMidia">
                                     <div class = "La-memberSocialMidiaIcon">
-                                        <a href = "#">
+                                        <a href = "http://lattes.cnpq.br/6949976948195196" target=_blank>
                                         <img  src = "app/assets/imagens/icons/lattes_icon.png" alt ="image 1">
                                         </a>
                                     </div>
                                     <div class = "La-memberSocialMidiaIcon">
-                                        <a href = "https://www.instagram.com/tatianabazevedo?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==">
+                                        <a href = "https://www.instagram.com/tatianabazevedo/" target=_blank>
                                         <img  src = "app/assets/imagens/icons/instagram_grey_icon.png" alt ="image 2">
                                         </a>
                                     </div>
                                     <div class = "La-memberSocialMidiaIcon">
-                                        <a href = "#">
+                                        <a href = "https://www.linkedin.com/in/tatiana-barbosa-de-azevedo-55751331/" target=_blank>
                                         <img  src = "app/assets/imagens/icons/linkedIn_icon.png" alt ="image 3">
                                         </a>
                                     </div>
