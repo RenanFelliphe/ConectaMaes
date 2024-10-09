@@ -17,6 +17,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
         <link rel="stylesheet" href="<?php echo $relativeAssetsPath; ?>/styles/style.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
         <link rel="icon" href="<?php echo $relativeAssetsPath; ?>/imagens/logos/final/Conecta_Mães_Logo_Icon.png">
         <title>ConectaMães - Auxílios</title>
         </meta>
@@ -36,7 +38,7 @@
                     <h1 class="Ho-postMain Ho-mainFilters" onclick="toggleAuxilioFilter(this);">Principais</h1>
                 </section>
 
-                <section class="Au-allAuxilios">
+                <section class="Au-allAuxilios container container-products row mx-auto">
                     <?php
                         $auxilios = queryPostsAndUserData($conn, 'Auxilio');
                         if (count($auxilios) > 0) {
@@ -48,7 +50,7 @@
                                 // Formatar a data da publicação utilizando a função do arquivo dateChecker.php
                                 $mensagemData = postDateMessage($dadosPublicacao["dataCriacaoPublicacao"]);
                                 ?>
-                                <article class="Au-auxilioCard" onclick="openAuxilioModal();">
+                                <article class="Au-auxilioCard col-3 col-xxl-3 col-md-4 col-sm-6"  onclick="openAuxilioModal();">
                                     <ul class="postDate"><li><?php echo htmlspecialchars($mensagemData); ?></li></ul>
                         
                                     <div class="postTimelineTop">

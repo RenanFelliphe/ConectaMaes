@@ -2735,16 +2735,17 @@ footer .A-footerRight li.A-footerPolitic h4 {
 }
 
 .Au-allAuxilios {
-    display: grid;
+    /*display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
     padding: 1rem;
-    align-items: flex-start;
+    align-items: flex-start;*/
+    padding: 0.5rem 0;
 }
 
 .Au-allAuxilios .Au-auxilioCard {
     position: relative;
-    width: 19rem;
+    /*width: 19rem;*/
     height: fit-content;
     display: flex;
     flex-direction: column;
@@ -2754,6 +2755,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     border: 1px solid var(--secondColor);
     padding: 1.5rem 1rem 1rem 0.5rem;
     cursor: pointer;
+    margin: 0.5rem;
 }
 
 .Au-allAuxilios .Au-auxilioCard .postTimelineTop {
