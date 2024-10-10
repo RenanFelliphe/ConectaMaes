@@ -2727,7 +2727,6 @@ footer .A-footerRight li.A-footerPolitic h4 {
     display: flex;
     height: 90vh;
     overflow: hidden;
-    
     position: relative;
     display: flex;
     align-items: flex-start;
@@ -2735,12 +2734,8 @@ footer .A-footerRight li.A-footerPolitic h4 {
 }
 
 .Au-allAuxilios {
-    /*display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    padding: 1rem;
-    align-items: flex-start;*/
     padding: 0.5rem 0;
+    width: 100%;
 }
 
 .Au-allAuxilios .Au-auxilioCard {

@@ -1,47 +1,38 @@
 <?php
-    function enviarEmailContato() {
-        $nomeContato = !empty($_POST['nomeContato']) ? htmlspecialchars(trim($_POST['nomeContato'])) : null;
-        $emailContato = !empty($_POST['emailContato']) ? trim($_POST['emailContato']) : null;
-        $assuntoContato = !empty($_POST['assuntoContato']) ? htmlspecialchars(trim($_POST['assuntoContato'])) : null;
-        $mensagemContato = !empty($_POST['mensagemContato']) ? htmlspecialchars(trim($_POST['mensagemContato'])) : null;
+    require_once "paths.php";
+    
+    $name = $_POST["nomeContato"];
+    $email = $_POST["emailContato"];
+    $subject = $_POST["assuntoContato"];
+    $message = $_POST["mensagemContato"];
 
-        // Validação de e-mail
-        if (!$emailContato || !filter_var($emailContato, FILTER_VALIDATE_EMAIL)) {
-            echo "Endereço de e-mail inválido!";
-            return;
-        }
+    require __DIR__ . '/../../../vendor/autoload.php';
 
-        if (!$nomeContato || !$assuntoContato || !$mensagemContato) {
-            echo "Preencha todos os campos!";
-            return;
-        }
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\SMTP;
 
-        $to = 'conectamaes2024@gmail.com';
-        $subject = $assuntoContato;
-        $message = "
-            <html>
-                <head>
-                    <title>$assuntoContato</title>
-                </head>
-                <body>
-                    <p><strong>Nome:</strong> $nomeContato</p>
-                    <p><strong>Email:</strong> $emailContato</p>
-                    <p><strong>Mensagem:</strong></p>
-                    <p>$mensagemContato</p>
-                </body>
-            </html>
-        ";
+    $mailServer = new PHPMailer(true);
 
-        $headers = array();
-        $headers[] = 'MIME-Version: 1.0';
-        $headers[] = 'Content-type: text/html; charset=UTF-8';
-        $headers[] = 'From: ' . $nomeContato . ' <' . $emailContato . '>';
-        $headers[] = 'Reply-To: ' . $emailContato;
+    //$mailServer->SMTPDebug = SMTP::DEBUG_SERVER;
+    $mailServer->isSMTP();
+    $mailServer->SMTPAuth = true;
 
-        // Envia o e-mail
-        if (mail($to, $subject, $message, implode("\r\n", $headers))) {
-            echo "E-mail enviado com sucesso!";
-        } else {
-            echo "Falha no envio do e-mail.";
-        }
+    $mailServer->Host = "smtp.gmail.com";
+    $mailServer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mailServer->Port = 587;
+
+    $mailServer->Username = "conectamaes2024@gmail.com";
+    $mailServer->Password = "lbik fekx toxo ieiy";
+
+    $mailServer->setFrom($email,$name);
+    $mailServer->addAddress("conectamaes2024@gmail.com", "Equipe ConectaMães");
+
+    $mailServer->Subject = $subject;
+    $mailServer->Body = $message;
+    function sendEmail($mailServer){
+        $mailServer->send();
+        echo "<p>Sua mensagem foi enviada com sucesso. Nossa equipe agradece seu feedback!</p>";
     }
+    
+
+    

@@ -1,4 +1,4 @@
-<?php require_once "app/services/helpers/mail.php";?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -163,7 +163,12 @@
                         </div>
                         
                         <button type="submit" class="La-landingButtons" name="envioContato">Enviar</button>
-                        <?php if (isset($_POST['envioContato'])) {enviarEmailContato();} ?>
+                        <?php 
+                            if(isset($_POST["envioContato"])){ 
+                                require_once "app/services/helpers/mail.php";
+                                sendEmail($mailServer);
+                            }
+                        ?>
                     </form>
 
                     <p class = "paragrafo">Você também pode nos contatar nas nossas <span class="La-focus">redes sociais oficiais!</span></p>
@@ -218,7 +223,7 @@
                                         </a>
                                     </div>
                                     <div class = "La-memberSocialMidiaIcon">
-                                        <a href = "#" target=_blank>
+                                        <a href = "https://www.linkedin.com/in/livia-braga-0151a52b7/" target=_blank>
                                         <img  src = "app/assets/imagens/icons/linkedIn_icon.png" alt ="image 3">
                                         </a>
                                     </div>
