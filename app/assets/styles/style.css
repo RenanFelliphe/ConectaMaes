@@ -2740,7 +2740,8 @@ footer .A-footerRight li.A-footerPolitic h4 {
 
 .Au-allAuxilios .Au-auxilioCard {
     position: relative;
-    /*width: 19rem;*/
+    min-width: 15rem;
+    width: 15vw;
     height: fit-content;
     display: flex;
     flex-direction: column;
@@ -2820,6 +2821,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    gap: 0.5rem;
     color: var(--grayColor);
 }
 
@@ -2828,6 +2830,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     display: flex;
     gap: 1.5rem;
     padding-left: 1.3rem;
+    width: fit-content;
 }
 
 .Au-allAuxilios .Au-auxilioCard .postTimelineBottom .postInteractions div {
@@ -2842,8 +2845,9 @@ footer .A-footerRight li.A-footerPolitic h4 {
 }
 
 .Au-allAuxilios .Au-auxilioCard .postTimelineBottom .confirmBtn {
+    font-size: 0.8rem;
     right: 0;
-    padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+    padding: 0.3rem 1.3rem 0.3rem 1.3rem;
 }
 
 .asideRight .myAuxilios{

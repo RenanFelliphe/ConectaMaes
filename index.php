@@ -213,7 +213,7 @@
                                 <img class ="La-memberImageIcon" src="app/assets/imagens/fotos/image_livia_roundBorder.png" alt="Foto da Lívia Braga">
                                 <div class = "La-memberSocialMidia">
                                     <div class = "La-memberSocialMidiaIcon">
-                                        <a href = "#" target=_blank>
+                                        <a href="./notFound.php" target=_blank>
                                         <img  src = "app/assets/imagens/icons/lattes_icon.png" alt ="image 1">
                                         </a>
                                     </div>

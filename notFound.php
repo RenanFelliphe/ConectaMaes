@@ -10,9 +10,27 @@
     </head>
 
     <body class="Y-theme">
-        <?php include_once __DIR__.'/app/includes/headerLanding.php'; ?>
-        
-    <h1>NÃO ENCONTRADO</h1>
+        <?php include_once ("./app/includes/headerLanding.php");?>
 
+        <main class="Su-suporte" style="height: 82vh;">
+            <img src="../app\assets\imagens\figuras\cells_standart_first_blue.png" class="backCells">
+            <img src="../app\assets\imagens\figuras\cells_standart_first_blue.png" class="backCells cellsLeft">
+
+            <div style="position: absolute;
+                        left: 50%; top: 40%;
+                        transform: translate(-50%);
+                        display: flex; flex-direction:
+                        column; cursor: pointer;">
+                <h1> PÁGINA NÃO ENCONTRADA </h1>
+                <h4> ... </h4>
+            </div>
+            
+        </main>
+
+        <?php 
+            include_once ("../app/includes/footer.php");
+        ?>
+
+        <script src="<?php echo $relativeAssetsPath; ?>/js/system.js"></script>
     </body>
 </html>

@@ -24,8 +24,8 @@
     $mailServer->Username = "conectamaes2024@gmail.com";
     $mailServer->Password = "lbik fekx toxo ieiy";
 
-    $mailServer->setFrom($email,$name);
-    $mailServer->addAddress("conectamaes2024@gmail.com", "Equipe ConectaMães");
+    $mailServer->setFrom($_POST["emailContato"],$name);
+    $mailServer->addAddress("conectamaes2024@gmail.com");
 
     $mailServer->Subject = $subject;
     $mailServer->Body = $message;
