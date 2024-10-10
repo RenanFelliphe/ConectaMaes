@@ -116,10 +116,13 @@
             <i class="bi bi-person-fill pageIcon"></i>
             <p>Perfil</p>
         </a>
-        <a href="<?php echo $relativePublicPath; ?>/admin.php" class="userFunctions">
-            <i class="bi bi-key-fill pageIcon"></i>
-            <p>Administração</p>
-        </a>
+        <?php if($currentUserData['isAdmin']){?>
+            <a href="<?php echo $relativePublicPath; ?>/admin.php" class="userFunctions">
+                <i class="bi bi-key-fill pageIcon"></i>
+                <p>Administração</p>
+            </a>
+        <?php }?>
+        
         <a href="<?php echo $relativePublicPath; ?>/home/config.php" class="userFunctions">
             <i class="bi bi-gear-fill pageIcon"></i>
             <p>Configurações</p>

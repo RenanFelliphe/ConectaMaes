@@ -24,14 +24,18 @@
     $mailServer->Username = "conectamaes2024@gmail.com";
     $mailServer->Password = "lbik fekx toxo ieiy";
 
-    $mailServer->setFrom($_POST["emailContato"],$name);
+    $mailServer->setFrom("conectamaes2024@gmail.com", $name." - User");
     $mailServer->addAddress("conectamaes2024@gmail.com");
 
     $mailServer->Subject = $subject;
-    $mailServer->Body = $message;
+    $mailServer->Body =  $email. " enviou:\n\n". $message;
     function sendEmail($mailServer){
-        $mailServer->send();
-        echo "<p>Sua mensagem foi enviada com sucesso. Nossa equipe agradece seu feedback!</p>";
+        try {
+            $mailServer->send();
+            echo "<p>Sua mensagem foi enviada com sucesso. Nossa equipe agradece seu feedback!</p>";
+        } catch (Exception $e) {
+            echo "<p>Infelizmente não foi possível enviar sua mensagem. Tente novamente mais tarde!</p> \nErro:{$mailServer->ErrorInfo}";
+        }
     }
     
 

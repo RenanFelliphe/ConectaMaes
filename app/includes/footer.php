@@ -20,12 +20,12 @@
         </li>
         <li class="A-footerHelp">
             <h4>Ajuda</h4>
-            <a href="../public\suporte.php" class="A-footerHelpSuport">Suporte</a>
+            <a href="<?= $relativePublicPath;?>/suporte.php" class="A-footerHelpSuport">Suporte</a>
         </li>
         <li class="A-footerPolitic">
             <h4>Política</h4>
-            <a href="../documents\politicas_de_privacidade_ConectaMaes.pdf" download="politicas_de_privacidade_ConectaMaes.pdf" class="A-footerPoliticPrivacy">Políticas de Privacidade</a>
-            <a href="../documents\termos_de_uso_ConectaMaes.pdf" download="termos_de_uso_ConectaMaes.pdf" class="A-footerPoliticTerms">Termos de Uso</a>
+            <a href="../documents/politicas_de_privacidade_ConectaMaes.pdf" download="politicas_de_privacidade_ConectaMaes.pdf" class="A-footerPoliticPrivacy">Políticas de Privacidade</a>
+            <a href="../documents/termos_de_uso_ConectaMaes.pdf" download="termos_de_uso_ConectaMaes.pdf" class="A-footerPoliticTerms">Termos de Uso</a>
         </li>
     </ul>
 </footer>

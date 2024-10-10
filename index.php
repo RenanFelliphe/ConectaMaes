@@ -1,4 +1,10 @@
-
+<?php 
+    require_once "app/services/helpers/conn.php";
+    require_once "app/services/auth/authUser.php";
+    if(isset($_POST["envioUsuarioTeste"])){
+        logInTest($conn);
+    }
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -99,7 +105,9 @@
                 <article class="La-testSing">
                     <h1 class = "La-articleTitle"> Que tal fazer um teste?</h1>
                     <p>No <span class="La-focus">ConectaMães</span> você consegue experimentar o sistema sem criar uma conta!</p>
-                    <a href="./public/registrar.php" class="La-landingButtons">Entre</a>
+                    <form method="post">
+                        <button name="envioUsuarioTeste" class="La-landingButtons">Entre</button>
+                    </form>    
                 </article>  
             </section>
 
@@ -110,27 +118,32 @@
                         <li class="La-faqQuestions">
                             <p>O que é o ConectaMães?</p>
                             <i class="bi bi-chevron-right"></i>
-                            <div class="La-faqAnswers">sadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfas</div>
+                            <div class="La-faqAnswers">O ConectaMães é um sistema web no formato de rede social, voltado para os responsáveis por cuidados parentais. Nosso objetivo é proporcionar um ambiente de apoio e troca de experiências, onde usuários podem compartilhar e possivelmente resolver adversidades relacionadas à vida parental, promovendo a inclusão de diferentes estruturas familiares.</div>
                         </li>
                         <li class="La-faqQuestions">
-                            <p>Mulheres grávidas também podem usar o site?</p>
+                            <p>Mulheres grávidas também podem usar o sistema?</p>
                             <i class="bi bi-chevron-right"></i>
-                            <div class="La-faqAnswers">sadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfas</div>
+                            <div class="La-faqAnswers">Sim, mulheres grávidas também podem usar o ConectaMães, mesmo que não sejam o público-alvo. O site é voltado para todos os cuidadores parentais, oferecendo um espaço de apoio e compartilhamento de experiências.</div>
                         </li>
                         <li class="La-faqQuestions">
-                            <p>Homens ou pessoas sem filho também podem usar o site?</p>
+                            <p>Homens ou pessoas sem filho também podem usar o sistema?</p>
                             <i class="bi bi-chevron-right"></i>
-                            <div class="La-faqAnswers">sadacscvdavfassadacscvdavfassadavdavfas</div>
+                            <div class="La-faqAnswers">Sim, o ConectaMães está aberto a homens e pessoas sem filhos. O site é voltado para todos os tipos de cuidadores parentais, incluindo pais solo e demais responsáveis legais, além de oferecer um espaço de suporte e compartilhamento de experiências para diferentes estruturas familiares.</div>
                         </li>
                         <li class="La-faqQuestions">
-                            <p>Que tipo de auxílios podem ser pedidos no site?</p>
+                            <p>Que tipo de auxílios podem ser pedidos?</p>
                             <i class="bi bi-chevron-right"></i>
-                            <div class="La-faqAnswers">sadacscvdavfassadacscvdavfassadacsadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfasscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfas</div>
+                            <div class="La-faqAnswers">O usuário pode solicitar qualquer tipo de auxílio, desde que não envolva a promoção de crimes, pedidos de informações pessoais ou qualquer forma de violência. Lembre-se de que os administradores estão trabalhando para que o sistema continue um lugar seguro para todos!</div>
                         </li>
                         <li class="La-faqQuestions">
                             <p>Eu posso relatar algo sem precisar me expor?</p>
                             <i class="bi bi-chevron-right"></i>
-                            <div class="La-faqAnswers">sadacscvdavfassadacscvdavfassadacscvdavsadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfasfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfassadacscvdavfas</div>
+                            <div class="La-faqAnswers">A equipe do ConectaMães está trabalhando para implementar a possibilidade de relatos anônimos. Essa funcionalidade permitirá que os usuários compartilhem suas experiências e dificuldades sem se expor publicamente, garantindo a privacidade e a integridade deles.</div>
+                        </li>
+                        <li class="La-faqQuestions">
+                            <p>Mais perguntas</p>
+                            <i class="bi bi-chevron-right"></i>
+                            <a href="public/suporte/faq.php" class="La-faqAnswers">Clique <span class="La-focus">aqui</span> para ver mais perguntas frequentes</a>
                         </li>
                     </ul>
                 </article>  

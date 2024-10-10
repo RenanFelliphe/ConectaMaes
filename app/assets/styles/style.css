@@ -1195,8 +1195,16 @@ footer .A-footerRight li.A-footerPolitic h4 {
     width: 90%;
     word-wrap: break-word;
     padding-left: 1rem;
+    text-decoration: none;
+    color: var(--blackColor);
+    cursor: default;
+    
 }
-
+.La-faqAnswers .La-focus {
+    font-weight: bold;      
+    color: var(--middleBlueColor);
+    cursor: pointer;
+}
 .La-landing .La-landingSections .La-contactSection {
     position: relative;
     display: flex;

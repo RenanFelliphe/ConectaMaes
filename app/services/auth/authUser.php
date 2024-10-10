@@ -20,7 +20,16 @@
             }
         }
     }
-    
+    function logInTest($conn){
+        if(session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        $_SESSION['idUsuario'] = 1;
+        $_SESSION['active'] = true;
+
+        include_once "../helpers/paths.php";
+        header("Location: public/home.php"); 
+    }
     function logOut() {
         if(session_status() === PHP_SESSION_NONE) {
             session_start();
