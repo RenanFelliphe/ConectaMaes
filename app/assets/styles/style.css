@@ -168,20 +168,18 @@
     --darkPinkColorTransparent: #A3155F20;
 }
 
-html {
+main{
+    position: relative;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     scroll-behavior: smooth;
 }
 
-body::-webkit-scrollbar {
-    position: relative;
-    display: none;
-}
-
-main {
-    position: relative;
-    width: 100vw;
-    overflow: hidden;
-}
 
 .backCells {
     position: absolute;
@@ -870,7 +868,8 @@ footer .A-footerRight li.A-footerPolitic h4 {
      var(--whiteColor) 70%, 
      #F9EC7C4D 80%,
      #7DEBFA33 94%);
-    height: auto;
+    min-height: 100vh; /* Garante que o main ocupe no mínimo 100% da altura da tela */
+    width: 100vw;
     overflow: hidden;
 }
 
@@ -927,6 +926,18 @@ footer .A-footerRight li.A-footerPolitic h4 {
     height: 125%;
 }
 
+@media (max-width: 1200px) {
+    .backCells {
+      display: none;
+    }
+}  
+
+@media (max-width: 850px) {
+    .La-equipCells {
+        display: none;
+    }
+}  
+
 .La-landingSections article {
     display: flex;
     justify-content: flex-start;
@@ -938,10 +949,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
 
 .La-landingSections article .La-momImageRight {
     width: 35rem;
-    margin-right: -25rem;
-    margin-left: -8rem;
-    margin-bottom: -8rem;
-    margin-top: -8rem;
+    margin: -8rem -25rem -8rem -8rem;
 }
 
 .La-landingSections article .La-momImageLeft {
@@ -1610,6 +1618,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     background: linear-gradient(var(--whiteColor) 0%, var(--firstColorLowOpacity) 95%);
     height: 86vh;
     padding: 3vh;
+    overflow: hidden;
 }
 
 .Lo-loginForm,
@@ -4324,4 +4333,12 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     background-color: var(--whiteColor);
     border-color: var(--secondColor);
     transition: 0.2s;
+}
+
+/*====================================================================================================
+========================================= PÁGINA DE SUPORTE ==========================================
+====================================================================================================*/
+
+.Su-suporte {
+    overflow: hidden;
 }
