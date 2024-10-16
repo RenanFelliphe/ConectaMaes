@@ -180,7 +180,6 @@ html, body {
     scroll-behavior: smooth;
 }
 
-
 .backCells {
     position: absolute;
     right: 0;
@@ -242,21 +241,34 @@ button.confirmBtn:hover {
 ====================================================================================================*/
 
 .headerLanding {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     gap: 3rem;
     height: 4rem;
     padding: 0.5rem 1rem;
-    z-index: 999;
+    z-index: 998;
     background: linear-gradient(#ffffff95 95%, transparent 100%);
     backdrop-filter: blur(4px);
 }
 
+.headerLanding.active{
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: var(--whiteColor);
+    flex-direction: column;
+}
 
 .headerLanding .A-headerLogo {
     width: 10rem;
+    max-width: 22rem;
     cursor: pointer;
 }
 
@@ -275,34 +287,17 @@ button.confirmBtn:hover {
     color: var(--blackColor);
 }
 
-.headerLanding .A-searchBar {
-    display: flex;
-    background-color: #e4e4e4;
-    border-radius: 10rem;
-    width: 15rem;
-    height: 2rem;
-    min-width: 13.5rem;
-    padding: 0 0.6rem 0 0.6rem;
-    gap: 0.4rem;
-    opacity: 0.6;
-    font-size: 0.8rem;
-    color: var(--grayColor);
-    border: 1px solid #d1d1d1;
-}
-
-.headerLanding .A-searchBarInput {
-    background-color: transparent;
-    border: none;
-    color: var(--blackColor);
-    outline: none;
-    width: 90%;
-    font-weight: 400;
-    font-size: 1rem;
-}
-
-.headerLanding .A-searchBar .bi,
-.headerLanding .A-searchBarInput::placeholder {
-    color: var(--blackColor);
+.La-toggleHeader{
+    display: none;
+    position: fixed;
+    top: 0.7rem;
+    left: 0.7rem;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 999;
+    background-color: #80808010;
+    border-radius: 0.5rem;
+    padding: 0.2rem 0.3rem;
 }
 
 .headerLanding .A-signButtons {
@@ -330,6 +325,37 @@ button.confirmBtn:hover {
     background-color: var(--secondColor);
 }
 
+@media (max-width: 768px) {
+    .La-toggleHeader{
+        display: flex;
+    }
+
+    .headerLanding{
+        display: none;
+        padding: 3rem;
+    }
+
+    .headerLanding .A-headerLogo {
+        width: 100vw;
+    }
+
+    .headerLanding .A-headerLinks {
+        flex-direction: column;
+        gap: 2.5rem;
+        font-size: 2rem;
+    }
+
+    .headerLanding .A-signButtons {
+        gap: 1rem;
+        flex-direction: column;
+    }
+
+    .headerLanding .A-signButtons h4 {
+        font-size: 1.5rem;
+        height: 3.5rem;
+        width: 13rem;
+    }
+}
 
 /*====================================================================================================
 ============================================ HEADER HOME =============================================
@@ -757,10 +783,11 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 1rem;
+    flex-wrap: wrap;
+    gap: 3rem;
     width: 100%;
-    height: 10rem;
-    padding: 0 2rem 0.5rem 0.5rem;
+    min-height: 10rem;
+    padding: 0 2rem 5rem 1rem;
     background-color: var(--blackColor);
     color: var(--whiteColor);
 }
@@ -770,7 +797,7 @@ footer .footerLink {
     height: 7vh;
     width: 100%;
     scroll-behavior: smooth;
-    margin-left: -0.5rem;
+    margin-left: -1rem;
 }
 
 footer h4 {
@@ -779,16 +806,7 @@ footer h4 {
     pointer-events: none;
 }
 
-footer .A-footerLeft img.A-footerLogo {
-    width: 15rem;
-    cursor: pointer;
-}
-
-footer .A-footerLeft .A-footerContact {
-    padding: 0 0 4rem 1rem;
-}
-
-footer .A-footerLeft .A-footerContact .A-footerSocialMedias {
+footer .A-footerLeft .A-footerSocialMedias {
     display: flex;
     justify-content: space-evenly;
     gap: 5rem;
@@ -796,12 +814,12 @@ footer .A-footerLeft .A-footerContact .A-footerSocialMedias {
     width: fit-content;
 }
 
-footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-instagram {
+footer .A-footerLeft .A-footerSocialMedias .bi-instagram {
     color: var(--pastelYellowColor);
     cursor: pointer;
 }
 
-footer .A-footerLeft .A-footerContact .A-footerSocialMedias .bi-envelope-fill {
+footer .A-footerLeft .A-footerSocialMedias .bi-envelope-fill {
     color: var(--pastelBlueColor);
     cursor: pointer;
 }
@@ -813,14 +831,16 @@ footer #A-copyrightSign {
     left: 50%;
     transform: translate(-50%);
     font-size: 0.7rem;
+    text-align: center;
 }
 
 footer .A-footerRight {
     display: flex;
     align-items: flex-start;
-    gap: 6rem;
-    list-style: none;
-    height: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    column-gap: 6rem;
+    row-gap: 1rem;
 }
 
 footer .A-footerRight li{
@@ -828,14 +848,10 @@ footer .A-footerRight li{
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    gap: 0.8rem;
+    gap: 0.5rem;
 }
 
 footer .A-footerRight li a {
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    font-size: 1rem;
     cursor: pointer;
     text-decoration: none;
     color: var(--whiteColor);
@@ -851,7 +867,7 @@ footer .A-footerRight li.A-footerHelp h4 {
 
 footer .A-footerRight li.A-footerPolitic h4 {
     color: var(--pastelPinkColor);
-}
+}*/
 
 /*====================================================================================================
 ====================================== PÁGINA DE APRESENTAÇÃO ========================================
@@ -880,9 +896,9 @@ footer .A-footerRight li.A-footerPolitic h4 {
     justify-content: center;
     position: relative;
     text-align: center;
-    padding: 5rem;
+    padding: 10rem;
     width: 80vw;
-    font-size: 8vh;
+    font-size: 4rem;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -935,6 +951,11 @@ footer .A-footerRight li.A-footerPolitic h4 {
 @media (max-width: 850px) {
     .La-equipCells {
         display: none;
+    }
+
+    .La-quote{
+        font-size: 3rem;
+        padding: 5rem;
     }
 }  
 

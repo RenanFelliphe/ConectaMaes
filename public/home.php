@@ -146,8 +146,9 @@
                     <i class="bi bi-x closeChildModal" onclick="registerChildModal()"></i>
                     <div class="Re-addChildBtn toggleAddChildModal"> Adicionar filho +</div>
                     <?php
-                        foreach ($publicacoes as $dadosPublicacao){
-
+                        $filhos = queryMultipleChildrenData($conn, $where = "idUsuario = " . $currentUserData['idUsuario'], $order = "nomeFilho")
+                        foreach ($filhos as $f){
+                            
                         }
                     ?>
                     <div class="Re-myChildBtn">
@@ -156,7 +157,7 @@
                         <i class="bi bi-x deleteChild"></i>
                     </div>
 
-                    <form class="Re-addChildBox close">
+                    <form class="Re-addChildBox close" method="POST">
                         <div class="Re-childBoxHeader">
                             <i class="bi bi-balloon Re-childIcon"></i>
                             <input type="text" class="Re-childName" id="nomeFilho" name="nomeFilho" placeholder="Nome Completo" required>
@@ -166,11 +167,11 @@
                         <div class="Re-childBoxSex">
                             <p> Sexo: </p>
                             <div class="Re-sexOptions" >
-                                <input type="radio" name="childSex" value="boy" id="Re-childBoySex" required>
+                                <input type="radio" name="sexoFilho" value="boy" id="Re-childBoySex" required>
                                 <label for="Re-childBoySex"> Menino </label>
-                                <input type="radio" name="childSex" value="girl" id="Re-childGirlSex">
+                                <input type="radio" name="sexoFilho" value="girl" id="Re-childGirlSex">
                                 <label for="Re-childGirlSex"> Menina </label>
-                                <input type="radio" name="childSex" value="nullSex" id="Re-childNullSex">
+                                <input type="radio" name="sexoFilho" value="nullSex" id="Re-childNullSex">
                                 <label for="Re-childNullSex"> Não Informar </label>
                             </div>
                         </div>
@@ -181,7 +182,7 @@
                                 <label for="dataNascFilho">Data de Nascimento</label>
                             </div>
                             <div class="Re-input">
-                                <select name="deficienciaSelect" id="deficiencia" >
+                                <select name="deficienciaFilho" id="deficiencia" >
                                     <option value="N/a">- - - - Nenhuma - - - -</option>
                                     <optgroup label="Deficiência Físicas">
                                         <option value="G80">G80 — Paralisia cerebral</option>
@@ -275,7 +276,12 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="Re-confirmAddChild confirmBtn"> Confirmar </button>
+                        <button type="submit" class="Re-confirmAddChild confirmBtn" name="envioFilho"> Confirmar </button>
+                        <?php 
+                            if(isset($_POST['envioFilho'])){
+                                addChild($conn, $currentUserData['idUsuario']);
+                            }
+                        ?>
                     </form>
                 </div>
             </div>

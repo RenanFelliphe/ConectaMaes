@@ -379,7 +379,6 @@
 
     <script>
         //FAQ Section
-
         document.querySelectorAll('.La-faqQuestions').forEach((question) => {
             question.addEventListener('click', () => {
                 question.classList.toggle('active');

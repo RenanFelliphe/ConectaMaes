@@ -3,14 +3,14 @@
     include_once(__DIR__ .'/../helpers/conn.php');
 
         // Função para registrar um novo usuário
-        function addChild($conn,$idParent){
+        function addChild($conn, $idParent){
             $err = array();
             $nomeFilho = mysqli_real_escape_string($conn, $_POST['nomeFilho']);
             $dataNascimentoFilho = mysqli_real_escape_string($conn, $_POST['dataNascimentoFilho']);
-            $sexoFilho= mysqli_real_escape_string($conn, $_POST['sexo']);
+            $sexoFilho= mysqli_real_escape_string($conn, $_POST['sexoFilho']);
             
             if (empty($err)) {
-                $insertNewChild = "INSERT INTO Filho (nomeFilho, dataNascimentoFilho, sexo, idUsuario) VALUES ('$nomeFilho','$dataNascimentoFilho', '$sexoFilho','$idParent')";
+                $insertNewChild = "INSERT INTO Filho (nomeFilho, dataNascimentoFilho, sexoFilho, idUsuario) VALUES ('$nomeFilho','$dataNascimentoFilho', '$sexoFilho','$idParent')";
                 $executeChildSignUp = mysqli_query($conn, $insertNewChild);
 
                 if (!$executeChildSignUp) {
