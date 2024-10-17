@@ -22,7 +22,7 @@
         </meta>
     </head>
 
-    <body class="<?php echo $currentUserData['tema'];?>">
+    <body class="<?= $currentUserData['tema'];?>">
         <?php include_once ("../../app/includes/headerHome.php");?>
         <main class="Ho-Main Se-main mainSystem">
             <section class="Se-asideLeft">
@@ -37,7 +37,7 @@
                 <div class="Se-centerSections">
                     <a class="Se-sectionTitle active" onclick="toggleConfigSection();">
                         <div>
-                            <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/user_icon.png" class="pageIcon" alt="Ícone de usuário">
+                            <img src="<?= $relativeAssetsPath; ?>/imagens/icons/user_icon.png" class="pageIcon" alt="Ícone de usuário">
                             <p> Informações da Conta</p>
                         </div>
                         <i class="bi bi-chevron-right" onclick="toggleConfigSection();"></i>
@@ -45,7 +45,7 @@
 
                     <a class="Se-sectionTitle">
                         <div>
-                            <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/pram_icon.png" class="pageIcon" alt="Ícone de usuário">
+                            <img src="<?= $relativeAssetsPath; ?>/imagens/icons/pram_icon.png" class="pageIcon" alt="Ícone de usuário">
                             <p> Informações dos Filhos</p>
                         </div>
                         <i class="bi bi-chevron-right" onclick="toggleConfigSection();"></i>
@@ -53,7 +53,7 @@
 
                     <a class="Se-sectionTitle">
                         <div>
-                            <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/chat_icon.png" class="pageIcon" alt="Ícone de usuário">
+                            <img src="<?= $relativeAssetsPath; ?>/imagens/icons/chat_icon.png" class="pageIcon" alt="Ícone de usuário">
                             <p> Interações com outros usuários</p>
                         </div>
                         <i class="bi bi-chevron-right"></i>
@@ -61,7 +61,7 @@
 
                     <a class="Se-sectionTitle">
                         <div>
-                            <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/lock_icon.png" class="pageIcon" alt="Ícone de usuário">
+                            <img src="<?= $relativeAssetsPath; ?>/imagens/icons/lock_icon.png" class="pageIcon" alt="Ícone de usuário">
                             <p> Segurança</p>
                         </div>
                         <i class="bi bi-chevron-right"></i>
@@ -69,7 +69,7 @@
 
                     <a class="Se-sectionTitle">
                         <div>
-                            <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/notifications_icon.png" class="pageIcon" alt="Ícone de usuário">
+                            <img src="<?= $relativeAssetsPath; ?>/imagens/icons/notifications_icon.png" class="pageIcon" alt="Ícone de usuário">
                             <p> Notificações</p>
                         </div>
                         <i class="bi bi-chevron-right"></i>
@@ -77,7 +77,7 @@
 
                     <a class="Se-sectionTitle" href="../../index.php">
                         <div>
-                            <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/conectamaes_icon.png" class="pageIcon" alt="Ícone de usuário">
+                            <img src="<?= $relativeAssetsPath; ?>/imagens/icons/conectamaes_icon.png" class="pageIcon" alt="Ícone de usuário">
                             <p> Sobre o ConectaMães</p>
                         </div>
                         <i class="bi bi-box-arrow-up-right"></i>
@@ -85,7 +85,7 @@
 
                     <a class="Se-sectionTitle" href="../suporte.php">
                         <div>
-                            <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/support_icon.png" class="pageIcon" alt="Ícone de usuário">
+                            <img src="<?= $relativeAssetsPath; ?>/imagens/icons/support_icon.png" class="pageIcon" alt="Ícone de usuário">
                             <p> Suporte</p>
                         </div>
                         <i class="bi bi-box-arrow-up-right"></i>
@@ -96,13 +96,13 @@
             <section class="Se-asideRight infoAccount">
                 <form class="Se-accountInformations Se-subSection active" method="post" enctype="multipart/form-data">
                     <div class="Se-sectionHeader">
-                        <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/user_icon.png" class="pageIcon" alt="Ícone de usuário">
+                        <img src="<?= $relativeAssetsPath; ?>/imagens/icons/user_icon.png" class="pageIcon" alt="Ícone de usuário">
                         <h1>Informações da Conta</h1>
                     </div>
                     <div class="Se-userInfo">
                         <div class="Re-addImageProfile">
                             <div class="Re-userImageProfile">
-                                <img src="<?php echo $relativeAssetsPath; ?>/imagens/fotos/perfil/<?php echo $currentUserData['linkFotoPerfil']; ?>" alt="" class="Re-userImage">
+                                <img src="<?= $relativeAssetsPath; ?>/imagens/fotos/perfil/<?= $currentUserData['linkFotoPerfil']; ?>" alt="" class="Re-userImage">
                             </div>
                             <input type="file" id="imagesSelector" name="fotoPerfilEdit" accept="image/png, image/jpeg">
                             <label for="imagesSelector" class="Re-addImageIcon">                        
@@ -112,11 +112,11 @@
                         <div class="Re-userInfoContainer">
                             <div class="Re-userInformations">
                                 <p class="Re-infoLabel">Usuário:</p>
-                                <p class="Re-userInfo"><?php echo $currentUserData['nomeDeUsuario'];?></p>
+                                <p class="Re-userInfo"><?= $currentUserData['nomeDeUsuario'];?></p>
                             </div>
                             <div class="Re-userInformations">
                                 <p class="Re-infoLabel">Email:</p>
-                                <p class="Re-userInfo"><?php echo $currentUserData['email'];?></p>
+                                <p class="Re-userInfo"><?= $currentUserData['email'];?></p>
                             </div>
                             <div class="Re-userInformations">
                                 <p class="Re-infoLabel">Data de Nascimento:</p>
@@ -132,14 +132,14 @@
                     </div>
 
                     <div class="Se-editInfo">
-                        <input type="hidden" class="updaterIdHiddenInput" name="updaterId" value="<?php echo $currentUserData['idUsuario']; ?>">    
+                        <input type="hidden" class="updaterIdHiddenInput" name="updaterId" value="<?= $currentUserData['idUsuario']; ?>">    
                         <div class="Se-userInput full-width">
-                            <input type="text" id="nomeCompletoUsuario" name="nomeEdit" value="<?php echo $currentUserData['nomeCompleto'];?>">
+                            <input type="text" id="nomeCompletoUsuario" name="nomeEdit" value="<?= $currentUserData['nomeCompleto'];?>">
                             <label class="Re-fakePlaceholder" for="nomeCompletoUsuario">Nome Completo</label>
                             <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
                         </div>
                         <div class="Se-userInput full-width">
-                            <textarea name="biografiaUsuarioEdit" id="biografiaUsuario" cols="54" rows="3"><?php echo $currentUserData['biografia'];?></textarea>                        
+                            <textarea name="biografiaUsuarioEdit" id="biografiaUsuario" cols="54" rows="3"><?= $currentUserData['biografia'];?></textarea>                        
                             <label class="Re-fakePlaceholder" for="biografiaUsuario">Biografia</label>
                             <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
                         </div>
@@ -178,18 +178,18 @@
                         </div>
                         
                         <div class="Se-userInput side-by-side">
-                            <input type="text" id="telefoneUsuario" name="telefoneEdit" value="<?php echo $currentUserData['telefone'];?>">
+                            <input type="text" id="telefoneUsuario" name="telefoneEdit" value="<?= $currentUserData['telefone'];?>">
                             <label class="Re-fakePlaceholder" for="telefoneUsuario">Telefone</label>
                             <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
                         </div>
                         <div class="Re-themeInfo">
                             <p> Tema </p>
                             <div class="Re-themeOptions">
-                                <input type="radio" name="temaEdit" value="Y-theme" id="Re-yellowTheme" <?php echo ($currentUserData['tema'] === 'Y-theme') ? 'checked' : ''; ?>>
+                                <input type="radio" name="temaEdit" value="Y-theme" id="Re-yellowTheme" <?= ($currentUserData['tema'] === 'Y-theme') ? 'checked' : ''; ?>>
                                 <label for="Re-yellowTheme"> Amarelo </label>
-                                <input type="radio" name="temaEdit" value="B-theme" id="Re-blueTheme" <?php echo ($currentUserData['tema'] === 'B-theme') ? 'checked' : ''; ?>>
+                                <input type="radio" name="temaEdit" value="B-theme" id="Re-blueTheme" <?= ($currentUserData['tema'] === 'B-theme') ? 'checked' : ''; ?>>
                                 <label for="Re-blueTheme"> Azul </label>
-                                <input type="radio" name="temaEdit" value="P-theme" id="Re-pinkTheme" <?php echo ($currentUserData['tema'] === 'P-theme') ? 'checked' : ''; ?>>
+                                <input type="radio" name="temaEdit" value="P-theme" id="Re-pinkTheme" <?= ($currentUserData['tema'] === 'P-theme') ? 'checked' : ''; ?>>
                                 <label for="Re-pinkTheme"> Rosa </label>
                             </div>
                         </div>
@@ -208,8 +208,7 @@
                             
                     <span class="Se-dateCriation"> Criado em: 
                         <span class="Se-accountDate">
-                            <?php 
-                                echo dateMessage($currentUserData['dataCriacaoUsuario']);
+                            <?= dateMessage($currentUserData['dataCriacaoUsuario']);
                             ?>
                         </span>
                     </span>
@@ -217,12 +216,12 @@
 
                 <div class="Se-childInformations Se-subSection">
                     <div class="Se-sectionHeader">
-                        <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/pram_icon.png" class="pageIcon" alt="Ícone de usuário">
+                        <img src="<?= $relativeAssetsPath; ?>/imagens/icons/pram_icon.png" class="pageIcon" alt="Ícone de usuário">
                         <h1>Informações dos Filhos</h1>
                     </div>
                     <form class="Se-userChild" method="post">
                         <div class="Se-childHeader">
-                            <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/boy_icon.png" class="pageIcon" alt="Ícone de usuário">
+                            <img src="<?= $relativeAssetsPath; ?>/imagens/icons/boy_icon.png" class="pageIcon" alt="Ícone de usuário">
                             <input type="text" value="Nome do filho">
                             <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
                         </div>
@@ -348,14 +347,14 @@
 
                 <div class="Se-otherUsersInteractions Se-subSection">
                     <div class="Se-sectionHeader">
-                        <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/chat_icon.png" class="pageIcon" alt="Ícone de usuário">
+                        <img src="<?= $relativeAssetsPath; ?>/imagens/icons/chat_icon.png" class="pageIcon" alt="Ícone de usuário">
                         <h1>Interações com outros usuários</h1>
                     </div>
                 </div>
 
                 <div class="Se-security Se-subSection">
                     <div class="Se-sectionHeader">
-                        <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/lock_icon.png" class="pageIcon" alt="Ícone de usuário">
+                        <img src="<?= $relativeAssetsPath; ?>/imagens/icons/lock_icon.png" class="pageIcon" alt="Ícone de usuário">
                         <h1>Segurança</h1>
                     </div>
 
@@ -397,7 +396,7 @@
 
                 <div class="Se-notifications Se-subSection">
                     <div class="Se-sectionHeader">
-                        <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/notifications_icon.png" class="pageIcon" alt="Ícone de usuário">
+                        <img src="<?= $relativeAssetsPath; ?>/imagens/icons/notifications_icon.png" class="pageIcon" alt="Ícone de usuário">
                         <h1>Notificações</h1>
                     </div>
                 </div>
@@ -408,8 +407,8 @@
                     <modal class="Se-accountDeleteModal">
                         <h2>Tem certeza que deseja deletar sua conta?</h2>
                         <form class="Se-accountDeleteModalForm" method="post">
-                            <input type="hidden" name="deleterId" value=<?php echo $currentUserData['idUsuario'];?>>
-                            <input type="text" placeholder="<?php echo "delete/".$currentUserData['idUsuario']."/".$currentUserData['nomeDeUsuario'];?>"
+                            <input type="hidden" name="deleterId" value=<?= $currentUserData['idUsuario'];?>>
+                            <input type="text" placeholder="<?= "delete/".$currentUserData['idUsuario']."/".$currentUserData['nomeDeUsuario'];?>"
                                 name="confirmaTextoDelete">
                             <button type="submit" id="Se-submitAccountDeleteModalForm">ENVIAR</button>
                             <button id="Se-cancelAccountDelete">CANCELAR</button>
@@ -435,7 +434,7 @@
 
         <?php include_once ("../../app/includes/modais.php");?>
 
-        <script src="<?php echo $relativeAssetsPath; ?>/js/system.js"></script>
+        <script src="<?= $relativeAssetsPath; ?>/js/system.js"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 toggleConfigSection();

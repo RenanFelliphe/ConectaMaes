@@ -27,22 +27,24 @@
         toggleHeader.style.backgroundColor = headerLanding.classList.contains('active') ? "#80808030" : "";
     });
 
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 768) {
-            headerLanding.classList.remove('active');
-            toggleHeader.style.display = 'none';
-        } else {
-            toggleHeader.style.display = 'flex';
-        }
-    });
+    /*
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                headerLanding.classList.remove('active');
+                toggleHeader.style.display = 'none';
+            } else {
+                toggleHeader.style.display = 'flex';
+            }
+        });
 
-    window.addEventListener('DOMContentLoaded', () => {
-        if (window.innerWidth >= 768) {
-            toggleHeader.style.display = 'none';
-        } else {
-            toggleHeader.style.display = 'flex';
-        }
-    });
+        window.addEventListener('DOMContentLoaded', () => {
+            if (window.innerWidth >= 768) {
+                toggleHeader.style.display = 'none';
+            } else {
+                toggleHeader.style.display = 'flex';
+            }
+        });
+    */
 
 </script>
 

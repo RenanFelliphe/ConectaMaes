@@ -3,22 +3,42 @@
     include_once(__DIR__ .'/../helpers/conn.php');
 
         // Função para registrar um novo usuário
-        function addChild($conn, $idParent){
+        function addChild($conn, $idParent) {
             $err = array();
             $nomeFilho = mysqli_real_escape_string($conn, $_POST['nomeFilho']);
             $dataNascimentoFilho = mysqli_real_escape_string($conn, $_POST['dataNascimentoFilho']);
-            $sexoFilho= mysqli_real_escape_string($conn, $_POST['sexoFilho']);
+            $sexoFilho = mysqli_real_escape_string($conn, $_POST['sexoFilho']);
+            $categoriaCID = mysqli_real_escape_string($conn, $_POST['deficienciaFilho']);
             
             if (empty($err)) {
-                $insertNewChild = "INSERT INTO Filho (nomeFilho, dataNascimentoFilho, sexoFilho, idUsuario) VALUES ('$nomeFilho','$dataNascimentoFilho', '$sexoFilho','$idParent')";
+                $insertNewChild = "INSERT INTO Filho (nomeFilho, dataNascimentoFilho, sexo, idUsuario) VALUES ('$nomeFilho', '$dataNascimentoFilho', '$sexoFilho', '$idParent')";
                 $executeChildSignUp = mysqli_query($conn, $insertNewChild);
-
-                if (!$executeChildSignUp) {
-                    echo "<p>Erro ao registrar filho: " . mysqli_error($conn) . "!<p>";
+        
+                if ($executeChildSignUp) {
+                    $idFilho = mysqli_insert_id($conn);
+                    if ($categoriaCID !== "N/a") {
+                        // Buscar o id da deficiência com base no código CID
+                        $queryDeficiencia = "SELECT idDeficiencia FROM Deficiencia WHERE categoriaCID = '$categoriaCID'";
+                        $resultDeficiencia = mysqli_query($conn, $queryDeficiencia);
+                        
+                        if (mysqli_num_rows($resultDeficiencia) > 0) {
+                            $idDeficiencia = mysqli_fetch_assoc($resultDeficiencia)['idDeficiencia'];
+                            $insertDeficiency = "INSERT INTO filhoDeficiencia (idFilho, idDeficiencia) VALUES ('$idFilho', '$idDeficiencia')";
+                            $executeInsertDeficiency = mysqli_query($conn, $insertDeficiency);
+        
+                            if (!$executeInsertDeficiency) {
+                                echo "<p>Não foi possível associar deficiência: " . mysqli_error($conn) . "!<p>";
+                            }
+                        } else {
+                            echo "<p>Deficiência não encontrada com o código CID fornecido!<p>";
+                        }
+                    }
+                } else {
+                    echo "<p>Não foi possível registrar filho: " . mysqli_error($conn) . "!<p>";
                 }
             }
-        }
-
+        }        
+        
         // USER QUERY FUNCTIONS - READ
             function queryChildData($conn, $id){
                 $sUQuery = "SELECT * FROM Filho WHERE idFilho =" . (int) $id;

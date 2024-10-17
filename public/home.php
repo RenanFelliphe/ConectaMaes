@@ -2,11 +2,15 @@
     if(session_status() === PHP_SESSION_NONE) {
         session_start();
     }
+
     include_once __DIR__ . "/../app/services/helpers/paths.php";
     $verify = isset($_SESSION['active']) ? true : header("Location:".$relativePublicPath."/login.php");
+
     require_once "../app/services/crud/userFunctions.php"; 
+    require_once "../app/services/crud/childFunctions.php";
     require_once "../app/services/crud/postFunctions.php";
     require_once '../app/services/helpers/dateChecker.php';
+
     $currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);
     
     // Processar $_POST
@@ -31,12 +35,12 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-        <link rel="stylesheet" href="<?php echo $relativeAssetsPath; ?>/styles/style.css">
-        <link rel="icon" href="<?php echo $relativeAssetsPath; ?>/imagens/logos/final/Conecta_Mães_Logo_Icon.png">
+        <link rel="stylesheet" href="<?= $relativeAssetsPath; ?>/styles/style.css">
+        <link rel="icon" href="<?= $relativeAssetsPath; ?>/imagens/logos/final/Conecta_Mães_Logo_Icon.png">
         <title>ConectaMães - Home</title>
     </head>
 
-    <body class="<?php echo $currentUserData['tema'];?>">
+    <body class="<?= $currentUserData['tema'];?>">
 
         <?php include_once ("../app/includes/headerHome.php");?>
 
@@ -64,7 +68,7 @@
                             ?>
                             <article class="Ho-post">
                                 <div class="postOwnerImage">
-                                    <img src="<?php echo $relativeAssetsPath."/imagens/fotos/perfil/".$dadosPublicacao['linkFotoPerfil'];?>">
+                                    <img src="<?= $relativeAssetsPath."/imagens/fotos/perfil/".$dadosPublicacao['linkFotoPerfil'];?>">
                                 </div>
                     
                                 <div class="postContent">
@@ -80,25 +84,25 @@
                                                 ?>
                                             </p>
                                             <p class="postOwnerUser">
-                                                <?php echo '@' . htmlspecialchars($dadosPublicacao['nomeDeUsuario']); ?>
+                                                <?= '@' . htmlspecialchars($dadosPublicacao['nomeDeUsuario']); ?>
                                             </p>
                                         </div>
                     
                                         <div class="postInfo">
-                                            <ul class="postDate"><li><?php echo htmlspecialchars($mensagemData); ?></li></ul>
+                                            <ul class="postDate"><li><?= htmlspecialchars($mensagemData); ?></li></ul>
                                             <div class="bi bi-three-dots postMoreButton"></div>
                                         </div>
                                     </div>
                     
                                     <div class="postTitles">  
-                                        <p class="postTitle"><?php echo htmlspecialchars($dadosPublicacao['titulo']); ?></p>
-                                        <p class="textPost"><?php echo htmlspecialchars($dadosPublicacao['conteudo']); ?></p>
+                                        <p class="postTitle"><?= htmlspecialchars($dadosPublicacao['titulo']); ?></p>
+                                        <p class="textPost"><?= htmlspecialchars($dadosPublicacao['conteudo']); ?></p>
                                     </div>
                     
                                     <form class="postTimelineBottom" method='post'>
                                         <button class="postLikes" type="submit" name="like_<?= $dadosPublicacao['idPublicacao']; ?>" value="like">
                                             <i class="bi bi-heart-fill <?= queryUserLike($conn,$currentUserData['idUsuario'],$dadosPublicacao['idPublicacao']) ? 'postLiked' : 'postNotLiked'; ?>"></i>
-                                            <p><?php echo htmlspecialchars($dadosPublicacao['totalLikes']); ?></p>
+                                            <p><?= htmlspecialchars($dadosPublicacao['totalLikes']); ?></p>
                                         </button>
                                         <button class="postComments" type="submit" name="comment">
                                             <i class="bi bi-chat-fill"></i>
@@ -132,8 +136,8 @@
 
                 <div class="asideRightFooter">
                     <div>
-                        <a href="<?php echo $relativeRootPath."/index.php"?>">Sobre o ConectaMães</a>
-                        <a href="<?php echo $relativePublicPath."/suporte.php"?>">Suporte</a>
+                        <a href="<?= $relativeRootPath."/index.php"?>">Sobre o ConectaMães</a>
+                        <a href="<?= $relativePublicPath."/suporte.php"?>">Suporte</a>
                         <a href="">Termos de Privacidade</a>
                         <a href="">CEFET-MG</a>
                     </div>
@@ -142,20 +146,21 @@
             </section>
 
             <div class="modalBack">
-                <div class="Re-registerChild">
+                <div class="Re-registerChild" id="addChildModal">
                     <i class="bi bi-x closeChildModal" onclick="registerChildModal()"></i>
-                    <div class="Re-addChildBtn toggleAddChildModal"> Adicionar filho +</div>
+                    <p class="Re-addChildBtn toggleAddChildModal"> Adicionar filho +</p>
                     <?php
-                        $filhos = queryMultipleChildrenData($conn, $where = "idUsuario = " . $currentUserData['idUsuario'], $order = "nomeFilho")
-                        foreach ($filhos as $f){
-                            
-                        }
+                        $filhos = queryMultipleChildrenData($conn, $where = "idUsuario = " . $currentUserData['idUsuario'], $order = "nomeFilho");
+                        foreach($filhos as $f){
                     ?>
-                    <div class="Re-myChildBtn">
-                        <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/boy_icon.png" class="pageIcon" alt="Ícone de usuário">
-                        <p>Nome da Criança</p>
-                        <i class="bi bi-x deleteChild"></i>
-                    </div>
+                        <div class="Re-myChildBtn">
+                            <img src="<?= $relativeAssetsPath; ?>/imagens/icons/<?= $f['sexo'] === 'boy' ? 'boy_icon' : ($f['sexo'] === 'girl' ? 'girl_icon' : 'pram_icon'); ?>.png" class="pageIcon" alt="Ícone do Filho">
+                            <p><?= $f['nomeFilho']; ?></p>
+                            <i class="bi bi-x deleteChild" data-id="<?= $f['idFilho']; ?>"></i>
+                        </div>
+                    <?php 
+                        } 
+                    ?>
 
                     <form class="Re-addChildBox close" method="POST">
                         <div class="Re-childBoxHeader">
@@ -277,12 +282,14 @@
                         </div>
 
                         <button type="submit" class="Re-confirmAddChild confirmBtn" name="envioFilho"> Confirmar </button>
-                        <?php 
-                            if(isset($_POST['envioFilho'])){
-                                addChild($conn, $currentUserData['idUsuario']);
-                            }
-                        ?>
+                        
                     </form>
+
+                    <?php 
+                        if(isset($_POST['envioFilho'])){
+                            addChild($conn, $currentUserData['idUsuario']);
+                        }
+                    ?>
                 </div>
             </div>
                
@@ -290,8 +297,12 @@
 
         <?php include_once ("../app/includes/modais.php");?>
         
-        <script src="<?php echo $relativeAssetsPath; ?>/js/system.js"></script>
-        <script>       
+        <script src="<?= $relativeAssetsPath; ?>/js/system.js"></script>
+        <script>
+            // ve se foi a primeira visita do usuario a public/home.php
+                // caso sim: mostra modal
+                // caso não: esconde modal
+            // vai ter que editar o css :( 
             function registerChildModal() {
                 const addChildModal = document.querySelector('.modalBack');
                 const closeModalBtn = document.querySelector('.closeChildModal');
