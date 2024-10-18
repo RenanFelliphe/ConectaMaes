@@ -173,7 +173,6 @@ main{
 }
 
 html, body {
-    height: 100%;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -260,8 +259,8 @@ button.confirmBtn:hover {
     position: fixed;
     top: 0;
     left: 0;
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
     background: var(--whiteColor);
     flex-direction: column;
 }
@@ -929,6 +928,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
 .La-landingSections{
     position: relative;
     padding: 5vh 0 5vh 0;
+    width: 100%;
 }
 
 .La-landingSections:first-of-type{
@@ -1169,7 +1169,6 @@ footer .A-footerRight li.A-footerPolitic h4 {
 .La-landing .La-landingSections .La-frequentQuestions .faqList .La-faqQuestions{
     position: relative;
     max-height: 5rem;
-    max-width: 60vw;
     border-bottom: 2px solid var(--grayColor);
     cursor: pointer;
     overflow: hidden;
@@ -1257,8 +1256,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     display: flex;
     flex-wrap: wrap;
     row-gap: 2.5rem;
-    width: 41vw;
-    max-width: 50rem;
+    max-width: 45rem;
 }
 
 .La-contactInfos{
@@ -1408,7 +1406,6 @@ footer .A-footerRight li.A-footerPolitic h4 {
 
 .La-landingSections .La-articleEquip .La-equipCells{
     position: absolute;
-    width: 15rem;
     right: 0;
 }
 
