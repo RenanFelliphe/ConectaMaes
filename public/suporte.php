@@ -13,20 +13,54 @@
     <body class="Y-theme">
         <?php include_once ("../app/includes/headerLanding.php");?>
 
-        <main class="Su-suporte" style="height: 82vh;">
-            <img src="<?= $relativeAssetsPath?>/imagens/figuras/cells_standart_first_blue.png" class="backCells">
-            <img src="../app/assets/imagens/figuras/cells_standart_first_blue.png" class="backCells cellsLeft">
+        <main class="Su-suporte">
+            <section class="Su-search">
+                <div class="Su-inputsearch">
+                    <h1>Suporte</h1>
+                    <div class="Su-search-bar">
+                        <input type="text" placeholder="Pesquisar">
+                    </div>
+                </div>
+            </section>
 
-            <div style="position: absolute;
-                        left: 50%; top: 40%;
-                        transform: translate(-50%);
-                        display: flex; flex-direction:
-                        column; cursor: pointer;">
-                <h1> EM DESENVOLVIMENTO </h1>
-                <h4> Suporte </h4>
-            </div>
-            
+            <section class="Su-helpSection">
+                <article class="Su-articleCards">
+                    <h2>Precisa de ajuda?</h2>
+                        <div class="Su-helpCards">
+                            <div class="Su-card">
+                                <img src="/app/assets/imagens/icons/Su_novidades.png" alt="" class="Su-cardIcons">
+                                <h3>Novidades</h3>
+                                <p>Fique por dentro das últimas <span class="La-focus">notícias </span> do ConectaMães</p>
+                            </div>
+
+                            <div class="Su-card">
+                                <img src="/app/assets/imagens/icons/Su_interface.png" alt="" class="Su-cardIcons">
+                                <h3>Interface</h3>
+                                <p>O que esse botão faz? Entenda tudo sobre a interface do sistema</p>
+                            </div>
+
+                            <div class="Su-card">
+                                <img src="/app/assets/imagens/icons/Su_config.png" alt="" class="Su-cardIcons">
+                                <h3>Configurações</h3>
+                                <p>Personalize o sistema como for melhor para você</p>
+                            </div>
+
+                            <div class="Su-card">
+                                <img src="/app/assets/imagens/icons/Su_politicas.png" alt="" class="Su-cardIcons">
+                                <h3>Políticas</h3>
+                                <p>Mantendo as coisas seguras para todos</p>
+                            </div>
+
+                            <div class="Su-card">
+                                <img src="/app/assets/imagens/icons/Su_faq.png" alt="" class="Su-cardIcons">
+                                <h3>FAQ</h3>
+                                <p>Veja se já responderam sua dúvida</p>
+                            </div>
+                        </div>
+                </article>
+            </section>
         </main>
+
 
         <?php 
             include_once ("../app/includes/footer.php");
