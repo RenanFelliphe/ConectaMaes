@@ -33,12 +33,12 @@
                     <div class = "La-seccaoDeTextoDireita">
                         <h1 class="La-tituloSeccao">Todos por uma maternidade mais fácil!</h1>
                         <h2 class ="La-subtituloSeccao"><span class="La-focus">Busque ajuda de semelhantes!</span></h2>
-                        <p class = "La-paragrafo">O <span class="La-focus">
+                        <p class = "La-articleText">O <span class="La-focus">
                         ConectaMães</span> permite  <span class="La-focus">oferecer e receber apoio</span></br>
                         de mães que já passaram por experiências</br>
                         semelhantes às suas.</p>
                     </div>
-                    <img src="app/assets/imagens/figuras/maeLevantandoCrianca.png" class="La-maeLevantandoCrianca La-momImageRight">
+                    <img src="app/assets/imagens/figuras/maeLevantandoCrianca.png" class="La-momImageRight La-momImages">
                 </article>
 
                 <article class="La-Sharing">
@@ -46,11 +46,11 @@
                         <img src="app/assets/imagens/icons/icons8-pessoas-trabalhando-juntas-90.png" alt="" width="30px">
                         <span class="La-articleBar La-focus"></span>
                     </div>
-                    <img src="app/assets/imagens/figuras/maeConversando.png" class="La-momStyle La-momImageLeft">
+                    <img src="app/assets/imagens/figuras/maeConversando.png" class="La-momImageLeft La-momImages">
                     <div class = "La-seccaoDeTextoEsquerda">
                     <h1 class="La-tituloSeccao">Uma  rede social colaborativa!</h1>
                         <h2 class ="La-subtituloSeccao"> <span class="La-focus">Crie uma rede de apoio virtual!</span></h2>
-                        <p class = "La-paragrafo">A plataforma oferece um novo espaço para o</br>
+                        <p class = "La-articleText">A plataforma oferece um novo espaço para o</br>
                          compartilhamento, anônimo ou não, de <span class="La-focus"> Relatos</span>  e</br>
                          interação entre as mães. Um espaço para a formação
                          de uma nova <span class="La-focus">rede de apoio maternal</span> .  </p>
@@ -65,11 +65,11 @@
                     <div class = "La-seccaoDeTextoDireita">
                         <h1 class="La-tituloSeccao">Conecte-se com outras mães! </h1>
                         <h2 class ="La-subtituloSeccao"><span class="La-focus">Compartilhe suas experiências!</span> </h2>
-                        <p class = "La-paragrafo">Uma oportunidade para <span class="La-focus">relatar com outras mães os</span></br>
+                        <p class = "La-articleText">Uma oportunidade para <span class="La-focus">relatar com outras mães os</span></br>
                          momentos mais felizes, tristes, engraçados e difíceis</br>
                          da sua vida como mãe.</p>
                     </div>
-                    <img src="app/assets/imagens/figuras/maeCelular.png" class="La-maecelular La-momImageRight">
+                    <img src="app/assets/imagens/figuras/maeCelular.png" class="La-momImageRight La-momImages">
                 </article>
 
                 <article class="La-articleHelping">
@@ -80,10 +80,10 @@
                     <div class = "La-seccaoDeTextoDireita">
                         <h1 class="La-tituloSeccao">Encontre ajuda anonimamente!</h1>
                         <h2 class ="La-subtituloSeccao"><span class="La-focus"> Ajude os outros sem se expor!</span></h2>
-                        <p class = "La-paragrafo">No <span class="La-focus">ConectaMães</span> você consegue descrever as suas</br>
+                        <p class = "La-articleText">No <span class="La-focus">ConectaMães</span> você consegue descrever as suas</br>
                          dificuldades e conseguir ajuda ou ajudar mesmo <span class="La-focus">sem</br> precisar se expor publicamente</span>. </p>
                     </div>
-                    <img src="app/assets/imagens/figuras/maePresente.png" class="La-maePresente La-momImageRight">
+                    <img src="app/assets/imagens/figuras/maePresente.png" class="La-momImageRight La-momImages">
                 </article>
 
                 <article class="La-articleRating">
@@ -91,11 +91,11 @@
                         <img src="app/assets/imagens/icons/icons8-estrela-90.png" alt="Icone de Estrela rosa" width="30px">
                         <span class="La-articleBar La-focus"></span>
                     </div>
-                    <img src="app/assets/imagens/figuras/maeEstela.png" class="La-maeEstrela La-momImageLeft">
+                    <img src="app/assets/imagens/figuras/maeEstela.png" class="La-momImageLeft La-momImages">
                     <div class = "La-seccaoDeTextoEsquerda">
                         <h1 class="La-tituloSeccao">Sua opinião é importante!</h1>
                         <h2 class ="La-subtituloSeccao"><span class="La-focus">Ajude a manter a comunidade ativa!</span></h2>
-                        <p class = "La-paragrafo">Avalie e interaja com os <span class="La-focus">Relatos</span> e <span class="La-focus">Pedidos</span> e ajude na
+                        <p class = "La-articleText">Avalie e interaja com os <span class="La-focus">Relatos</span> e <span class="La-focus">Pedidos</span> e ajude na
                          identificação de conteúdos relevantes para a comunidade.</p>
                     </div>
                   </article>
@@ -140,12 +140,8 @@
                             <i class="bi bi-chevron-right"></i>
                             <div class="La-faqAnswers">A equipe do ConectaMães está trabalhando para implementar a possibilidade de relatos anônimos. Essa funcionalidade permitirá que os usuários compartilhem suas experiências e dificuldades sem se expor publicamente, garantindo a privacidade e a integridade deles.</div>
                         </li>
-                        <li class="La-faqQuestions">
-                            <p>Mais perguntas</p>
-                            <i class="bi bi-chevron-right"></i>
-                            <a href="public/suporte/faq.php" class="La-faqAnswers">Clique <span class="La-focus">aqui</span> para ver mais perguntas frequentes</a>
-                        </li>
                     </ul>
+                    <p class="La-observation">Suas dúvidas ainda não foram respondidas? Contate nos através do  <a href="./public/suporte.php" class="La-focus">Suporte! <i class="bi bi-arrow-up-right"></i> </a></p>
                 </article>  
             </section>
 
@@ -184,7 +180,7 @@
                         ?>
                     </form>
 
-                    <p class = "paragrafo">Você também pode nos contatar nas nossas <span class="La-focus">redes sociais oficiais!</span></p>
+                    <p>Você também pode nos contatar nas nossas <span class="La-focus">redes sociais oficiais!</span></p>
                     
                     <div class="La-cantactSectionIcon">
                         <a href="https://www.instagram.com/conectamaes2024?igsh=MXdnbW50bXNxNzdoMA==" target="_blank" class="La-cantactSectionIconLink">
@@ -380,10 +376,25 @@
     <script>
         //FAQ Section
         document.querySelectorAll('.La-faqQuestions').forEach((question) => {
+            const answer = question.querySelector('.La-faqAnswers');
+            
             question.addEventListener('click', () => {
-                question.classList.toggle('active');
+                const isActive = question.classList.contains('active');
+                
+                // Remove a classe 'active' de todas as perguntas e reseta a altura
+                document.querySelectorAll('.La-faqQuestions').forEach(q => {
+                    q.classList.remove('active');
+                    q.querySelector('.La-faqAnswers').style.maxHeight = null;
+                });
+                
+                // Se a pergunta não estiver ativa, adicionar a classe 'active' e ajustar a altura do conteúdo
+                if (!isActive) {
+                    question.classList.add('active');
+                    answer.style.maxHeight = answer.scrollHeight + 'px'; // Define a altura do conteúdo
+                }
             });
         });
+
 
         //Contact Section
 
