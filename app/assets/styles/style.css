@@ -581,23 +581,23 @@ body.Y-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon {
 
 .headerHome .userContainer .makeAPost .makeAPostBtn {
     background-color: var(--secondColor);
-    padding: 0.5rem 0.5rem 0.45rem 1rem;
+    padding: 0.45rem 0.5rem 0.45rem 1rem;
     border: 2px solid transparent;
     border-top-left-radius: 100rem;
     border-bottom-left-radius: 100rem;
     color: var(--whiteColor);
     font-weight: 900;
-    font-size: 0.8rem;
+    font-size: 1rem;
     cursor: pointer;
 }
 
 .headerHome .userContainer .makeAPost .postStyle {
     border: 2px solid transparent;
     background-color: var(--secondColor);
-    padding: 0.7rem 0.5rem 0.45rem 0.3rem;
+    padding: 0.72rem 0.5rem 0.55rem 0.3rem;
     border-top-right-radius: 100rem;
     border-bottom-right-radius: 100rem;
-    font-size: 0.5rem;
+    font-size: 0.7rem;
     cursor: pointer;
 }
 
@@ -2534,35 +2534,9 @@ footer .A-footerRight li.A-footerPolitic h4 {
     gap: 0.3rem;
 }
 
-.Ho-postSomething .Ho-postBottom .Ho-submitArea .Ho-submitPost {
-    display: flex;
-    gap: 0.2rem;
-    cursor: pointer;
-}
-
 .Ho-postSomething .Ho-postBottom .Ho-submitArea .confirmBtn {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
     font-size: 1rem;
-}
-
-.Ho-postSomething .Ho-postBottom .Ho-submitArea .Ho-postStyle {
-    background-color: var(--secondColor);
-    padding: 0.75rem 0.5rem 0.55rem 0.3rem;
-    border-top-right-radius: 100rem;
-    border-bottom-right-radius: 100rem;
-    color: var(--whiteColor);
-    font-size: 0.7rem;
-    cursor: pointer;
-    border: 2px solid transparent;
-}
-
-.Ho-postSomething .Ho-postBottom .Ho-submitArea .Ho-postStyle.active,
-.Ho-postSomething .Ho-postBottom .Ho-submitArea .Ho-postStyle:hover {
-    transition: 0.3s;
-    background-color: var(--whiteColor);
-    color: var(--secondColor);
-    border-color: var(--secondColor);
+    padding: 0.3rem 2rem;
 }
 
 .Ho-Main .timeline .Ho-postSomething .Ho-postAttachments {
@@ -2747,11 +2721,18 @@ footer .A-footerRight li.A-footerPolitic h4 {
     .Ho-Main .asideLeft{
         display: none;
     }
+    .Ho-Main .timeline {
+        width: 70vw;
+    }
 }
 
 @media (max-width: 768px) {
     .Ho-Main .asideRight{
         display: none;
+    }
+
+    .Ho-Main .timeline {
+        width: 100vw;
     }
 }
 
@@ -2979,7 +2960,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     display: flex;
     justify-content: flex-start;
     gap: 1rem;
-    padding: 0.4rem 5rem 0.4rem 1.5rem;
+    padding: 0.65rem 5rem 0.65rem 1.5rem;
     background: var(--secondColor);
     border-radius: 1.5rem;
     cursor: pointer;
@@ -2995,7 +2976,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     display: flex;
     justify-content: right;
     background: var(--whiteColor);
-    padding: 0.1rem 1rem;
+    padding: 0.2rem 1rem;
     width: 6rem;
     color:var(--secondColor);
     font-weight: bold;
@@ -3707,12 +3688,6 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
 
 .modalSection .pageModal .modalHeader h1 {
     font-size: 1.8rem;
-}
-
-.modalSection .pageModal .confirmBtn {
-    background-color: var(--secondColorLowOpacity);
-    padding: 0.6rem 1.5rem;
-    font-size: 1rem;
 }
 
 .modalSection .Se-addNewChildModal .Se-childInputs {
