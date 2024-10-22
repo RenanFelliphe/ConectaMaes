@@ -134,10 +134,47 @@
                     <input type="search" class="searchBarInput" placeholder="Pesquisar">
                 </div>
 
+                <div class="myAuxilios">
+                    <h2 class="myAuxTitle">Meus Auxílios</h2>
+                    <ul class="auxiliosAside">
+                        <?php
+                            // Chama a função para obter todos os auxílios (sem limite aqui)
+                            $result = specificPostQuery($conn, "titulo, isConcluido", "tipoPublicacao = 'Auxilio' AND idUsuario = '".$currentUserData['idUsuario']."'", "ORDER BY dataCriacaoPublicacao DESC");
+                            $q = 0;
+
+                            // Itera sobre os resultados e exibe cada auxílio
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                $q++;
+                        ?>
+                            <li class="auxilioListItem <?php echo $q > 3 ? 'hidden' : ''; ?>" id="auxilioAside<?= $q;?>">
+                                <div class="comentarios">
+                                    <i class="bi bi-chat-fill"></i>
+                                    <span class="quantComentarios">0</span>
+                                </div>
+                                <div class="titulo"><?php echo $row['titulo']; ?></div>
+                                <span class="estado">
+                                    <?php 
+                                        if($row['isConcluido'] == 0){
+                                            echo "Aberto";
+                                        } else {
+                                            echo "Concluído";
+                                        }
+                                    ?>
+                                </span>
+                            </li>
+                        <?php
+                            }
+                        ?>
+                    </ul>
+                    <div class="verMaisAuxilios">
+                        <a href="#" id="verTodosBtn">Ver todos</a>
+                    </div>
+                </div>
+                
                 <div class="asideRightFooter">
                     <div>
-                        <a href="<?= $relativeRootPath."/index.php"?>">Sobre o ConectaMães</a>
-                        <a href="<?= $relativePublicPath."/suporte.php"?>">Suporte</a>
+                        <a href="<?php echo $relativeRootPath."/index.php"?>">Sobre o ConectaMães</a>
+                        <a href="<?php echo $relativePublicPath."/suporte.php"?>">Suporte</a>
                         <a href="">Termos de Privacidade</a>
                         <a href="">CEFET-MG</a>
                     </div>

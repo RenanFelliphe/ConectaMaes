@@ -179,7 +179,7 @@
                     <input type="search" class="searchBarInput" placeholder="Pesquisar">
                 </div>
 
-                <!--<div class="myAuxilios">
+                <div class="myAuxilios">
                     <h2 class="myAuxTitle">Meus Auxílios</h2>
                     <ul class="auxiliosAside">
                         <?php
@@ -214,8 +214,8 @@
                     <div class="verMaisAuxilios">
                         <a href="#" id="verTodosBtn">Ver todos</a>
                     </div>
-                </div>-->
-
+                </div>
+                
                 <div class="asideRightFooter">
                     <div>
                         <a href="<?php echo $relativeRootPath."/index.php"?>">Sobre o ConectaMães</a>
@@ -225,6 +225,7 @@
                     </div>
                     <h4>ConectaMães do CEFET-MG | 2024</h4>
                 </div>
+            </section>
         </main>
 
         <?php include_once ("../../app/includes/modais.php");?>
