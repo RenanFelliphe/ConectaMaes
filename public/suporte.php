@@ -68,5 +68,10 @@ s<?php include_once __DIR__ . "/../app/services/helpers/paths.php"; ?>
         ?>
 
         <script src="<?= $relativeAssetsPath; ?>/js/system.js"></script>
+        <script>
+            if ( window.history.replaceState ) {
+                window.history.replaceState( null, null, window.location.href );
+            }
+        </script>
     </body>
 </html>
