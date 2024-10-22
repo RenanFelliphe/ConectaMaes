@@ -16,7 +16,7 @@
         
                 if ($executeChildSignUp) {
                     $idFilho = mysqli_insert_id($conn);
-                    if ($categoriaCID !== "N/a") {
+                    if ($categoriaCID) {
                         // Buscar o id da deficiência com base no código CID
                         $queryDeficiencia = "SELECT idDeficiencia FROM Deficiencia WHERE categoriaCID = '$categoriaCID'";
                         $resultDeficiencia = mysqli_query($conn, $queryDeficiencia);
@@ -29,8 +29,6 @@
                             if (!$executeInsertDeficiency) {
                                 echo "<p>Não foi possível associar deficiência: " . mysqli_error($conn) . "!<p>";
                             }
-                        } else {
-                            echo "<p>Deficiência não encontrada com o código CID fornecido!<p>";
                         }
                     }
                 } else {

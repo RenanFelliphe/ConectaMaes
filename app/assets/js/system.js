@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     openModal();
 });
 
+
 function headerFunctions() {
     function toggleModals() {
         const modals = document.querySelectorAll('.headerModal');

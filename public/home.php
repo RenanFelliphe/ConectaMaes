@@ -90,7 +90,20 @@
                     
                                         <div class="postInfo">
                                             <ul class="postDate"><li><?= htmlspecialchars($mensagemData); ?></li></ul>
-                                            <div class="bi bi-three-dots postMoreButton"></div>
+                                            <div class="bi bi-three-dots postMoreButton">
+                                                <form class="postFunctionsModal close" method = "POST">
+                                                <button class="reportPostButton bi bi-megaphone-fill pageIcon" name = "denunciarPost" onclick=""> Denunciar Postagem</button>
+                                                    <?php if($currentUserData['idUsuario'] == $dadosPublicacao['idUsuario']){?>
+                                                        <input type="hidden" name = "deleterId" value="<?= $dadosPublicacao['idPublicacao']?>">
+                                                        <button class="deletePostButton bi bi-trash3-fill pageIcon" name = "deletarPost" type = "submit"> Deletar Postagem</button>
+                                                    <?php } ?>
+                                                </form>       
+                                                <?php
+                                                    if(isset($_POST['deletarPost'])){
+                                                        deletePost($conn, $_POST['deleterId']);
+                                                    }
+                                                ?>                                     
+                                            </div>                         
                                         </div>
                                     </div>
                     
@@ -128,59 +141,7 @@
                     ?>
             </section>
 
-            <section class="asideRight">
-                <div class="searchBar">
-                    <i class="bi bi-search"></i>
-                    <input type="search" class="searchBarInput" placeholder="Pesquisar">
-                </div>
-
-                <div class="myAuxilios">
-                    <h2 class="myAuxTitle">Meus Auxílios</h2>
-                    <ul class="auxiliosAside">
-                        <?php
-                            // Chama a função para obter todos os auxílios (sem limite aqui)
-                            $result = specificPostQuery($conn, "titulo, isConcluido", "tipoPublicacao = 'Auxilio' AND idUsuario = '".$currentUserData['idUsuario']."'", "ORDER BY dataCriacaoPublicacao DESC");
-                            $q = 0;
-
-                            // Itera sobre os resultados e exibe cada auxílio
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                $q++;
-                        ?>
-                            <li class="auxilioListItem <?php echo $q > 3 ? 'hidden' : ''; ?>" id="auxilioAside<?= $q;?>">
-                                <div class="comentarios">
-                                    <i class="bi bi-chat-fill"></i>
-                                    <span class="quantComentarios">0</span>
-                                </div>
-                                <div class="titulo"><?php echo $row['titulo']; ?></div>
-                                <span class="estado">
-                                    <?php 
-                                        if($row['isConcluido'] == 0){
-                                            echo "Aberto";
-                                        } else {
-                                            echo "Concluído";
-                                        }
-                                    ?>
-                                </span>
-                            </li>
-                        <?php
-                            }
-                        ?>
-                    </ul>
-                    <div class="verMaisAuxilios">
-                        <a href="#" id="verTodosBtn">Ver todos</a>
-                    </div>
-                </div>
-                
-                <div class="asideRightFooter">
-                    <div>
-                        <a href="<?php echo $relativeRootPath."/index.php"?>">Sobre o ConectaMães</a>
-                        <a href="<?php echo $relativePublicPath."/suporte.php"?>">Suporte</a>
-                        <a href="">Termos de Privacidade</a>
-                        <a href="">CEFET-MG</a>
-                    </div>
-                    <h4>ConectaMães do CEFET-MG | 2024</h4>
-                </div>
-            </section>
+            <?php include_once ("../app/includes/asideRight.php");?>
 
             <div class="modalBack">
                 <div class="Re-registerChild" id="addChildModal">
@@ -329,17 +290,13 @@
                     ?>
                 </div>
             </div>
-               
+
         </main>
 
         <?php include_once ("../app/includes/modais.php");?>
         
         <script src="<?= $relativeAssetsPath; ?>/js/system.js"></script>
         <script>
-            // ve se foi a primeira visita do usuario a public/home.php
-                // caso sim: mostra modal
-                // caso não: esconde modal
-            // vai ter que editar o css :( 
             function registerChildModal() {
                 const addChildModal = document.querySelector('.modalBack');
                 const closeModalBtn = document.querySelector('.closeChildModal');
@@ -356,6 +313,9 @@
                     });
                 });
             }
+            
+            //Abre as funções de um post
+            document.querySelectorAll('.postMoreButton').forEach(b => b.onclick = () => b.querySelector('.postFunctionsModal').classList.toggle('close'));
 
             registerChildModal();
         </script>

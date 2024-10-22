@@ -2,6 +2,8 @@
     include_once __DIR__ . "/../services/helpers/paths.php";
 ?>
 
+<i class="bi bi-list Ho-toggleHeader"></i>
+
 <header class="headerHome">
     <img src="<?php echo $relativeAssetsPath; ?>/imagens/logos/final/Conecta_Mães_Logo_Black.png" class="A-headerLogo" alt="Logo do ConectaMães">
 
@@ -138,6 +140,15 @@
 </header>
 
 <script>
+    const headerHome = document.querySelector('.headerHome');
+    const toggleHeader = document.querySelector('.Ho-toggleHeader');
+    const body = document.querySelector('body');
+
+    toggleHeader.addEventListener('click', () => {
+        headerHome.classList.toggle('active');
+        toggleHeader.style.backgroundColor = headerHome.classList.contains('active') ? "#80808030" : "";
+    });
+
     function headerFunctions() {
         function toggleModals() {
             const modals = document.querySelectorAll('.headerModal');

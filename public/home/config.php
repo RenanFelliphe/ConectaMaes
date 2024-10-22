@@ -359,8 +359,10 @@
                     </div>
 
                     <ul>
-                        <li><form class="Se-editPassword" method="post" id="formPassword">
+                        <li>
+                            <form class="Se-editPassword" method="post" id="formPassword">
                                 <h4> Senha </h4>
+                                <input type="hidden" class="updaterIdHiddenInput" name="updaterId" value="<?= $currentUserData['idUsuario']; ?>">   
                                 <div class="Se-passwordInputs">
                                     <div class="Se-passInput">
                                         <input type="text" id="currentPassword" name="currentPassword">
@@ -376,11 +378,22 @@
                                         <label class="Re-fakePlaceholder" for="confirmNewPassword">Confirmar Senha Nova</label>
                                     </div>
                                 </div>
-
                                 <button class="Se-editSubmit confirmBtn" type="submit" name="editPasswordSubmit">Confirmar</button>
-                        </form></li>
+                                <?php
+                                    if(isset($_POST['editPasswordSubmit'])) {   
+                                        if($_POST['updaterId'] === $currentUserData['idUsuario']) {
+                                            editPassword($conn, $_POST['updaterId']);
+                                        } else {
+                                            echo "Algo deu errado!";
+                                        }
+                                    }
+                                ?>
+                            </form>
+                        </li>
 
-                        <li><form class="Se-editPhoneNumber">
+                        <li>
+                            <form class="Se-editPhoneNumber">
+                                <input type="hidden" class="updaterIdHiddenInput" name="updaterId" value="<?= $currentUserData['idUsuario']; ?>">    
                                 <h4> Número de Telefone </h4>
                                 <div class="Se-phoneInput">
                                     <input type="text" id="editTelephone" name="editTelephoneNumber">
@@ -388,7 +401,8 @@
                                     <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
                                 </div>
                                 <button class="Se-editSubmit confirmBtn" type="submit" name="editTelephone Submit">Confirmar</button>
-                        </form></li>
+                            </form>
+                        </li>
                     </ul>
 
                     <button class="Se-accountDelete confirmBtn" onclick="openModal();">Excluir conta</button> <!--name="deletar" href="./config.php?deletar=true-->

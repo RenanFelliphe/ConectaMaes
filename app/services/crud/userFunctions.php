@@ -139,7 +139,7 @@
                 $result = mysqli_query($conn, $searchUserPassword);
                 $row = $result->fetch_assoc();
 
-                if($currentPassword == $row){
+                if($currentPassword == $row['senha']){
                     if($newPassword == $confirmPassword){
                         $updateSenha = "UPDATE Usuario SET senha = '$newPassword' WHERE idUsuario = $userId";
                     }else{
@@ -150,6 +150,7 @@
                 }  
                 if (empty($err)) {
                     $executeUpdate = mysqli_query($conn, $updateSenha);
+                    echo "<p>Senha alterada com sucesso!</p>";
                     if (!$executeUpdate){
                         echo "Erro ao atualizar senha: " . mysqli_error($conn) . "!";
                     }
