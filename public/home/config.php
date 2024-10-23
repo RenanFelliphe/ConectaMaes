@@ -359,8 +359,17 @@
                         } 
                     ?>
                     <button class="Se-addNewChild confirmBtn" onclick="openModal();">Adicionar Filho(a)</button>
-                    
                 </div>
+
+                <?php 
+                        if(isset($_POST['enviarFilho'])){
+                            addChild($conn, $currentUserData['idUsuario']);
+                        }
+                        if(isset($_POST['deletarFilho'])){
+                            $childId = $_POST['childIdentifier'];
+                            deleteChild($conn, $childId);
+                        }
+                    ?>
 
                 <div class="Se-otherUsersInteractions Se-subSection">
                     <div class="Se-sectionHeader">

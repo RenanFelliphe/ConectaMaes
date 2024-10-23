@@ -265,7 +265,7 @@
                 <label for="newChildDeficiencyInput">Deficiência</label>
             </div>
         </div>
-        <button class="Se-modalSubmit" type="submit" name="editPasswordSubmit confirmBtn">Confirmar</button>
+        <button class="Se-modalSubmit" type="submit" name="enviarFilho">Confirmar</button>
     </form>
 
     <form class="Se-deleteAccountModal pageModal close">
