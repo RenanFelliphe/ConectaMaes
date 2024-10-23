@@ -95,8 +95,15 @@
                     $dQuery = "DELETE FROM Filho WHERE idFilho = ". (int) $id;
                     $dExec = mysqli_query($conn, $dQuery);
 
+                    $dfQuery = "DELETE FROM filhoDeficiencia WHERE idFilho = ". (int) $id;
+                    $dfExec = mysqli_query($conn, $dfQuery);
+
                     if(!$dExec){
                         echo "Não foi possível excluir o filho!";
+                    }
+                    if(!$dfExec){
+                        echo "Não foi possível excluir o registro de deficiência do filho!";
+                        echo "( Contate a equipe de suporte para mais informações. )";
                     }
                 }    
             }

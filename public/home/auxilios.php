@@ -49,10 +49,7 @@
                             $mensagemData = postDateMessage($dadosPublicacao["dataCriacaoPublicacao"]);
                             ?>
                             <article class="Au-auxilioCard" onclick="openAuxilioModal();">
-                                <ul class="postDate">
-                                    <li><?php echo htmlspecialchars($mensagemData); ?></li>
-                                </ul>
-
+                                <ul class="postDate"><li><?php echo htmlspecialchars($mensagemData); ?></li></ul>
                                 <div class="postTimelineTop">
                                     <div class="postOwnerImage">
                                         <img src="<?php echo $relativeAssetsPath."/imagens/fotos/perfil/".$dadosPublicacao['linkFotoPerfil'];?>">
@@ -94,9 +91,7 @@
                                 <section class="Au-auxilioModalBack close">
                                     <article class="Au-auxilioModal">
                                         <div class="Au-modalHeader">
-                                            <ul class="auxilioDate">
-                                                <li><?php echo htmlspecialchars($mensagemData); ?></li>
-                                            </ul>
+                                            <ul class="auxilioDate"><li><?php echo htmlspecialchars($mensagemData); ?></li></ul> 
                                             <p class="auxilioTitle"><?php echo htmlspecialchars($dadosPublicacao['titulo']); ?></p>
                                             <i class="bi bi-x Au-closeModal" onclick="openAuxilioModal()"></i>
                                         </div>
@@ -186,6 +181,9 @@
             if ( window.history.replaceState ) {
                 window.history.replaceState( null, null, window.location.href );
             }
+
+            document.querySelectorAll('.postMoreButton').forEach(b => b.onclick = () => b.querySelector('.postFunctionsModal').classList.toggle('close'));
+
         </script>   
     </body>
 </html>

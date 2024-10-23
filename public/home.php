@@ -151,11 +151,12 @@
                         $filhos = queryMultipleChildrenData($conn, $where = "idUsuario = " . $currentUserData['idUsuario'], $order = "nomeFilho");
                         foreach($filhos as $f){
                     ?>
-                        <div class="Re-myChildBtn">
+                        <form class="Re-myChildBtn" method="POST">
+                            <input type="hidden" name="childIdentifier" value="<?= $f['idFilho']; ?>">
                             <img src="<?= $relativeAssetsPath; ?>/imagens/icons/<?= $f['sexo'] === 'boy' ? 'boy_icon' : ($f['sexo'] === 'girl' ? 'girl_icon' : 'pram_icon'); ?>.png" class="pageIcon" alt="Ícone do Filho">
                             <p><?= $f['nomeFilho']; ?></p>
-                            <i class="bi bi-x deleteChild" data-id="<?= $f['idFilho']; ?>"></i>
-                        </div>
+                            <button type="submit" class=" deleteChildButton" name="deletarFilho"><i class="bi bi-x"></i></button>
+                        </form>
                     <?php 
                         } 
                     ?>
@@ -279,13 +280,17 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="Re-confirmAddChild confirmBtn" name="envioFilho"> Confirmar </button>
+                        <button type="submit" class="Re-confirmAddChild confirmBtn" name="enviarFilho"> Confirmar </button>
                         
                     </form>
 
                     <?php 
-                        if(isset($_POST['envioFilho'])){
+                        if(isset($_POST['enviarFilho'])){
                             addChild($conn, $currentUserData['idUsuario']);
+                        }
+                        if(isset($_POST['deletarFilho'])){
+                            $childId = $_POST['childIdentifier'];
+                            deleteChild($conn, $childId);
                         }
                     ?>
                 </div>

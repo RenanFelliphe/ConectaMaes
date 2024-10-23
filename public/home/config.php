@@ -5,6 +5,7 @@
     include_once __DIR__ . "/../../app/services/helpers/paths.php";
     $verify = isset($_SESSION['active']) ? true : header("Location:" . $relativePublicPath . "/login.php");
     require_once "../../app/services/crud/userFunctions.php"; 
+    require_once "../../app/services/crud/childFunctions.php";
     require_once "../../app/services/auth/authUser.php";
     require_once "../../app/services/helpers/dateChecker.php";
     $table = "Usuario";
@@ -219,6 +220,7 @@
                         <img src="<?= $relativeAssetsPath; ?>/imagens/icons/pram_icon.png" class="pageIcon" alt="Ícone de usuário">
                         <h1>Informações dos Filhos</h1>
                     </div>
+                    <!-- 
                     <form class="Se-userChild" method="post">
                         <div class="Se-childHeader">
                             <img src="<?= $relativeAssetsPath; ?>/imagens/icons/boy_icon.png" class="pageIcon" alt="Ícone de usuário">
@@ -342,7 +344,22 @@
                             <button class="Se-editSubmit confirmBtn" type="submit" name="editChildSubmit">Confirmar</button>
                         </div>
                     </form>
+                    -->
+                    <?php
+                        $filhos = queryMultipleChildrenData($conn, $where = "idUsuario = " . $currentUserData['idUsuario'], $order = "nomeFilho");
+                        foreach($filhos as $f){
+                    ?>
+                        <form class="Re-myChildBtn" method="POST">
+                            <input type="hidden" name="childIdentifier" value="<?= $f['idFilho']; ?>">
+                            <img src="<?= $relativeAssetsPath; ?>/imagens/icons/<?= $f['sexo'] === 'boy' ? 'boy_icon' : ($f['sexo'] === 'girl' ? 'girl_icon' : 'pram_icon'); ?>.png" class="pageIcon" alt="Ícone do Filho">
+                            <p><?= $f['nomeFilho']; ?></p>
+                            <button type="submit" class=" deleteChildButton" name="deletarFilho"><i class="bi bi-x"></i></button>
+                        </form>
+                    <?php 
+                        } 
+                    ?>
                     <button class="Se-addNewChild confirmBtn" onclick="openModal();">Adicionar Filho(a)</button>
+                    
                 </div>
 
                 <div class="Se-otherUsersInteractions Se-subSection">

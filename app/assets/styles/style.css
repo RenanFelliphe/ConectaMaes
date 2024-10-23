@@ -3131,10 +3131,11 @@ footer .A-footerRight li.A-footerPolitic h4 {
     overflow: hidden;
 }
 
-.asideRight .myAuxilios #verTodosBtn{
+#verTodosBtn{
     position: relative;
     text-decoration: none;
-    color: var(--thirdColor);
+    font-weight: 500;
+    color: var(--secondColor);
     font-size: 0.9rem;
     text-align: right;
     transform: translateY(1rem);
