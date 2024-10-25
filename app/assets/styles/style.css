@@ -4382,6 +4382,21 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     filter: brightness(0) saturate(100%) invert(98%) sepia(100%) saturate(10%) hue-rotate(183deg) brightness(102%) contrast(100%);
 }
 
+.Re-registerChild .deleteChildButton{
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+    color: var(--whiteColor);
+    font-size: 1.5rem;
+    transition: 0.2s;
+    transform: translateY(1px);
+}
+
+.Re-registerChild .deleteChildButton:hover{
+    transform: scale(1.2) translateY(2px);
+}
+
 .Re-registerChild p{
     position: relative;
     width: 80%;
@@ -4390,12 +4405,13 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     text-align: center;
 }
 
+
 .Re-registerChild .Re-myChild i{
     font-size: 1.5rem;
 }
 
 .Re-registerChild .Re-addChildBox{
-    position: absolute;
+    position: relative;
     border: 1px solid var(--blackColor);
     display: flex;
     flex-direction: column;
@@ -4407,9 +4423,6 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     width: 26rem;   
     height: 18rem;
     box-shadow: 0 4px 16px 0px #00000020;
-    left: 50%;
-    top: -3.2rem;
-    transform: translateX(-50%);
     z-index: +1;
     overflow: hidden;
 }

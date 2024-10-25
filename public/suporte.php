@@ -10,10 +10,10 @@
         <title>ConectaMães - Suporte</title>
 
         <style>
-        /*.headerLanding{
+        .headerLanding{
                 background: var(--whiteColor);
             }
-        */
+        
         </style>
     </head>
 

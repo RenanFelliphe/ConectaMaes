@@ -151,16 +151,6 @@
                         $filhos = queryMultipleChildrenData($conn, $where = "idUsuario = " . $currentUserData['idUsuario'], $order = "nomeFilho");
                         foreach($filhos as $f){
                     ?>
-                        <form class="Re-myChildBtn" method="POST">
-                            <input type="hidden" name="childIdentifier" value="<?= $f['idFilho']; ?>">
-                            <img src="<?= $relativeAssetsPath; ?>/imagens/icons/<?= $f['sexo'] === 'boy' ? 'boy_icon' : ($f['sexo'] === 'girl' ? 'girl_icon' : 'pram_icon'); ?>.png" class="pageIcon" alt="Ícone do Filho">
-                            <p><?= $f['nomeFilho']; ?></p>
-                            <button type="submit" class=" deleteChildButton" name="deletarFilho"><i class="bi bi-x"></i></button>
-                        </form>
-                    <?php 
-                        } 
-                    ?>
-
                     <form class="Re-addChildBox close" method="POST">
                         <div class="Re-childBoxHeader">
                             <i class="bi bi-balloon Re-childIcon"></i>
@@ -283,6 +273,18 @@
                         <button type="submit" class="Re-confirmAddChild confirmBtn" name="enviarFilho"> Confirmar </button>
                         
                     </form>
+
+                    <form class="Re-myChildBtn" method="POST">
+                        <input type="hidden" name="childIdentifier" value="<?= $f['idFilho']; ?>">
+                        <img src="<?= $relativeAssetsPath; ?>/imagens/icons/<?= $f['sexo'] === 'boy' ? 'boy_icon' : ($f['sexo'] === 'girl' ? 'girl_icon' : 'pram_icon'); ?>.png" class="pageIcon" alt="Ícone do Filho">
+                        <p><?= $f['nomeFilho']; ?></p>
+                        <button type="submit" class=" deleteChildButton" name="deletarFilho"><i class="bi bi-x"></i></button>
+                    </form>
+                    <?php 
+                        } 
+                    ?>
+
+                    
 
                     <?php 
                         if(isset($_POST['enviarFilho'])){
