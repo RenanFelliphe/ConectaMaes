@@ -114,7 +114,7 @@
     </div>
 
     <div class="userFunctionsModal headerModal close">
-        <a href="<?php echo $relativePublicPath; ?>/home/perfil.php" class="userFunctions">
+        <a href="<?= $relativePublicPath . "/home/perfil.php?user=" . $currentUserData['nomeDeUsuario'];?>" class="userFunctions">
             <i class="bi bi-person-fill pageIcon"></i>
             <p>Perfil</p>
         </a>

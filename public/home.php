@@ -19,10 +19,6 @@
             $postId = str_replace('like_', '', $likedPost[0]); // Extrai o ID da publicação
             handlePostLike($conn, $currentUserData['idUsuario'], (int)$postId); // Lida com o like
         }
-
-        if (isset($_POST['postPostagem'])) {
-            sendPost($conn, "Postagem", $currentUserData['idUsuario']);
-        }
     }
 
     // Obter todas as publicações após o processamento dos likes
@@ -67,9 +63,9 @@
                             $mensagemData = postDateMessage($dadosPublicacao["dataCriacaoPublicacao"]);
                             ?>
                             <article class="Ho-post">
-                                <div class="postOwnerImage">
+                                <a class="postOwnerImage" href="<?= $relativePublicPath . "/home/perfil.php?user=" . urlencode($dadosPublicacao['nomeDeUsuario']);?>">
                                     <img src="<?= $relativeAssetsPath."/imagens/fotos/perfil/".$dadosPublicacao['linkFotoPerfil'];?>">
-                                </div>
+                                </a>
                     
                                 <div class="postContent">
                                     <div class="postTimelineTop">
@@ -112,9 +108,9 @@
                                         <p class="textPost"><?= htmlspecialchars($dadosPublicacao['conteudo']); ?></p>
                                     </div>
                     
-                                    <form class="postTimelineBottom" method='post'>
+                                    <form class="postTimelineBottom" method='POST'>
                                         <button class="postLikes" type="submit" name="like_<?= $dadosPublicacao['idPublicacao']; ?>" value="like">
-                                            <i class="bi bi-heart-fill <?= queryUserLike($conn,$currentUserData['idUsuario'],$dadosPublicacao['idPublicacao']) ? 'postLiked' : 'postNotLiked'; ?>"></i>
+                                            <i class="bi bi-heart-fill <?= queryUserLike($conn, $currentUserData['idUsuario'], $dadosPublicacao['idPublicacao']) ? 'postLiked' : 'postNotLiked'; ?>"></i>
                                             <p><?= htmlspecialchars($dadosPublicacao['totalLikes']); ?></p>
                                         </button>
                                         <button class="postComments" type="submit" name="comment">
@@ -279,6 +275,35 @@
                         <img src="<?= $relativeAssetsPath; ?>/imagens/icons/<?= $f['sexo'] === 'boy' ? 'boy_icon' : ($f['sexo'] === 'girl' ? 'girl_icon' : 'pram_icon'); ?>.png" class="pageIcon" alt="Ícone do Filho">
                         <p><?= $f['nomeFilho']; ?></p>
                         <button type="submit" class=" deleteChildButton" name="deletarFilho"><i class="bi bi-x"></i></button>
+                        <form class="childData" method="post">
+                            <div class="childSpecificData">
+                                <span>Sexo: </span> 
+                                <p>
+                                    <?php 
+                                        switch($f['sexo']){
+                                            case 'girl': echo  "Menina"; break;
+                                            case 'boy': echo "Menino"; break;
+                                            case 'nullSex': echo "Não especializado"; break;
+                                            default: echo 'N/a';
+                                        }
+                                    ?>
+                                </p>
+                            </div>
+                            <div class="childSpecificData">
+                                <span>Data de Nascimento: </span> 
+                                <p>
+                                    <?php 
+                                        $data = new DateTime($f['dataNascimentoFilho']);                                          
+                                        $dataFormatadaFilho = $data->format('d/m/Y');
+                                        echo $dataFormatadaFilho; 
+                                    ?>
+                                </p>
+                            </div>
+                            <div class="childSpecificData">
+                                <span>Deficiência: </span> <p><?= $f['deficiencias'] ;?></p>
+                            </div>
+                            <button type="submit" class="editarFilho" name="editarFilho">Editar</button>
+                        </form>
                     </form>
                     <?php 
                         } 

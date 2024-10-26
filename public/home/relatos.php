@@ -7,7 +7,16 @@
     require_once "../../app/services/crud/userFunctions.php"; 
     require_once "../../app/services/crud/postFunctions.php";
     require_once '../../app/services/helpers/dateChecker.php';
-    $currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);   
+
+    $currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);  
+
+    // Processar $_POST
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($likedPost = array_keys($_POST, 'like', true)) {
+            $postId = str_replace('like_', '', $likedPost[0]); // Extrai o ID da publicação
+            handlePostLike($conn, $currentUserData['idUsuario'], (int)$postId); // Lida com o like
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -95,16 +104,16 @@
                                         <p class="textPost"><?php echo htmlspecialchars($dadosPublicacao['conteudo']); ?></p>
                                     </div>
                     
-                                    <div class="postTimelineBottom">
-                                        <div class="postLikes">
-                                            <i class="bi bi-heart-fill"></i>
-                                            <p><?php echo htmlspecialchars($dadosPublicacao['totalLikes']); ?></p>
-                                        </div>
+                                    <form class="postTimelineBottom"  method='post'>
+                                        <button class="postLikes" type="submit" name="like_<?= $dadosPublicacao['idPublicacao']; ?>" value="like">
+                                            <i class="bi bi-heart-fill <?= queryUserLike($conn, $currentUserData['idUsuario'], $dadosPublicacao['idPublicacao']) ? 'postLiked' : 'postNotLiked'; ?>"></i>
+                                            <p><?= htmlspecialchars($dadosPublicacao['totalLikes']); ?></p>
+                                        </button>
                                         <div class="postComments">
                                             <i class="bi bi-chat-fill"></i>
                                             <p>0</p>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </article>
                     

@@ -81,18 +81,15 @@
 
     // LIKES
         function handlePostLike($conn, $idUser, $idPost) {
-            // Verificar se o usuário já deu like na publicação
             $userLike = queryUserLike($conn, $idUser, $idPost);
             if(!$userLike) {
-                // Inserir like
                 $insertLike = "INSERT INTO curtirPublicacao (idPublicacao, idUsuario) VALUES ($idPost , $idUser)";
                 $execQuery = mysqli_query($conn, $insertLike);
                 
                 if (!$execQuery) {
-                    die("Erro ao registrar curtida: " . mysqli_error($conn));
+                    die("Erro ao curtir: " . mysqli_error($conn));
                 }
             } else {
-                // Remover like
                 $deleteLike = "DELETE FROM curtirPublicacao WHERE idPublicacao = $idPost AND idUsuario = $idUser";
                 $execQuery = mysqli_query($conn, $deleteLike);
                 

@@ -3154,12 +3154,12 @@ footer .A-footerRight li.A-footerPolitic h4 {
 ====================================================================================================*/
 
 .Se-settingsCenter {
+    position: relative;
     border: 1px solid var(--grayColor);
     border-bottom: none;
     border-top: none;
     width: 40vw;
-    height: 100vh;
-    padding-top: 2rem;
+    height: 100%;
 }
 
 .Se-asideLeft {
@@ -3189,11 +3189,11 @@ footer .A-footerRight li.A-footerPolitic h4 {
     display: flex;
     gap: 1.5rem;
     justify-content: flex-start;
-    padding: 2rem 2rem;
+    padding: 2rem 1.5rem;
 }
 
 .Se-settingsCenter .Se-centerHeader .bi-arrow-left-circle {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     color: var(--grayColor);
     transition: 0.2s transform;
     cursor: pointer;
@@ -3205,7 +3205,6 @@ footer .A-footerRight li.A-footerPolitic h4 {
     transition: 0.2s transform;
 }
 
-
 .Se-settingsCenter .Se-centerHeader h1 {
     font-size: 1.8rem;
 }
@@ -3213,7 +3212,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
 .Se-settingsCenter .Se-centerSections .Se-sectionTitle {
     display: flex;
     justify-content: space-between;
-    padding: 0rem 2rem;
+    padding: 0 2rem;
     border-top: 1px solid var(--grayColor);
     width: 100%;
     height: 4rem;
@@ -4571,6 +4570,323 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     background-color: var(--whiteColor);
     border-color: var(--secondColor);
     transition: 0.2s;
+}
+
+/*====================================================================================================
+========================================= PÁGINA DE PERFIL ==========================================
+====================================================================================================*/
+
+.Pe-main .timeline .Pe-userProfileSection{
+    position: relative;
+    border-bottom: 1px solid transparent;
+    background: linear-gradient(var(--whiteColor), var(--whiteColor)) padding-box, linear-gradient(to right, var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
+    padding: 3rem 1rem 1rem 3rem;
+}
+
+.Pe-main .timeline .Pe-userProfileSection .bi-arrow-left-circle {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-size: 1.5rem;
+    color: var(--grayColor);
+    transition: 0.2s transform;
+    cursor: pointer;
+}
+
+.Pe-main .timeline .Pe-userProfileSection .bi-arrow-left-circle:hover {
+    color: var(--secondColor);
+    transition: 0.2s transform;
+}
+
+.Pe-main .timeline .Pe-userProfileSection .Pe-lastTimeOnline{
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    color: var(--grayColor);
+    font-size: 0.8rem;
+}
+
+.Pe-main .timeline .Pe-userProfileSection .Pe-lastTimeOnline span{
+    position: relative;
+    background: linear-gradient(to right, var(--middleBlueColor), var(--middlePinkColor), var(--middleYellowColor));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    width: fit-content;
+}
+
+.Pe-main .timeline .Pe-userProfileSection .Pe-userInformations{
+    position: relative;
+    width: fit-content;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.Pe-main .timeline .Pe-userProfileSection .Pe-userInformations .Pe-userImage {
+    position: relative;
+    min-width: 6rem;
+    min-height: 6rem;
+    width: 10vw;
+    height: 10vw;
+    max-width: 9rem;
+    max-height: 9rem;
+}
+
+.Pe-main .timeline .Pe-userProfileSection .Pe-userInformations .Pe-userImage .Pe-userProfileImage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--secondColor);
+    border-radius: 100%;
+    overflow: hidden;
+}
+
+.Pe-main .timeline .Pe-userProfileSection .Pe-userInformations .Pe-userImage .Pe-userProfileImage img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    object-fit: cover;
+}
+
+.Pe-main .timeline .Pe-userProfileSection .Pe-userInformations .Pe-userTextInformations {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.Pe-main .timeline .Pe-userProfileSection .Pe-userInformations .Pe-userTextInformations div{
+    display: flex;
+    gap: 0.5rem;
+}
+
+.Pe-main .timeline .Pe-userProfileSection .Pe-userInformations .Pe-userTextInformations .Pe-userChildren .Pe-childPortrait{
+    position: relative;
+    display: flex;
+    background-color: var(--secondColor);
+    border-radius: 100%;
+    width: 2.15rem;
+    height: 2.15rem;
+    border: 1px solid transparent;
+    background: linear-gradient(var(--secondColor), var(--secondColor)) padding-box, linear-gradient(to top, var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
+    cursor: pointer;
+}
+
+.Pe-main .timeline .Pe-userProfileSection .Pe-userInformations .Pe-userTextInformations .Pe-userChildren .Pe-childPortrait .Pe-childIcon{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7484%) hue-rotate(165deg) brightness(103%) contrast(104%);
+    border: 2px solid var(--whiteColor);
+    border-radius: 100%;
+    padding: 0.3rem;
+}
+
+.Pe-main .timeline .Pe-userProfileSection .Pe-userInformations .Pe-userTextInformations .Pe-userNames{
+    display: block;
+    text-align: start;
+}
+
+.Pe-main .timeline .Pe-userProfileSection .Pe-userInformations .Pe-userTextInformations .Pe-userNames .Pe-userRealName{
+    font-size: 1.5rem;
+    width: fit-content;
+}
+
+.Pe-main .timeline .Pe-userProfileSection .Pe-userInformations .Pe-userTextInformations .Pe-userNames .Pe-userNickname {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--grayColor);
+    width: fit-content;
+}
+
+.Pe-main .timeline .Pe-userProfileSection .Pe-userInformations .Pe-userTextInformations .Pe-userNumbers{
+    gap: 5vh;
+}
+
+.Pe-main .timeline .Pe-userProfileSection .Pe-userInformations .Pe-userTextInformations .Pe-userNumbers p{
+    font-weight: normal;
+}
+
+.Pe-main .timeline .Pe-userProfileSection .Pe-userInformations .Pe-userTextInformations .Pe-userNumbers .Pe-followingNumbers .Pe-following{
+    color: var(--darkYellowColor);
+}
+
+.Pe-main .timeline .Pe-userProfileSection .Pe-userInformations .Pe-userTextInformations .Pe-userNumbers .Pe-postsNumber .Pe-posts{
+    color: var(--darkBlueColor);
+}
+
+.Pe-main .timeline .Pe-userProfileSection .Pe-userInformations .Pe-userTextInformations .Pe-userNumbers .Pe-followersNumber .Pe-followers{
+    color: var(--darkPinkColor);
+}
+
+.Pe-main .timeline .Pe-userProfileSection .Pe-sectionBottom{
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    width: 100%;
+}
+
+.Pe-main .timeline .Pe-userProfileSection .Pe-sectionBottom .Pe-userBiography{
+    position: relative;
+    padding: 0.5rem 1rem 1rem 1rem;
+    width: 100%;
+}
+
+.Pe-main .timeline .Pe-userProfileSection .Pe-sectionBottom .Pe-userBiography p{
+    font-weight: 500;
+}
+
+.Pe-main .timeline .Pe-userProfileSection .Pe-sectionBottom .Pe-userBiography span{
+    padding: 0.5rem;
+    font-size: 0.8rem;
+}
+
+.Pe-main .timeline .Pe-userProfileSection .Pe-sectionBottom .Pe-editAccount{
+    display: flex;
+    width: 10rem;
+    gap: 0.5rem;
+    flex-wrap: nowrap;
+}
+
+.Pe-main .timeline .Pe-profilePostType{
+    position: relative;
+    width: 100%;
+    display: flex;
+    column-gap: 2rem;
+    row-gap: 0.5rem;
+    justify-content: space-evenly;
+    padding: 0 5rem;
+    height: 4rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+.Pe-main .timeline .Pe-profilePostType .Pe-searchBar {
+    position: absolute;
+    left: 2rem;
+    top: 1rem;
+    display: flex;
+    align-items: center;
+    background-color: #e4e4e4;
+    border-radius: 100rem;
+    width: 90%;
+    height: 2.5rem;
+    padding: 0.5rem 0.8rem 0.5rem 2.8rem;
+    gap: 0.4rem;
+    opacity: 0.8;
+    font-size: 1rem;
+    color: var(--grayColor);
+    transition: width 0.3s ease, padding 0.3s ease, opacity 0.3s ease;
+}
+
+.Pe-main .timeline .Pe-profilePostType .Pe-searchBar.close {
+    width: 2.5rem;
+    cursor: pointer;
+    padding: 0;
+}
+
+.Pe-main .timeline .Pe-profilePostType .Pe-searchBar .Pe-searchBarInput {
+    flex: 1;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    color: var(--blackColor);
+    width: 100%;
+    font-weight: 400;
+    font-size: 0.9rem;
+}
+
+.Pe-main .timeline .Pe-profilePostType .Pe-searchBar.close .Pe-searchBarInput {
+    display: none;
+}
+
+.Pe-main .timeline .Pe-profilePostType .Pe-searchBar .bi-search{
+    position: absolute;
+    left: 0.8rem;
+    z-index: +10;
+    cursor: pointer;
+}
+
+.Pe-main .timeline .Pe-profilePostType .Pe-searchBar .bi-arrow-counterclockwise{
+    position: absolute;
+    right: -1.8rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--blackColor);
+}
+
+.Pe-main .timeline .Pe-profilePostType .Pe-searchBar.close .bi-arrow-counterclockwise{
+    display: none;
+}
+
+.Pe-main .timeline .Pe-profilePostType .Pe-postType{
+    position: relative;
+    display: flex;
+    gap: 1rem;
+    height: 3rem;
+    color: var(--grayColor);
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.Pe-main .timeline .Pe-profilePostType .Pe-postType.active,
+.Pe-main .timeline .Pe-profilePostType .Pe-postType:hover{
+    color: var(--secondColor);
+}
+
+.Pe-main .timeline .Pe-profilePostType .Pe-postType span{
+    position: absolute;
+    width: 70%;
+    height: 1px;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    transition: 0.2s;
+}
+
+.Pe-main .timeline .Pe-profilePostType .Pe-postType.active span,
+.Pe-main .timeline .Pe-profilePostType .Pe-postType:hover span{
+    background-color: var(--secondColor);
+}
+
+.Pe-main .timeline .Pe-profilePostType .Pe-postType .Pe-postTypeIcon{
+    width: 1.5rem;
+    transition: 0.15s;
+}
+
+body.Y-theme .Pe-main .timeline .Pe-profilePostType .Pe-postType.active .Pe-postTypeIcon,
+body.Y-theme .Pe-main .timeline .Pe-profilePostType .Pe-postType:hover .Pe-postTypeIcon{
+    filter: brightness(0) saturate(100%) invert(66%) sepia(48%) saturate(459%) hue-rotate(16deg) brightness(97%) contrast(85%);
+    transition: 0.15s;
+}
+
+body.B-theme .Pe-main .timeline .Pe-profilePostType .Pe-postType.active .Pe-postTypeIcon,
+body.B-theme .Pe-main .timeline .Pe-profilePostType .Pe-postType:hover .Pe-postTypeIcon{
+    filter: brightness(0) saturate(100%) invert(63%) sepia(81%) saturate(331%) hue-rotate(139deg) brightness(83%) contrast(87%);
+    transition: 0.15s;
+}
+
+body.P-theme .Pe-main .timeline .Pe-profilePostType .Pe-postType.active .Pe-postTypeIcon,
+body.P-theme .Pe-main .timeline .Pe-profilePostType .Pe-postType:hover .Pe-postTypeIcon{
+    filter: brightness(0) saturate(100%) invert(42%) sepia(61%) saturate(1820%) hue-rotate(302deg) brightness(87%) contrast(85%);
+    transition: 0.15s;
+}
+
+
+.Pe-main .timeline .Pe-userProfilePosts{
+
+}
+
+.Pe-allPosts.active{
+    display: flex;
+}
+
+.Pe-allPosts{
+    display: none;
 }
 
 /*====================================================================================================

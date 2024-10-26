@@ -39,24 +39,49 @@
         
         // USER QUERY FUNCTIONS - READ
             function queryChildData($conn, $id){
-                $sUQuery = "SELECT * FROM Filho WHERE idFilho =" . (int) $id;
-                $sUExec = mysqli_query($conn, $sUQuery);
-                $sUReturn = mysqli_fetch_assoc($sUExec);
+                $query = "
+                    SELECT 
+                        f.*, 
+                        d.nomeDeficiencia 
+                    FROM 
+                        Filho f
+                    LEFT JOIN 
+                        filhoDeficiencia fd ON f.idFilho = fd.idFilho
+                    LEFT JOIN 
+                        Deficiencia d ON fd.idDeficiencia = d.idDeficiencia
+                    WHERE 
+                f.idFilho = " . (int) $id;
 
-                return $sUReturn;
+                $fQuery = mysqli_query($conn, $query);
+
+                return mysqli_fetch_assoc($fQuery);
             }
-            function queryMultipleChildrenData($conn, $where = 1, $order = ""){
-                if(!empty($order)){
+
+            function queryMultipleChildrenData($conn, $where = 1, $order = "") {
+                if (!empty($order)) {
                     $order = "ORDER BY $order";
                 }
 
-                $gQuery = "SELECT * FROM Filho WHERE $where $order ";
-                $gExec = mysqli_query($conn,$gQuery);
-                $gReturn = mysqli_fetch_all($gExec, MYSQLI_ASSOC);
+                $query = "
+                    SELECT 
+                        f.*, 
+                        GROUP_CONCAT(d.nomeDeficiencia) AS deficiencias
+                    FROM 
+                        Filho f
+                    LEFT JOIN 
+                        filhoDeficiencia fd ON f.idFilho = fd.idFilho
+                    LEFT JOIN 
+                        Deficiencia d ON fd.idDeficiencia = d.idDeficiencia
+                    WHERE 
+                        $where
+                    GROUP BY 
+                        f.idFilho
+                    $order";
 
-                return $gReturn;
+                $mFQuery = mysqli_query($conn, $query);
+
+                return mysqli_fetch_all($mFQuery, MYSQLI_ASSOC);
             }
-
         // EDIT ACCOUNT - UPDATE
             function editChild($conn, $childId) {
                 $err = array();

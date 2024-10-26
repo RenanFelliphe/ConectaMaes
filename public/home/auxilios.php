@@ -7,7 +7,16 @@
     require_once "../../app/services/crud/userFunctions.php"; 
     require_once "../../app/services/crud/postFunctions.php";
     require_once '../../app/services/helpers/dateChecker.php';
-    $currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);   
+
+    $currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);  
+
+    // Processar $_POST
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($likedPost = array_keys($_POST, 'like', true)) {
+            $postId = str_replace('like_', '', $likedPost[0]); // Extrai o ID da publicação
+            handlePostLike($conn, $currentUserData['idUsuario'], (int)$postId); // Lida com o like
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -77,7 +86,7 @@
                                     <div class="postInteractions">
                                         <div class="postLikes">
                                             <i class="bi bi-heart-fill"></i>
-                                            <p>0</p>
+                                            <p><?= htmlspecialchars($dadosPublicacao['totalLikes']); ?></p>
                                         </div>
                                         <div class="postComments">
                                             <i class="bi bi-chat-fill"></i>
@@ -134,12 +143,12 @@
                                             <button name="helpUser" class="Au-help confirmBtn">Auxiliar</button>
                                         </div>
 
-                                        <div class="postInteractions">
+                                        <form class="postInteractions"  method='post'>
                                             <span></span>
-                                            <div class="postLikes">
-                                                <i class="bi bi-chat-fill"></i>
-                                                <p>0</p>
-                                            </div>
+                                            <button class="postLikes" type="submit" name="like_<?= $dadosPublicacao['idPublicacao']; ?>" value="like">
+                                                <i class="bi bi-heart-fill <?= queryUserLike($conn,$currentUserData['idUsuario'],$dadosPublicacao['idPublicacao']) ? 'postLiked' : 'postNotLiked'; ?>"></i>
+                                                <p><?= htmlspecialchars($dadosPublicacao['totalLikes']); ?></p>
+                                            </button>
 
                                             <h3>Comentários</h3>
 
@@ -150,7 +159,7 @@
                                                 <p>0</p>
                                             </div>
                                             <span></span>
-                                        </div>
+                                        </form>
                                     </article>
                                 </section>
                             </article>

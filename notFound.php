@@ -1,3 +1,6 @@
+<?php     
+    include_once __DIR__ . "/app/services/helpers/paths.php";
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -22,7 +25,7 @@
                         display: flex; flex-direction:
                         column; cursor: pointer;">
                 <h1> PÁGINA NÃO ENCONTRADA </h1>
-                <h4> ... </h4>
+                <a class="" href = "<?= $relativePublicPath . "/home.php"; ?>"> Voltar de onde parou</a>
             </div>
             
         </main>
