@@ -70,17 +70,18 @@
 
             return $sUReturn;
         }
-            function queryMultipleUsersData($conn, $table, $where = 1, $order = ""){
-                if(!empty($order)){
-                    $order = "ORDER BY $order";
-                }
-
-                $gQuery = "SELECT * FROM $table WHERE $where $order ";
-                $gExec = mysqli_query($conn,$gQuery);
-                $gReturn = mysqli_fetch_all($gExec, MYSQLI_ASSOC);
-
-                return $gReturn;
+        
+        function queryMultipleUsersData($conn, $table, $where = 1, $order = ""){
+            if(!empty($order)){
+                $order = "ORDER BY $order";
             }
+
+            $gQuery = "SELECT * FROM $table WHERE $where $order ";
+            $gExec = mysqli_query($conn,$gQuery);
+            $gReturn = mysqli_fetch_all($gExec, MYSQLI_ASSOC);
+
+            return $gReturn;
+        }
 
     // EDIT ACCOUNT - UPDATE
         function editProfile($conn, $userId) {
