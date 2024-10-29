@@ -35,9 +35,7 @@
         <?php include_once ("../../app/includes/headerHome.php");?>
 
         <main class="Ho-Main Au-main mainSystem">
-            <section class="asideLeft">
-                <img src="" class="backCells cellsLeft">
-            </section>
+            <?php include_once ("../../app/includes/asideLeft.php");?>
 
             <section class="timeline">
                 <section class="Ho-postFilter">

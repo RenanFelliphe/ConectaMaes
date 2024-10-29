@@ -25,10 +25,9 @@
 
     <body class="<?= $currentUserData['tema'];?>">
         <?php include_once ("../../app/includes/headerHome.php");?>
+        
         <main class="Ho-Main Se-main mainSystem">
-            <section class="Se-asideLeft">
-                <img src="" class="backCells cellsLeft">
-            </section>
+            <?php include_once ("../../app/includes/asideLeft.php");?>
 
             <section class="Se-settingsCenter">
                 <div class="Se-centerHeader">  
