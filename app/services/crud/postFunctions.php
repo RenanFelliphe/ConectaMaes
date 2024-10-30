@@ -30,6 +30,7 @@
         
             return $sUExec;
         }
+        
         function queryPostsAndUserData($conn, $postType) {
             $baseQuery = "
                 SELECT 

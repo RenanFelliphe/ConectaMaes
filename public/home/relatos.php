@@ -53,7 +53,7 @@
                             // Formatar a data da publicação utilizando a função do arquivo dateChecker.php
                             $mensagemData = postDateMessage($dadosPublicacao["dataCriacaoPublicacao"]);
                             ?>
-                            <article class="Ho-post">
+                            <a href="<?= $relativePublicPath."/home/comentarios.php?post=". $dadosPublicacao['idPublicacao'];?>" class="Ho-post">
                                 <div class="postOwnerImage">
                                     <img src="<?php echo $relativeAssetsPath."/imagens/fotos/perfil/".$dadosPublicacao['linkFotoPerfil'];?>">
                                 </div>
@@ -103,17 +103,18 @@
                                     </div>
                     
                                     <form class="postTimelineBottom"  method='post'>
-                                        <button class="postLikes" type="submit" name="like_<?= $dadosPublicacao['idPublicacao']; ?>" value="like">
-                                            <i class="bi bi-heart-fill <?= queryUserLike($conn, $currentUserData['idUsuario'], $dadosPublicacao['idPublicacao']) ? 'postLiked' : 'postNotLiked'; ?>"></i>
+                                        <button class="postLikes <?= queryUserLike($conn, $currentUserData['idUsuario'], $dadosPublicacao['idPublicacao']) ? 'postLiked' : 'postNotLiked'; ?>" type="submit" name="like_<?= $dadosPublicacao['idPublicacao']; ?>" value="like">
+                                            <i class="bi bi-heart-fill"></i>
                                             <p><?= htmlspecialchars($dadosPublicacao['totalLikes']); ?></p>
                                         </button>
-                                        <div class="postComments">
+                                        <button class="postComments">
                                             <i class="bi bi-chat-fill"></i>
                                             <p>0</p>
-                                        </div>
+                                        </button>
                                     </form>
+
                                 </div>
-                            </article>
+                            </a>
                     
                             <?php
                             $count++;

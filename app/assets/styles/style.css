@@ -235,6 +235,11 @@ button.confirmBtn:hover {
     border-color: var(--secondColor);
 }
 
+a{
+    text-decoration: none;
+    color: var(--blackColor);
+}
+
 /*====================================================================================================
 ========================================== HEADER LANDING ============================================
 ====================================================================================================*/
@@ -2876,13 +2881,25 @@ footer .A-footerRight li.A-footerPolitic h4 {
     color: var(--secondColor);
 }
 
-.Ho-post .postLikes,
-.Ho-post .postComments{
+.Ho-post .postTimelineBottom .postLikes,
+.Ho-post .postTimelineBottom .postComments{
     display: flex;
     gap: 0.5rem;
     background-color: transparent;
     cursor: pointer;
     border: none;
+    color: var(--grayColor);
+    transition: 0.1s;
+}
+
+.Ho-post .postTimelineBottom .postLikes:hover,
+.Ho-post .postTimelineBottom .postComments:hover{
+    transform: scale(1.2);
+    transition: 0.1s;
+}
+
+.Ho-post .postLikes.postLiked{
+    color: var(--secondColor);
 }
 
 .endTimeline{
@@ -3135,6 +3152,27 @@ footer .A-footerRight li.A-footerPolitic h4 {
     align-items: flex-start;
 }
 
+.Au-auxilioCard .postTimelineBottom .postLikes,
+.Au-auxilioCard .postTimelineBottom .postComments{
+    display: flex;
+    gap: 0.5rem;
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+    color: var(--grayColor);
+    transition: 0.1s;
+}
+
+.Au-auxilioCard .postTimelineBottom .postLikes:hover,
+.Au-auxilioCard .postTimelineBottom .postComments:hover{
+    transform: scale(1.2);
+    transition: 0.1s;
+}
+
+.Au-auxilioCard .postTimelineBottom .postLikes.postLiked{
+    color: var(--secondColor);
+}
+
 .Au-auxilioCard .postTimelineBottom div div:hover {
     color: var(--secondColor);
 }
@@ -3215,6 +3253,14 @@ footer .A-footerRight li.A-footerPolitic h4 {
     display: flex;
     flex-wrap: nowrap;
     gap: 0.5rem;
+}
+
+/*====================================================================================================
+========================================= PÁGINA DE SUPORTE ==========================================
+====================================================================================================*/
+
+.Co-Main .timeline .Ho-post{
+    border-bottom: 1px solid var(--grayColor);
 }
 
 /*====================================================================================================

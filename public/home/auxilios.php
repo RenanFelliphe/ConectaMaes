@@ -80,20 +80,17 @@
 
                                 <p class="postTitle"><?php echo htmlspecialchars($dadosPublicacao['titulo']); ?></p>
 
-                                <div class="postTimelineBottom">
-                                    <div class="postInteractions">
-                                        <div class="postLikes">
-                                            <i class="bi bi-heart-fill"></i>
-                                            <p><?= htmlspecialchars($dadosPublicacao['totalLikes']); ?></p>
-                                        </div>
-                                        <div class="postComments">
-                                            <i class="bi bi-chat-fill"></i>
-                                            <p>0</p>
-                                        </div>
-                                    </div>
-
+                                <form class="postTimelineBottom"  method='post'>
+                                    <button class="postLikes <?= queryUserLike($conn, $currentUserData['idUsuario'], $dadosPublicacao['idPublicacao']) ? 'postLiked' : 'postNotLiked'; ?>" type="submit" name="like_<?= $dadosPublicacao['idPublicacao']; ?>" value="like">
+                                        <i class="bi bi-heart-fill"></i>
+                                        <p><?= htmlspecialchars($dadosPublicacao['totalLikes']); ?></p>
+                                    </button>
+                                    <button class="postComments">
+                                        <i class="bi bi-chat-fill"></i>
+                                        <p>0</p>
+                                    </button>
                                     <button name="openAuxilio" class="Au-openAuxilio confirmBtn">Auxiliar</button>
-                                </div>
+                                </form>
 
                                 <section class="Au-auxilioModalBack close">
                                     <article class="Au-auxilioModal">
