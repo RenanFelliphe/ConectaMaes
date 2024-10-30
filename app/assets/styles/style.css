@@ -841,7 +841,7 @@ body.Y-theme .headerHome .userContainer .makeAPostModal .postStyleSummary:hover 
     right: 15rem;
     top: 9.9vh;
     height: fit-content;
-    width: min-content;
+    width: 20vw;
     padding: 1rem;
     display: flex;
     flex-direction: column;
@@ -866,6 +866,39 @@ body.Y-theme .headerHome .userContainer .makeAPostModal .postStyleSummary:hover 
     background: linear-gradient(var(--whiteColor), var(--whiteColor)) padding-box, linear-gradient(to bottom, var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
     z-index: -1;
     opacity: 0.4;
+}
+
+
+.headerHome .notificationsModal .notificationsCenter{
+    position: relative;
+    width: 100%;
+}
+
+.headerHome .notificationsModal .modalHeader{
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 2rem;
+    padding: 0 1rem 1rem 1rem;
+}
+
+.headerHome .notificationsModal .notificationsCenter .notificationsRelativeDate{
+    position: relative;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.headerHome .notificationsModal .notificationsCenter .notificationsRelativeDate span{
+    position: relative;
+    content: '';
+    width: 2rem;
+    height: 1px;
+    background-color: #000000;
+}
+
+.headerHome .notificationsModal .notificationsCenter .notificationsRelativeDate span:last-of-type{
+    width: 100%;
 }
 
 /*====================================================================================================

@@ -164,6 +164,9 @@
         toggleHeader.style.backgroundColor = headerHome.classList.contains('active') ? "#80808030" : "";
     });
 
+    const notificationsModalIcon = document.querySelector(".notificationsModalIcon");
+    const notificationsModal = document.querySelector(".notificationsModal");
+
     function headerFunctions() {
         function toggleModals() {
             const modals = document.querySelectorAll('.headerModal');
@@ -222,6 +225,10 @@
         toggleModals();
         togglePages();
     }
+
+    notificationsModalIcon.addEventListener('click', () => {
+        notificationsModal.classList.toggle("close");
+    });
 
     headerFunctions();
 </script>
