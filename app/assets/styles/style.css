@@ -836,6 +836,38 @@ body.Y-theme .headerHome .userContainer .makeAPostModal .postStyleSummary:hover 
     border-color: var(--secondColor);
 }
 
+.headerHome .notificationsModal {
+    position: fixed;
+    right: 15rem;
+    top: 9.9vh;
+    height: fit-content;
+    width: min-content;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    border-bottom-left-radius: 1.3rem;
+    border-bottom-right-radius: 1.3rem;
+    background-color: var(--whiteColor);
+}
+
+.headerHome .notificationsModal:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-bottom-left-radius: 1.3rem;
+    border-bottom-right-radius: 1.3rem;
+    border: 4px solid transparent;
+    border-top: none;
+    background: linear-gradient(var(--whiteColor), var(--whiteColor)) padding-box, linear-gradient(to bottom, var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
+    z-index: -1;
+    opacity: 0.4;
+}
+
 /*====================================================================================================
 ============================================== FOOTER ================================================
 ====================================================================================================*/

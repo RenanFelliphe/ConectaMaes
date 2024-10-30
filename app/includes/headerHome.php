@@ -137,6 +137,21 @@
         <span></span>
     </div>
 
+    <div class="notificationsModal headerModal close">
+        <div class="modalHeader">
+            <h1>Notificações</h1>
+            <i class="bi bi-three-dots pageIcon"></i>
+        </div>    
+        <div class="notificationsCenter">
+            <div class="notificationsRelativeDate">
+                <span></span>    
+                <p> Hoje </p>
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+
 </header>
 
 <script>
