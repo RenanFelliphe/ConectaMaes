@@ -417,7 +417,7 @@
                         </li>
 
                         <li>
-                            <form class="Se-editPhoneNumber">
+                            <form class="Se-editPhoneNumber" method="post" id="formTelephone">
                                 <input type="hidden" class="updaterIdHiddenInput" name="updaterId" value="<?= $currentUserData['idUsuario']; ?>">    
                                 <h4> Número de Telefone </h4>
                                 <div class="Se-phoneInput">
@@ -425,7 +425,16 @@
                                     <label class="Re-fakePlaceholder" for="telephoneNumber">Telefone</label>
                                     <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
                                 </div>
-                                <button class="Se-editSubmit confirmBtn" type="submit" name="editTelephone Submit">Confirmar</button>
+                                <button class="Se-editSubmit confirmBtn" type="submit" name="editTelephoneSubmit">Confirmar</button>
+                                <?php
+                                    if(isset($_POST['editTelephoneSubmit'])) {   
+                                        if($_POST['updaterId'] === $currentUserData['idUsuario']) {
+                                            editTelephone($conn, $_POST['updaterId']);
+                                        } else {
+                                            echo "Algo deu errado!";
+                                        }
+                                    }
+                                ?>
                             </form>
                         </li>
                     </ul>

@@ -161,7 +161,45 @@
                         echo "<p>$e</p>";
                     }
                 }
-            }    
+            } 
+            
+    //EDIT TELEPHONE
+            function editTelephone($conn, $userId) {
+                $err = array();
+                
+                if (isset($_POST['editTelephoneNumber']) && !empty($_POST['editTelephoneNumber'])) {
+                    $newPhoneNumber = htmlspecialchars($_POST['editTelephoneNumber']);
+                    
+                    if (preg_match('/^\d{10,15}$/', $newPhoneNumber)) { 
+                        $updatePhone = "UPDATE Usuario SET telefone = ? WHERE idUsuario = ?";
+                        
+                        if ($stmt = $conn->prepare($updatePhone)) {
+                            $stmt->bind_param("si", $newPhoneNumber, $userId);
+                            
+                            if ($stmt->execute()) {
+                                echo "<p>Número de telefone atualizado com sucesso!</p>";
+                            } else {
+                                echo "Erro ao atualizar o número de telefone: " . $stmt->error;
+                            }
+                            
+                            $stmt->close();
+                        } else {
+                            echo "Erro ao preparar a consulta: " . $conn->error;
+                        }
+                    } else {
+                        $err[] = "O número de telefone deve conter entre 10 e 15 dígitos.";
+                    }
+                } else {
+                    $err[] = "Por favor, insira um número de telefone válido.";
+                }
+            
+                if (!empty($err)) {
+                    foreach ($err as $e) {
+                        echo "<p>$e</p>";
+                    }
+                }
+            }
+       
     // DELETE ACCOUNT - DELETE
         function deleteAccount($conn, $table, $id){
             if(!empty($id)){         

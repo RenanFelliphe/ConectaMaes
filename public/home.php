@@ -265,7 +265,6 @@
                         </div>
 
                         <button type="submit" class="Re-confirmAddChild confirmBtn" name="enviarFilho"> Confirmar </button>
-                        
                     </form>
 
                     <form class="Re-myChildBtn" method="POST">
