@@ -116,14 +116,7 @@
                                 </div>
                             </a>
                     
-                            <?php
-                            $count++;
-                    
-                            /* A cada 50 publicações, mostrar "sugestões"
-                                if ($count % 50 == 0) {
-                                    echo "Sugestões<br><br>";
-                                }
-                            */
+                            <?php                
                         }
                         ?><p class="endTimeline">...</p>
                         <?php

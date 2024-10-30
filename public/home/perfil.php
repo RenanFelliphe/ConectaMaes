@@ -1,38 +1,71 @@
 <?php 
-    if(session_status() === PHP_SESSION_NONE) {
-        session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+include_once __DIR__ . "/../../app/services/helpers/paths.php";
+
+// Verificar se o usuário está logado
+if (!isset($_SESSION['active'])) {
+    header("Location:" . $relativePublicPath . "/login.php");
+    exit;
+}
+
+// Verificar se o perfil de usuário foi especificado
+if (!isset($_GET['user'])) {
+    header("Location:" . $relativeRootPath . "/notFound.php");
+    exit;
+}
+
+require_once "../../app/services/crud/userFunctions.php";
+require_once "../../app/services/crud/childFunctions.php"; 
+require_once "../../app/services/crud/postFunctions.php";
+require_once '../../app/services/helpers/dateChecker.php';
+
+// Carregar dados do usuário logado
+$currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);   
+
+// Carregar dados do perfil do usuário visitado
+$profileQuery = "SELECT idUsuario, nomeCompleto, telefone, linkFotoPerfil, biografia, nomeDeUsuario, isAdmin FROM Usuario WHERE nomeDeUsuario = '" . mysqli_real_escape_string($conn, $_GET['user']) . "'";
+$profileResult = mysqli_query($conn, $profileQuery);
+$profileData = mysqli_fetch_assoc($profileResult);
+
+if (!$profileResult || mysqli_num_rows($profileResult) === 0) {
+    header("Location:" . $relativeRootPath . "/notFound.php");
+    exit;
+}
+
+// Processar $_POST para curtir e seguir
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($likedPost = array_keys($_POST, 'like', true)) {
+        $postId = str_replace('like_', '', $likedPost[0]);
+        handlePostLike($conn, $currentUserData['idUsuario'], (int)$postId);
     }
-    include_once __DIR__ . "/../../app/services/helpers/paths.php";
 
-    $verify = isset($_SESSION['active']) ? true : header("Location:".$relativePublicPath."/login.php");
-    $user = isset($_GET['user']) ? true : header("Location:". $relativeRootPath."/notFound.php");
-    
-    require_once "../../app/services/crud/userFunctions.php";
-    require_once "../../app/services/crud/childFunctions.php"; 
-    require_once "../../app/services/crud/postFunctions.php";
-    require_once '../../app/services/helpers/dateChecker.php';
-    
-    $currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);   
-
-    $profileQuery = "SELECT idUsuario, nomeCompleto, telefone, linkFotoPerfil, biografia, nomeDeUsuario, isAdmin FROM Usuario WHERE nomeDeUsuario = '" . mysqli_real_escape_string($conn, $_GET['user']) . "'";
-    $profileResult = mysqli_query($conn, $profileQuery);
-
-    if (!$profileResult || mysqli_num_rows($profileResult) === 0) {
-        header("Location:" . $relativeRootPath . "/notFound.php");
-        exit;
+    // Verificar e processar solicitação de seguir
+    if (isset($_POST['followProfile']) && $currentUserData['idUsuario'] != $profileData['idUsuario']) {
+        followUser($conn, $currentUserData['idUsuario'], $profileData['idUsuario']);
+    } elseif ($currentUserData['idUsuario'] == $profileData['idUsuario']) {
+        echo "Você não pode seguir a si mesmo.";
     }
+}
 
-    // Processar $_POST
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        if ($likedPost = array_keys($_POST, 'like', true)) {
-            $postId = str_replace('like_', '', $likedPost[0]); // Extrai o ID da publicação
-            handlePostLike($conn, $currentUserData['idUsuario'], (int)$postId); // Lida com o like
-        }
-    }
+$publicacoes = queryPostsAndUserData($conn,'');
 
-    $publicacoes = queryPostsAndUserData($conn,'');
-    $profileData = mysqli_fetch_assoc($profileResult);
+// Obter o número de seguidores e de pessoas que o usuário está seguindo
+if (isset($profileData)) {
+    $followerCount = getFollowerCount($conn, $profileData['idUsuario']);
+    $followingCount = getFollowingCount($conn, $profileData['idUsuario']);
+} else {
+    echo "Erro: Dados do perfil não encontrados.";
+}
+$isFollowingQuery = "SELECT * FROM seguirUsuario WHERE idUsuarioSeguidor = ? AND idUsuarioSeguindo = ?";
+$stmt = mysqli_prepare($conn, $isFollowingQuery);
+mysqli_stmt_bind_param($stmt, "ii", $currentUserData['idUsuario'], $profileData['idUsuario']);
+mysqli_stmt_execute($stmt);
+$isFollowingResult = mysqli_stmt_get_result($stmt);
+$isFollowing = mysqli_num_rows($isFollowingResult) > 0;
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -89,7 +122,7 @@
                             
                             <div class="Pe-userNumbers">
                                 <div class="Pe-followingNumbers">
-                                    <span class="Pe-following">0</span>
+                                    <span class="Pe-following"><?php echo $followingCount; ?></span>
                                     <p>Seguindo</p>
                                 </div>
                                 <div class="Pe-postsNumber">
@@ -97,7 +130,7 @@
                                     <p>Posts</p>
                                 </div>
                                 <div class="Pe-followersNumber">
-                                    <span class="Pe-followers">0</span>
+                                    <span class="Pe-followers"><?php echo $followerCount; ?></span>
                                     <p>Seguidores</p>
                                 </div>
                             </div>
@@ -107,14 +140,19 @@
                     <div class="Pe-sectionBottom">
                         <div class="Pe-userBiography">
                             <p>Biografia</p>
-                            <span><?php echo $profileData['biografia'];?></span>
+                            <span><?php echo $profileData['biografia']; ?></span>
                         </div>
-                        <?php if($currentUserData['idUsuario'] == $profileData['idUsuario']){?>
-                            <button name="editProfile" class="Pe-editAccount confirmBtn"><p>Editar Perfil</p><i class="bi bi-pencil-fill"></i></button>
-
-                        <?php } else {?>
-                            <button name="followProfile" class="Pe-editAccount confirmBtn"><p>Seguir</p><i class="bi bi-person-add"></i></button>
-                        <?php }?>
+                        <?php if($currentUserData['idUsuario'] == $profileData['idUsuario']) { ?>
+                            <button name="editProfile" class="Pe-editAccount confirmBtn">
+                                <p>Editar Perfil</p><i class="bi bi-pencil-fill"></i>
+                            </button>
+                        <?php } else { ?>
+                            <form method="POST">
+                                <button name="followProfile" class="Pe-editAccount confirmBtn">
+                                    <p><?php echo $isFollowing ? 'Deixar de Seguir' : 'Seguir'; ?></p><i class="bi bi-person-<?php echo $isFollowing ? 'dash' : 'add'; ?>"></i>
+                                </button>
+                            </form>
+                        <?php } ?>
                     </div>
                     
                 </section>

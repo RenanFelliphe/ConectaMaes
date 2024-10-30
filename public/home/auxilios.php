@@ -140,8 +140,8 @@
 
                                         <form class="postInteractions"  method='post'>
                                             <span></span>
-                                            <button class="postLikes" type="submit" name="like_<?= $dadosPublicacao['idPublicacao']; ?>" value="like">
-                                                <i class="bi bi-heart-fill <?= queryUserLike($conn,$currentUserData['idUsuario'],$dadosPublicacao['idPublicacao']) ? 'postLiked' : 'postNotLiked'; ?>"></i>
+                                            <button class="postLikes <?= queryUserLike($conn, $currentUserData['idUsuario'], $dadosPublicacao['idPublicacao']) ? 'postLiked' : 'postNotLiked'; ?>" type="submit" name="like_<?= $dadosPublicacao['idPublicacao']; ?>" value="like">
+                                                <i class="bi bi-heart-fill"></i>
                                                 <p><?= htmlspecialchars($dadosPublicacao['totalLikes']); ?></p>
                                             </button>
 

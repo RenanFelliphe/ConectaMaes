@@ -131,74 +131,75 @@
                 }
             }
         }
-            function editPassword($conn, $userId){
-                $err = array();
-                $currentPassword = md5($_POST['currentPassword']);
-                $newPassword = md5($_POST['newPassword']);
-                $confirmPassword = md5($_POST['confirmNewPassword']);
-                $searchUserPassword = "SELECT senha FROM Usuario WHERE idUsuario = $userId";
-                $result = mysqli_query($conn, $searchUserPassword);
-                $row = $result->fetch_assoc();
 
-                if($currentPassword == $row['senha']){
-                    if($newPassword == $confirmPassword){
-                        $updateSenha = "UPDATE Usuario SET senha = '$newPassword' WHERE idUsuario = $userId";
-                    }else{
-                        $err[] = "Senha nova não confirmada corretamente.";
-                    }
+        function editPassword($conn, $userId){
+            $err = array();
+            $currentPassword = md5($_POST['currentPassword']);
+            $newPassword = md5($_POST['newPassword']);
+            $confirmPassword = md5($_POST['confirmNewPassword']);
+            $searchUserPassword = "SELECT senha FROM Usuario WHERE idUsuario = $userId";
+            $result = mysqli_query($conn, $searchUserPassword);
+            $row = $result->fetch_assoc();
+
+            if($currentPassword == $row['senha']){
+                if($newPassword == $confirmPassword){
+                    $updateSenha = "UPDATE Usuario SET senha = '$newPassword' WHERE idUsuario = $userId";
                 }else{
-                    $err[] = "Senha atual não confere.";
-                }  
-                if (empty($err)) {
-                    $executeUpdate = mysqli_query($conn, $updateSenha);
-                    echo "<p>Senha alterada com sucesso!</p>";
-                    if (!$executeUpdate){
-                        echo "Erro ao atualizar senha: " . mysqli_error($conn) . "!";
-                    }
-                }else{
-                    //salvar error em variaveis pra imprimir no html
-                    foreach($err as $e){
-                        echo "<p>$e</p>";
-                    }
+                    $err[] = "Senha nova não confirmada corretamente.";
                 }
-            } 
-            
-    //EDIT TELEPHONE
-            function editTelephone($conn, $userId) {
-                $err = array();
-                
-                if (isset($_POST['editTelephoneNumber']) && !empty($_POST['editTelephoneNumber'])) {
-                    $newPhoneNumber = htmlspecialchars($_POST['editTelephoneNumber']);
-                    
-                    if (preg_match('/^\d{10,15}$/', $newPhoneNumber)) { 
-                        $updatePhone = "UPDATE Usuario SET telefone = ? WHERE idUsuario = ?";
-                        
-                        if ($stmt = $conn->prepare($updatePhone)) {
-                            $stmt->bind_param("si", $newPhoneNumber, $userId);
-                            
-                            if ($stmt->execute()) {
-                                echo "<p>Número de telefone atualizado com sucesso!</p>";
-                            } else {
-                                echo "Erro ao atualizar o número de telefone: " . $stmt->error;
-                            }
-                            
-                            $stmt->close();
-                        } else {
-                            echo "Erro ao preparar a consulta: " . $conn->error;
-                        }
-                    } else {
-                        $err[] = "O número de telefone deve conter entre 10 e 15 dígitos.";
-                    }
-                } else {
-                    $err[] = "Por favor, insira um número de telefone válido.";
+            }else{
+                $err[] = "Senha atual não confere.";
+            }  
+            if (empty($err)) {
+                $executeUpdate = mysqli_query($conn, $updateSenha);
+                echo "<p>Senha alterada com sucesso!</p>";
+                if (!$executeUpdate){
+                    echo "Erro ao atualizar senha: " . mysqli_error($conn) . "!";
                 }
-            
-                if (!empty($err)) {
-                    foreach ($err as $e) {
-                        echo "<p>$e</p>";
-                    }
+            }else{
+                //salvar error em variaveis pra imprimir no html
+                foreach($err as $e){
+                    echo "<p>$e</p>";
                 }
             }
+        } 
+            
+    // EDIT TELEPHONE
+        function editTelephone($conn, $userId) {
+            $err = array();
+            
+            if (isset($_POST['editTelephoneNumber']) && !empty($_POST['editTelephoneNumber'])) {
+                $newPhoneNumber = htmlspecialchars($_POST['editTelephoneNumber']);
+                
+                if (preg_match('/^\d{10,15}$/', $newPhoneNumber)) { 
+                    $updatePhone = "UPDATE Usuario SET telefone = ? WHERE idUsuario = ?";
+                    
+                    if ($stmt = $conn->prepare($updatePhone)) {
+                        $stmt->bind_param("si", $newPhoneNumber, $userId);
+                        
+                        if ($stmt->execute()) {
+                            echo "<p>Número de telefone atualizado com sucesso!</p>";
+                        } else {
+                            echo "Erro ao atualizar o número de telefone: " . $stmt->error;
+                        }
+                        
+                        $stmt->close();
+                    } else {
+                        echo "Erro ao preparar a consulta: " . $conn->error;
+                    }
+                } else {
+                    $err[] = "O número de telefone deve conter entre 10 e 15 dígitos.";
+                }
+            } else {
+                $err[] = "Por favor, insira um número de telefone válido.";
+            }
+        
+            if (!empty($err)) {
+                foreach ($err as $e) {
+                    echo "<p>$e</p>";
+                }
+            }
+        }
        
     // DELETE ACCOUNT - DELETE
         function deleteAccount($conn, $table, $id){
@@ -214,4 +215,60 @@
                 }
             }    
         }
-        
+    // Função para seguir um usuário
+        // Função para seguir ou deixar de seguir um usuário
+        function followUser($conn, $followerId, $followedId) {
+            // Verifica se o seguidor já está seguindo o usuário
+            $checkFollowQuery = "SELECT * FROM seguirUsuario WHERE idUsuarioSeguidor = ? AND idUsuarioSeguindo = ?";
+            $stmt = mysqli_prepare($conn, $checkFollowQuery);
+            mysqli_stmt_bind_param($stmt, "ii", $followerId, $followedId);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+
+            if (mysqli_num_rows($result) === 0) { 
+                // Se não está seguindo, insere uma nova relação
+                $insertFollowQuery = "INSERT INTO seguirUsuario (idUsuarioSeguidor, idUsuarioSeguindo) VALUES (?, ?)";
+                $stmt = mysqli_prepare($conn, $insertFollowQuery);
+                mysqli_stmt_bind_param($stmt, "ii", $followerId, $followedId);
+                if (mysqli_stmt_execute($stmt)) {
+                    echo "Seguido com sucesso!";
+                } else {
+                    echo "Erro ao seguir o usuário.";
+                }
+            } else { 
+                // Se já está seguindo, remove a relação
+                $deleteFollowQuery = "DELETE FROM seguirUsuario WHERE idUsuarioSeguidor = ? AND idUsuarioSeguindo = ?";
+                $stmt = mysqli_prepare($conn, $deleteFollowQuery);
+                mysqli_stmt_bind_param($stmt, "ii", $followerId, $followedId);
+                if (mysqli_stmt_execute($stmt)) {
+                    echo "Deixou de seguir com sucesso!";
+                } else {
+                    echo "Erro ao deixar de seguir o usuário.";
+                }
+            }
+        }
+
+
+    // Função para contar o número de seguidores
+        function getFollowerCount($conn, $userId) {
+            $query = "SELECT COUNT(*) as total FROM seguirUsuario  WHERE idUsuarioSeguindo  = ?";
+            $stmt = mysqli_prepare($conn, $query);
+            mysqli_stmt_bind_param($stmt, "i", $userId);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+            $data = mysqli_fetch_assoc($result);
+            
+            return $data['total'];
+        }
+
+    // Função para contar o número de pessoas que o usuário está seguindo
+        function getFollowingCount($conn, $userId) {
+            $query = "SELECT COUNT(*) as total FROM seguirUsuario  WHERE idUsuarioSeguidor  = ?";
+            $stmt = mysqli_prepare($conn, $query);
+            mysqli_stmt_bind_param($stmt, "i", $userId);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+            $data = mysqli_fetch_assoc($result);
+            
+            return $data['total'];
+        }
