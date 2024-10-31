@@ -224,31 +224,22 @@
             mysqli_stmt_bind_param($stmt, "ii", $followerId, $followedId);
             mysqli_stmt_execute($stmt);
             $result = mysqli_stmt_get_result($stmt);
-
+        
             if (mysqli_num_rows($result) === 0) { 
                 // Se não está seguindo, insere uma nova relação
                 $insertFollowQuery = "INSERT INTO seguirUsuario (idUsuarioSeguidor, idUsuarioSeguindo) VALUES (?, ?)";
                 $stmt = mysqli_prepare($conn, $insertFollowQuery);
                 mysqli_stmt_bind_param($stmt, "ii", $followerId, $followedId);
-                if (mysqli_stmt_execute($stmt)) {
-                    echo "Seguido com sucesso!";
-                } else {
-                    echo "Erro ao seguir o usuário.";
-                }
+                mysqli_stmt_execute($stmt); // Executa a query de seguir
             } else { 
                 // Se já está seguindo, remove a relação
                 $deleteFollowQuery = "DELETE FROM seguirUsuario WHERE idUsuarioSeguidor = ? AND idUsuarioSeguindo = ?";
                 $stmt = mysqli_prepare($conn, $deleteFollowQuery);
                 mysqli_stmt_bind_param($stmt, "ii", $followerId, $followedId);
-                if (mysqli_stmt_execute($stmt)) {
-                    echo "Deixou de seguir com sucesso!";
-                } else {
-                    echo "Erro ao deixar de seguir o usuário.";
-                }
+                mysqli_stmt_execute($stmt); // Executa a query de deixar de seguir
             }
         }
-
-
+        
     // Função para contar o número de seguidores
         function getFollowerCount($conn, $userId) {
             $query = "SELECT COUNT(*) as total FROM seguirUsuario  WHERE idUsuarioSeguindo  = ?";
@@ -264,6 +255,17 @@
     // Função para contar o número de pessoas que o usuário está seguindo
         function getFollowingCount($conn, $userId) {
             $query = "SELECT COUNT(*) as total FROM seguirUsuario  WHERE idUsuarioSeguidor  = ?";
+            $stmt = mysqli_prepare($conn, $query);
+            mysqli_stmt_bind_param($stmt, "i", $userId);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+            $data = mysqli_fetch_assoc($result);
+            
+            return $data['total'];
+        }
+
+        function getPostsCount($conn, $userId) {
+            $query = "SELECT COUNT(*) as total FROM Publicacao  WHERE idUsuario  = ?";
             $stmt = mysqli_prepare($conn, $query);
             mysqli_stmt_bind_param($stmt, "i", $userId);
             mysqli_stmt_execute($stmt);

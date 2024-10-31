@@ -2,40 +2,43 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
 include_once __DIR__ . "/../../app/services/helpers/paths.php";
+require_once "../../app/services/crud/userFunctions.php";
+require_once "../../app/services/crud/childFunctions.php"; 
+require_once "../../app/services/crud/postFunctions.php";
+require_once "../../app/services/helpers/dateChecker.php";
 
 // Verificar se o usuário está logado
 if (!isset($_SESSION['active'])) {
-    header("Location:" . $relativePublicPath . "/login.php");
+    header("Location: " . $relativePublicPath . "/login.php");
     exit;
 }
 
 // Verificar se o perfil de usuário foi especificado
 if (!isset($_GET['user'])) {
-    header("Location:" . $relativeRootPath . "/notFound.php");
+    header("Location: " . $relativeRootPath . "/notFound.php");
     exit;
 }
-
-require_once "../../app/services/crud/userFunctions.php";
-require_once "../../app/services/crud/childFunctions.php"; 
-require_once "../../app/services/crud/postFunctions.php";
-require_once '../../app/services/helpers/dateChecker.php';
 
 // Carregar dados do usuário logado
 $currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);   
 
 // Carregar dados do perfil do usuário visitado
-$profileQuery = "SELECT idUsuario, nomeCompleto, telefone, linkFotoPerfil, biografia, nomeDeUsuario, isAdmin FROM Usuario WHERE nomeDeUsuario = '" . mysqli_real_escape_string($conn, $_GET['user']) . "'";
+$profileQuery = "SELECT idUsuario, nomeCompleto, telefone, linkFotoPerfil, biografia, nomeDeUsuario, isAdmin 
+                 FROM Usuario 
+                 WHERE nomeDeUsuario = '" . mysqli_real_escape_string($conn, $_GET['user']) . "'";
 $profileResult = mysqli_query($conn, $profileQuery);
 $profileData = mysqli_fetch_assoc($profileResult);
 
 if (!$profileResult || mysqli_num_rows($profileResult) === 0) {
-    header("Location:" . $relativeRootPath . "/notFound.php");
+    header("Location: " . $relativeRootPath . "/notFound.php");
     exit;
 }
 
 // Processar $_POST para curtir e seguir
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Curtir postagem
     if ($likedPost = array_keys($_POST, 'like', true)) {
         $postId = str_replace('like_', '', $likedPost[0]);
         handlePostLike($conn, $currentUserData['idUsuario'], (int)$postId);
@@ -49,21 +52,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$publicacoes = queryPostsAndUserData($conn,'');
-
 // Obter o número de seguidores e de pessoas que o usuário está seguindo
 if (isset($profileData)) {
     $followerCount = getFollowerCount($conn, $profileData['idUsuario']);
     $followingCount = getFollowingCount($conn, $profileData['idUsuario']);
+    $postsCount = getPostsCount($conn, $profileData['idUsuario']);
 } else {
     echo "Erro: Dados do perfil não encontrados.";
 }
+
+// Verificar se o usuário logado já segue o perfil visitado
 $isFollowingQuery = "SELECT * FROM seguirUsuario WHERE idUsuarioSeguidor = ? AND idUsuarioSeguindo = ?";
 $stmt = mysqli_prepare($conn, $isFollowingQuery);
 mysqli_stmt_bind_param($stmt, "ii", $currentUserData['idUsuario'], $profileData['idUsuario']);
 mysqli_stmt_execute($stmt);
 $isFollowingResult = mysqli_stmt_get_result($stmt);
 $isFollowing = mysqli_num_rows($isFollowingResult) > 0;
+
+// Consultar as publicações do usuário
+$publicacoes = queryPostsAndUserData($conn, '');
+
 ?>
 
 
@@ -126,7 +134,7 @@ $isFollowing = mysqli_num_rows($isFollowingResult) > 0;
                                     <p>Seguindo</p>
                                 </div>
                                 <div class="Pe-postsNumber">
-                                    <span class="Pe-posts">0</span>
+                                    <span class="Pe-posts"><?php echo $postsCount; ?></span>
                                     <p>Posts</p>
                                 </div>
                                 <div class="Pe-followersNumber">
@@ -148,7 +156,7 @@ $isFollowing = mysqli_num_rows($isFollowingResult) > 0;
                             </button>
                         <?php } else { ?>
                             <form method="POST">
-                                <button name="followProfile" class="Pe-editAccount confirmBtn">
+                                <button name="followProfile" class="Pe-followUser confirmBtn">
                                     <p><?php echo $isFollowing ? 'Deixar de Seguir' : 'Seguir'; ?></p><i class="bi bi-person-<?php echo $isFollowing ? 'dash' : 'add'; ?>"></i>
                                 </button>
                             </form>
@@ -156,6 +164,7 @@ $isFollowing = mysqli_num_rows($isFollowingResult) > 0;
                     </div>
                     
                 </section>
+
                 <section class="Pe-profilePostType">
                     <div class="Pe-searchBar close">
                         <label class="bi bi-search" for="Pe-searchBarInput"></label>
@@ -185,7 +194,7 @@ $isFollowing = mysqli_num_rows($isFollowingResult) > 0;
                 </section>
 
                 <section class="Pe-userProfilePosts">
-                    <section class="Pe-postsPostagens Pe-allPosts ">
+                    <section class="Pe-postsPostagens Pe-allPosts active">
                         <?php
                         if (count($publicacoes) > 0) {
                             $count = 0;
@@ -274,6 +283,7 @@ $isFollowing = mysqli_num_rows($isFollowingResult) > 0;
                         }      
                         ?>
                     </section>
+
                     <section class="Pe-postsRelatos Pe-allPosts">
                         <?php
                             $publicacoes = queryPostsAndUserData($conn, 'Relato');
@@ -368,7 +378,8 @@ $isFollowing = mysqli_num_rows($isFollowingResult) > 0;
                             }   
                         ?>
                     </section>
-                    <section class="Pe-postsAuxilios Pe-allPosts active">
+
+                    <section class="Pe-postsAuxilios Pe-allPosts">
                         <?php
                         $auxilios = queryPostsAndUserData($conn, 'Auxilio');
                         if (count($auxilios) > 0) {
