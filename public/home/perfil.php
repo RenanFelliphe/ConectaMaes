@@ -523,8 +523,6 @@ $publicacoes = queryPostsAndUserData($conn, '');
                 window.history.replaceState(null, null, window.location.href );
             }
 
-            document.querySelectorAll('.postMoreButton').forEach(b => b.onclick = () => b.querySelector('.postFunctionsModal').classList.toggle('close'));
-
             const searchBar = document.querySelector('.Pe-searchBar');
             const backSearchBar = document.querySelector('.Pe-backSearchBar');
             const allPostTypes = document.querySelectorAll('.Pe-postType');

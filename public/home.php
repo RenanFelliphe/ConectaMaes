@@ -49,95 +49,15 @@
                     <h1 class="Ho-postMain Ho-mainFilters" onclick="toggleAuxilioFilter(this);">Principais</h1>
                 </section>
 
-                <?php
-                    if (count($publicacoes) > 0) {
-                        $count = 0;
-
-                        foreach ($publicacoes as $dadosPublicacao) {
-                            // Verificar se o link da foto de perfil está presente
-                            $profileImage = !empty($dadosPublicacao['linkFotoPerfil']) ? $dadosPublicacao['linkFotoPerfil'] : 'caminho/padrao/para/imagem.png';
-                    
-                            // Formatar a data da publicação utilizando a função do arquivo dateChecker.php
-                            $mensagemData = postDateMessage($dadosPublicacao["dataCriacaoPublicacao"]);
-                            ?>
-                            <article class="Ho-post">
-                                <a class="postOwnerImage" href="<?= $relativePublicPath . "/home/perfil.php?user=" . urlencode($dadosPublicacao['nomeDeUsuario']);?>">
-                                    <img src="<?= $relativeAssetsPath."/imagens/fotos/perfil/".$dadosPublicacao['linkFotoPerfil'];?>">
-                                </a>
-                    
-                                <div class="postContent">
-                                    <div class="postTimelineTop">
-                                        <div class="postUserNames">
-                                            <p class="postOwnerName">
-                                                <?php 
-                                                    $partesDoNomeCompletoOwner = explode(" ", $dadosPublicacao['nomeCompleto']);
-                                                    $firstNameOwner = $partesDoNomeCompletoOwner[0];
-                                                    $lastNameOwner = $partesDoNomeCompletoOwner[count($partesDoNomeCompletoOwner) - 1];
-                                                    $firstAndLastNameOwner = $firstNameOwner . " " . $lastNameOwner; // Concatena a primeira e a última palavra separadas por um espaço
-                                                    echo htmlspecialchars($firstAndLastNameOwner); 
-                                                ?>
-                                            </p>
-                                            <p class="postOwnerUser">
-                                                <?= '@' . htmlspecialchars($dadosPublicacao['nomeDeUsuario']); ?>
-                                            </p>
-                                        </div>
-                    
-                                        <div class="postInfo">
-                                            <ul class="postDate"><li><?= htmlspecialchars($mensagemData); ?></li></ul>
-                                            <div class="bi bi-three-dots postMoreButton">
-                                                <form class="postFunctionsModal close" method = "POST">
-                                                <button class="reportPostButton bi bi-megaphone-fill pageIcon" name = "denunciarPost" onclick=""> Denunciar Postagem</button>
-                                                    <?php if($currentUserData['idUsuario'] == $dadosPublicacao['idUsuario']){?>
-                                                        <input type="hidden" name = "deleterId" value="<?= $dadosPublicacao['idPublicacao']?>">
-                                                        <button class="deletePostButton bi bi-trash3-fill pageIcon" name = "deletarPost" type = "submit"> Deletar Postagem</button>
-                                                    <?php } ?>
-                                                </form>       
-                                                <?php
-                                                    if(isset($_POST['deletarPost'])){
-                                                        deletePost($conn, $_POST['deleterId']);
-                                                    }
-                                                ?>                                     
-                                            </div>                         
-                                        </div>
-                                    </div>
-                    
-                                    <div class="postTitles">  
-                                        <p class="postTitle"><?= htmlspecialchars($dadosPublicacao['titulo']); ?></p>
-                                        <p class="textPost"><?= htmlspecialchars($dadosPublicacao['conteudo']); ?></p>
-                                    </div>
-                    
-                                    <form class="postTimelineBottom" method='POST'>
-                                        <button class="postLikes <?= queryUserLike($conn, $currentUserData['idUsuario'], $dadosPublicacao['idPublicacao']) ? 'postLiked' : 'postNotLiked'; ?>" type="submit" name="like_<?= $dadosPublicacao['idPublicacao']; ?>" value="like">
-                                            <i class="bi bi-heart-fill"></i>
-                                            <p><?= htmlspecialchars($dadosPublicacao['totalLikes']); ?></p>
-                                        </button>
-                                        <button class="postComments">
-                                            <i class="bi bi-chat-fill"></i>
-                                            <p>0</p>
-                                        </button>
-                                    </form>
-                                </div>
-                            </article>
-                            <?php
-                            $count++;
-                            // A cada 50 publicações, mostrar "sugestões"
-                            /* if ($count % 50 == 0) {
-                                echo "Sugestões<br><br>";
-                            } */
-                        }
-                        ?><p class="endTimeline">...</p>
-                        <?php
-                    } else {
-                        ?>
-                            <p class="noPublicationsOnHome">Nenhuma publicação encontrada!</p>
-                        <?php
-                    }      
-                    ?>
+                <?php 
+                    $tipoPublicacao = '';
+                    include_once ("../app/includes/posts.php");
+                ?>
             </section>
 
             <?php include_once ("../app/includes/asideRight.php");?>
 
-            <div class="modalBack">
+            <!--<div class="modalBack">
                 <div class="Re-registerChild" id="addChildModal">
                     <i class="bi bi-x closeChildModal" onclick="registerChildModal()"></i>
                     <p class="Re-addChildBtn toggleAddChildModal"> Adicionar filho +</p>
@@ -318,7 +238,7 @@
                         }
                     ?>
                 </div>
-            </div>
+            </div>-->
 
         </main>
 
@@ -344,7 +264,6 @@
             }
             
             //Abre as funções de um post
-            document.querySelectorAll('.postMoreButton').forEach(b => b.onclick = () => b.querySelector('.postFunctionsModal').classList.toggle('close'));
 
             registerChildModal();
         </script>
