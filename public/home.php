@@ -263,8 +263,6 @@
                 });
             }
             
-            //Abre as funções de um post
-
             registerChildModal();
         </script>
         <script>

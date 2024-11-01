@@ -58,10 +58,6 @@
 
         <script src="<?php echo $relativeAssetsPath; ?>/js/system.js"></script>
         <script>        
-            document.addEventListener('DOMContentLoaded', function() {
-                openAuxilioModal();
-            });    
-
             if ( window.history.replaceState ) {
                 window.history.replaceState( null, null, window.location.href );
             }

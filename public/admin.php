@@ -29,9 +29,6 @@
         <?php include_once ("../app/includes/modais.php");?>
         
         <script src="<?php echo $relativeAssetsPath; ?>/js/system.js"></script>
-        <script>        
-            toggleTheme();
-        </script>
         <script>
             if ( window.history.replaceState ) {
                 window.history.replaceState( null, null, window.location.href );

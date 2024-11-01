@@ -70,6 +70,7 @@
     --grayColor: #808080;
     --blackColor: #000000;
     --redColor: #C84A60;
+    --translucidColor: #8080800a;
 
     /* ================ FONTES ================ */
     --sizeFontTitle: 26px;
@@ -2708,6 +2709,10 @@ footer .A-footerRight li.A-footerPolitic h4 {
     margin: 0.5rem 0;
 }
 
+.Ho-post:hover{
+    background-color: var(--translucidColor);
+}
+
 .Ho-post .postDate {
     position: absolute;
     right: 20%;
@@ -2758,7 +2763,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     column-gap: 0.5rem;
     align-items: flex-end;
     justify-content: flex-start;
-    width: 20rem;
+    max-width: 90%;
 }
 
 .Ho-post .postContent .postTimelineTop .postUserNames p:first-of-type {
@@ -4963,11 +4968,6 @@ body.P-theme .Pe-main .timeline .Pe-profilePostType .Pe-postType.active .Pe-post
 body.P-theme .Pe-main .timeline .Pe-profilePostType .Pe-postType:hover .Pe-postTypeIcon{
     filter: brightness(0) saturate(100%) invert(42%) sepia(61%) saturate(1820%) hue-rotate(302deg) brightness(87%) contrast(85%);
     transition: 0.15s;
-}
-
-
-.Pe-main .timeline .Pe-userProfilePosts{
-
 }
 
 .Pe-allPosts.active{
