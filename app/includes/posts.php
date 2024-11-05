@@ -9,9 +9,20 @@
         foreach ($publicacoes as $dadosPublicacao) {
             $profileImage = !empty($dadosPublicacao['linkFotoPerfil']) ? $dadosPublicacao['linkFotoPerfil'] : 'caminho/padrao/para/imagem.png';
             $mensagemData = postDateMessage($dadosPublicacao["dataCriacaoPublicacao"]);
+
+            // Definir o link para comentários caso o tipo não seja 'Auxilio'
+            $postLink = ($tipoPublicacao != 'Auxilio') 
+                ? $relativePublicPath . "/home/comentarios.php?post=" . $dadosPublicacao['idPublicacao'] ."&type=".$dadosPublicacao['tipoPublicacao']
+                : '#';  // Manter um link vazio se for 'Auxilio'
             ?>
             
-            <article class="Ho-post <?php if($tipoPublicacao == 'Auxilio') echo 'Ho-auxilioCard'?>">
+            <!-- Se o tipo de publicação não for 'Auxilio', o article se torna um link (a) -->
+            <?php if ($tipoPublicacao != 'Auxilio'): ?>
+                <a href="<?= htmlspecialchars($postLink); ?>" class="Ho-post <?= ($tipoPublicacao == 'Auxilio') ? 'Ho-auxilioCard' : ''; ?>">
+            <?php else: ?>
+                <article class="Ho-post <?= ($tipoPublicacao == 'Auxilio') ? 'Ho-auxilioCard' : ''; ?>">
+            <?php endif; ?>
+
                 <ul class="postDate"><li><?= htmlspecialchars($mensagemData); ?></li></ul>
                 <?php 
                     if ($tipoPublicacao != 'Auxilio') {
@@ -76,7 +87,6 @@
                             <p><?= htmlspecialchars($dadosPublicacao['totalLikes']); ?></p>
                         </button>
 
-                        
                         <?php 
                             if ($tipoPublicacao == 'Auxilio') { 
                                 echo '<button name="openAuxilio" class="Au-openAuxilio confirmBtn">Auxiliar</button>'; 
@@ -84,7 +94,11 @@
                         ?>
                     </form>
                 </div>
-            </article>
+            <?php if ($tipoPublicacao != 'Auxilio'): ?>
+                </a> <!-- Fechar o link (a) se o tipo não for 'Auxilio' -->
+            <?php else: ?>
+                </article> <!-- Fechar o article se for 'Auxilio' -->
+            <?php endif; ?>
         <?php
         }
         ?>

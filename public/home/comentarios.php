@@ -5,6 +5,7 @@
     include_once __DIR__ . "/../../app/services/helpers/paths.php";
     $verify = isset($_SESSION['active']) ? true : header("Location:".$relativePublicPath."/login.php");
     $post = isset($_GET['post']) ? true : header("Location:". $relativeRootPath."/notFound.php");
+    $postType = isset($_GET['type']) ? true : header("Location:". $relativeRootPath."/notFound.php");
 
     require_once "../../app/services/crud/userFunctions.php"; 
     require_once "../../app/services/crud/postFunctions.php";
@@ -12,15 +13,17 @@
 
     $currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);  
 
-    $postResult = specificPostQuery($conn, "idPublicacao, tipoPublicacao, conteudo, linkAnexo, titulo, isAnonima, isConcluido, dataCriacaoPublicacao, idUsuario, nomeCompleto, nomeDeUsuario, linkFotoPerfil, totalLikes", "idPublicacao = " . intval($_GET['post']), "");
+    // Consulta a postagem específica com ID
+    $postResult = queryPostsAndUserData($conn, "", $_GET['post'], 1);
 
-    /*if (!$postResult || mysqli_num_rows($postResult) === 0) {
-        if ($postResult === false) {
-            echo "<p class='error'>Erro na consulta: " . mysqli_error($conn) . "</p>";
-        }
-        header("Location:" . $relativeRootPath . "/notFound.php");
-        exit;
-    }*/
+    // Verifique se o resultado foi encontrado
+    if (!$postResult || count($postResult) === 0) {
+        echo "<p class='error'>Postagem não encontrada!</p>";
+        exit;  // Redireciona ou finaliza o processamento se não encontrar a postagem
+    }
+
+    // Obtém o primeiro (único) item do array retornado pela consulta
+    $dadosPublicacao = $postResult[0]; // Pega o primeiro item do array
 
     // Processar $_POST
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -57,7 +60,6 @@
                 </section>
 
                 <?php
-                    $dadosPublicacao = mysqli_fetch_assoc($postResult);
                     if ($dadosPublicacao) {
                         $profileImage = !empty($dadosPublicacao['linkFotoPerfil']) ? $dadosPublicacao['linkFotoPerfil'] : 'caminho/padrao/para/imagem.png';
                         $mensagemData = postDateMessage($dadosPublicacao["dataCriacaoPublicacao"]);

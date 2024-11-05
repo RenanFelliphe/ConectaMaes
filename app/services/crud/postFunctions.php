@@ -31,7 +31,7 @@ function specificPostQuery($conn, $data, $where, $order) {
     return $sUExec;
 }
 
-function queryPostsAndUserData($conn, $postType, $limit = 10, $offset = 0) {
+function queryPostsAndUserData($conn, $postType = '', $postId = null, $limit = 10, $offset = 0) {
     $baseQuery = "
         SELECT 
             p.idPublicacao, 
@@ -53,15 +53,24 @@ function queryPostsAndUserData($conn, $postType, $limit = 10, $offset = 0) {
             curtirPublicacao c ON c.idPublicacao = p.idPublicacao
     ";
 
-    // Adjust WHERE clause according to post type
-    $whereClause = ($postType === '') ? "p.tipoPublicacao <> 'Auxilio'" : "p.tipoPublicacao = '$postType'";
-    
-    // Combine base query with WHERE clause
-    $finalQuery = $baseQuery . " WHERE " . $whereClause . " GROUP BY p.idPublicacao ORDER BY p.dataCriacaoPublicacao DESC LIMIT $limit OFFSET $offset";
-    
+    if ($postId !== null) {
+        $finalQuery = $baseQuery . " WHERE p.idPublicacao = " . intval($postId) . " GROUP BY p.idPublicacao LIMIT 1";
+    } else {
+        $whereClause = ($postType === '') ? "p.tipoPublicacao <> 'Auxilio'" : "p.tipoPublicacao = '$postType'";
+        
+        $finalQuery = $baseQuery . " WHERE " . $whereClause . " GROUP BY p.idPublicacao ORDER BY p.dataCriacaoPublicacao DESC LIMIT $limit OFFSET $offset";
+    }
+
     $result = mysqli_query($conn, $finalQuery);
+
+    if (!$result) {
+        echo "<p class='error'>Erro na consulta: " . mysqli_error($conn) . "</p>";
+        return false;
+    }
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
+
+
 
 function queryUserLike($conn, $idUser, $idPost) {
     $queryLike = "SELECT * FROM curtirPublicacao WHERE idPublicacao = $idPost AND idUsuario = $idUser";
