@@ -1,4 +1,10 @@
 <?php
+    function renderProfileLink($relativePublicPath, $profileImage, $nomeDeUsuario) {
+        return '<a class="postOwnerImage" href="' . htmlspecialchars($relativePublicPath . "/home/perfil.php?user=" . urlencode($nomeDeUsuario)) . '">
+                    <img src="' . htmlspecialchars($profileImage) . '">
+                </a>';
+    }
+
     if (isset($tipoPublicacao)) {
         $publicacoes = queryPostsAndUserData($conn, $tipoPublicacao);    
     } else {
@@ -10,35 +16,22 @@
             $profileImage = !empty($dadosPublicacao['linkFotoPerfil']) ? $dadosPublicacao['linkFotoPerfil'] : 'caminho/padrao/para/imagem.png';
             $mensagemData = postDateMessage($dadosPublicacao["dataCriacaoPublicacao"]);
 
-            // Definir o link para comentários caso o tipo não seja 'Auxilio'
             $postLink = ($tipoPublicacao != 'Auxilio') 
-                ? $relativePublicPath . "/home/comentarios.php?post=" . $dadosPublicacao['idPublicacao'] ."&type=".$dadosPublicacao['tipoPublicacao']
-                : '#';  // Manter um link vazio se for 'Auxilio'
+                ? $relativePublicPath . "/home/comentarios.php?user=" . $dadosPublicacao['nomeDeUsuario'] ."&post=".$dadosPublicacao['idPublicacao']
+                : '#';
             ?>
             
-            <!-- Se o tipo de publicação não for 'Auxilio', o article se torna um link (a) -->
-            <?php if ($tipoPublicacao != 'Auxilio'): ?>
-                <a href="<?= htmlspecialchars($postLink); ?>" class="Ho-post <?= ($tipoPublicacao == 'Auxilio') ? 'Ho-auxilioCard' : ''; ?>">
-            <?php else: ?>
-                <article class="Ho-post <?= ($tipoPublicacao == 'Auxilio') ? 'Ho-auxilioCard' : ''; ?>">
-            <?php endif; ?>
-
+            <article class="Ho-post <?php if($tipoPublicacao == 'Auxilio') echo 'Ho-auxilioCard'?>" data-link="<?= htmlspecialchars($postLink); ?>">
                 <ul class="postDate"><li><?= htmlspecialchars($mensagemData); ?></li></ul>
                 <?php 
-                    if ($tipoPublicacao != 'Auxilio') {
-                        echo '<a class="postOwnerImage" href="' . htmlspecialchars($relativePublicPath . "/home/perfil.php?user=" . urlencode($dadosPublicacao['nomeDeUsuario'])) . '">
-                                <img src="' . htmlspecialchars($relativeAssetsPath . "/imagens/fotos/perfil/" . $profileImage) . '">
-                            </a>';
-                    }
+                    if ($tipoPublicacao != 'Auxilio') 
+                        echo renderProfileLink($relativePublicPath, $relativeAssetsPath . "/imagens/fotos/perfil/" . $profileImage, $dadosPublicacao['nomeDeUsuario']);
                 ?>
                 <div class="postContent">
                     <div class="postTimelineTop">
                         <?php 
-                            if ($tipoPublicacao == 'Auxilio') {
-                                echo '<a class="postOwnerImage" href="' . htmlspecialchars($relativePublicPath . "/home/perfil.php?user=" . urlencode($dadosPublicacao['nomeDeUsuario'])) . '">
-                                        <img src="' . htmlspecialchars($relativeAssetsPath . "/imagens/fotos/perfil/" . $profileImage) . '">
-                                    </a>';
-                            }
+                            if ($tipoPublicacao == 'Auxilio') 
+                                echo renderProfileLink($relativePublicPath, $relativeAssetsPath . "/imagens/fotos/perfil/" . $profileImage, $dadosPublicacao['nomeDeUsuario']);
                         ?>
                         <a class="postUserNames" href="<?= htmlspecialchars($relativePublicPath . "/home/perfil.php?user=" . urlencode($dadosPublicacao['nomeDeUsuario'])); ?>">
                             <p class="postOwnerName">
@@ -94,11 +87,7 @@
                         ?>
                     </form>
                 </div>
-            <?php if ($tipoPublicacao != 'Auxilio'): ?>
-                </a> <!-- Fechar o link (a) se o tipo não for 'Auxilio' -->
-            <?php else: ?>
-                </article> <!-- Fechar o article se for 'Auxilio' -->
-            <?php endif; ?>
+            </article>
         <?php
         }
         ?>
@@ -110,5 +99,11 @@
 ?>
 
 <script>
+    document.querySelectorAll('article[data-link]').forEach(article => {
+        article.addEventListener('click', function() {
+            window.location.href = article.getAttribute('data-link');
+        });
+    });
+
     document.querySelectorAll('.postMoreButton').forEach(b => b.onclick = () => b.querySelector('.postFunctionsModal').classList.toggle('close'));
 </script>

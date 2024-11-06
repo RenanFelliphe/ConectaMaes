@@ -5,7 +5,6 @@
     include_once __DIR__ . "/../../app/services/helpers/paths.php";
     $verify = isset($_SESSION['active']) ? true : header("Location:".$relativePublicPath."/login.php");
     $post = isset($_GET['post']) ? true : header("Location:". $relativeRootPath."/notFound.php");
-    $postType = isset($_GET['type']) ? true : header("Location:". $relativeRootPath."/notFound.php");
 
     require_once "../../app/services/crud/userFunctions.php"; 
     require_once "../../app/services/crud/postFunctions.php";

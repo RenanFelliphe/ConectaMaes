@@ -236,7 +236,7 @@ button.confirmBtn:hover {
     border-color: var(--secondColor);
 }
 
-a{
+a {
     text-decoration: none;
     color: var(--blackColor);
 }
@@ -1144,12 +1144,12 @@ footer .A-footerRight li.A-footerPolitic h4 {
     }
 }
 
-.La-landing .La-seccaoDeTextoEsquerda{
+.La-landing .La-seccaoDeTextoEsquerda {
     text-align: left;
     margin-right: auto;
 }
 
-.La-landing .La-seccaoDeTextoDireita{
+.La-landing .La-seccaoDeTextoDireita {
     text-align: right;
     margin-left: auto;
 }
@@ -1421,7 +1421,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     }
 }
 
-.La-landing .La-landingSections .La-frequentQuestions .La-observation a{
+.La-landing .La-landingSections .La-frequentQuestions .La-observation a {
     font-weight: bold;      
     color: var(--middleBlueColor);
     cursor: pointer;
@@ -1707,116 +1707,6 @@ footer .A-footerRight li.A-footerPolitic h4 {
     font-weight: 400;
     font-size: 1rem;
 }
-
-/*responsividade da landing page
-
-@media (max-width: 1200px) {
-
-    .La-landing {
-        padding-left: 1rem;
-    }
-
-    .La-landingSections .La-quote {
-        padding: 3rem 0 2 rem 3 rem;
-        font-size: 8vh;
-        width: 90vw;
-    }
-
-    .La-landingSections article {
-        flex-direction: colunm;
-        align-items: center;
-        gap: 1rem;
-        width: 80vw;
-    }
-
-    .La-landingSections article .La-momImageRight,
-    .La-landingSections article .La-momImageLeft {
-        margin-right: 0;
-        width: 100%;
-    }
-
-    .La-landingSections .La-createAccountSign {
-        width: 80vw;
-    }
-
-    .La-landingSections .La-createAccountSign p {
-        font-size: 1rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .La-landingSections .La-quote {
-        font-size: 6vh;
-        padding: 2rem 0 1rem 2rem;
-    }
-
-    .La-landingSections article {
-        width: 90vw;
-        font-size: 1rem;
-    }
-
-    .La-landingSections .La-createAccountSign p {
-        font-size: 0.9rem;
-        width: 90%;
-    }
-
-    .La-landingSections .La-createAccountSign .La-createAccountButton {
-        width: 100%;
-        font-size: 1.1rem;
-    }
-
-    .La-landingSections .La-articleEquip .La-equipContainer {
-        width: 100%;
-        gap: 1rem;
-    }
-
-    .La-landingSections .La-articleEquip .La-equipContainer .La-equipMember .La-memberImage img {
-        width: 8rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .La-landingSections .La-quote {
-        font-size: 4vh;
-        padding: 1rem 0 1rem 1rem;
-    }
-
-    .La-landingSections article {
-        width: 95vw;
-        font-size: 0.9rem;
-    }
-
-    .La-landingSections .La-createAccountSign p {
-        font-size: 0.8rem;
-        width: 95%;
-    }
-
-    .La-landingSections .La-createAccountSign .La-createAccountButton {
-        font-size: 1rem;
-    }
-
-    .La-landingSections .La-articleEquip .La-equipContainer {
-        width: 100%;
-        gap: 0.5rem;
-    }
-
-    .La-landingSections .La-articleEquip .La-equipContainer .La-equipMember .La-memberImage img {
-        width: 6rem;
-    }
-
-    .La-landingSections .La-articleEquip .La-equipContainer .La-equipMember .La-memberInformation .La-memberName {
-        font-size: 1.4rem;
-    }
-
-    .La-landingSections .La-articleEquip .La-equipContainer .La-equipMember .La-memberInformation .La-memberFamilyName {
-        font-size: 1rem;
-    }
-
-    .La-landingSections .La-articleEquip .La-equipContainer .La-equipMember .La-memberInformation .La-memberFunction {
-        font-size: 0.8rem;
-    }
-}
-*/
 
 /*====================================================================================================
 ==================================== PÁGINAS DE LOGIN/REGISTRO =======================================
@@ -2395,7 +2285,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     cursor: pointer;
 }
 
-.Re-registerTerms .Re-termsCheckboxes .Re-termsCheckbox label a{
+.Re-registerTerms .Re-termsCheckboxes .Re-termsCheckbox label a {
     color: var(--thirdColor);
     font-weight: 500;
 }

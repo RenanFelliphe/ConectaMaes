@@ -14,4 +14,3 @@
     $relativeAssetsPath = getRelativePath('app/assets');
     $relativeServicesPath = getRelativePath('app/services');
     $relativePublicPath = getRelativePath('public');
-    
