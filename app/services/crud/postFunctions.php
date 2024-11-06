@@ -70,8 +70,6 @@ function queryPostsAndUserData($conn, $postType = '', $postId = null, $limit = 1
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
-
-
 function queryUserLike($conn, $idUser, $idPost) {
     $queryLike = "SELECT * FROM curtirPublicacao WHERE idPublicacao = $idPost AND idUsuario = $idUser";
     $execQuery = mysqli_query($conn, $queryLike);
@@ -113,3 +111,34 @@ function handlePostLike($conn, $idUser, $idPost) {
 }
 
 // COMMENTS
+function queryCommentsData($conn, $postId, $limit = 10, $offset = 0) {
+    $query = "
+        SELECT 
+            c.idComentario,
+            c.conteudo AS comentarioConteudo,
+            c.dataCriacaoComentario,
+            u.idUsuario,
+            u.nomeCompleto,
+            u.nomeDeUsuario,
+            u.linkFotoPerfil,
+            u.estado
+        FROM 
+            Comentario c
+        JOIN 
+            Usuario u ON c.idUsuario = u.idUsuario
+        WHERE 
+            c.idPublicacao = " . intval($postId) . "
+        ORDER BY 
+            c.dataCriacaoComentario ASC
+        LIMIT $limit OFFSET $offset
+    ";
+
+    $result = mysqli_query($conn, $query);
+
+    if (!$result) {
+        echo "<p class='error'>Erro na consulta: " . mysqli_error($conn) . "</p>";
+        return false;
+    }
+
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+}

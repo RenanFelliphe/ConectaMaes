@@ -13,15 +13,13 @@
 
     $currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);
     
-    // Processar $_POST
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($likedPost = array_keys($_POST, 'like', true)) {
-            $postId = str_replace('like_', '', $likedPost[0]); // Extrai o ID da publicação
-            handlePostLike($conn, $currentUserData['idUsuario'], (int)$postId); // Lida com o like
+            $postId = str_replace('like_', '', $likedPost[0]);
+            handlePostLike($conn, $currentUserData['idUsuario'], (int)$postId);
         }
     }
 
-    // Obter todas as publicações após o processamento dos likes
     $publicacoes = queryPostsAndUserData($conn,'');
 ?>
 
@@ -44,10 +42,10 @@
             <?php include_once ("../app/includes/asideLeft.php");?>
 
             <section class="timeline">
-                <section class="Ho-postFilter">
+                <!-- <section class="Ho-postFilter">
                     <h1 class="Ho-postRecent Ho-mainFilters active" onclick="toggleAuxilioFilter(this);">Recentes</h1>
                     <h1 class="Ho-postMain Ho-mainFilters" onclick="toggleAuxilioFilter(this);">Principais</h1>
-                </section>
+                </section> -->
 
                 <?php 
                     $tipoPublicacao = '';
