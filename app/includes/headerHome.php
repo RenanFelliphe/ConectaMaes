@@ -28,8 +28,10 @@
     </div>
 
     <div class="userContainer">
-        <img class="notificationsModalIcon headerIcon" src="<?php echo $relativeAssetsPath; ?>/imagens/icons/notifications_off.png" alt="Ícone do modal de notificações">
-        
+        <!-- 
+        <img class="notificationsModalIcon headerIcon" src="<?= $relativeAssetsPath; ?>/imagens/icons/notifications_off.png" alt="Ícone do modal de notificações">
+        -->
+
         <div class="makeAPost">
             <button name ="postPostagem" class="makeAPostBtn">Postar</button>
 
@@ -41,7 +43,9 @@
         <div class="makeAPostModal headerModal close">
             <div class="modalHeader">
                 <h1>Publicação</h1>
+                <!--
                 <i class="bi bi-three-dots pageIcon"></i>
+                -->
             </div>
 
             <div class="postStyleSummary postPostBtn" onclick="openModal();">
@@ -83,7 +87,7 @@
                     enfrentando no momento e consiga apoio da
                     comunidade</span>. Outras mães estão aqui para oferecer
                     suporte baseado em suas próprias experiências.</p>
-                <button name="postPostagem" class="postBtn pedidosBtn">Postar</button>
+                <button name="postPostagem" class="postBtn pedidosBtn">Pedir</button>
             </div>
         </div>
 
@@ -226,9 +230,9 @@
         togglePages();
     }
 
-    notificationsModalIcon.addEventListener('click', () => {
+    /*notificationsModalIcon.addEventListener('click', () => {
         notificationsModal.classList.toggle("close");
-    });
+    });*/
 
     headerFunctions();
 </script>

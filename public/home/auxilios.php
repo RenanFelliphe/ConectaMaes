@@ -38,11 +38,13 @@
             <?php include_once ("../../app/includes/asideLeft.php");?>
 
             <section class="timeline">
+                <!--
                 <section class="Ho-postFilter">
                     <h1 class="Ho-postRecent Ho-mainFilters active" onclick="toggleAuxilioFilter(this);">Recentes</h1>
                     <h1 class="Ho-postMain Ho-mainFilters" onclick="toggleAuxilioFilter(this);">Principais</h1>
                 </section>
-
+                -->
+                
                 <section class="Au-allAuxilios">
                     <?php
                         $tipoPublicacao = 'Auxilio';

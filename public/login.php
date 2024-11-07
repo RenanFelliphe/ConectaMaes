@@ -47,7 +47,7 @@
                             <input class="Re-userInput" type="password" id="senha" name="senha" oninput="checkEmptyInputLogin(1)" required>
                             <label class="Re-fakePlaceholder" for="senha">Senha</label>
                         </div>
-
+                        <!--
                         <div class="Re-input Lo-loginAssistants">
                             <div class="Lo-rememberMe" style="cursor: pointer">
                                 <input type="checkbox" name="lembrar" id="rememberMeCheckbox" style="cursor: pointer"> 
@@ -55,6 +55,7 @@
                             </div>
                             <a href="" class="Lo-forgetPassword">Esqueceu sua senha?</a>
                         </div>
+                        -->
                     </div>
                 </div>
 
@@ -64,7 +65,7 @@
                 </div>
                 <?php if(isset($loginErrorMsg)){?>
                 <div class="Lo-errorMessage">
-                    <?php echo $loginErrorMsg;}?>
+                    <?= $loginErrorMsg;}?>
                 </div>
             </form> 
         </main>

@@ -1,7 +1,6 @@
 <?php
 include_once(__DIR__ . '/../helpers/upload.php');
 include_once(__DIR__ . '/../helpers/dateChecker.php');
-include_once(__DIR__ . '/../helpers/validateUserInput.php');
 include_once(__DIR__ . '/../helpers/conn.php');
 
 // Função para registrar um novo usuário

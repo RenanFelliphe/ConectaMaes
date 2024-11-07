@@ -112,7 +112,7 @@
             </section>
 
             <section class="La-landingSections">
-                <article class="La-frequentQuestions">
+                <article class="La-frequentQuestions" id="La-contactFAQ">
                     <h1 class = "La-articleTitle"> Perguntas Frequentes</h1>
                     <ul class="faqList">
                         <li class="La-faqQuestions">
@@ -141,13 +141,15 @@
                             <div class="La-faqAnswers">A equipe do ConectaMães está trabalhando para implementar a possibilidade de relatos anônimos. Essa funcionalidade permitirá que os usuários compartilhem suas experiências e dificuldades sem se expor publicamente, garantindo a privacidade e a integridade deles.</div>
                         </li>
                     </ul>
+                    <!--
                     <p class="La-observation">Suas dúvidas ainda não foram respondidas? Contate nos através do  <a href="./public/suporte.php" class="La-focus">Suporte! <i class="bi bi-arrow-up-right"></i> </a></p>
+                    -->
                 </article>  
             </section>
 
             <section class="La-landingSections">
                 <img class="La-contactSectionBackgroundImage" src="app/assets/imagens/figuras/icone.png" alt=" ">
-                <article class="La-contactSection">
+                <article class="La-contactSection" id="La-contactSection">
                     <h1 class = "La-articleTitle">Contato</h1>
                     <form class ="La-contactForm" method="POST">
                         <div class="La-contactInfos">
@@ -207,7 +209,7 @@
             </section>
 
             <section class="La-landingSections">
-                <article class="La-articleEquip">
+                <article class="La-articleEquip" id="La-articleEquip">
                     <div class="La-articleHighlight">
                         <div class ="La-equipeSectionCollum">
                             <img class = "La-equipIcon" src = "app/assets/imagens/icons/people_icon.png" alt="">
@@ -327,8 +329,8 @@
                             </div>
 
                             <div class="La-memberInformation">
-                                <p class="La-memberName"> Luís</p>
-                                <p class="La-memberFamilyName"> Mendes</p>
+                                <p class="La-memberName">Luís</p>
+                                <p class="La-memberFamilyName">Mendes</p>
                                 <p class="La-memberFunction"> Orientador </p>
                             </div>
                         </div>

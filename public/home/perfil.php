@@ -95,7 +95,7 @@ $publicacoes = queryPostsAndUserData($conn, '');
             <section class="timeline">
                 <section class="Pe-userProfileSection">
                     <a href="../home.php"><i class="bi bi-arrow-left-circle"></i></a>
-                    <ul><li class="Pe-lastTimeOnline">Visto por último: <span>a 2 horas atrás</span></li></ul> 
+                    <!-- <ul><li class="Pe-lastTimeOnline">Visto por último: <span>a 2 horas atrás</span></li></ul> -->
 
                     <div class="Pe-userInformations">
                         <div class="Pe-userImage">
@@ -166,11 +166,13 @@ $publicacoes = queryPostsAndUserData($conn, '');
                 </section>
 
                 <section class="Pe-profilePostType">
+                    <!--
                     <div class="Pe-searchBar close">
                         <label class="bi bi-search" for="Pe-searchBarInput"></label>
                         <input type="search" class="Pe-searchBarInput" id="Pe-searchBarInput" placeholder="Pesquisar neste perfil...">
                         <i class="bi bi-arrow-counterclockwise Pe-backSearchBar"></i>                    
                     </div>
+                    -->
                     
                     <div class="Pe-postType active" data-target="Pe-postsPostagens">
                         <img class="postsIcon Pe-postTypeIcon" src="<?php echo $relativeAssetsPath; ?>/imagens/icons/home_off.png" alt="Ícone da página inicial">
@@ -227,7 +229,7 @@ $publicacoes = queryPostsAndUserData($conn, '');
                 window.history.replaceState(null, null, window.location.href );
             }
 
-            const searchBar = document.querySelector('.Pe-searchBar');
+            /*const searchBar = document.querySelector('.Pe-searchBar');
             const backSearchBar = document.querySelector('.Pe-backSearchBar');
             const allPostTypes = document.querySelectorAll('.Pe-postType');
 
@@ -246,7 +248,7 @@ $publicacoes = queryPostsAndUserData($conn, '');
                 allPostTypes.forEach(postType => {
                     postType.style.display = "flex";
                 });
-            };
+            };*/
             
             const postTypes = document.querySelectorAll('.Pe-postType');
             const allPostsSections = document.querySelectorAll('.Pe-allPosts');

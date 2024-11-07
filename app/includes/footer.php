@@ -16,10 +16,14 @@
             <a href="https://www.inflp.cefetmg.br/projetos/projetos-interdisciplinares/" target="_blank" class="A-footerAboutProject">Projeto</a>
             <a href="https://www.leopoldina.cefetmg.br/" target="_blank" class="A-footerAboutEquip">CEFET-MG</a>
         </li>
+        <!--
+        
         <li class="A-footerHelp">
             <h4>Ajuda</h4>
             <a href="<?= $relativePublicPath;?>/suporte.php" class="A-footerHelpSuport">Suporte</a>
         </li>
+        -->
+        
         <li class="A-footerPolitic">
             <h4>Política</h4>
             <a href="../documents/politicas_de_privacidade_ConectaMaes.pdf" download="politicas_de_privacidade_ConectaMaes.pdf" class="A-footerPoliticPrivacy">Políticas de Privacidade</a>

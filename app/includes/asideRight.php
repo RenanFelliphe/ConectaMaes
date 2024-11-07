@@ -4,10 +4,13 @@
         $totalAuxilios = mysqli_num_rows($result); // Contar o total de auxílios
         $q = 0;
     ?>
+    
+    <!--
     <div class="searchBar">
         <i class="bi bi-search"></i>
         <input type="search" class="searchBarInput" placeholder="Pesquisar">
     </div>
+    -->
 
     <div class="myAuxilios">
         <h2 class="myAuxTitle">Meus Auxílios</h2>

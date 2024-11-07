@@ -3,7 +3,9 @@
         session_start();
     }
     include_once __DIR__ . "/../../app/services/helpers/paths.php";
+
     $verify = isset($_SESSION['active']) ? true : header("Location:".$relativePublicPath."/login.php");
+    
     require_once "../../app/services/crud/userFunctions.php"; 
     require_once "../../app/services/crud/postFunctions.php";
     require_once '../../app/services/helpers/dateChecker.php';
@@ -37,16 +39,17 @@
             <?php include_once ("../../app/includes/asideLeft.php");?>
 
             <section class="timeline">
+                <!-- 
                 <section class="Ho-postFilter">
                     <h1 class="Ho-postRecent Ho-mainFilters active" onclick="toggleAuxilioFilter(this);">Recentes</h1>
                     <h1 class="Ho-postMain Ho-mainFilters" onclick="toggleAuxilioFilter(this);">Principais</h1>
                 </section>
+                -->
 
                 <?php
                     $tipoPublicacao = 'Relato';
                     include_once ("../../app/includes/posts.php");
                 ?>
-
             </section>
 
             <?php include_once ("../../app/includes/asideRight.php");?>

@@ -26,12 +26,25 @@
         }
 
         if (isset($_POST['deletarPost'])) {
-            deletePost($conn, $_POST['deleterId']);
+            deletePost($conn, $_POST['postDeleterId']);
+        }
+
+        if ($likedComment = array_keys($_POST, 'like', true)) {
+            $commentId = str_replace('commentLike_', '', $likedComment[0]);
+            handleCommentLike($conn, $currentUserData['idUsuario'], (int)$commentId); 
+        }
+    
+        // Verifica se foi enviado para deletar algum comentário
+        if (isset($_POST['deletarComentario'])) {
+            deleteComment($conn, $_POST['deleterCommentId']);
         }
     }
+    
 
-    $comentarios = queryCommentsData($conn, $dadosPublicacao['idPublicacao']);
+    $allComentarios = queryCommentsData($conn, $dadosPublicacao['idPublicacao']);
 ?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -51,78 +64,29 @@
 
             <section class="timeline">
                 <div class="Co-mainPost">
-                    <?php 
-                        if ($dadosPublicacao) {
-                            $profileImage = !empty($dadosPublicacao['linkFotoPerfil']) ? $dadosPublicacao['linkFotoPerfil'] : 'caminho/padrao/para/imagem.png';
-                            $mensagemData = postDateMessage($dadosPublicacao["dataCriacaoPublicacao"]);
-                            ?>
-                            <article class="Ho-post">
-                                <div class="postOwnerImage">
-                                    <img src="<?php echo $relativeAssetsPath."/imagens/fotos/perfil/".$profileImage; ?>">
-                                </div>
+                    <div class="Co-timelineHeader">  
+                        <a href="../home.php"><i class="bi bi-arrow-left-circle"></i></a>
+                        <h1>Post</h1>
+                    </div>
 
-                                <div class="postContent">
-                                    <div class="postTimelineTop">
-                                        <div class="postUserNames">
-                                            <p class="postOwnerName">
-                                                <?php 
-                                                    $partesDoNomeCompletoOwner = explode(" ", $dadosPublicacao['nomeCompleto']);
-                                                    $firstNameOwner = $partesDoNomeCompletoOwner[0];
-                                                    $lastNameOwner = $partesDoNomeCompletoOwner[count($partesDoNomeCompletoOwner) - 1];
-                                                    $firstAndLastNameOwner = $firstNameOwner . " " . $lastNameOwner;
-
-                                                    echo htmlspecialchars($firstAndLastNameOwner); 
-                                                ?>
-                                            </p>
-                                            <p class="postOwnerUser">
-                                                <?php echo '@' . htmlspecialchars($dadosPublicacao['nomeDeUsuario']); ?>
-                                            </p>
-                                        </div>
-
-                                        <div class="postInfo">
-                                            <ul class="postDate"><li><?= htmlspecialchars($mensagemData); ?></li></ul>
-                                            <div class="bi bi-three-dots postMoreButton">
-                                                <form class="postFunctionsModal close" method="POST">
-                                                    <button class="reportPostButton bi bi-megaphone-fill pageIcon" name="denunciarPost"> Denunciar Postagem</button>
-                                                    <?php if ($currentUserData['idUsuario'] == $dadosPublicacao['idUsuario']) { ?>
-                                                        <input type="hidden" name="deleterId" value="<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?>">
-                                                        <button class="deletePostButton bi bi-trash3-fill pageIcon" name="deletarPost" type="submit"> Deletar Postagem</button>
-                                                    <?php } ?>
-                                                </form>
-                                            </div>
-                                        </div>
-
-                                        <div class="postTitles">
-                                            <p class="postTitle"><?php echo htmlspecialchars($dadosPublicacao['titulo']); ?></p>
-                                            <p class="textPost"><?php echo htmlspecialchars($dadosPublicacao['conteudo']); ?></p>
-                                        </div>
-
-                                        <form class="postTimelineBottom" method='post'>
-                                            <button class="postLikes" type="submit" name="like_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?>" value="like">
-                                                <i class="bi bi-heart-fill <?= queryUserLike($conn, $currentUserData['idUsuario'], $dadosPublicacao['idPublicacao']) ? 'postLiked' : 'postNotLiked'; ?>"></i>
-                                                <p><?= htmlspecialchars($dadosPublicacao['totalLikes']); ?></p>
-                                            </button>
-                                            <div class="postComments">
-                                                <i class="bi bi-chat-fill"></i>
-                                                <p>0</p>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </article>
-                            <?php
-                        }
+                    <?php
+                        $tipoPublicacao = '';
+                        include("../../app/includes/posts.php");
                     ?>
+
+                    <button type="submit" class="commentBtnn confirmBtn"> Comentar </button>
                 </div>
                 <div class="Co-allComents">
                     <?php                      
-                        if ($comentarios && count($comentarios) > 0) {
-                            foreach ($comentarios as $comentario) {
+                        if ($allComentarios && count($allComentarios) > 0) {
+                            foreach ($allComentarios as $comentario) {
                                 $commentProfileImage = !empty($comentario['linkFotoPerfil']) ? $comentario['linkFotoPerfil'] : 'caminho/padrao/para/imagem.png';
                                 $commentData = postDateMessage($comentario["dataCriacaoComentario"]);
                                 ?>
                                 
-                                <article class="Ho-post commentPost">
+                                <article class="Ho-post">
+                                    <ul class="postDate"><li><?php echo htmlspecialchars($commentData); ?></li></ul>
+
                                     <div class="postOwnerImage">
                                         <img src="<?php echo $relativeAssetsPath . "/imagens/fotos/perfil/" . htmlspecialchars($commentProfileImage); ?>">
                                     </div>
@@ -144,23 +108,41 @@
                                                 </p>
                                             </div>
 
-                                            <div class="postInfo">
-                                                <ul class="postDate"><li><?php echo htmlspecialchars($commentData); ?></li></ul>
-                                                <div class="bi bi-three-dots postMoreButton">
-                                                    <form class="postFunctionsModal close" method="POST">
-                                                        <button class="reportCommentButton bi bi-megaphone-fill pageIcon" name="denunciarComentario"> Denunciar Comentário</button>
-                                                        <?php if ($currentUserData['idUsuario'] == $comentario['idUsuario']) { ?>
-                                                            <input type="hidden" name="deleterCommentId" value="<?= htmlspecialchars($comentario['idComentario']); ?>">
-                                                            <button class="deleteCommentButton bi bi-trash3-fill pageIcon" name="deletarComentario" type="submit"> Deletar Comentário</button>
-                                                        <?php } ?>
-                                                    </form>
-                                                </div>
-                                            </div>
-
-                                            <div class="postTexts">  
-                                                <p class="postFullText"><?php echo htmlspecialchars($comentario['comentarioConteudo']); ?></p>
+                                            <div class="postInfo" >
+                                                <?php if($currentUserData['idUsuario'] == $comentario['idUsuario']){ ?>
+                                                    <div class="bi bi-three-dots postMoreButton">
+                                                        <form class="postFunctionsModal close" method="POST">
+                                                            <!-- <button class="reportPostButton bi bi-megaphone-fill pageIcon" name="denunciarComentario"> Denunciar Comentário </button> -->
+                                                            <?php if ($currentUserData['idUsuario'] == $comentario['idUsuario']) { ?>
+                                                                <input type="hidden" name="deleterCommentId" value="<?= $comentario['idComentario']; ?>">
+                                                                <button class="deletePostButton bi bi-trash3-fill pageIcon" name="deletarComentario" type="submit"> Deletar Comentário</button>
+                                                            <?php } ?>
+                                                        </form>
+                                                    
+                                                        <?php
+                                                            if (isset($_POST['deletarPost'])) {
+                                                                deletePost($conn, $_POST['deleterId']);
+                                                            }
+                                                        ?>                                     
+                                                    </div>
+                                                <?php } ?>                         
                                             </div>
                                         </div>
+
+                                        <div class="postTexts">  
+                                            <p class="postFullText"><?= htmlspecialchars($comentario['comentarioConteudo']); ?></p>
+                                        </div>
+
+                                        <form class="postTimelineBottom" method="POST">
+                                            <button class="postLikes <?= queryUserCommentLike($conn, $currentUserData['idUsuario'], $comentario['idComentario']) ? 'postLiked' : 'postNotLiked'; ?>" 
+                                                    type="submit" 
+                                                    name="commentLike_<?= htmlspecialchars($comentario['idComentario']); ?>" 
+                                                    value="like">
+                                                <i class="bi bi-heart-fill"></i>
+                                                <p><?= htmlspecialchars($comentario['totalCommentLikes']); ?></p>
+                                            </button>
+                                        </form>
+
                                     </div>
                                 </article>
                                 <?php
@@ -168,7 +150,6 @@
                         }
                     ?>
                 </div>
-                
             </section>
 
             <?php include_once ("../../app/includes/asideRight.php"); ?>
@@ -181,6 +162,10 @@
             if (window.history.replaceState) {
                 window.history.replaceState(null, null, window.location.href);
             }
+            document.querySelectorAll('.postMoreButton').forEach(b => b.onclick = () => {
+                b.querySelector('.postFunctionsModal').classList.toggle('close');
+            });
+
         </script>
     </body>
 </html>

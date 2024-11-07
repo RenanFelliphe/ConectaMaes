@@ -50,7 +50,8 @@
                         </div>
                         <i class="bi bi-chevron-right" onclick="toggleConfigSection();"></i>
                     </a>
-
+                    
+                    <!-- -->
                     <a class="Se-sectionTitle">
                         <div>
                             <img src="<?= $relativeAssetsPath; ?>/imagens/icons/chat_icon.png" class="pageIcon" alt="Ícone de usuário">
@@ -67,6 +68,7 @@
                         <i class="bi bi-chevron-right"></i>
                     </a>
 
+                    <!-- -->
                     <a class="Se-sectionTitle">
                         <div>
                             <img src="<?= $relativeAssetsPath; ?>/imagens/icons/notifications_icon.png" class="pageIcon" alt="Ícone de usuário">
@@ -143,7 +145,7 @@
                             <label class="Re-fakePlaceholder" for="biografiaUsuario">Biografia</label>
                             <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
                         </div>
-                        <div class="Se-userInput side-by-side">
+                        <div class="Se-userInput full-width">
                             <select id="localizacaoUsuario" name="localizacaoEdit">
                                 <option value="">- - - - - -</option>
                                 <option value="Acre"> AC | Acre</option>
@@ -175,12 +177,6 @@
                                 <option value="Tocantins"> TO | Tocantins</option>                 
                             </select>
                             <label class="Re-fakePlaceholder" for="localizacao" style="pointer-events: none;">Localização</label>
-                        </div>
-                        
-                        <div class="Se-userInput side-by-side">
-                            <input type="text" id="telefoneUsuario" name="telefoneEdit" value="<?= $currentUserData['telefone'];?>">
-                            <label class="Re-fakePlaceholder" for="telefoneUsuario">Telefone</label>
-                            <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
                         </div>
                         <div class="Re-themeInfo">
                             <p> Tema </p>
@@ -359,7 +355,6 @@
                     ?>
                     <button class="Se-addNewChild confirmBtn" onclick="openModal();">Adicionar Filho(a)</button>
                 </div>
-
                 <?php 
                         if(isset($_POST['enviarFilho'])){
                             addChild($conn, $currentUserData['idUsuario']);
@@ -380,7 +375,7 @@
                 <div class="Se-security Se-subSection">
                     <div class="Se-sectionHeader">
                         <img src="<?= $relativeAssetsPath; ?>/imagens/icons/lock_icon.png" class="pageIcon" alt="Ícone de usuário">
-                        <h1>Segurança</h1>
+                        <h1>Segurança e Privacidade</h1>
                     </div>
 
                     <ul>
@@ -392,7 +387,7 @@
                                     <div class="Se-passInput">
                                         <input type="text" id="currentPassword" name="currentPassword">
                                         <label class="Re-fakePlaceholder" for="currentPassword">Senha Atual</label>
-                                        <p class="Se-forgotPassword">Esqueceu a senha?</p>
+                                        <!-- <p class="Se-forgotPassword">Esqueceu a senha?</p> -->
                                     </div>
                                     <div class="Se-passInput">
                                         <input type="text" id="newPassword" name="newPassword">
