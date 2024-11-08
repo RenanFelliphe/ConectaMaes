@@ -344,12 +344,44 @@
                         $filhos = queryMultipleChildrenData($conn, $where = "idUsuario = " . $currentUserData['idUsuario'], $order = "nomeFilho");
                         foreach($filhos as $f){
                     ?>
-                        <form class="Re-myChildBtn" method="POST">
-                            <input type="hidden" name="childIdentifier" value="<?= $f['idFilho']; ?>">
-                            <img src="<?= $relativeAssetsPath; ?>/imagens/icons/<?= $f['sexo'] === 'boy' ? 'boy_icon' : ($f['sexo'] === 'girl' ? 'girl_icon' : 'pram_icon'); ?>.png" class="pageIcon" alt="Ícone do Filho">
-                            <p><?= $f['nomeFilho']; ?></p>
-                            <button type="submit" class=" deleteChildButton" name="deletarFilho"><i class="bi bi-x"></i></button>
-                        </form>
+                        <div class="Se-myChildBtn">
+                            <form class="childHeader" method="POST">
+                                <input type="hidden" name="childIdentifier" value="<?= $f['idFilho']; ?>">
+                                <img class ="childIcon" src="<?= $relativeAssetsPath; ?>/imagens/icons/<?= $f['sexo'] === 'boy' ? 'boy_icon' : ($f['sexo'] === 'girl' ? 'girl_icon' : 'pram_icon'); ?>.png" class="pageIcon" alt="Ícone do Filho">
+                                <p><?= $f['nomeFilho']; ?></p>
+                                <button type="submit" class=" deleteChildButton" name="deletarFilho"><i class="bi bi-x"></i></button> 
+                            </form>
+
+                            <form class="childData" method="post">
+                                <input type="hidden" name="childIdentifier" value="<?= $f['idFilho']; ?>">
+                                <div class="childSpecificData">
+                                    <span>Sexo:  
+                                        <?php 
+                                            switch($f['sexo']){
+                                                case 'girl': echo  "Menina"; break;
+                                                case 'boy': echo "Menino"; break;
+                                                case 'nullSex': echo "Não especializado"; break;
+                                                default: echo 'N/a';
+                                            }
+                                        ?>
+                                    </span>
+                                </div>
+                                <div class="childSpecificData">
+                                    <span>Data de Nascimento:
+                                    
+                                        <?php 
+                                            $data = new DateTime($f['dataNascimentoFilho']);                                          
+                                            $dataFormatadaFilho = $data->format('d/m/Y');
+                                            echo $dataFormatadaFilho; 
+                                        ?>
+                                     </span> 
+                                </div>
+                                <div class="childSpecificData">
+                                    <span>Deficiência:  <?= $f['deficiencias'] ;?></span>
+                                </div>
+                                <button type="submit" class="editarFilho" name="editarFilho">Editar</button>
+                            </form>
+                        </div>
                     <?php 
                         } 
                     ?>

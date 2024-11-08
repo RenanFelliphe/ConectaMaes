@@ -3624,6 +3624,50 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     padding: 0.7rem 1rem;
 }
 
+.Se-asideRight .Se-childInformations .Se-myChildBtn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    width: 80%;
+    height: 10rem;
+    background-color: var(--whiteColor);
+    border: var(--secondColor) 2px solid;
+    border-radius: 1.5rem;
+    position: relative; /* Adicionado para controle de posicionamento interno */
+    padding: 0; /* Remove o preenchimento interno */
+}
+
+.Se-asideRight .Se-childInformations .Se-myChildBtn .childHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: var(--secondColor);
+    width: 100%;
+    margin: 0; /* Remove a margem */
+    position: absolute; /* Adicionado para colar no topo */
+    top: 0; /* Coloca o header no topo */
+    left: 0; /* Alinha à esquerda */
+    padding: 0.5rem 0;
+    border-radius: 1.25rem;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    color: var(--whiteColor);
+}
+
+.Se-asideRight .Se-childInformations .Se-myChildBtn .childHeader .childIcon{
+    filter: brightness(0) saturate(100%) invert(98%) sepia(100%) saturate(10%) hue-rotate(183deg) brightness(102%) contrast(100%);
+}
+
+.Se-asideRight .Se-childInformations .Se-myChildBtn .childData {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 2.5rem; /* Adiciona espaçamento para compensar a altura do header */
+}
+
+
+
 .Se-asideRight .Se-security ul {
     position: relative;
     width: 100%;
@@ -5131,4 +5175,3 @@ body.P-theme .Pe-main .timeline .Pe-profilePostType .Pe-postType:hover .Pe-postT
         height: 2.5rem;
     }
 }
-

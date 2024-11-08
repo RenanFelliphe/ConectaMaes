@@ -1,8 +1,11 @@
 <?php
     include_once __DIR__ . "/../services/helpers/paths.php";
 ?>
+
 <section class="modalSection close">
-    <form class="Ho-postSomething postPostModal pageModal close" method="post" enctype="multipart/form-data">
+    <?php $postType = isset($postType) ? $postType : " ";?>
+    
+    <form class="Ho-postSomething pageModal close" method="post" enctype="multipart/form-data">
         <i class="bi bi-x closeModal" onclick="openModal()"></i>
 
         <div class="Ho-postTop">
@@ -11,136 +14,37 @@
             </a>
 
             <div class="Ho-postText">
+                <?php if ($_POST['postType'] !== " ") : ?>
+                    <div class="Ho-postTitle">
+                        <label for="Ho-postTitleInput">Título:</label>
+                        <input type="text" id="Ho-postTitleInput" name="tituloEnvio" class="Ho-postTitleInput" oninput="postTitleCharLimiter()">
+                        <div class="Ho-titleCharacters">
+                            <span class="Ho-titleCharactersNumber">0</span>/<span class="Ho-maxTitleCharacters">50</span>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                
                 <textarea name="conteudoEnvio" id="postText" cols="62" rows="3" class="Ho-postTextContent" placeholder="Como você está se sentindo?" oninput="postCharLimiter()"></textarea>
                 <div class="Ho-characters">
                     <span class="Ho-charactersNumber">0</span>/<span class="Ho-maxCharacters">200</span>
                 </div>
             </div>
         </div>
-
+        
         <div class="Ho-postBottom">
-            <div class="Ho-extraInputs">
-                <div class="Ho-imageInput">
-                    <input type="file" id="Ho-imageSelector" name="linkAnexoEnvio" accept="image/*" onchange="addPost()">
-                    <label for="Ho-imageSelector">
-                        <i class="bi bi-images Ho-iconLabel"></i>
-                        <p> Imagem </p>
-                    </label>
-                </div>
-            </div>
-
             <div class="Ho-submitArea">
-                <button type="submit" value="submit" name="postPostagemModal" class="Ho-submitBtn confirmBtn">Postar</button>
+                <button type="submit" value="submit" name="submitPost" class="Ho-submitBtn confirmBtn"> Postar </button>
             </div>
         </div>
 
         <div class="Ho-postAttachments">
             <span class="Ho-preview"></span>
         </div>
+
         <?php
-            if(isset($_POST['postPostagemModal'])){
-                sendPost($conn,"Postagem", $currentUserData['idUsuario']);
-            }
-        ?>
-    </form>
-
-    <form class="Ho-postSomething postRelatosModal pageModal close" method="post" enctype="multipart/form-data">
-        <i class="bi bi-x closeModal" onclick="openModal()"></i>
-
-        <div class="Ho-postTop">
-            <a class="Ho-userProfileImage" href="<?php echo $relativePublicPath; ?>/home/perfil.php">
-                <img src="<?php echo $relativeAssetsPath."/imagens/fotos/perfil/".$currentUserData['linkFotoPerfil'];?>">
-            </a>
-
-            <div class="Ho-postText">
-                <div class="Ho-postTitle">
-                    <label for="Ho-postTitleInput">Título:</label>
-                    <input type="text" id="Ho-postTitleInput" name="tituloEnvio" class="Ho-postTitleInput" oninput="postTitleCharLimiter()">
-                    <div class="Ho-titleCharacters">
-                        <span class="Ho-titleCharactersNumber">0</span>/<span class="Ho-maxTitleCharacters">50</span>
-                    </div>
-                </div>
-                <textarea name="conteudoEnvio" id="postText" cols="62" rows="3" class="Ho-postTextContent" placeholder="Encontrou uma dificuldade? Peça ajuda!" oninput="postCharLimiter()"></textarea>
-
-                <div class="Ho-characters">
-                    <span class="Ho-charactersNumber">0</span>/<span class="Ho-maxCharacters">200</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="Ho-postBottom">
-            <div class="Ho-extraInputs">
-                <div class="Ho-imageInput">
-                    <input type="file" id="Ho-imageSelector" name="linkAnexoEnvio" accept="image/*" onchange="addPost()">
-                    <label for="Ho-imageSelector">
-                        <i class="bi bi-images Ho-iconLabel"></i>
-                        <p> Imagem </p>
-                    </label>
-                </div>
-            </div>
-
-            <div class="Ho-submitArea">
-                <button type="submit" value="submit" name ="postRelatoModal" class="Ho-submitBtn confirmBtn">Postar</button>
-            </div>
-        </div>
-
-        <div class="Ho-postAttachments">
-            <span class="Ho-preview"></span>
-        </div>
-        <?php
-            if(isset($_POST['postRelatoModal'])){
-                sendPost($conn,"Relato", $currentUserData['idUsuario']);
-            }
-        ?>
-    </form>
-
-    <form class="Ho-postSomething postAuxilioModal pageModal close" method="post" enctype="multipart/form-data">
-        <i class="bi bi-x closeModal" onclick="openModal()"></i>
-
-        <div class="Ho-postTop">
-            <a class="Ho-userProfileImage" href="<?php echo $relativePublicPath; ?>/home/perfil.php">
-                <img src="<?php echo $relativeAssetsPath."/imagens/fotos/perfil/".$currentUserData['linkFotoPerfil'];?>">
-            </a>
-
-            <div class="Ho-postText">
-                <div class="Ho-postTitle">
-                    <label for="Ho-postTitleInput">Título:</label>
-                    <input type="text" id="Ho-postTitleInput" name="tituloEnvio" class="Ho-postTitleInput" oninput="postTitleCharLimiter()">
-                    <div class="Ho-titleCharacters">
-                        <span class="Ho-titleCharactersNumber">0</span>/<span class="Ho-maxTitleCharacters">50</span>
-                    </div>
-                </div>
-                
-                <textarea name="conteudoEnvio" id="postText" cols="62" rows="3" class="Ho-postTextContent" placeholder="Encontrou uma dificuldade? Peça ajuda!" oninput="postCharLimiter()"></textarea>
-                <div class="Ho-characters">
-                    <span class="Ho-charactersNumber">0</span>/<span class="Ho-maxCharacters">200</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="Ho-postBottom">
-            <div class="Ho-extraInputs">
-                <div class="Ho-imageInput">
-                    <input type="file" id="Ho-imageSelector" name="linkAnexoEnvio" accept="image/*" onchange="addPost()">
-                    <label for="Ho-imageSelector">
-                        <i class="bi bi-images Ho-iconLabel"></i>
-                        <p> Imagem </p>
-                    </label>
-                </div>
-            </div>
-
-            <div class="Ho-submitArea">
-                <button type="submit" value="submit" name ="postAuxilioModal" class="Ho-submitBtn confirmBtn">Pedir</button>
-            </div>
-        </div>
-
-        <div class="Ho-postAttachments">
-            <span class="Ho-preview"></span>
-        </div>
-        <?php
-            if(isset($_POST['postAuxilioModal'])){
-                sendPost($conn,"Auxilio", $currentUserData['idUsuario']);
-            }
+        if (isset($_POST['submitPost'])) {
+            sendPost($conn, $postType, $currentUserData['idUsuario']);
+        }
         ?>
     </form>
 

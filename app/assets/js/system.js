@@ -225,31 +225,6 @@ function openModal() {
     const modalSection = document.querySelector('.modalSection');
     const closeModalBtns = document.querySelectorAll('.closeModal');
     const pageModals = document.querySelectorAll('.pageModal');
-    
-    function postModal(){
-        const postPostBtn = document.querySelector('.postPostBtn');
-        const postRelatoBtn = document.querySelector('.postRelatoBtn');
-        const postAuxilioBtn = document.querySelector('.postAuxilioBtn');
-
-        const postPostModal = document.querySelector('.postPostModal');
-        const postRelatosModal = document.querySelector('.postRelatosModal');
-        const postAuxilioModal = document.querySelector('.postAuxilioModal');
-
-        postPostBtn.addEventListener('click', () => {
-            postPostModal.classList.toggle('close');
-            modalSection.classList.toggle('close');
-        });
-
-        postRelatoBtn.addEventListener('click', () => {
-            postRelatosModal.classList.toggle('close');
-            modalSection.classList.toggle('close');
-        });
-
-        postAuxilioBtn.addEventListener('click', () => {
-            postAuxilioModal.classList.toggle('close');
-            modalSection.classList.toggle('close');
-        });
-    }
 
     function openAddChildModal() {
         const addChildModalBtn = document.querySelector('.Se-addNewChild');
@@ -296,6 +271,30 @@ function openModal() {
     openDeleteAccountModal();
 }
 
+function openModal(button) {
+    const postType = button.getAttribute("data-post-type");
+    document.getElementById("postTypeInput").value = postType;
+
+    const postPostBtn = document.querySelectorAll('.postStyleSummary');
+    const postPostModal = document.querySelector('.Ho-postSomething');
+
+    postPostBtn.forEach(openPostModal => {
+        openPostModal.addEventListener('click', () => {
+            postPostModal.classList.toggle('close');
+            modalSection.classList.toggle('close');
+        });
+    });
+
+    closeModalBtns.forEach(closeModalBtn => {
+        closeModalBtn.addEventListener('click', () => {
+            pageModals.forEach(pageModal => {
+                pageModal.classList.add('close');
+                modalSection.classList.add('close');
+            });
+        });
+    });
+
+}
 function sendPassword(){
     const formElements = document.getElementById('formPassword');
 

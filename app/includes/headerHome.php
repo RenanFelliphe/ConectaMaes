@@ -6,6 +6,7 @@
 
 <header class="headerHome">
     <img src="<?php echo $relativeAssetsPath; ?>/imagens/logos/final/Conecta_Mães_Logo_Black.png" class="A-headerLogo" alt="Logo do ConectaMães">
+    <input type="hidden" id="postTypeInput" name="postType" value="">
 
     <div class="headerPageLinks">
         <a class="homePageLink pageLink" id="homePageLink" href="<?php echo $relativePublicPath; ?>/home.php">
@@ -48,7 +49,8 @@
                 -->
             </div>
 
-            <div class="postStyleSummary postPostBtn" onclick="openModal();">
+            <div class="postStyleSummary" data-post-type=" " onclick="openModal(this);">
+                <?php $postType = " " ?>
                 <div class="postStyleTitle">
                     <span></span>
                     <img class="homePageIcon headerIcon" src="<?php echo $relativeAssetsPath; ?>/imagens/icons/home_off.png" alt="Ícone da página inicial">
@@ -62,7 +64,8 @@
                 <button name ="postPostagem" class="postBtn postagemBtn">Postar</button>
             </div>
 
-            <div class="postStyleSummary postRelatoBtn" onclick="openModal();">
+            <div class="postStyleSummary" data-post-type="Relato" onclick="openModal(this);">
+                <?php $postType = "Relato" ?>
                 <div class="postStyleTitle">
                     <span></span>
                     <img class="reportPageIcon headerIcon" src="<?php echo $relativeAssetsPath; ?>/imagens/icons/reports_off.png" alt="Ícone da página de relatos">
@@ -76,7 +79,8 @@
                 <button name ="postPostagem" class="postBtn relatoBtn">Postar</button>
             </div>
 
-            <div class="postStyleSummary postAuxilioBtn" onclick="openModal();">
+            <div class="postStyleSummary" data-post-type="Auxilio" onclick="openModal(this);">
+                <?php $postType = "Auxilio" ?>
                 <div class="postStyleTitle">
                     <span></span>
                     <img class="helpPageIcon headerIcon" src="<?php echo $relativeAssetsPath; ?>/imagens/icons/helps_off.png" alt="Ícone da página de pedidos">
@@ -123,9 +127,9 @@
             <p>Perfil</p>
         </a>
         <?php if($currentUserData['isAdmin']){?>
-            <a href="<?php echo $relativePublicPath; ?>/admin.php" class="userFunctions">
+            <!--<a href="<?php echo $relativePublicPath; ?>/admin.php" class="userFunctions">
                 <i class="bi bi-key-fill pageIcon"></i>
-                <p>Administração</p>
+                <p>Administração</p>-->
             </a>
         <?php }?>
         
