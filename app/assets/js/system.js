@@ -1,67 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     toggleTheme();
-    openModal();
 });
-
-
-function headerFunctions() {
-    function toggleModals() {
-        const modals = document.querySelectorAll('.headerModal');
-        const makeAPostButton = document.querySelector('.makeAPost');
-        let closeTimeout;
-
-        function closeAllModals() {
-            modals.forEach(modal => modal.classList.add('close'));
-            makeAPostButton.classList.remove('active');
-        }
-
-        function toggleModal(modal, button = null) {
-            const isClosed = modal.classList.contains('close');
-            closeAllModals();
-            if (isClosed) {
-                modal.classList.remove('close');
-                if (button) {
-                    button.classList.add('active');
-                }
-            }
-        }
-
-        document.querySelector('.userAccount').addEventListener('click', () => {
-            toggleModal(document.querySelector('.userFunctionsModal'));
-        });
-
-        makeAPostButton.addEventListener('click', () => {
-            toggleModal(document.querySelector('.makeAPostModal'), makeAPostButton);
-        });
-
-        modals.forEach(modal => {
-            modal.addEventListener('mouseleave', () => {
-                closeTimeout = setTimeout(closeAllModals, 400);
-            });
-            modal.addEventListener('mouseenter', () => {
-                clearTimeout(closeTimeout);
-            });
-        });
-    }
-
-    function togglePages() {
-        const homePageLink = document.getElementById('homePageLink');
-        const reportPageLink = document.getElementById('reportPageLink');
-        const helpPageLink = document.getElementById('helpPageLink');
-        const currentUrl = window.location.href;
-
-        if (currentUrl.includes('/public/home.php')) {
-            homePageLink.classList.add('active');
-        } else if (currentUrl.includes('/public/home/relatos.php')) {
-            reportPageLink.classList.add('active');
-        } else if (currentUrl.includes('/public/home/pedidos.php')) {
-            helpPageLink.classList.add('active');
-        }
-    }
-
-    toggleModals();
-    togglePages();
-}
 
 function postCharLimiter() {
     const maxCharacters = Number(document.querySelector(".Ho-maxCharacters").textContent.trim());
@@ -221,7 +160,7 @@ function toggleConfigSection() {
     });
 }
 
-function openModal() {
+/*function openModal() {
     const modalSection = document.querySelector('.modalSection');
     const closeModalBtns = document.querySelectorAll('.closeModal');
     const pageModals = document.querySelectorAll('.pageModal');
@@ -269,32 +208,32 @@ function openModal() {
     openAddChildModal();
     openEditPasswordModal();
     openDeleteAccountModal();
-}
+}*/
 
-function openModal(button) {
-    const postType = button.getAttribute("data-post-type");
-    document.getElementById("postTypeInput").value = postType;
+function openModal(modal) {
+    const modalSections = document.querySelectorAll('.modalSection');
+    const closeModalBtns = document.querySelectorAll('.closeModal');
+    const btnClicked = modal.getAttribute("data-type");
 
-    const postPostBtn = document.querySelectorAll('.postStyleSummary');
-    const postPostModal = document.querySelector('.Ho-postSomething');
+    //Oculta o Título nos modais de POSTAGEM
+    const postTitleContainer = document.getElementById('postTitleContainer');
+    postTitleContainer.style.display = btnClicked === 'postSomething' && modal.id === '' ? 'none' : 'flex';
 
-    postPostBtn.forEach(openPostModal => {
-        openPostModal.addEventListener('click', () => {
-            postPostModal.classList.toggle('close');
+    modalSections.forEach(modalSection => {
+        if (modalSection.getAttribute("data-type") === btnClicked) {
             modalSection.classList.toggle('close');
-        });
+        }
     });
 
     closeModalBtns.forEach(closeModalBtn => {
         closeModalBtn.addEventListener('click', () => {
-            pageModals.forEach(pageModal => {
-                pageModal.classList.add('close');
+            modalSections.forEach(modalSection => {
                 modalSection.classList.add('close');
             });
         });
     });
-
 }
+
 function sendPassword(){
     const formElements = document.getElementById('formPassword');
 

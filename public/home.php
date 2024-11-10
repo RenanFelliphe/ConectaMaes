@@ -219,8 +219,6 @@
                         } 
                     ?>
 
-                    
-
                     <?php 
                         if(isset($_POST['enviarFilho'])){
                             addChild($conn, $currentUserData['idUsuario']);
@@ -231,11 +229,8 @@
                         }
                     ?>
                 </div>
-            </div>-->
-
+            </div> -->
         </main>
-
-        <?php include_once ("../app/includes/modais.php");?>
         
         <script src="<?= $relativeAssetsPath; ?>/js/system.js"></script>
         <script>

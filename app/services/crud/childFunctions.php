@@ -23,10 +23,10 @@
                         
                         if (mysqli_num_rows($resultDeficiencia) > 0) {
                             $idDeficiencia = mysqli_fetch_assoc($resultDeficiencia)['idDeficiencia'];
-                            $insertDeficiency = "INSERT INTO filhoDeficiencia (idFilho, idDeficiencia) VALUES ('$idFilho', '$idDeficiencia')";
-                            $executeInsertDeficiency = mysqli_query($conn, $insertDeficiency);
+                            $insertDisability = "INSERT INTO filhoDeficiencia (idFilho, idDeficiencia) VALUES ('$idFilho', '$idDeficiencia')";
+                            $executeInsertDisability = mysqli_query($conn, $insertDisability);
         
-                            if (!$executeInsertDeficiency) {
+                            if (!$executeInsertDisability) {
                                 echo "<p>Não foi possível associar deficiência: " . mysqli_error($conn) . "!<p>";
                             }
                         }
@@ -82,6 +82,19 @@
 
                 return mysqli_fetch_all($mFQuery, MYSQLI_ASSOC);
             }
+
+            function queryChildDisability($conn, $id) {
+                $query = "
+                    SELECT d.categoriaCID
+                    FROM Deficiencia d
+                    JOIN filhoDeficiencia fd ON d.idDeficiencia = fd.idDeficiencia
+                    WHERE fd.idFilho = $id
+                ";
+                $cdQuery = mysqli_query($conn, $query);
+                return mysqli_fetch_all($cdQuery, MYSQLI_ASSOC);
+            }
+            
+
         // EDIT ACCOUNT - UPDATE
             function editChild($conn, $childId) {
                 $err = array();

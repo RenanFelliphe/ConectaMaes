@@ -6,6 +6,7 @@
     $verify = isset($_SESSION['active']) ? true : header("Location:" . $relativePublicPath . "/login.php");
     require_once "../../app/services/crud/userFunctions.php"; 
     require_once "../../app/services/crud/childFunctions.php";
+    require_once "../../app/services/crud/disabilityFunctions.php";
     require_once "../../app/services/auth/authUser.php";
     require_once "../../app/services/helpers/dateChecker.php";
     $table = "Usuario";
@@ -24,11 +25,17 @@
     </head>
 
     <body class="<?= $currentUserData['tema'];?>">
-        <?php include_once ("../../app/includes/headerHome.php");?>
+        <?php
+            ini_set('display_errors', 1);
+            ini_set('display_startup_errors', 1);
+            error_reporting(E_ALL);
+        ?>
+        <?php 
+            include_once ("../../app/includes/headerHome.php");
+        ?>
         
         <main class="Ho-Main Se-main mainSystem">
-            <?php include_once ("../../app/includes/asideLeft.php");?>
-
+            <?php include_once "../../app/includes/asideLeft.php";?>
             <section class="Se-settingsCenter">
                 <div class="Se-centerHeader">  
                     <a href="../home.php"><i class="bi bi-arrow-left-circle"></i></a>
@@ -345,30 +352,29 @@
                         foreach($filhos as $f){
                     ?>
                         <div class="Se-myChildBtn">
-                            <form class="childHeader" method="POST">
+                            <form class="childHeader" method="POST" onclick="toggleChildData(this);">
                                 <input type="hidden" name="childIdentifier" value="<?= $f['idFilho']; ?>">
                                 <img class ="childIcon" src="<?= $relativeAssetsPath; ?>/imagens/icons/<?= $f['sexo'] === 'boy' ? 'boy_icon' : ($f['sexo'] === 'girl' ? 'girl_icon' : 'pram_icon'); ?>.png" class="pageIcon" alt="Ícone do Filho">
-                                <p><?= $f['nomeFilho']; ?></p>
+                                <p class="childName"><?= $f['nomeFilho']; ?></p>
                                 <button type="submit" class=" deleteChildButton" name="deletarFilho"><i class="bi bi-x"></i></button> 
                             </form>
 
                             <form class="childData" method="post">
                                 <input type="hidden" name="childIdentifier" value="<?= $f['idFilho']; ?>">
                                 <div class="childSpecificData">
-                                    <span>Sexo:  
+                                    <span><strong>Sexo:</strong>  
                                         <?php 
                                             switch($f['sexo']){
-                                                case 'girl': echo  "Menina"; break;
-                                                case 'boy': echo "Menino"; break;
-                                                case 'nullSex': echo "Não especializado"; break;
+                                                case 'girl': echo  "Feminino"; break;
+                                                case 'boy': echo "Masculino"; break;
+                                                case 'nullSex': echo "Não informado"; break;
                                                 default: echo 'N/a';
                                             }
                                         ?>
                                     </span>
                                 </div>
                                 <div class="childSpecificData">
-                                    <span>Data de Nascimento:
-                                    
+                                    <span><strong>Data de Nascimento:</strong>
                                         <?php 
                                             $data = new DateTime($f['dataNascimentoFilho']);                                          
                                             $dataFormatadaFilho = $data->format('d/m/Y');
@@ -377,10 +383,88 @@
                                      </span> 
                                 </div>
                                 <div class="childSpecificData">
-                                    <span>Deficiência:  <?= $f['deficiencias'] ;?></span>
+                                    <span><strong>Deficiência:</strong>  <?= $f['deficiencias'] ;?></span>
                                 </div>
-                                <button type="submit" class="editarFilho" name="editarFilho">Editar</button>
+                                <div class="editarFilho" name="editarFilho" onclick="toggleEditChildForm(this);">Editar Filho(a)</div>
                             </form>
+
+                            <form method="post" class="editChildForm">
+                                <div class="childNameEditor">
+                                    <p> Nome: </p>
+                                    <input type="text" class="Re-childName" id="nomeFilho" name="nomeFilho" placeholder="Nome Completo" value="<?= $f['nomeFilho'];?>"required>
+                                </div>
+                                <div class="childSexEditor">
+                                    <p> Sexo: </p>
+                                    <div class="sexOptions">
+                                        <?php
+                                            $sexOptions = ['boy' => 'Menino', 'girl' => 'Menina', 'nullSex' => 'Não Informar'];
+
+                                            foreach ($sexOptions as $value => $label) {
+                                                $checked = ($f['sexo'] === $value) ? 'checked' : '';
+                                                echo "<input type='radio' name='sexoFilho' value='$value' id='child{$value}Sex' $checked>";
+                                                echo "<label for='child{$value}Sex'> $label </label>";
+                                            }
+                                        ?>
+                                    </div>
+                                </div>
+                                <div class="childBirthEditor">
+                                    <label for="dataNascFilho">Data de Nascimento</label>
+                                    <input type="date" id="dataNascFilho" name="dataNascimentoFilho" value="<?= date('Y-m-d', strtotime($f['dataNascimentoFilho'])); ?>" required>
+                                </div>
+                                <div class="childDisabilityEditor">
+                                    <label for="deficienciaFilho">Deficiência</label>
+                                    <div class="input">
+                                        <?php $childDisability = queryChildDisability($conn, $f['idFilho'])[0]; ?>
+                                        <select name="deficienciaFilho" id="deficiencia">
+                                            <option value="N/a" <?= ($childDisability['categoriaCID'] == 'N/a') ? 'selected' : '' ?>> Não informar </option>
+                                            <optgroup label="Deficiência Físicas">
+                                                <?php 
+                                                    $physical_defs = queryMultipleDefData($conn, "categoriaCID LIKE 'G8%' OR categoriaCID LIKE 'R2%'", "categoriaCID ASC"); 
+                                                    foreach($physical_defs as $pd){
+                                                ?>
+                                                    <option value="<?=$pd['categoriaCID']?>" <?= ($childDisability['categoriaCID'] == $pd['categoriaCID']) ? 'selected' : '' ?>><?= $pd['categoriaCID'] . " - " . $pd['nomeDeficiencia']?></option>
+                                                <?php
+                                                    }
+                                                ?>
+                                            </optgroup>
+                                            <optgroup label="Deficiência Neurológicas">
+                                                <?php 
+                                                    $neural_des = queryMultipleDefData($conn, "categoriaCID LIKE 'G0%' OR categoriaCID LIKE 'G1%' OR categoriaCID LIKE 'G2%' OR categoriaCID LIKE 'G3%'", "categoriaCID ASC"); 
+                                                    foreach($neural_des as $nd){
+                                                ?>
+                                                    <option value="<?=$nd['categoriaCID']?>" <?= ($childDisability['categoriaCID'] == $nd['categoriaCID']) ? 'selected' : '' ?>><?= $nd['categoriaCID'] . " - " . $nd['nomeDeficiencia']?></option>
+                                                <?php
+                                                    }
+                                                ?>
+                                            </optgroup>
+                                            <optgroup label="Deficiência Visuais">
+                                                <?php 
+                                                    $visual_des = queryMultipleDefData($conn, "categoriaCID LIKE 'H5%'", "categoriaCID ASC"); 
+                                                    foreach($visual_des as $vd){
+                                                ?>
+                                                    <option value="<?=$vd['categoriaCID']?>" <?= ($childDisability['categoriaCID'] == $vd['categoriaCID']) ? 'selected' : '' ?>><?= $vd['categoriaCID'] . " - " . $vd['nomeDeficiencia']?></option>
+                                                <?php
+                                                    }
+                                                ?>
+                                            </optgroup>
+                                            <optgroup label="Deficiência Auditivas">
+                                                <?php 
+                                                    $aud_des = queryMultipleDefData($conn, "categoriaCID LIKE 'H8%' OR categoriaCID LIKE 'H9%", "categoriaCID ASC"); 
+                                                    foreach($aud_des as $ad){
+                                                ?>
+                                                    <option value="<?=$ad['categoriaCID']?>" <?= ($childDisability['categoriaCID'] == $ad['categoriaCID']) ? 'selected' : '' ?>><?= $ad['categoriaCID'] . " - " . $ad['nomeDeficiencia']?></option>
+                                                <?php
+                                                    }
+                                                ?>
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="childButtons">
+                                    <div name="voltar" onclick="toggleEditChildForm(this);">Cancelar Edição</div>
+                                    <button type="submit" name="confirmarEditarFilho">Salvar alterações</button>
+                                </div>
+                            </form> 
                         </div>
                     <?php 
                         } 
@@ -388,14 +472,14 @@
                     <button class="Se-addNewChild confirmBtn" onclick="openModal();">Adicionar Filho(a)</button>
                 </div>
                 <?php 
-                        if(isset($_POST['enviarFilho'])){
-                            addChild($conn, $currentUserData['idUsuario']);
-                        }
-                        if(isset($_POST['deletarFilho'])){
-                            $childId = $_POST['childIdentifier'];
-                            deleteChild($conn, $childId);
-                        }
-                    ?>
+                    if(isset($_POST['enviarFilho'])){
+                        addChild($conn, $currentUserData['idUsuario']);
+                    }
+                    if(isset($_POST['deletarFilho'])){
+                        $childId = $_POST['childIdentifier'];
+                        deleteChild($conn, $childId);
+                    }
+                ?>
 
                 <div class="Se-otherUsersInteractions Se-subSection">
                     <div class="Se-sectionHeader">
@@ -514,6 +598,18 @@
             document.addEventListener('DOMContentLoaded', function() {
                 toggleConfigSection();
             });
+
+            function toggleChildData(header) {
+                const container = header.parentElement;
+                container.classList.toggle('expanded');
+            }
+
+            function toggleEditChildForm(button) {
+                var childData = button.closest('.Se-myChildBtn').querySelector('.childData');
+                var editChildForm = button.closest('.Se-myChildBtn').querySelector('.editChildForm');
+                childData.classList.toggle('closed');
+                editChildForm.classList.toggle('open');
+            }
         </script>
         <script>
             if ( window.history.replaceState ) {

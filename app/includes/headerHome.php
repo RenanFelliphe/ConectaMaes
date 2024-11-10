@@ -41,60 +41,6 @@
             </div>
         </div>
 
-        <div class="makeAPostModal headerModal close">
-            <div class="modalHeader">
-                <h1>Publicação</h1>
-                <!--
-                <i class="bi bi-three-dots pageIcon"></i>
-                -->
-            </div>
-
-            <div class="postStyleSummary" data-post-type=" " onclick="openModal(this);">
-                <?php $postType = " " ?>
-                <div class="postStyleTitle">
-                    <span></span>
-                    <img class="homePageIcon headerIcon" src="<?php echo $relativeAssetsPath; ?>/imagens/icons/home_off.png" alt="Ícone da página inicial">
-                    <h4>Post</h4>
-                    <span></span>
-                </div>
-                <p>Faça uma publicação para compartilhar momentos
-                    do seu dia a dia, novidades, fotos ou qualquer outra coisa
-                    que queira dividir com a comunidade. <span>É a forma padrão
-                    de se conectar e interagir com outras mães<span>.</p>
-                <button name ="postPostagem" class="postBtn postagemBtn">Postar</button>
-            </div>
-
-            <div class="postStyleSummary" data-post-type="Relato" onclick="openModal(this);">
-                <?php $postType = "Relato" ?>
-                <div class="postStyleTitle">
-                    <span></span>
-                    <img class="reportPageIcon headerIcon" src="<?php echo $relativeAssetsPath; ?>/imagens/icons/reports_off.png" alt="Ícone da página de relatos">
-                    <h4>Relato</h4>
-                    <span></span>
-                </div>
-                <p>Compartilhe suas experiências pessoais. <span>Conte sobre
-                    momentos importantes, dificuldades superadas,
-                    alegrias ou tristezas da sua vida</span>. Seus relatos podem
-                    inspirar e confortar outras mães na comunidade.</p>
-                <button name ="postPostagem" class="postBtn relatoBtn">Postar</button>
-            </div>
-
-            <div class="postStyleSummary" data-post-type="Auxilio" onclick="openModal(this);">
-                <?php $postType = "Auxilio" ?>
-                <div class="postStyleTitle">
-                    <span></span>
-                    <img class="helpPageIcon headerIcon" src="<?php echo $relativeAssetsPath; ?>/imagens/icons/helps_off.png" alt="Ícone da página de pedidos">
-                    <h4>Auxílio</h4>
-                    <span></span>
-                </div>
-                <p>Precisa de ajuda? <span>Descreva uma dificuldade que está
-                    enfrentando no momento e consiga apoio da
-                    comunidade</span>. Outras mães estão aqui para oferecer
-                    suporte baseado em suas próprias experiências.</p>
-                <button name="postPostagem" class="postBtn pedidosBtn">Pedir</button>
-            </div>
-        </div>
-
         <div class="userInformations">
             <span class="userRealName">
                 <?php 
@@ -121,6 +67,71 @@
         </div>
     </div>
 
+    <div class="notificationsModal headerModal close">
+        <div class="modalHeader">
+            <h1>Notificações</h1>
+            <i class="bi bi-three-dots pageIcon"></i>
+        </div>    
+        <div class="notificationsCenter">
+            <div class="notificationsRelativeDate">
+                <span></span>    
+                <p> Hoje </p>
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="makeAPostModal headerModal close">
+        <div class="modalHeader">
+            <h1>Publicação</h1>
+            <!--
+            <i class="bi bi-three-dots pageIcon"></i>
+            -->
+        </div>
+
+        <div class="postStyleSummary" name="postPostagemModal" id='' data-type="postSomething" onclick="openModal(this);">
+            <div class="postStyleTitle">
+                <span></span>
+                <img class="homePageIcon headerIcon" src="<?php echo $relativeAssetsPath; ?>/imagens/icons/home_off.png" alt="Ícone da página inicial">
+                <h4>Post</h4>
+                <span></span>
+            </div>
+            <p>Faça uma publicação para compartilhar momentos
+                do seu dia a dia, novidades, fotos ou qualquer outra coisa
+                que queira dividir com a comunidade. <span>É a forma padrão
+                de se conectar e interagir com outras mães<span>.</p>
+            <button name ="postPostagem" class="postBtn">Postar</button>
+        </div>
+
+        <div class="postStyleSummary" name="postRelatoModal" id="Relato" data-type="postSomething" onclick="openModal(this);">
+            <div class="postStyleTitle">
+                <span></span>
+                <img class="reportPageIcon headerIcon" src="<?php echo $relativeAssetsPath; ?>/imagens/icons/reports_off.png" alt="Ícone da página de relatos">
+                <h4>Relato</h4>
+                <span></span>
+            </div>
+            <p>Compartilhe suas experiências pessoais. <span>Conte sobre
+                momentos importantes, dificuldades superadas,
+                alegrias ou tristezas da sua vida</span>. Seus relatos podem
+                inspirar e confortar outras mães na comunidade.</p>
+            <button name ="postPostagem" class="postBtn">Postar</button>
+        </div>
+
+        <div class="postStyleSummary" name="postAuxilioModal" id="Auxilio" data-type="postSomething" onclick="openModal(this);">
+            <div class="postStyleTitle">
+                <span></span>
+                <img class="helpPageIcon headerIcon" src="<?php echo $relativeAssetsPath; ?>/imagens/icons/helps_off.png" alt="Ícone da página de pedidos">
+                <h4>Auxílio</h4>
+                <span></span>
+            </div>
+            <p>Precisa de ajuda? <span>Descreva uma dificuldade que está
+                enfrentando no momento e consiga apoio da
+                comunidade</span>. Outras mães estão aqui para oferecer
+                suporte baseado em suas próprias experiências.</p>
+            <button name="postPostagem" class="postBtn">Pedir</button>
+        </div>
+    </div>
+
     <div class="userFunctionsModal headerModal close">
         <a href="<?= $relativePublicPath . "/home/perfil.php?user=" . $currentUserData['nomeDeUsuario'];?>" class="userFunctions">
             <i class="bi bi-person-fill pageIcon"></i>
@@ -144,23 +155,56 @@
         </a>
         <span></span>
     </div>
+</header>
 
-    <div class="notificationsModal headerModal close">
-        <div class="modalHeader">
-            <h1>Notificações</h1>
-            <i class="bi bi-three-dots pageIcon"></i>
-        </div>    
-        <div class="notificationsCenter">
-            <div class="notificationsRelativeDate">
-                <span></span>    
-                <p> Hoje </p>
-                <span></span>
+<modal class="modalSection close" data-type="postSomething">
+    <form class="Ho-postSomething pageModal" method="post" enctype="multipart/form-data">
+        <i class="bi bi-x closeModal" onclick="openModal()"></i>
+
+        <div class="Ho-postTop">
+            <a class="Ho-userProfileImage" href="<?php echo $relativePublicPath; ?>/home/perfil.php">
+                <img src="<?php echo $relativeAssetsPath . "/imagens/fotos/perfil/" . $currentUserData['linkFotoPerfil'];?>">
+            </a>
+
+            <div class="Ho-postText">
+                <div class="Ho-postTitle" id="postTitleContainer" style="display: none;">
+                    <label for="Ho-postTitleInput">Título:</label>
+                    <input type="text" id="Ho-postTitleInput" name="tituloEnvio" class="Ho-postTitleInput" oninput="postTitleCharLimiter()">
+                    <div class="Ho-titleCharacters">
+                        <span class="Ho-titleCharactersNumber">0</span>/<span class="Ho-maxTitleCharacters">50</span>
+                    </div>
+                </div>
+                
+                <textarea name="conteudoEnvio" id="postText" cols="62" rows="3" class="Ho-postTextContent" placeholder="Como você está se sentindo?" oninput="postCharLimiter()"></textarea>
+                <div class="Ho-characters">
+                    <span class="Ho-charactersNumber">0</span>/<span class="Ho-maxCharacters">200</span>
+                </div>
             </div>
         </div>
-    </div>
+        
+        <div class="Ho-postBottom">
+            <div class="Ho-submitArea">
+                <button type="submit" value="submit" name="postPostModal" class="Ho-submitBtn confirmBtn"> Postar </button>
+                <button type="submit" value="submit" name="postRelatoModal" class="Ho-submitBtn confirmBtn"> Postar </button>
+                <button type="submit" value="submit" name="postAuxilioModal" class="Ho-submitBtn confirmBtn"> Pedir </button>
+            </div>
+        </div>
 
+        <div class="Ho-postAttachments">
+            <span class="Ho-preview"></span>
+        </div>
 
-</header>
+        <?php
+            if (isset($_POST['postAuxilioModal'])) {
+                sendPost($conn, 'Auxilio', $currentUserData['idUsuario']);
+            } else if (isset($_POST['postRelatoModal'])) {
+                sendPost($conn, 'Relato', $currentUserData['idUsuario']);
+            } else {
+                sendPost($conn, '', $currentUserData['idUsuario']);
+            }
+        ?>
+    </form>
+</modal> 
 
 <script>
     const headerHome = document.querySelector('.headerHome');
@@ -171,7 +215,7 @@
         headerHome.classList.toggle('active');
         toggleHeader.style.backgroundColor = headerHome.classList.contains('active') ? "#80808030" : "";
     });
-
+    
     const notificationsModalIcon = document.querySelector(".notificationsModalIcon");
     const notificationsModal = document.querySelector(".notificationsModal");
 
@@ -233,10 +277,6 @@
         toggleModals();
         togglePages();
     }
-
-    /*notificationsModalIcon.addEventListener('click', () => {
-        notificationsModal.classList.toggle("close");
-    });*/
 
     headerFunctions();
 </script>

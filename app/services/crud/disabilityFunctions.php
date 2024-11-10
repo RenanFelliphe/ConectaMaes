@@ -46,13 +46,13 @@
 
             return $sDReturn;
         }
-            function queryMultipleDefData($conn, $where = 1, $order = ""){
+            function queryMultipleDefData($conn, $where = 1, $order = "idDeficiencia"){
                 if(!empty($order))
                 {
                     $order = "ORDER BY $order";
                 }
 
-                $gQuery = "SELECT * FROM Deficiencia WHERE $where $order ";
+                $gQuery = "SELECT * FROM Deficiencia WHERE $where ORDER BY $order ";
 
                 $gExec = mysqli_query($conn,$gQuery);
                 $gReturn = mysqli_fetch_all($gExec, MYSQLI_ASSOC);

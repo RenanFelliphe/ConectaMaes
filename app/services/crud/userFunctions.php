@@ -277,4 +277,3 @@ function getPostsCount($conn, $userId) {
     
     return $data['total'];
 }
-?>

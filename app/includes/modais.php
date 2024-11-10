@@ -2,53 +2,8 @@
     include_once __DIR__ . "/../services/helpers/paths.php";
 ?>
 
-<section class="modalSection close">
-    <?php $postType = isset($postType) ? $postType : " ";?>
-    
-    <form class="Ho-postSomething pageModal close" method="post" enctype="multipart/form-data">
-        <i class="bi bi-x closeModal" onclick="openModal()"></i>
-
-        <div class="Ho-postTop">
-            <a class="Ho-userProfileImage" href="<?php echo $relativePublicPath; ?>/home/perfil.php">
-                <img src="<?php echo $relativeAssetsPath . "/imagens/fotos/perfil/" . $currentUserData['linkFotoPerfil'];?>">
-            </a>
-
-            <div class="Ho-postText">
-                <?php if ($_POST['postType'] !== " ") : ?>
-                    <div class="Ho-postTitle">
-                        <label for="Ho-postTitleInput">Título:</label>
-                        <input type="text" id="Ho-postTitleInput" name="tituloEnvio" class="Ho-postTitleInput" oninput="postTitleCharLimiter()">
-                        <div class="Ho-titleCharacters">
-                            <span class="Ho-titleCharactersNumber">0</span>/<span class="Ho-maxTitleCharacters">50</span>
-                        </div>
-                    </div>
-                <?php endif; ?>
-                
-                <textarea name="conteudoEnvio" id="postText" cols="62" rows="3" class="Ho-postTextContent" placeholder="Como você está se sentindo?" oninput="postCharLimiter()"></textarea>
-                <div class="Ho-characters">
-                    <span class="Ho-charactersNumber">0</span>/<span class="Ho-maxCharacters">200</span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="Ho-postBottom">
-            <div class="Ho-submitArea">
-                <button type="submit" value="submit" name="submitPost" class="Ho-submitBtn confirmBtn"> Postar </button>
-            </div>
-        </div>
-
-        <div class="Ho-postAttachments">
-            <span class="Ho-preview"></span>
-        </div>
-
-        <?php
-        if (isset($_POST['submitPost'])) {
-            sendPost($conn, $postType, $currentUserData['idUsuario']);
-        }
-        ?>
-    </form>
-
-    <form class="Se-addNewChildModal pageModal close">
+<modal class="modalSection close" data-type="addChild">
+    <form class="Se-addNewChildModal pageModal">
         <div class="modalHeader">  
             <i class="bi bi-arrow-left-circle closeModal"></i>
             <h1>Adicionar Filho(a)</h1>
@@ -76,7 +31,7 @@
                 <label class="Re-fakePlaceholder" for="newChildDateInput">Data de Nascimento</label>
             </div>
             <div class="Se-childInput">
-                <select id="newChildDeficiencyInput" name="newChildDeficiency">
+                <select id="newChildDisabilityInput" name="newChildDisability">
                     <option value="N/a">- - - - Nenhuma - - - -</option>
                     <optgroup label="Deficiência Físicas">
                         <option value="G80">G80 — Paralisia cerebral</option>
@@ -166,13 +121,15 @@
                         <option value="F84.5">F84.5 — Síndrome de Asperger</option>
                     </optgroup>
                 </select>
-                <label for="newChildDeficiencyInput">Deficiência</label>
+                <label for="newChildDisabilityInput">Deficiência</label>
             </div>
         </div>
         <button class="Se-modalSubmit" type="submit" name="enviarFilho">Confirmar</button>
     </form>
+</modal>
 
-    <form class="Se-deleteAccountModal pageModal close">
+<modal class="modalSection close" data-type="deleAccount">
+    <form class="Se-deleteAccountModal pageModal">
         <div class="modalHeader">  
             <i class="bi bi-arrow-left-circle closeModal"></i>
             <h1>Deletar Conta</h1>
@@ -194,4 +151,4 @@
 
         <button class="Se-modalSubmit" type="submit" name="deleteAccountSubmit confirmBtn">Confirmar</button>
     </form>
-</section>
+</modal>

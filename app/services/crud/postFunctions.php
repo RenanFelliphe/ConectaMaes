@@ -98,7 +98,6 @@ function queryUserCommentLike($conn, $idUser, $idComment) {
     return $returnExec ? true : false;
 }
 
-
 // DELETE POST - DELETE
 function deletePost($conn, $id) {
     if (!empty($id)) {
@@ -187,7 +186,6 @@ function handleCommentLike($conn, $idUser, $idComment) {
         }
     }
 }
-
 
 function deleteComment($conn, $id) {
     if (!empty($id)) {
