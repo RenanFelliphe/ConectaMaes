@@ -70,7 +70,7 @@
                     <a class="Se-sectionTitle">
                         <div>
                             <img src="<?= $relativeAssetsPath; ?>/imagens/icons/lock_icon.png" class="pageIcon" alt="Ícone de usuário">
-                            <p> Segurança</p>
+                            <p> Segurança e Privacidade</p>
                         </div>
                         <i class="bi bi-chevron-right"></i>
                     </a>
@@ -535,11 +535,9 @@
                                 </div>
                                 <button class="Se-editSubmit confirmBtn" type="submit" name="editTelephoneSubmit" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Confirmar</button>
                                 <?php
-                                    if(isset($_POST['editTelephoneSubmit'])) {   
-                                        if($_POST['updaterId'] === $currentUserData['idUsuario']) {
-                                            editTelephone($conn, $_POST['updaterId']);
-                                        } else {
-                                            echo "Algo deu errado!";
+                                    if (isset($messages) && !empty($messages)) {
+                                        foreach ($messages as $message) {
+                                            echo $message;
                                         }
                                     }
                                 ?>
@@ -547,7 +545,7 @@
                         </li>
                     </ul>
 
-                    <button class="Se-accountDelete confirmBtn" onclick="openModal();" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Excluir conta</button> <!--name="deletar" href="./config.php?deletar=true-->
+                    <button class="Se-accountDelete confirmBtn" onclick="openDeleteModal();" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Excluir conta</button> <!--name="deletar" href="./config.php?deletar=true-->
                 </div>
 
                 <div class="Se-notifications Se-subSection">

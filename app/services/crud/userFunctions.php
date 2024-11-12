@@ -176,36 +176,39 @@ function editPassword($conn, $userId) {
 
 // EDIT TELEPHONE
 function editTelephone($conn, $userId) {
-    $err = array();
-    
+    $messages = array();  // Array para armazenar mensagens de erro e sucesso
+
     if (isset($_POST['editTelephoneNumber']) && !empty($_POST['editTelephoneNumber'])) {
         $newPhoneNumber = htmlspecialchars($_POST['editTelephoneNumber']);
         
+        // Validação do número de telefone
         if (preg_match('/^\d{10,15}$/', $newPhoneNumber)) { 
             $updatePhone = "UPDATE Usuario SET telefone = ? WHERE idUsuario = ?";
             $stmt = mysqli_prepare($conn, $updatePhone);
             mysqli_stmt_bind_param($stmt, "si", $newPhoneNumber, $userId);
             
             if (mysqli_stmt_execute($stmt)) {
-                echo "<p>Número de telefone atualizado com sucesso!</p>";
+                // Se a atualização for bem-sucedida, adiciona a mensagem de sucesso
+                $messages[] = "<p class='success-message'>Número de telefone atualizado com sucesso!</p>";
             } else {
-                echo "Erro ao atualizar o número de telefone: " . mysqli_stmt_error($stmt);
+                $messages[] = "<p class='error-message'>Erro ao atualizar o número de telefone: " . mysqli_stmt_error($stmt) . "</p>";
             }
             
             mysqli_stmt_close($stmt);
         } else {
-            $err[] = "O número de telefone deve conter entre 10 e 15 dígitos.";
+            $messages[] = "<p class='error-message'>O número de telefone deve conter entre 10 e 15 dígitos.</p>";
         }
     } else {
-        $err[] = "Por favor, insira um número de telefone válido.";
+        $messages[] = "<p class='error-message'>Por favor, insira um número de telefone válido.</p>";
     }
 
-    if (!empty($err)) {
-        foreach ($err as $e) {
-            echo "<p>$e</p>";
-        }
-    }
+    return $messages;  // Retorna todas as mensagens (erro ou sucesso)
 }
+
+if (isset($_POST['editTelephoneSubmit'])) {   
+    $messages = editTelephone($conn, $_POST['updaterId']);
+}
+
 
 // DELETE ACCOUNT - DELETE
 function deleteAccount($conn, $table, $id) {
