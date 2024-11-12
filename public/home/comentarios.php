@@ -74,7 +74,7 @@
                         include("../../app/includes/posts.php");
                     ?>
 
-                    <button type="submit" class="commentBtnn confirmBtn"> Comentar </button>
+                    <button type="submit" class="commentBtnn confirmBtn" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>> Comentar </button>
                 </div>
                 <div class="Co-allComents">
                     <?php                      

@@ -371,7 +371,7 @@
         
         <?php 
             include_once 'app/includes/footer.php';
-            include_once 'app/includes/modais.php';
+            //include_once 'app/includes/modais.php';
         ?>
     </body>
 

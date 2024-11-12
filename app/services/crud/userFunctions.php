@@ -132,6 +132,10 @@ function editProfile($conn, $userId) {
     }
 }
 
+if(isset($_POST['editarPerfil'])) {   
+    editProfile($conn, $_POST['updaterId']);
+}
+
 function editPassword($conn, $userId) {
     $err = array();
     $currentPassword = $_POST['currentPassword'];

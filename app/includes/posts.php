@@ -12,12 +12,10 @@ if (count($publicacoes) > 0) {
         $profileImage = !empty($dadosPublicacao['linkFotoPerfil']) ? $dadosPublicacao['linkFotoPerfil'] : 'caminho/padrao/para/imagem.png';
         $mensagemData = postDateMessage($dadosPublicacao["dataCriacaoPublicacao"]);
         
-        // Define o link para a página de comentários, apenas se não for do tipo 'Auxilio'
         $postLink = ($tipoPublicacao != 'Auxilio') 
             ? $relativePublicPath . "/home/comentarios.php?user=" . $dadosPublicacao['nomeDeUsuario'] ."&post=".$dadosPublicacao['idPublicacao']
             : '#';
         ?>
-        
         <article class="Ho-post <?= $tipoPublicacao == 'Auxilio' ? 'Ho-auxilioCard' : '' ?>" data-link="<?= htmlspecialchars($postLink); ?>">
             <ul class="postDate"><li><?= htmlspecialchars($mensagemData); ?></li></ul>
             <?php 
@@ -48,15 +46,9 @@ if (count($publicacoes) > 0) {
                                     <!-- <button class="reportPostButton bi bi-megaphone-fill pageIcon" name="denunciarPost"> Denunciar Postagem </button> -->
                                     <?php if ($currentUserData['idUsuario'] == $dadosPublicacao['idUsuario']) { ?>
                                         <input type="hidden" name="deleterId" value="<?= $dadosPublicacao['idPublicacao']; ?>">
-                                        <button class="deletePostButton bi bi-trash3-fill pageIcon" name="deletarPost" type="submit"> Deletar Postagem</button>
+                                        <button class="deletePostButton bi bi-trash3-fill pageIcon" name="deletarPost" type="submit" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>> Deletar Postagem</button>
                                     <?php } ?>
-                                </form>
-                            
-                                <?php
-                                    if (isset($_POST['deletarPost'])) {
-                                        deletePost($conn, $_POST['deleterId']);
-                                    }
-                                ?>                                     
+                                </form>                                      
                             </div>
                         <?php } ?>                         
                     </div>
@@ -70,11 +62,11 @@ if (count($publicacoes) > 0) {
                 </div>
 
                 <form class="postTimelineBottom" method="POST">
-                    <button class="postLikes <?= queryUserLike($conn, $currentUserData['idUsuario'], $dadosPublicacao['idPublicacao']) ? 'postLiked' : 'postNotLiked'; ?>" type="submit" name="like_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?>" value="like">
+                    <button class="postLikes <?= queryUserLike($conn, $currentUserData['idUsuario'], $dadosPublicacao['idPublicacao']) ? 'postLiked' : 'postNotLiked'; ?>" type="submit" name="like_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?>" value="like" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>
                         <i class="bi bi-heart-fill"></i>
                         <p><?= htmlspecialchars($dadosPublicacao['totalLikes']); ?></p>
                     </button>
-                    <button class="postComment" type="submit" name="comment_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?>" value="comment">
+                    <button class="postComment" type="submit" name="comment_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?>" value="comment" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>
                         <i class="bi bi-chat-fill"></i>
                         <p>0</p>
                     </button>

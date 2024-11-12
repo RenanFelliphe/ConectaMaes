@@ -103,11 +103,16 @@ function deletePost($conn, $id) {
     if (!empty($id)) {
         $dQuery = "DELETE FROM Publicacao WHERE idPublicacao = " . (int)$id;
         $dExec = mysqli_query($conn, $dQuery);
-
         if (!$dExec) {
             echo "Algo deu errado, tente novamente mais tarde!";
         }
+        echo "<script>window.location.href = window.location.href;</script>";
+        exit; 
     }
+}
+
+if (isset($_POST['deletarPost'])) {
+    deletePost($conn, $_POST['deleterId']);
 }
 
 // LIKES
@@ -191,7 +196,8 @@ function deleteComment($conn, $id) {
     if (!empty($id)) {
         $dQuery = "DELETE FROM Comentario WHERE idComentario = " . (int)$id;
         $dExec = mysqli_query($conn, $dQuery);
-
+        header('Location: ' . $_SERVER['REQUEST_URI']);
+        exit;
         if (!$dExec) {
             echo "Algo deu errado, tente novamente mais tarde!";
         }

@@ -231,6 +231,7 @@
                 <?php
                     if(isset($_POST['registrar'])){
                         signUp($conn);
+                        header('Location: ' . $_SERVER['REQUEST_URI']);
                     }
                 ?>
             </form>    
@@ -239,8 +240,12 @@
         <?php 
             include_once ("../app/includes/footer.php");
         ?>
-
-        <script src="<?php echo $relativeAssetsPath; ?>/js/system.js"></script>
+        <script>
+            if ( window.history.replaceState ) {
+                window.history.replaceState( null, null, window.location.href );
+            }
+        </script>
+        <script src="<?= $relativeAssetsPath; ?>/js/system.js"></script>
         <script>  
             document.querySelectorAll('.Re-userInput').forEach(input => {
                 const updateInfo = (event) => {
@@ -648,11 +653,6 @@
 
             userValidations();
             toggleRegisterSections();
-        </script>
-        <script>
-            if ( window.history.replaceState ) {
-                window.history.replaceState( null, null, window.location.href );
-            }
         </script>
     </body>
 </html>

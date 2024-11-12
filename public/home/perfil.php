@@ -151,12 +151,12 @@ $publicacoes = queryPostsAndUserData($conn, '');
                             <span><?php echo $profileData['biografia']; ?></span>
                         </div>
                         <?php if($currentUserData['idUsuario'] == $profileData['idUsuario']) { ?>
-                            <button name="editProfile" class="Pe-editAccount confirmBtn">
+                            <button name="editProfile" class="Pe-editAccount confirmBtn" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>
                                 <p>Editar Perfil</p><i class="bi bi-pencil-fill"></i>
                             </button>
                         <?php } else { ?>
                             <form method="POST">
-                                <button name="followProfile" class="Pe-followUser confirmBtn">
+                                <button name="followProfile" class="Pe-followUser confirmBtn" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>
                                     <p><?php echo $isFollowing ? 'Deixar de Seguir' : 'Seguir'; ?></p><i class="bi bi-person-<?php echo $isFollowing ? 'dash' : 'add'; ?>"></i>
                                 </button>
                             </form>

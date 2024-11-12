@@ -196,19 +196,9 @@
                                 <label for="Re-pinkTheme"> Rosa </label>
                             </div>
                         </div>
-                        <button class="Se-accountEdit confirmBtn" type="submit" name="editar">Editar conta</button>
+                        <button class="Se-accountEdit confirmBtn" type="submit" name="editarPerfil" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Editar conta</button>
                     </div>
 
-                    <?php
-                        if(isset($_POST['editar'])) {   
-                            if($_POST['updaterId'] === $currentUserData['idUsuario']) {
-                                editProfile($conn, $_POST['updaterId']);
-                            } else {
-                                echo "Algo deu errado!";
-                            }
-                        }
-                    ?>
-                            
                     <span class="Se-dateCriation"> Criado em: 
                         <span class="Se-accountDate">
                             <?= dateMessage($currentUserData['dataCriacaoUsuario']);
@@ -356,7 +346,7 @@
                                 <input type="hidden" name="childIdentifier" value="<?= $f['idFilho']; ?>">
                                 <img class ="childIcon" src="<?= $relativeAssetsPath; ?>/imagens/icons/<?= $f['sexo'] === 'boy' ? 'boy_icon' : ($f['sexo'] === 'girl' ? 'girl_icon' : 'pram_icon'); ?>.png" class="pageIcon" alt="Ícone do Filho">
                                 <p class="childName"><?= $f['nomeFilho']; ?></p>
-                                <button type="submit" class=" deleteChildButton" name="deletarFilho"><i class="bi bi-x"></i></button> 
+                                <button type="submit" class=" deleteChildButton" name="deletarFilho"><i class="bi bi-x" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>></i></button> 
                             </form>
 
                             <form class="childData" method="post">
@@ -389,6 +379,7 @@
                             </form>
 
                             <form method="post" class="editChildForm">
+                                <input type="hidden" name="childEditIdentifier" value="<?= $f['idFilho']; ?>">
                                 <div class="childNameEditor">
                                     <p> Nome: </p>
                                     <input type="text" class="Re-childName" id="nomeFilho" name="nomeFilho" placeholder="Nome Completo" value="<?= $f['nomeFilho'];?>"required>
@@ -397,7 +388,7 @@
                                     <p> Sexo: </p>
                                     <div class="sexOptions">
                                         <?php
-                                            $sexOptions = ['boy' => 'Menino', 'girl' => 'Menina', 'nullSex' => 'Não Informar'];
+                                            $sexOptions = ['boy' => 'Masculino', 'girl' => 'Feminino', 'nullSex' => 'Não Informar'];
 
                                             foreach ($sexOptions as $value => $label) {
                                                 $checked = ($f['sexo'] === $value) ? 'checked' : '';
@@ -449,10 +440,20 @@
                                             </optgroup>
                                             <optgroup label="Deficiência Auditivas">
                                                 <?php 
-                                                    $aud_des = queryMultipleDefData($conn, "categoriaCID LIKE 'H8%' OR categoriaCID LIKE 'H9%", "categoriaCID ASC"); 
+                                                    $aud_des = queryMultipleDefData($conn, "categoriaCID LIKE 'H8%' OR categoriaCID LIKE 'H9%'", "categoriaCID ASC"); 
                                                     foreach($aud_des as $ad){
                                                 ?>
                                                     <option value="<?=$ad['categoriaCID']?>" <?= ($childDisability['categoriaCID'] == $ad['categoriaCID']) ? 'selected' : '' ?>><?= $ad['categoriaCID'] . " - " . $ad['nomeDeficiencia']?></option>
+                                                <?php
+                                                    }
+                                                ?>
+                                            </optgroup>
+                                            <optgroup label="Deficiência Intelectuais">
+                                                <?php 
+                                                    $int_des = queryMultipleDefData($conn, "categoriaCID LIKE 'F%'", "categoriaCID ASC"); 
+                                                    foreach($int_des as $id){
+                                                ?>
+                                                    <option value="<?=$id['categoriaCID']?>" <?= ($childDisability['categoriaCID'] == $id['categoriaCID']) ? 'selected' : '' ?>><?= $id['categoriaCID'] . " - " . $id['nomeDeficiencia']?></option>
                                                 <?php
                                                     }
                                                 ?>
@@ -462,23 +463,19 @@
                                 </div>
                                 <div class="childButtons">
                                     <div name="voltar" onclick="toggleEditChildForm(this);">Cancelar Edição</div>
-                                    <button type="submit" name="confirmarEditarFilho">Salvar alterações</button>
+                                    <button type="submit" name="confirmarEditarFilho" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Salvar alterações</button>
                                 </div>
                             </form> 
                         </div>
-                    <?php 
+                    <?php  
                         } 
                     ?>
-                    <button class="Se-addNewChild confirmBtn" onclick="openModal();">Adicionar Filho(a)</button>
+                    <button class="Se-addNewChild confirmBtn" onclick="openModal();" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Adicionar Filho(a)</button>
                 </div>
                 <?php 
                     if(isset($_POST['enviarFilho'])){
                         addChild($conn, $currentUserData['idUsuario']);
-                    }
-                    if(isset($_POST['deletarFilho'])){
-                        $childId = $_POST['childIdentifier'];
-                        deleteChild($conn, $childId);
-                    }
+                    } 
                 ?>
 
                 <div class="Se-otherUsersInteractions Se-subSection">
@@ -514,7 +511,7 @@
                                         <label class="Re-fakePlaceholder" for="confirmNewPassword">Confirmar Senha Nova</label>
                                     </div>
                                 </div>
-                                <button class="Se-editSubmit confirmBtn" type="submit" name="editPasswordSubmit">Confirmar</button>
+                                <button class="Se-editSubmit confirmBtn" type="submit" name="editPasswordSubmit" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Confirmar</button>
                                 <?php
                                     if(isset($_POST['editPasswordSubmit'])) {   
                                         if($_POST['updaterId'] === $currentUserData['idUsuario']) {
@@ -536,7 +533,7 @@
                                     <label class="Re-fakePlaceholder" for="telephoneNumber">Telefone</label>
                                     <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
                                 </div>
-                                <button class="Se-editSubmit confirmBtn" type="submit" name="editTelephoneSubmit">Confirmar</button>
+                                <button class="Se-editSubmit confirmBtn" type="submit" name="editTelephoneSubmit" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Confirmar</button>
                                 <?php
                                     if(isset($_POST['editTelephoneSubmit'])) {   
                                         if($_POST['updaterId'] === $currentUserData['idUsuario']) {
@@ -550,7 +547,7 @@
                         </li>
                     </ul>
 
-                    <button class="Se-accountDelete confirmBtn" onclick="openModal();">Excluir conta</button> <!--name="deletar" href="./config.php?deletar=true-->
+                    <button class="Se-accountDelete confirmBtn" onclick="openModal();" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Excluir conta</button> <!--name="deletar" href="./config.php?deletar=true-->
                 </div>
 
                 <div class="Se-notifications Se-subSection">

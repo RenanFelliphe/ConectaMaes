@@ -46,19 +46,21 @@
 
             return $sDReturn;
         }
-            function queryMultipleDefData($conn, $where = 1, $order = "idDeficiencia"){
-                if(!empty($order))
-                {
-                    $order = "ORDER BY $order";
-                }
 
-                $gQuery = "SELECT * FROM Deficiencia WHERE $where ORDER BY $order ";
-
-                $gExec = mysqli_query($conn,$gQuery);
-                $gReturn = mysqli_fetch_all($gExec, MYSQLI_ASSOC);
-
-                return $gReturn;
+        function queryMultipleDefData($conn, $where = 1, $order = "idDeficiencia") {
+            $gQuery = "SELECT * FROM Deficiencia WHERE $where ORDER BY $order";
+            
+            $gExec = mysqli_query($conn, $gQuery);
+            
+            if (!$gExec) {
+                die('Erro na consulta SQL: ' . mysqli_error($conn));
             }
+            
+            $gReturn = mysqli_fetch_all($gExec, MYSQLI_ASSOC);
+            return $gReturn;
+        }
+        
+
 
     // EDIT ACCOUNT - UPDATE
         function editDef($conn, $defId) {

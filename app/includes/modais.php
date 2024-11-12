@@ -1,5 +1,6 @@
 <?php
     include_once __DIR__ . "/../services/helpers/paths.php";
+    include_once __DIR__ . "/../services/crud/disabilityFunctions.php";
 ?>
 
 <modal class="modalSection close" data-type="addChild">
@@ -32,93 +33,56 @@
             </div>
             <div class="Se-childInput">
                 <select id="newChildDisabilityInput" name="newChildDisability">
-                    <option value="N/a">- - - - Nenhuma - - - -</option>
+                    <option value="N/a"> Não informar </option>
                     <optgroup label="Deficiência Físicas">
-                        <option value="G80">G80 — Paralisia cerebral</option>
-                        <option value="G80.0">G80.0 — Paralisia cerebral quadriplégica espástica</option>
-                        <option value="G80.1">G80.1 — Paralisia cerebral diplégica espástica</option>
-                        <option value="G80.2">G80.2 — Paralisia cerebral hemiplégica espástica</option>
-                        <option value="G80.3">G80.3 — Paralisia cerebral discinética</option>
-                        <option value="G80.4">G80.4 — Paralisia cerebral atáxica</option>
-                        <option value="G80.8">G80.8 — Outras formas de paralisia cerebral</option>
-                        <option value="G80.9">G80.9 — Paralisia cerebral não especificada</option>
-                        <option value="G81">G81 — Hemiplegia</option>
-                        <option value="G81.0">G81.0 — Hemiplegia flácida</option>
-                        <option value="G81.1">G81.1 — Hemiplegia espástica</option>
-                        <option value="G81.9">G81.9 — Hemiplegia não especificada</option>
-                        <option value="G82">G82 — Paraplegia e tetraplegia</option>
-                        <option value="G82.0">G82.0 — Paraplegia flácida</option>
-                        <option value="G82.1">G82.1 — Paraplegia espástica</option>
-                        <option value="G82.2">G82.2 — Paraplegia não especificada</option>
-                        <option value="G82.3">G82.3 — Tetraplegia flácida</option>
-                        <option value="G82.4">G82.4 — Tetraplegia espástica</option>
-                        <option value="G82.5">G82.5 — Tetraplegia não especificada</option>
-                        <option value="G83.1">G83.1 — Monoplegia do membro inferior</option>
-                        <option value="G83.4">G83.4 — Síndrome da cauda equina</option>
-                        <option value="R26.0">R26.0 — Marcha atáxica</option>
-                        <option value="R26.1">R26.1 — Marcha paralítica</option>
-                        <option value="R26.2">R26.2 — Dificuldade para andar não classificada em outra parte</option>
+                        <?php 
+                            $physical_defs = queryMultipleDefData($conn, "categoriaCID LIKE 'G8%' OR categoriaCID LIKE 'R2%'", "categoriaCID ASC"); 
+                            foreach($physical_defs as $pd){
+                        ?>
+                            <option value="<?=$pd['categoriaCID']?>"><?= $pd['categoriaCID'] . " - " . $pd['nomeDeficiencia']?></option>
+                        <?php
+                            }
+                        ?>
                     </optgroup>
                     <optgroup label="Deficiência Neurológicas">
-                        <option value="G04">G04 — Encefalite, mielite e encefalomielite</option>
-                        <option value="G04.0">G04.0 — Encefalite aguda disseminada</option>
-                        <option value="G04.1">G04.1 — Paraplegia espástica tropical</option>
-                        <option value="G04.8">G04.8 — Outras encefalites, mielites e encefalomielites</option>
-                        <option value="G04.9">G04.9 — Encefalite, mielite e encefalomielite não especificada</option>
-                        <option value="G11">G11 — Ataxia hereditária</option>
-                        <option value="G11.0">G11.0 — Ataxia congênita não-progressiva</option>
-                        <option value="G11.1">G11.1 — Ataxia cerebelar de início precoce</option>
-                        <option value="G11.2">G11.2 — Ataxia cerebelar de início tardio</option>
-                        <option value="G11.3">G11.3 — Ataxia cerebelar com déficit na reparação do DNA</option>
-                        <option value="G11.4">G11.4 — Paraplegia espástica hereditária</option>
-                        <option value="G11.8">G11.8 — Outras ataxias hereditárias</option>
-                        <option value="G11.9">G11.9 — Ataxia hereditária não especificada</option>
-                        <option value="G20">G20 — Doença de Parkinson</option>
-                        <option value="G30">G30 — Doença de Alzheimer</option>
-                        <option value="G30.0">G30.0 — Doença de Alzheimer de início precoce</option>
-                        <option value="G30.1">G30.1 — Doença de Alzheimer de início tardio</option>
-                        <option value="G30.8">G30.8 — Outras formas de doença de Alzheimer</option>
-                        <option value="G30.9">G30.9 — Doença de Alzheimer não especificada</option>
-                        <option value="G35">G35 — Esclerose múltipla</option>
+                        <?php 
+                            $neural_des = queryMultipleDefData($conn, "categoriaCID LIKE 'G0%' OR categoriaCID LIKE 'G1%' OR categoriaCID LIKE 'G2%' OR categoriaCID LIKE 'G3%'", "categoriaCID ASC"); 
+                            foreach($neural_des as $nd){
+                        ?>
+                            <option value="<?=$nd['categoriaCID']?>"><?= $nd['categoriaCID'] . " - " . $nd['nomeDeficiencia']?></option>
+                        <?php
+                            }
+                        ?>
                     </optgroup>
                     <optgroup label="Deficiência Visuais">
-                        <option value="H54">H54 — Cegueira visão subnormal</option>
-                        <option value="H54.0">H54.0 — Cegueira, ambos os olhos</option>
-                        <option value="H54.1">H54.1 — Cegueira em um olho e visão subnormal em outro</option>
-                        <option value="H54.2">H54.2 — Visão subnormal de ambos os olhos</option>
-                        <option value="H54.3">H54.3 — Perda não qualificada da visão em ambos os olhos</option>
-                        <option value="H54.4">H54.4 — Cegueira em um olho</option>
-                        <option value="H54.5">H54.5 — Visão subnormal em um olho</option>
-                        <option value="H54.6">H54.6 — Perda não qualificada da visão em um olho</option>
-                        <option value="H54.7">H54.7 — Perda não especificada da visão</option>
+                        <?php 
+                            $visual_des = queryMultipleDefData($conn, "categoriaCID LIKE 'H5%'", "categoriaCID ASC"); 
+                            foreach($visual_des as $vd){
+                        ?>
+                            <option value="<?=$vd['categoriaCID']?>"><?= $vd['categoriaCID'] . " - " . $vd['nomeDeficiencia']?></option>
+                        <?php
+                            }
+                        ?>
                     </optgroup>
                     <optgroup label="Deficiência Auditivas">
-                        <option value="H80">H80 — Otosclerose</option>
-                        <option value="H80.0">H80.0 — Otosclerose que compromete a janela oval, não-obliterante</option>
-                        <option value="H80.1">H80.1 — Otosclerose que compromete a janela oval, obliterante</option>
-                        <option value="H80.2">H80.2 — Otosclerose da cóclea</option>
-                        <option value="H80.8">H80.8 — Outras otoscleroses</option>
-                        <option value="H80.9">H80.9 — Otosclerose não especificada</option>
-                        <option value="H90.0">H90.0 — Perda de audição bilateral devida a transtorno de condução</option>
-                        <option value="H90.1">H90.1 — Perda de audição unilateral por transtorno de condução, sem restrição de audição contralateral</option>
-                        <option value="H90.2">H90.2 — Perda não especificada de audição devida a transtorno de condução Surdez de condução SOE</option>
-                        <option value="H90.3">H90.3 — Perda de audição bilateral neuro-sensorial</option>
-                        <option value="H90.4">H90.4 — Perda de audição unilateral neuro-sensorial, sem restrição de audição contralateral</option>
-                        <option value="H90.5">H90.5 — Perda de audição neuro-sensorial não especificada</option>
-                        <option value="H90.6">H90.6 — Perda de audição bilateral mista, de condução e neuro-sensorial</option>
-                        <option value="H90.7">H90.7 — Perda de audição unilateral mista, de condução e neuro-sensorial, sem restrição de audição contralateral</option>
-                        <option value="H90.8">H90.8 — Perda de audição mista, de condução e neuro-sensorial, não especificada</option>
-                        <option value="H91.0">H91.0 — Perda de audição ototóxica</option>
-                        <option value="H91.1">H91.1 — Presbiacusia</option>
-                        <option value="H91.2">H91.2 — Perda de audição súbita idiopática</option>
-                        <option value="H91.3">H91.3 — Surdo-mudez não classificada em outra parte</option>
-                        <option value="H91.8">H91.8 — Outras perdas de audição especificadas</option>
-                        <option value="H91.9">H91.9 — Perda não especificada de audição</option>
+                        <?php 
+                            $aud_des = queryMultipleDefData($conn, "categoriaCID LIKE 'H8%' OR categoriaCID LIKE 'H9%'", "categoriaCID ASC"); 
+                            foreach($aud_des as $ad){
+                        ?>
+                            <option value="<?=$ad['categoriaCID']?>"><?= $ad['categoriaCID'] . " - " . $ad['nomeDeficiencia']?></option>
+                        <?php
+                            }
+                        ?>
                     </optgroup>
                     <optgroup label="Deficiência Intelectuais">
-                        <option value="F84.0">F84.0 — Autismo infantil</option>
-                        <option value="F84.1">F84.1 — Autismo atípico</option>
-                        <option value="F84.5">F84.5 — Síndrome de Asperger</option>
+                        <?php 
+                            $int_des = queryMultipleDefData($conn, "categoriaCID LIKE 'F%'", "categoriaCID ASC"); 
+                            foreach($int_des as $id){
+                        ?>
+                            <option value="<?=$id['categoriaCID']?>"><?= $id['categoriaCID'] . " - " . $id['nomeDeficiencia']?></option>
+                        <?php
+                            }
+                        ?>
                     </optgroup>
                 </select>
                 <label for="newChildDisabilityInput">Deficiência</label>
@@ -148,7 +112,6 @@
                 <label class="Re-fakePlaceholder" for="confirmDeleteInput">Reescreva o texto acima para confirmar</label>
             </div>
         </div>
-
         <button class="Se-modalSubmit" type="submit" name="deleteAccountSubmit confirmBtn">Confirmar</button>
     </form>
 </modal>
