@@ -240,11 +240,6 @@
         <?php 
             include_once ("../app/includes/footer.php");
         ?>
-        <script>
-            if ( window.history.replaceState ) {
-                window.history.replaceState( null, null, window.location.href );
-            }
-        </script>
         <script src="<?= $relativeAssetsPath; ?>/js/system.js"></script>
         <script>  
             document.querySelectorAll('.Re-userInput').forEach(input => {

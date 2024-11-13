@@ -36,7 +36,7 @@
         <img class="notificationsModalIcon headerIcon" src="<?//= $relativeAssetsPath; ?>/imagens/icons/notifications_off.png" alt="Ícone do modal de notificações">
         -->
 
-        <div class="makeAPost">
+        <div class="makeAPost" onclick="openModalHeader(this);">
             <button name ="postPostagem" class="makeAPostBtn">Postar</button>
 
             <div class="postStyle">
@@ -86,12 +86,9 @@
     <div class="makeAPostModal headerModal close">
         <div class="modalHeader">
             <h1>Publicação</h1>
-            <!--
-            <i class="bi bi-three-dots pageIcon"></i>
-            -->
         </div>
 
-        <div class="postStyleSummary" name="postPostagemModal" id='' data-type="postSomething" <?= $currentUserData['idUsuario'] == 1 ? '' : 'onclick="openModal(this);"'; ?>>
+        <div class="postStyleSummary" name="postPostModal" id='' data-type="postSomething" <?= $currentUserData['idUsuario'] == 1 ? '' : 'onclick="openModalHeader(this);"'; ?>>
             <div class="postStyleTitle">
                 <span></span>
                 <img class="homePageIcon headerIcon" src="<?= $relativeAssetsPath; ?>/imagens/icons/home_off.png" alt="Ícone da página inicial">
@@ -105,7 +102,7 @@
             <button name="postPostagem" class="postBtn" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Postar</button>
         </div>
 
-        <div class="postStyleSummary" name="postRelatoModal" id="Relato" data-type="postSomething" <?= $currentUserData['idUsuario'] == 1 ? '' : 'onclick="openModal(this);"'; ?>>
+        <div class="postStyleSummary" name="postRelatoModal" id="Relato" data-type="postSomething" <?= $currentUserData['idUsuario'] == 1 ? '' : 'onclick="openModalHeader(this);"'; ?>>
             <div class="postStyleTitle">
                 <span></span>
                 <img class="reportPageIcon headerIcon" src="<?= $relativeAssetsPath; ?>/imagens/icons/reports_off.png" alt="Ícone da página de relatos">
@@ -119,7 +116,7 @@
             <button name="postPostagem" class="postBtn" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Postar</button>
         </div>
 
-        <div class="postStyleSummary" name="postAuxilioModal" id="Auxilio" data-type="postSomething" <?= $currentUserData['idUsuario'] == 1 ? '' : 'onclick="openModal(this);"'; ?>>
+        <div class="postStyleSummary" name="postAuxilioModal" id="Auxilio" data-type="postSomething" <?= $currentUserData['idUsuario'] == 1 ? '' : 'onclick="openModalHeader(this);"'; ?>>
             <div class="postStyleTitle">
                 <span></span>
                 <img class="helpPageIcon headerIcon" src="<?= $relativeAssetsPath; ?>/imagens/icons/helps_off.png" alt="Ícone da página de pedidos">
@@ -130,7 +127,6 @@
                 passando, e receba apoio e conselhos da comunidade</span>.</p>
             <button name="postPostagem" class="postBtn" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Postar</button>
         </div>
-
     </div>
 
     <div class="userFunctionsModal headerModal close">
@@ -160,7 +156,7 @@
 
 <modal class="modalSection close" data-type="postSomething">
     <form class="Ho-postSomething pageModal" method="post" enctype="multipart/form-data">
-        <i class="bi bi-x closeModal" onclick="openModal();"></i>
+        <i class="bi bi-x closeModal" onclick="openModalHeader(this);"></i>
 
         <div class="Ho-postTop">
             <a class="Ho-userProfileImage" href="<?= $relativePublicPath; ?>/home/perfil.php">
@@ -176,7 +172,7 @@
                     </div>
                 </div>
                 
-                <textarea name="conteudoEnvio" id="postText" cols="62" rows="3" class="Ho-postTextContent" placeholder="Como você está se sentindo?" oninput="postCharLimiter()"></textarea>
+                <textarea name="conteudoEnvio" id="postText" cols="62" rows="3" class="Ho-postTextContent" placeholder="Como você está se sentindo?" style="resize: none;" oninput="postCharLimiter()"></textarea>
                 <div class="Ho-characters">
                     <span class="Ho-charactersNumber">0</span>/<span class="Ho-maxCharacters">200</span>
                 </div>
@@ -185,9 +181,9 @@
         
         <div class="Ho-postBottom">
             <div class="Ho-submitArea">
-                <button type="submit" value="submit" name="postPostModal" class="Ho-submitBtn confirmBtn"> Postar </button>
-                <button type="submit" value="submit" name="postRelatoModal" class="Ho-submitBtn confirmBtn"> Postar </button>
-                <button type="submit" value="submit" name="postAuxilioModal" class="Ho-submitBtn confirmBtn"> Pedir </button>
+                <button type="submit" value="submit" name="postPostModal" class="Ho-submitBtn confirmBtn close"> Postar </button>
+                <button type="submit" value="submit" name="postRelatoModal" class="Ho-submitBtn confirmBtn close"> Relatar </button>
+                <button type="submit" value="submit" name="postAuxilioModal" class="Ho-submitBtn confirmBtn close"> Pedir </button>
             </div>
         </div>
 
@@ -216,7 +212,41 @@
         headerHome.classList.toggle('active');
         toggleHeader.style.backgroundColor = headerHome.classList.contains('active') ? "#80808030" : "";
     });
-    
+
+    function openModalHeader(modal) { 
+    const modalSections = document.querySelectorAll('.modalSection');
+    const closeModalBtns = document.querySelectorAll('.closeModal');
+    const btnClicked = modal.getAttribute("data-type");
+    const postStyleSummary = document.querySelectorAll('.postStyleSummary');
+    const submitBtns = document.querySelectorAll('.Ho-submitBtn');
+    const postTitleContainer = document.getElementById('postTitleContainer');
+
+    postTitleContainer.style.display = (btnClicked === 'postSomething' && modal.id === '') ? 'none' : 'flex';
+
+    toggleModal(modal);
+
+    postStyleSummary.forEach(postStyle => {
+        postStyle.addEventListener('click', () => {
+            const postStyleName = postStyle.getAttribute('name');
+            submitBtns.forEach(btn => {
+                if (btn.getAttribute('name') === postStyleName) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        });
+    });
+
+    closeModalBtns.forEach(closeModalBtn => {
+        closeModalBtn.addEventListener('click', () => {
+            modalSections.forEach(modal => modal.classList.add('close'));
+            submitBtns.forEach(btn => btn.classList.remove('active'));
+            });
+        });
+    }
+
+
     const notificationsModalIcon = document.querySelector(".notificationsModalIcon");
     const notificationsModal = document.querySelector(".notificationsModal");
 

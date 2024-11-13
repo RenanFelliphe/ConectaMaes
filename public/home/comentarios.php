@@ -155,17 +155,11 @@
             <?php include_once ("../../app/includes/asideRight.php"); ?>
         </main>
 
-        <?php include_once ("../../app/includes/modais.php"); ?>
-
         <script src="<?php echo $relativeAssetsPath; ?>/js/system.js"></script>
         <script>
-            if (window.history.replaceState) {
-                window.history.replaceState(null, null, window.location.href);
-            }
             document.querySelectorAll('.postMoreButton').forEach(b => b.onclick = () => {
                 b.querySelector('.postFunctionsModal').classList.toggle('close');
             });
-
         </script>
     </body>
 </html>

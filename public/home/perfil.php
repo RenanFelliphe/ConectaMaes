@@ -221,8 +221,6 @@ $publicacoes = queryPostsAndUserData($conn, '');
             <?php include_once ("../../app/includes/asideRight.php");?>
         </main>
 
-        <?php include_once ("../../app/includes/modais.php");?>
-
         <script src="<?php echo $relativeAssetsPath; ?>/js/system.js"></script>
         <script>
             if ( window.history.replaceState ) {
@@ -264,7 +262,6 @@ $publicacoes = queryPostsAndUserData($conn, '');
                     targetSection.classList.add('active');
                 });
             });
-
         </script>
     </body>
 </html>

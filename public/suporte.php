@@ -13,7 +13,6 @@
         .headerLanding{
                 background: var(--whiteColor);
             }
-        
         </style>
     </head>
 
@@ -67,16 +66,10 @@
             </section>
         </main>
 
-
         <?php 
             include_once ("../app/includes/footer.php");
         ?>
 
         <script src="<?= $relativeAssetsPath; ?>/js/system.js"></script>
-        <script>
-            if ( window.history.replaceState ) {
-                window.history.replaceState( null, null, window.location.href );
-            }
-        </script>
     </body>
 </html>

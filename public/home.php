@@ -50,7 +50,7 @@
 
             <?php include_once ("../app/includes/asideRight.php");?>
 
-            <!--<div class="modalBack">
+            <!-- <div class="modalBack">
                 <div class="Re-registerChild" id="addChildModal">
                     <i class="bi bi-x closeChildModal" onclick="registerChildModal()"></i>
                     <p class="Re-addChildBtn toggleAddChildModal"> Adicionar filho +</p>
@@ -252,11 +252,6 @@
             }
             
             registerChildModal();
-        </script>
-        <script>
-            if ( window.history.replaceState ) {
-                window.history.replaceState( null, null, window.location.href );
-            }
         </script>
     </body>
 </html>

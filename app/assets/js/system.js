@@ -2,6 +2,10 @@ document.addEventListener('DOMContentLoaded', function() {
     toggleTheme();
 });
 
+if ( window.history.replaceState ) {
+    window.history.replaceState( null, null, window.location.href );
+}
+
 function postCharLimiter() {
     const maxCharacters = Number(document.querySelector(".Ho-maxCharacters").textContent.trim());
     const input = document.querySelector(".Ho-postTextContent");
@@ -160,64 +164,10 @@ function toggleConfigSection() {
     });
 }
 
-/*function openModal() {
-    const modalSection = document.querySelector('.modalSection');
-    const closeModalBtns = document.querySelectorAll('.closeModal');
-    const pageModals = document.querySelectorAll('.pageModal');
-
-    function openAddChildModal() {
-        const addChildModalBtn = document.querySelector('.Se-addNewChild');
-        const addChildModal = document.querySelector('.Se-addNewChildModal');
-
-        addChildModalBtn.addEventListener('click', () => {
-            addChildModal.classList.toggle('close');
-            modalSection.classList.toggle('close');
-        });
-    }
-
-    function openEditPasswordModal() {
-        const editPasswordModal = document.querySelector('.Se-editPasswordModal');
-        const editPasswordBtn = document.querySelector('.editPasswordInput');
-
-        editPasswordBtn.addEventListener('click', () => {
-            editPasswordModal.classList.toggle('close');
-            modalSection.classList.toggle('close');
-        });
-    }
-
-    function openDeleteAccountModal() {
-        const deleteAccountModal = document.querySelector('.Se-deleteAccountModal');
-        const deleteAccountBtn = document.querySelector('.Se-accountDelete');
-
-        deleteAccountBtn.addEventListener('click', () => {
-            deleteAccountModal.classList.toggle('close');
-            modalSection.classList.toggle('close');
-        });
-    }
-
-    closeModalBtns.forEach(closeModalBtn => {
-        closeModalBtn.addEventListener('click', () => {
-            pageModals.forEach(pageModal => {
-                pageModal.classList.add('close');
-                modalSection.classList.add('close');
-            });
-        });
-    });
-
-    postModal();
-    openAddChildModal();
-    openEditPasswordModal();
-    openDeleteAccountModal();
-}*/
-
-function openModal(modal) {
+function toggleModal(modal) {
     const modalSections = document.querySelectorAll('.modalSection');
     const closeModalBtns = document.querySelectorAll('.closeModal');
     const btnClicked = modal.getAttribute("data-type");
-
-    //Oculta o Título nos modais de POSTAGEM
-    const postTitleContainer = document.getElementById('postTitleContainer');
-    postTitleContainer.style.display = btnClicked === 'postSomething' && modal.id === '' ? 'none' : 'flex';
 
     modalSections.forEach(modalSection => {
         if (modalSection.getAttribute("data-type") === btnClicked) {

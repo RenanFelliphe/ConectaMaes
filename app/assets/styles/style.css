@@ -868,6 +868,202 @@ body.Y-theme .makeAPostModal .postStyleSummary:hover .postStyleTitle img {
     font-size: 0.9rem;
 }
 
+.Ho-postSomething {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid var(--grayColor);
+    padding: 1rem;
+}
+
+.Ho-postSomething .Ho-postTop {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-bottom: 1rem;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.Ho-postSomething .Ho-postTop .Ho-userProfileImage {
+    position: relative;
+    width: 4rem;
+    height: 4rem;
+    border: 1px solid var(--secondColor);
+    border-radius: 100%;
+    overflow: hidden;
+}
+
+.Ho-postSomething .Ho-postTop .Ho-userProfileImage img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    object-fit: cover;
+}
+
+.Ho-postSomething .Ho-postTop .Ho-postText {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: fit-content;
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    50% {
+        transform: translateX(5px);
+    }
+
+    75% {
+        transform: translateX(-5px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.Ho-postSomething .Ho-postTop .Ho-postText .characterBlocked {
+    animation: shake 0.7s;
+}
+
+.Ho-postSomething .Ho-postTop .Ho-postTitle label .characterBlocked {
+    animation: shake 0.7s;
+}
+
+.Ho-postSomething .Ho-postTop .Ho-postText .Ho-postTextContent {
+    position: relative;
+    outline: none;
+    border: 1px solid var(--grayColor);
+    padding: 0.5rem 2rem 0.5rem 1rem;
+    background-color: transparent;
+    border-radius: 0.7rem;
+    font-size: 0.9rem;
+}
+
+.Ho-postSomething .Ho-postTop .Ho-postText .Ho-postTextContent::-webkit-scrollbar {
+    display: none;
+}
+
+.Ho-postSomething .Ho-postTop .Ho-postText .Ho-characters {
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0.1rem;
+    color: var(--grayColor);
+    font-size: 0.65rem;
+}
+
+.Ho-postSomething .Ho-postBottom {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    padding-left: 5rem;
+}
+
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs {
+    display: flex;
+    gap: 1rem;
+}
+
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-iconLabel {
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-imageInput {
+    display: flex;
+}
+
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-imageInput input {
+    display: none
+}
+
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-imageInput label,
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput {
+    display: flex;
+    gap: 0.5rem;
+    width: fit-content;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-imageInput label img {
+    width: 1.3rem;
+}
+
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput {
+    cursor: text;
+}
+
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput input {
+    width: 5rem;
+    outline: none;
+    font-size: 1rem;
+    border: none;
+}
+
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput input:focus {
+    border-bottom: 1px solid var(--grayColor);
+}
+
+.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput input::placeholder {
+    color: var(--blackColor);
+    font-size: 1rem;
+}
+
+.Ho-postSomething .Ho-postBottom .Ho-submitArea {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.8rem;
+    gap: 0.3rem;
+}
+
+.Ho-Main .timeline .Ho-postSomething .Ho-postAttachments {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    padding-left: 1.5rem;
+}
+
+.Ho-postSomething .Ho-postAttachments .Ho-preview img {
+    margin-top: -1rem;
+    width: 4rem;
+    opacity: 0.5;
+    transition: 0.3s;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.Ho-postSomething .Ho-postAttachments .Ho-preview img:hover {
+    opacity: 1;
+    transition: 0.3s;
+}
+
+.Ho-postSomething .Ho-postBottom .Ho-submitArea .confirmBtn {
+    display: none;
+    font-size: 1rem;
+    padding: 0.4rem 1.5rem;
+}
+
+.Ho-postSomething .Ho-postBottom .Ho-submitArea .confirmBtn.active {
+    display: flex;
+    background-color: var(--secondColor);
+    color: var(--whiteColor);
+}
+
 /*====================================================================================================
 ============================================== FOOTER ================================================
 ====================================================================================================*/
@@ -2361,195 +2557,6 @@ footer .A-footerRight li.A-footerPolitic h4 {
     transition: 0.2s;
 }
 
-.Ho-postSomething {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    border-bottom: 1px solid var(--grayColor);
-    padding: 1rem;
-}
-
-.Ho-postSomething .Ho-postTop {
-    position: relative;
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    padding-bottom: 1rem;
-    gap: 1.5rem;
-    width: 100%;
-}
-
-.Ho-postSomething .Ho-postTop .Ho-userProfileImage {
-    position: relative;
-    width: 4rem;
-    height: 4rem;
-    border: 1px solid var(--secondColor);
-    border-radius: 100%;
-    overflow: hidden;
-}
-
-.Ho-postSomething .Ho-postTop .Ho-userProfileImage img {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-    object-fit: cover;
-}
-
-.Ho-postSomething .Ho-postTop .Ho-postText {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: fit-content;
-}
-
-@keyframes shake {
-    0% {
-        transform: translateX(0);
-    }
-
-    25% {
-        transform: translateX(-5px);
-    }
-
-    50% {
-        transform: translateX(5px);
-    }
-
-    75% {
-        transform: translateX(-5px);
-    }
-
-    100% {
-        transform: translateX(0);
-    }
-}
-
-.Ho-postSomething .Ho-postTop .Ho-postText .characterBlocked {
-    animation: shake 0.7s;
-}
-
-.Ho-postSomething .Ho-postTop .Ho-postTitle label .characterBlocked {
-    animation: shake 0.7s;
-}
-
-.Ho-postSomething .Ho-postTop .Ho-postText .Ho-postTextContent {
-    position: relative;
-    outline: none;
-    border: 1px solid var(--grayColor);
-    padding: 0.5rem 2rem 0.5rem 1rem;
-    background-color: transparent;
-    border-radius: 0.7rem;
-    font-size: 0.9rem;
-}
-
-.Ho-postSomething .Ho-postTop .Ho-postText .Ho-postTextContent::-webkit-scrollbar {
-    display: none;
-}
-
-.Ho-postSomething .Ho-postTop .Ho-postText .Ho-characters {
-    position: absolute;
-    right: 0.5rem;
-    bottom: 0.1rem;
-    color: var(--grayColor);
-    font-size: 0.65rem;
-}
-
-.Ho-postSomething .Ho-postBottom {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    width: 100%;
-    padding-left: 5rem;
-}
-
-.Ho-postSomething .Ho-postBottom .Ho-extraInputs {
-    display: flex;
-    gap: 1rem;
-}
-
-.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-iconLabel {
-    font-size: 1rem;
-    cursor: pointer;
-}
-
-.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-imageInput {
-    display: flex;
-}
-
-.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-imageInput input {
-    display: none
-}
-
-.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-imageInput label,
-.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput {
-    display: flex;
-    gap: 0.5rem;
-    width: fit-content;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.9rem;
-}
-
-.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-imageInput label img {
-    width: 1.3rem;
-}
-
-.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput {
-    cursor: text;
-}
-
-.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput input {
-    width: 5rem;
-    outline: none;
-    font-size: 1rem;
-    border: none;
-}
-
-.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput input:focus {
-    border-bottom: 1px solid var(--grayColor);
-}
-
-.Ho-postSomething .Ho-postBottom .Ho-extraInputs .Ho-tagInput input::placeholder {
-    color: var(--blackColor);
-    font-size: 1rem;
-}
-
-.Ho-postSomething .Ho-postBottom .Ho-submitArea {
-    display: flex;
-    flex-direction: column;
-    font-size: 0.8rem;
-    gap: 0.3rem;
-}
-
-.Ho-postSomething .Ho-postBottom .Ho-submitArea .confirmBtn {
-    font-size: 1rem;
-    padding: 0.4rem 1.5rem;
-}
-
-.Ho-Main .timeline .Ho-postSomething .Ho-postAttachments {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    width: 100%;
-    padding-left: 1.5rem;
-}
-
-.Ho-postSomething .Ho-postAttachments .Ho-preview img {
-    margin-top: -1rem;
-    width: 4rem;
-    opacity: 0.5;
-    transition: 0.3s;
-    border-radius: 0.5rem;
-    cursor: pointer;
-}
-
-.Ho-postSomething .Ho-postAttachments .Ho-preview img:hover {
-    opacity: 1;
-    transition: 0.3s;
-}
-
 .Ho-post {
     position: relative;
     width: 100%;
@@ -3150,7 +3157,6 @@ footer .A-footerRight li.A-footerPolitic h4 {
 }
 
 .Se-settingsCenter .Se-centerSections .Se-sectionTitle:nth-of-type(3),
-.Se-settingsCenter .Se-centerSections .Se-sectionTitle:nth-of-type(5),
 .Se-settingsCenter .Se-centerSections .Se-sectionTitle:nth-of-type(7){
     display: none;
 }
@@ -4057,12 +4063,12 @@ align-items: flex-start;
     width: 0.7rem;
 }
 
-.modalSection .Se-deleteAccountModal .Se-modalSubmit {
+.modalSection .Se-deleteAccountModal .confirmBtn {
     background-color: var(--redColor);
     opacity: 0.5;
 }
 
-.modalSection .Se-deleteAccountModal .Se-modalSubmit:hover {
+.modalSection .Se-deleteAccountModal .confirmBtn:hover {
     background-color: var(--redColor);
     opacity: 1;
 }

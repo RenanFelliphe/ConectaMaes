@@ -25,14 +25,6 @@
         <main class="Ho-Main">
 
         </main>
-
-        <?php include_once ("../app/includes/modais.php");?>
-        
         <script src="<?php echo $relativeAssetsPath; ?>/js/system.js"></script>
-        <script>
-            if ( window.history.replaceState ) {
-                window.history.replaceState( null, null, window.location.href );
-            }
-        </script>
     </body>
 </html>
