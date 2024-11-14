@@ -7,10 +7,10 @@ function sendPost($conn, $postType, $currentUserId) {
         $err = array();
         $tipoPublicacaoEnvio = mysqli_real_escape_string($conn, $postType);
         $conteudoEnvio = mysqli_real_escape_string($conn, $_POST['conteudoEnvio']);
+        $linkAnexoEnvio = '';
         $tituloEnvio = isset($_POST['tituloEnvio']) ? mysqli_real_escape_string($conn, $_POST['tituloEnvio']) : null;
         $isConcluido = isset($_POST['isConcluidoEnvio']) ? mysqli_real_escape_string($conn, $_POST['isConcluidoEnvio']) : 0;
         $idUsuarioQuePostou = mysqli_real_escape_string($conn, $currentUserId);
-        $linkAnexoEnvio = '';
 
         if (empty($err)) {
             $insertNewPost = "INSERT INTO Publicacao (tipoPublicacao, conteudo, linkAnexo, titulo, isConcluido, idUsuario) VALUES ('$tipoPublicacaoEnvio', '$conteudoEnvio', '$linkAnexoEnvio', '$tituloEnvio', '$isConcluido', '$idUsuarioQuePostou')";
@@ -22,6 +22,38 @@ function sendPost($conn, $postType, $currentUserId) {
         }
     }
 }
+
+// SEND COMMENT - CREATE
+function sendComment($conn, $idPublicacao, $currentUserId) {
+    if (!empty($_POST['conteudoEnvio'])) {
+        $err = array();
+        $conteudoEnvio = mysqli_real_escape_string($conn, $_POST['conteudoEnvio']);
+        $idUsuarioQuePostou = mysqli_real_escape_string($conn, $currentUserId);
+
+        if (empty($err)) {
+            $insertNewPost = "INSERT INTO Comentario (conteudo, idUsuario, idPublicacao) VALUES ('$conteudoEnvio', '$idUsuarioQuePostou', '$idPublicacao')";
+            $executeSendPost = mysqli_query($conn, $insertNewPost);
+
+            if (!$executeSendPost) {
+                echo "<p>Erro ao enviar comentário: " . mysqli_error($conn) . "!<p>";
+            } else {
+                echo "<p>Comentário enviado com sucesso!<p>";
+            }
+        }
+    }
+}
+
+/*
+CREATE TABLE Comentario (
+idComentario BIGINT PRIMARY KEY AUTO_INCREMENT,
+conteudo VARCHAR(256),
+dataCriacaoComentario TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+idUsuario BIGINT,
+idPublicacao BIGINT,
+CONSTRAINT FK_Comentario_Usuario FOREIGN KEY (idUsuario) REFERENCES Usuario (idUsuario) ON DELETE NO ACTION ON UPDATE CASCADE,
+CONSTRAINT FK_Comentario_Publicacao FOREIGN KEY (idPublicacao) REFERENCES Publicacao (idPublicacao) ON DELETE NO ACTION ON UPDATE CASCADE
+);
+*/
 
 // SEARCH POSTS - READ
 function specificPostQuery($conn, $data, $where, $order) {

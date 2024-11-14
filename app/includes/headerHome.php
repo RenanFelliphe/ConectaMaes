@@ -88,7 +88,7 @@
             <h1>Publicação</h1>
         </div>
 
-        <div class="postStyleSummary" name="postPostModal" id='' data-type="postSomething" <?= $currentUserData['idUsuario'] == 1 ? '' : 'onclick="openModalHeader(this);"'; ?>>
+        <div class="postStyleSummary" post-link="postPostModal" id='' data-type="postSomething" <?= $currentUserData['idUsuario'] == 1 ? '' : 'onclick="openModalHeader(this);"'; ?>>
             <div class="postStyleTitle">
                 <span></span>
                 <img class="homePageIcon headerIcon" src="<?= $relativeAssetsPath; ?>/imagens/icons/home_off.png" alt="Ícone da página inicial">
@@ -102,7 +102,7 @@
             <button name="postPostagem" class="postBtn" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Postar</button>
         </div>
 
-        <div class="postStyleSummary" name="postRelatoModal" id="Relato" data-type="postSomething" <?= $currentUserData['idUsuario'] == 1 ? '' : 'onclick="openModalHeader(this);"'; ?>>
+        <div class="postStyleSummary" post-link="postRelatoModal" id="Relato" data-type="postSomething" <?= $currentUserData['idUsuario'] == 1 ? '' : 'onclick="openModalHeader(this);"'; ?>>
             <div class="postStyleTitle">
                 <span></span>
                 <img class="reportPageIcon headerIcon" src="<?= $relativeAssetsPath; ?>/imagens/icons/reports_off.png" alt="Ícone da página de relatos">
@@ -116,7 +116,7 @@
             <button name="postPostagem" class="postBtn" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Postar</button>
         </div>
 
-        <div class="postStyleSummary" name="postAuxilioModal" id="Auxilio" data-type="postSomething" <?= $currentUserData['idUsuario'] == 1 ? '' : 'onclick="openModalHeader(this);"'; ?>>
+        <div class="postStyleSummary" post-link="postAuxilioModal" id="Auxilio" data-type="postSomething" <?= $currentUserData['idUsuario'] == 1 ? '' : 'onclick="openModalHeader(this);"'; ?>>
             <div class="postStyleTitle">
                 <span></span>
                 <img class="helpPageIcon headerIcon" src="<?= $relativeAssetsPath; ?>/imagens/icons/helps_off.png" alt="Ícone da página de pedidos">
@@ -181,9 +181,10 @@
         
         <div class="Ho-postBottom">
             <div class="Ho-submitArea">
-                <button type="submit" value="submit" name="postPostModal" class="Ho-submitBtn confirmBtn close"> Postar </button>
-                <button type="submit" value="submit" name="postRelatoModal" class="Ho-submitBtn confirmBtn close"> Relatar </button>
-                <button type="submit" value="submit" name="postAuxilioModal" class="Ho-submitBtn confirmBtn close"> Pedir </button>
+                <button type="submit" value="submit" post-link="postPostModal" name="postPostModal" class="Ho-submitBtn confirmBtn close"> Postar </button>
+                <button type="submit" value="submit" post-link="postRelatoModal" name="postRelatoModal" class="Ho-submitBtn confirmBtn close"> Relatar </button>
+                <button type="submit" value="submit" post-link="postAuxilioModal" name="postAuxilioModal" class="Ho-submitBtn confirmBtn close"> Pedir </button>
+                <button type="submit" value="submit" post-link="postComentarioModal" name="postComentarioModal" class="Ho-submitBtn confirmBtn"> Comentar </button>
             </div>
         </div>
 
@@ -196,6 +197,8 @@
                 sendPost($conn, 'Auxilio', $currentUserData['idUsuario']);
             } else if (isset($_POST['postRelatoModal'])) {
                 sendPost($conn, 'Relato', $currentUserData['idUsuario']);
+            } else if (isset($_POST['postComentarioModal'])) {
+                sendComment($conn, $dadosPublicacao['idPublicacao'], $currentUserData['idUsuario']);
             } else {
                 sendPost($conn, '', $currentUserData['idUsuario']);
             }
@@ -213,35 +216,48 @@
         toggleHeader.style.backgroundColor = headerHome.classList.contains('active') ? "#80808030" : "";
     });
 
-    function openModalHeader(modal) { 
-    const modalSections = document.querySelectorAll('.modalSection');
-    const closeModalBtns = document.querySelectorAll('.closeModal');
-    const btnClicked = modal.getAttribute("data-type");
-    const postStyleSummary = document.querySelectorAll('.postStyleSummary');
-    const submitBtns = document.querySelectorAll('.Ho-submitBtn');
-    const postTitleContainer = document.getElementById('postTitleContainer');
+    function openModalHeader(modal) {
+        const modalSections = document.querySelectorAll('.modalSection');
+        const closeModalBtns = document.querySelectorAll('.closeModal');
+        const btnClicked = modal.getAttribute("data-type");
+        const postStyleSummary = document.querySelectorAll('.postStyleSummary');
+        const submitBtns = document.querySelectorAll('.Ho-submitBtn');
+        const postTitleContainer = document.getElementById('postTitleContainer');
 
-    postTitleContainer.style.display = (btnClicked === 'postSomething' && modal.id === '') ? 'none' : 'flex';
+        // Controla a exibição do título
+        postTitleContainer.style.display = (btnClicked === 'postSomething' && modal.id === '') ? 'none' : 'flex';
 
-    toggleModal(modal);
+        // Abre o modal correto
+        toggleModal(modal);
 
-    postStyleSummary.forEach(postStyle => {
-        postStyle.addEventListener('click', () => {
-            const postStyleName = postStyle.getAttribute('name');
-            submitBtns.forEach(btn => {
-                if (btn.getAttribute('name') === postStyleName) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
+        // Limpa as classes 'active' de todos os botões de submit
+        submitBtns.forEach(btn => btn.classList.remove('active'));
+
+        // Verifica se o elemento clicado é um comentário e ativa o botão 'Comentar'
+        if (modal.getAttribute("post-link") === "postComentarioModal") {
+            const commentBtn = document.querySelector('.Ho-submitBtn[post-link="postComentarioModal"]');
+            if (commentBtn) commentBtn.classList.add('active');
+        } else {
+            // Se não for comentário, associa os botões de postagem normais
+            postStyleSummary.forEach(postStyle => {
+                postStyle.addEventListener('click', () => {
+                    const postStyleName = postStyle.getAttribute('post-link');
+                    submitBtns.forEach(btn => {
+                        if (btn.getAttribute('post-link') === postStyleName) {
+                            btn.classList.add('active');
+                        } else {
+                            btn.classList.remove('active');
+                        }
+                    });
+                });
             });
-        });
-    });
+        }
 
-    closeModalBtns.forEach(closeModalBtn => {
-        closeModalBtn.addEventListener('click', () => {
-            modalSections.forEach(modal => modal.classList.add('close'));
-            submitBtns.forEach(btn => btn.classList.remove('active'));
+        // Fecha os modais e remove classes 'active' ao clicar no botão de fechar
+        closeModalBtns.forEach(closeModalBtn => {
+            closeModalBtn.addEventListener('click', () => {
+                modalSections.forEach(modal => modal.classList.add('close'));
+                submitBtns.forEach(btn => btn.classList.remove('active'));
             });
         });
     }

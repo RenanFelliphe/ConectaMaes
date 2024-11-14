@@ -61,16 +61,18 @@ if (count($publicacoes) > 0) {
                     <?php } ?>
                 </div>
 
-                <form class="postTimelineBottom" method="POST">
-                    <button class="postLikes <?= queryUserLike($conn, $currentUserData['idUsuario'], $dadosPublicacao['idPublicacao']) ? 'postLiked' : 'postNotLiked'; ?>" type="submit" name="like_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?>" value="like" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>
-                        <i class="bi bi-heart-fill"></i>
-                        <p><?= htmlspecialchars($dadosPublicacao['totalLikes']); ?></p>
-                    </button>
-                    <button class="postComment" type="submit" name="comment_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?>" value="comment" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>
+                <div class="postTimelineBottom">
+                    <form method="POST">
+                        <button class="postLikes <?= queryUserLike($conn, $currentUserData['idUsuario'], $dadosPublicacao['idPublicacao']) ? 'postLiked' : 'postNotLiked'; ?>" type="submit" name="like_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?>" value="like" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>
+                            <i class="bi bi-heart-fill"></i>
+                            <p><?= htmlspecialchars($dadosPublicacao['totalLikes']); ?></p>
+                        </button>
+                    </form>
+                    <button class="postComment" type="submit" post-link="postComentarioModal"; data-type="postSomething" name="comment_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?>" value="comment" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?> onclick="openModalHeader(this);">
                         <i class="bi bi-chat-fill"></i>
                         <p>0</p>
                     </button>
-                </form>
+                </div>
             </div>
         </article>
         <?php
@@ -88,6 +90,8 @@ if (count($publicacoes) > 0) {
     document.querySelectorAll('article[data-link]').forEach(article => {
         article.addEventListener('click', function(event) {
             if (event.target.closest('.postMoreButton') || event.target.closest('.postFunctionsModal')) {
+                event.stopPropagation();
+            } else if(event.target.closest('.postComment')){
                 event.stopPropagation();
             } else {
                 window.location.href = article.getAttribute('data-link');

@@ -142,7 +142,6 @@
                                                 <p><?= htmlspecialchars($comentario['totalCommentLikes']); ?></p>
                                             </button>
                                         </form>
-
                                     </div>
                                 </article>
                                 <?php
