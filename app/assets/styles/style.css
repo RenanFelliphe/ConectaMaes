@@ -876,9 +876,6 @@ body.Y-theme .makeAPostModal .postStyleSummary:hover .postStyleTitle img {
 
 .Ho-postSomething .Ho-postTop .Ho-postText {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
     width: fit-content;
 }
 
@@ -912,26 +909,101 @@ body.Y-theme .makeAPostModal .postStyleSummary:hover .postStyleTitle img {
     animation: shake 0.7s;
 }
 
-.Ho-postSomething .Ho-postTop .Ho-postText .Ho-postTextContent {
+.Ho-postSomething .Ho-postTop .Ho-postText .Ho-postMainContent{
     position: relative;
+}
+
+.Ho-postSomething .Ho-postTop .Ho-postText .Ho-postMainContent .Ho-postTextContent {
+    position: relative;
+    width: 100%;
+    height: 100%;
     outline: none;
     border: 1px solid var(--grayColor);
-    padding: 0.5rem 2rem 0.5rem 1rem;
+    padding: 0.5rem 2.5rem 0.5rem 1rem;
     background-color: transparent;
     border-radius: 0.7rem;
     font-size: 0.9rem;
 }
 
-.Ho-postSomething .Ho-postTop .Ho-postText .Ho-postTextContent::-webkit-scrollbar {
+.Ho-postSomething .Ho-postTop .Ho-postText .Ho-postMainContent .Ho-postTextContent::-webkit-scrollbar {
     display: none;
 }
 
-.Ho-postSomething .Ho-postTop .Ho-postText .Ho-characters {
+.Ho-postSomething .Ho-postTop .Ho-postText .Ho-postMainContent .Ho-characters {
     position: absolute;
     right: 0.5rem;
-    bottom: 0.1rem;
+    bottom: 0.5rem;
     color: var(--grayColor);
     font-size: 0.65rem;
+}
+
+.Ho-postSomething .Ho-postTop .Ho-identifyMyself{
+    display: none;
+    position: relative;
+    float: right;
+    right: 0;
+    bottom: 0;
+    margin: 0.5rem;
+    cursor: pointer;
+    font-size: 0.85rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.Ho-postSomething .Ho-postTop .Ho-identifyMyself #infoIcon{
+    font-size: 0.8rem;
+    color: var(--grayColor);
+}
+
+.Ho-postSomething .Ho-identifyMyselfModal{
+    position: absolute;
+    border-radius: 1.3rem;
+    right: -1rem;
+    bottom: 1.5rem;
+    padding: 0.5rem;
+    max-width: 20rem;
+    background-color: var(--whiteColor);
+}
+
+.Ho-postSomething .Ho-identifyMyselfModal:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    border-radius: 1.3rem;
+    border: 4px solid transparent;
+    background: linear-gradient(var(--whiteColor), var(--whiteColor)) padding-box, linear-gradient(to bottom, var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
+    opacity: 0.4;
+    z-index: -1;
+}
+
+.Ho-postSomething .Ho-identifyMyselfModal .Ho-identifyHeader{
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1rem
+}
+
+.Ho-postSomething .Ho-identifyMyselfModal .Ho-identifyHeader .Ho-relatosIcon{
+    position: relative;
+    width: 1.5rem;
+    filter: brightness(0) saturate(100%) invert(66%) sepia(48%) saturate(459%) hue-rotate(16deg) brightness(97%) contrast(85%);
+}
+
+.Ho-postSomething .Ho-identifyMyselfModal p{
+    word-break: break-all;
+}
+
+.Ho-postSomething .Ho-identifyMyselfModal p span{
+    font-weight: bold;
+    color: var(--redColor);
+}
+
+.Ho-postSomething .Ho-identifyMyselfModal p span:first-of-type{
+    color: var(--secondColor);
 }
 
 .Ho-postSomething .Ho-postBottom {

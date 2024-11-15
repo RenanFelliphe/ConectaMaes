@@ -169,11 +169,30 @@
                     </div>
                 </div>
                 
-                <textarea name="conteudoEnvio" id="postText" cols="62" rows="3" class="Ho-postTextContent" placeholder="Como você está se sentindo?" style="resize: none;" oninput="postCharLimiter()"></textarea>
-                <div class="Ho-characters">
-                    <span class="Ho-charactersNumber">0</span>/<span class="Ho-maxCharacters">200</span>
+                <div class="Ho-postMainContent">
+                    <textarea name="conteudoEnvio" id="postText" cols="62" rows="3" class="Ho-postTextContent" placeholder="Como você está se sentindo?" style="resize: none;" oninput="postCharLimiter()"></textarea>
+                    <div class="Ho-characters">
+                        <span class="Ho-charactersNumber">0</span>/<span class="Ho-maxCharacters">200</span>
+                    </div>
+                </div>
+
+                <div class="Ho-identifyMyself" id="meIdentificarContainer" style="cursor: pointer;">
+                    <input type="checkbox" id="meIdentificarCheckbox" name="meIdentificar" style="cursor: pointer;" checked>
+                    <label for="meIdentificarCheckbox" style="cursor: pointer;"> Me identificar </label>
+                    <i class="bi bi-info-circle-fill" id="infoIcon" style="cursor: pointer;"></i>
                 </div>
             </div>
+        </div>
+
+        <div class="Ho-identifyMyselfModal">
+            <div class="Ho-identifyHeader"> 
+                <img class="Ho-relatosIcon" src="<?= $relativeAssetsPath; ?>/imagens/icons/reports_off.png" alt="Ícone da página de relatos">
+                <h3>Publicação sem identificação</h3>
+            </div>
+            <p><span>Relatos</span> podem ser publicados sem a necessidade de identificação, logo, 
+                suas informações <span>não serão vinculadas</span> ao post e nenhum usuários poderá 
+                acessar seu perfil a partir dele. Apesar disso, as notificações chegarão 
+                normalmente.</p>
         </div>
         <?php
             foreach ($messages as $message) {
@@ -181,14 +200,6 @@
             }
         ?>
         <div class="Ho-postBottom">
-            <div class="Ho-identifyMyself" id="meIdentificarContainer"style="display: none;">
-                <label for="meIdentificarCheckbox">
-                    <input type="checkbox" id="meIdentificarCheckbox" name="meIdentificar" checked>
-                    Me identificar
-                </label>
-                <i class="bi bi-info-circle" id="infoIcon"></i>
-            </div>
-
             <button type="submit" value="submit" post-link="postPostModal" name="postPostModal" class="Ho-submitBtn confirmBtn close"> Postar </button>
             <button type="submit" value="submit" post-link="postRelatoModal" name="postRelatoModal" class="Ho-submitBtn confirmBtn close"> Relatar </button>
             <button type="submit" value="submit" post-link="postAuxilioModal" name="postAuxilioModal" class="Ho-submitBtn confirmBtn close"> Pedir </button>
