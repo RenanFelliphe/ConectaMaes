@@ -3,57 +3,65 @@ include_once(__DIR__ . '/../helpers/conn.php');
 
 // SEND POSTS - CREATE
 function sendPost($conn, $postType, $currentUserId) {
+    $messages = array();  // Array para armazenar as mensagens
+
     if (!empty($_POST['conteudoEnvio'])) {
-        $err = array();
         $tipoPublicacaoEnvio = mysqli_real_escape_string($conn, $postType);
         $conteudoEnvio = mysqli_real_escape_string($conn, $_POST['conteudoEnvio']);
         $linkAnexoEnvio = '';
         $tituloEnvio = isset($_POST['tituloEnvio']) ? mysqli_real_escape_string($conn, $_POST['tituloEnvio']) : null;
-        $isConcluido = isset($_POST['isConcluidoEnvio']) ? mysqli_real_escape_string($conn, $_POST['isConcluidoEnvio']) : 0;
+        $isConcluido = isset($_POST['isConcluidoEnvio']) ? (int) $_POST['isConcluidoEnvio'] : 0; 
+        $isAnonima = isset($_POST['meIdentificar']) && $_POST['meIdentificar'] == 'on' ? 0 : 1; 
         $idUsuarioQuePostou = mysqli_real_escape_string($conn, $currentUserId);
 
-        if (empty($err)) {
-            $insertNewPost = "INSERT INTO Publicacao (tipoPublicacao, conteudo, linkAnexo, titulo, isConcluido, idUsuario) VALUES ('$tipoPublicacaoEnvio', '$conteudoEnvio', '$linkAnexoEnvio', '$tituloEnvio', '$isConcluido', '$idUsuarioQuePostou')";
-            $executeSendPost = mysqli_query($conn, $insertNewPost);
+        $insertNewPost = "INSERT INTO Publicacao (tipoPublicacao, conteudo, linkAnexo, titulo, isConcluido, isAnonima, idUsuario) VALUES ('$tipoPublicacaoEnvio', '$conteudoEnvio', '$linkAnexoEnvio', '$tituloEnvio', '$isConcluido', '$isAnonima', '$idUsuarioQuePostou')";
+        $executeSendPost = mysqli_query($conn, $insertNewPost);
 
-            if (!$executeSendPost) {
-                echo "<p>Erro ao enviar publicação: " . mysqli_error($conn) . "!<p>";
-            }
+        if (!$executeSendPost) {
+            $messages[] = "Erro ao enviar publicação: " . mysqli_error($conn);
         }
     }
+
+    return $messages; // Retorna as mensagens
 }
+
 
 // SEND COMMENT - CREATE
 function sendComment($conn, $idPublicacao, $currentUserId) {
+    $messages = array();  // Array para armazenar as mensagens
+
     if (!empty($_POST['conteudoEnvio'])) {
-        $err = array();
         $conteudoEnvio = mysqli_real_escape_string($conn, $_POST['conteudoEnvio']);
         $idUsuarioQuePostou = mysqli_real_escape_string($conn, $currentUserId);
 
-        if (empty($err)) {
-            $insertNewPost = "INSERT INTO Comentario (conteudo, idUsuario, idPublicacao) VALUES ('$conteudoEnvio', '$idUsuarioQuePostou', '$idPublicacao')";
-            $executeSendPost = mysqli_query($conn, $insertNewPost);
+        $insertNewComment = "INSERT INTO Comentario (conteudo, idUsuario, idPublicacao) VALUES ('$conteudoEnvio', '$idUsuarioQuePostou', '$idPublicacao')";
+        $executeSendComment = mysqli_query($conn, $insertNewComment);
 
-            if (!$executeSendPost) {
-                echo "<p>Erro ao enviar comentário: " . mysqli_error($conn) . "!<p>";
-            } else {
-                echo "<p>Comentário enviado com sucesso!<p>";
-            }
+        if (!$executeSendComment) {
+            $messages[] = "Erro ao enviar comentário: " . mysqli_error($conn);
         }
     }
+
+    return $messages;
 }
 
-/*
-CREATE TABLE Comentario (
-idComentario BIGINT PRIMARY KEY AUTO_INCREMENT,
-conteudo VARCHAR(256),
-dataCriacaoComentario TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-idUsuario BIGINT,
-idPublicacao BIGINT,
-CONSTRAINT FK_Comentario_Usuario FOREIGN KEY (idUsuario) REFERENCES Usuario (idUsuario) ON DELETE NO ACTION ON UPDATE CASCADE,
-CONSTRAINT FK_Comentario_Publicacao FOREIGN KEY (idPublicacao) REFERENCES Publicacao (idPublicacao) ON DELETE NO ACTION ON UPDATE CASCADE
-);
-*/
+
+if (isset($_POST['postAuxilioModal'])) {
+    $messages = sendPost($conn, 'Auxilio', $currentUserData['idUsuario']);
+} else if (isset($_POST['postRelatoModal'])) {
+    $messages = sendPost($conn, 'Relato', $currentUserData['idUsuario']);
+} else if (isset($_POST['postComentarioModal'])) {
+    $postId = $_POST['idPublicacao'] ?? null;
+
+    if (!empty($postId)) {
+        $messages = sendComment($conn, $postId, $currentUserData['idUsuario']);
+    } else {
+        $messages[] = "<p class='error'>Erro: Não é possível comentar sem um ID de publicação válido.</p>";
+    }
+} else {
+    $messages = sendPost($conn, '', $currentUserData['idUsuario']);
+}
+
 
 // SEARCH POSTS - READ
 function specificPostQuery($conn, $data, $where, $order) {
@@ -70,19 +78,23 @@ function queryPostsAndUserData($conn, $postType = '', $postId = null, $limit = 1
             p.tipoPublicacao, 
             p.conteudo, 
             p.titulo, 
-            p.dataCriacaoPublicacao, 
+            p.isAnonima,
+            p.dataCriacaoPublicacao,
             u.idUsuario, 
             u.nomeCompleto, 
             u.nomeDeUsuario, 
             u.linkFotoPerfil,
             u.estado,
-            COUNT(c.idPublicacao) as totalLikes
+            COUNT(c.idPublicacao) as totalLikes,
+            COUNT(cm.idComentario) as totalComments
         FROM 
             Publicacao p
         JOIN 
             Usuario u ON p.idUsuario = u.idUsuario
         LEFT JOIN 
             curtirPublicacao c ON c.idPublicacao = p.idPublicacao
+        LEFT JOIN 
+            Comentario cm ON cm.idPublicacao = p.idPublicacao
     ";
 
     if ($postId !== null) {
@@ -102,10 +114,16 @@ function queryPostsAndUserData($conn, $postType = '', $postId = null, $limit = 1
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
-function renderProfileLink($relativePublicPath, $profileImage, $nomeDeUsuario) {
-    return '<a class="postOwnerImage" href="' . htmlspecialchars($relativePublicPath . "/home/perfil.php?user=" . urlencode($nomeDeUsuario)) . '">
-                <img src="' . htmlspecialchars($profileImage) . '">
-            </a>';
+function renderProfileLink($relativePublicPath, $profileImage, $nomeDeUsuario, $isRelatoAnonimo = false) {
+    if ($isRelatoAnonimo) {
+        return '<a class="postOwnerImage" href="#" onclick="return false;">
+                    <img src="' . htmlspecialchars($profileImage) . '">
+                </a>';
+    } else {
+        return '<a class="postOwnerImage" href="' . htmlspecialchars($relativePublicPath . "/home/perfil.php?user=" . urlencode($nomeDeUsuario)) . '">
+                    <img src="' . htmlspecialchars($profileImage) . '">
+                </a>';
+    }
 }
 
 function queryUserLike($conn, $idUser, $idPost) {
@@ -129,6 +147,7 @@ function queryUserCommentLike($conn, $idUser, $idComment) {
 
     return $returnExec ? true : false;
 }
+
 
 // DELETE POST - DELETE
 function deletePost($conn, $id) {
@@ -234,4 +253,78 @@ function deleteComment($conn, $id) {
             echo "Algo deu errado, tente novamente mais tarde!";
         }
     }
+}
+
+//RELATO ANÔNIMO
+function anonUsername($conn, $username) {
+    $username = mysqli_real_escape_string($conn, $username);
+
+    $query = "SELECT idUsuario FROM Usuario WHERE nomeDeUsuario = '$username' LIMIT 1";
+
+    $result = mysqli_query($conn, $query);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $id = $row['idUsuario'];
+        $n = 5 * $id + 4;
+
+        return sprintf("%07X", $n);
+    } else {
+        return null;
+    }
+}
+
+function getAnonUserId($n){
+    $id = (hexdec($n) - 4) / 5;
+    return $id;
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($likedPost = array_keys($_POST, 'like', true)) {
+        $postId = str_replace('like_', '', $likedPost[0]);
+        handlePostLike($conn, $currentUserData['idUsuario'], (int)$postId);
+    }
+
+    if (isset($_POST['deletarPost'])) {
+        deletePost($conn, $_POST['postDeleterId']);
+    }
+
+    if ($likedComment = array_keys($_POST, 'like', true)) {
+        $commentId = str_replace('commentLike_', '', $likedComment[0]);
+        handleCommentLike($conn, $currentUserData['idUsuario'], (int)$commentId); 
+    }
+
+    // Verifica se foi enviado para deletar algum comentário
+    if (isset($_POST['deletarComentario'])) {
+        deleteComment($conn, $_POST['deleterCommentId']);
+    }
+}
+
+function editAnonIdentification($conn, $id) {
+    
+    $meIdentificarEdit = $_POST['meIdentificarEdit'];
+
+    $queryTitulo = "SELECT titulo FROM Publicacao WHERE idPublicacao = " . (int)$id;
+    $resultadoTitulo = mysqli_query($conn, $queryTitulo);
+
+    if ($resultadoTitulo && mysqli_num_rows($resultadoTitulo) > 0) {
+        $row = mysqli_fetch_assoc($resultadoTitulo);
+        $tituloPublicacao = $row['titulo'];
+    }
+
+    if (isset($meIdentificarEdit) && $meIdentificarEdit == 'on') {
+        $query = "UPDATE Publicacao SET isAnonima = 0 WHERE idPublicacao = " . (int)$id;
+        $resultado = mysqli_query($conn, $query);
+        if ($resultado) {
+            $mensagem = "Você se identificou no relato: \"" . $tituloPublicacao . "\".";
+        } else {
+            $mensagem = "Erro (". mysqli_error($conn) .") ao se identificar no relato: \"" . $tituloPublicacao . "\". ";
+        }
+    }
+
+    return $mensagem;
+}
+
+if(isset($_POST['confirmReportIdentification']) && isset($_POST['meIdentificarEdit'])){
+    $anonIdentification_message = editAnonIdentification($conn, $_POST['anonymousReportIdentifier']);
 }

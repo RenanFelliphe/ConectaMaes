@@ -1,76 +1,52 @@
 <?php 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-include_once __DIR__ . "/../../app/services/helpers/paths.php";
-require_once "../../app/services/crud/userFunctions.php";
-require_once "../../app/services/crud/childFunctions.php"; 
-require_once "../../app/services/crud/postFunctions.php";
-require_once "../../app/services/helpers/dateChecker.php";
-
-// Verificar se o usuário está logado
-if (!isset($_SESSION['active'])) {
-    header("Location: " . $relativePublicPath . "/login.php");
-    exit;
-}
-
-// Verificar se o perfil de usuário foi especificado
-if (!isset($_GET['user'])) {
-    header("Location: " . $relativeRootPath . "/notFound.php");
-    exit;
-}
-
-// Carregar dados do usuário logado
-$currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);   
-
-// Carregar dados do perfil do usuário visitado
-$profileQuery = "SELECT idUsuario, nomeCompleto, telefone, linkFotoPerfil, biografia, nomeDeUsuario, isAdmin 
-                 FROM Usuario 
-                 WHERE nomeDeUsuario = '" . mysqli_real_escape_string($conn, $_GET['user']) . "'";
-$profileResult = mysqli_query($conn, $profileQuery);
-$profileData = mysqli_fetch_assoc($profileResult);
-
-if (!$profileResult || mysqli_num_rows($profileResult) === 0) {
-    header("Location: " . $relativeRootPath . "/notFound.php");
-    exit;
-}
-
-// Processar $_POST para curtir e seguir
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Curtir postagem
-    if ($likedPost = array_keys($_POST, 'like', true)) {
-        $postId = str_replace('like_', '', $likedPost[0]);
-        handlePostLike($conn, $currentUserData['idUsuario'], (int)$postId);
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
     }
 
-    // Verificar e processar solicitação de seguir
-    if (isset($_POST['followProfile']) && $currentUserData['idUsuario'] != $profileData['idUsuario']) {
-        followUser($conn, $currentUserData['idUsuario'], $profileData['idUsuario']);
-    } elseif ($currentUserData['idUsuario'] == $profileData['idUsuario']) {
-        echo "Você não pode seguir a si mesmo.";
+    include_once __DIR__ . "/../../app/services/helpers/paths.php";
+    require_once "../../app/services/crud/userFunctions.php";
+    $currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);  
+    require_once "../../app/services/crud/childFunctions.php"; 
+    require_once "../../app/services/crud/postFunctions.php";
+    require_once "../../app/services/helpers/dateChecker.php";
+
+    if (!isset($_SESSION['active'])) {
+        header("Location: " . $relativePublicPath . "/login.php");
+        exit;
     }
-}
 
-// Obter o número de seguidores e de pessoas que o usuário está seguindo
-if (isset($profileData)) {
-    $followerCount = getFollowerCount($conn, $profileData['idUsuario']);
-    $followingCount = getFollowingCount($conn, $profileData['idUsuario']);
-    $postsCount = getPostsCount($conn, $profileData['idUsuario']);
-} else {
-    echo "Erro: Dados do perfil não encontrados.";
-}
+    if (!isset($_GET['user'])) {
+        header("Location: " . $relativeRootPath . "/notFound.php");
+        exit;
+    }
 
-// Verificar se o usuário logado já segue o perfil visitado
-$isFollowingQuery = "SELECT * FROM seguirUsuario WHERE idUsuarioSeguidor = ? AND idUsuarioSeguindo = ?";
-$stmt = mysqli_prepare($conn, $isFollowingQuery);
-mysqli_stmt_bind_param($stmt, "ii", $currentUserData['idUsuario'], $profileData['idUsuario']);
-mysqli_stmt_execute($stmt);
-$isFollowingResult = mysqli_stmt_get_result($stmt);
-$isFollowing = mysqli_num_rows($isFollowingResult) > 0;
+    $profileQuery = "SELECT idUsuario, nomeCompleto, telefone, linkFotoPerfil, biografia, nomeDeUsuario, isAdmin 
+                    FROM Usuario 
+                    WHERE nomeDeUsuario = '" . mysqli_real_escape_string($conn, $_GET['user']) . "'";
+    $profileResult = mysqli_query($conn, $profileQuery);
+    $profileData = mysqli_fetch_assoc($profileResult);
 
-// Consultar as publicações do usuário
-$publicacoes = queryPostsAndUserData($conn, '');
+    if (!$profileResult || mysqli_num_rows($profileResult) === 0) {
+        header("Location: " . $relativeRootPath . "/notFound.php");
+        exit;
+    }
+
+    if (isset($profileData)) {
+        $followerCount = getFollowerCount($conn, $profileData['idUsuario']);
+        $followingCount = getFollowingCount($conn, $profileData['idUsuario']);
+        $postsCount = getPostsCount($conn, $profileData['idUsuario']);
+    } else {
+        echo "Erro: Dados do perfil não encontrados.";
+    }
+
+    $isFollowingQuery = "SELECT * FROM seguirUsuario WHERE idUsuarioSeguidor = ? AND idUsuarioSeguindo = ?";
+    $stmt = mysqli_prepare($conn, $isFollowingQuery);
+    mysqli_stmt_bind_param($stmt, "ii", $currentUserData['idUsuario'], $profileData['idUsuario']);
+    mysqli_stmt_execute($stmt);
+    $isFollowingResult = mysqli_stmt_get_result($stmt);
+    $isFollowing = mysqli_num_rows($isFollowingResult) > 0;
+
+    $publicacoes = queryPostsAndUserData($conn, '');
 
 ?>
 
@@ -81,12 +57,12 @@ $publicacoes = queryPostsAndUserData($conn, '');
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-        <link rel="stylesheet" href="<?php echo $relativeAssetsPath; ?>/styles/style.css">
-        <link rel="icon" href="<?php echo $relativeAssetsPath; ?>/imagens/logos/final/Conecta_Mães_Logo_Icon.png">
+        <link rel="stylesheet" href="<?= $relativeAssetsPath; ?>/styles/style.css">
+        <link rel="icon" href="<?= $relativeAssetsPath; ?>/imagens/logos/final/Conecta_Mães_Logo_Icon.png">
         <title>ConectaMães - Perfil</title>
     </head>
 
-    <body class="<?php echo $currentUserData['tema'];?>">
+    <body class="<?= $currentUserData['tema'];?>">
         <?php include_once ("../../app/includes/headerHome.php");?>
 
         <main class="Ho-Main Pe-main mainSystem">
@@ -99,7 +75,7 @@ $publicacoes = queryPostsAndUserData($conn, '');
 
                     <div class="Pe-userInformations">
                         <div class="Pe-userImage">
-                            <div class="Pe-userProfileImage"><img src="<?php echo $relativeAssetsPath . "/imagens/fotos/perfil/". $profileData['linkFotoPerfil'];?>"></div>
+                            <div class="Pe-userProfileImage"><img src="<?= $relativeAssetsPath . "/imagens/fotos/perfil/". $profileData['linkFotoPerfil'];?>"></div>
                         </div>
 
                         <div class="Pe-userTextInformations">
@@ -125,20 +101,20 @@ $publicacoes = queryPostsAndUserData($conn, '');
                                         echo $firstAndLastName;
                                     ?>
                                 </div>
-                                <div class="Pe-userNickname"><?php echo "@" . $profileData['nomeDeUsuario']; ?></div>
+                                <div class="Pe-userNickname"><?= "@" . $profileData['nomeDeUsuario']; ?></div>
                             </div>
                             
                             <div class="Pe-userNumbers">
                                 <div class="Pe-followingNumbers">
-                                    <span class="Pe-following"><?php echo $followingCount; ?></span>
+                                    <span class="Pe-following"><?= $followingCount; ?></span>
                                     <p>Seguindo</p>
                                 </div>
                                 <div class="Pe-postsNumber">
-                                    <span class="Pe-posts"><?php echo $postsCount; ?></span>
+                                    <span class="Pe-posts"><?= $postsCount; ?></span>
                                     <p>Posts</p>
                                 </div>
                                 <div class="Pe-followersNumber">
-                                    <span class="Pe-followers"><?php echo $followerCount; ?></span>
+                                    <span class="Pe-followers"><?= $followerCount; ?></span>
                                     <p>Seguidores</p>
                                 </div>
                             </div>
@@ -148,7 +124,7 @@ $publicacoes = queryPostsAndUserData($conn, '');
                     <div class="Pe-sectionBottom">
                         <div class="Pe-userBiography">
                             <p>Biografia</p>
-                            <span><?php echo $profileData['biografia']; ?></span>
+                            <span><?= $profileData['biografia']; ?></span>
                         </div>
                         <?php if($currentUserData['idUsuario'] == $profileData['idUsuario']) { ?>
                             <button name="editProfile" class="Pe-editAccount confirmBtn" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>
@@ -157,7 +133,7 @@ $publicacoes = queryPostsAndUserData($conn, '');
                         <?php } else { ?>
                             <form method="POST">
                                 <button name="followProfile" class="Pe-followUser confirmBtn" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>
-                                    <p><?php echo $isFollowing ? 'Deixar de Seguir' : 'Seguir'; ?></p><i class="bi bi-person-<?php echo $isFollowing ? 'dash' : 'add'; ?>"></i>
+                                    <p><?= $isFollowing ? 'Deixar de Seguir' : 'Seguir'; ?></p><i class="bi bi-person-<?= $isFollowing ? 'dash' : 'add'; ?>"></i>
                                 </button>
                             </form>
                         <?php } ?>
@@ -175,19 +151,19 @@ $publicacoes = queryPostsAndUserData($conn, '');
                     -->
                     
                     <div class="Pe-postType active" data-target="Pe-postsPostagens">
-                        <img class="postsIcon Pe-postTypeIcon" src="<?php echo $relativeAssetsPath; ?>/imagens/icons/home_off.png" alt="Ícone da página inicial">
+                        <img class="postsIcon Pe-postTypeIcon" src="<?= $relativeAssetsPath; ?>/imagens/icons/home_off.png" alt="Ícone da página inicial">
                         <p class="Pe-postTypeTitle">Postagem</p>
                         <i class="bi bi-info-circle-fill"></i>
                         <span class="Pe-postTypeSelector"></span>
                     </div>
                     <div class="Pe-postType" data-target="Pe-postsRelatos">
-                        <img class="reportsIcon Pe-postTypeIcon" src="<?php echo $relativeAssetsPath; ?>/imagens/icons/reports_off.png" alt="Ícone da página de relatos">
+                        <img class="reportsIcon Pe-postTypeIcon" src="<?= $relativeAssetsPath; ?>/imagens/icons/reports_off.png" alt="Ícone da página de relatos">
                         <p class="Pe-postTypeTitle">Relato</p>
                         <i class="bi bi-info-circle-fill"></i>
                         <span class="Pe-postTypeSelector"></span>
                     </div>
                     <div class="Pe-postType" data-target="Pe-postsAuxilios">
-                        <img class="helpsIcon Pe-postTypeIcon" src="<?php echo $relativeAssetsPath; ?>/imagens/icons/helps_off.png" alt="Ícone da página de auxílios">
+                        <img class="helpsIcon Pe-postTypeIcon" src="<?= $relativeAssetsPath; ?>/imagens/icons/helps_off.png" alt="Ícone da página de auxílios">
                         <p class="Pe-postTypeTitle">Auxílio</p>
                         <i class="bi bi-info-circle-fill"></i>
                         <span class="Pe-postTypeSelector"></span>
@@ -221,7 +197,7 @@ $publicacoes = queryPostsAndUserData($conn, '');
             <?php include_once ("../../app/includes/asideRight.php");?>
         </main>
 
-        <script src="<?php echo $relativeAssetsPath; ?>/js/system.js"></script>
+        <script src="<?= $relativeAssetsPath; ?>/js/system.js"></script>
         <script>
             if ( window.history.replaceState ) {
                 window.history.replaceState(null, null, window.location.href );

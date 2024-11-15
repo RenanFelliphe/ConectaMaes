@@ -10,7 +10,7 @@ function signUp($conn) {
     $nomeRegistro = $_POST['nomeUsuarioRegistro'];
     $emailRegistro = $_POST['emailRegistro'];
     $userRegistro = $_POST['userRegistro'];
-    $senhaRegistro = password_hash($_POST['senhaRegistro'], PASSWORD_DEFAULT);
+    $senhaRegistro = md5($_POST['senhaRegistro']);
     $dataNascimentoRegistro = $_POST['dataNascimentoRegistro'];
     $telefoneRegistro = !empty(trim($_POST['telefoneRegistro'])) ? trim($_POST['telefoneRegistro']) : NULL;
     $biografiaUsuarioRegistro = $_POST['biografiaUsuarioRegistro'];
@@ -137,41 +137,53 @@ if(isset($_POST['editarPerfil'])) {
 }
 
 function editPassword($conn, $userId) {
-    $err = array();
-    $currentPassword = $_POST['currentPassword'];
-    $newPassword = $_POST['newPassword'];
-    $confirmPassword = $_POST['confirmNewPassword'];
+    $messages = array();  // Array para armazenar mensagens de erro e sucesso
 
-    $searchUserPassword = "SELECT senha FROM Usuario WHERE idUsuario = ?";
-    $stmt = mysqli_prepare($conn, $searchUserPassword);
-    mysqli_stmt_bind_param($stmt, 'i', $userId);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-    $row = mysqli_fetch_assoc($result);
+    if (isset($_POST['currentPassword'], $_POST['newPassword'], $_POST['confirmNewPassword'])) {
+        $currentPassword = htmlspecialchars($_POST['currentPassword']);
+        $newPassword = htmlspecialchars($_POST['newPassword']);
+        $confirmPassword = htmlspecialchars($_POST['confirmNewPassword']);
 
-    if (password_verify($currentPassword, $row['senha'])) {
-        if ($newPassword === $confirmPassword) {
-            $updateSenha = "UPDATE Usuario SET senha = ? WHERE idUsuario = ?";
-            $stmt = mysqli_prepare($conn, $updateSenha);
-            $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
-            mysqli_stmt_bind_param($stmt, 'si', $hashedPassword, $userId);
-            if (mysqli_stmt_execute($stmt)) {
-                echo "<p>Senha alterada com sucesso!</p>";
+        // Busca a senha atual do usuário no banco de dados
+        $searchUserPassword = "SELECT senha FROM Usuario WHERE idUsuario = ?";
+        $stmt = mysqli_prepare($conn, $searchUserPassword);
+        mysqli_stmt_bind_param($stmt, 'i', $userId);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $row = mysqli_fetch_assoc($result);
+
+        if (password_verify($currentPassword, $row['senha'])) {
+            // Verifica se a senha nova foi confirmada corretamente
+            if ($newPassword === $confirmPassword) {
+                // Atualiza a senha do usuário
+                $updateSenha = "UPDATE Usuario SET senha = ? WHERE idUsuario = ?";
+                $stmt = mysqli_prepare($conn, $updateSenha);
+                $hashedPassword = md5($newPassword, PASSWORD_DEFAULT);
+                mysqli_stmt_bind_param($stmt, 'si', $hashedPassword, $userId);
+
+                if (mysqli_stmt_execute($stmt)) {
+                    // Se a atualização for bem-sucedida, adiciona a mensagem de sucesso
+                    $messages[] = "<p class='success-message'>Senha alterada com sucesso!</p>";
+                } else {
+                    $messages[] = "<p class='error-message'>Erro ao atualizar a senha: " . mysqli_stmt_error($stmt) . "</p>";
+                }
+
+                mysqli_stmt_close($stmt);
             } else {
-                echo "Erro ao atualizar senha: " . mysqli_error($conn) . "!";
+                $messages[] = "<p class='error-message'>Senha nova não confirmada corretamente.</p>";
             }
         } else {
-            $err[] = "Senha nova não confirmada corretamente.";
+            $messages[] = "<p class='error-message'>Senha atual não confere.</p>";
         }
     } else {
-        $err[] = "Senha atual não confere.";
+        $messages[] = "<p class='error-message'>Por favor, preencha todos os campos corretamente.</p>";
     }
 
-    if (!empty($err)) {
-        foreach ($err as $e) {
-            echo "<p>$e</p>";
-        }
-    }
+    return $messages;  // Retorna todas as mensagens (erro ou sucesso)
+}
+
+if (isset($_POST['editPasswordSubmit'])) {
+    $password_messages = editPassword($conn, $_POST['updaterId']);
 }
 
 // EDIT TELEPHONE
@@ -206,24 +218,79 @@ function editTelephone($conn, $userId) {
 }
 
 if (isset($_POST['editTelephoneSubmit'])) {   
-    $messages = editTelephone($conn, $_POST['updaterId']);
+    $phone_messages = editTelephone($conn, $_POST['updaterId']);
 }
 
-
 // DELETE ACCOUNT - DELETE
-function deleteAccount($conn, $table, $id) {
-    if (!empty($id)) {         
-        $dQuery = "DELETE FROM $table WHERE idUsuario = ?";
-        $stmt = mysqli_prepare($conn, $dQuery);
-        mysqli_stmt_bind_param($stmt, 'i', $id);
-        if (mysqli_stmt_execute($stmt)) {
-            session_unset();
-            session_destroy();
+function deleteAccount($conn, $id) {
+    $messages = []; 
+    if (!empty($id)) {
+        $query = "SELECT nomeDeUsuario FROM Usuario WHERE idUsuario = $id";
+        $result = mysqli_query($conn, $query);
+        if ($result) {
+            $row = mysqli_fetch_assoc($result);
+            $nomeUsuario = $row['nomeDeUsuario'];
+            if ($nomeUsuario) {
+                $validExtensions = ["jpg", "jpeg", "png", "gif", "bmp", "webp"];
+                
+                foreach ($validExtensions as $ext) {
+                    $filePath = __DIR__ . "/../../assets/imagens/fotos/perfil/" . $nomeUsuario . "." . $ext;
+                    var_dump($filePath);
+                    if (file_exists($filePath)) {
+                        if (unlink($filePath)) {
+                            break;
+                        } else {
+                            $messages[] = "Erro ao excluir a foto do usuário ($filePath).";
+                            break;
+                        }
+                    }
+                }
+
+                if (!isset($messages[0])) {
+                    $messages[] = "Arquivo de foto não encontrado para o usuário.";
+                }
+            }
+
+            $dQuery = "DELETE FROM Usuario WHERE idUsuario = $id";
+            $dResult = mysqli_query($conn, $dQuery);
+
+            if ($dResult) {
+                session_unset();
+                session_destroy();
+                header("Location: ../../public/registrar.php");
+                exit();
+            } else {
+                $messages[] = "Não foi possível deletar a conta!";
+            }
         } else {
-            echo "Não foi possível deletar a conta!";
+            $messages[] = "Erro ao consultar o usuário no banco de dados.";
         }
-        mysqli_stmt_close($stmt);
-    }    
+        mysqli_free_result($result);
+    }
+
+    return $messages; 
+}
+
+function generateRandomCode() {
+    $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!()';
+    $code = '';
+    $length = 12;
+
+    for ($i = 0; $i < $length; $i++) {
+        $randomIndex = rand(0, strlen($characters) - 1);
+        $code .= $characters[$randomIndex];
+    }
+
+    return $code;
+}
+
+if (isset($_POST['deleteAccountSubmit'])) {
+    $userId = $_POST['deleteUserId'];
+    if ($_POST['deleteTextInput'] == $_POST['confirmDeleteText']) {
+        $deleteUser_messages = deleteAccount($conn, $userId);
+    } else {
+        $deleteUser_messages[] = "<p>Código de verificação incorreto!</p>";
+    }
 }
 
 // Função para seguir um usuário

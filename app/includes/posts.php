@@ -9,18 +9,29 @@ if (isset($dadosPublicacao)) {
 
 if (count($publicacoes) > 0) {        
     foreach ($publicacoes as $dadosPublicacao) {
-        $profileImage = !empty($dadosPublicacao['linkFotoPerfil']) ? $dadosPublicacao['linkFotoPerfil'] : 'caminho/padrao/para/imagem.png';
+        $profileImage = !empty($dadosPublicacao['linkFotoPerfil']) ? $dadosPublicacao['linkFotoPerfil'] : 'default.png';
         $mensagemData = postDateMessage($dadosPublicacao["dataCriacaoPublicacao"]);
+
+        $isRelatoAnonimo = ($dadosPublicacao['tipoPublicacao'] == "Relato" && $dadosPublicacao['isAnonima'] == 1);
         
-        $postLink = ($tipoPublicacao != 'Auxilio') 
-            ? $relativePublicPath . "/home/comentarios.php?user=" . $dadosPublicacao['nomeDeUsuario'] ."&post=".$dadosPublicacao['idPublicacao']
-            : '#';
+        if ($isRelatoAnonimo && $currentUserData['idUsuario'] == 1) {
+            continue;
+        }
+        
+        if ($isRelatoAnonimo) {
+            $profileImage = 'anonymous.png';
+            $postLink = $relativePublicPath . "/home/comentarios.php?anonUser=" . anonUsername($conn, $dadosPublicacao['nomeDeUsuario']) ."&post=".$dadosPublicacao['idPublicacao'];
+        } else {
+            $postLink = ($tipoPublicacao != 'Auxilio') 
+                ? $relativePublicPath . "/home/comentarios.php?user=" . $dadosPublicacao['nomeDeUsuario'] ."&post=".$dadosPublicacao['idPublicacao']
+                : '#';
+        }
         ?>
         <article class="Ho-post <?= $tipoPublicacao == 'Auxilio' ? 'Ho-auxilioCard' : '' ?>" data-link="<?= htmlspecialchars($postLink); ?>">
             <ul class="postDate"><li><?= htmlspecialchars($mensagemData); ?></li></ul>
             <?php 
                 if ($tipoPublicacao != 'Auxilio') 
-                    echo renderProfileLink($relativePublicPath, $relativeAssetsPath . "/imagens/fotos/perfil/" . $profileImage, $dadosPublicacao['nomeDeUsuario']);
+                    echo renderProfileLink($relativePublicPath, $relativeAssetsPath . "/imagens/fotos/perfil/" . $profileImage, $dadosPublicacao['nomeDeUsuario'], $isRelatoAnonimo);
             ?>
             <div class="postContent">
                 <div class="postTimelineTop">
@@ -28,15 +39,27 @@ if (count($publicacoes) > 0) {
                         if ($tipoPublicacao == 'Auxilio') 
                             echo renderProfileLink($relativePublicPath, $relativeAssetsPath . "/imagens/fotos/perfil/" . $profileImage, $dadosPublicacao['nomeDeUsuario']);
                     ?>
-                    <a class="postUserNames" href="<?= htmlspecialchars($relativePublicPath . "/home/perfil.php?user=" . urlencode($dadosPublicacao['nomeDeUsuario'])); ?>">
+                    <a class="postUserNames" href="<?= $isRelatoAnonimo ? '#' : htmlspecialchars($relativePublicPath . "/home/perfil.php?user=" . urlencode($dadosPublicacao['nomeDeUsuario'])); ?>">
                         <p class="postOwnerName">
                             <?php 
-                                $partesDoNomeCompletoOwner = explode(" ", $dadosPublicacao['nomeCompleto']);
-                                $firstAndLastNameOwner = $partesDoNomeCompletoOwner[0] . " " . end($partesDoNomeCompletoOwner);
-                                echo htmlspecialchars($firstAndLastNameOwner); 
+                                if ($isRelatoAnonimo) {
+                                    echo "Usuário Anônimo " . htmlspecialchars(anonUsername($conn, $dadosPublicacao['nomeDeUsuario']));
+                                } else {
+                                    $partesDoNomeCompletoOwner = explode(" ", $dadosPublicacao['nomeCompleto']);
+                                    $firstAndLastNameOwner = $partesDoNomeCompletoOwner[0] . " " . end($partesDoNomeCompletoOwner);
+                                    echo htmlspecialchars($firstAndLastNameOwner); 
+                                }
                             ?>
                         </p>
-                        <p class="postOwnerUser"><?= '@' . htmlspecialchars($dadosPublicacao['nomeDeUsuario']); ?></p>
+                        <p class="postOwnerUser">
+                            <?php 
+                                if ($isRelatoAnonimo) {
+                                    echo '@anonUser' . htmlspecialchars(anonUsername($conn, $dadosPublicacao['nomeDeUsuario']));
+                                } else {
+                                    echo '@' . htmlspecialchars($dadosPublicacao['nomeDeUsuario']); 
+                                }
+                            ?>
+                        </p>
                     </a>
 
                     <div class="postInfo" >
@@ -63,14 +86,20 @@ if (count($publicacoes) > 0) {
 
                 <div class="postTimelineBottom">
                     <form method="POST">
-                        <button class="postLikes <?= queryUserLike($conn, $currentUserData['idUsuario'], $dadosPublicacao['idPublicacao']) ? 'postLiked' : 'postNotLiked'; ?>" type="submit" name="like_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?>" value="like" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>
+                        <button class="postLikes <?= queryUserLike($conn, $currentUserData['idUsuario'], $dadosPublicacao['idPublicacao']) ? 'postLiked' : 'postNotLiked'; ?>" type="submit" name="like_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?>" value="like" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?> >
                             <i class="bi bi-heart-fill"></i>
                             <p><?= htmlspecialchars($dadosPublicacao['totalLikes']); ?></p>
                         </button>
                     </form>
-                    <button class="postComment" type="submit" post-link="postComentarioModal"; data-type="postSomething" name="comment_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?>" value="comment" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?> onclick="openModalHeader(this);">
+                    <button class="postComment" type="button" post-link="postComentarioModal" data-post-id="<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?>" 
+                        data-type="postSomething" 
+                        name="comment_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?>" 
+                        value="comment"  
+                        onclick="openModalHeader(this);"
+                        <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>
+                        >
                         <i class="bi bi-chat-fill"></i>
-                        <p>0</p>
+                        <p><?= htmlspecialchars($dadosPublicacao['totalComments']); ?></p>
                     </button>
                 </div>
             </div>

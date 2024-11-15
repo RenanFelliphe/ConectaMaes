@@ -7,18 +7,10 @@
     $verify = isset($_SESSION['active']) ? true : header("Location:".$relativePublicPath."/login.php");
 
     require_once "../app/services/crud/userFunctions.php"; 
+    $currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);
     require_once "../app/services/crud/childFunctions.php";
     require_once "../app/services/crud/postFunctions.php";
     require_once '../app/services/helpers/dateChecker.php';
-
-    $currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);
-    
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        if ($likedPost = array_keys($_POST, 'like', true)) {
-            $postId = str_replace('like_', '', $likedPost[0]);
-            handlePostLike($conn, $currentUserData['idUsuario'], (int)$postId);
-        }
-    }
 
     $publicacoes = queryPostsAndUserData($conn,'');
 ?>
@@ -54,7 +46,7 @@
                 <div class="Re-registerChild" id="addChildModal">
                     <i class="bi bi-x closeChildModal" onclick="registerChildModal()"></i>
                     <p class="Re-addChildBtn toggleAddChildModal"> Adicionar filho +</p>
-                    <?php
+                    <?php /*
                         $filhos = queryMultipleChildrenData($conn, $where = "idUsuario = " . $currentUserData['idUsuario'], $order = "nomeFilho");
                         foreach($filhos as $f){
                     ?>
@@ -216,17 +208,17 @@
                         </form>
                     </form>
                     <?php 
-                        } 
+                        } */
                     ?>
 
-                    <?php 
+                    <?php /*
                         if(isset($_POST['enviarFilho'])){
                             addChild($conn, $currentUserData['idUsuario']);
                         }
                         if(isset($_POST['deletarFilho'])){
                             $childId = $_POST['childIdentifier'];
                             deleteChild($conn, $childId);
-                        }
+                        }*/
                     ?>
                 </div>
             </div> -->
@@ -234,7 +226,7 @@
         
         <script src="<?= $relativeAssetsPath; ?>/js/system.js"></script>
         <script>
-            function registerChildModal() {
+            /*function registerChildModal() {
                 const addChildModal = document.querySelector('.modalBack');
                 const closeModalBtn = document.querySelector('.closeChildModal');
                 const addChildBox = document.querySelector('.Re-addChildBox');
@@ -251,7 +243,7 @@
                 });
             }
             
-            registerChildModal();
+            registerChildModal();*/
         </script>
     </body>
 </html>

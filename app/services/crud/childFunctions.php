@@ -3,39 +3,60 @@
     include_once(__DIR__ .'/../helpers/conn.php');
 
         // Função para registrar um novo filho
-        function addChild($conn, $idParent) {
-            $err = array();
-            $nomeFilho = mysqli_real_escape_string($conn, $_POST['nomeFilho']);
-            $dataNascimentoFilho = mysqli_real_escape_string($conn, $_POST['dataNascimentoFilho']);
-            $sexoFilho = mysqli_real_escape_string($conn, $_POST['sexoFilho']);
-            $categoriaCID = mysqli_real_escape_string($conn, $_POST['deficienciaFilho']);
+            function addChild($conn, $idParent) {
+                $messages = array();  // Array para armazenar mensagens de erro e sucesso
             
-            if (empty($err)) {
-                $insertNewChild = "INSERT INTO Filho (nomeFilho, dataNascimentoFilho, sexo, idUsuario) VALUES ('$nomeFilho', '$dataNascimentoFilho', '$sexoFilho', '$idParent')";
-                $executeChildSignUp = mysqli_query($conn, $insertNewChild);
-        
-                if ($executeChildSignUp) {
-                    $idFilho = mysqli_insert_id($conn);
-                    if ($categoriaCID) {
-                        $queryDeficiencia = "SELECT idDeficiencia FROM Deficiencia WHERE categoriaCID = '$categoriaCID'";
-                        $resultDeficiencia = mysqli_query($conn, $queryDeficiencia);
-                        
-                        if (mysqli_num_rows($resultDeficiencia) > 0) {
-                            $idDeficiencia = mysqli_fetch_assoc($resultDeficiencia)['idDeficiencia'];
-                            $insertDisability = "INSERT INTO filhoDeficiencia (idFilho, idDeficiencia) VALUES ('$idFilho', '$idDeficiencia')";
-                            $executeInsertDisability = mysqli_query($conn, $insertDisability);
-        
-                            if (!$executeInsertDisability) {
-                                echo "<p>Não foi possível associar deficiência: " . mysqli_error($conn) . "!<p>";
+                if (isset($_POST['enviarFilho'])) {
+                    $sexoFilho = mysqli_real_escape_string($conn, $_POST['addChildSex']);
+                    $nomeFilho = mysqli_real_escape_string($conn, $_POST['addChildName']);
+                    $dataNascimentoFilho = mysqli_real_escape_string($conn, $_POST['addChildBirthDate']);
+                    $categoriaCID = mysqli_real_escape_string($conn, $_POST['addChildDisability']);
+            
+                    // Verifica se os dados obrigatórios estão preenchidos
+                    if (empty($nomeFilho) || empty($dataNascimentoFilho) || empty($sexoFilho)) {
+                        $messages[] = "<p class='error-message'>Por favor, preencha todos os campos obrigatórios.</p>";
+                    } else {
+                        // Insere os dados do filho
+                        $insertNewChild = "INSERT INTO Filho (nomeFilho, dataNascimentoFilho, sexo, idUsuario) VALUES ('$nomeFilho', '$dataNascimentoFilho', '$sexoFilho', '$idParent')";
+                        $executeChildSignUp = mysqli_query($conn, $insertNewChild);
+            
+                        if ($executeChildSignUp) {
+                            $idFilho = mysqli_insert_id($conn);
+            
+                            // Se a categoria CID for informada, tenta associar uma deficiência ao filho
+                            if (!empty($categoriaCID)) {
+                                $queryDeficiencia = "SELECT idDeficiencia FROM Deficiencia WHERE categoriaCID = '$categoriaCID'";
+                                $resultDeficiencia = mysqli_query($conn, $queryDeficiencia);
+            
+                                if (mysqli_num_rows($resultDeficiencia) > 0) {
+                                    $idDeficiencia = mysqli_fetch_assoc($resultDeficiencia)['idDeficiencia'];
+                                    $insertDisability = "INSERT INTO filhoDeficiencia (idFilho, idDeficiencia) VALUES ('$idFilho', '$idDeficiencia')";
+                                    $executeInsertDisability = mysqli_query($conn, $insertDisability);
+            
+                                    if (!$executeInsertDisability) {
+                                        $messages[] = "<p class='error-message'>Não foi possível associar a deficiência: " . mysqli_error($conn) . ".</p>";
+                                    }
+                                } else {
+                                    $messages[] = "<p class='error-message'>Deficiência não encontrada para o CID informado.</p>";
+                                }
                             }
+            
+                            // Se tudo ocorrer bem, adiciona a mensagem de sucesso
+                            $messages[] = "<p class='success-message'>Filho(a) cadastrado(a) com sucesso!</p>";
+                        } else {
+                            $messages[] = "<p class='error-message'>Não foi possível registrar o filho. Erro: " . mysqli_error($conn) . ".</p>";
                         }
                     }
-                } else {
-                    echo "<p>Não foi possível registrar filho: " . mysqli_error($conn) . "!<p>";
                 }
+            
+                return $messages;  // Retorna todas as mensagens (erro ou sucesso)
             }
-        }        
-        
+            
+            if (isset($_POST['enviarFilho'])) {
+                $idParent = $_POST['parentIdToAddChild'];
+                $add_child_messages = addChild($conn, $idParent); 
+            }
+            
         // CHILD QUERY FUNCTIONS - READ
             function queryChildData($conn, $id){
                 $query = "
@@ -93,78 +114,61 @@
                 return mysqli_fetch_all($cdQuery, MYSQLI_ASSOC);
             }
             
-
         // EDIT CHILD - UPDATE
             function editChild($conn, $childId) {
-                $err = array();
-                
-                // Recebendo dados do formulário
-                $nomeFilho = !empty($_POST['nomeFilho']) ? mysqli_real_escape_string($conn, $_POST['nomeFilho']) : null;
-                $sexoFilho = !empty($_POST['sexoFilho']) ? mysqli_real_escape_string($conn, $_POST['sexoFilho']) : null;
-                $dataNascimentoFilho = !empty($_POST['dataNascimentoFilho']) ? mysqli_real_escape_string($conn, $_POST['dataNascimentoFilho']) : null;
-                $deficienciaFilho = !empty($_POST['deficienciaFilho']) ? $_POST['deficienciaFilho'] : null; // Mantendo a categoriaCID, incluindo "N/a"
+                $nomeFilho = !empty($_POST['editChildName']) ? mysqli_real_escape_string($conn, $_POST['editChildName']) : null;
+                $sexoFilho = !empty($_POST['editChildSex']) ? mysqli_real_escape_string($conn, $_POST['editChildSex']) : null;
+                $dataNascimentoFilho = !empty($_POST['editChildBirthDate']) ? mysqli_real_escape_string($conn, $_POST['editChildBirthDate']) : null;
+                $deficienciaFilho = !empty($_POST['editChildDisability']) ? $_POST['editChildDisability'] : null;
             
-                if (empty($err)) {
-                    $fields = [];
-                    if ($nomeFilho) $fields["nomeFilho"] = $nomeFilho;
-                    if ($sexoFilho) $fields["sexo"] = $sexoFilho;
-                    if ($dataNascimentoFilho) $fields["dataNascimentoFilho"] = $dataNascimentoFilho;
+                $fields = [];
+                if ($nomeFilho) $fields["nomeFilho"] = "'$nomeFilho'";
+                if ($sexoFilho) $fields["sexo"] = "'$sexoFilho'";
+                if ($dataNascimentoFilho) $fields["dataNascimentoFilho"] = "'$dataNascimentoFilho'";
             
-                    if (!empty($fields)) {
-                        $setFields = [];
-                        foreach ($fields as $field => $value) {
-                            $setFields[] = "$field = ?";
-                        }
-                        $setFieldsStr = implode(", ", $setFields);
-                        $updateChild = "UPDATE Filho SET $setFieldsStr WHERE idFilho = ?";
-                        $stmt = mysqli_prepare($conn, $updateChild);
-                        $values = array_values($fields);
-                        $values[] = $childId; 
-                        $types = str_repeat('s', count($values) - 1) . 'i'; // tipos para bind_param
-                        mysqli_stmt_bind_param($stmt, $types, ...$values);
-            
-                        if (!mysqli_stmt_execute($stmt)) {
-                            echo "Erro ao atualizar filho: " . mysqli_error($conn) . "!";
-                            return;
-                        }
+                if (!empty($fields)) {
+                    $setFields = [];
+                    foreach ($fields as $field => $value) {
+                        $setFields[] = "$field = $value";
                     }
+                    $setFieldsStr = implode(", ", $setFields);
             
-                    if ($deficienciaFilho !== null) {
-                        $checkCurrentDeficiencyQuery = "SELECT fd.idFilho, fd.idDeficiencia, d.categoriaCID 
-                                                        FROM filhoDeficiencia fd
-                                                        JOIN Deficiencia d ON fd.idDeficiencia = d.idDeficiencia
-                                                        WHERE fd.idFilho = ?";
-                        $stmt = mysqli_prepare($conn, $checkCurrentDeficiencyQuery);
-                        mysqli_stmt_bind_param($stmt, 'i', $childId);
-                        mysqli_stmt_execute($stmt);
-                        $result = mysqli_stmt_get_result($stmt);
-                        $currentDeficiency = mysqli_fetch_assoc($result);
+                    $updateChild = "UPDATE Filho SET $setFieldsStr WHERE idFilho = " . (int)$childId;
+                    if (!mysqli_query($conn, $updateChild)) {
+                        echo "Erro ao atualizar filho: " . mysqli_error($conn);
+                        return;
+                    }
+                }
             
-                        if ($currentDeficiency) {
-                            if ($currentDeficiency['categoriaCID'] !== $deficienciaFilho) {
-                                $updateDeficiencyQuery = "UPDATE filhoDeficiencia fd
-                                                        JOIN Deficiencia d ON fd.idDeficiencia = d.idDeficiencia
-                                                        SET fd.idDeficiencia = (SELECT idDeficiencia FROM Deficiencia WHERE categoriaCID = ?)
-                                                        WHERE fd.idFilho = ? AND d.categoriaCID = ?";
-                                $stmtUpdate = mysqli_prepare($conn, $updateDeficiencyQuery);
-                                mysqli_stmt_bind_param($stmtUpdate, 'sis', $deficienciaFilho, $childId, $currentDeficiency['categoriaCID']);
-                                mysqli_stmt_execute($stmtUpdate);
+                if ($deficienciaFilho !== null) {
+                    $checkCurrentDeficiencyQuery = "SELECT fd.idFilho, fd.idDeficiencia, d.categoriaCID FROM filhoDeficiencia fd JOIN Deficiencia d ON fd.idDeficiencia = d.idDeficiencia WHERE fd.idFilho = " . (int)$childId;
+                    $result = mysqli_query($conn, $checkCurrentDeficiencyQuery);
+                    $currentDeficiency = mysqli_fetch_assoc($result);
+            
+                    if ($currentDeficiency) {
+                        if ($currentDeficiency['categoriaCID'] !== $deficienciaFilho) {
+                            $updateDeficiencyQuery = "UPDATE filhoDeficiencia fd JOIN Deficiencia d ON fd.idDeficiencia = d.idDeficiencia SET fd.idDeficiencia = (SELECT idDeficiencia FROM Deficiencia WHERE categoriaCID = '$deficienciaFilho') WHERE fd.idFilho = " . (int)$childId . " AND d.categoriaCID = '" . mysqli_real_escape_string($conn, $currentDeficiency['categoriaCID']) . "'";
+                            if (!mysqli_query($conn, $updateDeficiencyQuery)) {
+                                echo "Erro ao atualizar deficiência: " . mysqli_error($conn);
+                                return;
                             }
                         }
-                    }
-                } else {
-                    foreach ($err as $e) {
-                        echo "<p>$e</p>";
+                    } else {
+                        // Se não existe deficiência associada, adicionar uma nova
+                        $insertDeficiencyQuery = "INSERT INTO filhoDeficiencia (idFilho, idDeficiencia) SELECT $childId, idDeficiencia FROM Deficiencia WHERE categoriaCID = '" . mysqli_real_escape_string($conn, $deficienciaFilho) . "'";
+                        if (!mysqli_query($conn, $insertDeficiencyQuery)) {
+                            echo "Erro ao associar deficiência: " . mysqli_error($conn);
+                            return;
+                        }
                     }
                 }
             }
         
-
-         
             if(isset($_POST['confirmarEditarFilho'])) {
                 $childId = $_POST['childEditIdentifier'];
                 editChild($conn, $childId);
             } 
+
         // DELETE CHILD - DELETE
             function deleteChild($conn, $id){
                 if(!empty($id)){         

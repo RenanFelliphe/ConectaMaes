@@ -3,8 +3,6 @@
     include_once __DIR__ . "/../services/crud/postFunctions.php";
 ?>
 
-<i class="bi bi-list Ho-toggleHeader"></i>
-
 <header class="headerHome">
     <img src="<?= $relativeAssetsPath; ?>/imagens/logos/final/Conecta_Mães_Logo_Black.png" class="A-headerLogo" alt="Logo do ConectaMães">
     <input type="hidden" id="postTypeInput" name="postType" value="">
@@ -32,9 +30,7 @@
     </div>
 
     <div class="userContainer">
-        <!-- 
-        <img class="notificationsModalIcon headerIcon" src="<?//= $relativeAssetsPath; ?>/imagens/icons/notifications_off.png" alt="Ícone do modal de notificações">
-        -->
+        <img class="notificationsModalIcon headerIcon" src="<?= $relativeAssetsPath; ?>/imagens/icons/notifications_off.png" alt="Ícone do modal de notificações">
 
         <div class="makeAPost" onclick="openModalHeader(this);">
             <button name ="postPostagem" class="makeAPostBtn">Postar</button>
@@ -113,7 +109,7 @@
                 momentos importantes, dificuldades superadas,
                 alegrias ou tristezas da sua vida</span>. Seus relatos podem
                 inspirar e confortar outras mães na comunidade.</p>
-            <button name="postPostagem" class="postBtn" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Postar</button>
+            <button name="postPostagem" class="postBtn" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Relatar</button>
         </div>
 
         <div class="postStyleSummary" post-link="postAuxilioModal" id="Auxilio" data-type="postSomething" <?= $currentUserData['idUsuario'] == 1 ? '' : 'onclick="openModalHeader(this);"'; ?>>
@@ -125,7 +121,7 @@
             </div>
             <p>Precisa de ajuda? <span>Descreva uma dificuldade que está
                 passando, e receba apoio e conselhos da comunidade</span>.</p>
-            <button name="postPostagem" class="postBtn" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Postar</button>
+            <button name="postPostagem" class="postBtn" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Pedir</button>
         </div>
     </div>
 
@@ -157,6 +153,7 @@
 <modal class="modalSection close" data-type="postSomething">
     <form class="Ho-postSomething pageModal" method="post" enctype="multipart/form-data">
         <i class="bi bi-x closeModal" onclick="openModalHeader(this);"></i>
+        <input type="hidden" name="idPublicacao" id="postIdField" value="">
 
         <div class="Ho-postTop">
             <a class="Ho-userProfileImage" href="<?= $relativePublicPath; ?>/home/perfil.php">
@@ -178,153 +175,154 @@
                 </div>
             </div>
         </div>
-        
+        <?php
+            foreach ($messages as $message) {
+                echo "<p>$message</p>";
+            }
+        ?>
         <div class="Ho-postBottom">
-            <div class="Ho-submitArea">
-                <button type="submit" value="submit" post-link="postPostModal" name="postPostModal" class="Ho-submitBtn confirmBtn close"> Postar </button>
-                <button type="submit" value="submit" post-link="postRelatoModal" name="postRelatoModal" class="Ho-submitBtn confirmBtn close"> Relatar </button>
-                <button type="submit" value="submit" post-link="postAuxilioModal" name="postAuxilioModal" class="Ho-submitBtn confirmBtn close"> Pedir </button>
-                <button type="submit" value="submit" post-link="postComentarioModal" name="postComentarioModal" class="Ho-submitBtn confirmBtn"> Comentar </button>
+            <div class="Ho-identifyMyself" id="meIdentificarContainer"style="display: none;">
+                <label for="meIdentificarCheckbox">
+                    <input type="checkbox" id="meIdentificarCheckbox" name="meIdentificar" checked>
+                    Me identificar
+                </label>
+                <i class="bi bi-info-circle" id="infoIcon"></i>
             </div>
+
+            <button type="submit" value="submit" post-link="postPostModal" name="postPostModal" class="Ho-submitBtn confirmBtn close"> Postar </button>
+            <button type="submit" value="submit" post-link="postRelatoModal" name="postRelatoModal" class="Ho-submitBtn confirmBtn close"> Relatar </button>
+            <button type="submit" value="submit" post-link="postAuxilioModal" name="postAuxilioModal" class="Ho-submitBtn confirmBtn close"> Pedir </button>
+            <button type="submit" value="submit" post-link="postComentarioModal" name="postComentarioModal" class="Ho-submitBtn confirmBtn"> Comentar </button>
         </div>
 
         <div class="Ho-postAttachments">
             <span class="Ho-preview"></span>
         </div>
-
-        <?php
-            if (isset($_POST['postAuxilioModal'])) {
-                sendPost($conn, 'Auxilio', $currentUserData['idUsuario']);
-            } else if (isset($_POST['postRelatoModal'])) {
-                sendPost($conn, 'Relato', $currentUserData['idUsuario']);
-            } else if (isset($_POST['postComentarioModal'])) {
-                sendComment($conn, $dadosPublicacao['idPublicacao'], $currentUserData['idUsuario']);
-            } else {
-                sendPost($conn, '', $currentUserData['idUsuario']);
-            }
-        ?>
     </form>
 </modal> 
 
 <script>
     const headerHome = document.querySelector('.headerHome');
-    const toggleHeader = document.querySelector('.Ho-toggleHeader');
-    const body = document.querySelector('body');
-
-    toggleHeader.addEventListener('click', () => {
-        headerHome.classList.toggle('active');
-        toggleHeader.style.backgroundColor = headerHome.classList.contains('active') ? "#80808030" : "";
-    });
 
     function openModalHeader(modal) {
-        const modalSections = document.querySelectorAll('.modalSection');
-        const closeModalBtns = document.querySelectorAll('.closeModal');
-        const btnClicked = modal.getAttribute("data-type");
-        const postStyleSummary = document.querySelectorAll('.postStyleSummary');
-        const submitBtns = document.querySelectorAll('.Ho-submitBtn');
-        const postTitleContainer = document.getElementById('postTitleContainer');
+    const modalSections = document.querySelectorAll('.modalSection');
+    const closeModalBtns = document.querySelectorAll('.closeModal');
+    const btnClicked = modal.getAttribute("data-type");
+    const postStyleSummary = document.querySelectorAll('.postStyleSummary');
+    const submitBtns = document.querySelectorAll('.Ho-submitBtn');
+    const postTitleContainer = document.getElementById('postTitleContainer');
+    const meIdentificarContainer = document.getElementById('meIdentificarContainer');  // Referência ao container "Me Identificar"
 
-        // Controla a exibição do título
-        postTitleContainer.style.display = (btnClicked === 'postSomething' && modal.id === '') ? 'none' : 'flex';
+    // Controle de exibição do título
+    postTitleContainer.style.display = (btnClicked === 'postSomething' && modal.id === '') ? 'none' : 'flex';
 
-        // Abre o modal correto
-        toggleModal(modal);
+    // Inicialmente, esconda o "Me Identificar" (mesmo no caso de outro tipo de post)
+    meIdentificarContainer.style.display = 'none';
 
-        // Limpa as classes 'active' de todos os botões de submit
-        submitBtns.forEach(btn => btn.classList.remove('active'));
+    postStyleSummary.forEach(postStyle => {
+        postStyle.addEventListener('click', () => {
+            const postStyleName = postStyle.getAttribute('post-link');
 
-        // Verifica se o elemento clicado é um comentário e ativa o botão 'Comentar'
-        if (modal.getAttribute("post-link") === "postComentarioModal") {
-            const commentBtn = document.querySelector('.Ho-submitBtn[post-link="postComentarioModal"]');
-            if (commentBtn) commentBtn.classList.add('active');
-        } else {
-            // Se não for comentário, associa os botões de postagem normais
-            postStyleSummary.forEach(postStyle => {
-                postStyle.addEventListener('click', () => {
-                    const postStyleName = postStyle.getAttribute('post-link');
-                    submitBtns.forEach(btn => {
-                        if (btn.getAttribute('post-link') === postStyleName) {
-                            btn.classList.add('active');
-                        } else {
-                            btn.classList.remove('active');
-                        }
-                    });
-                });
+            if (postStyleName === "postRelatoModal") {
+                meIdentificarContainer.style.display = 'flex';  
+            } else {
+                meIdentificarContainer.style.display = 'none';  
+            }
+
+            submitBtns.forEach(btn => {
+                if (btn.getAttribute('post-link') === postStyleName) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
             });
+        });
+    });
+    
+    toggleModal(modal);
+    
+
+    const postId = modal.getAttribute("data-post-id");
+
+    if (btnClicked === 'postSomething' && postId) {
+        const postIdField = document.querySelector('#postIdField');
+        if (postIdField) {
+            postIdField.value = postId;
+        }
+    }
+
+    submitBtns.forEach(btn => btn.classList.remove('active'));
+
+    if (modal.getAttribute("post-link") === "postComentarioModal") {
+        const commentBtn = document.querySelector('.Ho-submitBtn[post-link="postComentarioModal"]');
+        if (commentBtn) commentBtn.classList.add('active');
+    }
+
+    closeModalBtns.forEach(closeModalBtn => {
+        closeModalBtn.addEventListener('click', () => {
+            modalSections.forEach(modal => modal.classList.add('close'));
+            submitBtns.forEach(btn => btn.classList.remove('active'));
+        });
+    });
+}
+
+    function dropdownHeaderSections() {
+        const makeAPostButton = document.querySelector('.makeAPost');
+        let closeTimeout;
+
+        function closeAllModals() {
+            document.querySelectorAll('.headerModal').forEach(modal => modal.classList.add('close'));
+            makeAPostButton.classList.remove('active');
         }
 
-        // Fecha os modais e remove classes 'active' ao clicar no botão de fechar
-        closeModalBtns.forEach(closeModalBtn => {
-            closeModalBtn.addEventListener('click', () => {
-                modalSections.forEach(modal => modal.classList.add('close'));
-                submitBtns.forEach(btn => btn.classList.remove('active'));
-            });
+        function toggleModal(modal, button = null) {
+            const isClosed = modal.classList.contains('close');
+            closeAllModals();
+            if (isClosed) {
+                modal.classList.remove('close');
+                if (button) {
+                    button.classList.add('active');
+                }
+            }
+        }
+
+        document.querySelector('.userAccount').addEventListener('click', () => {
+            toggleModal(document.querySelector('.userFunctionsModal'));
+        });
+
+        document.querySelector('.notificationsModalIcon').addEventListener('click', () => {
+            toggleModal(document.querySelector('.notificationsModal'));
+        });
+
+        document.querySelector('.makeAPost').addEventListener('click', () => {
+            toggleModal(document.querySelector('.makeAPostModal'));
+
+            if(!document.querySelector('.makeAPostModal').classList.contains('close'))
+                makeAPostButton.classList.add('active');
+        });
+
+        headerHome.addEventListener('mouseleave', () => {
+            closeTimeout = setTimeout(closeAllModals, 400);
         });
     }
 
+    function toggleSelectedPage() {
+        const homePageLink = document.getElementById('homePageLink');
+        const reportPageLink = document.getElementById('reportPageLink');
+        const helpPageLink = document.getElementById('helpPageLink');
+        const currentUrl = window.location.href;
 
-    const notificationsModalIcon = document.querySelector(".notificationsModalIcon");
-    const notificationsModal = document.querySelector(".notificationsModal");
-
-    function headerFunctions() {
-        function toggleModals() {
-            const modals = document.querySelectorAll('.headerModal');
-            const makeAPostButton = document.querySelector('.makeAPost');
-            let closeTimeout;
-
-            function closeAllModals() {
-                modals.forEach(modal => modal.classList.add('close'));
-                makeAPostButton.classList.remove('active');
-            }
-
-            function toggleModal(modal, button = null) {
-                const isClosed = modal.classList.contains('close');
-                closeAllModals();
-                if (isClosed) {
-                    modal.classList.remove('close');
-                    if (button) {
-                        button.classList.add('active');
-                    }
-                }
-            }
-
-            document.querySelector('.userAccount').addEventListener('click', () => {
-                toggleModal(document.querySelector('.userFunctionsModal'));
-            });
-
-            makeAPostButton.addEventListener('click', () => {
-                toggleModal(document.querySelector('.makeAPostModal'), makeAPostButton);
-            });
-
-            modals.forEach(modal => {
-                modal.addEventListener('mouseleave', () => {
-                    closeTimeout = setTimeout(closeAllModals, 400);
-                });
-                modal.addEventListener('mouseenter', () => {
-                    clearTimeout(closeTimeout);
-                });
-            });
+        if (currentUrl.includes('home.php')) {
+            homePageLink.classList.add('active');
+        } else if (currentUrl.includes('/home/relatos.php')) {
+            reportPageLink.classList.add('active');
+        } else if (currentUrl.includes('/home/auxilios.php')) {
+            helpPageLink.classList.add('active');
         }
-
-        function togglePages() {
-            const homePageLink = document.getElementById('homePageLink');
-            const reportPageLink = document.getElementById('reportPageLink');
-            const helpPageLink = document.getElementById('helpPageLink');
-            const currentUrl = window.location.href;
-
-            if (currentUrl.includes('home.php')) {
-                homePageLink.classList.add('active');
-            } else if (currentUrl.includes('/home/relatos.php')) {
-                reportPageLink.classList.add('active');
-            } else if (currentUrl.includes('/home/auxilios.php')) {
-                helpPageLink.classList.add('active');
-            }
-        }
-
-        toggleModals();
-        togglePages();
     }
 
-    headerFunctions();
+    dropdownHeaderSections();
+    toggleSelectedPage();
+    
 </script>
 

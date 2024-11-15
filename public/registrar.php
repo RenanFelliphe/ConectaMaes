@@ -231,7 +231,6 @@
                 <?php
                     if(isset($_POST['registrar'])){
                         signUp($conn);
-                        header('Location: ' . $_SERVER['REQUEST_URI']);
                     }
                 ?>
             </form>    

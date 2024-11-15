@@ -4,13 +4,16 @@
     }
     include_once __DIR__ . "/../../app/services/helpers/paths.php";
     $verify = isset($_SESSION['active']) ? true : header("Location:" . $relativePublicPath . "/login.php");
-    require_once "../../app/services/crud/userFunctions.php"; 
+
+    require_once "../../app/services/crud/userFunctions.php";
+    $currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']); 
+
     require_once "../../app/services/crud/childFunctions.php";
     require_once "../../app/services/crud/disabilityFunctions.php";
     require_once "../../app/services/auth/authUser.php";
     require_once "../../app/services/helpers/dateChecker.php";
-    $table = "Usuario";
-    $currentUserData = queryUserData($conn, $table, $_SESSION['idUsuario']);   
+    require_once "../../app/services/crud/postFunctions.php";
+    $relatosAnonimosUsuario = queryPostsAndUserData($conn, 'Relato')
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -25,11 +28,6 @@
     </head>
 
     <body class="<?= $currentUserData['tema'];?>">
-        <?php
-            ini_set('display_errors', 1);
-            ini_set('display_startup_errors', 1);
-            error_reporting(E_ALL);
-        ?>
         <?php 
             include_once ("../../app/includes/headerHome.php");
         ?>
@@ -257,7 +255,7 @@
                                 <input type="hidden" name="childEditIdentifier" value="<?= $f['idFilho']; ?>">
                                 <div class="childNameEditor">
                                     <p> Nome: </p>
-                                    <input type="text" class="Re-childName" id="nomeFilho" name="nomeFilho" placeholder="Nome Completo" value="<?= $f['nomeFilho'];?>"required>
+                                    <input type="text" class="Re-childName" id="nomeFilho" name="editChildName" placeholder="Nome Completo" value="<?= $f['nomeFilho'];?>"required>
                                 </div>
                                 <div class="childSexEditor">
                                     <p> Sexo: </p>
@@ -267,7 +265,7 @@
 
                                             foreach ($sexOptions as $value => $label) {
                                                 $checked = ($f['sexo'] === $value) ? 'checked' : '';
-                                                echo "<input type='radio' name='sexoFilho' value='$value' id='child{$value}Sex' $checked>";
+                                                echo "<input type='radio' name='editChildSex' value='$value' id='child{$value}Sex' $checked>";
                                                 echo "<label for='child{$value}Sex'> $label </label>";
                                             }
                                         ?>
@@ -275,13 +273,13 @@
                                 </div>
                                 <div class="childBirthEditor">
                                     <label for="dataNascFilho">Data de Nascimento</label>
-                                    <input type="date" id="dataNascFilho" name="dataNascimentoFilho" value="<?= date('Y-m-d', strtotime($f['dataNascimentoFilho'])); ?>" required>
+                                    <input type="date" id="dataNascFilho" name="editChildBirthDate" value="<?= date('Y-m-d', strtotime($f['dataNascimentoFilho'])); ?>" required>
                                 </div>
                                 <div class="childDisabilityEditor">
-                                    <label for="deficienciaFilho">Deficiência</label>
+                                    <label for="editChildDisability">Deficiência</label>
                                     <div class="input">
                                         <?php $childDisability = queryChildDisability($conn, $f['idFilho'])[0]; ?>
-                                        <select name="deficienciaFilho" id="deficiencia">
+                                        <select name="editChildDisability" id="deficiencia">
                                             <option value="N/a" <?= ($childDisability['categoriaCID'] == 'N/a') ? 'selected' : '' ?>> Não informar </option>
                                             <optgroup label="Deficiência Físicas">
                                                 <?php 
@@ -345,14 +343,15 @@
                     <?php  
                         } 
                     ?>
+                    <?php
+                        if (isset($add_child_messages) && !empty($add_child_messages)){
+                            foreach ($add_child_messages as $a_c_m) {
+                                echo $a_c_m;
+                            }
+                        }   
+                    ?>
                     <button class="Se-addNewChild confirmBtn" data-type="addChild" onclick="toggleModal(this);" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Adicionar Filho(a)</button>
                 </div>
-
-                <?php 
-                    if(isset($_POST['enviarFilho'])){
-                        addChild($conn, $currentUserData['idUsuario']);
-                    } 
-                ?>
 
                 <div class="Se-otherUsersInteractions Se-subSection">
                     <div class="Se-sectionHeader">
@@ -364,7 +363,7 @@
                 <div class="Se-security Se-subSection">
                     <div class="Se-sectionHeader">
                         <img src="<?= $relativeAssetsPath; ?>/imagens/icons/lock_icon.png" class="pageIcon" alt="Ícone de usuário">
-                        <h1>Segurança e Privacidade</h1>
+                        <h1>Segurança</h1>
                     </div>
 
                     <ul>
@@ -389,11 +388,9 @@
                                 </div>
                                 <button class="Se-editSubmit confirmBtn" type="submit" name="editPasswordSubmit" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Confirmar</button>
                                 <?php
-                                    if(isset($_POST['editPasswordSubmit'])) {   
-                                        if($_POST['updaterId'] === $currentUserData['idUsuario']) {
-                                            editPassword($conn, $_POST['updaterId']);
-                                        } else {
-                                            echo "Algo deu errado!";
+                                    if (isset($password_messages) && !empty($password_messages)) {
+                                        foreach ($password_messages as $p_m) {
+                                            echo $p_m;
                                         }
                                     }
                                 ?>
@@ -411,13 +408,56 @@
                                 </div>
                                 <button class="Se-editSubmit confirmBtn" type="submit" name="editTelephoneSubmit" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Confirmar</button>
                                 <?php
-                                    if (isset($messages) && !empty($messages)) {
-                                        foreach ($messages as $message) {
-                                            echo $message;
+                                    if (isset($phone_messages) && !empty($phone_messages)) {
+                                        foreach ($phone_messages as $p_m) {
+                                            echo $p_m;
                                         }
                                     }
                                 ?>
                             </form>
+                        </li>
+
+                    </ul>
+                    <div class="Se-sectionHeader">
+                        <img src="<?= $relativeAssetsPath; ?>/imagens/icons/lock_icon.png" class="pageIcon" alt="Ícone de usuário">
+                        <h1>Privacidade</h1>
+                    </div>
+
+                    <ul>
+                        <li>
+                            <div class="Se-reportPrivacy" method="post" id="formAnonymous">
+                                <h4>Relatos Anônimos</h4>
+                                <?php
+                                    if (isset($anonIdentification_message)) {
+                                        ?><div class='feedbackMessage'><?=$anonIdentification_message?></div><?php
+                                    }
+                                ?>
+                                <?php 
+                                    foreach($relatosAnonimosUsuario as $ra){
+                                        if($ra['isAnonima']){
+                                ?>
+                                    <form class="relatoAnonimo" method="post">
+                                        <div class="raHeader">
+                                            <input type="hidden" name="anonymousReportIdentifier" class="anonymousReportUpdater" value="<?= $ra['idPublicacao'];?>">
+                                            <div class="raTitle">Título: <?= $ra['titulo'];?></div>
+                                            <div class="raIdentify">
+                                                <label for="meIdentificarCheckboxEdit">
+                                                    <input type="checkbox" id="meIdentificarCheckboxEdit" name="meIdentificarEdit">
+                                                    Me identificar
+                                                </label>
+                                                <i class="bi bi-info-circle-fill" id="infoIcon"></i>
+                                            </div>
+                                        </div>
+                                        <div class="raContentContainer">
+                                            <div class="raContent">Conteúdo: <?= $ra['conteudo'];?></div>
+                                        </div>
+                                        <button type="submit" class="confirmReportIdentification confirmBtn" name="confirmReportIdentification"> Confirmar identificação</button>
+                                    </form>
+                                <?php
+                                        } 
+                                    }
+                                ?>
+                            </div>
                         </li>
                     </ul>
 
@@ -432,67 +472,39 @@
                 </div>
 
             </section>
-            <?php 
-                if(isset($_GET['deletar'])){ 
-                ?>
-                    <modal class="Se-accountDeleteModal">
-                        <h2>Tem certeza que deseja deletar sua conta?</h2>
-                        <form class="Se-accountDeleteModalForm" method="post">
-                            <input type="hidden" name="deleterId" value=<?= $currentUserData['idUsuario'];?>>
-                            <input type="text" placeholder="<?= "delete/".$currentUserData['idUsuario']."/".$currentUserData['nomeDeUsuario'];?>"
-                                name="confirmaTextoDelete">
-                            <button type="submit" id="Se-submitAccountDeleteModalForm">ENVIAR</button>
-                            <button id="Se-cancelAccountDelete">CANCELAR</button>
-                        <?php
-                            if(isset($_POST['confirmaTextoDelete'])){
-                                if($_POST['confirmaTextoDelete'] === ("delete/".$currentUserData['idUsuario']."/".$currentUserData['nomeDeUsuario']))
-                                {
-                                    deleteAccount($conn, $table, $_POST['deleterId']);
-                                }
-                                else
-                                {
-                                    echo "Insira o texto corretamente!";
-                                }
-                            }
-                            
-                        ?>
-                        </form>
-                    </modal>
-            <?php
-                }
-            ?>
         </main>
 
         <modal class="modalSection close" data-type="addChild">
-            <form class="Se-addNewChildModal pageModal">
+            <form class="Se-addNewChildModal pageModal" method="post">
                 <div class="modalHeader">  
                     <i class="bi bi-arrow-left-circle closeModal"></i>
                     <h1>Adicionar Filho(a)</h1>
+                    <input type="hidden" name="parentIdToAddChild" value="<?= $currentUserData['idUsuario'];?>">
                 </div>
 
                 <div class="Se-childInputs">
                     <div class="Re-childBoxSex">
                         <p> Sexo: </p>
                         <div class="Re-sexOptions">
-                            <input type="radio" name="childSex" value="boy" id="Re-childBoySex">
-                            <label for="Re-childBoySex"> Menino </label>
-                            <input type="radio" name="childSex" value="girl" id="Re-childGirlSex">
-                            <label for="Re-childGirlSex"> Menina </label>
-                            <input type="radio" name="childSex" value="nullSex" id="Re-childNullSex">
+                            <input type="radio" name="addChildSex" value="boy" id="Re-childBoySex">
+                            <label for="Re-childBoySex"> Masculino </label>
+                            <input type="radio" name="addChildSex" value="girl" id="Re-childGirlSex">
+                            <label for="Re-childGirlSex"> Feminino </label>
+                            <input type="radio" name="addChildSex" value="nullSex" id="Re-childNullSex">
                             <label for="Re-childNullSex"> Não Informar </label>
                         </div>
                     </div>
                     <div class="Se-childInput">
-                        <input type="text" id="newChildNameInput" name="newChildName" placeholder="- - - - - - - - - - - -">
+                        <input type="text" id="newChildNameInput" name="addChildName">
                         <label class="Re-fakePlaceholder" for="newChildNameInput">Nome Completo</label>
-                        <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/pram_icon.png" class="pageIcon" alt="Ícone de usuário">
+                        <img src="<?= $relativeAssetsPath; ?>/imagens/icons/pram_icon.png" class="pageIcon" alt="Ícone de usuário">
                     </div>
                     <div class="Se-childInput">
-                        <input type="date" id="newChildDateInput" name="newChildDate">
+                        <input type="date" id="newChildDateInput" name="addChildBirthDate">
                         <label class="Re-fakePlaceholder" for="newChildDateInput">Data de Nascimento</label>
                     </div>
                     <div class="Se-childInput">
-                        <select id="newChildDisabilityInput" name="newChildDisability">
+                        <select id="newChildDisabilityInput" name="addChildDisability">
                             <option value="N/a"> Não informar </option>
                             <optgroup label="Deficiência Físicas">
                                 <?php 
@@ -548,23 +560,25 @@
                         <label for="newChildDisabilityInput">Deficiência</label>
                     </div>
                 </div>
-                <button class="Se-modalSubmit" type="submit" name="enviarFilho">Confirmar</button>
+                <button class="Se-modalSubmit" type="submit" name="enviarFilho">Confirmar adição</button>
             </form>
         </modal>
 
         <modal class="modalSection close" data-type="deleteAccount">
-            <form class="Se-deleteAccountModal pageModal">
+            <form class="Se-deleteAccountModal pageModal" method="post">
                 <div class="modalHeader">  
                     <i class="bi bi-arrow-left-circle closeModal"></i>
                     <h1>Deletar Conta</h1>
+                    <input type="hidden" name="deleteUserId" value="<?= $currentUserData['idUsuario'];?>">
                 </div>
 
                 <div class="Se-deleteInputs">
                     <ul><li>Tem certeza que deseja deletar a conta?</li></ul>
                     <div class="Se-deleteInput">
-                        <input type="text" id="confirmDelete" name="confirmDeleteText" placeholder="AS-x5s}wRRc2;a">
+                        <?php $genCode = generateRandomCode(); ?>
+                        <input type="text" id="confirmDelete" name="confirmDeleteText" value="<?= $genCode;?>" placeholder=".">
                         <label class="Re-fakePlaceholder" for="confirmDelete">
-                            <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/conectamaes_icon_black.png"></img>  
+                            <img src="<?= $relativeAssetsPath; ?>/imagens/icons/conectamaes_icon_black.png"></img>  
                         </label>
                     </div>
                     <div class="Se-deleteInput">
@@ -572,7 +586,14 @@
                         <label class="Re-fakePlaceholder" for="confirmDeleteInput">Reescreva o texto acima para confirmar</label>
                     </div>
                 </div>
-                <button class="Se-modalSubmit" type="submit" name="deleteAccountSubmit confirmBtn">Confirmar</button>
+                <button class="Se-modalSubmit confirmBtn" type="submit" name="deleteAccountSubmit">Confirmar deleção</button>
+                <?php
+                    if (isset($deleteUser_messages) && !empty($deleteUser_messages)) {
+                        foreach ($deleteUser_messages as $d_m) {
+                            echo $d_m;
+                        }
+                    }
+                ?>
             </form>
         </modal>
 
@@ -591,6 +612,10 @@
                 childData.classList.toggle('closed');
                 editChildForm.classList.toggle('open');
             }
+
+            document.getElementById('confirmDelete').addEventListener('copy', function(e) {
+                e.preventDefault();
+            });
         </script>
     </body>
 </html>
