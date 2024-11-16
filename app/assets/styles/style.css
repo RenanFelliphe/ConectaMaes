@@ -950,19 +950,33 @@ body.Y-theme .makeAPostModal .postStyleSummary:hover .postStyleTitle img {
     gap: 0.5rem;
 }
 
-.Ho-postSomething .Ho-postTop .Ho-identifyMyself #infoIcon{
+.Ho-postSomething .Ho-postTop .Ho-identifyMyself #Ho-identifyMyselfIcon{
     font-size: 0.8rem;
     color: var(--grayColor);
+}
+
+.Ho-postSomething .Ho-postTop .Ho-identifyMyself #Ho-identifyMyselfIcon:hover{
+    color: var(--secondColor);
 }
 
 .Ho-postSomething .Ho-identifyMyselfModal{
     position: absolute;
     border-radius: 1.3rem;
-    right: -1rem;
+    right: -45%;
     bottom: 1.5rem;
-    padding: 0.5rem;
-    max-width: 20rem;
+    padding: 1rem;
+    width: 16.5rem;
     background-color: var(--whiteColor);
+    transition: 0.25s ease-in;
+    transform: translateX(0);
+    opacity: 1;
+    z-index: -1;
+}
+
+.Ho-postSomething .Ho-identifyMyselfModal.close{
+    transform: translateX(-5rem);
+    transition: 0.25s ease-in;
+    opacity: 0;
 }
 
 .Ho-postSomething .Ho-identifyMyselfModal:before {
@@ -984,17 +998,24 @@ body.Y-theme .makeAPostModal .postStyleSummary:hover .postStyleTitle img {
     position: relative;
     display: flex;
     flex-wrap: nowrap;
-    gap: 1rem
+    gap: 0.5rem;
+    padding-bottom: 0.5rem;
 }
 
 .Ho-postSomething .Ho-identifyMyselfModal .Ho-identifyHeader .Ho-relatosIcon{
     position: relative;
-    width: 1.5rem;
+    width: 1.2rem;
     filter: brightness(0) saturate(100%) invert(66%) sepia(48%) saturate(459%) hue-rotate(16deg) brightness(97%) contrast(85%);
+}
+
+.Ho-postSomething .Ho-identifyMyselfModal .Ho-identifyHeader h3{
+    font-size: 0.9rem;
 }
 
 .Ho-postSomething .Ho-identifyMyselfModal p{
     word-break: break-all;
+    font-size: 0.8rem;
+    text-align: justify;
 }
 
 .Ho-postSomething .Ho-identifyMyselfModal p span{

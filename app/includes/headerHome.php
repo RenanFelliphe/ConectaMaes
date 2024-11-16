@@ -179,12 +179,12 @@
                 <div class="Ho-identifyMyself" id="meIdentificarContainer" style="cursor: pointer;">
                     <input type="checkbox" id="meIdentificarCheckbox" name="meIdentificar" style="cursor: pointer;" checked>
                     <label for="meIdentificarCheckbox" style="cursor: pointer;"> Me identificar </label>
-                    <i class="bi bi-info-circle-fill" id="infoIcon" style="cursor: pointer;"></i>
+                    <i class="bi bi-info-circle-fill" id="Ho-identifyMyselfIcon" style="cursor: pointer;"></i>
                 </div>
             </div>
         </div>
 
-        <div class="Ho-identifyMyselfModal">
+        <div class="Ho-identifyMyselfModal close">
             <div class="Ho-identifyHeader"> 
                 <img class="Ho-relatosIcon" src="<?= $relativeAssetsPath; ?>/imagens/icons/reports_off.png" alt="Ícone da página de relatos">
                 <h3>Publicação sem identificação</h3>
@@ -331,6 +331,10 @@
             helpPageLink.classList.add('active');
         }
     }
+
+    document.querySelector('.Ho-identifyMyself').addEventListener('click', () => {
+        document.querySelector('.Ho-identifyMyselfModal').classList.toggle('close');
+    })
 
     dropdownHeaderSections();
     toggleSelectedPage();
