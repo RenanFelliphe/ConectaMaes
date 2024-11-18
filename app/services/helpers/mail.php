@@ -25,11 +25,11 @@
             $mailServer->Username = "contato@conectamaes.linceonline.com.br";
             $mailServer->Password = "!JCaBe%1}?9u";
 
-            $mailServer->setFrom("$email", $name);
-            $mailServer->addAddress("contato@conectamaes.linceonline.com.br");
+            $mailServer->setFrom('contato@conectamaes.linceonline.com.br', 'Equipe ConectaMaes');
+            $mailServer->addAddress("$email");
 
             $mailServer->Subject = $subject;
-            $mailServer->Body = "Olá, ConectaMães.\n" . $message;
+            $mailServer->Body = "Olá, $name. Agradecemos seu feedback sobre \"$subject\". A mensagem enviada foi: $message.\n\n Vamos conversar sobre!";
             $mailServer->send();
 
             echo "<p>Sua mensagem foi enviada com sucesso. Nossa equipe agradece seu feedback!</p>";
