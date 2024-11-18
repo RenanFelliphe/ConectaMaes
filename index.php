@@ -177,7 +177,7 @@
                         <?php 
                             if(isset($_POST["envioContato"])){ 
                                 require_once "app/services/helpers/mail.php";
-                                sendEmail($mailServer);
+                                configureMailServer($name, $email, $subject, $message);
                             }
                         ?>
                     </form>

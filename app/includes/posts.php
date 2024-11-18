@@ -111,8 +111,21 @@ if (count($publicacoes) > 0) {
                         <ul class="auxilioDate">
                             <li><?php echo htmlspecialchars($mensagemData); ?></li>
                         </ul>
-                        <p class="auxilioTitle"><?php echo htmlspecialchars($dadosPublicacao['titulo']); ?></p>
-                        <i class="bi bi-x closeModal" onclick="toggleModal(this)"></i>
+                        
+                        <div class="postInfo" >
+                            <?php if($currentUserData['idUsuario'] == $dadosPublicacao['idUsuario']){ ?>
+                                <div class="bi bi-three-dots postMoreButton">
+                                    <form class="postFunctionsModal close" method="POST">
+                                        <!-- <button class="reportPostButton bi bi-megaphone-fill pageIcon" name="denunciarPost"> Denunciar Postagem </button> -->
+                                        <?php if ($currentUserData['idUsuario'] == $dadosPublicacao['idUsuario']) { ?>
+                                            <input type="hidden" name="deleterId" value="<?= $dadosPublicacao['idPublicacao']; ?>">
+                                            <button class="deletePostButton bi bi-trash3-fill pageIcon" name="deletarPost" type="submit" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>> Deletar Postagem</button>
+                                        <?php } ?>
+                                    </form>                                      
+                                </div>
+                            <?php } ?>  
+                            <i class="bi bi-x closeModal" onclick="toggleModal(this)"></i>                       
+                        </div>
                     </div>
 
                     <div class="Au-auxilioUser">
@@ -128,6 +141,7 @@ if (count($publicacoes) > 0) {
                         <button name="followUser" class="Au-follow confirmBtn">Seguir</button>
                     </div>
 
+                    <p class="auxilioTitle"><?php echo htmlspecialchars($dadosPublicacao['titulo']); ?></p>
                     <p class="Au-textPost"><?php echo htmlspecialchars($dadosPublicacao['conteudo']); ?></p>
 
                     <div class="Au-childPostSection">
