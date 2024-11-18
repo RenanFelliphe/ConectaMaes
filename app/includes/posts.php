@@ -27,7 +27,7 @@ if (count($publicacoes) > 0) {
                 : '#';
         }
         ?>
-        <article class="Ho-post <?= $tipoPublicacao == 'Auxilio' ? 'Ho-auxilioCard' : '' ?>" data-link="<?= htmlspecialchars($postLink); ?>">
+        <article data-id="<?= $dadosPublicacao['idPublicacao']?>" class="Ho-post <?= $tipoPublicacao == 'Auxilio' ? 'Ho-auxilioCard' : '' ?>" <?= $tipoPublicacao == 'Auxilio' ? 'data-type="auxilioModal" onclick="toggleModal(this);"' : '' ?> data-link="<?= htmlspecialchars($postLink); ?>">
             <ul class="postDate"><li><?= htmlspecialchars($mensagemData); ?></li></ul>
             <?php 
                 if ($tipoPublicacao != 'Auxilio') 
@@ -104,6 +104,74 @@ if (count($publicacoes) > 0) {
                     </button>
                 </div>
             </div>
+
+            <modal data-id="<?= $dadosPublicacao['idPublicacao']?>" class="modalSection close" data-type="auxilioModal">
+                <article class="Au-auxilioModal pageModal">
+                    <div class="Au-modalHeader">
+                        <ul class="auxilioDate">
+                            <li><?php echo htmlspecialchars($mensagemData); ?></li>
+                        </ul>
+                        <p class="auxilioTitle"><?php echo htmlspecialchars($dadosPublicacao['titulo']); ?></p>
+                        <i class="bi bi-x closeModal" onclick="toggleModal(this)"></i>
+                    </div>
+
+                    <div class="Au-auxilioUser">
+                        <div class="postOwnerImage">
+                            <img src="<?php echo $relativeAssetsPath."/imagens/fotos/perfil/".$dadosPublicacao['linkFotoPerfil'];?>">
+                        </div>
+
+                        <div class="postUserNames">
+                            <p class="postOwnerName"><?php echo htmlspecialchars($dadosPublicacao['nomeCompleto']); ?></p>
+                            <p class="postOwnerUser"><?php echo htmlspecialchars($dadosPublicacao['nomeDeUsuario']); ?></p>
+                        </div>
+
+                        <button name="followUser" class="Au-follow confirmBtn">Seguir</button>
+                    </div>
+
+                    <p class="Au-textPost"><?php echo htmlspecialchars($dadosPublicacao['conteudo']); ?></p>
+
+                    <div class="Au-childPostSection">
+                        <div class="Au-childrenName">
+                            <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/pram_icon.png" class="pageImageIcon active" alt="Ícone de Criança">
+                            <p class="Au-childName">Nome da Criança</p>
+                        </div>
+
+                        <div class="postsImages">
+                            <p>+</p>
+                        </div>
+
+                        <div class="Au-postExtraInfos">
+                            <div class="Au-extraInfos">
+                                <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/local_icon.png" class="pageImageIcon active" alt="Ícone de Local">
+                                <p><?php echo htmlspecialchars($dadosPublicacao['estado']); ?></p>
+                            </div>
+                            <div class="Au-extraInfos">
+                                <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/pix_icon.png" class="pageImageIcon active" alt="Ícone de Pix">
+                                <p>N/a</p>
+                            </div>
+                        </div>
+                        <button name="helpUser" class="Au-help confirmBtn">Auxiliar</button>
+                    </div>
+
+                    <div class="postInteractions">
+                        <span></span>
+                        <div class="postLikes">
+                            <i class="bi bi-chat-fill"></i>
+                            <p>0</p>
+                        </div>
+
+                        <h3>Comentários</h3>
+
+                        <span></span>
+
+                        <div class="postComments">
+                            <i class="bi bi-heart-fill"></i>
+                            <p>0</p>
+                        </div>
+                        <span></span>
+                    </div>
+                </article>
+            </modal>
         </article>
         <?php
     }
@@ -115,7 +183,7 @@ if (count($publicacoes) > 0) {
     ?><p class="noPublicationsOnHome">Nenhuma publicação encontrada!</p><?php
 }
 ?>
-
+                                
 <script>
     document.querySelectorAll('article[data-link]').forEach(article => {
         article.addEventListener('click', function(event) {

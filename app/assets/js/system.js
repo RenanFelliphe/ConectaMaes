@@ -166,23 +166,28 @@ function toggleConfigSection() {
 
 function toggleModal(modal) {
     const modalSections = document.querySelectorAll('.modalSection');
-    const closeModalBtns = document.querySelectorAll('.closeModal');
-    const btnClicked = modal.getAttribute("data-type");
+    
+    modalSections.forEach(modalSection => {
+        modalSection.classList.add('close');
+    });
 
     modalSections.forEach(modalSection => {
-        if (modalSection.getAttribute("data-type") === btnClicked) {
-            modalSection.classList.toggle('close');
+        if (modalSection.getAttribute("data-type") === modal.getAttribute("data-type") && modalSection.getAttribute("data-id") === modal.getAttribute("data-id")) {
+            modalSection.classList.remove('close');
         }
     });
 
-    closeModalBtns.forEach(closeModalBtn => {
-        closeModalBtn.addEventListener('click', () => {
-            modalSections.forEach(modalSection => {
-                modalSection.classList.add('close');
-            });
+    document.querySelectorAll('.closeModal').forEach(closeModalBtn => {
+        closeModalBtn.addEventListener('click', (event) => {
+            event.stopPropagation();
+            const parentModal = closeModalBtn.closest('.modalSection');
+            if (parentModal) {
+                parentModal.classList.add('close');
+            }
         });
     });
 }
+
 
 function sendPassword(){
     const formElements = document.getElementById('formPassword');

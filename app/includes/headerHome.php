@@ -251,7 +251,6 @@
     });
     
     toggleModal(modal);
-    
 
     const postId = modal.getAttribute("data-post-id");
 
