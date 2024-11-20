@@ -63,7 +63,7 @@ if (count($publicacoes) > 0) {
                     </a>
 
                     <div class="postInfo" >
-                        <?php if($currentUserData['idUsuario'] == $dadosPublicacao['idUsuario']){ ?>
+                        <?php if($currentUserData['idUsuario'] == $dadosPublicacao['idUsuario'] && $tipoPublicacao != "Auxilio"){ ?>
                             <div class="bi bi-three-dots postMoreButton">
                                 <form class="postFunctionsModal close" method="POST">
                                     <!-- <button class="reportPostButton bi bi-megaphone-fill pageIcon" name="denunciarPost"> Denunciar Postagem </button> -->
@@ -129,61 +129,68 @@ if (count($publicacoes) > 0) {
                     </div>
 
                     <div class="Au-auxilioUser">
-                        <div class="postOwnerImage">
-                            <img src="<?php echo $relativeAssetsPath."/imagens/fotos/perfil/".$dadosPublicacao['linkFotoPerfil'];?>">
+                        <?php
+                            echo renderProfileLink($relativePublicPath, $relativeAssetsPath . "/imagens/fotos/perfil/" . $profileImage, $dadosPublicacao['nomeDeUsuario']);
+                        ?>
+
+                        <div class="postOwner">
+                            <div class="postOwnerName">
+                                <?php 
+                                    $partesDoNomeCompletoOwner = explode(" ", $dadosPublicacao['nomeCompleto']);
+                                    $firstAndLastNameOwner = $partesDoNomeCompletoOwner[0] . " " . end($partesDoNomeCompletoOwner);
+                                    echo htmlspecialchars($firstAndLastNameOwner); 
+                                ?>
+                                <p class="postOwnerUser"><?php echo '@' . htmlspecialchars($dadosPublicacao['nomeDeUsuario']); ?></p>
+                            </div>    
+                            <div class="followersNumber">
+                                <span class="followers"><?= getFollowingCount($conn, $dadosPublicacao['idUsuario']); ?></span>
+                                <p>Seguidores</p>
+                            </div>                        
                         </div>
 
-                        <div class="postUserNames">
-                            <p class="postOwnerName"><?php echo htmlspecialchars($dadosPublicacao['nomeCompleto']); ?></p>
-                            <p class="postOwnerUser"><?php echo htmlspecialchars($dadosPublicacao['nomeDeUsuario']); ?></p>
-                        </div>
-
-                        <button name="followUser" class="Au-follow confirmBtn">Seguir</button>
+                        <form method="POST">
+                            <button name="followProfile" class="Au-follow confirmBtn" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>
+                                <p>Seguir</p>
+                            </button>
+                        </form>                    
                     </div>
 
                     <p class="auxilioTitle"><?php echo htmlspecialchars($dadosPublicacao['titulo']); ?></p>
                     <p class="Au-textPost"><?php echo htmlspecialchars($dadosPublicacao['conteudo']); ?></p>
-
-                    <div class="Au-childPostSection">
-                        <div class="Au-childrenName">
-                            <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/pram_icon.png" class="pageImageIcon active" alt="Ícone de Criança">
-                            <p class="Au-childName">Nome da Criança</p>
+                    
+                    <div class="Au-postExtraInfos">
+                        <div class="Au-extraInfos">
+                            <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/local_icon.png" class="pageImageIcon active" alt="Ícone de Local">
+                            <p><?php echo htmlspecialchars($dadosPublicacao['estado']); ?></p>
                         </div>
-
-                        <div class="postsImages">
-                            <p>+</p>
+                        <div class="Au-extraInfos">
+                            <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/pix_icon.png" class="pageImageIcon active" alt="Ícone de Pix">
+                            <p>N/a</p>
                         </div>
-
-                        <div class="Au-postExtraInfos">
-                            <div class="Au-extraInfos">
-                                <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/local_icon.png" class="pageImageIcon active" alt="Ícone de Local">
-                                <p><?php echo htmlspecialchars($dadosPublicacao['estado']); ?></p>
-                            </div>
-                            <div class="Au-extraInfos">
-                                <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/pix_icon.png" class="pageImageIcon active" alt="Ícone de Pix">
-                                <p>N/a</p>
-                            </div>
-                        </div>
-                        <button name="helpUser" class="Au-help confirmBtn">Auxiliar</button>
                     </div>
 
-                    <div class="postInteractions">
+                    <div class="postsImages">
+                        <p><i class="bi bi-camera-fill"></i></p>
+                        <button name="helpUser" class="Au-help confirmBtn">Auxiliar</button>
+                    </div>
+                    
+                    <form class="postInteractions" method="POST">
                         <span></span>
-                        <div class="postLikes">
+                        <button class="postComment" type="button" name="comment_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?>" value="comment" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>
                             <i class="bi bi-chat-fill"></i>
-                            <p>0</p>
-                        </div>
+                            <p><?= htmlspecialchars($dadosPublicacao['totalComments']); ?></p>
+                        </button>
 
                         <h3>Comentários</h3>
 
                         <span></span>
-
-                        <div class="postComments">
+                        <button class="postLikes <?= queryUserLike($conn, $currentUserData['idUsuario'], $dadosPublicacao['idPublicacao']) ? 'postLiked' : 'postNotLiked';
+                        ?>" type="submit" name="like_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?>" value="like" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?> >
                             <i class="bi bi-heart-fill"></i>
-                            <p>0</p>
-                        </div>
+                            <p><?= htmlspecialchars($dadosPublicacao['totalLikes']); ?></p>
+                        </button>
                         <span></span>
-                    </div>
+                    </form>
                 </article>
             </modal>
         </article>

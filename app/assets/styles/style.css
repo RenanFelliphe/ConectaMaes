@@ -2952,14 +2952,6 @@ footer .A-footerRight li.A-footerPolitic h4 {
     display: inline-block;
 }
 
-.Ho-auxilioCard .postTimelineTop {
-    position: relative;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
 .Ho-auxilioCard .postDate {
     position: absolute;
     top: 0.5rem;
@@ -2978,9 +2970,21 @@ footer .A-footerRight li.A-footerPolitic h4 {
     position: relative;
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
+    gap: 0.5rem;
     padding-top: 0.1rem;
+}
+
+.Ho-post .postContent .postTimelineTop .postUserNames {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    row-gap: 0;
+    column-gap: 0.5rem;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 
 .Ho-auxilioCard .postContent .postTexts {
@@ -3040,6 +3044,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
 
 
 .modalSection .Au-auxilioModal {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -3095,29 +3100,19 @@ footer .A-footerRight li.A-footerPolitic h4 {
 }
 
 .modalSection .Au-auxilioModal .Au-auxilioUser {
+    position: relative;
     display: flex;
     gap: 1rem;
 }
 
-.modalSection .Au-auxilioModal .Au-modalHeader .auxilioTitle {
-    position: relative;
-    height: 100%;
-    display: flex;
-    align-items: flex-end;
-    text-align: center;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--thirdColor);
-}
-
 .modalSection .Au-auxilioModal .Au-auxilioUser .postOwnerImage {
     position: relative;
-    width: 4rem;
-    height: 4rem;
-    min-width: 4rem;
-    min-height: 4rem;
-    max-width: 4rem;
-    max-height: 4rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    min-width: 3.5rem;
+    min-height: 3.5rem;
+    max-width: 3.5rem;
+    max-height: 3.5rem;
     float: left;
     border-radius: 100%;
     overflow: hidden;
@@ -3129,27 +3124,68 @@ footer .A-footerRight li.A-footerPolitic h4 {
     object-fit: cover;
 }
 
-.modalSection .Au-auxilioModal .Au-auxilioUser .postUserNames {
-    width: 100%;
+.modalSection .Au-auxilioModal .Au-auxilioUser .postOwner {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
-.modalSection .Au-auxilioModal .Au-auxilioUser .postUserNames p:first-of-type {
-    font-size: 1.1em;
+.modalSection .Au-auxilioModal .Au-auxilioUser .postOwner .postOwnerName {
+    font-size: 1rem;
     font-weight: bolder;
+    display: flex;
+    align-items: flex-end;
+    gap: 0.3rem;
 }
 
-.modalSection .Au-auxilioModal .Au-auxilioUser .postUserNames p:last-of-type {
+.modalSection .Au-auxilioModal .Au-auxilioUser .postOwner .postOwnerName .postOwnerUser {
+    font-size: 0.7rem;
+    font-weight: normal;
     color: var(--grayColor);
+}
+
+.modalSection .Au-auxilioModal .Au-auxilioUser .postOwner .followersNumber{
+    display: flex;
+    gap: 0.3rem;
     font-size: 0.8rem;
 }
 
+.modalSection .Au-auxilioModal .Au-auxilioUser .postOwner .followersNumber .followers{
+    font-weight: bolder;
+    color: var(--thirdColor);
+}
+
 .modalSection .Au-auxilioModal .Au-auxilioUser .confirmBtn {
-    padding: 0.6rem 1.5rem;
+    padding: 0.4rem 1rem;
     font-size: 1rem;
+}
+
+.modalSection .Au-auxilioModal .Au-postExtraInfos {
+    display: flex;
+    justify-content: flex-start;
+    column-gap: 2rem;
+    padding-left: 1rem;
+}
+
+.modalSection .Au-auxilioModal .Au-postExtraInfos .Au-extraInfos {
+    position: relative;
+    display: flex;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+}
+
+.modalSection .Au-auxilioModal .Au-postExtraInfos .Au-extraInfos img{
+    width: 1.5rem;
+}
+
+.modalSection .Au-auxilioModal .auxilioTitle {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--thirdColor);
 }
 
 .modalSection .Au-auxilioModal .Au-textPost {
@@ -3160,67 +3196,30 @@ footer .A-footerRight li.A-footerPolitic h4 {
     text-align: justify;
 }
 
-.modalSection .Au-auxilioModal .Au-childPostSection {
+.modalSection .Au-auxilioModal .postsImages {
     position: relative;
-    width: 100%;
-    height: max-content;
-    margin-bottom: 2rem;
-}
-
-.modalSection .Au-auxilioModal .Au-childPostSection .Au-childrenName {
-    position: relative;
-    width: 100%;
     display: flex;
-    justify-content: flex-start;
-    gap: 1rem;
-    font-weight: 600;
-    font-size: 1rem;
-}
-
-.modalSection .Au-auxilioModal .Au-childPostSection .Au-childrenName img {
-    width: 1.3rem;
-}
-
-.modalSection .Au-auxilioModal .Au-childPostSection .postsImages {
-    position: relative;
-    bottom: -1rem;
-    display: flex;
-    width: 20rem;
+    width: 100%;
     height: 15rem;
-    background-color: var(--grayColor);
-    border: 1px solid var(--thirdColor);
+    background-color: #d1d1d1;
+    border: 1px solid var(--grayColor);
     border-radius: 0.5rem;
     font-size: 7rem;
-    color: var(--whiteColor);
+    color: var(--grayColor);
     cursor: pointer;
 }
 
-.modalSection .Au-auxilioModal .Au-postExtraInfos {
+.modalSection .Au-auxilioModal .postsImages .confirmBtn {
     position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-    right: 7rem;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.modalSection .Au-auxilioModal .Au-postExtraInfos .Au-extraInfos {
-    position: relative;
-    display: flex;
-    gap: 0.5rem;
-}
-
-.modalSection .Au-auxilioModal .Au-childPostSection .confirmBtn {
-    position: absolute;
-    bottom: 0;
-    right: 1rem;
-    padding: 0.6rem 2rem;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    padding: 0.4rem 1.5rem;
     font-size: 1.1rem;
+    box-shadow: 0 0 20px 1px var(--secondColor);
 }
 
 .modalSection .Au-auxilioModal .postInteractions {
+    position: relative;
     display: flex;
     width: 100%;
     gap: 0.5rem;
@@ -3231,21 +3230,25 @@ footer .A-footerRight li.A-footerPolitic h4 {
     color: var(--secondColor);
 }
 
-.modalSection .Au-auxilioModal .postInteractions div {
+.modalSection .Au-auxilioModal .postInteractions button {
+    position: relative;
+    display: flex;
+    font-size: 0.8rem;
+    gap: 0.3rem;
+    cursor: pointer;
     display: flex;
     gap: 0.5rem;
-}
-
-.modalSection .Au-auxilioModal .postInteractions  .postLikes{
-    display: flex;
-    gap: 0.5rem;
-    background-color: transparent;
     cursor: pointer;
     border: none;
     color: var(--grayColor);
+    transition: 0.1s;
 }
 
-.modalSection .Au-auxilioModal .postInteractions .postLikes.postLiked{
+.modalSection .Au-auxilioModal .postInteractions button:hover {
+    color: var(--secondColor);
+}
+
+.modalSection .Au-auxilioModal .postInteractions button.postLiked{
     color: var(--secondColor);
 }
 
