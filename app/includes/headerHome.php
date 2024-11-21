@@ -42,13 +42,7 @@
 
         <div class="userInformations">
             <span class="userRealName">
-                <?php 
-                    $partesDoNomeCompleto = explode(" ", $currentUserData['nomeCompleto']);
-                    $firstName = $partesDoNomeCompleto[0];
-                    $lastName = end($partesDoNomeCompleto);
-                    $firstAndLastName = $firstName . " " . $lastName;
-                    echo $firstAndLastName;
-                ?>
+                <?= getFirstAndLastName($currentUserData['nomeCompleto']);?>
             </span>
             <span class="userNickname">
                 <?php 

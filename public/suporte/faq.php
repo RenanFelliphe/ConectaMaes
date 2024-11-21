@@ -12,20 +12,42 @@
 
     <body class="Y-theme">
         <?php include_once ("../../app/includes/headerLanding.php");?>
+        
+        <main class="Su-suporte">
+            <h2 class="La-sectionTitle">Políticas</h2>
 
-        <main class="Su-suporte" style="height: 82vh;">
-            <img src="<?= $relativeAssetsPath?>/imagens/figuras/cells_standart_first_blue.png" class="backCells">
-            <img src="<?= $relativeAssetsPath?>/imagens/figuras/cells_standart_first_blue.png" class="backCells cellsLeft">
+            <section class="Su-helpSection">
+                <article class="Su-articleCards">
+                    <a href="<?= $relativePublicPath;?>/suporte.php" class="Su-card">
+                        <img src="../../app/assets/imagens/icons/support_icon.png" alt="" class="Su-cardIcons">
+                        <h3>Voltar ao Suporte</h3>
+                    </a>
+                    <a href="<?= $relativeSupportPath;?>/novidades.php" class="Su-card">
+                        <img src="../../app/assets/imagens/icons/Su_novidades.png" alt="" class="Su-cardIcons">
+                        <h3>Novidades</h3>
+                    </a>
 
-            <div style="position: absolute;
-                        left: 50%; top: 40%;
-                        transform: translate(-50%);
-                        display: flex; flex-direction:
-                        column; cursor: pointer;">
-                <h1> EM DESENVOLVIMENTO </h1>
-                <h4> Perguntas Frequentes </h4>
-            </div>
-            
+                    <a href="<?= $relativeSupportPath;?>/interface.php" class="Su-card">
+                        <img src="../../app/assets/imagens/icons/Su_interface.png" alt="" class="Su-cardIcons">
+                        <h3>Interface</h3>
+                    </a>
+
+                    <a href="<?= $relativeSupportPath;?>/configuracoes.php" class="Su-card">
+                        <img src="../../app/assets/imagens/icons/Su_config.png" alt="" class="Su-cardIcons">
+                        <h3>Configurações</h3>
+                    </a>
+
+                    <a href="<?= $relativeSupportPath;?>/politicas.php" class="Su-card">
+                        <img src="../../app/assets/imagens/icons/Su_politicas.png" alt="" class="Su-cardIcons">
+                        <h3>Políticas</h3>
+                    </a>    
+
+                    <a href="<?= $relativeSupportPath;?>/faq.php" class="Su-card">
+                        <img src="../../app/assets/imagens/icons/Su_faq.png" alt="" class="Su-cardIcons">
+                        <h3>FAQ</h3>
+                    </a>
+                </article>
+            </section>
         </main>
 
         <?php 

@@ -1,8 +1,10 @@
 <section class="asideRight">
     <?php 
-        $result = specificPostQuery($conn, "titulo, isConcluido", "tipoPublicacao = 'Auxilio' AND idUsuario = '".$currentUserData['idUsuario']."'", "ORDER BY dataCriacaoPublicacao DESC");
-        $totalAuxilios = mysqli_num_rows($result); // Contar o total de auxílios
-        $q = 0;
+        $resultAuxilios = specificPostQuery($conn, "titulo, isConcluido", "tipoPublicacao = 'Auxilio' AND idUsuario = '".$currentUserData['idUsuario']."'", "ORDER BY dataCriacaoPublicacao DESC");
+        $totalAuxilios = mysqli_num_rows($resultAuxilios); // Contar o total de auxílios
+        $qa = 0;
+
+        $resultPeople = queryNotFollowed($conn, $currentUserData['idUsuario'], $order = "ORDER BY dataCriacaoUsuario DESC LIMIT 3");
     ?>
     
     <!--
@@ -21,15 +23,15 @@
         <ul class="auxiliosAside">
             <?php
                 // Itera sobre os resultados e exibe cada auxílio
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $q++;
+                while ($row = mysqli_fetch_assoc($resultAuxilios)) {
+                    $qa++;
             ?>
-                <li class="auxilioListItem <?php echo $q > 3 ? 'hidden' : ''; ?>" id="auxilioAside<?= $q;?>">
+                <li class="auxilioListItem <?= $q > 3 ? 'hidden' : ''; ?>" id="auxilioAside<?= $q;?>">
                     <div class="comentarios">
                         <i class="bi bi-chat-fill"></i>
                         <span class="quantComentarios">0</span>
                     </div>
-                    <div class="titulo"><?php echo $row['titulo']; ?></div>
+                    <div class="titulo"><?= $row['titulo']; ?></div>
                     <span class="estado">
                         <?php 
                             if($row['isConcluido'] == 0){
@@ -45,11 +47,36 @@
             ?>
         </ul>
     </div>
+
+    <div class="mySuggestions">
+        <h2 class="mySuggestionsTitle">Sugestões</h2>
+        
+        <ul class="sugesttionsAside">
+            <?php
+                foreach($resultPeople as $rep) {
+                    if (!isUserFollowingProfile($conn, $currentUserData['idUsuario'], $rep['idUsuario'])) {
+            ?>
+                        <li>
+                            <form method="post" class="suggestionListItem" id="suggestionAside<?= $rep['idUsuario']; ?>" >
+                                <input type="hidden" name="toFollowId" value="<?= $rep['idUsuario']; ?>"> 
+                                <div class="usuario">
+                                    <i class="bi bi-account-fill"><?= $rep['nomeCompleto']?></i>
+                                </div>
+                                <button type="submit" name="followSuggestedProfile">Seguir</button>
+                            </form>
+                        </li>
+            <?php
+                    }
+                }
+            ?>
+        </ul>
+    </div>
+
     
     <div class="asideRightFooter">
         <div>
-            <a href="<?php echo $relativeRootPath."/index.php"?>">Sobre o ConectaMães</a>
-            <a href="<?php echo $relativePublicPath."/suporte.php"?>">Suporte</a>
+            <a href="<?= $relativeRootPath."/index.php"?>">Sobre o ConectaMães</a>
+            <a href="<?= $relativePublicPath."/suporte.php"?>">Suporte</a>
             <a href="">Termos de Privacidade</a>
             <a href="">CEFET-MG</a>
         </div>

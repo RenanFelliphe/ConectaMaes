@@ -45,9 +45,7 @@ if (count($publicacoes) > 0) {
                                 if ($isRelatoAnonimo) {
                                     echo "Usuário Anônimo " . htmlspecialchars(anonUsername($conn, $dadosPublicacao['nomeDeUsuario']));
                                 } else {
-                                    $partesDoNomeCompletoOwner = explode(" ", $dadosPublicacao['nomeCompleto']);
-                                    $firstAndLastNameOwner = $partesDoNomeCompletoOwner[0] . " " . end($partesDoNomeCompletoOwner);
-                                    echo htmlspecialchars($firstAndLastNameOwner); 
+                                    echo htmlspecialchars(getFirstAndLastName($dadosPublicacao['nomeCompleto'])); 
                                 }
                             ?>
                         </p>
@@ -135,11 +133,7 @@ if (count($publicacoes) > 0) {
 
                         <div class="postOwner">
                             <div class="postOwnerName">
-                                <?php 
-                                    $partesDoNomeCompletoOwner = explode(" ", $dadosPublicacao['nomeCompleto']);
-                                    $firstAndLastNameOwner = $partesDoNomeCompletoOwner[0] . " " . end($partesDoNomeCompletoOwner);
-                                    echo htmlspecialchars($firstAndLastNameOwner); 
-                                ?>
+                                <?= htmlspecialchars(getFirstAndLastName($dadosPublicacao['nomeCompleto'])); ?>
                                 <p class="postOwnerUser"><?php echo '@' . htmlspecialchars($dadosPublicacao['nomeDeUsuario']); ?></p>
                             </div>    
                             <div class="followersNumber">

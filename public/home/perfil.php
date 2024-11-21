@@ -5,6 +5,8 @@ if (session_status() === PHP_SESSION_NONE) {
 
 include_once __DIR__ . "/../../app/services/helpers/paths.php";
 require_once "../../app/services/crud/userFunctions.php";
+// Carregar dados do usuário logado
+$currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);   
 require_once "../../app/services/crud/childFunctions.php"; 
 require_once "../../app/services/crud/postFunctions.php";
 require_once "../../app/services/helpers/dateChecker.php";
@@ -21,20 +23,7 @@ if (!isset($_GET['user'])) {
     exit;
 }
 
-// Carregar dados do usuário logado
-$currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);   
-
-// Carregar dados do perfil do usuário visitado
-$profileQuery = "SELECT idUsuario, nomeCompleto, telefone, linkFotoPerfil, biografia, nomeDeUsuario, isAdmin 
-                 FROM Usuario 
-                 WHERE nomeDeUsuario = '" . mysqli_real_escape_string($conn, $_GET['user']) . "'";
-$profileResult = mysqli_query($conn, $profileQuery);
-$profileData = mysqli_fetch_assoc($profileResult);
-
-if (!$profileResult || mysqli_num_rows($profileResult) === 0) {
-    header("Location: " . $relativeRootPath . "/notFound.php");
-    exit;
-}
+$profileData = getUserProfile($conn, $_GET['user']);
 
 // Processar $_POST para curtir e seguir
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -47,27 +36,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Verificar e processar solicitação de seguir
     if (isset($_POST['followProfile']) && $currentUserData['idUsuario'] != $profileData['idUsuario']) {
         followUser($conn, $currentUserData['idUsuario'], $profileData['idUsuario']);
-    } elseif ($currentUserData['idUsuario'] == $profileData['idUsuario']) {
-        echo "Você não pode seguir a si mesmo.";
     }
 }
 
-// Obter o número de seguidores e de pessoas que o usuário está seguindo
-if (isset($profileData)) {
-    $followerCount = getFollowerCount($conn, $profileData['idUsuario']);
-    $followingCount = getFollowingCount($conn, $profileData['idUsuario']);
-    $postsCount = getPostsCount($conn, $profileData['idUsuario']);
-} else {
-    echo "Erro: Dados do perfil não encontrados.";
-}
+$profileCounts = getProfileCounts($conn, $profileData);
 
-// Verificar se o usuário logado já segue o perfil visitado
-$isFollowingQuery = "SELECT * FROM seguirUsuario WHERE idUsuarioSeguidor = ? AND idUsuarioSeguindo = ?";
-$stmt = mysqli_prepare($conn, $isFollowingQuery);
-mysqli_stmt_bind_param($stmt, "ii", $currentUserData['idUsuario'], $profileData['idUsuario']);
-mysqli_stmt_execute($stmt);
-$isFollowingResult = mysqli_stmt_get_result($stmt);
-$isFollowing = mysqli_num_rows($isFollowingResult) > 0;
+$isFollowing = isUserFollowingProfile($conn, $currentUserData['idUsuario'], $profileData['idUsuario']);
 
 // Consultar as publicações do usuário
 $publicacoes = queryPostsAndUserData($conn, '');
@@ -81,12 +55,12 @@ $publicacoes = queryPostsAndUserData($conn, '');
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-        <link rel="stylesheet" href="<?php echo $relativeAssetsPath; ?>/styles/style.css">
-        <link rel="icon" href="<?php echo $relativeAssetsPath; ?>/imagens/logos/final/Conecta_Mães_Logo_Icon.png">
+        <link rel="stylesheet" href="<?= $relativeAssetsPath; ?>/styles/style.css">
+        <link rel="icon" href="<?= $relativeAssetsPath; ?>/imagens/logos/final/Conecta_Mães_Logo_Icon.png">
         <title>ConectaMães - Perfil</title>
     </head>
 
-    <body class="<?php echo $currentUserData['tema'];?>">
+    <body class="<?= $currentUserData['tema'];?>">
         <?php include_once ("../../app/includes/headerHome.php");?>
 
         <main class="Ho-Main Pe-main mainSystem">
@@ -99,7 +73,7 @@ $publicacoes = queryPostsAndUserData($conn, '');
 
                     <div class="Pe-userInformations">
                         <div class="Pe-userImage">
-                            <div class="Pe-userProfileImage"><img src="<?php echo $relativeAssetsPath . "/imagens/fotos/perfil/". $profileData['linkFotoPerfil'];?>"></div>
+                            <div class="Pe-userProfileImage"><img src="<?= $relativeAssetsPath . "/imagens/fotos/perfil/". $profileData['linkFotoPerfil'];?>"></div>
                         </div>
 
                         <div class="Pe-userTextInformations">
@@ -116,29 +90,23 @@ $publicacoes = queryPostsAndUserData($conn, '');
 
                             <div class="Pe-userNames">
                                 <div class="Pe-userRealName">
-                                    <?php 
-                                        $partesDoNomeCompleto = explode(" ", $profileData['nomeCompleto']);
-                                        $firstName = $partesDoNomeCompleto[0];
-                                        $lastName = $partesDoNomeCompleto[count($partesDoNomeCompleto) - 1];
-                                        $firstAndLastName = $firstName . " " . $lastName;
-                                        
-                                        echo $firstAndLastName;
+                                    <?= getFirstAndLastName($profileData['nomeCompleto']);
                                     ?>
                                 </div>
-                                <div class="Pe-userNickname"><?php echo "@" . $profileData['nomeDeUsuario']; ?></div>
+                                <div class="Pe-userNickname"><?= "@" . $profileData['nomeDeUsuario']; ?></div>
                             </div>
                             
                             <div class="Pe-userNumbers">
                                 <div class="Pe-followingNumbers">
-                                    <span class="Pe-following"><?php echo $followingCount; ?></span>
+                                    <span class="Pe-following"><?= $profileCounts['following']; ?></span>
                                     <p>Seguindo</p>
                                 </div>
                                 <div class="Pe-postsNumber">
-                                    <span class="Pe-posts"><?php echo $postsCount; ?></span>
+                                    <span class="Pe-posts"><?= $profileCounts['posts']; ?></span>
                                     <p>Posts</p>
                                 </div>
                                 <div class="Pe-followersNumber">
-                                    <span class="Pe-followers"><?php echo $followerCount; ?></span>
+                                    <span class="Pe-followers"><?= $profileCounts['followers']; ?></span>
                                     <p>Seguidores</p>
                                 </div>
                             </div>
@@ -148,7 +116,7 @@ $publicacoes = queryPostsAndUserData($conn, '');
                     <div class="Pe-sectionBottom">
                         <div class="Pe-userBiography">
                             <p>Biografia</p>
-                            <span><?php echo $profileData['biografia']; ?></span>
+                            <span><?= $profileData['biografia']; ?></span>
                         </div>
                         <?php if($currentUserData['idUsuario'] == $profileData['idUsuario']) { ?>
                             <button name="editProfile" class="Pe-editAccount confirmBtn">
@@ -157,7 +125,7 @@ $publicacoes = queryPostsAndUserData($conn, '');
                         <?php } else { ?>
                             <form method="POST">
                                 <button name="followProfile" class="Pe-followUser confirmBtn">
-                                    <p><?php echo $isFollowing ? 'Deixar de Seguir' : 'Seguir'; ?></p><i class="bi bi-person-<?php echo $isFollowing ? 'dash' : 'add'; ?>"></i>
+                                    <p><?= $isFollowing ? 'Deixar de Seguir' : 'Seguir'; ?></p><i class="bi bi-person-<?= $isFollowing ? 'dash' : 'add'; ?>"></i>
                                 </button>
                             </form>
                         <?php } ?>
@@ -166,26 +134,26 @@ $publicacoes = queryPostsAndUserData($conn, '');
                 </section>
 
                 <section class="Pe-profilePostType">
-                    <div class="Pe-searchBar close">
+                    <!--<div class="Pe-searchBar close">
                         <label class="bi bi-search" for="Pe-searchBarInput"></label>
                         <input type="search" class="Pe-searchBarInput" id="Pe-searchBarInput" placeholder="Pesquisar neste perfil...">
                         <i class="bi bi-arrow-counterclockwise Pe-backSearchBar"></i>                    
-                    </div>
+                    </div>-->
                     
                     <div class="Pe-postType active" data-target="Pe-postsPostagens">
-                        <img class="postsIcon Pe-postTypeIcon" src="<?php echo $relativeAssetsPath; ?>/imagens/icons/home_off.png" alt="Ícone da página inicial">
+                        <img class="postsIcon Pe-postTypeIcon" src="<?= $relativeAssetsPath; ?>/imagens/icons/home_off.png" alt="Ícone da página inicial">
                         <p class="Pe-postTypeTitle">Postagem</p>
                         <i class="bi bi-info-circle-fill"></i>
                         <span class="Pe-postTypeSelector"></span>
                     </div>
                     <div class="Pe-postType" data-target="Pe-postsRelatos">
-                        <img class="reportsIcon Pe-postTypeIcon" src="<?php echo $relativeAssetsPath; ?>/imagens/icons/reports_off.png" alt="Ícone da página de relatos">
+                        <img class="reportsIcon Pe-postTypeIcon" src="<?= $relativeAssetsPath; ?>/imagens/icons/reports_off.png" alt="Ícone da página de relatos">
                         <p class="Pe-postTypeTitle">Relato</p>
                         <i class="bi bi-info-circle-fill"></i>
                         <span class="Pe-postTypeSelector"></span>
                     </div>
                     <div class="Pe-postType" data-target="Pe-postsAuxilios">
-                        <img class="helpsIcon Pe-postTypeIcon" src="<?php echo $relativeAssetsPath; ?>/imagens/icons/helps_off.png" alt="Ícone da página de auxílios">
+                        <img class="helpsIcon Pe-postTypeIcon" src="<?= $relativeAssetsPath; ?>/imagens/icons/helps_off.png" alt="Ícone da página de auxílios">
                         <p class="Pe-postTypeTitle">Auxílio</p>
                         <i class="bi bi-info-circle-fill"></i>
                         <span class="Pe-postTypeSelector"></span>
@@ -217,13 +185,7 @@ $publicacoes = queryPostsAndUserData($conn, '');
                                             <div class="postTimelineTop">
                                                 <div class="postUserNames">
                                                     <p class="postOwnerName">
-                                                        <?php 
-                                                            $partesDoNomeCompletoOwner = explode(" ", $dadosPublicacao['nomeCompleto']);
-                                                            $firstNameOwner = $partesDoNomeCompletoOwner[0];
-                                                            $lastNameOwner = $partesDoNomeCompletoOwner[count($partesDoNomeCompletoOwner) - 1];
-                                                            $firstAndLastNameOwner = $firstNameOwner . " " . $lastNameOwner; // Concatena a primeira e a última palavra separadas por um espaço
-                                                            echo htmlspecialchars($firstAndLastNameOwner); 
-                                                        ?>
+                                                        <?= getFirstAndLastName($dadosPublicacao['nomeCompleto'])?>
                                                     </p>
                                                     <p class="postOwnerUser">
                                                         <?= '@' . htmlspecialchars($dadosPublicacao['nomeDeUsuario']); ?>
@@ -299,26 +261,17 @@ $publicacoes = queryPostsAndUserData($conn, '');
                                         ?>
                                         <article class="Ho-post">
                                             <div class="postOwnerImage">
-                                                <img src="<?php echo $relativeAssetsPath."/imagens/fotos/perfil/".$dadosPublicacao['linkFotoPerfil'];?>">
+                                                <img src="<?= $relativeAssetsPath."/imagens/fotos/perfil/".$dadosPublicacao['linkFotoPerfil'];?>">
                                             </div>
                                 
                                             <div class="postContent">
                                                 <div class="postTimelineTop">
                                                     <div class="postUserNames">
                                                         <p class="postOwnerName">
-                                                            <?php 
-                                                                $partesDoNomeCompletoOwner = explode(" ", $dadosPublicacao['nomeCompleto']);
-                                                                $firstNameOwner = $partesDoNomeCompletoOwner[0];
-                                                                $lastNameOwner = $partesDoNomeCompletoOwner[count($partesDoNomeCompletoOwner) - 1];
-                                                                
-                                                                // Concatena a primeira e a última palavra separadas por um espaço
-                                                                $firstAndLastNameOwner = $firstNameOwner . " " . $lastNameOwner;
-                                
-                                                                echo htmlspecialchars( $firstAndLastNameOwner); 
-                                                            ?>
+                                                        <?= getFirstAndLastName($dadosPublicacao['nomeCompleto'])?>
                                                         </p>
                                                         <p class="postOwnerUser">
-                                                            <?php echo '@' . htmlspecialchars($dadosPublicacao['nomeDeUsuario']); ?>
+                                                            <?= '@' . htmlspecialchars($dadosPublicacao['nomeDeUsuario']); ?>
                                                         </p>
                                                     </div>
                                 
@@ -342,8 +295,8 @@ $publicacoes = queryPostsAndUserData($conn, '');
                                                 </div>
                                 
                                                 <div class="postTitles">  
-                                                    <p class="postTitle"><?php echo htmlspecialchars($dadosPublicacao['titulo']); ?></p>
-                                                    <p class="textPost"><?php echo htmlspecialchars($dadosPublicacao['conteudo']); ?></p>
+                                                    <strong class="postTitle"><?= htmlspecialchars($dadosPublicacao['titulo']); ?></strong>
+                                                    <p class="textPost"><?= htmlspecialchars($dadosPublicacao['conteudo']); ?></p>
                                                 </div>
                                 
                                                 <form class="postTimelineBottom"  method='post'>
@@ -393,29 +346,23 @@ $publicacoes = queryPostsAndUserData($conn, '');
                                     $mensagemData = postDateMessage($dadosPublicacao["dataCriacaoPublicacao"]);
                                     ?>
                                     <article class="Au-auxilioCard" onclick="openAuxilioModal();">
-                                        <ul class="postDate"><li><?php echo htmlspecialchars($mensagemData); ?></li></ul>
+                                        <ul class="postDate"><li><?= htmlspecialchars($mensagemData); ?></li></ul>
                                         <div class="postTimelineTop">
                                             <div class="postOwnerImage">
-                                                <img src="<?php echo $relativeAssetsPath."/imagens/fotos/perfil/".$dadosPublicacao['linkFotoPerfil'];?>">
+                                                <img src="<?= $relativeAssetsPath."/imagens/fotos/perfil/".$dadosPublicacao['linkFotoPerfil'];?>">
                                             </div>
 
                                             <div class="postUserNames">
                                                 <p class="postOwnerName">
-                                                    <?php 
-                                                    $partesDoNomeCompletoOwner = explode(" ", $dadosPublicacao['nomeCompleto']);
-                                                    $firstNameOwner = $partesDoNomeCompletoOwner[0];
-                                                    $lastNameOwner = $partesDoNomeCompletoOwner[count($partesDoNomeCompletoOwner) - 1];
-                                                    $firstAndLastNameOwner = $firstNameOwner . " " . $lastNameOwner;
-                                                    echo htmlspecialchars($firstAndLastNameOwner); 
-                                                    ?>
+                                                <?= getFirstAndLastName($dadosPublicacao['nomeCompleto'])?>
                                                 </p>
                                                 <p class="postOwnerUser">
-                                                    <?php echo '@' . htmlspecialchars($dadosPublicacao['nomeDeUsuario']); ?>
+                                                    <?= '@' . htmlspecialchars($dadosPublicacao['nomeDeUsuario']); ?>
                                                 </p>
                                             </div>
                                         </div>
 
-                                        <p class="postTitle"><?php echo htmlspecialchars($dadosPublicacao['titulo']); ?></p>
+                                        <p class="postTitle"><?= htmlspecialchars($dadosPublicacao['titulo']); ?></p>
 
                                         <div class="postTimelineBottom">
                                             <div class="postInteractions">
@@ -435,29 +382,29 @@ $publicacoes = queryPostsAndUserData($conn, '');
                                         <section class="Au-auxilioModalBack close">
                                             <article class="Au-auxilioModal">
                                                 <div class="Au-modalHeader">
-                                                    <ul class="auxilioDate"><li><?php echo htmlspecialchars($mensagemData); ?></li></ul> 
-                                                    <p class="auxilioTitle"><?php echo htmlspecialchars($dadosPublicacao['titulo']); ?></p>
+                                                    <ul class="auxilioDate"><li><?= htmlspecialchars($mensagemData); ?></li></ul> 
+                                                    <p class="auxilioTitle"><?= htmlspecialchars($dadosPublicacao['titulo']); ?></p>
                                                     <i class="bi bi-x Au-closeModal" onclick="openAuxilioModal()"></i>
                                                 </div>
 
                                                 <div class="Au-auxilioUser">
                                                     <div class="postOwnerImage">
-                                                        <img src="<?php echo $relativeAssetsPath."/imagens/fotos/perfil/".$dadosPublicacao['linkFotoPerfil'];?>">
+                                                        <img src="<?= $relativeAssetsPath."/imagens/fotos/perfil/".$dadosPublicacao['linkFotoPerfil'];?>">
                                                     </div>
 
                                                     <div class="postUserNames">
-                                                        <p class="postOwnerName"><?php echo htmlspecialchars($dadosPublicacao['nomeCompleto']); ?></p>
-                                                        <p class="postOwnerUser"><?php echo htmlspecialchars($dadosPublicacao['nomeDeUsuario']); ?></p>
+                                                        <p class="postOwnerName"><?= htmlspecialchars($dadosPublicacao['nomeCompleto']); ?></p>
+                                                        <p class="postOwnerUser"><?= htmlspecialchars($dadosPublicacao['nomeDeUsuario']); ?></p>
                                                     </div>
 
                                                     <button name="followUser" class="Au-follow confirmBtn">Seguir</button>
                                                 </div>
 
-                                                <p class="Au-textPost"><?php echo htmlspecialchars($dadosPublicacao['conteudo']); ?></p>
+                                                <p class="Au-textPost"><?= htmlspecialchars($dadosPublicacao['conteudo']); ?></p>
 
                                                 <div class="Au-childPostSection">
                                                     <div class="Au-childrenName">
-                                                        <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/pram_icon.png" class="pageImageIcon active" alt="Ícone de Criança">
+                                                        <img src="<?= $relativeAssetsPath; ?>/imagens/icons/pram_icon.png" class="pageImageIcon active" alt="Ícone de Criança">
                                                         <p class="Au-childName">Nome da Criança</p>
                                                     </div>
 
@@ -467,11 +414,11 @@ $publicacoes = queryPostsAndUserData($conn, '');
 
                                                     <div class="Au-postExtraInfos">
                                                         <div class="Au-extraInfos">
-                                                            <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/local_icon.png" class="pageImageIcon active" alt="Ícone de Local">
-                                                            <p><?php echo htmlspecialchars($dadosPublicacao['estado']); ?></p>
+                                                            <img src="<?= $relativeAssetsPath; ?>/imagens/icons/local_icon.png" class="pageImageIcon active" alt="Ícone de Local">
+                                                            <p><?= htmlspecialchars($dadosPublicacao['estado']); ?></p>
                                                         </div>
                                                         <div class="Au-extraInfos">
-                                                            <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/pix_icon.png" class="pageImageIcon active" alt="Ícone de Pix">
+                                                            <img src="<?= $relativeAssetsPath; ?>/imagens/icons/pix_icon.png" class="pageImageIcon active" alt="Ícone de Pix">
                                                             <p>N/a</p>
                                                         </div>
                                                     </div>
@@ -515,9 +462,9 @@ $publicacoes = queryPostsAndUserData($conn, '');
             <?php include_once ("../../app/includes/asideRight.php");?>
         </main>
 
-        <?php include_once ("../../app/includes/modais.php");?>
+        <?php //include_once ("../../app/includes/modais.php");?>
 
-        <script src="<?php echo $relativeAssetsPath; ?>/js/system.js"></script>
+        <script src="<?= $relativeAssetsPath; ?>/js/system.js"></script>
         <script>
             if ( window.history.replaceState ) {
                 window.history.replaceState(null, null, window.location.href );
