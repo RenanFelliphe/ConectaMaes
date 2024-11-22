@@ -2906,6 +2906,60 @@ footer .A-footerRight li.A-footerPolitic h4 {
     white-space: nowrap;
 }
 
+.asideRight .mySuggestions{
+    padding: 1rem;
+}
+
+.asideRight .mySuggestions .mySuggestionsTitle{
+    margin: 0 0 1rem 1rem;
+}
+.asideRight .mySuggestions .sugesttionsAside{
+    border: 1px solid var(--grayColor);
+    border-radius: 1rem;
+}
+
+.asideRight .mySuggestions .sugesttionsAside .suggestionListItem{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem;
+}
+
+.asideRight .mySuggestions .sugesttionsAside .suggestionListItem .suggestionInfos{
+    position: relative;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.asideRight .mySuggestions .sugesttionsAside .suggestionListItem .suggestionInfos .suggestionImageProfile{
+    position: relative;
+    width: 3rem;
+    height: 3rem;
+    background-color: var(--secondColor);
+    border: 1px solid var(--thirdColor);
+    border-radius: 100%;
+    display: flex;
+    overflow: hidden;
+}
+
+.asideRight .mySuggestions .sugesttionsAside .suggestionListItem .suggestionInfos .suggestionImageProfile img{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.asideRight .mySuggestions .sugesttionsAside .suggestionListItem .suggestionInfos .suggestUserNames .userName{
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.asideRight .mySuggestions .sugesttionsAside .suggestionListItem .suggestionInfos .suggestUserNames .userNick{
+    font-size: 0.7rem;
+    font-weight: normal;
+    color: var(--grayColor);
+}
+
 /*====================================================================================================
 ========================================= PÁGINA DE PEDIDOS ==========================================
 ====================================================================================================*/

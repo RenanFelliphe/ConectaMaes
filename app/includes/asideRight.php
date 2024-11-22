@@ -51,25 +51,31 @@
     <div class="mySuggestions">
         <h2 class="mySuggestionsTitle">Sugestões</h2>
         
-        <ul class="sugesttionsAside">
+        <div class="sugesttionsAside">
             <?php
-                foreach($resultPeople as $rep) {
-                    if (!isUserFollowingProfile($conn, $currentUserData['idUsuario'], $rep['idUsuario'])) {
+                foreach($resultPeople as $userSuggestion) {
+                    if (!isUserFollowingProfile($conn, $currentUserData['idUsuario'], $userSuggestion['idUsuario'])) {
             ?>
-                        <li>
-                            <form method="post" class="suggestionListItem" id="suggestionAside<?= $rep['idUsuario']; ?>" >
-                                <input type="hidden" name="toFollowId" value="<?= $rep['idUsuario']; ?>"> 
-                                <div class="usuario">
-                                    <i class="bi bi-account-fill"><?= $rep['nomeCompleto']?></i>
-                                </div>
-                                <button type="submit" name="followSuggestedProfile">Seguir</button>
-                            </form>
-                        </li>
+            <form method="post" class="suggestionListItem" id="suggestionAside<?= $userSuggestion['idUsuario']; ?>" >
+                <div class="suggestionInfos">
+                    <div class="suggestionImageProfile">
+                        <?php 
+                            echo renderProfileLink($relativePublicPath, $relativeAssetsPath . "/imagens/fotos/perfil/" . $profileImage, $userSuggestion['nomeDeUsuario'], $isRelatoAnonimo);
+                        ?>
+                    </div>
+                    <input type="hidden" name="toFollowId" value="<?= $userSuggestion['idUsuario']; ?>"> 
+                    <div class="suggestUserNames">
+                        <p class="userName"><?= $userSuggestion['nomeCompleto']?></p>
+                        <p class="userNick"><?= '@' . $userSuggestion['nomeDeUsuario']?></p>
+                    </div>
+                </div>
+                <button type="submit" class="followSuggestion confirmBtn" name="followSuggestedProfile">Seguir</button>
+            </form>
             <?php
                     }
                 }
             ?>
-        </ul>
+        </div>
     </div>
 
     
