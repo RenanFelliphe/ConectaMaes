@@ -69,7 +69,6 @@ $publicacoes = queryPostsAndUserData($conn, '');
             <section class="timeline">
                 <section class="Pe-userProfileSection">
                     <a href="../home.php"><i class="bi bi-arrow-left-circle"></i></a>
-                    <ul><li class="Pe-lastTimeOnline">Visto por último: <span>a 2 horas atrás</span></li></ul> 
 
                     <div class="Pe-userInformations">
                         <div class="Pe-userImage">

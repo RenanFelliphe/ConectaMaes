@@ -859,8 +859,12 @@ body.Y-theme .makeAPostModal .postStyleSummary:hover .postStyleTitle img {
 
 .Ho-postSomething .Ho-postTop .Ho-userProfileImage {
     position: relative;
+    min-width: 4rem;
+    min-height: 4rem;
     width: 4rem;
     height: 4rem;
+    max-width: 4rem;
+    max-height: 4rem;
     border: 1px solid var(--secondColor);
     border-radius: 100%;
     overflow: hidden;
@@ -2541,7 +2545,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     display: flex;
     align-items: flex-start;
     overflow: hidden;
-    height: 90vh;
+    height: 87vh;
 }
 
 .Ho-Main .timeline {
@@ -3096,7 +3100,6 @@ footer .A-footerRight li.A-footerPolitic h4 {
     padding: 1.5rem;
 }
 
-
 .modalSection .Au-auxilioModal {
     position: relative;
     display: flex;
@@ -3314,6 +3317,61 @@ footer .A-footerRight li.A-footerPolitic h4 {
 
 .modalSection .Au-auxilioModal .postInteractions span:nth-of-type(2) {
     width: 100%;
+}
+
+.modalSection .Au-auxilioModal .Ho-postSomething.postAuxilioComent {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: none;
+    margin-bottom: 1rem;
+}
+
+.modalSection .Au-auxilioModal .Ho-postSomething.postAuxilioComent .Ho-postTop {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.modalSection .Au-auxilioModal .Ho-postSomething.postAuxilioComent .Ho-postTop .Ho-userProfileImage {
+    position: relative;
+    min-width: 3.5rem;
+    min-height: 3.5rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    max-width: 3.5rem;
+    max-height: 3.5rem;
+    border: 1px solid var(--secondColor);
+    border-radius: 100%;
+    overflow: hidden;
+}
+
+.modalSection .Au-auxilioModal .Ho-postSomething.postAuxilioComent .Ho-postTop .Ho-userProfileImage img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    object-fit: cover;
+}
+
+.modalSection .Au-auxilioModal .Ho-postSomething.postAuxilioComent .Ho-postBottom .confirmBtn{
+    display: flex;
+    margin: 0.5rem 0;
+    transform: scale(0.9);
+}
+
+.modalSection .Au-auxilioModal .Ho-auxiliosComments{
+    position: relative;
+    width: 100%;
+}
+
+.modalSection .Au-auxilioModal .Ho-auxiliosComments .Ho-post{
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 .asideRight .myAuxilios{

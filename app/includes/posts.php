@@ -91,7 +91,7 @@ if (count($publicacoes) > 0) {
                         </button>
                     </form>
                     <button class="postComment" type="button" post-link="postComentarioModal" data-post-id="<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?>" 
-                        data-type="postSomething" 
+                        data-type="postSomething" onclick="openModalHeader(this);"                         
                         name="comment_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?>" 
                         value="comment"  
                         onclick="openModalHeader(this);"
@@ -165,7 +165,6 @@ if (count($publicacoes) > 0) {
 
                     <div class="postsImages">
                         <p><i class="bi bi-camera-fill"></i></p>
-                        <button name="helpUser" class="Au-help confirmBtn">Auxiliar</button>
                     </div>
                     
                     <form class="postInteractions" method="POST">
@@ -185,6 +184,46 @@ if (count($publicacoes) > 0) {
                         </button>
                         <span></span>
                     </form>
+
+                    <div class="Ho-auxiliosComments">
+                        <form class="Ho-postSomething postAuxilioComent" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="idPublicacao" id="postIdField" value="">
+                            <div class="Ho-postTop">
+                                <a class="Ho-userProfileImage" href="<?= $relativePublicPath; ?>/home/perfil.php">
+                                    <img src="<?= $relativeAssetsPath . "/imagens/fotos/perfil/" . $currentUserData['linkFotoPerfil'];?>">
+                                </a>
+
+                                <div class="Ho-postText">
+                                    <div class="Ho-postTitle" id="postTitleContainer" style="display: none;">
+                                        <label for="Ho-postTitleInput">Título:</label>
+                                        <input type="text" id="Ho-postTitleInput" name="tituloEnvio" class="Ho-postTitleInput" oninput="postTitleCharLimiter()">
+                                        <div class="Ho-titleCharacters">
+                                            <span class="Ho-titleCharactersNumber">0</span>/<span class="Ho-maxTitleCharacters">50</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="Ho-postMainContent">
+                                        <textarea name="conteudoEnvio" id="postText" cols="62" rows="3" class="Ho-postTextContent" placeholder="Como você está se sentindo?" style="resize: none;" oninput="postCharLimiter()"></textarea>
+                                        <div class="Ho-characters">
+                                            <span class="Ho-charactersNumber">0</span>/<span class="Ho-maxCharacters">200</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="Ho-postBottom">
+                                <button type="submit" value="submit" name="postComentarioModal" class="confirmBtn"> Comentar </button>
+                            </div>
+                            <?php
+                                if(isset($_POST['postComentarioModal'])){
+                                    sendComment($conn, $dadosPublicacao['idPublicacao'], $currentUserData['idUsuario']);
+                                }
+                            ?>  
+                        </form>
+
+                        <?php
+                            include ("../../app/includes/comments.php");
+                        ?>    
+                    </div>
                 </article>
             </modal>
         </article>
