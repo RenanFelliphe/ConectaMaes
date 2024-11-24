@@ -188,7 +188,6 @@ function toggleModal(modal) {
     });
 }
 
-
 function sendPassword(){
     const formElements = document.getElementById('formPassword');
 

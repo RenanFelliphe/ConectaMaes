@@ -430,3 +430,26 @@ if (isset($currentUserData)) {
         }
     }
 }
+
+//notificações
+function getUserNotifications($conn, $userId) {
+    $userId = (int)$userId;
+
+    $query = "SELECT * FROM Notificacoes WHERE idUsuarioRecebeu = $userId ORDER BY dataNotificacao DESC";
+    
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+        if (mysqli_num_rows($result) > 0) {
+            $notifications = [];
+            while ($row = mysqli_fetch_assoc($result)) {
+                $notifications[] = $row;
+            }
+            return $notifications;
+        } else {
+            return [];
+        }
+    } else {
+        return false;
+    }
+}

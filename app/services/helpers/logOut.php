@@ -1,3 +1,3 @@
 <?php
-    require_once "../auth/authUser.php";
+    require_once "../helpers/authUser.php";
     logOut();

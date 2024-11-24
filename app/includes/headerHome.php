@@ -70,6 +70,26 @@
                 <p> Hoje </p>
                 <span></span>
             </div>
+            <?php 
+                $notifications = getUserNotifications($conn, $currentUserData['idUsuario']);
+                if (count($notifications) > 0) {
+                    foreach ($notifications as $notification) {
+                        switch($notification['tipoNotificacao']){
+                            case 'curtiuPublicacao':
+                                echo $notification['idUsuarioGerou'] . "curtiu sua publicacao";
+                            break;
+                            case 'comentouPublicacao':
+                                echo $notification['idUsuarioGerou'] . "comentou sua publicacao";
+                            break;
+                            case 'seguiuUsuario':
+                                echo $notification['idUsuarioGerou'] . "seguiu você";
+                            break;
+                        }
+                    }
+                } else {
+                    echo "Nenhuma notificação encontrada.";
+                }
+            ?>
         </div>
     </div>
 
@@ -204,17 +224,19 @@
 
     function openModalHeader(modal) {
         const modalSections = document.querySelectorAll('.modalSection');
-        const closeModalBtns = document.querySelectorAll('.closeModal');
-        const postStyleSummary = document.querySelectorAll('.postStyleSummary');
         const submitPostBtn = document.querySelector('.Ho-submitPost');
-        const identifyMyself = document.querySelector('.Ho-identifyMyself');
-        const postTitleContainer = document.querySelector('#postTitleContainer');
         const btnClicked = modal.getAttribute("data-type");
-        
+
+        //Muda o estado do input de titulo para os Relatos e Auxilios
+        const postTitleContainer = document.querySelector('#postTitleContainer');
+
         postTitleContainer.style.display = (btnClicked === 'postSomething' && modal.id === '') ? 'none' : 'flex';
 
+        //Define o tipo de publicação que sofrerá submit
         submitPostBtn.setAttribute('name', modal.getAttribute('post-link'));
-        
+
+        //Muda o estado do container "Me identificar" para os Relatos
+        const identifyMyself = document.querySelector('.Ho-identifyMyself');
         if (modal.getAttribute('post-link') === "postRelatoModal") {
             identifyMyself.style.display = 'flex';  
         } else {
@@ -223,8 +245,8 @@
         
         toggleModal(modal);
 
+        //Adiciona o idPublicacao na postagem de comentarios
         const postId = modal.getAttribute("data-post-id");
-
         if (btnClicked === 'postSomething' && postId) {
             const postIdField = document.querySelector('#postIdField');
             if (postIdField) {
@@ -232,11 +254,8 @@
             }
         }
 
-        if (modal.getAttribute("post-link") === "postComentarioModal") {
-            const commentBtn = document.querySelector('.Ho-submitBtn[post-link="postComentarioModal"]');
-            if (commentBtn) commentBtn.classList.add('active');
-        }
-
+        //Fecha o modal
+        const closeModalBtns = document.querySelectorAll('.closeModal');  
         closeModalBtns.forEach(closeModalBtn => {
             closeModalBtn.addEventListener('click', () => {
                 modalSections.forEach(modal => modal.classList.add('close'));

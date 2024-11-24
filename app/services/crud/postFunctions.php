@@ -25,7 +25,6 @@ function sendPost($conn, $postType, $currentUserId) {
     return $messages; // Retorna as mensagens
 }
 
-
 // SEND COMMENT - CREATE
 function sendComment($conn, $idPublicacao, $currentUserId) {
     $messages = array();  // Array para armazenar as mensagens
@@ -44,7 +43,6 @@ function sendComment($conn, $idPublicacao, $currentUserId) {
 
     return $messages;
 }
-
 
 if (isset($_POST['postAuxilioModal'])) {
     $messages = sendPost($conn, 'Auxilio', $currentUserData['idUsuario']);
@@ -147,7 +145,6 @@ function queryUserCommentLike($conn, $idUser, $idComment) {
 
     return $returnExec ? true : false;
 }
-
 
 // DELETE POST - DELETE
 function deletePost($conn, $id) {

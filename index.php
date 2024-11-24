@@ -1,10 +1,11 @@
 <?php 
     require_once "app/services/helpers/conn.php";
-    require_once "app/services/auth/authUser.php";
+    require_once "app/services/helpers/authUser.php";
     if(isset($_POST["envioUsuarioTeste"])){
         logInTest($conn);
     }
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>

@@ -59,8 +59,9 @@
             <form method="post" class="suggestionListItem" id="suggestionAside<?= $userSuggestion['idUsuario']; ?>" >
                 <div class="suggestionInfos">
                     <div class="suggestionImageProfile">
-                        <?php 
-                            echo renderProfileLink($relativePublicPath, $relativeAssetsPath . "/imagens/fotos/perfil/" . $profileImage, $userSuggestion['nomeDeUsuario'], $isRelatoAnonimo);
+                        <?php
+                            $userSuggestionProfileImage = !empty($userSuggestion['linkFotoPerfil']) ? $userSuggestion['linkFotoPerfil'] : 'default.png'; ;
+                            echo renderProfileLink($relativePublicPath, $relativeAssetsPath . "/imagens/fotos/perfil/" . $userSuggestionProfileImage, $userSuggestion['nomeDeUsuario'], $isRelatoAnonimo = false);
                         ?>
                     </div>
                     <input type="hidden" name="toFollowId" value="<?= $userSuggestion['idUsuario']; ?>"> 

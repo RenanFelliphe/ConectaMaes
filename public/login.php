@@ -1,5 +1,5 @@
 <?php
-    require_once("../app/services/auth/authUser.php");
+    require_once("../app/services/helpers/authUser.php");
     require_once("../app/services/helpers/conn.php");
     require_once("../app/services/helpers/paths.php");
 

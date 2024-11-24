@@ -59,8 +59,6 @@
             $gReturn = mysqli_fetch_all($gExec, MYSQLI_ASSOC);
             return $gReturn;
         }
-        
-
 
     // EDIT ACCOUNT - UPDATE
         function editDef($conn, $defId) {

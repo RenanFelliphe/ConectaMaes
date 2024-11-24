@@ -1,51 +1,37 @@
 <?php 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+    include_once ("../../app/includes/globalIncludes.php");
 
-include_once __DIR__ . "/../../app/services/helpers/paths.php";
-require_once "../../app/services/crud/userFunctions.php";
-// Carregar dados do usuário logado
-$currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);   
-require_once "../../app/services/crud/childFunctions.php"; 
-require_once "../../app/services/crud/postFunctions.php";
-require_once "../../app/services/helpers/dateChecker.php";
-
-// Verificar se o usuário está logado
-if (!isset($_SESSION['active'])) {
-    header("Location: " . $relativePublicPath . "/login.php");
-    exit;
-}
-
-// Verificar se o perfil de usuário foi especificado
-if (!isset($_GET['user'])) {
-    header("Location: " . $relativeRootPath . "/notFound.php");
-    exit;
-}
-
-$profileData = getUserProfile($conn, $_GET['user']);
-
-// Processar $_POST para curtir e seguir
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Curtir postagem
-    if ($likedPost = array_keys($_POST, 'like', true)) {
-        $postId = str_replace('like_', '', $likedPost[0]);
-        handlePostLike($conn, $currentUserData['idUsuario'], (int)$postId);
+    // Verificar se o usuário está logado
+    if (!isset($_SESSION['active'])) {
+        header("Location: " . $relativePublicPath . "/login.php");
+        exit;
     }
 
-    // Verificar e processar solicitação de seguir
-    if (isset($_POST['followProfile']) && $currentUserData['idUsuario'] != $profileData['idUsuario']) {
-        followUser($conn, $currentUserData['idUsuario'], $profileData['idUsuario']);
+    // Verificar se o perfil de usuário foi especificado
+    if (!isset($_GET['user'])) {
+        header("Location: " . $relativeRootPath . "/notFound.php");
+        exit;
     }
-}
 
-$profileCounts = getProfileCounts($conn, $profileData);
+    $profileData = getUserProfile($conn, $_GET['user']);
 
-$isFollowing = isUserFollowingProfile($conn, $currentUserData['idUsuario'], $profileData['idUsuario']);
+    // Processar $_POST para curtir e seguir
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Curtir postagem
+        if ($likedPost = array_keys($_POST, 'like', true)) {
+            $postId = str_replace('like_', '', $likedPost[0]);
+            handlePostLike($conn, $currentUserData['idUsuario'], (int)$postId);
+        }
 
-// Consultar as publicações do usuário
-$publicacoes = queryPostsAndUserData($conn, '');
+        // Verificar e processar solicitação de seguir
+        if (isset($_POST['followProfile']) && $currentUserData['idUsuario'] != $profileData['idUsuario']) {
+            followUser($conn, $currentUserData['idUsuario'], $profileData['idUsuario']);
+        }
+    }
 
+    $profileCounts = getProfileCounts($conn, $profileData);
+
+    $isFollowing = isUserFollowingProfile($conn, $currentUserData['idUsuario'], $profileData['idUsuario']);
 ?>
 
 
