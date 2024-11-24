@@ -942,7 +942,6 @@ body.Y-theme .makeAPostModal .postStyleSummary:hover .postStyleTitle img {
 }
 
 .Ho-postSomething .Ho-postTop .Ho-identifyMyself{
-    display: none;
     position: relative;
     float: right;
     right: 0;
@@ -1067,15 +1066,9 @@ body.Y-theme .makeAPostModal .postStyleSummary:hover .postStyleTitle img {
 .Ho-postSomething .Ho-postBottom .confirmBtn {
     position: relative;
     float: right;
-    display: none;
+    display: flex;
     font-size: 1rem;
     padding: 0.4rem 1.5rem;
-}
-
-.Ho-postSomething .Ho-postBottom .confirmBtn.active {
-    display: flex;
-    background-color: var(--secondColor);
-    color: var(--whiteColor);
 }
 
 .Ho-postSomething .Ho-postAttachments {

@@ -78,7 +78,7 @@
             <h1>Publicação</h1>
         </div>
 
-        <div class="postStyleSummary" post-link="postPostModal" id='' data-type="postSomething" <?= $currentUserData['idUsuario'] == 1 ? '' : 'onclick="openModalHeader(this);"'; ?>>
+        <div class="postStyleSummary" post-link="postPostModal" id='' data-type="postSomething" onclick="openModalHeader(this);">
             <div class="postStyleTitle">
                 <span></span>
                 <img class="homePageIcon headerIcon" src="<?= $relativeAssetsPath; ?>/imagens/icons/home_off.png" alt="Ícone da página inicial">
@@ -92,7 +92,7 @@
             <button name="postPostagem" class="postBtn" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Postar</button>
         </div>
 
-        <div class="postStyleSummary" post-link="postRelatoModal" id="Relato" data-type="postSomething" <?= $currentUserData['idUsuario'] == 1 ? '' : 'onclick="openModalHeader(this);"'; ?>>
+        <div class="postStyleSummary" post-link="postRelatoModal" id="Relato" data-type="postSomething" onclick="openModalHeader(this);">
             <div class="postStyleTitle">
                 <span></span>
                 <img class="reportPageIcon headerIcon" src="<?= $relativeAssetsPath; ?>/imagens/icons/reports_off.png" alt="Ícone da página de relatos">
@@ -106,7 +106,7 @@
             <button name="postPostagem" class="postBtn" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Relatar</button>
         </div>
 
-        <div class="postStyleSummary" post-link="postAuxilioModal" id="Auxilio" data-type="postSomething" <?= $currentUserData['idUsuario'] == 1 ? '' : 'onclick="openModalHeader(this);"'; ?>>
+        <div class="postStyleSummary" post-link="postAuxilioModal" id="Auxilio" data-type="postSomething" onclick="openModalHeader(this);">
             <div class="postStyleTitle">
                 <span></span>
                 <img class="helpPageIcon headerIcon" src="<?= $relativeAssetsPath; ?>/imagens/icons/helps_off.png" alt="Ícone da página de pedidos">
@@ -170,7 +170,7 @@
                     </div>
                 </div>
 
-                <div class="Ho-identifyMyself" id="meIdentificarContainer" style="cursor: pointer;">
+                <div class="Ho-identifyMyself" style="cursor: pointer;">
                     <input type="checkbox" id="meIdentificarCheckbox" name="meIdentificar" style="cursor: pointer;" checked>
                     <label for="meIdentificarCheckbox" style="cursor: pointer;"> Me identificar </label>
                     <i class="bi bi-info-circle-fill" id="Ho-identifyMyselfIcon" style="cursor: pointer;"></i>
@@ -188,16 +188,9 @@
                 acessar seu perfil a partir dele. Apesar disso, as notificações chegarão 
                 normalmente.</p>
         </div>
-        <?php
-            foreach ($messages as $message) {
-                echo "<p>$message</p>";
-            }
-        ?>
+
         <div class="Ho-postBottom">
-            <button type="submit" value="submit" post-link="postPostModal" name="postPostModal" class="Ho-submitBtn confirmBtn close"> Postar </button>
-            <button type="submit" value="submit" post-link="postRelatoModal" name="postRelatoModal" class="Ho-submitBtn confirmBtn close"> Relatar </button>
-            <button type="submit" value="submit" post-link="postAuxilioModal" name="postAuxilioModal" class="Ho-submitBtn confirmBtn close"> Pedir </button>
-            <button type="submit" value="submit" post-link="postComentarioModal" name="postComentarioModal" class="Ho-submitBtn confirmBtn"> Comentar </button>
+            <button type="submit" value="submit" name="postPostModal" class="Ho-submitPost confirmBtn close"> Postar </button>
         </div>
 
         <div class="Ho-postAttachments">
@@ -210,65 +203,46 @@
     const headerHome = document.querySelector('.headerHome');
 
     function openModalHeader(modal) {
-    const modalSections = document.querySelectorAll('.modalSection');
-    const closeModalBtns = document.querySelectorAll('.closeModal');
-    const btnClicked = modal.getAttribute("data-type");
-    const postStyleSummary = document.querySelectorAll('.postStyleSummary');
-    const submitBtns = document.querySelectorAll('.Ho-submitBtn');
-    const postTitleContainer = document.getElementById('postTitleContainer');
-    const meIdentificarContainer = document.getElementById('meIdentificarContainer');  // Referência ao container "Me Identificar"
+        const modalSections = document.querySelectorAll('.modalSection');
+        const closeModalBtns = document.querySelectorAll('.closeModal');
+        const postStyleSummary = document.querySelectorAll('.postStyleSummary');
+        const submitPostBtn = document.querySelector('.Ho-submitPost');
+        const identifyMyself = document.querySelector('.Ho-identifyMyself');
+        const postTitleContainer = document.querySelector('#postTitleContainer');
+        const btnClicked = modal.getAttribute("data-type");
+        
+        postTitleContainer.style.display = (btnClicked === 'postSomething' && modal.id === '') ? 'none' : 'flex';
 
-    // Controle de exibição do título
-    postTitleContainer.style.display = (btnClicked === 'postSomething' && modal.id === '') ? 'none' : 'flex';
+        submitPostBtn.setAttribute('name', modal.getAttribute('post-link'));
+        
+        if (modal.getAttribute('post-link') === "postRelatoModal") {
+            identifyMyself.style.display = 'flex';  
+        } else {
+            identifyMyself.style.display = 'none';  
+        }
+        
+        toggleModal(modal);
 
-    // Inicialmente, esconda o "Me Identificar" (mesmo no caso de outro tipo de post)
-    meIdentificarContainer.style.display = 'none';
+        const postId = modal.getAttribute("data-post-id");
 
-    postStyleSummary.forEach(postStyle => {
-        postStyle.addEventListener('click', () => {
-            const postStyleName = postStyle.getAttribute('post-link');
-
-            if (postStyleName === "postRelatoModal") {
-                meIdentificarContainer.style.display = 'flex';  
-            } else {
-                meIdentificarContainer.style.display = 'none';  
+        if (btnClicked === 'postSomething' && postId) {
+            const postIdField = document.querySelector('#postIdField');
+            if (postIdField) {
+                postIdField.value = postId;
             }
+        }
 
-            submitBtns.forEach(btn => {
-                if (btn.getAttribute('post-link') === postStyleName) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
+        if (modal.getAttribute("post-link") === "postComentarioModal") {
+            const commentBtn = document.querySelector('.Ho-submitBtn[post-link="postComentarioModal"]');
+            if (commentBtn) commentBtn.classList.add('active');
+        }
+
+        closeModalBtns.forEach(closeModalBtn => {
+            closeModalBtn.addEventListener('click', () => {
+                modalSections.forEach(modal => modal.classList.add('close'));
             });
         });
-    });
-    
-    toggleModal(modal);
-
-    const postId = modal.getAttribute("data-post-id");
-
-    if (btnClicked === 'postSomething' && postId) {
-        const postIdField = document.querySelector('#postIdField');
-        if (postIdField) {
-            postIdField.value = postId;
-        }
     }
-
-    submitBtns.forEach(btn => btn.classList.remove('active'));
-
-    if (modal.getAttribute("post-link") === "postComentarioModal") {
-        const commentBtn = document.querySelector('.Ho-submitBtn[post-link="postComentarioModal"]');
-        if (commentBtn) commentBtn.classList.add('active');
-    }
-
-    closeModalBtns.forEach(closeModalBtn => {
-        closeModalBtn.addEventListener('click', () => {
-            modalSections.forEach(modal => modal.classList.add('close'));
-            submitBtns.forEach(btn => btn.classList.remove('active'));
-        });
-    });
-}
 
     function dropdownHeaderSections() {
         const makeAPostButton = document.querySelector('.makeAPost');
