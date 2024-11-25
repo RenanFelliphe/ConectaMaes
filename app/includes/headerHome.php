@@ -83,6 +83,44 @@
                                 continue;
                             }
 
+                            switch ($currentUserData['desativouNotificacao']) {
+                                case 1:
+                                    if ($notification['tipoNotificacao'] === "curtiuPublicacao") {
+                                        continue 2;
+                                    }
+                                    break;
+                                case 2:
+                                    if ($notification['tipoNotificacao'] === "comentouPublicacao") {
+                                        continue 2;
+                                    }
+                                    break;
+                                case 3:
+                                    if (in_array($notification['tipoNotificacao'], ["curtiuPublicacao", "comentouPublicacao"])) {
+                                        continue 2;
+                                    }
+                                    break;
+                                case 4:
+                                    if ($notification['tipoNotificacao'] === "seguiuUsuario") {
+                                        continue 2;
+                                    }
+                                    break;
+                                case 5:
+                                    if (in_array($notification['tipoNotificacao'], ["curtiuPublicacao", "seguiuUsuario"])) {
+                                        continue 2;
+                                    }
+                                    break;
+                                case 6:
+                                    if (in_array($notification['tipoNotificacao'], ["comentouPublicacao", "seguiuUsuario"])) {
+                                        continue 2;
+                                    }
+                                    break;
+                                case 7:
+                                    if (in_array($notification['tipoNotificacao'], ["curtiuPublicacao", "comentouPublicacao", "seguiuUsuario"])) {
+                                        continue 2;
+                                    }
+                                    break;
+                            }
+
                             $foundNotification = true;
                             $userPhoto = $notification['fotoUsuarioGerou'];
                             $username = $notification['usernameUsuarioGerou'];

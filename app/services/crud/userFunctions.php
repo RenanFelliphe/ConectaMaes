@@ -486,3 +486,22 @@ function getUserNotifications($conn, $userId) {
     }
 }
 
+function desativarNotificacoes($conn, $userId) {
+    $mensagem = '';
+
+    $valorBinario = intval($_POST['valorBinario']); // Garantir que seja um número inteiro
+
+    $sql = "UPDATE Usuario SET desativouNotificacao = $valorBinario WHERE idUsuario = $userId";
+
+    if (mysqli_query($conn, $sql)) {
+        $mensagem = "Suas configurações foram redefinidas com sucesso!";
+    } else {
+        $mensagem = "Erro ao atualizar notificações: " . mysqli_error($conn);
+    }
+
+    return $mensagem;
+}
+
+if (isset($_POST['desativarNotificacoesEnvio'])) {
+    $notif_message = desativarNotificacoes($conn, $_POST['updaterId']);
+}
