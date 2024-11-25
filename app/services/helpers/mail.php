@@ -29,7 +29,7 @@
             $mailServer->addAddress("$email");
 
             $mailServer->Subject = $subject;
-            $mailServer->Body = "Olá, $name. Agradecemos seu feedback sobre \"$subject\". A mensagem enviada foi: $message.\n\n Vamos conversar sobre!";
+            $mailServer->Body = "Olá, $name. Agradecemos seu feedback sobre \"$subject\". A mensagem enviada foi: $message.\n\n Responda esse email para conversarmos sobre!";
             $mailServer->send();
 
             echo "<p>Sua mensagem foi enviada com sucesso. Nossa equipe agradece seu feedback!</p>";
