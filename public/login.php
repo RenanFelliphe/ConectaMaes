@@ -2,6 +2,7 @@
     require_once("../app/services/helpers/authUser.php");
     require_once("../app/services/helpers/conn.php");
     require_once("../app/services/helpers/paths.php");
+    validateRememberedCookie($conn, "home.php");
 
     if(isset($_POST['logar'])) {
         logIn($conn);
@@ -47,15 +48,17 @@
                             <input class="Re-userInput" type="password" id="senha" name="senha" oninput="checkEmptyInputLogin(1)" required>
                             <label class="Re-fakePlaceholder" for="senha">Senha</label>
                         </div>
-                        <!--
+                        
                         <div class="Re-input Lo-loginAssistants">
                             <div class="Lo-rememberMe" style="cursor: pointer">
-                                <input type="checkbox" name="lembrar" id="rememberMeCheckbox" style="cursor: pointer"> 
+                                <input type="checkbox" name="rememberMe" id="rememberMeCheckbox" style="cursor: pointer"> 
                                 <label for="rememberMeCheckbox" style="cursor: pointer;"> Lembrar de mim?</label>
                             </div>
+                            <!--
                             <a href="" class="Lo-forgetPassword">Esqueceu sua senha?</a>
+                            -->
                         </div>
-                        -->
+                        
                     </div>
                 </div>
 

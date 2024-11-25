@@ -18,13 +18,7 @@
                     <div class="postTimelineTop">
                         <div class="postUserNames">
                             <p class="postOwnerName">
-                                <?php 
-                                    $nomeCompletoComentario = explode(" ", $comentario['nomeCompleto']);
-                                    $firstNameComentario = $nomeCompletoComentario[0];
-                                    $lastNameComentario = $nomeCompletoComentario[count($nomeCompletoComentario) - 1];
-                                    $nomeFinalComentario = $firstNameComentario . " " . $lastNameComentario;
-                                    echo htmlspecialchars($nomeFinalComentario); 
-                                ?>
+                                <?= getFirstAndLastName($comentario['nomeCompleto']);?>
                             </p>
                             <p class="postOwnerUser">
                                 <?= '@' . htmlspecialchars($comentario['nomeDeUsuario']); ?>

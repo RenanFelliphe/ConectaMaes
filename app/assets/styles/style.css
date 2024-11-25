@@ -794,6 +794,30 @@ body.Y-theme .makeAPostModal .postStyleSummary:hover .postStyleTitle img {
     width: 100%;
 }
 
+.headerHome .notificationsModal .notificationsCenter .notificationsContainer{
+    display: flex;
+    flex-direction: column;
+}
+.headerHome .notificationsModal .notificationsCenter .notificationsContainer .notification{
+    display: flex;
+    flex-direction: row;
+    text-wrap: wrap;
+}
+.headerHome .notificationsModal .notificationsCenter .notificationsContainer .notification .postOwnerImage{
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.headerHome .notificationsModal .notificationsCenter .notificationsContainer .notification .postOwnerImage img{
+    height: 3rem;
+    width: 3rem;
+}
+
 .headerHome .userFunctionsModal {
     right: 1rem;
     padding: 1rem;

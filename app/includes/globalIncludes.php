@@ -13,6 +13,4 @@
     $currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);  
 
     include_once "../../app/services/crud/postFunctions.php";
-    $publicacoes = queryPostsAndUserData($conn,'');
-    $relatosAnonimosUsuario = queryPostsAndUserData($conn, 'Relato')
 ?>

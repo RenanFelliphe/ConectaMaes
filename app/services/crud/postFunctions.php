@@ -54,13 +54,11 @@ if (isset($_POST['postAuxilioModal'])) {
     if (!empty($postId)) {
         $messages = sendComment($conn, $postId, $currentUserData['idUsuario']);
     } else {
-        $messages[] = "<p class='error'>Erro: Não é possível comentar sem um ID de publicação válido.</p>";
+        $messages[] = "<p class='error'>Erro: Não foi possível comentar nesta publicação.</p>";
     }
 } else {
     $messages = sendPost($conn, '', $currentUserData['idUsuario']);
 }
-
-
 // SEARCH POSTS - READ
 function specificPostQuery($conn, $data, $where, $order) {
     $sUQuery = "SELECT $data FROM Publicacao WHERE $where $order";
@@ -83,24 +81,22 @@ function queryPostsAndUserData($conn, $postType = '', $postId = null, $limit = 1
             u.nomeDeUsuario, 
             u.linkFotoPerfil,
             u.estado,
-            COUNT(c.idPublicacao) as totalLikes,
-            COUNT(cm.idComentario) as totalComments
+            -- Subquery para contar likes
+            (SELECT COUNT(*) FROM curtirPublicacao c WHERE c.idPublicacao = p.idPublicacao) AS totalLikes,
+            -- Subquery para contar comentários
+            (SELECT COUNT(*) FROM Comentario cm WHERE cm.idPublicacao = p.idPublicacao) AS totalComments
         FROM 
             Publicacao p
         JOIN 
             Usuario u ON p.idUsuario = u.idUsuario
-        LEFT JOIN 
-            curtirPublicacao c ON c.idPublicacao = p.idPublicacao
-        LEFT JOIN 
-            Comentario cm ON cm.idPublicacao = p.idPublicacao
     ";
 
     if ($postId !== null) {
-        $finalQuery = $baseQuery . " WHERE p.idPublicacao = " . intval($postId) . " GROUP BY p.idPublicacao LIMIT 1";
+        $finalQuery = $baseQuery . " WHERE p.idPublicacao = " . intval($postId) . " ORDER BY p.dataCriacaoPublicacao DESC LIMIT 1";
     } else {
         $whereClause = ($postType === '') ? "p.tipoPublicacao <> 'Auxilio'" : "p.tipoPublicacao = '$postType'";
         
-        $finalQuery = $baseQuery . " WHERE " . $whereClause . " GROUP BY p.idPublicacao ORDER BY p.dataCriacaoPublicacao DESC LIMIT $limit OFFSET $offset";
+        $finalQuery = $baseQuery . " WHERE " . $whereClause . " ORDER BY p.dataCriacaoPublicacao DESC LIMIT $limit OFFSET $offset";
     }
 
     $result = mysqli_query($conn, $finalQuery);
@@ -111,6 +107,7 @@ function queryPostsAndUserData($conn, $postType = '', $postId = null, $limit = 1
     }
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
+
 
 function renderProfileLink($relativePublicPath, $profileImage, $nomeDeUsuario, $isRelatoAnonimo = false) {
     if ($isRelatoAnonimo) {
@@ -251,31 +248,6 @@ function deleteComment($conn, $id) {
         }
     }
 }
-
-//RELATO ANÔNIMO
-function anonUsername($conn, $username) {
-    $username = mysqli_real_escape_string($conn, $username);
-
-    $query = "SELECT idUsuario FROM Usuario WHERE nomeDeUsuario = '$username' LIMIT 1";
-
-    $result = mysqli_query($conn, $query);
-
-    if ($result && mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-        $id = $row['idUsuario'];
-        $n = 5 * $id + 4;
-
-        return sprintf("%07X", $n);
-    } else {
-        return null;
-    }
-}
-
-function getAnonUserId($n){
-    $id = (hexdec($n) - 4) / 5;
-    return $id;
-}
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($likedPost = array_keys($_POST, 'like', true)) {
         $postId = str_replace('like_', '', $likedPost[0]);
@@ -297,6 +269,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+
+//RELATO ANÔNIMO
+function anonUsername($conn, $username) {
+    $username = mysqli_real_escape_string($conn, $username);
+
+    $query = "SELECT idUsuario FROM Usuario WHERE nomeDeUsuario = '$username' LIMIT 1";
+
+    $result = mysqli_query($conn, $query);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $id = $row['idUsuario'];
+        $n = 5 * $id + 4;
+
+        return sprintf("%07X", $n);
+    } else {
+        return null;
+    }
+}
+function getAnonUserId($n){
+    $id = (hexdec($n) - 4) / 5;
+    return $id;
+}
 function editAnonIdentification($conn, $id) {
     
     $meIdentificarEdit = $_POST['meIdentificarEdit'];
@@ -321,7 +316,6 @@ function editAnonIdentification($conn, $id) {
 
     return $mensagem;
 }
-
 if(isset($_POST['confirmReportIdentification']) && isset($_POST['meIdentificarEdit'])){
     $anonIdentification_message = editAnonIdentification($conn, $_POST['anonymousReportIdentifier']);
 }

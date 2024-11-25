@@ -1,9 +1,8 @@
 <?php 
     require_once "app/services/helpers/conn.php";
     require_once "app/services/helpers/authUser.php";
-    if(isset($_POST["envioUsuarioTeste"])){
-        logInTest($conn);
-    }
+    require_once "app/services/helpers/paths.php";
+    validateRememberedCookie($conn, $relativePublicPath . "/home.php");
 ?>
 
 <!DOCTYPE html>
@@ -190,7 +189,7 @@
                             <img src="app/assets/imagens/icons/icons8-instagram-grey.png" alt="img1" class="base">
                             <img src="app/assets/imagens/icons/instagram_pink_icon.png" alt="img2" class = "overlay">
                         </a>
-                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=conectamaes2024@gmail.com" target="_blank" class="La-cantactSectionIconLink">
+                        <a href="mailto:contato@conectamaes.linceonline.com.br" target="_blank" class="La-cantactSectionIconLink">
                             <img src="app/assets/imagens/icons/gmail_grey_icon.png" alt="img1" class="base">
                             <img src="app/assets/imagens/icons/icons8-envelope-pink.png" alt="img2" class="overlay">
                         </a>

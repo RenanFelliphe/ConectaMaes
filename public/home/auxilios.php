@@ -1,5 +1,5 @@
 <?php 
-    include_once ("../../app/includes/globalIncludes.php");
+    include_once ("../../app/includes/globalIncludes.php"); 
 ?>
 
 <!DOCTYPE html>

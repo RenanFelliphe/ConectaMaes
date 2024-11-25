@@ -70,26 +70,52 @@
                 <p> Hoje </p>
                 <span></span>
             </div>
-            <?php 
-                $notifications = getUserNotifications($conn, $currentUserData['idUsuario']);
-                if (count($notifications) > 0) {
-                    foreach ($notifications as $notification) {
-                        switch($notification['tipoNotificacao']){
-                            case 'curtiuPublicacao':
-                                echo $notification['idUsuarioGerou'] . "curtiu sua publicacao";
-                            break;
-                            case 'comentouPublicacao':
-                                echo $notification['idUsuarioGerou'] . "comentou sua publicacao";
-                            break;
-                            case 'seguiuUsuario':
-                                echo $notification['idUsuarioGerou'] . "seguiu você";
-                            break;
+            <div class="notificationsContainer">
+                <?php 
+                    $notifications = getUserNotifications($conn, $currentUserData['idUsuario']);
+                    $today = date('Y-m-d'); 
+                    $foundNotification = false;
+
+                    if (count($notifications) > 0) {
+                        foreach ($notifications as $notification) {
+                            $notificationDate = date('Y-m-d', strtotime($notification['dataNotificacao']));
+                            if ($notificationDate !== $today || $notification['idUsuarioGerou'] == $currentUserData['idUsuario']) {
+                                continue;
+                            }
+
+                            $foundNotification = true;
+                            $userPhoto = $notification['fotoUsuarioGerou'];
+                            $username = $notification['usernameUsuarioGerou'];
+                            $action = '';
+
+                            switch($notification['tipoNotificacao']){
+                                case 'curtiuPublicacao':
+                                    $action = "curtiu sua publicação";
+                                    break;
+                                case 'comentouPublicacao':
+                                    $action = "comentou sua publicação";
+                                    break;
+                                case 'seguiuUsuario':
+                                    $action = "seguiu você";
+                                    break;
+                            }
+                            ?>
+                                <div class='notification' data-link=<?= $relativePublicPath.$notification['linkNotificacao']?>>
+                                    <?= renderProfileLink($relativePublicPath, $relativeAssetsPath."/imagens/fotos/perfil/".$userPhoto, $username, false) ?>
+                                    <div class="notificationContent">
+                                        <strong class='username'><?= $username ?></strong> <?= $action ?>
+                                    </div>
+                                </div>
+                            <?php
                         }
                     }
-                } else {
-                    echo "Nenhuma notificação encontrada.";
-                }
-            ?>
+
+                    if (!$foundNotification) {
+                        echo "Nenhuma notificação encontrada.";
+                    }
+                ?>
+            </div>
+
         </div>
     </div>
 

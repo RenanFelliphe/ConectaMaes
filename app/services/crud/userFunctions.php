@@ -419,30 +419,62 @@ function isUserFollowingProfile($conn, $currentUserId, $profileUserId) {
     return mysqli_num_rows($isFollowingResult) > 0;
 }
 
-// Função para contar o número de seguidores
-
-
-if (isset($currentUserData)) {
-    if($_SERVER['REQUEST_METHOD'] === 'POST'){
-        if ($likedPost = array_keys($_POST, 'like', true)) {
-            $postId = str_replace('like_', '', $likedPost[0]);
-            handlePostLike($conn, $currentUserData['idUsuario'], (int)$postId);
-        }
-    }
-}
-
 //notificações
 function getUserNotifications($conn, $userId) {
     $userId = (int)$userId;
 
-    $query = "SELECT * FROM Notificacoes WHERE idUsuarioRecebeu = $userId ORDER BY dataNotificacao DESC";
-    
+    $query = "
+        SELECT 
+            n.*, 
+            u.nomeDeUsuario AS usernameUsuarioGerou, 
+            u.linkFotoPerfil AS fotoUsuarioGerou
+        FROM 
+            Notificacoes n
+        LEFT JOIN 
+            Usuario u ON n.idUsuarioGerou = u.idUsuario
+        WHERE 
+            n.idUsuarioRecebeu = $userId
+        ORDER BY 
+            n.dataNotificacao DESC
+    ";
+
     $result = mysqli_query($conn, $query);
 
     if ($result) {
         if (mysqli_num_rows($result) > 0) {
             $notifications = [];
             while ($row = mysqli_fetch_assoc($result)) {
+                // Processa informações relacionadas à publicação, se aplicável
+                if (strpos($row['tipoNotificacao'], 'Publicacao') !== false) {
+                    // Extrai o ID da publicação do link
+                    $urlComponents = parse_url($row['linkNotificacao']);
+                    $queryParams = [];
+                    if (isset($urlComponents['query'])) {
+                        parse_str($urlComponents['query'], $queryParams);
+                    }
+
+                    $idPublicacao = $queryParams['post'] ?? null;
+
+                    if ($idPublicacao) {
+                        // Busca título ou conteúdo da publicação diretamente pelo ID
+                        $pubQuery = "
+                            SELECT titulo, conteudo 
+                            FROM Publicacao 
+                            WHERE idPublicacao = $idPublicacao
+                        ";
+                        $pubResult = mysqli_query($conn, $pubQuery);
+                        $publicacao = mysqli_fetch_assoc($pubResult);
+
+                        $row['descricaoPublicacao'] = $publicacao['titulo'] 
+                            ? $publicacao['titulo'] 
+                            : $publicacao['conteudo'];
+                    } else {
+                        $row['descricaoPublicacao'] = null;
+                    }
+                } else {
+                    $row['descricaoPublicacao'] = null;
+                }
+
                 $notifications[] = $row;
             }
             return $notifications;
@@ -453,3 +485,4 @@ function getUserNotifications($conn, $userId) {
         return false;
     }
 }
+

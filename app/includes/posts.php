@@ -107,7 +107,7 @@ if (count($publicacoes) > 0) {
                 <article class="Au-auxilioModal pageModal">
                     <div class="Au-modalHeader">
                         <ul class="auxilioDate">
-                            <li><?php echo htmlspecialchars($mensagemData); ?></li>
+                            <li><?= htmlspecialchars($mensagemData); ?></li>
                         </ul>
                         
                         <div class="postInfo" >
@@ -127,14 +127,13 @@ if (count($publicacoes) > 0) {
                     </div>
 
                     <div class="Au-auxilioUser">
-                        <?php
-                            echo renderProfileLink($relativePublicPath, $relativeAssetsPath . "/imagens/fotos/perfil/" . $profileImage, $dadosPublicacao['nomeDeUsuario']);
+                        <?= renderProfileLink($relativePublicPath, $relativeAssetsPath . "/imagens/fotos/perfil/" . $profileImage, $dadosPublicacao['nomeDeUsuario']);
                         ?>
 
                         <div class="postOwner">
                             <div class="postOwnerName">
                                 <?= htmlspecialchars(getFirstAndLastName($dadosPublicacao['nomeCompleto'])); ?>
-                                <p class="postOwnerUser"><?php echo '@' . htmlspecialchars($dadosPublicacao['nomeDeUsuario']); ?></p>
+                                <p class="postOwnerUser"><?= '@' . htmlspecialchars($dadosPublicacao['nomeDeUsuario']); ?></p>
                             </div>    
                             <div class="followersNumber">
                                 <span class="followers"><?= getFollowingCount($conn, $dadosPublicacao['idUsuario']); ?></span>
@@ -149,16 +148,16 @@ if (count($publicacoes) > 0) {
                         </form>                    
                     </div>
 
-                    <p class="auxilioTitle"><?php echo htmlspecialchars($dadosPublicacao['titulo']); ?></p>
-                    <p class="Au-textPost"><?php echo htmlspecialchars($dadosPublicacao['conteudo']); ?></p>
+                    <p class="auxilioTitle"><?= htmlspecialchars($dadosPublicacao['titulo']); ?></p>
+                    <p class="Au-textPost"><?= htmlspecialchars($dadosPublicacao['conteudo']); ?></p>
                     
                     <div class="Au-postExtraInfos">
                         <div class="Au-extraInfos">
-                            <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/local_icon.png" class="pageImageIcon active" alt="Ícone de Local">
-                            <p><?php echo htmlspecialchars($dadosPublicacao['estado']); ?></p>
+                            <img src="<?= $relativeAssetsPath; ?>/imagens/icons/local_icon.png" class="pageImageIcon active" alt="Ícone de Local">
+                            <p><?= htmlspecialchars($dadosPublicacao['estado']); ?></p>
                         </div>
                         <div class="Au-extraInfos">
-                            <img src="<?php echo $relativeAssetsPath; ?>/imagens/icons/pix_icon.png" class="pageImageIcon active" alt="Ícone de Pix">
+                            <img src="<?= $relativeAssetsPath; ?>/imagens/icons/pix_icon.png" class="pageImageIcon active" alt="Ícone de Pix">
                             <p>N/a</p>
                         </div>
                     </div>
@@ -211,10 +210,10 @@ if (count($publicacoes) > 0) {
                                 </div>
                             </div>
                             <div class="Ho-postBottom">
-                                <button type="submit" value="submit" name="postComentarioModal" class="confirmBtn"> Comentar </button>
+                                <button type="submit" value="submit" name="postComentarioModalAuxilio" class="confirmBtn"> Comentar </button>
                             </div>
                             <?php
-                                if(isset($_POST['postComentarioModal'])){
+                                if(isset($_POST['postComentarioModalAuxilio'])){
                                     sendComment($conn, $dadosPublicacao['idPublicacao'], $currentUserData['idUsuario']);
                                 }
                             ?>  

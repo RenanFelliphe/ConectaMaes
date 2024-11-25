@@ -11,8 +11,6 @@
     require_once "../app/services/crud/childFunctions.php";
     require_once "../app/services/crud/postFunctions.php";
     require_once '../app/services/helpers/dateChecker.php';
-
-    $publicacoes = queryPostsAndUserData($conn,'');
 ?>
 
 <!DOCTYPE html>

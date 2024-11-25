@@ -1,9 +1,8 @@
 Ideias
 	Essenciais
-		postagem - compartilhamento
-		modo anônimo
-		visualização de postagens não sensíveis sem ter o log in necessário
-        validação com IA de post sensível
+		!postagem - compartilhamento
+		!modo anônimo
+		!visualização de postagens não sensíveis sem ter o log in necessário
 	Futuras
 		algoritmo de sugestão - nath
 		conectar com o Google - renan
@@ -11,11 +10,14 @@ Ideias
 		chat (dm) - renan
 		imagens nos comentários - renan
 		seção de páginas e comunidades/grupos - renan
+		validação com IA de post sensível
+		criar página de admin
+
 ---------------------------------------------------------------
 documentacao
-	documento de proposta
-	documento de termos
-	documento de direitos
+	!documento de proposta
+	!documento de termos
+	!documento de direitos
 	completar o diario de bordo
 ---------------------------------------------------------------
 prototipacao
@@ -23,36 +25,35 @@ prototipacao
 ---------------------------------------------------------------
 implementacao
 	arquivos
-		arrumar a landing page - nath e renan
+		!arrumar a landing page - nath e renan
 		arrumar pagina de suporte - 
 		arrumar registro
-		criar página de admin
     interface
-        arrumar header
+        !arrumar header
         arrumar carregamento esquisito das sessões com a timeline
-	crud
-		usuario
+	!crud
+		!usuario
 			!update senha - nath
 			!preview de update da pfp - renan
 			!update da pfp com uniqueId - nath
 			!validação de delete - nath
-		post
-			likes - nath
-			delete - nath
-			comentarios =>
-				insert
-				read
-				delete
+		!post
+			!likes - nath
+			!delete - nath
+			!comentarios =>
+				!insert
+				!read
+				!delete
 		!filho
 			!insert
-			read
-			update
-			delete
-		deficiencia
-			insert
-			read
-			update
-			delete
+			!read
+			!update
+			!delete
+		!deficiencia
+			!insert
+			!read
+			!update
+			!delete
 ---------------------------------------------------------------
 servidor
 	arrumar o banco do servidor

@@ -1,3 +1,6 @@
+<?php     
+    validateRememberedCookie($conn, "home.php");
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
