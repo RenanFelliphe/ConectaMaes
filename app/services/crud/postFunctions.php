@@ -59,6 +59,7 @@ if (isset($_POST['postAuxilioModal'])) {
 } else {
     $messages = sendPost($conn, '', $currentUserData['idUsuario']);
 }
+
 // SEARCH POSTS - READ
 function specificPostQuery($conn, $data, $where, $order) {
     $sUQuery = "SELECT $data FROM Publicacao WHERE $where $order";
@@ -248,6 +249,7 @@ function deleteComment($conn, $id) {
         }
     }
 }
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($likedPost = array_keys($_POST, 'like', true)) {
         $postId = str_replace('like_', '', $likedPost[0]);
@@ -288,10 +290,12 @@ function anonUsername($conn, $username) {
         return null;
     }
 }
+
 function getAnonUserId($n){
     $id = (hexdec($n) - 4) / 5;
     return $id;
 }
+
 function editAnonIdentification($conn, $id) {
     
     $meIdentificarEdit = $_POST['meIdentificarEdit'];
@@ -316,6 +320,7 @@ function editAnonIdentification($conn, $id) {
 
     return $mensagem;
 }
+
 if(isset($_POST['confirmReportIdentification']) && isset($_POST['meIdentificarEdit'])){
     $anonIdentification_message = editAnonIdentification($conn, $_POST['anonymousReportIdentifier']);
 }

@@ -1,4 +1,5 @@
 <?php include_once __DIR__ . "/../app/services/helpers/paths.php"; ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>

@@ -26,7 +26,9 @@
                 while ($row = mysqli_fetch_assoc($resultAuxilios)) {
                     $qa++;
             ?>
-                <li class="auxilioListItem <?= $q > 3 ? 'hidden' : ''; ?>" id="auxilioAside<?= $q;?>">
+                <li class="auxilioListItem <?= $q > 3 ? 'hidden' : ''; ?>" data-id="<?= $dadosPublicacao['idPublicacao']?>"  data-type="auxilioModal" id="auxilioAside<?= $q;?>" onclick="toggleModal(this);">                
+                    <?php include_once ("../app/includes/posts.php"); ?>
+
                     <div class="comentarios">
                         <i class="bi bi-chat-fill"></i>
                         <span class="quantComentarios">0</span>

@@ -1,13 +1,8 @@
-<?php 
-    if(session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
-    include_once __DIR__ . "/../app/services/helpers/paths.php";
-    $verify = isset($_SESSION['active']) ? true : header("Location:".$relativePublicPath."/login.php");
-    require_once "../app/services/crud/userFunctions.php"; 
-    $currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);   
+<?php
+    include_once __DIR__ . "/../app/includes/globalIncludes.php";
     $verifyAdmin = $currentUserData['isAdmin'] ? true : header("Location:".$relativePublicPath."/home.php");
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>

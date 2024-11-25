@@ -1,7 +1,8 @@
 <?php
-    require_once("../app/services/helpers/authUser.php");
-    require_once("../app/services/helpers/conn.php");
-    require_once("../app/services/helpers/paths.php");
+    include_once("../app/services/helpers/authUser.php");
+    include_once("../app/services/helpers/conn.php");
+    include_once("../app/services/helpers/paths.php");
+    
     validateRememberedCookie($conn, "home.php");
 
     if(isset($_POST['logar'])) {

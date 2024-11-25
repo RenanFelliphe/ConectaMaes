@@ -457,6 +457,17 @@
                         <img src="<?= $relativeAssetsPath; ?>/imagens/icons/notifications_icon.png" class="pageIcon" alt="Ícone de usuário">
                         <h1>Notificações</h1>
                     </div>
+
+                    <form id="notificacaoForm" method='post'>
+                        <label><input type="checkbox" id="desativarTodas" value="4"> Desativar todas as notificações</label><br>
+                        <label><input type="checkbox" id="curtidas" value="1"> Desativar notificações de curtidas</label><br>
+                        <label><input type="checkbox" id="comentarios" value="2"> Desativar notificações de comentários</label><br>
+                        <label><input type="checkbox" id="seguidores" value="3"> Desativar notificações de seguidores</label><br>
+                        <button type="submit">Salvar</button>
+
+                        <!-- Adicionando o campo hidden para o valor binário -->
+                        <input type="hidden" id="valorBinario" name="valorBinario" value="0">
+                    </form>
                 </div>
 
             </section>
@@ -603,6 +614,59 @@
 
             document.getElementById('confirmDelete').addEventListener('copy', function(e) {
                 e.preventDefault();
+            });
+
+            document.getElementById("notificacaoForm").addEventListener("change", function() {
+                let valor = 0;
+
+                const desativarTodas = document.getElementById("desativarTodas");
+                const curtidas = document.getElementById("curtidas");
+                const comentarios = document.getElementById("comentarios");
+                const seguidores = document.getElementById("seguidores");
+
+                // Lógica para desmarcar/desmarcar "Desativar todas" baseado nas outras checkboxes
+                if (desativarTodas.checked) {
+                    // Se "Desativar todas" for marcada, marque todas as outras
+                    curtidas.checked = true;
+                    comentarios.checked = true;
+                    seguidores.checked = true;
+                } else {
+                    // Caso contrário, não marque todas as outras automaticamente
+                    if (!(curtidas.checked || comentarios.checked || seguidores.checked)) {
+                        desativarTodas.checked = false;
+                    }
+                }
+
+                // Calculando o valor total baseado nos checkboxes selecionados
+                if (desativarTodas.checked) valor += 4;
+                if (curtidas.checked) valor += 1;
+                if (comentarios.checked) valor += 2;
+                if (seguidores.checked) valor += 3;
+
+                // Exibir o valor binário
+                document.getElementById("valorBinario").textContent = "Valor Binário: " + valor;
+
+                // Você pode enviar o valor para o backend aqui, utilizando AJAX ou outro método
+            });
+
+            document.getElementById("notificacaoForm").addEventListener("submit", function(event) {
+                event.preventDefault();
+                let valorFinal = 0;
+
+                const desativarTodas = document.getElementById("desativarTodas");
+                const curtidas = document.getElementById("curtidas");
+                const comentarios = document.getElementById("comentarios");
+                const seguidores = document.getElementById("seguidores");
+
+                if (desativarTodas.checked) valorFinal += 4;
+                if (curtidas.checked) valorFinal += 1;
+                if (comentarios.checked) valorFinal += 2;
+                if (seguidores.checked) valorFinal += 3;
+
+                // Enviar para o backend o valorFinal, que é o valor a ser salvo no banco
+                console.log("Valor a ser salvo no banco:", valorFinal);
+
+                // Aqui, você pode enviar o valorFinal via AJAX ou algum outro método
             });
         </script>
     </body>
