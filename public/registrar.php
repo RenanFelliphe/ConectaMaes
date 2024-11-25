@@ -1,4 +1,5 @@
 <?php     
+    require_once "../app/services/helpers/authUser.php";
     validateRememberedCookie($conn, "home.php");
 ?>
 <!DOCTYPE html>
