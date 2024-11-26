@@ -1,4 +1,4 @@
-<?php
+ <?php
 include_once(__DIR__ . '/../helpers/upload.php');
 include_once(__DIR__ . '/../helpers/dateChecker.php');
 include_once(__DIR__ . '/../helpers/conn.php');
@@ -404,10 +404,13 @@ if(isset($currentUserData)){
         followUser($conn, $currentUserData['idUsuario'], $profileUserId);
     }
 }
+
 if(isset($currentUserData)){
-    if (isset($_POST['followSuggestedProfile'])) {
-        var_dump($_POST);
-        followUser($conn, $currentUserData['idUsuario'], $_POST['toFollowId']);
+    foreach ($_POST as $key => $value) {
+        if (strpos($key, 'followSuggestedProfile') === 0) {
+            $followedId = $_POST['toFollowId'];
+            followUser($conn, $currentUserData['idUsuario'], $followedId);
+        }
     }
 }
 

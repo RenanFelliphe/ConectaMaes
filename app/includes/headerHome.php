@@ -45,9 +45,7 @@
                 <?= getFirstAndLastName($currentUserData['nomeCompleto']);?>
             </span>
             <span class="userNickname">
-                <?php 
-                    echo "@" . $currentUserData['nomeDeUsuario']; 
-                ?>
+                <?= "@" . $currentUserData['nomeDeUsuario']; ?>
             </span>
         </div>
 
@@ -62,7 +60,7 @@
     <div class="notificationsModal headerModal close">
         <div class="modalHeader">
             <h1>Notificações</h1>
-            <i class="bi bi-three-dots pageIcon"></i>
+            <!--i class="bi bi-three-dots pageIcon"></i-->
         </div>    
         <div class="notificationsCenter">
             <div class="notificationsRelativeDate">

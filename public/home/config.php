@@ -1,6 +1,7 @@
 <?php
     include_once ("../../app/includes/globalIncludes.php");
     require_once "../../app/services/crud/disabilityFunctions.php";
+    $relatosAnonimosUsuario = queryPostsAndUserData($conn, 'Relato')
 ?>
 
 <!DOCTYPE html>
@@ -207,7 +208,7 @@
                                 <input type="hidden" name="childIdentifier" value="<?= $f['idFilho']; ?>">
                                 <img class ="childIcon" src="<?= $relativeAssetsPath; ?>/imagens/icons/<?= $f['sexo'] === 'boy' ? 'boy_icon' : ($f['sexo'] === 'girl' ? 'girl_icon' : 'pram_icon'); ?>.png" class="pageIcon" alt="Ícone do Filho">
                                 <p class="childName"><?= $f['nomeFilho']; ?></p>
-                                <button type="submit" class=" deleteChildButton" name="deletarFilho"><i class="bi bi-x" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>></i></button> 
+                                <button type="submit" class=" deleteChildButton" name="deletarFilho" <?php if($currentUserData['idUsuario'] == 1){echo "disabled";}?>><i class="bi bi-x" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>></i></button> 
                             </form>
 
                             <form class="childData" method="post">
@@ -421,6 +422,8 @@
                                     }
                                 ?>
                                 <?php 
+                                    $encontrouAnonimo = false; // Variável de controle para verificar se algum relato anônimo foi encontrado.
+
                                     foreach($relatosAnonimosUsuario as $ra){
                                         if($ra['isAnonima']){
                                 ?>
@@ -444,6 +447,12 @@
                                 <?php
                                         } 
                                     }
+
+                                    if (!$encontrouAnonimo) {
+                                    ?>
+                                        <div class="anonNotFound"><?= "Nenhum relato anônimo encontrado." ?></div>
+                                    <?php
+                                    }
                                 ?>
                             </div>
                         </li>
@@ -462,11 +471,11 @@
                         <input type="hidden" id="valorBinario" name="valorBinario" value="0">
                         <input type="hidden" name="updaterId" value='<?= $currentUserData['idUsuario']?>'>
 
-                        <label><input type="checkbox" id="curtidas" value="1"> Desativar notificações de curtidas</label><br>
-                        <label><input type="checkbox" id="comentarios" value="2"> Desativar notificações de comentários</label><br>
-                        <label><input type="checkbox" id="seguidores" value="3"> Desativar notificações de seguidores</label><br>
+                        <label><input type="checkbox" id="curtidas" value="1" <?php if($currentUserData['idUsuario'] == 1){echo "disabled";}?>> Desativar notificações de curtidas</label><br>
+                        <label><input type="checkbox" id="comentarios" value="2" <?php if($currentUserData['idUsuario'] == 1){echo "disabled";}?>> Desativar notificações de comentários</label><br>
+                        <label><input type="checkbox" id="seguidores" value="3" <?php if($currentUserData['idUsuario'] == 1){echo "disabled";}?>> Desativar notificações de seguidores</label><br>
 
-                        <button type="submit" value="submit" name="desativarNotificacoesEnvio" onclick='console.log("clicou");'>Salvar</button>
+                        <button type="submit" value="submit" name="desativarNotificacoesEnvio" <?php if($currentUserData['idUsuario'] == 1){echo "disabled";}?>>Salvar</button>
                     </form>
                 </div>
 

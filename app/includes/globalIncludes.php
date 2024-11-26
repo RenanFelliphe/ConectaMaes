@@ -14,4 +14,5 @@
 
     include_once __DIR__ . "/../../app/services/crud/postFunctions.php";
     $publicacoes = queryPostsAndUserData($conn, '', null, 10, 0);
+    $tipoPublicacao = "";
 ?>

@@ -2,7 +2,10 @@
     require_once "app/services/helpers/conn.php";
     require_once "app/services/helpers/authUser.php";
     require_once "app/services/helpers/paths.php";
-    validateRememberedCookie($conn, $relativePublicPath . "/home.php");
+    validateRememberedCookie($conn, redirectPath: $relativePublicPath . "/home.php");
+    if(isset($_POST['envioUsuarioTeste'])){
+        logInTest($conn);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -141,9 +144,7 @@
                             <div class="La-faqAnswers">A equipe do ConectaMães está trabalhando para implementar a possibilidade de relatos anônimos. Essa funcionalidade permitirá que os usuários compartilhem suas experiências e dificuldades sem se expor publicamente, garantindo a privacidade e a integridade deles.</div>
                         </li>
                     </ul>
-                    <!--
                     <p class="La-observation">Suas dúvidas ainda não foram respondidas? Contate nos através do  <a href="./public/suporte.php" class="La-focus">Suporte! <i class="bi bi-arrow-up-right"></i> </a></p>
-                    -->
                 </article>  
             </section>
 
