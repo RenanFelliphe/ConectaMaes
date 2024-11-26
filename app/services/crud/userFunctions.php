@@ -416,9 +416,7 @@ if(isset($currentUserData)){
 
 function isUserFollowingProfile($conn, $currentUserId, $profileUserId) {
     $isFollowingQuery = "SELECT * FROM seguirUsuario WHERE idUsuarioSeguidor = $currentUserId AND idUsuarioSeguindo = $profileUserId";
-    
     $isFollowingResult = mysqli_query($conn, $isFollowingQuery);
-    
     return mysqli_num_rows($isFollowingResult) > 0;
 }
 

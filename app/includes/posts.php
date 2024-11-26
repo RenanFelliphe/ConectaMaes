@@ -103,7 +103,7 @@ if (count($publicacoes) > 0) {
                 </div>
             </div>
 
-            <?php include_once __DIR__ . "/../includes/auxiliosModal.php";?>
+            <?php include __DIR__ . "/../includes/auxiliosModal.php";?>
         </article>
         <?php
     }

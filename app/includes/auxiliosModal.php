@@ -1,3 +1,4 @@
+
 <modal data-id="<?= $dadosPublicacao['idPublicacao']?>" class="modalSection close" data-type="auxilioModal">
     <article class="Au-auxilioModal pageModal">
         <div class="Au-modalHeader">

@@ -1,3 +1,4 @@
+
 <section class="asideRight">
     <?php 
         $resultAuxilios = specificPostQuery($conn, "idPublicacao, titulo, isConcluido", "tipoPublicacao = 'Auxilio' AND idUsuario = '".$currentUserData['idUsuario']."'", "ORDER BY dataCriacaoPublicacao DESC");
@@ -29,7 +30,7 @@
                     data-type="auxilioModal"
                     id="auxilioAside<?= $qa;?>"
                     onclick="toggleModal(this);">                
-                    <?php include_once __DIR__ . "/../includes/auxiliosModal.php";?>
+                    <?php include __DIR__ . "/../includes/auxiliosModal.php";?>
                     
                     <div class="comentarios">
                         <i class="bi bi-chat-fill"></i>
@@ -44,20 +45,21 @@
         </ul>
     </div>
 
-    <div class="mySuggestions">
-    <h2 class="mySuggestionsTitle">Sugestões</h2>
-    
-    <div class="sugesttionsAside">
-        <?php
-            $resultPeople = queryNotFollowed($conn, $currentUserData['idUsuario'], $order = "ORDER BY dataCriacaoUsuario DESC LIMIT 3");
-            foreach($resultPeople as $userSuggestion) {
-                if (!isUserFollowingProfile($conn, $currentUserData['idUsuario'], $userSuggestion['idUsuario'])) {
-                    ?>
+    <div class="mySuggestions"> 
+        <h2 class="mySuggestionsTitle">Sugestões</h2>
+        
+        <div class="sugesttionsAside">
+            <?php
+                // Consulta os usuários que o atual usuário ainda não segue
+                $resultPeople = queryNotFollowed($conn, $currentUserData['idUsuario'], $order = "ORDER BY dataCriacaoUsuario DESC LIMIT 3");
+                foreach($resultPeople as $userSuggestion) {
+                    if (!isUserFollowingProfile($conn, $currentUserData['idUsuario'], $userSuggestion['idUsuario'])) {
+                        ?>
                         <form method="post" class="suggestionListItem" id="suggestionAside<?= $userSuggestion['idUsuario']; ?>" >
                             <div class="suggestionInfos">
                                 <div class="suggestionImageProfile">
                                     <?php
-                                        $userSuggestionProfileImage = !empty($userSuggestion['linkFotoPerfil']) ? $userSuggestion['linkFotoPerfil'] : 'default.png'; ;
+                                        $userSuggestionProfileImage = !empty($userSuggestion['linkFotoPerfil']) ? $userSuggestion['linkFotoPerfil'] : 'default.png';
                                         echo renderProfileLink($relativePublicPath, $relativeAssetsPath . "/imagens/fotos/perfil/" . $userSuggestionProfileImage, $userSuggestion['nomeDeUsuario'], $isRelatoAnonimo = false);
                                     ?>
                                 </div>
@@ -69,12 +71,12 @@
                             </div>
                             <button type="submit" class="followSuggestion confirmBtn" name="followSuggestedProfile<?= $userSuggestion['idUsuario']; ?>">Seguir</button>
                         </form>
-                    <?php
+                        <?php
+                    }
                 }
-            }
-        ?>
+            ?>
+        </div>
     </div>
-</div>
 
     <div class="asideRightFooter">
         <div>
