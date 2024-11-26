@@ -378,10 +378,8 @@ a {
     display: flex;
     gap: 5rem;
     justify-content: space-between;
-    height: 10vh;
-    min-height: 5rem;
+    height: 12vh;
     width: 100%;
-    max-height: 6rem;
     padding: 0 1rem;
     background: var(--whiteColor);
     border-bottom: 1px solid var(--grayColor);
@@ -2562,7 +2560,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     display: flex;
     align-items: flex-start;
     overflow: hidden;
-    height: 87vh;
+    height: 88vh;
 }
 
 .Ho-Main .timeline {
@@ -2832,7 +2830,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     position: relative;
     width: 30vw;
     height: 90vh;
-    padding: 2rem 0 0.3rem 0;
+    padding: 1rem;
 }
 
 @media (max-width: 1024px) {
@@ -2859,7 +2857,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     display: flex;
     background-color: #e4e4e4;
     border-radius: 100rem;
-    width: 80%;
+    width: 100%;
     height: 2rem;
     min-width: 13.5rem;
     padding: 0 0.6rem 0 0.6rem;
@@ -2929,12 +2927,8 @@ footer .A-footerRight li.A-footerPolitic h4 {
     white-space: nowrap;
 }
 
-.asideRight .mySuggestions{
-    padding: 1rem;
-}
-
-.asideRight .mySuggestions .mySuggestionsTitle{
-    margin: 0 0 1rem 1rem;
+.asideRight .asideSectionTitle{
+    margin: 1rem;
 }
 .asideRight .mySuggestions .sugesttionsAside{
     border: 1px solid var(--grayColor);
@@ -3197,6 +3191,12 @@ footer .A-footerRight li.A-footerPolitic h4 {
     transition: 0.2s;
 }
 
+.modalSection .Au-auxilioModal .Au-modalHeader .postInfo .concludeAuxilio i{
+    font-size: 1.1rem;
+    margin-right: -3px;
+    margin-left: -2px;
+}
+
 .modalSection .Au-auxilioModal .Au-auxilioUser {
     position: relative;
     display: flex;
@@ -3418,7 +3418,6 @@ footer .A-footerRight li.A-footerPolitic h4 {
 .asideRight .myAuxilios{
     position: relative;
     width: 100%;
-    padding: 2rem;
 }
 
 .asideRight .myAuxilios .auxiliosAside{
@@ -3426,7 +3425,6 @@ footer .A-footerRight li.A-footerPolitic h4 {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    padding: 2rem 0 1rem 0;
     color:var(--whiteColor);
     width: 100%;
 }
@@ -3720,10 +3718,6 @@ body.Y-theme .Se-asideRight .Se-subSection .Se-sectionHeader .pageIcon {
     width: 100%;
     height: 100%;
     object-fit: fill;
-}
-
-.Se-asideRight .Se-accountInformations .Se-userInfo .Re-userImage #imagesSelector {
-    display: none;
 }
 
 .Se-asideRight .Se-accountInformations .Se-userInfo .Re-userImage .Re-addImageIcon {

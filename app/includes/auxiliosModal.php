@@ -1,4 +1,3 @@
-
 <modal data-id="<?= $dadosPublicacao['idPublicacao']?>" class="modalSection close" data-type="auxilioModal">
     <article class="Au-auxilioModal pageModal">
         <div class="Au-modalHeader">
@@ -10,11 +9,22 @@
                 <?php if($currentUserData['idUsuario'] == $dadosPublicacao['idUsuario']){ ?>
                     <div class="bi bi-three-dots postMoreButton">
                         <form class="postFunctionsModal close" method="POST">
-                            <!-- <button class="reportPostButton bi bi-megaphone-fill pageIcon" name="denunciarPost"> Denunciar Postagem </button> -->
+                            <!-- <button class="reportPostButton  pageIcon" name="denunciarPost">
+                                <i class="bi bi-megaphone-fill"></i>
+                                <p>Denunciar Postagem</p>
+                            </button> -->
                             <?php if ($currentUserData['idUsuario'] == $dadosPublicacao['idUsuario']) { ?>
                                 <input type="hidden" name="deleterId" value="<?= $dadosPublicacao['idPublicacao']; ?>">
-                                <button class="deletePostButton bi bi-trash3-fill pageIcon" name="deletarPost" type="submit" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>> Deletar Postagem</button>
-                            <?php } ?>
+                                <button class="deletePostButton pageIcon" name="deletarPost" type="submit" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>
+                                    <i class="bi bi-trash3-fill"></i>
+                                    <p>Deletar Postagem</p>
+                                </button>
+                                <?php if ($dadosPublicacao['tipoPublicacao'] == "Auxilio") { ?>
+                                    <button class="concludeAuxilio pageIcon" name="concludePost" type="submit" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>
+                                        <i class="bi bi-check-all"></i>
+                                        <p>Concluir auxilio</p>
+                                    </button>
+                            <?php } } ?>
                         </form>                                      
                     </div>
                 <?php } ?>  
@@ -37,11 +47,14 @@
                 </div>                        
             </div>
 
-            <form method="POST">
-                <button name="followProfile" class="Au-follow confirmBtn" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>
-                    <p>Seguir</p>
-                </button>
-            </form>                    
+            <?php if($currentUserData['idUsuario'] != $dadosPublicacao['idUsuario']) {?>
+                <form method="POST">
+                    <button name="followProfile" class="Au-follow confirmBtn" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>
+                        <p>Seguir</p>
+                    </button>
+                </form>                    
+            <?php } ?>
+
         </div>
 
         <p class="auxilioTitle"><?= htmlspecialchars($dadosPublicacao['titulo']); ?></p>

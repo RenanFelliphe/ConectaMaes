@@ -109,7 +109,6 @@ function queryPostsAndUserData($conn, $postType = '', $postId = null, $limit = 1
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 
-
 function renderProfileLink($relativePublicPath, $profileImage, $nomeDeUsuario, $isRelatoAnonimo = false) {
     if ($isRelatoAnonimo) {
         return '<a class="postOwnerImage" href="#" onclick="return false;">

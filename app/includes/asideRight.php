@@ -1,4 +1,3 @@
-
 <section class="asideRight">
     <?php 
         $resultAuxilios = specificPostQuery($conn, "idPublicacao, titulo, isConcluido", "tipoPublicacao = 'Auxilio' AND idUsuario = '".$currentUserData['idUsuario']."'", "ORDER BY dataCriacaoPublicacao DESC");
@@ -6,15 +5,13 @@
         $qa = 0;
     ?>
     
-    <!--
     <div class="searchBar">
         <i class="bi bi-search"></i>
         <input type="search" class="searchBarInput" placeholder="Pesquisar">
     </div>
-    -->
-
+    
     <div class="myAuxilios">
-        <h2 class="myAuxTitle">Meus Auxílios</h2>
+        <h2 class="myAuxTitle asideSectionTitle">Meus Auxílios</h2>
         <?php if($totalAuxilios > 3){?>
             <p id="verTodosBtn">Ver todos</p>    
         <?php }?>
@@ -30,7 +27,6 @@
                     data-type="auxilioModal"
                     id="auxilioAside<?= $qa;?>"
                     onclick="toggleModal(this);">                
-                    <?php include __DIR__ . "/../includes/auxiliosModal.php";?>
                     
                     <div class="comentarios">
                         <i class="bi bi-chat-fill"></i>
@@ -46,12 +42,12 @@
     </div>
 
     <div class="mySuggestions"> 
-        <h2 class="mySuggestionsTitle">Sugestões</h2>
+        <h2 class="mySuggestionsTitle asideSectionTitle">Sugestões</h2>
         
         <div class="sugesttionsAside">
             <?php
                 // Consulta os usuários que o atual usuário ainda não segue
-                $resultPeople = queryNotFollowed($conn, $currentUserData['idUsuario'], $order = "ORDER BY dataCriacaoUsuario DESC LIMIT 3");
+                $resultPeople = suggestUsers($conn, $currentUserData['idUsuario']);
                 foreach($resultPeople as $userSuggestion) {
                     if (!isUserFollowingProfile($conn, $currentUserData['idUsuario'], $userSuggestion['idUsuario'])) {
                         ?>
@@ -65,7 +61,7 @@
                                 </div>
                                 <input type="hidden" name="toFollowId" value="<?= $userSuggestion['idUsuario']; ?>"> 
                                 <div class="suggestUserNames">
-                                    <p class="userName"><?= $userSuggestion['nomeCompleto']?></p>
+                                    <p class="userName"><?= getFirstAndLastName($userSuggestion['nomeCompleto'])?></p>
                                     <p class="userNick"><?= '@' . $userSuggestion['nomeDeUsuario']?></p>
                                 </div>
                             </div>

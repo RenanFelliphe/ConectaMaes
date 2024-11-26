@@ -94,7 +94,8 @@ include_once(__DIR__ . '/../helpers/paths.php');
         $gExec = mysqli_query($conn, $gQuery);
         return mysqli_fetch_all($gExec, MYSQLI_ASSOC);
     }
-    function queryNotFollowed($conn, $id_usuario, $order = "") {
+
+    function suggestUsers($conn, $id_usuario) {
         // A consulta que seleciona os usuários que o id_usuario não segue
         $naoSeguidosQuery = "
             SELECT idUsuario, nomeCompleto, nomeDeUsuario, email, telefone, biografia, estado, dataNascimentoUsuario, linkFotoPerfil
@@ -105,8 +106,7 @@ include_once(__DIR__ . '/../helpers/paths.php');
                 FROM seguirUsuario s
                 WHERE s.idUsuarioSeguidor = $id_usuario
                 AND s.idUsuarioSeguindo = u.idUsuario
-            )
-            $order
+            ) ORDER BY RAND() LIMIT 3
         ";
 
         // Executa a consulta
@@ -398,21 +398,21 @@ function followUser($conn, $followerId, $followedId) {
     }
 }
 
-if(isset($currentUserData)){
-    if (isset($_POST['followProfile'])) {
-        var_dump($_POST);
-        followUser($conn, $currentUserData['idUsuario'], $profileUserId);
-    }
-}
-
-if(isset($currentUserData)){
-    foreach ($_POST as $key => $value) {
-        if (strpos($key, 'followSuggestedProfile') === 0) {
-            $followedId = $_POST['toFollowId'];
-            followUser($conn, $currentUserData['idUsuario'], $followedId);
+    if(isset($currentUserData)){
+        if (isset($_POST['followProfile'])) {
+            var_dump($_POST);
+            followUser($conn, $currentUserData['idUsuario'], $profileUserId);
         }
     }
-}
+
+    if(isset($currentUserData) && $_SERVER['REQUEST_METHOD'] === 'POST'){
+        foreach ($_POST as $key => $value) {
+            if (strpos($key, 'followSuggestedProfile') === 0) {
+                $followedId = $_POST['toFollowId'];
+                followUser($conn, $currentUserData['idUsuario'], $followedId);
+            }
+        }
+    }
 
 function isUserFollowingProfile($conn, $currentUserId, $profileUserId) {
     $isFollowingQuery = "SELECT * FROM seguirUsuario WHERE idUsuarioSeguidor = $currentUserId AND idUsuarioSeguindo = $profileUserId";
