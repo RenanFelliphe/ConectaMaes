@@ -8,7 +8,6 @@
                 exit; 
             }
         }
-        
 
         if (isset($_FILES['fotoPerfilRegistro']) && $_FILES['fotoPerfilRegistro']['error'] == UPLOAD_ERR_OK) {
             $imgTemp = $_FILES['fotoPerfilRegistro']['tmp_name'];
@@ -87,26 +86,37 @@
         return $linkFotoPerfil;
     }
      
-    function uploadAnexo(){
-        $diretorioAnexo = "/app/assets/imagens/fotos/anexos/";
+    function uploadAnexo($conn, $idPost){
+        $diretorioAnexo = __DIR__ . "/../../assets/imagens/fotos/anexos/";
 
-        if (isset($_FILES['img']) && $_FILES['img']['error'] == UPLOAD_ERR_OK) {
-            $imgTemp = $_FILES['img']['tmp_name'];
-            $imgNomeOriginal = $_FILES['img']['name'];
-            $extensao = pathinfo($imgNomeOriginal, PATHINFO_EXTENSION);// Gera um nome único para a img usando uniqid() e preserva a extensão original
-            $imgNomeUnico = uniqid() . "." . $extensao;
-            $caminhoDestino = $diretorioAnexo . $imgNomeUnico;// Caminho completo para onde a img será movida
-            
-            if (move_uploaded_file($imgTemp, $caminhoDestino)) {// Move a img para o diretório de destino
-                echo "img enviada com sucesso! Nome único: " . $imgNomeUnico;
-            } else {
-                echo "Erro ao mover a img.";
+        if (isset($_FILES['linkAnexoEnvio']) && $_FILES['linkAnexoEnvio']['name'] != '') {
+            if ($_FILES['linkAnexoEnvio']['error'] != UPLOAD_ERR_OK) {
+                echo "Erro no envio do arquivo.<br>";
+                exit; 
             }
-        } else {
-            echo "Nenhuma img enviada ou erro no upload.";
+        }
+
+        if (isset($_FILES['linkAnexoEnvio']) && $_FILES['linkAnexoEnvio']['error'] == UPLOAD_ERR_OK) {
+            $imgTemp = $_FILES['linkAnexoEnvio']['tmp_name'];
+            $imgNomeOriginal = $_FILES['linkAnexoEnvio']['name'];
+            $imgExtensao = strtolower(pathinfo($imgNomeOriginal, PATHINFO_EXTENSION));
+            
+            if (in_array($imgExtensao, ['png', 'jpeg', 'jpg'])) { 
+                $imgNomeUnico =  $idPost. "." . $imgExtensao;
+                $caminhoDestino = $diretorioAnexo . $imgNomeUnico;
+
+                if(move_uploaded_file($imgTemp, $caminhoDestino)){
+                    $imgNomeUnicoDb = mysqli_real_escape_string($conn, $imgNomeUnico);
+                    $queryUpdate = "UPDATE Publicacao SET linkAnexo = '$imgNomeUnicoDb' WHERE idPublicacao = $idPost";
+
+                    if (!mysqli_query($conn, $queryUpdate)) {
+                        echo "Erro ao atualizar o banco de dados: " . mysqli_error($conn) . "<br>";
+                    }
+                } else {
+                    echo "Erro (". $_FILES['linkAnexoEnvio']['error']. ") ao mover o arquivo para o diretório de destino.<br>";
+                }
+            } else {
+                echo "Formato de imagem não suportado. Apenas .png e .jpeg são permitidos.<br>";
+            }  
         }
     }
-
-
-    
-

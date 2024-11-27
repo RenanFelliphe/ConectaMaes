@@ -1,5 +1,6 @@
 <?php
 include_once(__DIR__ . '/../helpers/conn.php');
+include_once(__DIR__ . '/../helpers/upload.php');
 
 // SEND POSTS - CREATE
 function sendPost($conn, $postType, $currentUserId) {
@@ -8,7 +9,7 @@ function sendPost($conn, $postType, $currentUserId) {
     if (!empty($_POST['conteudoEnvio'])) {
         $tipoPublicacaoEnvio = mysqli_real_escape_string($conn, $postType);
         $conteudoEnvio = mysqli_real_escape_string($conn, $_POST['conteudoEnvio']);
-        $linkAnexoEnvio = '';
+        $linkAnexoEnvio = ''; 
         $tituloEnvio = isset($_POST['tituloEnvio']) ? mysqli_real_escape_string($conn, $_POST['tituloEnvio']) : null;
         $isConcluido = isset($_POST['isConcluidoEnvio']) ? (int) $_POST['isConcluidoEnvio'] : 0; 
         $isAnonima = isset($_POST['meIdentificar']) && $_POST['meIdentificar'] == 'on' ? 0 : 1; 
@@ -19,6 +20,9 @@ function sendPost($conn, $postType, $currentUserId) {
 
         if (!$executeSendPost) {
             $messages[] = "Erro ao enviar publicação: " . mysqli_error($conn);
+        } else {
+            $idPost = mysqli_insert_id($conn);
+            uploadAnexo($conn, $idPost);
         }
     }
 

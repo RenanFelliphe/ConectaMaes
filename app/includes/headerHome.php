@@ -272,6 +272,14 @@
         </div>
 
         <div class="Ho-postBottom">
+            <div class="Ho-imageInput">
+                <input type="file" id="Ho-imageSelector" name="linkAnexoEnvio" accept="image/png, image/jpeg" onchange="addPost();">
+                <label for="Ho-imageSelector">
+                    <i class="bi bi-images Ho-iconLabel"></i>
+                    <p> Imagem </p>
+                </label>
+            </div>
+            
             <button type="submit" value="submit" name="postPostModal" class="Ho-submitPost confirmBtn close"> Postar </button>
         </div>
 

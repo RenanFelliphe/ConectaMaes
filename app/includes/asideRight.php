@@ -49,8 +49,7 @@
                 // Consulta os usuários que o atual usuário ainda não segue
                 $resultPeople = suggestUsers($conn, $currentUserData['idUsuario']);
                 foreach($resultPeople as $userSuggestion) {
-                    if (!isUserFollowingProfile($conn, $currentUserData['idUsuario'], $userSuggestion['idUsuario'])) {
-                        ?>
+                    ?>
                         <form method="post" class="suggestionListItem" id="suggestionAside<?= $userSuggestion['idUsuario']; ?>" >
                             <div class="suggestionInfos">
                                 <div class="suggestionImageProfile">
@@ -65,10 +64,19 @@
                                     <p class="userNick"><?= '@' . $userSuggestion['nomeDeUsuario']?></p>
                                 </div>
                             </div>
-                            <button type="submit" class="followSuggestion confirmBtn" name="followSuggestedProfile<?= $userSuggestion['idUsuario']; ?>">Seguir</button>
+                            <?php 
+                                if ($userSuggestion['sugestaoFoiSeguida']){ 
+                                    ?>
+                                        <button type="button" class="followSuggestion confirmBtn" disabled>Seguindo</button>
+                                    <?php 
+                                }else{ 
+                                    ?>
+                                        <button type="submit" class="followSuggestion confirmBtn" name="followSuggestedProfile<?= $userSuggestion['idUsuario']; ?>">Seguir</button>
+                                    <?php 
+                                }
+                            ?>
                         </form>
-                        <?php
-                    }
+                    <?php
                 }
             ?>
         </div>
