@@ -457,11 +457,11 @@
 
             document.querySelectorAll('.postMoreButton').forEach(b => b.onclick = () => b.querySelector('.postFunctionsModal').classList.toggle('close'));
 
-            const searchBar = document.querySelector('.Pe-searchBar');
-            const backSearchBar = document.querySelector('.Pe-backSearchBar');
+            //const searchBar = document.querySelector('.Pe-searchBar');
+            //const backSearchBar = document.querySelector('.Pe-backSearchBar');
             const allPostTypes = document.querySelectorAll('.Pe-postType');
 
-            searchBar.onclick = function () {
+            /*searchBar.onclick = function () {
                 if (searchBar.classList.contains('close')) {
                     searchBar.classList.remove('close');
                     allPostTypes.forEach(postType => {
@@ -476,7 +476,7 @@
                 allPostTypes.forEach(postType => {
                     postType.style.display = "flex";
                 });
-            };
+            };*/
             
             const postTypes = document.querySelectorAll('.Pe-postType');
             const allPostsSections = document.querySelectorAll('.Pe-allPosts');
