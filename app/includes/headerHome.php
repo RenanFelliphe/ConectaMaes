@@ -307,10 +307,20 @@
 
         //Muda o estado do container "Me identificar" para os Relatos
         const identifyMyself = document.querySelector('.Ho-identifyMyself');
+        //Não deixa comentários publicarem fotos
+        const imageInput = document.querySelector('.Ho-imageInput');
+
         if (modal.getAttribute('post-link') === "postRelatoModal") {
             identifyMyself.style.display = 'flex';  
         } else {
             identifyMyself.style.display = 'none';  
+
+            // Verifica se é um comentário
+            if (modal.getAttribute('post-link') === "postComentarioModal") {
+                imageInput.style.display = 'none'; 
+            } else {
+                imageInput.style.display = 'flex';
+            }
         }
         
         toggleModal(modal);

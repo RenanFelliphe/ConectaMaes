@@ -71,9 +71,15 @@
             </div>
         </div>
 
-        <div class="postsImages">
-            <p><i class="bi bi-camera-fill"></i></p>
-        </div>
+        <?php
+            if($dadosPublicacao['linkAnexo']!=''){
+                ?>
+                    <div class="postsImages">
+                        <img src="<?= $relativeAssetsPath . "/imagens/fotos/anexos/" . $dadosPublicacao['linkAnexo'];?>" alt="Anexo da Publicação <?=$dadosPublicacao['idPublicacao'];?>">
+                    </div>
+                <?php
+            }
+        ?>
         
         <form class="postInteractions" method="POST">
             <span></span>

@@ -91,6 +91,11 @@ if (count($publicacoes) > 0) {
                     <p class="postTitle"><?= htmlspecialchars($dadosPublicacao['titulo']); ?></p>
                     <?php if ($tipoPublicacao !== 'Auxilio') { ?>
                         <p class="postFullText"><?= htmlspecialchars($dadosPublicacao['conteudo']); ?></p>
+                        <?php if($dadosPublicacao['linkAnexo'] != ''){?>
+                                <div class="postImageContainer">
+                                    <img src="<?= $relativeAssetsPath."/imagens/fotos/anexos/".$dadosPublicacao['linkAnexo'];?>" alt="Anexo da Publicação <?=$dadosPublicacao['idPublicacao'];?>" class="postImage">
+                                </div>
+                        <?php }?>
                     <?php } ?>
                 </div>
 

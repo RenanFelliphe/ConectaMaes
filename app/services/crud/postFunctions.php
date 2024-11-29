@@ -77,7 +77,8 @@ function queryPostsAndUserData($conn, $postType = '', $postId = null, $limit = 1
         SELECT 
             p.idPublicacao, 
             p.tipoPublicacao, 
-            p.conteudo, 
+            p.conteudo,
+            p.linkAnexo, 
             p.titulo, 
             p.isAnonima,
             p.dataCriacaoPublicacao,
@@ -150,15 +151,37 @@ function queryUserCommentLike($conn, $idUser, $idComment) {
 // DELETE POST - DELETE
 function deletePost($conn, $id) {
     if (!empty($id)) {
+        $query = "SELECT linkAnexo FROM Publicacao WHERE idPublicacao = " . (int)$id;
+        $result = mysqli_query($conn, $query);
+
+        if ($result) {
+            $row = mysqli_fetch_assoc($result);
+            $linkAnexo = $row['linkAnexo'];
+
+            if (!empty($linkAnexo)) {
+                $filePath = __DIR__ . "/../../assets/imagens/fotos/anexos/" . $linkAnexo;
+
+                if (file_exists($filePath)) {
+                    if (!unlink($filePath)) {
+                        echo "Erro ao excluir o arquivo de imagem associado à publicação ($filePath).";
+                    }
+                }
+            }
+        }
+
         $dQuery = "DELETE FROM Publicacao WHERE idPublicacao = " . (int)$id;
         $dExec = mysqli_query($conn, $dQuery);
+
         if (!$dExec) {
             echo "Algo deu errado, tente novamente mais tarde!";
+        } else {
+            echo "<script>window.location.href = window.location.href;</script>";
         }
-        echo "<script>window.location.href = window.location.href;</script>";
+
         exit; 
     }
 }
+
 
 if (isset($_POST['deletarPost'])) {
     deletePost($conn, $_POST['deleterId']);
