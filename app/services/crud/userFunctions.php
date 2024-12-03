@@ -16,19 +16,21 @@ function signUp($conn) {
     $dataNascimentoRegistro = $_POST['dataNascimentoRegistro'];
     $telefoneRegistro = !empty(trim($_POST['telefoneRegistro'])) ? trim($_POST['telefoneRegistro']) : NULL;
     $biografiaUsuarioRegistro = $_POST['biografiaUsuarioRegistro'];
-    $temaRegistro = $_POST['temaRegistro'];
+    $temaRegistro = $_POST['temaRegistro']; 
     $localizacaoRegistro = $_POST['localizacaoRegistro'];
     $linkFotoPerfilRegistro = 'default.png';
     $isAdminRegistro = false;
 
-    // Consulta única para verificar e-mail, nome de usuário e telefone
-    $query = "SELECT email, nomeDeUsuario, telefone FROM Usuario WHERE email = ? OR nomeDeUsuario = ? OR telefone = ?";
-    $stmt = mysqli_prepare($conn, $query);
-    mysqli_stmt_bind_param($stmt, 'sss', $emailRegistro, $userRegistro, $telefoneRegistro);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
+    $queryConfig = "SELECT idConfiguracao FROM Configuracoes WHERE tema = '$temaRegistro' AND desativouNotificacao = 0 LIMIT 1";
+    $resultConfig = mysqli_query($conn, $queryConfig);
+    $configRow = mysqli_fetch_assoc($resultConfig);
+    $idConfiguracao = $configRow['idConfiguracao'];
 
-    while ($row = mysqli_fetch_assoc($result)) {
+    // Verificar e-mail, nome de usuário e telefone
+    $queryValid = "SELECT email, nomeDeUsuario, telefone FROM Usuario WHERE email = '$emailRegistro' OR nomeDeUsuario = '$userRegistro' OR telefone = '$telefoneRegistro'";
+    $resultValid = mysqli_query($conn, $queryValid);
+
+    while ($row = mysqli_fetch_assoc($resultValid)) {
         if ($row['email'] === $emailRegistro) {
             $err[] = "E-mail já registrado!";
         }
@@ -41,11 +43,9 @@ function signUp($conn) {
     }
 
     if (empty($err)) {
-        $insertNewUser = "INSERT INTO Usuario (nomeCompleto, email, senha, dataNascimentoUsuario, telefone, linkFotoPerfil, biografia, nomeDeUsuario, isAdmin, tema, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        $stmt = mysqli_prepare($conn, $insertNewUser);
-        mysqli_stmt_bind_param($stmt, 'sssssssssss', $nomeRegistro, $emailRegistro, $senhaRegistro, $dataNascimentoRegistro, $telefoneRegistro, $linkFotoPerfilRegistro, $biografiaUsuarioRegistro, $userRegistro, $isAdminRegistro, $temaRegistro, $localizacaoRegistro);
-        
-        if (mysqli_stmt_execute($stmt)) {
+        $insertNewUser = "INSERT INTO Usuario (nomeCompleto, email, senha, dataNascimentoUsuario, telefone, linkFotoPerfil, biografia, nomeDeUsuario, isAdmin, idConfiguracao, estado) 
+                          VALUES ('$nomeRegistro', '$emailRegistro', '$senhaRegistro', '$dataNascimentoRegistro', '$telefoneRegistro', '$linkFotoPerfilRegistro', '$biografiaUsuarioRegistro', '$userRegistro', '$isAdminRegistro', '$idConfiguracao', '$localizacaoRegistro')";
+        if (mysqli_query($conn, $insertNewUser)) {
             $userId = mysqli_insert_id($conn);
             echo "Usuário registrado com sucesso!<br>";
             uploadPFP($conn, $userId, $userRegistro);
@@ -60,13 +60,20 @@ function signUp($conn) {
 }
 
 // USER QUERY FUNCTIONS - READ
-function queryUserData($conn, $table, $id) {
-    $sUQuery = "SELECT * FROM $table WHERE idUsuario = ?";
-    $stmt = mysqli_prepare($conn, $sUQuery);
-    mysqli_stmt_bind_param($stmt, 'i', $id);
-    mysqli_stmt_execute($stmt);
-    $sUExec = mysqli_stmt_get_result($stmt);
-    return mysqli_fetch_assoc($sUExec);
+function queryUserData($conn, $userId) {
+    $query = "
+        SELECT 
+            u.*,         
+            c.tema, c.desativouNotificacao 
+        FROM Usuario u
+        JOIN Configuracoes c ON u.idConfiguracao = c.idConfiguracao
+        WHERE u.idUsuario = $userId";
+
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+        return mysqli_fetch_assoc($result);
+    } 
 }
 
 function getUserProfile($conn, $nomeDeUsuario) {
@@ -155,114 +162,114 @@ function suggestUsers($conn, $id_usuario) {
     return $resultados;
 }
 
-    function getFirstAndLastName($fullName) {
-        // Split the full name into an array of words
-        $partesDoNomeCompleto = explode(" ", $fullName);
-        
-        // Get the first and last name
-        $firstName = $partesDoNomeCompleto[0];
-        $lastName = $partesDoNomeCompleto[count($partesDoNomeCompleto) - 1];
-        
-        // Combine the first and last name
-        return $firstName . " " . $lastName;
-    }
+function getFirstAndLastName($fullName) {
+    $partesDoNomeCompleto = explode(" ", $fullName);
+    $firstName = $partesDoNomeCompleto[0];
+    $lastName = $partesDoNomeCompleto[count($partesDoNomeCompleto) - 1];
+    return $firstName . " " . $lastName;
+}
 
-    function getFollowerCount($conn, $userId) {
-        $query = "SELECT COUNT(*) as total FROM seguirUsuario WHERE idUsuarioSeguindo = ?";
-        $stmt = mysqli_prepare($conn, $query);
-        mysqli_stmt_bind_param($stmt, "i", $userId);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
-        $data = mysqli_fetch_assoc($result);
-        
-        return $data['total'];
-    }
+function getFollowerCount($conn, $userId) {
+    $query = "SELECT COUNT(*) as total FROM seguirUsuario WHERE idUsuarioSeguindo = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "i", $userId);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $data = mysqli_fetch_assoc($result);
     
-    // Função para contar o número de pessoas que o usuário está seguindo
-    function getFollowingCount($conn, $userId) {
-        $query = "SELECT COUNT(*) as total FROM seguirUsuario WHERE idUsuarioSeguidor = ?";
-        $stmt = mysqli_prepare($conn, $query);
-        mysqli_stmt_bind_param($stmt, "i", $userId);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
-        $data = mysqli_fetch_assoc($result);
-        
-        return $data['total'];
-    }
+    return $data['total'];
+}
     
-    // Função para contar o número de postagens
-    function getPostsCount($conn, $userId) {
-        $query = "SELECT COUNT(*) as total FROM Publicacao WHERE idUsuario = ?";
-        $stmt = mysqli_prepare($conn, $query);
-        mysqli_stmt_bind_param($stmt, "i", $userId);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
-        $data = mysqli_fetch_assoc($result);
-        
-        return $data['total'];
-    }
+// Função para contar o número de pessoas que o usuário está seguindo
+function getFollowingCount($conn, $userId) {
+    $query = "SELECT COUNT(*) as total FROM seguirUsuario WHERE idUsuarioSeguidor = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "i", $userId);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $data = mysqli_fetch_assoc($result);
     
-    function getProfileCounts($conn, $profileData) {
-        if (isset($profileData)) {
-            $followerCount = getFollowerCount($conn, $profileData['idUsuario']);
-            $followingCount = getFollowingCount($conn, $profileData['idUsuario']);
-            $postsCount = getPostsCount($conn, $profileData['idUsuario']);
+    return $data['total'];
+}
+
+// Função para contar o número de postagens
+function getPostsCount($conn, $userId) {
+    $query = "SELECT COUNT(*) as total FROM Publicacao WHERE idUsuario = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "i", $userId);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $data = mysqli_fetch_assoc($result);
     
-            return [
-                'followers' => $followerCount,
-                'following' => $followingCount,
-                'posts' => $postsCount
-            ];
-        } else {
-            return "Erro: Dados do perfil não encontrados.";
-        }
+    return $data['total'];
+}
+
+function getProfileCounts($conn, $profileData) {
+    if (isset($profileData)) {
+        $followerCount = getFollowerCount($conn, $profileData['idUsuario']);
+        $followingCount = getFollowingCount($conn, $profileData['idUsuario']);
+        $postsCount = getPostsCount($conn, $profileData['idUsuario']);
+
+        return [
+            'followers' => $followerCount,
+            'following' => $followingCount,
+            'posts' => $postsCount
+        ];
+    } else {
+        return "Erro: Dados do perfil não encontrados.";
     }
+}
 
 // EDIT ACCOUNT - UPDATE
 function editProfile($conn, $userId) {
     $err = array();
-    $nome = !empty($_POST['nomeEdit']) ? $_POST['nomeEdit'] : null;
-    $user = !empty($_POST['userEdit']) ? $_POST['userEdit'] : null;
-    $telefone = !empty($_POST['telefoneEdit']) ? $_POST['telefoneEdit'] : null;
-    $localizacao = !empty($_POST['localizacaoEdit']) ? $_POST['localizacaoEdit'] : null;
-    $biografiaUsuario = !empty($_POST['biografiaUsuarioEdit']) ? $_POST['biografiaUsuarioEdit'] : null;
-    $tema = !empty($_POST['temaEdit']) ? $_POST['temaEdit'] : null;
+    $nome = !empty($_POST['nomeEdit']) ? mysqli_real_escape_string($conn, $_POST['nomeEdit']) : null;
+    $user = !empty($_POST['userEdit']) ? mysqli_real_escape_string($conn, $_POST['userEdit']) : null;
+    $localizacao = !empty($_POST['localizacaoEdit']) ? mysqli_real_escape_string($conn, $_POST['localizacaoEdit']) : null;
+    $biografiaUsuario = !empty($_POST['biografiaUsuarioEdit']) ? mysqli_real_escape_string($conn, $_POST['biografiaUsuarioEdit']) : null;
+    $tema = !empty($_POST['temaEdit']) ? mysqli_real_escape_string($conn, $_POST['temaEdit']) : null;
     $linkFotoPerfil = updatePFP($conn, $userId, $user);
-
-    if ($telefone) {
-        $queryTelefone = "SELECT telefone FROM Usuario WHERE telefone = ? AND idUsuario != ?";
-        $stmt = mysqli_prepare($conn, $queryTelefone);
-        mysqli_stmt_bind_param($stmt, 'si', $telefone, $userId);
-        mysqli_stmt_execute($stmt);
-        $searchTelefone = mysqli_stmt_get_result($stmt);
-        if (mysqli_num_rows($searchTelefone)) {
-            $err[] = "Telefone já registrado!";
-        }
-    }
 
     if (empty($err)) {
         $fields = [];
-        if ($nome) $fields["nomeCompleto"] = $nome;
-        if ($telefone) $fields["telefone"] = $telefone;
-        if ($localizacao) $fields["estado"] = $localizacao;
-        if ($biografiaUsuario) $fields["biografia"] = $biografiaUsuario;
-        if ($tema) $fields["tema"] = $tema;
-        if ($linkFotoPerfil) $fields["linkFotoPerfil"] = $linkFotoPerfil;
+        if ($nome) $fields[] = "nomeCompleto = '$nome'";
+        if ($localizacao) $fields[] = "estado = '$localizacao'";
+        if ($biografiaUsuario) $fields[] = "biografia = '$biografiaUsuario'";
+        if ($linkFotoPerfil) $fields[] = "linkFotoPerfil = '$linkFotoPerfil'";
+
+        if ($tema) {
+            // Obter o valor atual de desativouNotificacao do usuário
+            $queryCurrentConfig = "
+                SELECT c.desativouNotificacao 
+                FROM Usuario u 
+                JOIN Configuracoes c ON u.idConfiguracao = c.idConfiguracao 
+                WHERE u.idUsuario = $userId";
+            $resultNotif = mysqli_query($conn, $queryCurrentConfig);
+
+            if ($currentConfig = mysqli_fetch_assoc($resultNotif)) {
+                $currentNotificationSetting = $currentConfig['desativouNotificacao'];
+
+                // Buscar o idConfiguracao correspondente ao tema e desativouNotificacao atual
+                $queryConfig = "
+                    SELECT idConfiguracao 
+                    FROM Configuracoes 
+                    WHERE tema = '$tema' AND desativouNotificacao = $currentNotificationSetting";
+                $resultConfig = mysqli_query($conn, $queryConfig);
+
+                if ($config = mysqli_fetch_assoc($resultConfig)) {
+                    $fields[] = "idConfiguracao = " . $config['idConfiguracao'];
+                } else {
+                    $err[] = "Configuração correspondente ao tema e notificações não encontrada!";
+                }
+            } else {
+                $err[] = "Configuração atual do usuário não encontrada!";
+            }
+        }
 
         if (!empty($fields)) {
-            $setFields = [];
-            foreach ($fields as $field => $value) {
-                $setFields[] = "$field = ?";
-            }
-            $setFieldsStr = implode(", ", $setFields);
-            $updateUser = "UPDATE Usuario SET $setFieldsStr WHERE idUsuario = ?";
-            $stmt = mysqli_prepare($conn, $updateUser);
-            $values = array_values($fields);
-            $values[] = $userId;
-            $types = str_repeat('s', count($values) - 1) . 'i'; // tipos para bind_param
-            mysqli_stmt_bind_param($stmt, $types, ...$values);
-
-            if (!mysqli_stmt_execute($stmt)) {
+            $setFieldsStr = implode(", ", $fields);
+            $updateUser = "UPDATE Usuario SET $setFieldsStr WHERE idUsuario = $userId";
+            if (!mysqli_query($conn, $updateUser)) {
                 echo "Erro ao atualizar perfil: " . mysqli_error($conn) . "!";
             }
         }
@@ -272,6 +279,7 @@ function editProfile($conn, $userId) {
         }
     }
 }
+
     if(isset($_POST['editarPerfil'])) {   
         editProfile($conn, $_POST['updaterId']);
     }
@@ -521,19 +529,36 @@ function getUserNotifications($conn, $userId) {
 }
 function desativarNotificacoes($conn, $userId) {
     $mensagem = '';
+    $valorBinario = isset($_POST['valorBinario']) ? intval($_POST['valorBinario']) : 0;
+    $queryConfigAtual = "
+        SELECT c.tema, c.desativouNotificacao
+        FROM Usuario u
+        JOIN Configuracoes c ON u.idConfiguracao = c.idConfiguracao
+        WHERE u.idUsuario = $userId";
+    $resultConfigAtual = mysqli_query($conn, $queryConfigAtual);
 
-    $valorBinario = intval($_POST['valorBinario']); // Garantir que seja um número inteiro
+    if ($configAtual = mysqli_fetch_assoc($resultConfigAtual)) {
+        $temaAtual = $configAtual['tema'];
+        $queryNovaConfig = "
+            SELECT idConfiguracao
+            FROM Configuracoes
+            WHERE tema = '$temaAtual' AND desativouNotificacao = $valorBinario";
+        $resultNovaConfig = mysqli_query($conn, $queryNovaConfig);
 
-    $sql = "UPDATE Usuario SET desativouNotificacao = $valorBinario WHERE idUsuario = $userId";
+        if ($novaConfig = mysqli_fetch_assoc($resultNovaConfig)) {
+            $novoIdConfiguracao = $novaConfig['idConfiguracao'];
+            $sqlUpdate = "UPDATE Usuario SET idConfiguracao = $novoIdConfiguracao WHERE idUsuario = $userId";
 
-    if (mysqli_query($conn, $sql)) {
-        $mensagem = "Suas configurações foram redefinidas com sucesso!";
-    } else {
-        $mensagem = "Erro ao atualizar notificações: " . mysqli_error($conn);
+            if (mysqli_query($conn, $sqlUpdate)) {
+                $mensagem = "As configurações de notificações foram atualizadas com sucesso!";
+            } else {
+                $mensagem = "Erro ao atualizar configurações de notificações: " . mysqli_error($conn);
+            }
+        }
     }
-
     return $mensagem;
 }
+
     if (isset($_POST['desativarNotificacoesEnvio'])) {
         $notif_message = desativarNotificacoes($conn, $_POST['updaterId']);
     }

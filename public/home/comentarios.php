@@ -7,7 +7,7 @@
     $post = isset($_GET['post']) ? true : header("Location:". $relativeRootPath."/notFound.php");
 
     require_once "../../app/services/crud/userFunctions.php";
-    $currentUserData = queryUserData($conn, "Usuario", $_SESSION['idUsuario']);  
+    $currentUserData = queryUserData($conn, $_SESSION['idUsuario']);  
     require_once "../../app/services/crud/postFunctions.php";
     require_once '../../app/services/helpers/dateChecker.php';
      
