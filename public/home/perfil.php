@@ -483,19 +483,15 @@
 
             postTypes.forEach(postType => {
                 postType.addEventListener('click', () => {
-                    // Remove a classe 'active' de todos os indicadores e seções
                     postTypes.forEach(pt => pt.classList.remove('active'));
                     allPostsSections.forEach(section => section.classList.remove('active'));
 
-                    // Adiciona a classe 'active' ao indicador clicado
                     postType.classList.add('active');
 
-                    // Seleciona a seção correspondente com base no 'data-target' do indicador
                     const targetSection = document.querySelector(`.${postType.getAttribute('data-target')}`);
                     targetSection.classList.add('active');
                 });
             });
-
         </script>
     </body>
 </html>

@@ -405,6 +405,32 @@
                                 ?>
                             </form>
                         </li>
+                        <li>
+                            <form class="Se-editPixKey" method="post" id="formPixKey">
+                                <input type="hidden" class="updaterIdHiddenInput" name="updaterId" value="<?= $currentUserData['idUsuario']; ?>">    
+                                <?php $hasPixKey = isset($currentUserData['chavePix']) && !in_array($currentUserData['chavePix'], ['N/a', NULL, '']); ?>
+                                <h4> <?= $hasPixKey ? 'Editar chave Pix' : 'Adicionar chave Pix'; ?> </h4>
+
+                                <div class="Se-pixInput">
+                                    <input type="text" id="editPixKey" name="editPixKey" value="">
+                                    <label class="Re-fakePlaceholder" for="editPixKey">Chave Pix</label>
+                                    <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
+                                </div>
+
+                                <button class="Se-editSubmit confirmBtn" type="submit" name="editPixSubmit" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>
+                                    <?= $hasPixKey ? 'Editar' : 'Adicionar'; ?>
+                                </button>
+
+                                <?php
+                                    if (isset($pix_messages) && !empty($pix_messages)) {
+                                        foreach ($pix_messages as $p_m) {
+                                            echo $p_m;
+                                        }
+                                    }
+                                ?>
+                            </form>
+                        </li>
+
 
                     </ul>
                     <div class="Se-sectionHeader">

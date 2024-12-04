@@ -13,18 +13,25 @@
                                 <i class="bi bi-megaphone-fill"></i>
                                 <p>Denunciar Postagem</p>
                             </button> -->
-                            <?php if ($currentUserData['idUsuario'] == $dadosPublicacao['idUsuario']) { ?>
-                                <input type="hidden" name="deleterId" value="<?= $dadosPublicacao['idPublicacao']; ?>">
+                            <?php 
+                                if ($currentUserData['idUsuario'] == $dadosPublicacao['idUsuario']) { 
+                            ?>
+                                <input type="hidden" name="identifierId" value="<?= $dadosPublicacao['idPublicacao']; ?>">
                                 <button class="deletePostButton pageIcon" name="deletarPost" type="submit" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>
                                     <i class="bi bi-trash3-fill"></i>
                                     <p>Deletar Postagem</p>
                                 </button>
-                                <?php if ($dadosPublicacao['tipoPublicacao'] == "Auxilio") { ?>
+                                <?php 
+                                    if ($dadosPublicacao['tipoPublicacao'] == "Auxilio" && !$dadosPublicacao['isConcluido']) { 
+                                ?>
                                     <button class="concludeAuxilio pageIcon" name="concludePost" type="submit" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>
                                         <i class="bi bi-check-all"></i>
                                         <p>Concluir auxilio</p>
                                     </button>
-                            <?php } } ?>
+                            <?php 
+                                    } 
+                                } 
+                            ?>
                         </form>                                      
                     </div>
                 <?php } ?>  
@@ -67,7 +74,7 @@
             </div>
             <div class="Au-extraInfos">
                 <img src="<?= $relativeAssetsPath; ?>/imagens/icons/pix_icon.png" class="pageImageIcon active" alt="Ícone de Pix">
-                <p>N/a</p>
+                <p id="pixKeyDisplay"><?= $dadosPublicacao['chavePix']?></p>
             </div>
         </div>
 
@@ -100,39 +107,41 @@
         </form>
 
         <div class="Ho-auxiliosComments">
-            <form class="Ho-postSomething postAuxilioComent" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="idPublicacao" id="postIdField" value="">
-                <div class="Ho-postTop">
-                    <a class="Ho-userProfileImage" href="<?= $relativePublicPath; ?>/home/perfil.php">
-                        <img src="<?= $relativeAssetsPath . "/imagens/fotos/perfil/" . $currentUserData['linkFotoPerfil'];?>">
-                    </a>
+            <?php if(!$dadosPublicacao['isConcluido']){?>
+                <form class="Ho-postSomething postAuxilioComent" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="idPublicacao" id="postIdField" value="">
+                    <div class="Ho-postTop">
+                        <a class="Ho-userProfileImage" href="<?= $relativePublicPath; ?>/home/perfil.php">
+                            <img src="<?= $relativeAssetsPath . "/imagens/fotos/perfil/" . $currentUserData['linkFotoPerfil'];?>">
+                        </a>
 
-                    <div class="Ho-postText">
-                        <div class="Ho-postTitle" id="postTitleContainer" style="display: none;">
-                            <label for="Ho-postTitleInput">Título:</label>
-                            <input type="text" id="Ho-postTitleInput" name="tituloEnvio" class="Ho-postTitleInput" oninput="postTitleCharLimiter()">
-                            <div class="Ho-titleCharacters">
-                                <span class="Ho-titleCharactersNumber">0</span>/<span class="Ho-maxTitleCharacters">50</span>
+                        <div class="Ho-postText">
+                            <div class="Ho-postTitle" id="postTitleContainer" style="display: none;">
+                                <label for="Ho-postTitleInput">Título:</label>
+                                <input type="text" id="Ho-postTitleInput" name="tituloEnvio" class="Ho-postTitleInput" oninput="postTitleCharLimiter()">
+                                <div class="Ho-titleCharacters">
+                                    <span class="Ho-titleCharactersNumber">0</span>/<span class="Ho-maxTitleCharacters">50</span>
+                                </div>
                             </div>
-                        </div>
-                        
-                        <div class="Ho-postMainContent">
-                            <textarea name="conteudoEnvio" id="postText" cols="62" rows="3" class="Ho-postTextContent" placeholder="Como você está se sentindo?" style="resize: none;" oninput="postCharLimiter()"></textarea>
-                            <div class="Ho-characters">
-                                <span class="Ho-charactersNumber">0</span>/<span class="Ho-maxCharacters">200</span>
+                            
+                            <div class="Ho-postMainContent">
+                                <textarea name="conteudoEnvio" id="postText" cols="62" rows="3" class="Ho-postTextContent" placeholder="Como você está se sentindo?" style="resize: none;" oninput="postCharLimiter()"></textarea>
+                                <div class="Ho-characters">
+                                    <span class="Ho-charactersNumber">0</span>/<span class="Ho-maxCharacters">200</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="Ho-postBottom">
-                    <button type="submit" value="submit" name="postComentarioModalAuxilio" class="confirmBtn"> Comentar </button>
-                </div>
-                <?php
-                    if(isset($_POST['postComentarioModalAuxilio'])){
-                        sendComment($conn, $dadosPublicacao['idPublicacao'], $currentUserData['idUsuario']);
-                    }
-                ?>  
-            </form>
+                    <div class="Ho-postBottom">
+                        <button type="submit" value="submit" name="postComentarioModalAuxilio" class="confirmBtn"> Comentar </button>
+                    </div>
+                    <?php
+                        if(isset($_POST['postComentarioModalAuxilio'])){
+                            sendComment($conn, $dadosPublicacao['idPublicacao'], $currentUserData['idUsuario']);
+                        }
+                    ?>  
+                </form>
+            <?php } ?>
 
             <?php
                 include ("../../app/includes/comments.php");

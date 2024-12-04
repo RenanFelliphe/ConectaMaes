@@ -74,13 +74,7 @@ if (count($publicacoes) > 0) {
                                             <i class="bi bi-trash3-fill"></i>
                                             <p>Deletar Postagem</p>
                                         </button>
-                                        
-                                        <?php if ($dadosPublicacao['tipoPublicacao'] == "Auxilio") { ?>
-                                            <button class="concludeAuxilio pageIcon" name="concludePost" type="submit" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>
-                                                <i class="bi bi-check-all"></i>
-                                                <p>Concluir auxilio</p>
-                                            </button>
-                                    <?php } } ?>
+                                    <?php } ?>
                                 </form>                                      
                             </div>
                         <?php } ?>                         

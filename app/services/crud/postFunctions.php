@@ -11,11 +11,27 @@ function sendPost($conn, $postType, $currentUserId) {
         $conteudoEnvio = mysqli_real_escape_string($conn, $_POST['conteudoEnvio']);
         $linkAnexoEnvio = ''; 
         $tituloEnvio = isset($_POST['tituloEnvio']) ? mysqli_real_escape_string($conn, $_POST['tituloEnvio']) : null;
-        $isConcluido = isset($_POST['isConcluidoEnvio']) ? (int) $_POST['isConcluidoEnvio'] : 0; 
+        $isConcluido = 0; 
         $isAnonima = isset($_POST['meIdentificar']) && $_POST['meIdentificar'] == 'on' ? 0 : 1; 
         $idUsuarioQuePostou = mysqli_real_escape_string($conn, $currentUserId);
 
-        $insertNewPost = "INSERT INTO Publicacao (tipoPublicacao, conteudo, linkAnexo, titulo, isConcluido, isAnonima, idUsuario) VALUES ('$tipoPublicacaoEnvio', '$conteudoEnvio', '$linkAnexoEnvio', '$tituloEnvio', '$isConcluido', '$isAnonima', '$idUsuarioQuePostou')";
+        if (isset($_POST['showPixKey']) && $_POST['showPixKey'] == 'on') {
+            $sqlChavePix = "SELECT chavePix FROM Usuario WHERE idUsuario = '$idUsuarioQuePostou'";
+            $resultChavePix = mysqli_query($conn, $sqlChavePix);
+
+            if ($resultChavePix && mysqli_num_rows($resultChavePix) > 0) {
+                $user = mysqli_fetch_assoc($resultChavePix);
+                $chavePix = $user['chavePix'];
+            } else {
+                $chavePix = 'N/a';
+            }
+        } else {
+            $chavePix = 'N/a';
+        }
+
+        // Inserir o post na tabela 'Publicacao'
+        $insertNewPost = "INSERT INTO Publicacao (tipoPublicacao, conteudo, linkAnexo, titulo, isConcluido, isAnonima, idUsuario, chavePix) 
+                          VALUES ('$tipoPublicacaoEnvio', '$conteudoEnvio', '$linkAnexoEnvio', '$tituloEnvio', '$isConcluido', '$isAnonima', '$idUsuarioQuePostou', '$chavePix')";
         $executeSendPost = mysqli_query($conn, $insertNewPost);
 
         if (!$executeSendPost) {
@@ -71,7 +87,6 @@ function specificPostQuery($conn, $data, $where, $order) {
     
     return $sUExec;
 }
-
 function queryPostsAndUserData($conn, $postType = '', $postId = null, $limit = 10, $offset = 0) {
     $baseQuery = "
         SELECT 
@@ -81,12 +96,14 @@ function queryPostsAndUserData($conn, $postType = '', $postId = null, $limit = 1
             p.linkAnexo, 
             p.titulo, 
             p.isAnonima,
+            p.isConcluido,
             p.dataCriacaoPublicacao,
             u.idUsuario, 
             u.nomeCompleto, 
             u.nomeDeUsuario, 
             u.linkFotoPerfil,
             u.estado,
+            IF(p.chavePix = 'N/a', 'N/a', u.chavePix) AS chavePix,
             -- Subquery para contar likes
             (SELECT COUNT(*) FROM curtirPublicacao c WHERE c.idPublicacao = p.idPublicacao) AS totalLikes,
             -- Subquery para contar comentários
@@ -113,7 +130,6 @@ function queryPostsAndUserData($conn, $postType = '', $postId = null, $limit = 1
     }
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
-
 function renderProfileLink($relativePublicPath, $profileImage, $nomeDeUsuario, $isRelatoAnonimo = false) {
     if ($isRelatoAnonimo) {
         return '<a class="postOwnerImage" href="#" onclick="return false;">
@@ -125,7 +141,6 @@ function renderProfileLink($relativePublicPath, $profileImage, $nomeDeUsuario, $
                 </a>';
     }
 }
-
 function queryUserLike($conn, $idUser, $idPost) {
     $queryLike = "SELECT * FROM curtirPublicacao WHERE idPublicacao = $idPost AND idUsuario = $idUser";
     $execQuery = mysqli_query($conn, $queryLike);
@@ -133,7 +148,6 @@ function queryUserLike($conn, $idUser, $idPost) {
 
     return $returnExec;
 }
-
 function queryUserCommentLike($conn, $idUser, $idComment) {
     $queryLike = "SELECT * FROM curtirComentario WHERE idComentario = $idComment AND idUsuario = $idUser";
     $execQuery = mysqli_query($conn, $queryLike);
@@ -147,7 +161,6 @@ function queryUserCommentLike($conn, $idUser, $idComment) {
 
     return $returnExec ? true : false;
 }
-
 // DELETE POST - DELETE
 function deletePost($conn, $id) {
     if (!empty($id)) {
@@ -181,12 +194,9 @@ function deletePost($conn, $id) {
         exit; 
     }
 }
-
-
 if (isset($_POST['deletarPost'])) {
-    deletePost($conn, $_POST['deleterId']);
+    deletePost($conn, $_POST['identifierId']);
 }
-
 // LIKES
 function handlePostLike($conn, $idUser, $idPost) {
     $userLike = queryUserLike($conn, $idUser, $idPost);
@@ -206,7 +216,6 @@ function handlePostLike($conn, $idUser, $idPost) {
         }
     }
 }
-
 // COMMENTS
 function queryCommentsData($conn, $postId, $limit = 10, $offset = 0) {
     $baseQuery = "
@@ -244,7 +253,6 @@ function queryCommentsData($conn, $postId, $limit = 10, $offset = 0) {
 
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
-
 function handleCommentLike($conn, $idUser, $idComment) {
     $userLike = queryUserCommentLike($conn, $idUser, $idComment);
     if (!$userLike) {
@@ -263,7 +271,6 @@ function handleCommentLike($conn, $idUser, $idComment) {
         }
     }
 }
-
 function deleteComment($conn, $id) {
     if (!empty($id)) {
         $dQuery = "DELETE FROM Comentario WHERE idComentario = " . (int)$id;
@@ -282,10 +289,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         handlePostLike($conn, $currentUserData['idUsuario'], (int)$postId);
     }
 
-    if (isset($_POST['deletarPost'])) {
-        deletePost($conn, $_POST['postDeleterId']);
-    }
-
     if ($likedComment = array_keys($_POST, 'like', true)) {
         $commentId = str_replace('commentLike_', '', $likedComment[0]);
         handleCommentLike($conn, $currentUserData['idUsuario'], (int)$commentId); 
@@ -296,7 +299,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         deleteComment($conn, $_POST['deleterCommentId']);
     }
 }
-
 
 //RELATO ANÔNIMO
 function anonUsername($conn, $username) {
@@ -316,12 +318,10 @@ function anonUsername($conn, $username) {
         return null;
     }
 }
-
 function getAnonUserId($n){
     $id = (hexdec($n) - 4) / 5;
     return $id;
 }
-
 function editAnonIdentification($conn, $id) {
     
     $meIdentificarEdit = $_POST['meIdentificarEdit'];
@@ -346,7 +346,23 @@ function editAnonIdentification($conn, $id) {
 
     return $mensagem;
 }
-
 if(isset($_POST['confirmReportIdentification']) && isset($_POST['meIdentificarEdit'])){
     $anonIdentification_message = editAnonIdentification($conn, $_POST['anonymousReportIdentifier']);
+}
+
+//AUXILIOS
+function endAuxilio($conn, $postId) {
+    $message = "";
+    $query = "UPDATE Publicacao SET isConcluido = 1 WHERE idPublicacao = $postId";
+    $result = mysqli_query($conn, $query);
+    if ($result && mysqli_affected_rows($conn) > 0) {
+        $message = "Auxílio concluído com sucesso!";
+    } else {
+        $message = "Erro ao concluir o auxílio. Tente novamente mais tarde.";
+    }
+    return $message;
+}
+
+if(isset($_POST['concludePost'])){
+    $conclude_message = endAuxilio($conn, $_POST['identifierId']);
 }

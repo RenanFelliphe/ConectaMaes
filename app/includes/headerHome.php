@@ -257,6 +257,12 @@
                     <label for="meIdentificarCheckbox" style="cursor: pointer;"> Me identificar </label>
                     <i class="bi bi-info-circle-fill" id="Ho-identifyMyselfIcon" style="cursor: pointer;"></i>
                 </div>
+
+                <div class="Ho-showPixKey">
+                    <img src="<?= $relativeAssetsPath . "/imagens/icons/pix_icon.png"?>" alt="Ícone do Pix" style = "width: 20px;">
+                    <label for="showPixKeyCheckbox" style="cursor: pointer;"> Chave Pix </label>
+                    <input type="checkbox" id="showPixKeyCheckbox" name="showPixKey" style="cursor: pointer;">
+                </div>
             </div>
         </div>
 
@@ -297,30 +303,32 @@
         const submitPostBtn = document.querySelector('.Ho-submitPost');
         const btnClicked = modal.getAttribute("data-type");
 
-        //Muda o estado do input de titulo para os Relatos e Auxilios
         const postTitleContainer = document.querySelector('#postTitleContainer');
 
         postTitleContainer.style.display = (btnClicked === 'postSomething' && modal.id === '') ? 'none' : 'flex';
 
-        //Define o tipo de publicação que sofrerá submit
         submitPostBtn.setAttribute('name', modal.getAttribute('post-link'));
 
-        //Muda o estado do container "Me identificar" para os Relatos
         const identifyMyself = document.querySelector('.Ho-identifyMyself');
-        //Não deixa comentários publicarem fotos
         const imageInput = document.querySelector('.Ho-imageInput');
+        const showPixKey = document.querySelector('.Ho-showPixKey');
 
         if (modal.getAttribute('post-link') === "postRelatoModal") {
             identifyMyself.style.display = 'flex';  
         } else {
             identifyMyself.style.display = 'none';  
+        }
 
-            // Verifica se é um comentário
-            if (modal.getAttribute('post-link') === "postComentarioModal") {
-                imageInput.style.display = 'none'; 
-            } else {
-                imageInput.style.display = 'flex';
-            }
+        if (modal.getAttribute('post-link') === "postComentarioModal") {
+            imageInput.style.display = 'none'; 
+        } else {
+            imageInput.style.display = 'flex';
+        }
+
+        if (modal.getAttribute('post-link') === "postAuxilioModal") {
+            showPixKey.style.display = 'flex';
+        } else {
+            showPixKey.style.display = 'none';
         }
         
         toggleModal(modal);

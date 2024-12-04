@@ -354,6 +354,41 @@ function editTelephone($conn, $userId) {
         $phone_messages = editTelephone($conn, $_POST['updaterId']);
     }
 
+    function editPixKey($conn, $userId) {
+        $messages = array();  // Array para armazenar mensagens de erro e sucesso
+    
+        if (isset($_POST['editPixKey']) && !empty($_POST['editPixKey'])) {
+            $newPixKey = mysqli_real_escape_string($conn, htmlspecialchars($_POST['editPixKey']));
+
+            if (preg_match('/^[a-zA-Z0-9]{1,50}$/', $newPixKey)) {
+                $checkPixQuery = "SELECT idUsuario FROM Usuario WHERE chavePix = '$newPixKey' AND idUsuario != $userId";
+                $result = mysqli_query($conn, $checkPixQuery);
+
+                if (mysqli_num_rows($result) > 0) {
+                    $messages[] = "<p class='error-message'>Esta chave Pix já está associada a outro usuário. Por favor, insira uma chave Pix diferente.</p>";
+                } else {
+                    $updatePixKey = "UPDATE Usuario SET chavePix = '$newPixKey' WHERE idUsuario = $userId";
+                    if (mysqli_query($conn, $updatePixKey)) {
+                        $messages[] = "<p class='success-message'>Chave Pix atualizada com sucesso!</p>";
+                    } else {
+                        $messages[] = "<p class='error-message'>Erro ao atualizar a chave Pix: " . mysqli_error($conn) . "</p>";
+                    }
+                }
+            } else {
+                $messages[] = "<p class='error-message'>A chave Pix deve conter apenas letras e números, e ter no máximo 50 caracteres.</p>";
+            }
+        } else {
+            $messages[] = "<p class='error-message'>Por favor, insira uma chave Pix válida.</p>";
+        }
+    
+        return $messages;  // Retorna todas as mensagens (erro ou sucesso)
+    }
+    
+    if (isset($_POST['editPixSubmit'])) {   
+        $pix_messages = editPixKey($conn, $_POST['updaterId']);
+    }
+    
+
 // DELETE ACCOUNT - DELETE
 function deleteAccount($conn, $id) {
     $messages = []; 
