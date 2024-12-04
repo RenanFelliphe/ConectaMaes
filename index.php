@@ -2,7 +2,7 @@
     require_once "app/services/helpers/conn.php";
     require_once "app/services/helpers/authUser.php";
     require_once "app/services/helpers/paths.php";
-    validateRememberedCookie($conn, redirectPath: $relativePublicPath . "/home.php");
+    validateRememberedCookie($conn, $relativePublicPath . "/home.php");
     if(isset($_POST['envioUsuarioTeste'])){
         logInTest($conn);
     }
