@@ -109,38 +109,8 @@
                             </div>
                         </div>
                         <div class="Re-input inputLocal">
-                            <select class="Re-userInput validate blank" name="localizacaoRegistro" id="localizacao" onchange="validateLocal()" required>
-                                <option value=""></option>
-                                <option value="Não Informar"> Não Informar</option>
-                                <option value="Acre"> AC | Acre</option>
-                                <option value="Alagoas"> AL | Alagoas</option>
-                                <option value="Amapá"> AP | Amapá</option>
-                                <option value="Amazonas"> AM | Amazonas</option>
-                                <option value="Bahia"> BA | Bahia</option>
-                                <option value="Ceará"> CE | Ceará</option>
-                                <option value="Distrito Federal"> DF | Distrito Federal</option>
-                                <option value="Espírito Santo"> ES | Espírito Santo</option>
-                                <option value="Goiás"> GO | Goiás</option>
-                                <option value="Maranhão"> MA | Maranhão</option>
-                                <option value="Mato Grosso"> MT | Mato Grosso</option>
-                                <option value="Mato Grosso do Sul"> MS | Mato Grosso do Sul</option>
-                                <option value="Minas Gerais"> MG | Minas Gerais</option>
-                                <option value="Pará"> PA | Pará</option>
-                                <option value="Paraíba"> PB | Paraíba</option>
-                                <option value="Paraná"> PR | Paraná</option>
-                                <option value="Pernambuco"> PE | Pernambuco</option>
-                                <option value="Piauí"> PI | Piauí</option>
-                                <option value="Rio de Janeiro"> RJ | Rio de Janeiro</option>
-                                <option value="Rio Grande do Norte"> RN | Rio Grande do Norte</option>
-                                <option value="Rio Grande do Sul"> RS | Rio Grande do Sul</option>
-                                <option value="Rondônia"> RO | Rondônia</option>
-                                <option value="Roraima"> RR | Roraima</option>
-                                <option value="Santa Catarina"> SC | Santa Catarina</option>
-                                <option value="São Paulo"> SP | São Paulo</option>
-                                <option value="Sergipe"> SE | Sergipe</option>
-                                <option value="Tocantins"> TO | Tocantins</option>                 
-                            </select>
-                            <label class="Re-fakePlaceholder" for="localizacao" style="pointer-events: none;">Localização</label>
+                            <input class="Re-userInput validate blank"  type="number" name="localizacaoRegistro" id="localizacao" oninput="validateLocal()" required></input>
+                            <label class="Re-fakePlaceholder" for="localizacao" style="pointer-events: none;">CEP</label>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
                             <div class="errorMessageContainer">
                                 <div class="errorMessageContent"></div>
@@ -253,10 +223,6 @@
                 };
 
                 input.addEventListener('input', updateInfo);
-
-                if (input.tagName === 'SELECT') {
-                    input.addEventListener('change', updateInfo);
-                }
             });
 
             function userValidations(){
@@ -464,8 +430,9 @@
                 function validateBornDate() {
                     const birthDate = new Date(validateInputs[6].value);
                     const today = new Date();
-                    const hundredYearsAgo = new Date(today.setFullYear(today.getFullYear() - 100));
-                    
+                    const hundredYearsAgo = new Date(today.getFullYear() - 100, today.getMonth(), today.getDate());
+                    const eighteenYearsAgo = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+
                     checkEmptyInput(6);
 
                     if (validateInputs[6].value === "") {
@@ -475,23 +442,78 @@
                         setError(6, "A data de nascimento não pode ser uma <span class='mainError'>data futura.</span>");
                     } else if (birthDate < hundredYearsAgo) {
                         setError(6, "A data de nascimento é <span class='mainError'>muito antiga.</span>");
+                    } else if (birthDate > eighteenYearsAgo) {
+                        setError(6, "Você precisa ser <span class='mainError'>maior de 18 anos.</span>");
                     } else {
                         removeError(6);
                     }
                 }
 
-                function validateLocal() {
-                    const localizacao = validateInputs[7].value;
+
+                // Função separada para buscar o CEP na API ViaCEP
+                async function fetchCepData(cep) {
+                    try {
+                        const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+
+                        if (!response.ok) {
+                            throw new Error("Erro ao <span class='mainError'>consultar o CEP.</span>");
+                        }
+
+                        const data = await response.json();
+
+                        if (data.erro) {
+                            throw new Error("O CEP informado <span class='mainError'>não foi encontrado.</span>");
+                        }
+
+                        return data; // Retorna o objeto com os dados do CEP
+                    } catch (error) {
+                        console.error(error.message);
+                        throw error; // Lança o erro para ser tratado na função chamadora
+                    }
+                }
+
+                // Função principal de validação
+                async function validateLocal() {
+                    const cep = validateInputs[7].value.trim(); // Remove espaços em branco
+                    const maxChar = 8;
 
                     checkEmptyInput(7);
 
-                    if (localizacao == "") {
+                    // Verificação básica do input
+                    if (cep === "") {
                         inputContainers[7].style.opacity = '1';
-                        setError(7, "Selecione ao menos <span class='mainError'>uma opção.</span>");
-                    } else {
-                        removeError(7);
+                        setError(7, "O campo CEP é <span class='mainError'>obrigatório.</span>");
+                        return;
+                    }
+
+                    if (cep.length !== maxChar) {
+                        inputContainers[7].style.opacity = '1';
+                        setError(7, "O CEP deve ter <span class='mainError'>8 dígitos.</span>");
+                        return;
+                    }
+
+                    if (!/^\d{8}$/.test(cep)) {
+                        inputContainers[7].style.opacity = '1';
+                        setError(7, "Insira um CEP válido.");
+                        return;
+                    }
+
+                    // Busca os dados do CEP utilizando a função fetchCepData
+                    try {
+                        const data = await fetchCepData(cep);
+
+                        // Valida se o estado é Minas Gerais
+                        if (data.uf !== "MG") {
+                            setError(7, "O CEP não pertence ao estado de <span class='mainError'>Minas Gerais (MG).</span>");
+                            return;
+                        }
+
+                        removeError(7); // Remove erros caso o CEP seja válido
+                    } catch (error) {
+                        setError(7, error.message);
                     }
                 }
+
 
                 function validateBio() {
                     const bioInput = document.querySelector('.Re-userInput.validate');
@@ -501,7 +523,7 @@
                     const biography = validateInputs[8].value;
                     
                     charactersNumber.textContent = biography.length;
-                    maxChar = 257;
+                    maxChar = 255;
 
                     checkEmptyInput(8);
 
