@@ -449,8 +449,6 @@
                     }
                 }
 
-
-                // Função separada para buscar o CEP na API ViaCEP
                 async function fetchCepData(cep) {
                     try {
                         const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
@@ -472,14 +470,12 @@
                     }
                 }
 
-                // Função principal de validação
                 async function validateLocal() {
                     const cep = validateInputs[7].value.trim(); // Remove espaços em branco
                     const maxChar = 8;
 
                     checkEmptyInput(7);
 
-                    // Verificação básica do input
                     if (cep === "") {
                         inputContainers[7].style.opacity = '1';
                         setError(7, "O campo CEP é <span class='mainError'>obrigatório.</span>");
@@ -494,26 +490,26 @@
 
                     if (!/^\d{8}$/.test(cep)) {
                         inputContainers[7].style.opacity = '1';
-                        setError(7, "Insira um CEP válido.");
+                        setError(7, "Insira um <span class='mainError'>CEP válido.</span>");
                         return;
                     }
 
-                    // Busca os dados do CEP utilizando a função fetchCepData
                     try {
                         const data = await fetchCepData(cep);
-
-                        // Valida se o estado é Minas Gerais
                         if (data.uf !== "MG") {
                             setError(7, "O CEP não pertence ao estado de <span class='mainError'>Minas Gerais (MG).</span>");
                             return;
                         }
+
+                        // Atualiza o conteúdo de 'infoLocalizacao' com a cidade e UF
+                        const infoLocalizacao = document.getElementById('infoLocalizacao');
+                        infoLocalizacao.textContent = `${data.localidade}, ${data.uf}`;
 
                         removeError(7); // Remove erros caso o CEP seja válido
                     } catch (error) {
                         setError(7, error.message);
                     }
                 }
-
 
                 function validateBio() {
                     const bioInput = document.querySelector('.Re-userInput.validate');
