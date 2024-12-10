@@ -233,11 +233,15 @@
 
                             <form method="post" class="editChildForm">
                                 <input type="hidden" name="childEditIdentifier" value="<?= $f['idFilho']; ?>">
-                                <div class="childNameEditor">
+                                <div class="Se-childInput childNameEditor">
                                     <p> Nome: </p>
-                                    <input type="text" class="Re-childName" id="nomeFilho" name="editChildName" placeholder="Nome Completo" value="<?= $f['nomeFilho'];?>"required>
+                                    <input type="text" class="Re-childName" id="editChildNameInput" name="editChildName" placeholder="Nome Completo" value="<?= $f['nomeFilho'];?>"required>
                                 </div>
-                                <div class="childSexEditor">
+                                <div class="errorMessageContainer">
+                                    <div class="editChildErrorContent"></div>
+                                </div>
+
+                                <div class="Se-childInput childSexEditor">
                                     <p> Sexo: </p>
                                     <div class="sexOptions">
                                         <?php
@@ -251,11 +255,14 @@
                                         ?>
                                     </div>
                                 </div>
-                                <div class="childBirthEditor">
+                                <div class="Se-childInput childBirthEditor">
                                     <label for="dataNascFilho">Data de Nascimento</label>
-                                    <input type="date" id="dataNascFilho" name="editChildBirthDate" value="<?= date('Y-m-d', strtotime($f['dataNascimentoFilho'])); ?>" required>
+                                    <input type="date" id="editChildDateInput" name="editChildBirthDate" value="<?= date('Y-m-d', strtotime($f['dataNascimentoFilho'])); ?>" required>
                                 </div>
-                                <div class="childDisabilityEditor">
+                                <div class="errorMessageContainer">
+                                    <div class="editChildErrorContent"></div>
+                                </div>
+                                <div class="Se-childInput childDisabilityEditor">
                                     <label for="deficiencia">Deficiência</label>
                                     <div class="input">
                                         <?php $childDisability = queryChildDisability($conn, $f['idFilho'])[0]; ?>
@@ -316,7 +323,7 @@
                                 </div>
                                 <div class="childButtons">
                                     <div name="voltar" onclick="toggleEditChildForm(this);">Cancelar Edição</div>
-                                    <button type="submit" name="confirmarEditarFilho" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Salvar alterações</button>
+                                    <button type="submit" id="editChild" name="confirmarEditarFilho" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Salvar alterações</button>
                                 </div>
                             </form> 
                         </div>
@@ -517,11 +524,7 @@
                             <label for="Re-childBoySex">Masculino</label>
                             <input type="radio" name="addChildSex" value="girl" id="Re-childGirlSex">
                             <label for="Re-childGirlSex">Feminino</label>
-                            
                         </div>
-                    </div>
-                    <div class="errorMessageContainer">
-                        <div class="errorMessageContent"></div>
                     </div>
 
                     <div class="Se-childInput">
@@ -530,7 +533,7 @@
                         <img src="<?= $relativeAssetsPath; ?>/imagens/icons/pram_icon.png" class="pageIcon" alt="Ícone de usuário">
                     </div>
                     <div class="errorMessageContainer">
-                        <div class="errorMessageContent"></div>
+                        <div class="childErrorMessageContent"></div>
                     </div>
 
                     <div class="Se-childInput">
@@ -538,7 +541,7 @@
                         <label class="Re-fakePlaceholder" for="newChildDateInput">Data de Nascimento</label>
                     </div>
                     <div class="errorMessageContainer">
-                        <div class="errorMessageContent"></div>
+                        <div class="childErrorMessageContent"></div>
                     </div>
 
                     <div class="Se-childInput">
@@ -640,167 +643,160 @@
         <script>
             toggleConfigSection();
 
-            const validateInputs = [
-                document.getElementById('nomeCompletoUsuario'),
-                document.getElementById('biografiaUsuario'),
-                document.getElementById('localizacaoUsuario')
-            ];
+            function editUserValidations(){
+                const validateUserInputs = [
+                    document.getElementById('nomeCompletoUsuario'),
+                    document.getElementById('biografiaUsuario'),
+                    document.getElementById('localizacaoUsuario')
+                ];
 
-            function setError(inputIndex, message) {
-                const inputElement = validateInputs[inputIndex];
-                // Agora, pegamos o .errorMessageContainer fora de .Se-userInput
-                const errorMessageContainer = inputElement.closest('.Se-userInput').nextElementSibling.querySelector('.errorMessageContent');
-                errorMessageContainer.innerHTML = message;
-                inputElement.classList.add('error');
-            }
+                function setUserError(inputIndex, message) {
+                    const inputElement = validateUserInputs[inputIndex];
+                    const errorMessageContainer = inputElement.closest('.Se-userInput').nextElementSibling.querySelector('.errorMessageContent');
+                    errorMessageContainer.innerHTML = message;
+                    inputElement.classList.add('error');
+                }
 
-            function removeError(inputIndex) {
-                const inputElement = validateInputs[inputIndex];
-                // Agora, pegamos o .errorMessageContainer fora de .Se-userInput
-                const errorMessageContainer = inputElement.closest('.Se-userInput').nextElementSibling.querySelector('.errorMessageContent');
-                errorMessageContainer.innerHTML = '';
-                inputElement.classList.remove('error');
-            }
+                function removeUserError(inputIndex) {
+                    const inputElement = validateUserInputs[inputIndex];
+                    const errorMessageContainer = inputElement.closest('.Se-userInput').nextElementSibling.querySelector('.errorMessageContent');
+                    errorMessageContainer.innerHTML = '';
+                    inputElement.classList.remove('error');
+                }
 
-            // Função que verifica se há erros no formulário
-            function validateForm() {
-                const errorMessages = document.querySelectorAll('.errorMessageContent');
-                
-                // Se qualquer campo de erro não estiver vazio, o formulário não será enviado
-                for (let errorMessage of errorMessages) {
-                    if (errorMessage.innerHTML !== '') {
-                        return false;  // Impede o envio do formulário
+                function validateEditProfileForm() {
+                    const errorMessages = document.querySelectorAll('.errorMessageContent');
+                    
+                    for (let errorMessage of errorMessages) {
+                        if (errorMessage.innerHTML !== '') {
+                            return false;  // Impede o envio do formulário
+                        }
+                    }
+                    return true;  // Permite o envio do formulário se não houver erros
+                }
+
+                function validateFullName() {
+                    const fullName = validateUserInputs[0].value;  // Valor do campo 'Nome Completo'
+                    const maxChar = 100;  // Número máximo de caracteres permitidos
+
+                    checkEmptyInput(0);  // Verifica se o campo está vazio
+                    const nameRegex = /^([a-zA-ZÀ-ÖØ-ÿÇç'-]+(\s[a-zA-ZÀ-ÖØ-ÿÇç'-]+)*)$/;  // Expressão regular para nome completo válido
+
+                    // Verifica as condições e exibe erros
+                    if (fullName.length === 0) {
+                        setUserError(0, "O nome completo é <span class='mainError'>obrigatório.</span>");
+                    } else if (fullName.length > maxChar) {
+                        setUserError(0, "O nome é <span class='mainError'>muito longo.</span>");
+                    } else if (/\d/.test(fullName)) {
+                        setUserError(0, "O nome não pode possuir <span class='mainError'>números.</span>");
+                    } else if (!nameRegex.test(fullName)) {
+                        setUserError(0, "O nome pode conter apenas <span class='mainError'>letras, espaços, acentos, hífens, cedilhas e apóstrofos.</span>");
+                    } else if (!/^([a-zA-ZÀ-ÖØ-ÿ'-]+\s[a-zA-ZÀ-ÖØ-ÿ'-]+.*)$/.test(fullName)) {
+                        setUserError(0, "Insira o seu <span class='mainError'>nome completo.</span>");
+                    } else {
+                        removeUserError(0);  // Remove o erro se estiver tudo certo
                     }
                 }
-                return true;  // Permite o envio do formulário se não houver erros
-            }
 
-            // Função de validação do nome completo
-            function validateFullName() {
-                const fullName = validateInputs[0].value;  // Valor do campo 'Nome Completo'
-                const maxChar = 100;  // Número máximo de caracteres permitidos
+                async function fetchCepData(cep) {
+                    try {
+                        const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+                        if (!response.ok) {
+                            throw new Error("Erro ao consultar o CEP.");
+                        }
 
-                checkEmptyInput(0);  // Verifica se o campo está vazio
-                const nameRegex = /^([a-zA-ZÀ-ÖØ-ÿ'-]+(\s[a-zA-ZÀ-ÖØ-ÿ'-]+)*)$/;  // Expressão regular para nome completo válido
-
-                // Verifica as condições e exibe erros
-                if (fullName.length === 0) {
-                    setError(0, "O nome completo é <span class='mainError'>obrigatório.</span>");
-                } else if (fullName.length > maxChar) {
-                    setError(0, "O nome é <span class='mainError'>muito longo.</span>");
-                } else if (/\d/.test(fullName)) {
-                    setError(0, "O nome não pode possuir <span class='mainError'>números.</span>");
-                } else if (!nameRegex.test(fullName)) {
-                    setError(0, "O nome pode conter apenas <span class='mainError'>letras, espaços, acentos, hífens, cedilhas e apóstrofos.</span>");
-                } else if (!/^([a-zA-ZÀ-ÖØ-ÿ'-]+\s[a-zA-ZÀ-ÖØ-ÿ'-]+.*)$/.test(fullName)) {
-                    setError(0, "Insira o seu <span class='mainError'>nome completo.</span>");
-                } else {
-                    removeError(0);  // Remove o erro se estiver tudo certo
-                }
-            }
-
-            async function fetchCepData(cep) {
-                try {
-                    const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
-
-                    if (!response.ok) {
-                        throw new Error("Erro ao <span class='mainError'>consultar o CEP.</span>");
+                        const data = await response.json();
+                        if (data.erro) {
+                            throw new Error("O CEP informado não foi encontrado.");
+                        }
+                        return data; // Retorna o objeto com os dados do CEP
+                    } catch (error) {
+                        console.warn(error.message);
+                        throw error; // Lança o erro para ser tratado na função chamadora
                     }
-
-                    const data = await response.json();
-
-                    if (data.erro) {
-                        throw new Error("O CEP informado <span class='mainError'>não foi encontrado.</span>");
-                    }
-
-                    return data; // Retorna o objeto com os dados do CEP
-                } catch (error) {
-                    console.error(error.message);
-                    throw error; // Lança o erro para ser tratado na função chamadora
-                }
-            }
-
-            // Função de validação do CEP
-            async function validateLocal() {
-                const cep = validateInputs[2].value.trim(); // Remove espaços em branco
-                const maxChar = 8;
-
-                checkEmptyInput(2);  // Verifica se o campo do CEP está vazio
-
-                if (cep === "") {
-                    setError(2, "O campo CEP é <span class='mainError'>obrigatório.</span>");
-                    return;
                 }
 
-                if (cep.length !== maxChar) {
-                    setError(2, "O CEP deve ter <span class='mainError'>8 dígitos.</span>");
-                    return;
-                }
+                async function validateLocal() {
+                    const cep = validateUserInputs[2].value.trim(); // Remove espaços em branco
+                    const cepMustBeLength = 8;
 
-                if (!/^\d{8}$/.test(cep)) {
-                    setError(2, "Insira um <span class='mainError'>CEP válido.</span>");
-                    return;
-                }
+                    checkEmptyInput(2);  // Verifica se o campo do CEP está vazio
 
-                try {
-                    const data = await fetchCepData(cep);
-                    if (data.uf !== "MG") {
-                        setError(2, "O CEP não pertence ao estado de <span class='mainError'>Minas Gerais (MG).</span>");
+                    if (cep === "") {
+                        setUserError(2, "O campo CEP é <span class='mainError'>obrigatório.</span>");
                         return;
                     }
 
-                    // Remove erro caso o CEP seja válido
-                    removeError(2);
-                } catch (error) {
-                    setError(2, error.message);
+                    if (cep.length !== cepMustBeLength) {
+                        setUserError(2, "O CEP deve ter <span class='mainError'>8 dígitos.</span>");
+                        return;
+                    }
+
+                    if (!/^\d{8}$/.test(cep)) {
+                        setUserError(2, "Insira um <span class='mainError'>CEP válido.</span>");
+                        return;
+                    }
+
+                    try {
+                        const data = await fetchCepData(cep);
+                        if (data.uf !== "MG") {
+                            setUserError(2, "O CEP não pertence ao estado de <span class='mainError'>Minas Gerais (MG).</span>");
+                            return;
+                        }
+
+                        // Remove erro caso o CEP seja válido
+                        removeUserError(2);
+                    } catch (error) {
+                        setUserError(2, error.message);
+                    }
                 }
+
+                // Função de validação da biografia
+                function validateBio() {
+                    const bioInput = validateUserInputs[1];
+                    const bioValue = bioInput.value;
+                    const maxChar = 255;
+
+                    checkEmptyInput(1);  // Verifica se o campo de biografia está vazio
+
+                    if (bioValue.length === 0) {
+                        removeUserError(1);
+                    } else if (bioValue.length > maxChar) {
+                        setUserError(1, "A biografia é <span class='mainError'>muito longa.</span>");
+                    } else {
+                        removeUserError(1);
+                    }
+                }
+
+                // Função para verificar se algum campo está vazio
+                function checkEmptyInput(inputIndex) {
+                    const inputElement = validateUserInputs[inputIndex];
+                    if (inputElement.value.trim() === "") {
+                        setUserError(inputIndex, "Este campo é <span class='mainError'>obrigatório.</span>");
+                    }
+                }
+
+                // Impede o envio do formulário se houver erro
+                const submitEditUserButton = document.getElementById('editProfile');  // Certifique-se de selecionar o formulário corretamente
+                        
+                submitEditUserButton.addEventListener('click', function(event) {
+                    // Valida todos os campos antes de permitir o envio
+                    validateFullName();
+                    validateBio();
+                    validateLocal();
+
+                    // Se houver algum erro, impede o envio
+                    if (!validateEditProfileForm()) {
+                        event.preventDefault();  // Impede o envio do formulário
+                        alert("Por favor, corrija os erros antes de enviar o formulário.");
+                    }
+                });
+
+                // Adiciona listeners de input para validar enquanto o usuário digita
+                validateUserInputs[0].addEventListener('input', validateFullName);
+                validateUserInputs[1].addEventListener('input', validateBio);
+                validateUserInputs[2].addEventListener('input', validateLocal);
             }
-
-            // Função de validação da biografia
-            function validateBio() {
-                const bioInput = validateInputs[1];
-                const bioValue = bioInput.value;
-                const maxChar = 255;
-
-                checkEmptyInput(1);  // Verifica se o campo de biografia está vazio
-
-                if (bioValue.length === 0) {
-                    removeError(1);
-                } else if (bioValue.length > maxChar) {
-                    setError(1, "A biografia é <span class='mainError'>muito longa.</span>");
-                } else {
-                    removeError(1);
-                }
-            }
-
-            // Função para verificar se algum campo está vazio
-            function checkEmptyInput(inputIndex) {
-                const inputElement = validateInputs[inputIndex];
-                if (inputElement.value.trim() === "") {
-                    setError(inputIndex, "Este campo é <span class='mainError'>obrigatório.</span>");
-                }
-            }
-
-            // Impede o envio do formulário se houver erro
-            const submitEditUserButton = document.getElementById('editProfile');  // Certifique-se de selecionar o formulário corretamente
-                    
-            submitEditUserButton.addEventListener('click', function(event) {
-                // Valida todos os campos antes de permitir o envio
-                validateFullName();
-                validateBio();
-                validateLocal();
-
-                // Se houver algum erro, impede o envio
-                if (!validateForm()) {
-                    event.preventDefault();  // Impede o envio do formulário
-                    alert("Por favor, corrija os erros antes de enviar o formulário.");
-                }
-            });
-
-            // Adiciona listeners de input para validar enquanto o usuário digita
-            validateInputs[0].addEventListener('input', validateFullName);
-            validateInputs[1].addEventListener('input', validateBio);
-            validateInputs[2].addEventListener('input', validateLocal);
 
             function toggleChildData(header) {
                 const container = header.parentElement;
@@ -814,7 +810,197 @@
                 editChildForm.classList.toggle('open');
             }
 
+            function addChildValidations(){
+                const validateChildInputs = [
+                    document.getElementById('newChildNameInput'),
+                    document.getElementById('newChildDateInput')
+                ];
 
+                function setChildError(inputIndex, message) {
+                    const inputElement = validateChildInputs[inputIndex];
+                    const errorMessageContainer = inputElement.closest('.Se-childInput').nextElementSibling.querySelector('.childErrorMessageContent');
+                    if (errorMessageContainer && errorMessageContainer.classList.contains('childErrorMessageContent')) {
+                        errorMessageContainer.innerHTML = message;  // Set the error message
+                        inputElement.classList.add('error');        // Add the error class to the input
+                    }
+                }
+
+                function removeChildError(inputIndex) {
+                    const inputElement = validateChildInputs[inputIndex];
+                    const errorMessageContainer = inputElement.closest('.Se-childInput').nextElementSibling.querySelector('.childErrorMessageContent');
+                    if (errorMessageContainer && errorMessageContainer.classList.contains('childErrorMessageContent')) {                
+                        errorMessageContainer.innerHTML = '';
+                        inputElement.classList.remove('error');
+                    }
+                }
+
+                function validateAddChildForm() {
+                    const errorMessages = document.querySelectorAll('.childErrorMessageContent');
+                    
+                    for (let e of errorMessages) {
+                        if (e.innerHTML !== '') {
+                            return false;  // Impede o envio do formulário
+                        }
+                    }
+                    return true;  // Permite o envio do formulário se não houver erros
+                }
+
+                function validateChildName() {
+                    const childName = validateChildInputs[0].value;  // Valor do campo 'Nome Completo'
+                    const minChar = 3, maxChar = 100;
+                    checkEmptyChildInput(0);  // Verifica se o campo está vazio
+                    const nameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿÇç' -]{3,}$/;  
+                    const letterCount = (childName.match(/[A-Za-zÀ-ÖØ-öø-ÿÇç]/g) || []).length;
+                    
+                    if (letterCount < minChar) {  // Verifica se o nome tem pelo menos 3 letras
+                        setChildError(0, "O nome do filho deve conter pelo menos <span class='mainError'>3 letras.</span>");
+                    } else if (childName.length > maxChar) {
+                        setChildError(0, "O nome do filho é <span class='mainError'>muito longo.</span>");
+                    } else if (/\d/.test(childName)) {
+                        setChildError(0, "O nome do filho não pode possuir <span class='mainError'>números.</span>");
+                    } else if (!nameRegex.test(childName)) {
+                        setChildError(0, "O nome do filho pode conter apenas <span class='mainError'>letras, espaços, acentos, hífens, cedilhas e apóstrofos.</span>");
+                    } else {
+                        removeChildError(0);  // Remove o erro se estiver tudo certo
+                    }
+                }
+
+                function validateChildBirthDate() {
+                    const childBirthDate = new Date(validateChildInputs[1].value);  
+                    const today = new Date();  
+                    const userBirthDate = new Date("<?= $currentUserData['dataNascimentoUsuario'] ?>"); 
+                    checkEmptyChildInput(1);  
+                    if (validateChildInputs[1].value === "") {
+                        setChildError(1, "A data de nascimento é <span class='mainError'>obrigatória.</span>");
+                    }
+                    else if (childBirthDate > today) {
+                        setChildError(1, "A data de nascimento não pode ser uma <span class='mainError'>data futura.</span>");
+                    }
+                    else if (childBirthDate < userBirthDate) {
+                        setChildError(1, "O filho não pode nascer antes do responsável.");
+                    } else {
+                        removeChildError(1);  
+                    }
+                }
+                
+                function checkEmptyChildInput(inputIndex) {
+                    const inputElement = validateChildInputs[inputIndex];
+                    if (inputElement.value.trim() === "") {
+                        setChildError(inputIndex, "Este campo é <span class='mainError'>obrigatório.</span>");
+                    }
+                }
+
+                const submitAddChildButton = document.getElementById('insertChild');  
+                        
+                submitAddChildButton.addEventListener('click', function(event) {
+                    validateChildName();
+                    validateChildBirthDate();
+                    
+                    if (!validateAddChildForm()) {
+                        event.preventDefault(); 
+                        alert("Por favor, corrija os erros antes de enviar o formulário.");
+                    }
+                });
+
+                validateChildInputs[0].addEventListener('input', validateChildName);
+                validateChildInputs[1].addEventListener('input', validateChildBirthDate);
+            }
+            
+            function editChildValidations(){
+                const validateEditChildInputs = [
+                    document.getElementById('editChildNameInput'),
+                    document.getElementById('editChildDateInput')
+                ];
+
+                function setChildError(inputIndex, message) {
+                    const inputElement = validateEditChildInputs[inputIndex];
+                    const errorMessageContainer = inputElement.closest('.Se-childInput').nextElementSibling.querySelector('.editChildErrorContent');
+                    if (errorMessageContainer && errorMessageContainer.classList.contains('editChildErrorContent')) {
+                        errorMessageContainer.innerHTML = message;  // Set the error message
+                        inputElement.classList.add('error');        // Add the error class to the input
+                    }
+                }
+
+                function removeChildError(inputIndex) {
+                    const inputElement = validateEditChildInputs[inputIndex];
+                    const errorMessageContainer = inputElement.closest('.Se-childInput').nextElementSibling.querySelector('.editChildErrorContent');
+                    if (errorMessageContainer && errorMessageContainer.classList.contains('editChildErrorContent')) {                
+                        errorMessageContainer.innerHTML = '';
+                        inputElement.classList.remove('error');
+                    }
+                }
+
+                function validateEditChildForm() {
+                    const errorMessages = document.querySelectorAll('.editChildErrorContent');
+                    
+                    for (let e of errorMessages) {
+                        if (e.innerHTML !== '') {
+                            return false;  // Impede o envio do formulário
+                        }
+                    }
+                    return true;  // Permite o envio do formulário se não houver erros
+                }
+
+                function validateChildName() {
+                    const childName = validateEditChildInputs[0].value;  // Valor do campo 'Nome Completo'
+                    const minChar = 3, maxChar = 100;
+                    checkEmptyChildInput(0);  // Verifica se o campo está vazio
+                    const nameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿÇç' -]{3,}$/;  
+                    const letterCount = (childName.match(/[A-Za-zÀ-ÖØ-öø-ÿÇç]/g) || []).length;
+                    
+                    if (letterCount < minChar) {  // Verifica se o nome tem pelo menos 3 letras
+                        setChildError(0, "O nome do filho deve conter pelo menos <span class='mainError'>3 letras.</span>");
+                    } else if (childName.length > maxChar) {
+                        setChildError(0, "O nome do filho é <span class='mainError'>muito longo.</span>");
+                    } else if (/\d/.test(childName)) {
+                        setChildError(0, "O nome do filho não pode possuir <span class='mainError'>números.</span>");
+                    } else if (!nameRegex.test(childName)) {
+                        setChildError(0, "O nome do filho pode conter apenas <span class='mainError'>letras, espaços, acentos, hífens, cedilhas e apóstrofos.</span>");
+                    } else {
+                        removeChildError(0);  // Remove o erro se estiver tudo certo
+                    }
+                }
+
+                function validateChildBirthDate() {
+                    const childBirthDate = new Date(validateEditChildInputs[1].value);  
+                    const today = new Date();  
+                    const userBirthDate = new Date("<?= $currentUserData['dataNascimentoUsuario'] ?>"); 
+                    checkEmptyChildInput(1);  
+                    if (validateEditChildInputs[1].value === "") {
+                        setChildError(1, "A data de nascimento é <span class='mainError'>obrigatória.</span>");
+                    }
+                    else if (childBirthDate > today) {
+                        setChildError(1, "A data de nascimento não pode ser uma <span class='mainError'>data futura.</span>");
+                    }
+                    else if (childBirthDate < userBirthDate) {
+                        setChildError(1, "O filho não pode nascer antes do responsável.");
+                    } else {
+                        removeChildError(1);  
+                    }
+                }
+                
+                function checkEmptyChildInput(inputIndex) {
+                    const inputElement = validateEditChildInputs[inputIndex];
+                    if (inputElement.value.trim() === "") {
+                        setChildError(inputIndex, "Este campo é <span class='mainError'>obrigatório.</span>");
+                    }
+                }
+
+                const submitEditChildButton = document.getElementById('editChild');  
+                        
+                submitEditChildButton.addEventListener('click', function(event) {
+                    validateChildName();
+                    validateChildBirthDate();
+                    
+                    if (!validateEditChildForm()) {
+                        event.preventDefault(); 
+                        alert("Por favor, corrija os erros antes de enviar o formulário.");
+                    }
+                });
+                validateEditChildInputs[0].addEventListener('input', validateChildName);
+                validateEditChildInputs[1].addEventListener('input', validateChildBirthDate);
+            }
+            
 
             document.getElementById('confirmDelete').addEventListener('copy', function(e) {
                 e.preventDefault();
@@ -845,6 +1031,10 @@
                 if (comentarios.checked) valorFinal += 2;
                 if (seguidores.checked) valorFinal += 3;
             });
+
+            editUserValidations();
+            addChildValidations();
+            editChildValidations();
         </script>
     </body>
 </html>

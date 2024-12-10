@@ -4480,6 +4480,7 @@ align-items: flex-start;
     gap: 1rem;
     font-size: 0.8rem;
     transform: translateY(2px);
+    margin-bottom: 1rem;
 }
 
 .modalSection .Se-addNewChildModal .Se-childInputs .Re-childBoxSex p {
