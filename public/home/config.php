@@ -132,46 +132,29 @@
                         <div class="Se-userInput full-width">
                             <input type="text" id="nomeCompletoUsuario" name="nomeEdit" value="<?= $currentUserData['nomeCompleto'];?>">
                             <label class="Re-fakePlaceholder" for="nomeCompletoUsuario">Nome Completo</label>
-                            <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
+                            <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>
                         </div>
+                        <div class="errorMessageContainer">
+                            <div class="errorMessageContent"></div>
+                        </div>
+
                         <div class="Se-userInput full-width">
-                            <textarea name="biografiaUsuarioEdit" id="biografiaUsuario" cols="54" rows="3"><?= $currentUserData['biografia'];?></textarea>                        
+                            <textarea name="biografiaUsuarioEdit" id="biografiaUsuario" cols="54" rows="3"><?= $currentUserData['biografia']; ?></textarea>
                             <label class="Re-fakePlaceholder" for="biografiaUsuario">Biografia</label>
-                            <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
+                            <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>
                         </div>
+                        <div class="errorMessageContainer">
+                            <div class="errorMessageContent"></div>
+                        </div>
+
                         <div class="Se-userInput full-width">
-                            <select id="localizacaoUsuario" name="localizacaoEdit">
-                                <option value="">- - - - - -</option>
-                                <option value="Acre"> AC | Acre</option>
-                                <option value="Alagoas"> AL | Alagoas</option>
-                                <option value="Amapá"> AP | Amapá</option>
-                                <option value="Amazonas"> AM | Amazonas</option>
-                                <option value="Bahia"> BA | Bahia</option>
-                                <option value="Ceará"> CE | Ceará</option>
-                                <option value="Distrito Federal"> DF | Distrito Federal</option>
-                                <option value="Espírito Santo"> ES | Espírito Santo</option>
-                                <option value="Goiás"> GO | Goiás</option>
-                                <option value="Maranhão"> MA | Maranhão</option>
-                                <option value="Mato Grosso"> MT | Mato Grosso</option>
-                                <option value="Mato Grosso do Sul"> MS | Mato Grosso do Sul</option>
-                                <option value="Minas Gerais"> MG | Minas Gerais</option>
-                                <option value="Pará"> PA | Pará</option>
-                                <option value="Paraíba"> PB | Paraíba</option>
-                                <option value="Paraná"> PR | Paraná</option>
-                                <option value="Pernambuco"> PE | Pernambuco</option>
-                                <option value="Piauí"> PI | Piauí</option>
-                                <option value="Rio de Janeiro"> RJ | Rio de Janeiro</option>
-                                <option value="Rio Grande do Norte"> RN | Rio Grande do Norte</option>
-                                <option value="Rio Grande do Sul"> RS | Rio Grande do Sul</option>
-                                <option value="Rondônia"> RO | Rondônia</option>
-                                <option value="Roraima"> RR | Roraima</option>
-                                <option value="Santa Catarina"> SC | Santa Catarina</option>
-                                <option value="São Paulo"> SP | São Paulo</option>
-                                <option value="Sergipe"> SE | Sergipe</option>
-                                <option value="Tocantins"> TO | Tocantins</option>                 
-                            </select>
-                            <label class="Re-fakePlaceholder" for="localizacao" style="pointer-events: none;">Localização</label>
+                            <input type="number" id="localizacaoUsuario" name="localizacaoEdit" value="<?= $currentUserData['estado']; ?>">
+                            <label class="Re-fakePlaceholder" for="localizacaoUsuario" style="pointer-events: none;">Código de Endereçamento Postal (CEP)</label>
                         </div>
+                        <div class="errorMessageContainer">
+                            <div class="errorMessageContent"></div>
+                        </div>
+
                         <div class="Re-themeInfo">
                             <p> Tema </p>
                             <div class="Re-themeOptions">
@@ -634,6 +617,148 @@
         <script src="<?= $relativeAssetsPath; ?>/js/system.js"></script>
         <script>
             toggleConfigSection();
+
+            const validateInputs = [
+                document.getElementById('nomeCompletoUsuario'),
+                document.getElementById('biografiaUsuario'),
+                document.getElementById('localizacaoUsuario')
+            ];
+
+            function setError(inputIndex, message) {
+                const inputElement = validateInputs[inputIndex];
+                // Agora, pegamos o .errorMessageContainer fora de .Se-userInput
+                const errorMessageContainer = inputElement.closest('.Se-userInput').nextElementSibling.querySelector('.errorMessageContent');
+                errorMessageContainer.innerHTML = message;
+                inputElement.classList.add('error');
+            }
+
+            function removeError(inputIndex) {
+                const inputElement = validateInputs[inputIndex];
+                // Agora, pegamos o .errorMessageContainer fora de .Se-userInput
+                const errorMessageContainer = inputElement.closest('.Se-userInput').nextElementSibling.querySelector('.errorMessageContent');
+                errorMessageContainer.innerHTML = '';
+                inputElement.classList.remove('error');
+            }
+
+            // Função que verifica se há erros no formulário
+            // Função que verifica se há erros no formulário
+            function validateForm() {
+                const errorMessages = document.querySelectorAll('.errorMessageContent');
+                
+                // Se qualquer campo de erro não estiver vazio, o formulário não será enviado
+                for (let errorMessage of errorMessages) {
+                    if (errorMessage.innerHTML !== '') {
+                        return false;  // Impede o envio do formulário
+                    }
+                }
+                return true;  // Permite o envio do formulário se não houver erros
+            }
+
+            // Função de validação do nome completo
+            function validateFullName() {
+                const fullName = validateInputs[0].value;  // Valor do campo 'Nome Completo'
+                const maxChar = 100;  // Número máximo de caracteres permitidos
+
+                checkEmptyInput(0);  // Verifica se o campo está vazio
+                const nameRegex = /^([a-zA-ZÀ-ÖØ-ÿ'-]+(\s[a-zA-ZÀ-ÖØ-ÿ'-]+)*)$/;  // Expressão regular para nome completo válido
+
+                // Verifica as condições e exibe erros
+                if (fullName.length === 0) {
+                    setError(0, "O nome completo é <span class='mainError'>obrigatório.</span>");
+                } else if (fullName.length > maxChar) {
+                    setError(0, "O nome é <span class='mainError'>muito longo.</span>");
+                } else if (/\d/.test(fullName)) {
+                    setError(0, "O nome não pode possuir <span class='mainError'>números.</span>");
+                } else if (!nameRegex.test(fullName)) {
+                    setError(0, "O nome pode conter apenas <span class='mainError'>letras, espaços, acentos, hífens, cedilhas e apóstrofos.</span>");
+                } else if (!/^([a-zA-ZÀ-ÖØ-ÿ'-]+\s[a-zA-ZÀ-ÖØ-ÿ'-]+.*)$/.test(fullName)) {
+                    setError(0, "Insira o seu <span class='mainError'>nome completo.</span>");
+                } else {
+                    removeError(0);  // Remove o erro se estiver tudo certo
+                }
+            }
+
+            // Função de validação do CEP
+            async function validateLocal() {
+                const cep = validateInputs[2].value.trim(); // Remove espaços em branco
+                const maxChar = 8;
+
+                checkEmptyInput(2);  // Verifica se o campo do CEP está vazio
+
+                if (cep === "") {
+                    setError(2, "O campo CEP é <span class='mainError'>obrigatório.</span>");
+                    return;
+                }
+
+                if (cep.length !== maxChar) {
+                    setError(2, "O CEP deve ter <span class='mainError'>8 dígitos.</span>");
+                    return;
+                }
+
+                if (!/^\d{8}$/.test(cep)) {
+                    setError(2, "Insira um <span class='mainError'>CEP válido.</span>");
+                    return;
+                }
+
+                try {
+                    const data = await fetchCepData(cep);
+                    if (data.uf !== "MG") {
+                        setError(2, "O CEP não pertence ao estado de <span class='mainError'>Minas Gerais (MG).</span>");
+                        return;
+                    }
+
+                    // Remove erro caso o CEP seja válido
+                    removeError(2);
+                } catch (error) {
+                    setError(2, error.message);
+                }
+            }
+
+            // Função de validação da biografia
+            function validateBio() {
+                const bioInput = validateInputs[1];
+                const bioValue = bioInput.value;
+                const maxChar = 255;
+
+                checkEmptyInput(1);  // Verifica se o campo de biografia está vazio
+
+                if (bioValue.length === 0) {
+                    removeError(1);
+                } else if (bioValue.length > maxChar) {
+                    setError(1, "A biografia é <span class='mainError'>muito longa.</span>");
+                } else {
+                    removeError(1);
+                }
+            }
+
+            // Função para verificar se algum campo está vazio
+            function checkEmptyInput(inputIndex) {
+                const inputElement = validateInputs[inputIndex];
+                if (inputElement.value.trim() === "") {
+                    setError(inputIndex, "Este campo é <span class='mainError'>obrigatório.</span>");
+                }
+            }
+
+            // Impede o envio do formulário se houver erro
+            const form = document.querySelector('form');  // Certifique-se de selecionar o formulário corretamente
+
+            form.addEventListener('submit', function(event) {
+                // Valida todos os campos antes de permitir o envio
+                validateFullName();
+                validateBio();
+                validateLocal();
+
+                // Se houver algum erro, impede o envio
+                if (!validateForm()) {
+                    event.preventDefault();  // Impede o envio do formulário
+                    alert("Por favor, corrija os erros antes de enviar o formulário.");
+                }
+            });
+
+            // Adiciona listeners de input para validar enquanto o usuário digita
+            validateInputs[0].addEventListener('input', validateFullName);
+            validateInputs[1].addEventListener('input', validateBio);
+            validateInputs[2].addEventListener('input', validateLocal);
 
             function toggleChildData(header) {
                 const container = header.parentElement;

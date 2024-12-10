@@ -70,7 +70,7 @@
         <div class="Au-postExtraInfos">
             <div class="Au-extraInfos">
                 <img src="<?= $relativeAssetsPath; ?>/imagens/icons/local_icon.png" class="pageImageIcon active" alt="Ícone de Local">
-                <p><?= htmlspecialchars($dadosPublicacao['estado']); ?></p>
+                <p id="localizacaoDisplay"></p>
             </div>
             <div class="Au-extraInfos">
                 <img src="<?= $relativeAssetsPath; ?>/imagens/icons/pix_icon.png" class="pageImageIcon active" alt="Ícone de Pix">
@@ -149,3 +149,38 @@
         </div>
     </article>
 </modal>
+<script>
+    const cep = "<?= htmlspecialchars($dadosPublicacao['estado']); ?>";  // O valor do CEP
+    const localizacaoElement = document.getElementById('localizacaoDisplay');
+
+    // Função para buscar os dados de CEP na API do ViaCEP
+    async function buscarLocalizacao(cep) {
+        try {
+            // Fazendo a requisição para a API do ViaCEP
+            const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+            
+            // Verifica se a resposta é válida
+            if (!response.ok) {
+                throw new Error("Erro ao consultar o CEP.");
+            }
+
+            // Parse da resposta JSON
+            const data = await response.json();
+
+            // Verifica se a API retornou erro (CEP não encontrado)
+            if (data.erro) {
+                localizacaoElement.innerHTML = "CEP não encontrado.";
+            } else {
+                // Exibe a cidade e o estado no formato 'Cidade, UF'
+                localizacaoElement.innerHTML = `${data.localidade}, ${data.uf}`;
+            }
+        } catch (error) {
+            // Caso ocorra algum erro, exibe uma mensagem
+            localizacaoElement.innerHTML = "Erro ao buscar a localização.";
+            console.error(error);
+        }
+    }
+
+    // Chama a função passando o CEP
+    buscarLocalizacao(cep);
+</script>

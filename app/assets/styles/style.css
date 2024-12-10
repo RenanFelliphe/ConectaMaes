@@ -2550,15 +2550,13 @@ footer .A-footerRight li.A-footerPolitic h4 {
     font-weight: 700;
 }
 
-input[type="number"]::-webkit-inner-spin-button, 
-input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
+/* Remover os botões de aumentar e diminuir no Chrome, Opera e Edge */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
     margin: 0;
+    display: none; /* Garante que os botões não sejam exibidos */
 }
 
-input[type="number"] {
-    -moz-appearance: textfield; /* Para Firefox */
-}
 
 /*====================================================================================================
 ======================================= PÁGINA INICIAL (HOME) ========================================
@@ -3755,7 +3753,7 @@ body.Y-theme .Se-asideRight .Se-subSection .Se-sectionHeader .pageIcon {
     position: relative;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
+    gap: 0.25rem;
     width: 100%;
     margin: 1rem 0;
 }
@@ -3810,6 +3808,19 @@ body.Y-theme .Se-asideRight .Se-subSection .Se-sectionHeader .pageIcon {
     top: 50%;
     transform: translateY(-50%);
     color: var(--secondColor);
+}
+
+.errorMessageContainer {
+    margin-bottom: 1rem; /* Espaçamento entre o campo de input e a mensagem de erro */
+    display: flex;
+    clear: both; /* Garantir que o container de erro não sobreponha o conteúdo anterior */
+    width: 100%;
+}
+
+.errorMessageContent {
+    color: var(--redColor); /* Cor da mensagem de erro */
+    font-size: 14px; /* Tamanho da fonte da mensagem de erro */
+    line-height: 1; /* Espaçamento entre as linhas */
 }
 
 .Se-asideRight .Se-accountInformations .Re-themeInfo {

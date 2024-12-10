@@ -5,10 +5,10 @@
         $qa = 0;
     ?>
     
-    <div class="searchBar">
+    <!--div class="searchBar">
         <i class="bi bi-search"></i>
         <input type="search" class="searchBarInput" placeholder="Pesquisar">
-    </div>
+    </div-->
     
     <div class="myAuxilios">
         <h2 class="myAuxTitle asideSectionTitle">Meus Auxílios</h2>
