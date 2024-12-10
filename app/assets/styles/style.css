@@ -4437,7 +4437,7 @@ align-items: flex-start;
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 0.2rem;
 }
 
 .modalSection .Se-addNewChildModal .Se-childInputs .Se-childInput {
@@ -4523,6 +4523,15 @@ align-items: flex-start;
 
 .modalSection .Se-addNewChildModal .Se-modalSubmit {
     top: 10%;
+}
+.modalSection .Se-addNewChildModal .errorMessageContainer{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+.modalSection .Se-addNewChildModal .errorMessageContainer .errorMessageContent {
+    color: var(--redColor);
+    font-size: 12px;
 }
 
 .modalSection .Se-deleteAccountModal {

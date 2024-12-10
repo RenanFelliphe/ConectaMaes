@@ -241,7 +241,7 @@
                                     <p> Sexo: </p>
                                     <div class="sexOptions">
                                         <?php
-                                            $sexOptions = ['boy' => 'Masculino', 'girl' => 'Feminino', 'nullSex' => 'Não Informar'];
+                                            $sexOptions = ['nullSex' => 'Não Informar', 'boy' => 'Masculino', 'girl' => 'Feminino'];
 
                                             foreach ($sexOptions as $value => $label) {
                                                 $checked = ($f['sexo'] === $value) ? 'checked' : '';
@@ -256,7 +256,7 @@
                                     <input type="date" id="dataNascFilho" name="editChildBirthDate" value="<?= date('Y-m-d', strtotime($f['dataNascimentoFilho'])); ?>" required>
                                 </div>
                                 <div class="childDisabilityEditor">
-                                    <label for="editChildDisability">Deficiência</label>
+                                    <label for="deficiencia">Deficiência</label>
                                     <div class="input">
                                         <?php $childDisability = queryChildDisability($conn, $f['idFilho'])[0]; ?>
                                         <select name="editChildDisability" id="deficiencia">
@@ -383,7 +383,7 @@
                                 <h4> Número de Telefone </h4>
                                 <div class="Se-phoneInput">
                                     <input type="text" id="editTelephone" name="editTelephoneNumber">
-                                    <label class="Re-fakePlaceholder" for="telephoneNumber">Telefone</label>
+                                    <label class="Re-fakePlaceholder" for="editTelephone">Telefone</label>
                                     <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
                                 </div>
                                 <button class="Se-editSubmit confirmBtn" type="submit" name="editTelephoneSubmit" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Confirmar</button>
@@ -509,28 +509,41 @@
 
                 <div class="Se-childInputs">
                     <div class="Re-childBoxSex">
-                        <p> Sexo: </p>
+                        <p>Sexo: </p>
                         <div class="Re-sexOptions">
+                            <input type="radio" name="addChildSex" value="nullSex" id="Re-childNullSex" checked>
+                            <label for="Re-childNullSex">Não Informar</label>
                             <input type="radio" name="addChildSex" value="boy" id="Re-childBoySex">
-                            <label for="Re-childBoySex"> Masculino </label>
+                            <label for="Re-childBoySex">Masculino</label>
                             <input type="radio" name="addChildSex" value="girl" id="Re-childGirlSex">
-                            <label for="Re-childGirlSex"> Feminino </label>
-                            <input type="radio" name="addChildSex" value="nullSex" id="Re-childNullSex">
-                            <label for="Re-childNullSex"> Não Informar </label>
+                            <label for="Re-childGirlSex">Feminino</label>
+                            
                         </div>
                     </div>
+                    <div class="errorMessageContainer">
+                        <div class="errorMessageContent"></div>
+                    </div>
+
                     <div class="Se-childInput">
                         <input type="text" id="newChildNameInput" name="addChildName">
                         <label class="Re-fakePlaceholder" for="newChildNameInput">Nome Completo</label>
                         <img src="<?= $relativeAssetsPath; ?>/imagens/icons/pram_icon.png" class="pageIcon" alt="Ícone de usuário">
                     </div>
+                    <div class="errorMessageContainer">
+                        <div class="errorMessageContent"></div>
+                    </div>
+
                     <div class="Se-childInput">
                         <input type="date" id="newChildDateInput" name="addChildBirthDate">
                         <label class="Re-fakePlaceholder" for="newChildDateInput">Data de Nascimento</label>
                     </div>
+                    <div class="errorMessageContainer">
+                        <div class="errorMessageContent"></div>
+                    </div>
+
                     <div class="Se-childInput">
                         <select id="newChildDisabilityInput" name="addChildDisability">
-                            <option value="N/a"> Não informar </option>
+                            <option value="N/a">Não informar</option>
                             <optgroup label="Deficiência Físicas">
                                 <?php 
                                     $physical_defs = queryMultipleDefData($conn, "categoriaCID LIKE 'G8%' OR categoriaCID LIKE 'R2%'", "categoriaCID ASC"); 
@@ -585,7 +598,8 @@
                         <label for="newChildDisabilityInput">Deficiência</label>
                     </div>
                 </div>
-                <button class="Se-modalSubmit" type="submit" name="enviarFilho">Confirmar adição</button>
+
+                <button class="Se-modalSubmit" id="insertChild" type="submit" name="enviarFilho">Confirmar adição</button>
             </form>
         </modal>
 
@@ -800,92 +814,6 @@
                 editChildForm.classList.toggle('open');
             }
 
-            const validateChildInputs = [
-                document.getElementById('newChildNameInput'),  // Nome da criança
-                document.getElementById('newChildDateInput'),  // Data de nascimento da criança
-                document.getElementById('newChildDisabilityInput') // Deficiência da criança
-            ];
-
-            function setChildError(inputIndex, message) {
-                const inputElement = validateInputs[inputIndex];
-                // A busca pelo container da mensagem de erro dentro do modal do filho
-                const errorMessageContainer = inputElement.closest('.Se-childInput').nextElementSibling.querySelector('.errorMessageContent');
-                errorMessageContainer.innerHTML = message;
-                inputElement.classList.add('error');
-            }
-
-            function removeChildError(inputIndex) {
-                const inputElement = validateInputs[inputIndex];
-                // A busca pelo container da mensagem de erro dentro do modal do filho
-                const errorMessageContainer = inputElement.closest('.Se-childInput').nextElementSibling.querySelector('.errorMessageContent');
-                errorMessageContainer.innerHTML = '';
-                inputElement.classList.remove('error');
-            }
-
-            function validateAddChildForm() {
-                // Valida todos os campos individualmente
-                validateChildName();
-                validateChildBirthDate();
-                validateChildDisability();
-
-                // Verifica se não há nenhum erro em todos os campos
-                const errorMessages = document.querySelectorAll('.errorMessageContent');
-                for (let errorMessage of errorMessages) {
-                    if (errorMessage.innerHTML !== '') {
-                        return false;  // Impede o envio do formulário
-                    }
-                }
-                return true;  // Permite o envio do formulário se não houver erros
-            }
-
-
-            function validateChildName() {
-                const childName = validateInputs[0].value;  // Valor do campo 'Nome Completo'
-                const maxChar = 100;  // Número máximo de caracteres permitidos
-
-                checkEmptyInput(0);  // Verifica se o campo está vazio
-                const nameRegex = /^([a-zA-ZÀ-ÖØ-ÿ'-]+(\s[a-zA-ZÀ-ÖØ-ÿ'-]+)*)$/;  // Expressão regular para nome completo válido
-
-                // Verifica as condições e exibe erros
-                if (childName.length === 0) {
-                    setChildError(0, "O nome é <span class='mainError'>obrigatório.</span>");
-                } else if (childName.length > maxChar) {
-                    setChildError(0, "O nome é <span class='mainError'>muito longo.</span>");
-                } else if (/\d/.test(childName)) {
-                    setChildError(0, "O nome não pode possuir <span class='mainError'>números.</span>");
-                } else if (!nameRegex.test(childName)) {
-                    setChildError(0, "O nome pode conter apenas <span class='mainError'>letras, espaços, acentos, hífens, cedilhas e apóstrofos.</span>");
-                } else {
-                    removeChildError(0);  // Remove o erro se estiver tudo certo
-                }
-            }
-
-            function validateChildBirthDate() {
-                const childBirthDate = new Date(validateInputs[2].value);  // Data de nascimento da criança
-                const today = new Date();  // Data atual
-                const userBirthDate = new Date("<?= $currentUserData['dataNascimentoUsuario'] ?>"); // Data de nascimento do usuário
-
-                checkEmptyInput(1);  // Verifica se o campo de data está vazio
-
-                if (validateInputs[1].value === "") {
-                    setChildError(1, "A data de nascimento é <span class='mainError'>obrigatória.</span>");
-                }
-                else if (childBirthDate > today) {
-                    setChildError(1, "A data de nascimento não pode ser uma <span class='mainError'>data futura.</span>");
-                }
-                else if (childBirthDate < userBirthDate) {
-                    setChildError(1, "A criança não pode nascer antes da data de nascimento do responsável.");
-                } else {
-                    removeChildError(1);  // Remove o erro se estiver tudo certo
-                }
-            }
-
-            document.querySelector('.Se-addNewChildModal').addEventListener('submit', function(event) {
-                event.preventDefault();
-                if (validateForm()) {
-                    this.submit();  // Se não houver erros, o formulário é enviado
-                }
-            });
 
 
             document.getElementById('confirmDelete').addEventListener('copy', function(e) {
