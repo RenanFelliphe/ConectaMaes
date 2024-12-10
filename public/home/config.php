@@ -100,7 +100,7 @@
                             <div class="Re-userImageProfile">
                                 <img src="<?= $relativeAssetsPath; ?>/imagens/fotos/perfil/<?= $currentUserData['linkFotoPerfil']; ?>" alt="" class="Re-userImage">
                             </div>
-                            <input type="file" id="imagesSelector" name="fotoPerfilEdit" accept="image/png, image/jpeg">
+                            <input type="file" id="imagesSelector" name="fotoPerfilEdit" accept="image/*">
                             <label for="imagesSelector" class="Re-addImageIcon">                        
                                 <i class="bi bi-camera-fill"></i>                    
                             </label>
@@ -166,7 +166,7 @@
                                 <label for="Re-pinkTheme"> Rosa </label>
                             </div>
                         </div>
-                        <button class="Se-accountEdit confirmBtn" type="submit" name="editarPerfil" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Editar conta</button>
+                        <button class="Se-accountEdit confirmBtn" type="submit" id="editProfile" name="editarPerfil" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Editar conta</button>
                     </div>
 
                     <span class="Se-dateCriation"> Criado em: 
@@ -641,7 +641,6 @@
             }
 
             // Função que verifica se há erros no formulário
-            // Função que verifica se há erros no formulário
             function validateForm() {
                 const errorMessages = document.querySelectorAll('.errorMessageContent');
                 
@@ -675,6 +674,27 @@
                     setError(0, "Insira o seu <span class='mainError'>nome completo.</span>");
                 } else {
                     removeError(0);  // Remove o erro se estiver tudo certo
+                }
+            }
+
+            async function fetchCepData(cep) {
+                try {
+                    const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+
+                    if (!response.ok) {
+                        throw new Error("Erro ao <span class='mainError'>consultar o CEP.</span>");
+                    }
+
+                    const data = await response.json();
+
+                    if (data.erro) {
+                        throw new Error("O CEP informado <span class='mainError'>não foi encontrado.</span>");
+                    }
+
+                    return data; // Retorna o objeto com os dados do CEP
+                } catch (error) {
+                    console.error(error.message);
+                    throw error; // Lança o erro para ser tratado na função chamadora
                 }
             }
 
@@ -740,9 +760,9 @@
             }
 
             // Impede o envio do formulário se houver erro
-            const form = document.querySelector('form');  // Certifique-se de selecionar o formulário corretamente
-
-            form.addEventListener('submit', function(event) {
+            const submitEditUserButton = document.getElementById('editProfile');  // Certifique-se de selecionar o formulário corretamente
+                    
+            submitEditUserButton.addEventListener('click', function(event) {
                 // Valida todos os campos antes de permitir o envio
                 validateFullName();
                 validateBio();
