@@ -166,6 +166,14 @@
                                 <label for="Re-pinkTheme"> Rosa </label>
                             </div>
                         </div>
+                        <?php 
+                            if(isset($updateProfile_messages) and !empty($updateProfile_messages)){
+                                // Exibe as mensagens de resultado (se houver)
+                                foreach ($updateProfile_messages as $upm) {
+                                    echo "$upm";
+                                }
+                            }
+                        ?>
                         <button class="Se-accountEdit confirmBtn" type="submit" id="editProfile" name="editarPerfil" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Editar conta</button>
                     </div>
 
@@ -791,6 +799,94 @@
                 childData.classList.toggle('closed');
                 editChildForm.classList.toggle('open');
             }
+
+            const validateChildInputs = [
+                document.getElementById('newChildNameInput'),  // Nome da criança
+                document.getElementById('newChildDateInput'),  // Data de nascimento da criança
+                document.getElementById('newChildDisabilityInput') // Deficiência da criança
+            ];
+
+            function setChildError(inputIndex, message) {
+                const inputElement = validateInputs[inputIndex];
+                // A busca pelo container da mensagem de erro dentro do modal do filho
+                const errorMessageContainer = inputElement.closest('.Se-childInput').nextElementSibling.querySelector('.errorMessageContent');
+                errorMessageContainer.innerHTML = message;
+                inputElement.classList.add('error');
+            }
+
+            function removeChildError(inputIndex) {
+                const inputElement = validateInputs[inputIndex];
+                // A busca pelo container da mensagem de erro dentro do modal do filho
+                const errorMessageContainer = inputElement.closest('.Se-childInput').nextElementSibling.querySelector('.errorMessageContent');
+                errorMessageContainer.innerHTML = '';
+                inputElement.classList.remove('error');
+            }
+
+            function validateAddChildForm() {
+                // Valida todos os campos individualmente
+                validateChildName();
+                validateChildBirthDate();
+                validateChildDisability();
+
+                // Verifica se não há nenhum erro em todos os campos
+                const errorMessages = document.querySelectorAll('.errorMessageContent');
+                for (let errorMessage of errorMessages) {
+                    if (errorMessage.innerHTML !== '') {
+                        return false;  // Impede o envio do formulário
+                    }
+                }
+                return true;  // Permite o envio do formulário se não houver erros
+            }
+
+
+            function validateChildName() {
+                const childName = validateInputs[0].value;  // Valor do campo 'Nome Completo'
+                const maxChar = 100;  // Número máximo de caracteres permitidos
+
+                checkEmptyInput(0);  // Verifica se o campo está vazio
+                const nameRegex = /^([a-zA-ZÀ-ÖØ-ÿ'-]+(\s[a-zA-ZÀ-ÖØ-ÿ'-]+)*)$/;  // Expressão regular para nome completo válido
+
+                // Verifica as condições e exibe erros
+                if (childName.length === 0) {
+                    setChildError(0, "O nome é <span class='mainError'>obrigatório.</span>");
+                } else if (childName.length > maxChar) {
+                    setChildError(0, "O nome é <span class='mainError'>muito longo.</span>");
+                } else if (/\d/.test(childName)) {
+                    setChildError(0, "O nome não pode possuir <span class='mainError'>números.</span>");
+                } else if (!nameRegex.test(childName)) {
+                    setChildError(0, "O nome pode conter apenas <span class='mainError'>letras, espaços, acentos, hífens, cedilhas e apóstrofos.</span>");
+                } else {
+                    removeChildError(0);  // Remove o erro se estiver tudo certo
+                }
+            }
+
+            function validateChildBirthDate() {
+                const childBirthDate = new Date(validateInputs[2].value);  // Data de nascimento da criança
+                const today = new Date();  // Data atual
+                const userBirthDate = new Date("<?= $currentUserData['dataNascimentoUsuario'] ?>"); // Data de nascimento do usuário
+
+                checkEmptyInput(1);  // Verifica se o campo de data está vazio
+
+                if (validateInputs[1].value === "") {
+                    setChildError(1, "A data de nascimento é <span class='mainError'>obrigatória.</span>");
+                }
+                else if (childBirthDate > today) {
+                    setChildError(1, "A data de nascimento não pode ser uma <span class='mainError'>data futura.</span>");
+                }
+                else if (childBirthDate < userBirthDate) {
+                    setChildError(1, "A criança não pode nascer antes da data de nascimento do responsável.");
+                } else {
+                    removeChildError(1);  // Remove o erro se estiver tudo certo
+                }
+            }
+
+            document.querySelector('.Se-addNewChildModal').addEventListener('submit', function(event) {
+                event.preventDefault();
+                if (validateForm()) {
+                    this.submit();  // Se não houver erros, o formulário é enviado
+                }
+            });
+
 
             document.getElementById('confirmDelete').addEventListener('copy', function(e) {
                 e.preventDefault();

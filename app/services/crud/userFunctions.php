@@ -222,23 +222,28 @@ function getProfileCounts($conn, $profileData) {
 
 // EDIT ACCOUNT - UPDATE
 function editProfile($conn, $userId) {
-    $err = array();
-    $nome = !empty($_POST['nomeEdit']) ? mysqli_real_escape_string($conn, $_POST['nomeEdit']) : null;
-    $user = !empty($_POST['userEdit']) ? mysqli_real_escape_string($conn, $_POST['userEdit']) : null;
-    $localizacao = !empty($_POST['localizacaoEdit']) ? mysqli_real_escape_string($conn, $_POST['localizacaoEdit']) : null;
-    $biografiaUsuario = !empty($_POST['biografiaUsuarioEdit']) ? mysqli_real_escape_string($conn, $_POST['biografiaUsuarioEdit']) : null;
-    $tema = !empty($_POST['temaEdit']) ? mysqli_real_escape_string($conn, $_POST['temaEdit']) : null;
-    $linkFotoPerfil = updatePFP($conn, $userId, $user);
+    $mensagens = array(); // Array para armazenar as mensagens de erro e sucesso
 
+    $nome = !empty($_POST['nomeEdit']) ? mysqli_real_escape_string($conn, $_POST['nomeEdit']) : null;
+    $localizacao = !empty($_POST['localizacaoEdit']) ? mysqli_real_escape_string($conn, $_POST['localizacaoEdit']) : null;
+    $biografiaUsuario = isset($_POST['biografiaUsuarioEdit']) ? mysqli_real_escape_string($conn, $_POST['biografiaUsuarioEdit']) : "";
+    $tema = !empty($_POST['temaEdit']) ? mysqli_real_escape_string($conn, $_POST['temaEdit']) : null;
+    $resultado = updatePFP($conn, $userId);
+    $linkFotoPerfil = $resultado['linkFotoPerfil'];
+
+    $err = array();
+    foreach($resultado['mensagens'] as $uir){
+        $err[] = $uir;
+    }
     if (empty($err)) {
         $fields = [];
         if ($nome) $fields[] = "nomeCompleto = '$nome'";
         if ($localizacao) $fields[] = "estado = '$localizacao'";
-        if ($biografiaUsuario) $fields[] = "biografia = '$biografiaUsuario'";
+        $fields[] = "biografia = '$biografiaUsuario'";
         if ($linkFotoPerfil) $fields[] = "linkFotoPerfil = '$linkFotoPerfil'";
 
         if ($tema) {
-            // Obter o valor atual de desativouNotificacao do usuário
+            // Obtém a configuração atual de notificações do usuário
             $queryCurrentConfig = "
                 SELECT c.desativouNotificacao 
                 FROM Usuario u 
@@ -248,8 +253,6 @@ function editProfile($conn, $userId) {
 
             if ($currentConfig = mysqli_fetch_assoc($resultNotif)) {
                 $currentNotificationSetting = $currentConfig['desativouNotificacao'];
-
-                // Buscar o idConfiguracao correspondente ao tema e desativouNotificacao atual
                 $queryConfig = "
                     SELECT idConfiguracao 
                     FROM Configuracoes 
@@ -265,24 +268,28 @@ function editProfile($conn, $userId) {
                 $err[] = "Configuração atual do usuário não encontrada!";
             }
         }
-
         if (!empty($fields)) {
             $setFieldsStr = implode(", ", $fields);
             $updateUser = "UPDATE Usuario SET $setFieldsStr WHERE idUsuario = $userId";
             if (!mysqli_query($conn, $updateUser)) {
-                echo "Erro ao atualizar perfil: " . mysqli_error($conn) . "!";
+                $mensagens[] = "Erro ao atualizar perfil: " . mysqli_error($conn); // Armazena erro no vetor de mensagens
+            } else {
+                $mensagens[] = "Perfil atualizado com sucesso."; // Mensagem de sucesso
             }
         }
     } else {
         foreach ($err as $e) {
-            echo "<p>$e</p>";
+            $mensagens[] = $e; // Armazena cada erro encontrado no vetor de mensagens
         }
     }
+    return $mensagens;
 }
 
-    if(isset($_POST['editarPerfil'])) {   
-        editProfile($conn, $_POST['updaterId']);
-    }
+// Como utilizar a função
+if(isset($_POST['editarPerfil'])) {
+    $updateProfile_messages = editProfile($conn, $_POST['updaterId']);
+}
+
 
 function editPassword($conn, $userId) {
     $messages = array();  // Array para armazenar mensagens de erro e sucesso

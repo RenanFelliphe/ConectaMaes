@@ -378,7 +378,7 @@
 
                     checkEmptyInput(4);
 
-                    const nameRegex = /^[a-zA-ZÀ-ÖØ-ÿ' -]+$/;
+                    const nameRegex = /^([a-zA-ZÀ-ÖØ-ÿ'-]+(\s[a-zA-ZÀ-ÖØ-ÿ'-]+)*)$/;
 
                     if (fullName.length === 0) {
                         checkEmptyInput(4);
