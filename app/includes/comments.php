@@ -26,11 +26,11 @@
                         </div>
 
                         <div class="postInfo" >
-                            <?php if($currentUserData['idUsuario'] == $comentario['idUsuario']){ ?>
+                            <?php if($currentUserData['idUsuario'] == $comentario['idUsuario'] || $currentUserData['isAdmin']){ ?>
                                 <div class="bi bi-three-dots postMoreButton">
                                     <form class="postFunctionsModal close" method="POST">
                                         <!-- <button class="reportPostButton bi bi-megaphone-fill pageIcon" name="denunciarComentario"> Denunciar Comentário </button> -->
-                                        <?php if ($currentUserData['idUsuario'] == $comentario['idUsuario']) { ?>
+                                        <?php if ($currentUserData['idUsuario'] == $comentario['idUsuario'] || $currentUserData['isAdmin']) { ?>
                                             <input type="hidden" name="deleterCommentId" value="<?= $comentario['idComentario']; ?>">
                                             <button class="deletePostButton bi bi-trash3-fill pageIcon" name="deletarComentario" type="submit"> Deletar Comentário</button>
                                         <?php } ?>

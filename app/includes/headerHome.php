@@ -1,8 +1,13 @@
 <?php
     include_once __DIR__ . "/../services/helpers/paths.php";
     include_once __DIR__ . "/../services/crud/postFunctions.php";
+    ini_set('display_errors', 1);
+    error_reporting(E_ALL);
 ?>
 
+<script>
+    
+</script>
 <header class="headerHome">
     <img src="<?= $relativeAssetsPath; ?>/imagens/logos/final/Conecta_Mães_Logo_Black.png" class="A-headerLogo" alt="Logo do ConectaMães">
     <input type="hidden" id="postTypeInput" name="postType" value="">
@@ -65,7 +70,7 @@
         <div class="notificationsCenter">
             <div class="notificationsRelativeDate">
                 <span></span>    
-                <p> Hoje </p>
+                    <p>Hoje</p>
                 <span></span>
             </div>
             <div class="notificationsContainer">
@@ -74,49 +79,30 @@
                     $today = date('Y-m-d'); 
                     $foundNotification = false;
 
+                    // Lista de notificações desativadas por tipo de notificação
+                    $notificacoesDesativadas = [
+                        1 => ["curtiuPublicacao"],
+                        2 => ["comentouPublicacao"],
+                        3 => ["curtiuPublicacao", "comentouPublicacao"],
+                        4 => ["seguiuUsuario"],
+                        5 => ["curtiuPublicacao", "seguiuUsuario"],
+                        6 => ["comentouPublicacao", "seguiuUsuario"],
+                        7 => ["curtiuPublicacao", "comentouPublicacao", "seguiuUsuario"]
+                    ];
+
                     if (count($notifications) > 0) {
                         foreach ($notifications as $notification) {
                             $notificationDate = date('Y-m-d', strtotime($notification['dataNotificacao']));
+
+                            // Pula notificações que não são de hoje ou são do próprio usuário
                             if ($notificationDate !== $today || $notification['idUsuarioGerou'] == $currentUserData['idUsuario']) {
                                 continue;
                             }
 
-                            switch ($currentUserData['desativouNotificacao']) {
-                                case 1:
-                                    if ($notification['tipoNotificacao'] === "curtiuPublicacao") {
-                                        continue 2;
-                                    }
-                                    break;
-                                case 2:
-                                    if ($notification['tipoNotificacao'] === "comentouPublicacao") {
-                                        continue 2;
-                                    }
-                                    break;
-                                case 3:
-                                    if (in_array($notification['tipoNotificacao'], ["curtiuPublicacao", "comentouPublicacao"])) {
-                                        continue 2;
-                                    }
-                                    break;
-                                case 4:
-                                    if ($notification['tipoNotificacao'] === "seguiuUsuario") {
-                                        continue 2;
-                                    }
-                                    break;
-                                case 5:
-                                    if (in_array($notification['tipoNotificacao'], ["curtiuPublicacao", "seguiuUsuario"])) {
-                                        continue 2;
-                                    }
-                                    break;
-                                case 6:
-                                    if (in_array($notification['tipoNotificacao'], ["comentouPublicacao", "seguiuUsuario"])) {
-                                        continue 2;
-                                    }
-                                    break;
-                                case 7:
-                                    if (in_array($notification['tipoNotificacao'], ["curtiuPublicacao", "comentouPublicacao", "seguiuUsuario"])) {
-                                        continue 2;
-                                    }
-                                    break;
+                            // Verifica se a notificação está desativada para o tipo atual
+                            $desativadoTipos = $notificacoesDesativadas[$currentUserData['desativouNotificacao']] ?? [];
+                            if (in_array($notification['tipoNotificacao'], $desativadoTipos)) {
+                                continue;
                             }
 
                             $foundNotification = true;
@@ -124,7 +110,8 @@
                             $username = $notification['usernameUsuarioGerou'];
                             $action = '';
 
-                            switch($notification['tipoNotificacao']){
+                            // Define a ação de acordo com o tipo de notificação
+                            switch ($notification['tipoNotificacao']) {
                                 case 'curtiuPublicacao':
                                     $action = "curtiu sua publicação";
                                     break;
@@ -136,12 +123,12 @@
                                     break;
                             }
                             ?>
-                                <div class='notification' data-link=<?= $relativePublicPath.$notification['linkNotificacao']?>>
-                                    <?= renderProfileLink($relativePublicPath, $relativeAssetsPath."/imagens/fotos/perfil/".$userPhoto, $username, false) ?>
-                                    <div class="notificationContent">
-                                        <strong class='username'><?= $username ?></strong> <?= $action ?>
-                                    </div>
+                            <div class='notification' data-id="<?=$notification['idNotificacao'];?>" data-link="<?= $relativePublicPath . $notification['linkNotificacao'] ?>">
+                                <?= renderProfileLink($relativePublicPath, $relativeAssetsPath . "/imagens/fotos/perfil/" . $userPhoto, $username, false) ?>
+                                <div class="notificationContent">
+                                    <strong class='username'><?= $username ?></strong> <?= $action ?>
                                 </div>
+                            </div>
                             <?php
                         }
                     }
@@ -151,7 +138,6 @@
                     }
                 ?>
             </div>
-
         </div>
     </div>
 
@@ -387,7 +373,7 @@
         });
 
         headerHome.addEventListener('mouseleave', () => {
-            closeTimeout = setTimeout(closeAllModals, 400);
+            closeTimeout = setTimeout(closeAllModals, 100000);
         });
     }
 
@@ -406,12 +392,66 @@
         }
     }
 
+    function redirectFromNotification() {
+        document.addEventListener("DOMContentLoaded", function() {
+            const notificationItems = document.querySelectorAll('.notification');
+
+            notificationItems.forEach(notification => {
+                notification.addEventListener('click', function() {
+                    const link = this.getAttribute('data-link');
+                    window.location.href = link; 
+                });
+            });
+        });
+    }
+
     document.querySelector('.Ho-identifyMyself').addEventListener('click', () => {
         document.querySelector('.Ho-identifyMyselfModal').classList.toggle('close');
     })
 
+    document.addEventListener("DOMContentLoaded", function () {
+        const modal = document.querySelector('.notificationsModal');
+        
+        const observer = new MutationObserver(function (mutationsList) {
+            for (const mutation of mutationsList) {
+                if (mutation.type === 'attributes' && !modal.classList.contains('close')) {
+                    // A classe 'close' foi removida, ou seja, o modal foi aberto
+                    const notifications = document.querySelectorAll('.notification');
+                    
+                    notifications.forEach(notification => {
+                        const notificationId = notification.getAttribute('data-id');
+                        
+                        // Fazendo a requisição ao servidor para marcar a notificação como lida
+                        fetch('<?= $_SERVER['PHP_SELF']?>', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded'
+                            },
+                            body: `notificationId=${notificationId}`
+                        })
+                        .then(response => response.json())  // Converte automaticamente para JSON
+                        .then(data => {
+                            console.log('Dados recebidos do servidor:', data);
+                            if (data.success) {
+                                console.log('Notificação marcada como lida.');
+                            } else {
+                                console.log('Falha ao marcar a notificação:', data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Erro ao marcar notificação como lida:', error);
+                        });
+                    });
+                }
+            }
+        });
+
+        observer.observe(modal, { attributes: true });
+    });
+
     dropdownHeaderSections();
     toggleSelectedPage();
+    redirectFromNotification();
     
 </script>
 

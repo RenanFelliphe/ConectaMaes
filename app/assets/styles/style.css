@@ -778,6 +778,7 @@ body.Y-theme .makeAPostModal .postStyleSummary:hover .postStyleTitle img {
     position: relative;
     display: flex;
     gap: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .headerHome .notificationsModal .notificationsCenter .notificationsRelativeDate span{
@@ -795,20 +796,33 @@ body.Y-theme .makeAPostModal .postStyleSummary:hover .postStyleTitle img {
 .headerHome .notificationsModal .notificationsCenter .notificationsContainer{
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
+    gap:0.25rem;
 }
 .headerHome .notificationsModal .notificationsCenter .notificationsContainer .notification{
     display: flex;
     flex-direction: row;
     text-wrap: wrap;
+    cursor: pointer;
+    width:100%;
+    justify-content: flex-start;
+    gap:1rem;
+}
+.headerHome .notificationsModal .notificationsCenter .notificationsContainer .notification:hover{
+    background-color: var(--translucidColor);
 }
 .headerHome .notificationsModal .notificationsCenter .notificationsContainer .notification .postOwnerImage{
-    width: 3rem;
-    height: 3rem;
+    min-width: 3rem;
+    max-width: 3rem;
+    min-height: 3rem;
+    max-height: 3rem;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     overflow: hidden;
-    border-radius: 50%;
+    border: 1px solid var(--thirdColor);
+    border-radius: 100%;
+    background-color: var(--secondColor);
 }
 
 .headerHome .notificationsModal .notificationsCenter .notificationsContainer .notification .postOwnerImage img{

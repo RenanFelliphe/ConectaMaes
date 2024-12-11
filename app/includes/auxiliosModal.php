@@ -6,7 +6,7 @@
             </ul>
             
             <div class="postInfo" >
-                <?php if($currentUserData['idUsuario'] == $dadosPublicacao['idUsuario']){ ?>
+                <?php if($currentUserData['idUsuario'] == $dadosPublicacao['idUsuario'] || $currentUserData['isAdmin']){ ?>
                     <div class="bi bi-three-dots postMoreButton">
                         <form class="postFunctionsModal close" method="POST">
                             <!-- <button class="reportPostButton  pageIcon" name="denunciarPost">
@@ -14,7 +14,7 @@
                                 <p>Denunciar Postagem</p>
                             </button> -->
                             <?php 
-                                if ($currentUserData['idUsuario'] == $dadosPublicacao['idUsuario']) { 
+                                if ($currentUserData['idUsuario'] == $dadosPublicacao['idUsuario'] || $currentUserData['isAdmin']) { 
                             ?>
                                 <input type="hidden" name="identifierId" value="<?= $dadosPublicacao['idPublicacao']; ?>">
                                 <button class="deletePostButton pageIcon" name="deletarPost" type="submit" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>

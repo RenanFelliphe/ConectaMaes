@@ -166,7 +166,7 @@ function getFirstAndLastName($fullName) {
     $partesDoNomeCompleto = explode(" ", $fullName);
     $firstName = $partesDoNomeCompleto[0];
     $lastName = $partesDoNomeCompleto[count($partesDoNomeCompleto) - 1];
-    return $firstName . " " . $lastName;
+    return ucwords($firstName . " " . $lastName);
 }
 
 function getFollowerCount($conn, $userId) {
@@ -451,11 +451,7 @@ function generateRandomCode() {
 
     if (isset($_POST['deleteAccountSubmit'])) {
         $userId = filter_var(mysqli_escape_string($conn,$_POST['deleteUserId']), FILTER_SANITIZE_NUMBER_INT);
-        if ($_POST['deleteTextInput'] == $_POST['confirmDeleteText']) {
-            $deleteUser_messages = deleteAccount($conn, $userId);
-        } else {
-            $deleteUser_messages[] = "<p>Código de verificação incorreto!</p>";
-        }
+        $deleteUser_messages = deleteAccount($conn, $userId);
     }
 
 // Função para seguir um usuário
@@ -559,6 +555,36 @@ function getUserNotifications($conn, $userId) {
         return false;
     }
 }
+
+function markNotificationAsRead($conn, $notificationId) {
+    header('Content-Type: application/json');    
+    $notificationId = intval($notificationId);
+
+    if ($notificationId > 0) {
+        $query = "UPDATE Notificacoes SET isLida = 1 WHERE idNotificacao = $notificationId";
+        $result = mysqli_query($conn, $query);
+
+        if ($result) {
+            $response = ['success'=>true];
+            file_put_contents('debug.log', json_encode($response) . PHP_EOL, FILE_APPEND);
+        } else {
+            $response = ['success'=>false, 'message'=>'Erro ao marcar a notificação. (' . mysqli_error($conn) . ')'];
+            file_put_contents('debug.log', json_encode($response) . PHP_EOL, FILE_APPEND);
+        }
+    } else {
+        $response = ['success'=>false, 'message'=>'ID de notificação inválido'];
+        file_put_contents('debug.log', json_encode($response) . PHP_EOL, FILE_APPEND);
+    }
+
+    echo json_encode($response);
+    exit;  
+
+}
+
+if (isset($_POST['notificationId'])) {
+    echo trim(markNotificationAsRead($conn, filter_var(mysqli_escape_string($conn, $_POST['notificationId']), FILTER_SANITIZE_NUMBER_INT)));
+}
+
 function desativarNotificacoes($conn, $userId) {
     $mensagem = '';
     $valorBinario = isset($_POST['valorBinario']) ? intval($_POST['valorBinario']) : 0;
@@ -590,7 +616,6 @@ function desativarNotificacoes($conn, $userId) {
     }
     return $mensagem;
 }
-
     if (isset($_POST['desativarNotificacoesEnvio'])) {
         $notif_message = desativarNotificacoes($conn, filter_var(mysqli_escape_string($conn,$_POST['updaterId']), FILTER_SANITIZE_NUMBER_INT));
     }
