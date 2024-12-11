@@ -597,7 +597,7 @@
                         if (validateSection(currentIndex)) {
                             if (currentIndex < sections.length - 1) showSection(currentIndex + 1);
                         } else {
-                            alert("Preencha todos os campos corretamente antes de prosseguir");
+                            alert("Preencha todos os campos antes de prosseguir. Caso existam, corrija os erros.");
                         }
                     }
                 });

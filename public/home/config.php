@@ -168,7 +168,6 @@
                         </div>
                         <?php 
                             if(isset($updateProfile_messages) and !empty($updateProfile_messages)){
-                                // Exibe as mensagens de resultado (se houver)
                                 foreach ($updateProfile_messages as $upm) {
                                     echo "$upm";
                                 }
@@ -235,7 +234,7 @@
                                 <input type="hidden" name="childEditIdentifier" value="<?= $f['idFilho']; ?>">
                                 <div class="Se-childInput childNameEditor">
                                     <p> Nome: </p>
-                                    <input type="text" class="Re-childName" id="editChildNameInput" name="editChildName" placeholder="Nome Completo" value="<?= $f['nomeFilho'];?>"required>
+                                    <input type="text" class="Re-childName" id="editChildNameInput<?= $f['idFilho']?>" name="editChildName" placeholder="Nome Completo" value="<?= $f['nomeFilho'];?>"required>
                                 </div>
                                 <div class="errorMessageContainer">
                                     <div class="editChildErrorContent"></div>
@@ -256,8 +255,8 @@
                                     </div>
                                 </div>
                                 <div class="Se-childInput childBirthEditor">
-                                    <label for="dataNascFilho">Data de Nascimento</label>
-                                    <input type="date" id="editChildDateInput" name="editChildBirthDate" value="<?= date('Y-m-d', strtotime($f['dataNascimentoFilho'])); ?>" required>
+                                    <label for="editChildDateInput<?= $f['idFilho']?>">Data de Nascimento</label>
+                                    <input type="date" id="editChildDateInput<?= $f['idFilho']?>" name="editChildBirthDate" value="<?= date('Y-m-d', strtotime($f['dataNascimentoFilho'])); ?>" required>
                                 </div>
                                 <div class="errorMessageContainer">
                                     <div class="editChildErrorContent"></div>
@@ -364,13 +363,21 @@
                                         <label class="Re-fakePlaceholder" for="currentPassword">Senha Atual</label>
                                         <!-- <p class="Se-forgotPassword">Esqueceu a senha?</p> -->
                                     </div>
+
                                     <div class="Se-passInput">
                                         <input type="text" id="newPassword" name="newPassword">
                                         <label class="Re-fakePlaceholder" for="newPassword">Senha Nova</label>
                                     </div>
+                                    <div class="errorMessageContainer">
+                                        <div class="editPasswordErrorContent"></div>
+                                    </div>
+
                                     <div class="Se-passInput">
                                         <input type="text" id="confirmNewPassword" name="confirmNewPassword">
                                         <label class="Re-fakePlaceholder" for="confirmNewPassword">Confirmar Senha Nova</label>
+                                    </div>
+                                    <div class="errorMessageContainer">
+                                        <div class="editPasswordErrorContent"></div>
                                     </div>
                                 </div>
                                 <button class="Se-editSubmit confirmBtn" type="submit" name="editPasswordSubmit" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Confirmar</button>
@@ -389,10 +396,14 @@
                                 <input type="hidden" class="updaterIdHiddenInput" name="updaterId" value="<?= $currentUserData['idUsuario']; ?>">    
                                 <h4> Número de Telefone </h4>
                                 <div class="Se-phoneInput">
-                                    <input type="text" id="editTelephone" name="editTelephoneNumber">
+                                    <input type="number" id="editTelephone" name="editTelephoneNumber">
                                     <label class="Re-fakePlaceholder" for="editTelephone">Telefone</label>
                                     <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
                                 </div>
+                                <div class="errorMessageContainer">
+                                    <div class="editPhoneErrorContent"></div>
+                                </div>
+
                                 <button class="Se-editSubmit confirmBtn" type="submit" name="editTelephoneSubmit" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Confirmar</button>
                                 <?php
                                     if (isset($phone_messages) && !empty($phone_messages)) {
@@ -414,18 +425,22 @@
                                     <label class="Re-fakePlaceholder" for="editPixKey">Chave Pix</label>
                                     <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
                                 </div>
+                                <div class="errorMessageContainer">
+                                    <div class="pixErrorContent"></div>
+                                    <?php
+                                        if (isset($pix_messages) && !empty($pix_messages)) {
+                                            foreach ($pix_messages as $p_m) {
+                                                echo $p_m;
+                                            }
+                                        }
+                                    ?>
+                                </div>
 
                                 <button class="Se-editSubmit confirmBtn" type="submit" name="editPixSubmit" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>
                                     <?= $hasPixKey ? 'Editar' : 'Adicionar'; ?>
                                 </button>
 
-                                <?php
-                                    if (isset($pix_messages) && !empty($pix_messages)) {
-                                        foreach ($pix_messages as $p_m) {
-                                            echo $p_m;
-                                        }
-                                    }
-                                ?>
+                                
                             </form>
                         </li>
 
@@ -450,6 +465,7 @@
 
                                     foreach($relatosAnonimosUsuario as $ra){
                                         if($ra['isAnonima']){
+                                            $encontrouAnonimo = true;
                                 ?>
                                     <form class="relatoAnonimo" method="post">
                                         <div class="raHeader">
@@ -626,6 +642,9 @@
                     <div class="Se-deleteInput">
                         <input type="text" id="confirmDeleteInput" name="deleteTextInput">
                         <label class="Re-fakePlaceholder" for="confirmDeleteInput">Reescreva o texto acima para confirmar</label>
+                    </div>
+                    <div class="errorMessageContainer">
+                        <div class="deleteAccountErrorContent"></div>
                     </div>
                 </div>
                 <button class="Se-modalSubmit confirmBtn" type="submit" name="deleteAccountSubmit">Confirmar deleção</button>
@@ -806,200 +825,557 @@
                 editChildForm.classList.toggle('open');
             }
 
-            function addChildValidations(){
-                const validateChildInputs = [
-                    document.getElementById('newChildNameInput'),
-                    document.getElementById('newChildDateInput')
-                ];
+            function childValidations(){
+                function addChildValidations(){
+                    const validateChildInputs = [
+                        document.getElementById('newChildNameInput'),
+                        document.getElementById('newChildDateInput')
+                    ];
 
-                function setChildError(inputIndex, message) {
-                    const inputElement = validateChildInputs[inputIndex];
-                    const errorMessageContainer = inputElement.closest('.Se-childInput').nextElementSibling.querySelector('.childErrorMessageContent');
-                    if (errorMessageContainer && errorMessageContainer.classList.contains('childErrorMessageContent')) {
-                        errorMessageContainer.innerHTML = message;  // Set the error message
-                        inputElement.classList.add('error');        // Add the error class to the input
+                    function setChildError(inputIndex, message) {
+                        const inputElement = validateChildInputs[inputIndex];
+                        const errorMessageContainer = inputElement.closest('.Se-childInput').nextElementSibling.querySelector('.childErrorMessageContent');
+                        if (errorMessageContainer && errorMessageContainer.classList.contains('childErrorMessageContent')) {
+                            errorMessageContainer.innerHTML = message;  // Set the error message
+                            inputElement.classList.add('error');        // Add the error class to the input
+                        }
                     }
+
+                    function removeChildError(inputIndex) {
+                        const inputElement = validateChildInputs[inputIndex];
+                        const errorMessageContainer = inputElement.closest('.Se-childInput').nextElementSibling.querySelector('.childErrorMessageContent');
+                        if (errorMessageContainer && errorMessageContainer.classList.contains('childErrorMessageContent')) {                
+                            errorMessageContainer.innerHTML = '';
+                            inputElement.classList.remove('error');
+                        }
+                    }
+
+                    function validateAddChildForm() {
+                        const errorMessages = document.querySelectorAll('.childErrorMessageContent');
+                        
+                        for (let e of errorMessages) {
+                            if (e.innerHTML !== '') {
+                                return false;  // Impede o envio do formulário
+                            }
+                        }
+                        return true;  // Permite o envio do formulário se não houver erros
+                    }
+
+                    function validateChildName() {
+                        const childName = validateChildInputs[0].value;  // Valor do campo 'Nome Completo'
+                        const minChar = 3, maxChar = 100;
+                        checkEmptyChildInput(0);  // Verifica se o campo está vazio
+                        const nameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿÇç' -]{3,}$/;  
+                        const letterCount = (childName.match(/[A-Za-zÀ-ÖØ-öø-ÿÇç]/g) || []).length;
+                        
+                        if (letterCount < minChar) {  // Verifica se o nome tem pelo menos 3 letras
+                            setChildError(0, "O nome do filho deve conter pelo menos <span class='mainError'>3 letras.</span>");
+                        } else if (childName.length > maxChar) {
+                            setChildError(0, "O nome do filho é <span class='mainError'>muito longo.</span>");
+                        } else if (/\d/.test(childName)) {
+                            setChildError(0, "O nome do filho não pode possuir <span class='mainError'>números.</span>");
+                        } else if (!nameRegex.test(childName)) {
+                            setChildError(0, "O nome do filho pode conter apenas <span class='mainError'>letras, espaços, acentos, hífens, cedilhas e apóstrofos.</span>");
+                        } else {
+                            removeChildError(0);  // Remove o erro se estiver tudo certo
+                        }
+                    }
+
+                    function validateChildBirthDate() {
+                        const childBirthDate = new Date(validateChildInputs[1].value);  
+                        const today = new Date();  
+                        const userBirthDate = new Date("<?= $currentUserData['dataNascimentoUsuario'] ?>"); 
+                        checkEmptyChildInput(1);  
+                        if (validateChildInputs[1].value === "") {
+                            setChildError(1, "A data de nascimento é <span class='mainError'>obrigatória.</span>");
+                        }
+                        else if (childBirthDate > today) {
+                            setChildError(1, "A data de nascimento não pode ser uma <span class='mainError'>data futura.</span>");
+                        }
+                        else if (childBirthDate < userBirthDate) {
+                            setChildError(1, "O filho não pode nascer antes do responsável.");
+                        } else {
+                            removeChildError(1);  
+                        }
+                    }
+                    
+                    function checkEmptyChildInput(inputIndex) {
+                        const inputElement = validateChildInputs[inputIndex];
+                        if (inputElement.value.trim() === "") {
+                            setChildError(inputIndex, "Este campo é <span class='mainError'>obrigatório.</span>");
+                        }
+                    }
+
+                    const submitAddChildButton = document.getElementById('insertChild');  
+                            
+                    submitAddChildButton.addEventListener('click', function(event) {
+                        validateChildName();
+                        validateChildBirthDate();
+                        
+                        if (!validateAddChildForm()) {
+                            event.preventDefault(); 
+                            alert("Por favor, corrija os erros antes de enviar o formulário.");
+                        }
+                    });
+
+                    validateChildInputs[0].addEventListener('input', validateChildName);
+                    validateChildInputs[1].addEventListener('input', validateChildBirthDate);
                 }
 
-                function removeChildError(inputIndex) {
-                    const inputElement = validateChildInputs[inputIndex];
-                    const errorMessageContainer = inputElement.closest('.Se-childInput').nextElementSibling.querySelector('.childErrorMessageContent');
-                    if (errorMessageContainer && errorMessageContainer.classList.contains('childErrorMessageContent')) {                
+                function editChildValidations(childId){
+                    const validateEditChildInputs = [
+                        document.getElementById('editChildNameInput'+ childId),
+                        document.getElementById('editChildDateInput'+ childId)
+                    ];
+
+                    function setChildError(inputIndex, message) {
+                        const inputElement = validateEditChildInputs[inputIndex];
+                        const errorMessageContainer = inputElement.closest('.Se-childInput').nextElementSibling.querySelector('.editChildErrorContent');
+                        if (errorMessageContainer && errorMessageContainer.classList.contains('editChildErrorContent')) {
+                            errorMessageContainer.innerHTML = message;  // Set the error message
+                            inputElement.classList.add('error');        // Add the error class to the input
+                        }
+                    }
+
+                    function removeChildError(inputIndex) {
+                        const inputElement = validateEditChildInputs[inputIndex];
+                        const errorMessageContainer = inputElement.closest('.Se-childInput').nextElementSibling.querySelector('.editChildErrorContent');
+                        if (errorMessageContainer && errorMessageContainer.classList.contains('editChildErrorContent')) {                
+                            errorMessageContainer.innerHTML = '';
+                            inputElement.classList.remove('error');
+                        }
+                    }
+
+                    function validateEditChildForm() {
+                        const errorMessages = document.querySelectorAll('.editChildErrorContent');
+                        
+                        for (let e of errorMessages) {
+                            if (e.innerHTML !== '') {
+                                return false;  // Impede o envio do formulário
+                            }
+                        }
+                        return true;  // Permite o envio do formulário se não houver erros
+                    }
+
+                    function validateChildName() {
+                        const childName = validateEditChildInputs[0].value;  // Valor do campo 'Nome Completo'
+                        const minChar = 3, maxChar = 100;
+                        checkEmptyChildInput(0);  // Verifica se o campo está vazio
+                        const nameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿÇç' -]{3,}$/;  
+                        const letterCount = (childName.match(/[A-Za-zÀ-ÖØ-öø-ÿÇç]/g) || []).length;
+                        
+                        if (letterCount < minChar) {  // Verifica se o nome tem pelo menos 3 letras
+                            setChildError(0, "O nome do filho deve conter pelo menos <span class='mainError'>3 letras.</span>");
+                        } else if (childName.length > maxChar) {
+                            setChildError(0, "O nome do filho é <span class='mainError'>muito longo.</span>");
+                        } else if (/\d/.test(childName)) {
+                            setChildError(0, "O nome do filho não pode possuir <span class='mainError'>números.</span>");
+                        } else if (!nameRegex.test(childName)) {
+                            setChildError(0, "O nome do filho pode conter apenas <span class='mainError'>letras, espaços, acentos, hífens, cedilhas e apóstrofos.</span>");
+                        } else {
+                            removeChildError(0);  // Remove o erro se estiver tudo certo
+                        }
+                    }
+
+                    function validateChildBirthDate() {
+                        const childBirthDate = new Date(validateEditChildInputs[1].value);  
+                        const today = new Date();  
+                        const userBirthDate = new Date("<?= $currentUserData['dataNascimentoUsuario'] ?>"); 
+                        checkEmptyChildInput(1);  
+                        if (validateEditChildInputs[1].value === "") {
+                            setChildError(1, "A data de nascimento é <span class='mainError'>obrigatória.</span>");
+                        }
+                        else if (childBirthDate > today) {
+                            setChildError(1, "A data de nascimento não pode ser uma <span class='mainError'>data futura.</span>");
+                        }
+                        else if (childBirthDate < userBirthDate) {
+                            setChildError(1, "O filho não pode nascer antes do responsável.");
+                        } else {
+                            removeChildError(1);  
+                        }
+                    }
+                    
+                    function checkEmptyChildInput(inputIndex) {
+                        const inputElement = validateEditChildInputs[inputIndex];
+                        if (inputElement.value.trim() === "") {
+                            setChildError(inputIndex, "Este campo é <span class='mainError'>obrigatório.</span>");
+                        }
+                    }
+
+                    const submitEditChildButton = document.getElementById('editChild');  
+                            
+                    submitEditChildButton.addEventListener('click', function(event) {
+                        validateChildName();
+                        validateChildBirthDate();
+                        
+                        if (!validateEditChildForm()) {
+                            event.preventDefault(); 
+                            alert("Por favor, corrija os erros antes de enviar o formulário.");
+                        }
+                    });
+                    validateEditChildInputs[0].addEventListener('input', validateChildName);
+                    validateEditChildInputs[1].addEventListener('input', validateChildBirthDate);
+                }
+
+                function applyEditChildValidations() {
+                    document.querySelectorAll('.editChildForm').forEach((form) => {
+                        const childId = form.querySelector('input[name="childEditIdentifier"]').value;
+                        editChildValidations(childId);  // Chama a função de validação para cada filho, passando o ID do filho
+                    });
+                }
+
+                addChildValidations();
+                applyEditChildValidations();
+            }
+
+            function securityValidations(){
+                function passwordValidations() {
+                    const passwordInputs = [
+                        document.getElementById('currentPassword'),
+                        document.getElementById('newPassword'),
+                        document.getElementById('confirmNewPassword')
+                    ];
+
+                    function setPasswordError(inputIndex, message) {
+                        const inputElement = passwordInputs[inputIndex];
+                        const errorMessageContainer = inputElement.closest('.Se-passInput').nextElementSibling.querySelector('.editPasswordErrorContent');
+                        errorMessageContainer.innerHTML = message;
+                        inputElement.classList.add('error');
+                    }
+
+                    function removePasswordError(inputIndex) {
+                        const inputElement = passwordInputs[inputIndex];
+                        const errorMessageContainer = inputElement.closest('.Se-passInput').nextElementSibling.querySelector('.editPasswordErrorContent');
                         errorMessageContainer.innerHTML = '';
                         inputElement.classList.remove('error');
                     }
-                }
 
-                function validateAddChildForm() {
-                    const errorMessages = document.querySelectorAll('.childErrorMessageContent');
-                    
-                    for (let e of errorMessages) {
-                        if (e.innerHTML !== '') {
-                            return false;  // Impede o envio do formulário
+                    function validateNewPassword() {
+                        const password = passwordInputs[1].value;
+                        const hasUpperCase = /[A-Z]/.test(password);
+                        const hasLowerCase = /[a-z]/.test(password);
+                        const hasDigit = /\d/.test(password);
+                        const minLength = 8;
+                        const maxLength = 100;
+
+                        if (password.length!==0 && password.length < minLength) {
+                            setPasswordError(1, "A senha deve ter no mínimo 8 caracteres.");
+                        } else if (password.length > maxLength) {
+                            setPasswordError(1, "A senha é muito longa.");
+                        } else if (password.length!==0 && !hasUpperCase) {
+                            setPasswordError(1, "A senha deve conter letras maiúsculas.");
+                        } else if (password.length!==0 && !hasLowerCase) {
+                            setPasswordError(1, "A senha deve conter letras minúsculas.");
+                        } else if (password.length!==0 && !hasDigit) {
+                            setPasswordError(1, "A senha deve conter números.");
+                        } else {
+                            removePasswordError(1);
                         }
                     }
-                    return true;  // Permite o envio do formulário se não houver erros
+
+                    function validateConfirmNewPassword() {
+                        const newPassword = passwordInputs[1].value;
+                        const confirmPassword = passwordInputs[2].value;
+
+                        if (newPassword.length !== 0 && confirmPassword.length === 0) {
+                            setPasswordError(2, "Por favor, confirme a senha.");
+                        } else if (newPassword !== confirmPassword) {
+                            setPasswordError(2, "As senhas <span class='mainError'>não coincidem.</span>");
+                        } else {
+                            removePasswordError(2);
+                        }
+                    }
+
+                    function validatePasswordForm(event) {
+                        if (passwordInputs.every(input => input.value.trim() === "")) {
+                            alert("Por favor, preencha todos os campos antes de enviar o formulário.");
+                            event.preventDefault();  // Prevent form submission if all fields are empty
+                            return;
+                        }
+                        validateNewPassword();
+                        validateConfirmNewPassword();
+
+                        const errorMessages = document.querySelectorAll('.editPasswordErrorContent');
+                        for (let errorMessage of errorMessages) {
+                            if (errorMessage.innerHTML !== '') {
+                                event.preventDefault();  // Prevent form submission if there's an error
+                                alert("Por favor, corrija os erros antes de enviar o formulário.");
+                                return;
+                            }
+                        }
+                    }
+
+                    const submitButton = document.querySelector('[name="editPasswordSubmit"]');
+                    submitButton.addEventListener('click', validatePasswordForm);
+
+                    passwordInputs[1].addEventListener('input', validateNewPassword);
+                    passwordInputs[2].addEventListener('input', validateConfirmNewPassword);
                 }
 
-                function validateChildName() {
-                    const childName = validateChildInputs[0].value;  // Valor do campo 'Nome Completo'
-                    const minChar = 3, maxChar = 100;
-                    checkEmptyChildInput(0);  // Verifica se o campo está vazio
-                    const nameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿÇç' -]{3,}$/;  
-                    const letterCount = (childName.match(/[A-Za-zÀ-ÖØ-öø-ÿÇç]/g) || []).length;
+                function phoneValidations() {
+                    const phoneInput = document.getElementById('editTelephone');
+                    const errorMessageContainer = phoneInput.closest('.Se-phoneInput').nextElementSibling.querySelector('.editPhoneErrorContent');
                     
-                    if (letterCount < minChar) {  // Verifica se o nome tem pelo menos 3 letras
-                        setChildError(0, "O nome do filho deve conter pelo menos <span class='mainError'>3 letras.</span>");
-                    } else if (childName.length > maxChar) {
-                        setChildError(0, "O nome do filho é <span class='mainError'>muito longo.</span>");
-                    } else if (/\d/.test(childName)) {
-                        setChildError(0, "O nome do filho não pode possuir <span class='mainError'>números.</span>");
-                    } else if (!nameRegex.test(childName)) {
-                        setChildError(0, "O nome do filho pode conter apenas <span class='mainError'>letras, espaços, acentos, hífens, cedilhas e apóstrofos.</span>");
-                    } else {
-                        removeChildError(0);  // Remove o erro se estiver tudo certo
+                    function setPhoneError(message) {
+                        errorMessageContainer.innerHTML = message;
+                        phoneInput.classList.add('error');
                     }
-                }
 
-                function validateChildBirthDate() {
-                    const childBirthDate = new Date(validateChildInputs[1].value);  
-                    const today = new Date();  
-                    const userBirthDate = new Date("<?= $currentUserData['dataNascimentoUsuario'] ?>"); 
-                    checkEmptyChildInput(1);  
-                    if (validateChildInputs[1].value === "") {
-                        setChildError(1, "A data de nascimento é <span class='mainError'>obrigatória.</span>");
-                    }
-                    else if (childBirthDate > today) {
-                        setChildError(1, "A data de nascimento não pode ser uma <span class='mainError'>data futura.</span>");
-                    }
-                    else if (childBirthDate < userBirthDate) {
-                        setChildError(1, "O filho não pode nascer antes do responsável.");
-                    } else {
-                        removeChildError(1);  
-                    }
-                }
-                
-                function checkEmptyChildInput(inputIndex) {
-                    const inputElement = validateChildInputs[inputIndex];
-                    if (inputElement.value.trim() === "") {
-                        setChildError(inputIndex, "Este campo é <span class='mainError'>obrigatório.</span>");
-                    }
-                }
-
-                const submitAddChildButton = document.getElementById('insertChild');  
-                        
-                submitAddChildButton.addEventListener('click', function(event) {
-                    validateChildName();
-                    validateChildBirthDate();
-                    
-                    if (!validateAddChildForm()) {
-                        event.preventDefault(); 
-                        alert("Por favor, corrija os erros antes de enviar o formulário.");
-                    }
-                });
-
-                validateChildInputs[0].addEventListener('input', validateChildName);
-                validateChildInputs[1].addEventListener('input', validateChildBirthDate);
-            }
-            
-            function editChildValidations(){
-                const validateEditChildInputs = [
-                    document.getElementById('editChildNameInput'),
-                    document.getElementById('editChildDateInput')
-                ];
-
-                function setChildError(inputIndex, message) {
-                    const inputElement = validateEditChildInputs[inputIndex];
-                    const errorMessageContainer = inputElement.closest('.Se-childInput').nextElementSibling.querySelector('.editChildErrorContent');
-                    if (errorMessageContainer && errorMessageContainer.classList.contains('editChildErrorContent')) {
-                        errorMessageContainer.innerHTML = message;  // Set the error message
-                        inputElement.classList.add('error');        // Add the error class to the input
-                    }
-                }
-
-                function removeChildError(inputIndex) {
-                    const inputElement = validateEditChildInputs[inputIndex];
-                    const errorMessageContainer = inputElement.closest('.Se-childInput').nextElementSibling.querySelector('.editChildErrorContent');
-                    if (errorMessageContainer && errorMessageContainer.classList.contains('editChildErrorContent')) {                
+                    function removePhoneError() {
                         errorMessageContainer.innerHTML = '';
-                        inputElement.classList.remove('error');
+                        phoneInput.classList.remove('error');
                     }
-                }
 
-                function validateEditChildForm() {
-                    const errorMessages = document.querySelectorAll('.editChildErrorContent');
-                    
-                    for (let e of errorMessages) {
-                        if (e.innerHTML !== '') {
-                            return false;  // Impede o envio do formulário
+                    function validatePhoneNumber() {
+                        const phone = phoneInput.value;
+                        const validDDDs = [
+                            '61', '62', '64', '65', '66', '67', // Centro-Oeste
+                            '71', '73', '74', '75', '77', '79', '81', '82', '83', '84', '85', '86', '87', '88', '89', '98', '99', // Nordeste
+                            '63', '68', '69', '91', '92', '93', '94', '95', '96', '97', // Norte
+                            '11', '12', '13', '14', '15', '16', '17', '18', '19', '21', '22', '24', '31', '32', '33', '34', '35', '37', '38', // Sudeste
+                            '41', '42', '43', '44', '45', '46', '47', '48', '49', '51', '53', '54', '55' // Sul
+                        ];
+
+                        const ddd = phone.substring(0, 2); // Extrai os primeiros dois dígitos como DDD
+                        const phoneRegex = /^\d{10,11}$/;  // Aceita números de 10 ou 11 dígitos
+
+                        const maxChar = 11;
+                        if (phone.length === 0) {
+                            removePhoneError();
+                            return;
+                        }
+                        if (phone.length > maxChar) {
+                            setPhoneError("O número de telefone é longo demais.");
+                            return;
+                        }
+                        if (!phoneRegex.test(phone)) {
+                            setPhoneError("Insira um telefone válido.");
+                            return;
+                        }
+                        if (!validDDDs.includes(ddd)) {
+                            setPhoneError("Insira um DDD válido.");
+                            return;
+                        }
+                        removePhoneError();
+                    }
+
+                    function validatePhoneForm(event) {
+                        // Verifica se o campo de telefone está vazio
+                        if (phoneInput.value.trim() === "") {
+                            alert("Por favor, preencha o campo de telefone antes de enviar o formulário.");
+                            event.preventDefault();  // Impede o envio do formulário se o campo estiver vazio
+                            return;
+                        }
+                        
+                        // Validação do número de telefone
+                        validatePhoneNumber();
+
+                        // Verifica se há algum erro de validação no campo de telefone
+                        if (errorMessageContainer.innerHTML !== '') {
+                            event.preventDefault();  // Impede o envio do formulário se houver erros
+                            alert("Por favor, corrija os erros antes de enviar o formulário.");
                         }
                     }
-                    return true;  // Permite o envio do formulário se não houver erros
+
+                    const submitButton = document.querySelector('[name="editTelephoneSubmit"]');
+                    submitButton.addEventListener('click', validatePhoneForm);
+
+                    phoneInput.addEventListener('input', validatePhoneNumber);
                 }
 
-                function validateChildName() {
-                    const childName = validateEditChildInputs[0].value;  // Valor do campo 'Nome Completo'
-                    const minChar = 3, maxChar = 100;
-                    checkEmptyChildInput(0);  // Verifica se o campo está vazio
-                    const nameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿÇç' -]{3,}$/;  
-                    const letterCount = (childName.match(/[A-Za-zÀ-ÖØ-öø-ÿÇç]/g) || []).length;
+                function pixKeyValidations() {
+                    const pixKeyInput = document.getElementById('editPixKey');
+                    const errorMessageContainer = pixKeyInput.closest('.Se-pixInput').nextElementSibling.querySelector('.pixErrorContent');
                     
-                    if (letterCount < minChar) {  // Verifica se o nome tem pelo menos 3 letras
-                        setChildError(0, "O nome do filho deve conter pelo menos <span class='mainError'>3 letras.</span>");
-                    } else if (childName.length > maxChar) {
-                        setChildError(0, "O nome do filho é <span class='mainError'>muito longo.</span>");
-                    } else if (/\d/.test(childName)) {
-                        setChildError(0, "O nome do filho não pode possuir <span class='mainError'>números.</span>");
-                    } else if (!nameRegex.test(childName)) {
-                        setChildError(0, "O nome do filho pode conter apenas <span class='mainError'>letras, espaços, acentos, hífens, cedilhas e apóstrofos.</span>");
-                    } else {
-                        removeChildError(0);  // Remove o erro se estiver tudo certo
+                    function setPixKeyError(message) {
+                        errorMessageContainer.innerHTML = message;
+                        pixKeyInput.classList.add('error');
                     }
-                }
 
-                function validateChildBirthDate() {
-                    const childBirthDate = new Date(validateEditChildInputs[1].value);  
-                    const today = new Date();  
-                    const userBirthDate = new Date("<?= $currentUserData['dataNascimentoUsuario'] ?>"); 
-                    checkEmptyChildInput(1);  
-                    if (validateEditChildInputs[1].value === "") {
-                        setChildError(1, "A data de nascimento é <span class='mainError'>obrigatória.</span>");
+                    function removePixKeyError() {
+                        errorMessageContainer.innerHTML = '';
+                        pixKeyInput.classList.remove('error');
                     }
-                    else if (childBirthDate > today) {
-                        setChildError(1, "A data de nascimento não pode ser uma <span class='mainError'>data futura.</span>");
-                    }
-                    else if (childBirthDate < userBirthDate) {
-                        setChildError(1, "O filho não pode nascer antes do responsável.");
-                    } else {
-                        removeChildError(1);  
-                    }
-                }
-                
-                function checkEmptyChildInput(inputIndex) {
-                    const inputElement = validateEditChildInputs[inputIndex];
-                    if (inputElement.value.trim() === "") {
-                        setChildError(inputIndex, "Este campo é <span class='mainError'>obrigatório.</span>");
-                    }
-                }
 
-                const submitEditChildButton = document.getElementById('editChild');  
+                    function validarCPF(cpf) {
+                        cpf = cpf.replace(/[^\d]/g, '');
+                        if (cpf.length !== 11) {
+                            return false;
+                        }
+
+                        let cpfArray = cpf.split('').map(Number);
+
+                        let v1 = 0, v2 = 0;
+
+                        for (let i = 0; i < 9; i++) {
+                            v1 += cpfArray[i] * (9 - (i % 10));
+                        }
+                        v1 = (v1 % 11) % 10;
+
+                        for (let i = 0; i < 9; i++) {
+                            v2 += cpfArray[i] * (9 - ((i + 1) % 10));
+                        }
+                        v2 += v1 * 9;
+                        v2 = (v2 % 11) % 10;
+
+                        return cpfArray[9] === v1 && cpfArray[10] === v2;
+                    }
+
+                    function validatePixKey() {
+                        const pixKey = pixKeyInput.value.trim();
+                        const cleanedPixKey = pixKey.replace(/\D/g, ''); // Remove caracteres não numéricos
+                        let errorMessages = [];
+
+                        // Validação de CPF e telefone
+                        const validDDDs = [
+                            '61', '62', '64', '65', '66', '67', // Centro-Oeste
+                            '82', '71', '73', '74', '75', '77', '79', '81', '83', '84', '85', '86', '87', '88', '89', '98', '99', // Nordeste
+                            '63', '68', '69', '91', '92', '93', '94', '69', '95', '96', '97', // Norte
+                            '11', '12', '13', '14', '15', '16', '17', '18', '19', '21', '22', '24', '31', '32', '33', '34', '35', '37', '38', // Sudeste
+                            '41', '42', '43', '44', '45', '46', '47', '48', '49', '51', '53', '54', '55' // Sul
+                        ];
                         
-                submitEditChildButton.addEventListener('click', function(event) {
-                    validateChildName();
-                    validateChildBirthDate();
-                    
-                    if (!validateEditChildForm()) {
-                        event.preventDefault(); 
-                        alert("Por favor, corrija os erros antes de enviar o formulário.");
-                    }
-                });
-                validateEditChildInputs[0].addEventListener('input', validateChildName);
-                validateEditChildInputs[1].addEventListener('input', validateChildBirthDate);
-            }
+                        const phoneRegex = /^\d{10,11}$/;
 
-            document.getElementById('confirmDelete').addEventListener('copy', function(e) {
-                e.preventDefault();
-            });
+                        if (cleanedPixKey.length === 11 && !isNaN(cleanedPixKey)) {
+                            if (!validarCPF(cleanedPixKey)) {
+                                if (phoneRegex.test(cleanedPixKey)) {
+                                    const ddd = cleanedPixKey.substring(0, 2);
+                                    if (!validDDDs.includes(ddd)) {
+                                        errorMessages.push("Número de telefone inválido.");
+                                    } else {
+                                        removePixKeyError();
+                                        return; // Telefone válido, encerra a validação
+                                    }
+                                }
+                                errorMessages.push("CPF inválido.");
+                            } else {
+                                removePixKeyError();
+                                return; // CPF válido, encerra a validação
+                            }
+                        }
+
+                        if (/^\d{14}$/.test(cleanedPixKey)) {
+                            if (pixKey.match(/[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}/)) {
+                                removePixKeyError(); // CNPJ válido
+                                return;
+                            } else {
+                                errorMessages.push("CNPJ inválido.");
+                            }
+                        }
+
+                        if (/^[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$/.test(pixKey)) {
+                            removePixKeyError(); // Chave aleatória válida
+                            return;
+                        } else if (pixKey.length === 36) {
+                            errorMessages.push("Chave aleatória inválida.");
+                        }
+
+                        if (/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(pixKey)) {
+                            removePixKeyError(); // E-mail válido
+                            return;
+                        } else if (pixKey.includes('@')) {
+                            errorMessages.push("E-mail inválido.");
+                        }
+
+                        // Mensagem padrão se nenhuma validação for atendida
+                        if (pixKey.length !== 0 &&errorMessages.length === 0) {
+                            errorMessages.push("A chave Pix deve ser um CPF, CNPJ, e-mail ou chave aleatória.");
+                        }
+
+                        if (errorMessages.length > 0) {
+                            setPixKeyError(errorMessages.join(' '));
+                        } else {
+                            removePixKeyError(); // Nenhum erro encontrado
+                        }
+                    }
+
+                    function validatePixForm(event) {
+                        if (pixKeyInput.value.trim() === "") {
+                            alert("Por favor, preencha todos os campos antes de enviar o formulário.");
+                            event.preventDefault();  // Impede o envio do formulário se o campo estiver vazio
+                            return;
+                        }
+
+                        validatePixKey();
+
+                        const errorMessages = document.querySelectorAll('.pixErrorContent');
+                        for (let errorMessage of errorMessages) {
+                            if (errorMessage.innerHTML !== '') {
+                                event.preventDefault();  // Impede o envio do formulário se houver erro
+                                alert("Por favor, corrija os erros antes de enviar o formulário.");
+                                return;
+                            }
+                        }
+                    }
+
+                    const submitButton = document.querySelector('[name="editPixSubmit"]');
+                    submitButton.addEventListener('click', validatePixForm);
+
+                    pixKeyInput.addEventListener('input', validatePixKey);
+                }
+
+                function deleteAccountValidation() {
+                    const confirmDeleteInput = document.getElementById('confirmDeleteInput');
+                    const confirmDeleteText = document.getElementById('confirmDelete').value; // O código gerado
+                    const confirmDelete = document.getElementById('confirmDelete');
+
+                    confirmDelete.addEventListener('copy', function(e) {
+                        e.preventDefault();
+                    });
+
+                    function setDeleteError(message) {
+                        const errorMessageContainer = confirmDeleteInput.closest('.Se-deleteInput').nextElementSibling.querySelector('.deleteAccountErrorContent');
+                        errorMessageContainer.innerHTML = message;
+                        confirmDeleteInput.classList.add('error');
+                    }
+
+                    function removeDeleteError() {
+                        const errorMessageContainer = confirmDeleteInput.closest('.Se-deleteInput').nextElementSibling.querySelector('.deleteAccountErrorContent');
+                        errorMessageContainer.innerHTML = '';
+                        confirmDeleteInput.classList.remove('error');
+                    }
+
+                    function validateDeleteInput() {
+                        const inputText = confirmDeleteInput.value.trim();
+
+                        if (inputText === "") {
+                            setDeleteError("Por favor, reescreva o código para confirmar.");
+                        } else if (inputText !== confirmDeleteText) {
+                            setDeleteError("Os textos não coincidem.");
+                        } else {
+                            removeDeleteError();
+                        }
+                    }
+
+                    function validateDeleteForm(event) {
+                        if (confirmDeleteInput.value.trim() === "") {
+                            alert("Por favor, preencha o campo de confirmação antes de enviar o formulário.");
+                            event.preventDefault();  // Prevent form submission if the field is empty
+                            return;
+                        }
+
+                        validateDeleteInput();
+
+                        const errorMessage = document.querySelector('.deleteAccountErrorContent');
+                        if (errorMessage && errorMessage.innerHTML !== '') {
+                            event.preventDefault();  // Prevent form submission if there's an error
+                            alert("Por favor, corrija os erros antes de enviar o formulário.");
+                            return;
+                        }
+                    }
+
+                    const submitButton = document.querySelector('[name="deleteAccountSubmit"]');
+                    submitButton.addEventListener('click', validateDeleteForm);
+
+                    confirmDeleteInput.addEventListener('input', validateDeleteInput);
+                }
+
+                pixKeyValidations();
+                passwordValidations();
+                phoneValidations();
+                deleteAccountValidation();
+            }
 
             document.getElementById("notificacaoForm").addEventListener("change", function() {
                 let valor = 0;
@@ -1028,8 +1404,8 @@
             });
 
             editUserValidations();
-            addChildValidations();
-            editChildValidations();
+            childValidations();
+            securityValidations();
         </script>
     </body>
 </html>
