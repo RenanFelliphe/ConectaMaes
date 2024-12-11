@@ -751,7 +751,6 @@
                     }
                 }
 
-                // Função de validação da biografia
                 function validateBio() {
                     const bioInput = validateUserInputs[1];
                     const bioValue = bioInput.value;
@@ -768,7 +767,6 @@
                     }
                 }
 
-                // Função para verificar se algum campo está vazio
                 function checkEmptyInput(inputIndex) {
                     const inputElement = validateUserInputs[inputIndex];
                     if (inputElement.value.trim() === "") {
@@ -776,9 +774,8 @@
                     }
                 }
 
-                // Impede o envio do formulário se houver erro
-                const submitEditUserButton = document.getElementById('editProfile');  // Certifique-se de selecionar o formulário corretamente
-                        
+                const submitEditUserButton = document.getElementById('editProfile'); 
+
                 submitEditUserButton.addEventListener('click', function(event) {
                     // Valida todos os campos antes de permitir o envio
                     validateFullName();
@@ -792,7 +789,6 @@
                     }
                 });
 
-                // Adiciona listeners de input para validar enquanto o usuário digita
                 validateUserInputs[0].addEventListener('input', validateFullName);
                 validateUserInputs[1].addEventListener('input', validateBio);
                 validateUserInputs[2].addEventListener('input', validateLocal);
@@ -1000,7 +996,6 @@
                 validateEditChildInputs[0].addEventListener('input', validateChildName);
                 validateEditChildInputs[1].addEventListener('input', validateChildBirthDate);
             }
-            
 
             document.getElementById('confirmDelete').addEventListener('copy', function(e) {
                 e.preventDefault();

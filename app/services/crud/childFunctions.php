@@ -53,7 +53,7 @@
             }
             
             if (isset($_POST['enviarFilho'])) {
-                $idParent = $_POST['parentIdToAddChild'];
+                $idParent = filter_var(mysqli_escape_string($conn,$_POST['parentIdToAddChild']), FILTER_SANITIZE_NUMBER_INT);
                 $add_child_messages = addChild($conn, $idParent); 
             }
             
@@ -165,7 +165,7 @@
             }
         
             if(isset($_POST['confirmarEditarFilho'])) {
-                $childId = $_POST['childEditIdentifier'];
+                $childId = filter_var(mysqli_escape_string($conn,$_POST['childEditIdentifier']), FILTER_SANITIZE_NUMBER_INT);
                 editChild($conn, $childId);
             } 
 
@@ -192,6 +192,6 @@
             }
 
             if(isset($_POST['deletarFilho'])){
-                $childId = $_POST['childIdentifier'];
+                $childId = filter_var(mysqli_escape_string($conn,$_POST['childIdentifier']), FILTER_SANITIZE_NUMBER_INT);
                 deleteChild($conn, $childId);
             }

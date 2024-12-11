@@ -285,18 +285,18 @@ function deleteComment($conn, $id) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($likedPost = array_keys($_POST, 'like', true)) {
-        $postId = str_replace('like_', '', $likedPost[0]);
+        $postId = filter_var(mysqli_escape_string($conn, str_replace('like_', '', $likedPost[0])), FILTER_SANITIZE_NUMBER_INT);
         handlePostLike($conn, $currentUserData['idUsuario'], (int)$postId);
     }
 
     if ($likedComment = array_keys($_POST, 'like', true)) {
-        $commentId = str_replace('commentLike_', '', $likedComment[0]);
+        $commentId = filter_var(mysqli_escape_string($conn, str_replace('commentLike_', '', $likedComment[0])), FILTER_SANITIZE_NUMBER_INT);
         handleCommentLike($conn, $currentUserData['idUsuario'], (int)$commentId); 
     }
 
     // Verifica se foi enviado para deletar algum comentário
     if (isset($_POST['deletarComentario'])) {
-        deleteComment($conn, $_POST['deleterCommentId']);
+        deleteComment($conn, filter_var(mysqli_escape_string($conn,$_POST['deleterCommentId']), FILTER_SANITIZE_NUMBER_INT));
     }
 }
 
@@ -347,7 +347,7 @@ function editAnonIdentification($conn, $id) {
     return $mensagem;
 }
 if(isset($_POST['confirmReportIdentification']) && isset($_POST['meIdentificarEdit'])){
-    $anonIdentification_message = editAnonIdentification($conn, $_POST['anonymousReportIdentifier']);
+    $anonIdentification_message = editAnonIdentification($conn, filter_var(mysqli_escape_string($conn,$_POST['anonymousReportIdentifier']), FILTER_SANITIZE_NUMBER_INT));
 }
 
 //AUXILIOS
@@ -364,5 +364,5 @@ function endAuxilio($conn, $postId) {
 }
 
 if(isset($_POST['concludePost'])){
-    $conclude_message = endAuxilio($conn, $_POST['identifierId']);
+    $conclude_message = endAuxilio($conn, filter_var(mysqli_escape_string($conn,$_POST['identifierId']), FILTER_SANITIZE_NUMBER_INT));
 }

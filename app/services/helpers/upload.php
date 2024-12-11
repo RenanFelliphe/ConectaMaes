@@ -15,7 +15,7 @@
             $imgExtensao = strtolower(pathinfo($imgNomeOriginal, PATHINFO_EXTENSION));
     
             // Verifica se a extensão é permitida (.png ou .jpeg)
-            if (in_array($imgExtensao, ['png', 'jpeg', 'jpg'])) {
+            if (in_array($imgExtensao, ["jpg", "jpeg", "png", "bmp", "webp"])) {
                 $imgNomeUnico = $nomeDeUsuario . "." . $imgExtensao;
                 $caminhoDestino = $diretorioPfP . $imgNomeUnico;
     
@@ -86,7 +86,7 @@
                     $mensagens[] = "Erro ao mover o arquivo para o diretório de destino."; // Mensagem de erro ao mover arquivo
                 }
             } else {
-                $mensagens[] = "Formato de imagem não suportado. Apenas .png e .jpeg são permitidos."; // Mensagem de erro para formato inválido
+                $mensagens[] = "Formato de imagem não suportado. Apenas .png, .jpg, .jpeg, .bmp, .webp são permitidos."; // Mensagem de erro para formato inválido
             }
         }
     
@@ -112,7 +112,7 @@
             $imgNomeOriginal = $_FILES['linkAnexoEnvio']['name'];
             $imgExtensao = strtolower(pathinfo($imgNomeOriginal, PATHINFO_EXTENSION));
             
-            if (in_array($imgExtensao, ['png', 'jpeg', 'jpg'])) { 
+            if (in_array($imgExtensao, ["jpg", "jpeg", "png", "bmp", "webp"])) { 
                 $imgNomeUnico =  $idPost. "." . $imgExtensao;
                 $caminhoDestino = $diretorioAnexo . $imgNomeUnico;
 
@@ -127,7 +127,7 @@
                     echo "Erro (". $_FILES['linkAnexoEnvio']['error']. ") ao mover o arquivo para o diretório de destino.<br>";
                 }
             } else {
-                echo "Formato de imagem não suportado. Apenas .png e .jpeg são permitidos.<br>";
+                echo "Formato de imagem não suportado. Apenas .png, .jpg, .jpeg, .bmp, .webp são permitidos.<br>";
             }  
         }
     }

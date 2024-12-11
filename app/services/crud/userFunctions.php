@@ -284,20 +284,17 @@ function editProfile($conn, $userId) {
     }
     return $mensagens;
 }
-
-// Como utilizar a função
-if(isset($_POST['editarPerfil'])) {
-    $updateProfile_messages = editProfile($conn, $_POST['updaterId']);
-}
-
+    if(isset($_POST['editarPerfil'])) {
+        $updateProfile_messages = editProfile($conn, filter_var(mysqli_escape_string($conn,$_POST['updaterId']), FILTER_SANITIZE_NUMBER_INT));
+    }
 
 function editPassword($conn, $userId) {
     $messages = array();  // Array para armazenar mensagens de erro e sucesso
 
     if (isset($_POST['currentPassword'], $_POST['newPassword'], $_POST['confirmNewPassword'])) {
-        $currentPassword = htmlspecialchars($_POST['currentPassword']);
-        $newPassword = htmlspecialchars($_POST['newPassword']);
-        $confirmPassword = htmlspecialchars($_POST['confirmNewPassword']);
+        $currentPassword = mysqli_real_escape_string($conn, $_POST['currentPassword']);
+        $newPassword = mysqli_real_escape_string($conn, $_POST['newPassword']);
+        $confirmPassword = mysqli_real_escape_string($conn, $_POST['confirmNewPassword']);
 
         // Busca a senha atual do usuário no banco de dados
         $searchUserPassword = "SELECT senha FROM Usuario WHERE idUsuario = $userId";
@@ -326,13 +323,13 @@ function editPassword($conn, $userId) {
     return $messages;  // Retorna todas as mensagens (erro ou sucesso)
 }
     if (isset($_POST['editPasswordSubmit'])) {
-        $password_messages = editPassword($conn, $_POST['updaterId']);
+        $password_messages = editPassword($conn, mysqli_escape_string($conn,$_POST['updaterId']));
     }
 function editTelephone($conn, $userId) {
     $messages = array();  // Array para armazenar mensagens de erro e sucesso
 
     if (isset($_POST['editTelephoneNumber']) && !empty($_POST['editTelephoneNumber'])) {
-        $newPhoneNumber = htmlspecialchars($_POST['editTelephoneNumber']);
+        $newPhoneNumber = mysqli_real_escape_string($conn, $_POST['editTelephoneNumber']);
         
         // Validação do número de telefone
         if (preg_match('/^\d{10,15}$/', $newPhoneNumber)) { 
@@ -358,7 +355,7 @@ function editTelephone($conn, $userId) {
     return $messages;  // Retorna todas as mensagens (erro ou sucesso)
 }
     if (isset($_POST['editTelephoneSubmit'])) {   
-        $phone_messages = editTelephone($conn, $_POST['updaterId']);
+        $phone_messages = editTelephone($conn, filter_var(mysqli_escape_string($conn,$_POST['updaterId']), FILTER_SANITIZE_NUMBER_INT));
     }
 
     function editPixKey($conn, $userId) {
@@ -392,7 +389,7 @@ function editTelephone($conn, $userId) {
     }
     
     if (isset($_POST['editPixSubmit'])) {   
-        $pix_messages = editPixKey($conn, $_POST['updaterId']);
+        $pix_messages = editPixKey($conn, filter_var(mysqli_escape_string($conn,$_POST['updaterId']), FILTER_SANITIZE_NUMBER_INT));
     }
     
 
@@ -406,7 +403,7 @@ function deleteAccount($conn, $id) {
             $row = mysqli_fetch_assoc($result);
             $nomeUsuario = $row['nomeDeUsuario'];
             if ($nomeUsuario) {
-                $validExtensions = ["jpg", "jpeg", "png", "gif", "bmp", "webp"];
+                $validExtensions = ["jpg", "jpeg", "png", "bmp", "webp"];
                 
                 foreach ($validExtensions as $ext) {
                     $filePath = __DIR__ . "/../../assets/imagens/fotos/perfil/" . $nomeUsuario . "." . $ext;
@@ -460,7 +457,7 @@ function generateRandomCode() {
 }
 
     if (isset($_POST['deleteAccountSubmit'])) {
-        $userId = $_POST['deleteUserId'];
+        $userId = filter_var(mysqli_escape_string($conn,$_POST['deleteUserId']), FILTER_SANITIZE_NUMBER_INT);
         if ($_POST['deleteTextInput'] == $_POST['confirmDeleteText']) {
             $deleteUser_messages = deleteAccount($conn, $userId);
         } else {
@@ -602,5 +599,5 @@ function desativarNotificacoes($conn, $userId) {
 }
 
     if (isset($_POST['desativarNotificacoesEnvio'])) {
-        $notif_message = desativarNotificacoes($conn, $_POST['updaterId']);
+        $notif_message = desativarNotificacoes($conn, filter_var(mysqli_escape_string($conn,$_POST['updaterId']), FILTER_SANITIZE_NUMBER_INT));
     }

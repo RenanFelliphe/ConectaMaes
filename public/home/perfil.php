@@ -109,7 +109,7 @@
                             </button>
                         <?php } else { ?>
                             <form method="POST">
-                                <button name="followProfile" class="Pe-followUser confirmBtn">
+                                <button name="followProfile" class="Pe-followUser confirmBtn" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>
                                     <p><?= $isFollowing ? 'Deixar de Seguir' : 'Seguir'; ?></p><i class="bi bi-person-<?= $isFollowing ? 'dash' : 'add'; ?>"></i>
                                 </button>
                             </form>
