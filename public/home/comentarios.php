@@ -12,7 +12,7 @@
     } else if (isset($_GET['comment'])) {
         $commentResult  = queryCommentsData($conn, "", $_GET['comment'], 1);  // Ou o que for adequado para buscar por comentário
         if (!$commentResult || count($commentResult) === 0) {
-            echo "<p class='error'>Postagem não encontrada!</p>";
+            echo "<p class='error'>Comentário não encontrado!</p>";
             exit;
         }
         $dadosConteudoComentado = $commentResult[0];
@@ -53,7 +53,7 @@
                             $dadosPublicacao = $dadosConteudoComentado;
                             include("../../app/includes/posts.php"); // Carrega a publicação
                         } else {
-                            $showReplies = false;
+                            $showReplies = isset($dadosComentario);  // Apenas mostrar respostas se já estivermos em um comentário específico
                             $dadosComentario = $dadosConteudoComentado;
                             include("../../app/includes/comments.php"); // Carrega o comentário
                         }
@@ -67,7 +67,7 @@
                     </button>
                 </div>
                 <div class="Co-allComents">
-                    <?php 
+                    <?php
                         $showReplies = true;
                         include ("../../app/includes/comments.php"); 
                     ?>

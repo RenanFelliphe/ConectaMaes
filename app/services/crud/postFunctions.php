@@ -87,6 +87,7 @@ function specificPostQuery($conn, $data, $where, $order) {
     
     return $sUExec;
 }
+
 function queryPostsAndUserData($conn, $postType = '', $postId = null, $limit = 10, $offset = 0) {
     $baseQuery = "
         SELECT 
@@ -130,6 +131,7 @@ function queryPostsAndUserData($conn, $postType = '', $postId = null, $limit = 1
     }
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
+
 function renderProfileLink($relativePublicPath, $profileImage, $nomeDeUsuario, $isRelatoAnonimo = false) {
     if ($isRelatoAnonimo) {
         return '<a class="postOwnerImage" href="#" onclick="return false;">
@@ -141,6 +143,7 @@ function renderProfileLink($relativePublicPath, $profileImage, $nomeDeUsuario, $
                 </a>';
     }
 }
+
 function queryUserLike($conn, $idUser, $idPost) {
     $queryLike = "SELECT * FROM curtirPublicacao WHERE idPublicacao = $idPost AND idUsuario = $idUser";
     $execQuery = mysqli_query($conn, $queryLike);
@@ -148,6 +151,7 @@ function queryUserLike($conn, $idUser, $idPost) {
 
     return $returnExec;
 }
+
 function queryUserCommentLike($conn, $idUser, $idComment) {
     $queryLike = "SELECT * FROM curtirComentario WHERE idComentario = $idComment AND idUsuario = $idUser";
     $execQuery = mysqli_query($conn, $queryLike);
@@ -161,6 +165,7 @@ function queryUserCommentLike($conn, $idUser, $idComment) {
 
     return $returnExec ? true : false;
 }
+
 // DELETE POST - DELETE
 function deletePost($conn, $id) {
     if (!empty($id)) {
@@ -197,6 +202,7 @@ function deletePost($conn, $id) {
 if (isset($_POST['deletarPost'])) {
     deletePost($conn, $_POST['identifierId']);
 }
+
 // LIKES
 function handlePostLike($conn, $idUser, $idPost) {
     $userLike = queryUserLike($conn, $idUser, $idPost);
@@ -216,6 +222,7 @@ function handlePostLike($conn, $idUser, $idPost) {
         }
     }
 }
+
 // COMMENTS
 function queryCommentsData($conn, $postId = null, $commentId = null, $limit = 10, $offset = 0) {
     $baseQuery = "
@@ -325,7 +332,6 @@ function queryCommentReplies($conn, $idComentarioAcima, $limit = 10, $offset = 0
 
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
-
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($likedPost = array_keys($_POST, 'like', true)) {
