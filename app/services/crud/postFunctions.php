@@ -64,6 +64,29 @@ function sendComment($conn, $idPublicacao, $currentUserId) {
     return $messages;
 }
 
+function sendNestedComment($conn, $idComentarioAcima, $currentUserId) {
+    $messages = array(); // Array para armazenar as mensagens
+
+    if (!empty($_POST['conteudoEnvio'])) {
+        $conteudoEnvio = mysqli_real_escape_string($conn, $_POST['conteudoEnvio']);
+        $idUsuarioQuePostou = mysqli_real_escape_string($conn, $currentUserId);
+        $insertNewComment = "INSERT INTO Comentario (conteudo, idUsuario, idPublicacao) VALUES ('$conteudoEnvio', '$idUsuarioQuePostou', NULL)";
+        $executeSendComment = mysqli_query($conn, $insertNewComment);
+        if ($executeSendComment) {
+            $idComentarioAbaixo = mysqli_insert_id($conn);
+            $insertRelation = "INSERT INTO comentarioComentario (idComentarioAcima, idComentarioAbaixo) VALUES ('$idComentarioAcima', '$idComentarioAbaixo')";
+            $executeRelation = mysqli_query($conn, $insertRelation);
+            if (!$executeRelation) {
+                $messages[] = "Erro ao relacionar comentários: " . mysqli_error($conn);
+            }
+        } else {
+            $messages[] = "Erro ao enviar comentário: " . mysqli_error($conn);
+        }
+    }
+
+    return $messages;
+}
+
 if (isset($_POST['postAuxilioModal'])) {
     $messages = sendPost($conn, 'Auxilio', $currentUserData['idUsuario']);
 } else if (isset($_POST['postRelatoModal'])) {

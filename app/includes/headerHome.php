@@ -1,8 +1,6 @@
 <?php
     include_once __DIR__ . "/../services/helpers/paths.php";
     include_once __DIR__ . "/../services/crud/postFunctions.php";
-    ini_set('display_errors', 1);
-    error_reporting(E_ALL);
     $currentUserHasNewNotifications = hasNewNotifications($conn, $currentUserData['idUsuario']);
 ?>
 
@@ -322,34 +320,45 @@
 <script>
     const headerHome = document.querySelector('.headerHome');
 
-    function openModalHeader(modal) {
+    function openModalHeader(modal) { 
         const modalSections = document.querySelectorAll('.modalSection');
         const submitPostBtn = document.querySelector('.Ho-submitPost');
         const btnClicked = modal.getAttribute("data-type");
+        const postLink = modal.getAttribute('post-link');
 
         const postTitleContainer = document.querySelector('#postTitleContainer');
-
         postTitleContainer.style.display = (btnClicked === 'postSomething' && modal.id === '') ? 'none' : 'flex';
 
-        submitPostBtn.setAttribute('name', modal.getAttribute('post-link'));
+        // Ajusta o texto do botão com base no `post-link`
+        let buttonText = 'Postar'; // Texto padrão
+        if (postLink === 'postComentarioModal' || postLink === 'postNestedComentarioModal') {
+            buttonText = 'Comentar';
+        } else if (postLink === 'postAuxilioModal') {
+            buttonText = 'Pedir';
+        } else if (postLink === 'postRelatoModal') {
+            buttonText = 'Relatar';
+        }
+        submitPostBtn.textContent = buttonText;
+
+        submitPostBtn.setAttribute('name', postLink);
 
         const identifyMyself = document.querySelector('.Ho-identifyMyself');
         const imageInput = document.querySelector('.Ho-imageInput');
         const showPixKey = document.querySelector('.Ho-showPixKey');
 
-        if (modal.getAttribute('post-link') === "postRelatoModal") {
+        if (postLink === "postRelatoModal") {
             identifyMyself.style.display = 'flex';  
         } else {
             identifyMyself.style.display = 'none';  
         }
 
-        if (modal.getAttribute('post-link') === "postComentarioModal") {
+        if (postLink === "postComentarioModal" || postLink === "postNestedComentarioModal") {
             imageInput.style.display = 'none'; 
         } else {
             imageInput.style.display = 'flex';
         }
 
-        if (modal.getAttribute('post-link') === "postAuxilioModal") {
+        if (postLink === "postAuxilioModal") {
             showPixKey.style.display = 'flex';
         } else {
             showPixKey.style.display = 'none';
@@ -357,7 +366,7 @@
         
         toggleModal(modal);
 
-        //Adiciona o idPublicacao na postagem de comentarios
+        // Adiciona o idPublicacao na postagem de comentários
         const postId = modal.getAttribute("data-post-id");
         if (btnClicked === 'postSomething' && postId) {
             const postIdField = document.querySelector('#postIdField');
@@ -366,7 +375,7 @@
             }
         }
 
-        //Fecha o modal
+        // Fecha o modal
         const closeModalBtns = document.querySelectorAll('.closeModal');  
         closeModalBtns.forEach(closeModalBtn => {
             closeModalBtn.addEventListener('click', () => {
@@ -374,6 +383,7 @@
             });
         });
     }
+
 
     function dropdownHeaderSections() {
         const makeAPostButton = document.querySelector('.makeAPost');

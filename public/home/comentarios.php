@@ -55,16 +55,25 @@
                         } else {
                             $showReplies = isset($dadosComentario);  // Apenas mostrar respostas se já estivermos em um comentário específico
                             $dadosComentario = $dadosConteudoComentado;
-                            include("../../app/includes/comments.php"); // Carrega o comentário
+                            if (!isset($wasMainCommentDisplayed)) {
+                                include("../../app/includes/comments.php");
+                                $wasMainCommentDisplayed = true;
+                            }
                         }
                     ?>
 
-                    <button type="submit" class="commentBtnn confirmBtn" 
-                        data-type="postSomething" data-post-id="<?= $dadosPublicacao['idPublicacao']; ?>" 
-                        post-link="postComentarioModal" onclick="openModalHeader(this);"
-                        <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>
-                        Comentar
-                    </button>
+                <?php 
+                    $postLink = $tipoConteudo === 'Publicação' ? 'postComentarioModal' : 'postNestedComentarioModal';
+                    $dataPostId = $tipoConteudo === 'Publicação' ? $dadosPublicacao['idPublicacao'] : $dadosComentario['idComentario'];
+                ?>
+                <button type="submit" class="commentBtnn confirmBtn" 
+                    data-type="postSomething" 
+                    data-post-id="<?= $dataPostId; ?>" 
+                    post-link="<?= $postLink; ?>" 
+                    onclick="openModalHeader(this);"
+                    <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>
+                    Comentar
+                </button>
                 </div>
                 <div class="Co-allComents">
                     <?php
