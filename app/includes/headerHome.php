@@ -76,6 +76,7 @@
             <div class="notificationsContainer">
                 <?php 
                     $notifications = getUserNotifications($conn, $currentUserData['idUsuario']);
+                    //var_dump($notifications);
                     $today = date('Y-m-d'); 
                     $foundNotification = false;
 
@@ -92,19 +93,20 @@
 
                     if (count($notifications) > 0) {
                         foreach ($notifications as $notification) {
+                            
                             $notificationDate = date('Y-m-d', strtotime($notification['dataNotificacao']));
-
+                            
                             // Pula notificações que não são de hoje ou são do próprio usuário
-                            if ($notificationDate !== $today || $notification['idUsuarioGerou'] == $currentUserData['idUsuario']) {
+                            if (/*$notificationDate !== $today || */$notification['idUsuarioGerou'] == $currentUserData['idUsuario']) {
                                 continue;
                             }
-
+                            //var_dump($notification);
                             // Verifica se a notificação está desativada para o tipo atual
                             $desativadoTipos = $notificacoesDesativadas[$currentUserData['desativouNotificacao']] ?? [];
                             if (in_array($notification['tipoNotificacao'], $desativadoTipos)) {
                                 continue;
                             }
-
+                            
                             $foundNotification = true;
                             $userPhoto = $notification['fotoUsuarioGerou'];
                             $username = $notification['usernameUsuarioGerou'];
