@@ -177,8 +177,12 @@
                     </div>
                     
                     <div class="Re-termsPDF">
-                        <div class="Re-usingTermsPDF"></div>
-                        <div class="Re-privacyTermsPDF"></div>
+                        <div class="Re-usingTermsPDF">
+                            <embed src="<?=$relativeRootPath ."/documents/politicas_de_privacidade_ConectaMaes.pdf"?>" width="500" height="auto" style="overflow:hidden;" type="application/pdf">
+                        </div>
+                        <div class="Re-privacyTermsPDF">
+                            <embed src="<?=$relativeRootPath."/documents/termos_de_uso_ConectaMaes.pdf"?>" width="100%" height="auto" style="overflow:hidden;" type="application/pdf">
+                        </div>
                     </div>
 
                     <div class="Re-termsCheckboxes">
@@ -615,17 +619,30 @@
                     function toggleTermsType(clicked) {
                         const termsType = document.querySelectorAll('.Re-termsType');
                         const termsSelector = document.querySelector('.Re-termsSelector');
+                        const usingTermsPDF = document.querySelector('.Re-usingTermsPDF');
+                        const privacyTermsPDF = document.querySelector('.Re-privacyTermsPDF');
 
+                        // Remove a classe 'active' de todos os botões
                         termsType.forEach(termType => {
                             termType.classList.remove('active');
                         });
 
+                        // Adiciona a classe 'active' ao botão clicado
                         clicked.classList.add('active');
 
+                        // Alterna entre os PDFs com base no botão clicado
                         if (clicked.classList.contains('Re-usingTerms')) {
                             termsSelector.style.transform = 'translateX(0)';
+
+                            // Exibe o PDF de termos de uso e oculta o de privacidade
+                            usingTermsPDF.style.display = 'block';
+                            privacyTermsPDF.style.display = 'none';
                         } else if (clicked.classList.contains('Re-privacyTerms')) {
                             termsSelector.style.transform = 'translateX(100%)';
+
+                            // Exibe o PDF de política de privacidade e oculta o de termos de uso
+                            usingTermsPDF.style.display = 'none';
+                            privacyTermsPDF.style.display = 'block';
                         }
                     }
 
@@ -634,7 +651,7 @@
                             toggleTermsType(termType);
                         });
                     });
-
+                    
                     function validateSubmit() {
                         const privacyTermsCheckbox = document.querySelector('#privacyTermsCheckbox');
                         const usingTermsCheckbox = document.querySelector('#usingTermsCheckbox');

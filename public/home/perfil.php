@@ -148,9 +148,11 @@
 
                             foreach ($publicacoes as $dadosPublicacao) {
                                 if ($dadosPublicacao['idUsuario'] == $profileData['idUsuario']) {
-
+                                    if($currentUserData['idUsuario'] !== $profileData['idUsuario'] && $dadosPublicacao['isAnonima']){
+                                        continue;
+                                    }
                                     // Verificar se o link da foto de perfil está presente
-                                    $profileImage = !empty($dadosPublicacao['linkFotoPerfil']) ? $dadosPublicacao['linkFotoPerfil'] : 'caminho/padrao/para/imagem.png';
+                                    $profileImage = !empty($dadosPublicacao['linkFotoPerfil']) ? $dadosPublicacao['linkFotoPerfil'] : 'default.png';
                             
                                     // Formatar a data da publicação utilizando a função do arquivo dateChecker.php
                                     $mensagemData = postDateMessage($dadosPublicacao["dataCriacaoPublicacao"]);
@@ -191,7 +193,7 @@
                                             </div>
                             
                                             <div class="postTitles">  
-                                                <p class="postTitle"><?= htmlspecialchars($dadosPublicacao['titulo']); ?></p>
+                                                <p class="postTitle"><strong><?= htmlspecialchars($dadosPublicacao['titulo']); ?></strong></p>
                                                 <p class="textPost"><?= htmlspecialchars($dadosPublicacao['conteudo']); ?></p>
                                             </div>
                             
@@ -232,8 +234,11 @@
                                 $count = 0;
                                 foreach ($publicacoes as $dadosPublicacao) {
                                     if ($dadosPublicacao['idUsuario'] == $profileData['idUsuario']) {
+                                        if($currentUserData['idUsuario'] !== $profileData['idUsuario'] && $dadosPublicacao['isAnonima']){
+                                            continue;
+                                        }
                                         // Verificar se o link da foto de perfil está presente
-                                        $profileImage = !empty($dadosPublicacao['linkFotoPerfil']) ? $dadosPublicacao['linkFotoPerfil'] : 'caminho/padrao/para/imagem.png';
+                                        $profileImage = !empty($dadosPublicacao['linkFotoPerfil']) ? $dadosPublicacao['linkFotoPerfil'] : 'default.png';
                                 
                                         // Formatar a data da publicação utilizando a função do arquivo dateChecker.php
                                         $mensagemData = postDateMessage($dadosPublicacao["dataCriacaoPublicacao"]);
@@ -319,7 +324,7 @@
                             foreach ($auxilios as $dadosPublicacao) {
                                 if ($dadosPublicacao['idUsuario'] == $profileData['idUsuario']) {
                                     // Verificar se o link da foto de perfil está presente
-                                    $profileImage = !empty($dadosPublicacao['linkFotoPerfil']) ? $relativeAssetsPath."/imagens/fotos/perfil/".$dadosPublicacao['linkFotoPerfil'] : 'caminho/padrao/para/imagem.png';
+                                    $profileImage = !empty($dadosPublicacao['linkFotoPerfil']) ? $relativeAssetsPath."/imagens/fotos/perfil/".$dadosPublicacao['linkFotoPerfil'] : 'default.png';
 
                                     // Formatar a data da publicação utilizando a função do arquivo dateChecker.php
                                     $mensagemData = postDateMessage($dadosPublicacao["dataCriacaoPublicacao"]);
