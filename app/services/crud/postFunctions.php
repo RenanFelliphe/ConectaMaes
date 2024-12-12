@@ -217,17 +217,17 @@ function handlePostLike($conn, $idUser, $idPost) {
     }
 }
 // COMMENTS
-function queryCommentsData($conn, $postId, $limit = 10, $offset = 0) {
+function queryCommentsData($conn, $postId = null, $commentId = null, $limit = 10, $offset = 0) {
     $baseQuery = "
         SELECT 
             c.idComentario,
             c.conteudo AS comentarioConteudo,
             c.dataCriacaoComentario,
+            c.idPublicacao,
             u.idUsuario,
             u.nomeCompleto,
             u.nomeDeUsuario,
             u.linkFotoPerfil,
-            u.estado,
             COUNT(lp.idComentario) AS totalCommentLikes
         FROM 
             Comentario c
@@ -237,13 +237,19 @@ function queryCommentsData($conn, $postId, $limit = 10, $offset = 0) {
             curtirComentario lp ON lp.idComentario = c.idComentario
     ";
 
-    $whereClause = "WHERE c.idPublicacao = " . intval($postId);
+    $whereClause = '';
+    if ($commentId !== null) {
+        $commentId = intval($commentId); 
+        $whereClause = "WHERE c.idComentario = $commentId";
+    } else if ($postId !== null) {
+        $postId = intval($postId); 
+        $whereClause = "WHERE c.idPublicacao = $postId";
+    }
 
     $finalQuery = $baseQuery . " " . $whereClause . " 
         GROUP BY c.idComentario
         ORDER BY c.dataCriacaoComentario ASC
         LIMIT $limit OFFSET $offset";
-
     $result = mysqli_query($conn, $finalQuery);
 
     if (!$result) {
@@ -253,6 +259,7 @@ function queryCommentsData($conn, $postId, $limit = 10, $offset = 0) {
 
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
+
 function handleCommentLike($conn, $idUser, $idComment) {
     $userLike = queryUserCommentLike($conn, $idUser, $idComment);
     if (!$userLike) {
@@ -271,6 +278,7 @@ function handleCommentLike($conn, $idUser, $idComment) {
         }
     }
 }
+
 function deleteComment($conn, $id) {
     if (!empty($id)) {
         $dQuery = "DELETE FROM Comentario WHERE idComentario = " . (int)$id;
@@ -282,6 +290,42 @@ function deleteComment($conn, $id) {
         }
     }
 }
+
+function queryCommentReplies($conn, $idComentarioAcima, $limit = 10, $offset = 0) {
+    $query = "
+        SELECT 
+            c.idComentario, 
+            c.conteudo AS comentarioConteudo, 
+            c.dataCriacaoComentario, 
+            c.idUsuario, 
+            c.idPublicacao, 
+            u.nomeCompleto, 
+            u.nomeDeUsuario, 
+            u.linkFotoPerfil, 
+            (SELECT COUNT(*) FROM curtirComentario lp WHERE lp.idComentario = c.idComentario) AS totalCommentLikes
+        FROM 
+            comentarioComentario cc
+        JOIN 
+            Comentario c ON cc.idComentarioAbaixo = c.idComentario
+        JOIN 
+            Usuario u ON c.idUsuario = u.idUsuario
+        WHERE 
+            cc.idComentarioAcima = " . intval($idComentarioAcima) . "
+        ORDER BY 
+            c.dataCriacaoComentario ASC
+        LIMIT $limit OFFSET $offset
+    ";
+
+    $result = mysqli_query($conn, $query);
+
+    if (!$result) {
+        echo "<p class='error'>Erro na consulta: " . mysqli_error($conn) . "</p>";
+        return false;
+    }
+
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($likedPost = array_keys($_POST, 'like', true)) {

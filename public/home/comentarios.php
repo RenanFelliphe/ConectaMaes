@@ -1,14 +1,27 @@
 <?php 
     include_once __DIR__ . "/../../app/includes/globalIncludes.php";
-    $post = isset($_GET['post']) ? true : header("Location:". $relativeRootPath."/notFound.php");
-    $postResult = queryPostsAndUserData($conn, "", $_GET['post'], 1);
-    if (!$postResult || count($postResult) === 0) {
-        echo "<p class='error'>Postagem não encontrada!</p>";
-        exit;
-    }
-    $dadosPublicacao = $postResult[0];
-?>
 
+    if (isset($_GET['post'])) {
+        $postResult = queryPostsAndUserData($conn, "", $_GET['post'], 1);
+        if (!$postResult || count($postResult) === 0) {
+            echo "<p class='error'>Postagem não encontrada!</p>";
+            exit;
+        }
+        $dadosConteudoComentado = $postResult[0];
+        $tipoConteudo = 'Publicação';
+    } else if (isset($_GET['comment'])) {
+        $commentResult  = queryCommentsData($conn, "", $_GET['comment'], 1);  // Ou o que for adequado para buscar por comentário
+        if (!$commentResult || count($commentResult) === 0) {
+            echo "<p class='error'>Postagem não encontrada!</p>";
+            exit;
+        }
+        $dadosConteudoComentado = $commentResult[0];
+        $tipoConteudo = 'Comentário';
+    } else {
+        header("Location:". $relativeRootPath."/notFound.php");
+        exit;
+    } 
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -31,24 +44,33 @@
                 <div class="Co-mainPost">
                     <div class="Co-timelineHeader">  
                         <a href="../home.php"><i class="bi bi-arrow-left-circle"></i></a>
-                        <h1>Post</h1>
+                        <h1><?= $tipoConteudo === 'Comentário' ? 'Comentário' : 'Publicação'; ?></h1>
                     </div>
 
                     <?php
-                        $tipoPublicacao = '';
-                        include("../../app/includes/posts.php");
+                        if ($tipoConteudo === 'Publicação') {
+                            $tipoPublicacao = '';
+                            $dadosPublicacao = $dadosConteudoComentado;
+                            include("../../app/includes/posts.php"); // Carrega a publicação
+                        } else {
+                            $showReplies = false;
+                            $dadosComentario = $dadosConteudoComentado;
+                            include("../../app/includes/comments.php"); // Carrega o comentário
+                        }
                     ?>
 
-                <button type="submit" class="commentBtnn confirmBtn" 
-                    data-type="postSomething" data-post-id="<?= $dadosPublicacao['idPublicacao']; ?>" 
-                    post-link="postComentarioModal" onclick="openModalHeader(this);"
-                    <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>
-                    Comentar
-                </button>
-                
+                    <button type="submit" class="commentBtnn confirmBtn" 
+                        data-type="postSomething" data-post-id="<?= $dadosPublicacao['idPublicacao']; ?>" 
+                        post-link="postComentarioModal" onclick="openModalHeader(this);"
+                        <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>
+                        Comentar
+                    </button>
                 </div>
                 <div class="Co-allComents">
-                    <?php include ("../../app/includes/comments.php"); ?>
+                    <?php 
+                        $showReplies = true;
+                        include ("../../app/includes/comments.php"); 
+                    ?>
                 </div>
             </section>
 

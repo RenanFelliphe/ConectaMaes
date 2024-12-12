@@ -1,12 +1,6 @@
 <?php 
     include_once ("../../app/includes/globalIncludes.php");
 
-    // Verificar se o usuário está logado
-    if (!isset($_SESSION['active'])) {
-        header("Location: " . $relativePublicPath . "/login.php");
-        exit;
-    }
-
     // Verificar se o perfil de usuário foi especificado
     if (!isset($_GET['user'])) {
         header("Location: " . $relativeRootPath . "/notFound.php");
@@ -104,7 +98,7 @@
                             <span><?= $profileData['biografia']; ?></span>
                         </div>
                         <?php if($currentUserData['idUsuario'] == $profileData['idUsuario']) { ?>
-                            <button name="editProfile" class="Pe-editAccount confirmBtn">
+                            <button name="editProfile" class="Pe-editAccount confirmBtn" data-link="<?= $relativePublicPath . "/home/config.php"?>">
                                 <p>Editar Perfil</p><i class="bi bi-pencil-fill"></i>
                             </button>
                         <?php } else { ?>
@@ -451,10 +445,6 @@
 
         <script src="<?= $relativeAssetsPath; ?>/js/system.js"></script>
         <script>
-            if ( window.history.replaceState ) {
-                window.history.replaceState(null, null, window.location.href );
-            }
-
             document.querySelectorAll('.postMoreButton').forEach(b => b.onclick = () => b.querySelector('.postFunctionsModal').classList.toggle('close'));
 
             //const searchBar = document.querySelector('.Pe-searchBar');
@@ -492,6 +482,18 @@
                     targetSection.classList.add('active');
                 });
             });
+
+            function redirectToEditProfile(buttonSelector) {
+                const button = document.querySelector(buttonSelector);
+                button.addEventListener('click', function() {
+                    const link = this.getAttribute('data-link');
+                    window.location.href = link;
+                });
+            }
+
+            // Chama a função para o botão com a classe "Pe-editAccount"
+            redirectToEditProfile('.Pe-editAccount');
+
         </script>
     </body>
 </html>
