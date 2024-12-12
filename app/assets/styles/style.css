@@ -485,8 +485,27 @@ body.Y-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon {
     height: 4rem;
 }
 
-.headerHome .userContainer .notificationsModalIcon {
+.headerHome .userContainer .notificationIconContainer{
+    position: relative;
+
+}
+
+.headerHome .userContainer .notificationIconContainer .notificationsModalIcon {
     width: 2rem;
+    position: relative;
+}
+
+.headerHome .userContainer .notificationIconContainer .notificationAlert {
+    position: absolute;
+    top: -0.1rem; /* Ajuste fino para posicionamento */
+    right: -0.1rem; /* Ajuste fino para posicionamento */
+    width: 1rem; /* Unifique largura e altura */
+    height: 1rem;
+    background-color: var(--secondColor);
+    border: 3px solid white; /* Bordas mais finas */
+    border-radius: 50%;
+    display: inline-block;
+    z-index: 1;
 }
 
 .headerHome .userContainer .userInformations {
@@ -777,8 +796,11 @@ body.Y-theme .makeAPostModal .postStyleSummary:hover .postStyleTitle img {
 .headerHome .notificationsModal .notificationsCenter .notificationsRelativeDate{
     position: relative;
     display: flex;
+    align-items: center;
+    justify-content: center;
     gap: 0.5rem;
     margin-bottom: 0.5rem;
+    width:100%;
 }
 
 .headerHome .notificationsModal .notificationsCenter .notificationsRelativeDate span{
@@ -789,8 +811,17 @@ body.Y-theme .makeAPostModal .postStyleSummary:hover .postStyleTitle img {
     background-color: #000000;
 }
 
-.headerHome .notificationsModal .notificationsCenter .notificationsRelativeDate span:last-of-type{
-    width: 100%;
+.headerHome .notificationsModal .notificationsCenter .notificationsRelativeDate span:first-child {
+    width: 2rem; /* Tamanho fixo para o primeiro span */
+}
+
+.headerHome .notificationsModal .notificationsCenter .notificationsRelativeDate span:last-child {
+    flex-grow: 1; /* O segundo span ocupará o restante do espaço */
+}
+
+.headerHome .notificationsModal .notificationsCenter .notificationsRelativeDate p {
+    margin: 0 8px;
+    white-space: nowrap; /* Garante que o texto não quebre */
 }
 
 .headerHome .notificationsModal .notificationsCenter .notificationsContainer{

@@ -1,18 +1,7 @@
 <?php 
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
-    include_once __DIR__ . "/../../app/services/helpers/paths.php";
-    $verify = isset($_SESSION['active']) ? true : header("Location:".$relativePublicPath."/login.php");
+    include_once __DIR__ . "/../../app/includes/globalIncludes.php";
     $post = isset($_GET['post']) ? true : header("Location:". $relativeRootPath."/notFound.php");
-
-    require_once "../../app/services/crud/userFunctions.php";
-    $currentUserData = queryUserData($conn, $_SESSION['idUsuario']);  
-    require_once "../../app/services/crud/postFunctions.php";
-    require_once '../../app/services/helpers/dateChecker.php';
-     
     $postResult = queryPostsAndUserData($conn, "", $_GET['post'], 1);
-
     if (!$postResult || count($postResult) === 0) {
         echo "<p class='error'>Postagem não encontrada!</p>";
         exit;

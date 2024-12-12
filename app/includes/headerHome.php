@@ -3,6 +3,7 @@
     include_once __DIR__ . "/../services/crud/postFunctions.php";
     ini_set('display_errors', 1);
     error_reporting(E_ALL);
+    $currentUserHasNewNotifications = hasNewNotifications($conn, $currentUserData['idUsuario']);
 ?>
 
 <script>
@@ -35,7 +36,16 @@
     </div>
 
     <div class="userContainer">
-        <img class="notificationsModalIcon headerIcon" src="<?= $relativeAssetsPath; ?>/imagens/icons/notifications_off.png" alt="Ícone do modal de notificações">
+        <div class="notificationIconContainer">
+            <img class="notificationsModalIcon headerIcon" src="<?= $relativeAssetsPath; ?>/imagens/icons/notifications_off.png" alt="Ícone do modal de notificações">
+            <?php
+                if($currentUserHasNewNotifications){
+                ?>
+                    <span class="notificationAlert"></span>
+                <?php
+                }
+            ?>
+        </div>
 
         <div class="makeAPost" onclick="openModalHeader(this);">
             <button name ="postPostagem" class="makeAPostBtn">Postar</button>
@@ -68,16 +78,11 @@
             <!--i class="bi bi-three-dots pageIcon"></i-->
         </div>    
         <div class="notificationsCenter">
-            <div class="notificationsRelativeDate">
-                <span></span>    
-                    <p>Hoje</p>
-                <span></span>
-            </div>
             <div class="notificationsContainer">
                 <?php 
                     $notifications = getUserNotifications($conn, $currentUserData['idUsuario']);
-                    //var_dump($notifications);
                     $today = date('Y-m-d'); 
+                    $sevenDaysAgo = date('Y-m-d', strtotime('-7 days')); 
                     $foundNotification = false;
 
                     // Lista de notificações desativadas por tipo de notificação
@@ -91,47 +96,77 @@
                         7 => ["curtiuPublicacao", "comentouPublicacao", "seguiuUsuario"]
                     ];
 
+                    // Função para calcular o texto da data relativa
+                    function getRelativeDateText($date, $today) {
+                        $diff = (strtotime($today) - strtotime($date)) / 86400;
+                        if ($diff == 0) return "Hoje";
+                        if ($diff == 1) return "Ontem";
+                        return "$diff dias atrás";
+                    }
+
+                    $groupedNotifications = [];
+
                     if (count($notifications) > 0) {
                         foreach ($notifications as $notification) {
-                            
                             $notificationDate = date('Y-m-d', strtotime($notification['dataNotificacao']));
-                            
-                            // Pula notificações que não são de hoje ou são do próprio usuário
-                            if (/*$notificationDate !== $today || */$notification['idUsuarioGerou'] == $currentUserData['idUsuario']) {
+
+                            // Pula notificações fora do intervalo de 7 dias ou do próprio usuário
+                            if ($notificationDate < $sevenDaysAgo || $notification['idUsuarioGerou'] == $currentUserData['idUsuario']) {
                                 continue;
                             }
-                            //var_dump($notification);
+
                             // Verifica se a notificação está desativada para o tipo atual
                             $desativadoTipos = $notificacoesDesativadas[$currentUserData['desativouNotificacao']] ?? [];
                             if (in_array($notification['tipoNotificacao'], $desativadoTipos)) {
                                 continue;
                             }
-                            
-                            $foundNotification = true;
-                            $userPhoto = $notification['fotoUsuarioGerou'];
-                            $username = $notification['usernameUsuarioGerou'];
-                            $action = '';
 
-                            // Define a ação de acordo com o tipo de notificação
-                            switch ($notification['tipoNotificacao']) {
-                                case 'curtiuPublicacao':
-                                    $action = "curtiu sua publicação";
-                                    break;
-                                case 'comentouPublicacao':
-                                    $action = "comentou sua publicação";
-                                    break;
-                                case 'seguiuUsuario':
-                                    $action = "seguiu você";
-                                    break;
+                            $foundNotification = true;
+
+                            // Agrupa notificações por data
+                            $relativeDateText = getRelativeDateText($notificationDate, $today);
+                            if (!isset($groupedNotifications[$relativeDateText])) {
+                                $groupedNotifications[$relativeDateText] = [];
                             }
+                            $groupedNotifications[$relativeDateText][] = $notification;
+                        }
+
+                        // Renderiza notificações agrupadas
+                        foreach ($groupedNotifications as $relativeDate => $notificationsGroup) {
                             ?>
-                            <div class='notification' data-id="<?=$notification['idNotificacao'];?>" data-link="<?= $relativePublicPath . $notification['linkNotificacao'] ?>">
-                                <?= renderProfileLink($relativePublicPath, $relativeAssetsPath . "/imagens/fotos/perfil/" . $userPhoto, $username, false) ?>
-                                <div class="notificationContent">
-                                    <strong class='username'><?= $username ?></strong> <?= $action ?>
+                                <div class='notificationsRelativeDate'>
+                                    <span></span>
+                                    <p><?= $relativeDate ?></p>
+                                    <span></span>
                                 </div>
-                            </div>
                             <?php
+
+                            foreach ($notificationsGroup as $notification) {
+                                $userPhoto = $notification['fotoUsuarioGerou'];
+                                $username = $notification['usernameUsuarioGerou'];
+                                $action = '';
+
+                                // Define a ação de acordo com o tipo de notificação
+                                switch ($notification['tipoNotificacao']) {
+                                    case 'curtiuPublicacao':
+                                        $action = "curtiu sua publicação";
+                                        break;
+                                    case 'comentouPublicacao':
+                                        $action = "comentou sua publicação";
+                                        break;
+                                    case 'seguiuUsuario':
+                                        $action = "seguiu você";
+                                        break;
+                                }
+                                ?>
+                                <div class='notification' data-id="<?=$notification['idNotificacao'];?>" data-link="<?= $relativePublicPath . $notification['linkNotificacao'] ?>">
+                                    <?= renderProfileLink($relativePublicPath, $relativeAssetsPath . "/imagens/fotos/perfil/" . $userPhoto, $username, false) ?>
+                                    <div class="notificationContent">
+                                        <strong class='username'><?= $username ?></strong> <?= $action ?>
+                                    </div>
+                                </div>
+                                <?php
+                            }
                         }
                     }
 
@@ -142,6 +177,7 @@
             </div>
         </div>
     </div>
+
 
     <div class="makeAPostModal headerModal close">
         <div class="modalHeader">
@@ -375,7 +411,7 @@
         });
 
         headerHome.addEventListener('mouseleave', () => {
-            closeTimeout = setTimeout(closeAllModals, 100000);
+            closeTimeout = setTimeout(closeAllModals, 10000);
         });
     }
 

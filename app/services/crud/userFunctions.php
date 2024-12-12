@@ -566,14 +566,11 @@ function markNotificationAsRead($conn, $notificationId) {
 
         if ($result) {
             $response = ['success'=>true];
-            file_put_contents('debug.log', json_encode($response) . PHP_EOL, FILE_APPEND);
         } else {
             $response = ['success'=>false, 'message'=>'Erro ao marcar a notificação. (' . mysqli_error($conn) . ')'];
-            file_put_contents('debug.log', json_encode($response) . PHP_EOL, FILE_APPEND);
         }
     } else {
         $response = ['success'=>false, 'message'=>'ID de notificação inválido'];
-        file_put_contents('debug.log', json_encode($response) . PHP_EOL, FILE_APPEND);
     }
 
     echo json_encode($response);
@@ -583,6 +580,38 @@ function markNotificationAsRead($conn, $notificationId) {
 
 if (isset($_POST['notificationId'])) {
     echo trim(markNotificationAsRead($conn, filter_var(mysqli_escape_string($conn, $_POST['notificationId']), FILTER_SANITIZE_NUMBER_INT)));
+}
+
+function hasNewNotifications($conn, $idUsuario) {
+    // Obter a última notificação lida
+    $queryLastRead = "
+        SELECT MAX(dataNotificacao) as ultimaDataLida 
+        FROM Notificacoes 
+        WHERE idUsuarioRecebeu = $idUsuario AND isLida = 1
+    ";
+    $resultLastRead = mysqli_query($conn, $queryLastRead);
+
+    if ($resultLastRead && $row = mysqli_fetch_assoc($resultLastRead)) {
+        $ultimaDataLida = $row['ultimaDataLida'];
+    } else {
+        $ultimaDataLida = null;
+    }
+
+    // Verificar notificações não lidas posteriores à última lida
+    $queryNewNotifications = "
+        SELECT COUNT(*) as novas 
+        FROM Notificacoes 
+        WHERE idUsuarioRecebeu = $idUsuario 
+        AND isLida = 0 
+        " . ($ultimaDataLida ? "AND dataNotificacao > '$ultimaDataLida'" : "") . "
+    ";
+    $resultNewNotifications = mysqli_query($conn, $queryNewNotifications);
+
+    if ($resultNewNotifications && $row = mysqli_fetch_assoc($resultNewNotifications)) {
+        $novasNotificacoes = $row['novas'];
+        return $novasNotificacoes > 0;
+    }
+    return false;
 }
 
 function desativarNotificacoes($conn, $userId) {
