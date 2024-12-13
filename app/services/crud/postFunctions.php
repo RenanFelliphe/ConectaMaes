@@ -99,6 +99,13 @@ if (isset($_POST['postAuxilioModal'])) {
     } else {
         $messages[] = "<p class='error'>Erro: Não foi possível comentar nesta publicação.</p>";
     }
+} else if(isset($_POST['postNestedComentarioModal'])){
+    $commentId = $_POST['idComentario'] ?? null;
+    if (!empty($commentId)) {
+        $messages = sendNestedComment($conn, $commentId, $currentUserData['idUsuario']);
+    } else {
+        $messages[] = "<p class='error'>Erro: Não foi possível comentar este comentário.</p>";
+    }
 } else {
     $messages = sendPost($conn, '', $currentUserData['idUsuario']);
 }

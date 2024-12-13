@@ -320,7 +320,18 @@
 <script>
     const headerHome = document.querySelector('.headerHome');
 
+    function configurePostModal(modal) {
+        const postLink = modal.getAttribute('post-link');
+        const postIdField = document.querySelector('#postIdField');
+        
+        if (postLink === 'postNestedComentarioModal') {
+            postIdField.name = 'idComentario';
+        } else {
+            postIdField.name = 'idPublicacao';
+        }
+    }
     function openModalHeader(modal) { 
+        configurePostModal(modal);
         const modalSections = document.querySelectorAll('.modalSection');
         const submitPostBtn = document.querySelector('.Ho-submitPost');
         const btnClicked = modal.getAttribute("data-type");
