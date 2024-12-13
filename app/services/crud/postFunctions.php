@@ -378,6 +378,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['deletarComentario'])) {
         deleteComment($conn, filter_var(mysqli_escape_string($conn,$_POST['deleterCommentId']), FILTER_SANITIZE_NUMBER_INT));
     }
+
+    if (isset($_POST['deletarResposta'])) {
+        deleteComment($conn, filter_var(mysqli_escape_string($conn,$_POST['deleterCommentId']), FILTER_SANITIZE_NUMBER_INT));
+    }
 }
 
 //RELATO ANÔNIMO

@@ -32,8 +32,8 @@ if ($allComentarios && count($allComentarios) > 0) {
                                     <?php if ($currentUserData['idUsuario'] == $reply['idUsuario'] || $currentUserData['isAdmin']) { ?>
                                         <div class="bi bi-three-dots postMoreButton">
                                             <form class="postFunctionsModal close" method="POST">
-                                                <input type="hidden" name="deleterReplyId" value="<?= $reply['idComentario']; ?>">
-                                                <button class="deletePostButton bi bi-trash3-fill pageIcon" name="deletarResposta" type="submit"> Deletar Resposta</button>
+                                                <input type="hidden" name="deleterCommentId" value="<?= $reply['idComentario']; ?>">
+                                                <button class="deletePostButton bi bi-trash3-fill pageIcon" name="deletarResposta" type="submit"> Deletar Comentário</button>
                                             </form>
                                         </div>
                                     <?php } ?>
@@ -136,8 +136,8 @@ if ($allComentarios && count($allComentarios) > 0) {
                                     <?php if ($currentUserData['idUsuario'] == $reply['idUsuario'] || $currentUserData['isAdmin']) { ?>
                                         <div class="bi bi-three-dots postMoreButton">
                                             <form class="postFunctionsModal close" method="POST">
-                                                <input type="hidden" name="deleterReplyId" value="<?= $reply['idComentario']; ?>">
-                                                <button class="deletePostButton bi bi-trash3-fill pageIcon" name="deletarResposta" type="submit"> Deletar Resposta</button>
+                                                <input type="hidden" name="deleterCommentId" value="<?= $reply['idComentario']; ?>">
+                                                <button class="deletePostButton bi bi-trash3-fill pageIcon" name="deletarResposta" type="submit"> Deletar Comentário</button>
                                             </form>
                                         </div>
                                     <?php } ?>
