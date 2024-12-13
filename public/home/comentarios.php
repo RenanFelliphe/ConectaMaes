@@ -43,7 +43,7 @@
             <section class="timeline">
                 <div class="Co-mainPost">
                     <div class="Co-timelineHeader">  
-                        <a href="../home.php"><i class="bi bi-arrow-left-circle"></i></a>
+                        <a href="javascript:window.history.back();"><i class="bi bi-arrow-left-circle"></i></a>
                         <h1><?= $tipoConteudo === 'Comentário' ? 'Comentário' : 'Publicação'; ?></h1>
                     </div>
 

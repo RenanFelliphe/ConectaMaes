@@ -1266,19 +1266,15 @@ footer .A-footerRight li.A-footerPolitic h4 {
 .La-landing {
     background: linear-gradient(
      var(--whiteColor) 5%,
-     #F9EC7C35 15%,
-     #7DEBFA35 28%,
-     #7DEBFA35 33%,
-     #FA7EBD35 40%,
-     #FA7EBD35 41%,
-     #F9EC7C35 45%,
-     #F9EC7C35 49%,
-     #7DEBFA35 53%, 
-     #7DEBFA35 63%, 
-     var(--whiteColor) 67%, 
-     var(--whiteColor) 75%, 
-     #F9EC7C35 82%,
-     #7DEBFA35 90%);
+     #F9EC7C50 10%,
+     #7DEBFA50 30%,
+     
+     #FA7EBD50 39%,
+     #F9EC7C50 47%,
+     #7DEBFA50 58%, 
+     var(--whiteColor) 69%, 
+     #F9EC7C50 79%,
+     #7DEBFA50 90%) !important;
     overflow: hidden;
 }
 
