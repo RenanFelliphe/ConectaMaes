@@ -102,7 +102,7 @@ if ($allComentarios && count($allComentarios) > 0) {
                         <button class="postLikes <?= queryUserCommentLike($conn, $currentUserData['idUsuario'], $comentario['idComentario']) ? 'postLiked' : 'postNotLiked'; ?>" 
                                 type="submit" 
                                 name="commentLike_<?= htmlspecialchars($comentario['idComentario']); ?>" 
-                                value="like"
+                                value="likeComment"
                                 <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>
                                 >
                             <i class="bi bi-heart-fill"></i>

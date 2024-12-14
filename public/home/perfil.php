@@ -17,14 +17,16 @@
             handlePostLike($conn, $currentUserData['idUsuario'], (int)$postId);
         }
 
-        // Verificar e processar solicitação de seguir
-        if (isset($_POST['followProfile']) && $currentUserData['idUsuario'] != $profileData['idUsuario']) {
-            followUser($conn, $currentUserData['idUsuario'], $profileData['idUsuario']);
+        if (isset($currentUserData) && isset($_POST['followFromProfile'])) {
+            $toFollowId = (int) $_POST['idFromProfile'];
+        
+            if ($toFollowId !== $currentUserData['idUsuario'] && $toFollowId !== 1) {
+                followUser($conn, $currentUserData['idUsuario'], $toFollowId);
+            }
         }
     }
 
     $profileCounts = getProfileCounts($conn, $profileData);
-
     $isFollowing = isUserFollowingProfile($conn, $currentUserData['idUsuario'], $profileData['idUsuario']);
 ?>
 
@@ -103,13 +105,14 @@
                             </button>
                         <?php } else { ?>
                             <form method="POST">
-                                <button name="followProfile" class="Pe-followUser confirmBtn" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>
+                                <input type="hidden" name="idFromProfile" value="<?= $profileData['idUsuario']; ?>">
+
+                                <button name="followFromProfile" class="Pe-followUser confirmBtn" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>
                                     <p><?= $isFollowing ? 'Deixar de Seguir' : 'Seguir'; ?></p><i class="bi bi-person-<?= $isFollowing ? 'dash' : 'add'; ?>"></i>
                                 </button>
                             </form>
                         <?php } ?>
                     </div>
-                    
                 </section>
 
                 <section class="Pe-profilePostType">
@@ -143,310 +146,35 @@
                 <section class="Pe-userProfilePosts">
                     <section class="Pe-postsPostagens Pe-allPosts active">
                         <?php
-                        if (count($publicacoes) > 0) {
-                            $count = 0;
-
-                            foreach ($publicacoes as $dadosPublicacao) {
-                                if ($dadosPublicacao['idUsuario'] == $profileData['idUsuario']) {
-                                    if($currentUserData['idUsuario'] !== $profileData['idUsuario'] && $dadosPublicacao['isAnonima']){
-                                        continue;
-                                    }
-                                    // Verificar se o link da foto de perfil está presente
-                                    $profileImage = !empty($dadosPublicacao['linkFotoPerfil']) ? $dadosPublicacao['linkFotoPerfil'] : 'default.png';
-                            
-                                    // Formatar a data da publicação utilizando a função do arquivo dateChecker.php
-                                    $mensagemData = postDateMessage($dadosPublicacao["dataCriacaoPublicacao"]);
-                                    ?>
-                                    <article class="Ho-post">
-                                        <a class="postOwnerImage" href="<?= $relativePublicPath . "/home/perfil.php?user=" . urlencode($dadosPublicacao['nomeDeUsuario']);?>">
-                                            <img src="<?= $relativeAssetsPath."/imagens/fotos/perfil/".$dadosPublicacao['linkFotoPerfil'];?>">
-                                        </a>
-                            
-                                        <div class="postContent">
-                                            <div class="postTimelineTop">
-                                                <div class="postUserNames">
-                                                    <p class="postOwnerName">
-                                                        <?= getFirstAndLastName($dadosPublicacao['nomeCompleto'])?>
-                                                    </p>
-                                                    <p class="postOwnerUser">
-                                                        <?= '@' . htmlspecialchars($dadosPublicacao['nomeDeUsuario']); ?>
-                                                    </p>
-                                                </div>
-                            
-                                                <div class="postInfo">
-                                                    <ul class="postDate"><li><?= htmlspecialchars($mensagemData); ?></li></ul>
-                                                    <div class="bi bi-three-dots postMoreButton">
-                                                        <form class="postFunctionsModal close" method = "POST">
-                                                        <button class="reportPostButton bi bi-megaphone-fill pageIcon" name = "denunciarPost" onclick=""> Denunciar Postagem</button>
-                                                            <?php if($currentUserData['idUsuario'] == $dadosPublicacao['idUsuario']){?>
-                                                                <input type="hidden" name = "deleterId" value="<?= $dadosPublicacao['idPublicacao']?>">
-                                                                <button class="deletePostButton bi bi-trash3-fill pageIcon" name = "deletarPost" type = "submit"> Deletar Postagem</button>
-                                                            <?php } ?>
-                                                        </form>       
-                                                        <?php
-                                                            if(isset($_POST['deletarPost'])){
-                                                                deletePost($conn, $_POST['deleterId']);
-                                                            }
-                                                        ?>                                     
-                                                    </div>                         
-                                                </div>
-                                            </div>
-                            
-                                            <div class="postTitles">  
-                                                <p class="postTitle"><strong><?= htmlspecialchars($dadosPublicacao['titulo']); ?></strong></p>
-                                                <p class="textPost"><?= htmlspecialchars($dadosPublicacao['conteudo']); ?></p>
-                                            </div>
-                            
-                                            <form class="postTimelineBottom" method='POST'>
-                                                <button class="postLikes" type="submit" name="like_<?= $dadosPublicacao['idPublicacao']; ?>" value="like">
-                                                    <i class="bi bi-heart-fill <?= queryUserLike($conn, $currentUserData['idUsuario'], $dadosPublicacao['idPublicacao']) ? 'postLiked' : 'postNotLiked'; ?>"></i>
-                                                    <p><?= htmlspecialchars($dadosPublicacao['totalLikes']); ?></p>
-                                                </button>
-                                                <button class="postComments" type="submit" name="comment">
-                                                    <i class="bi bi-chat-fill"></i>
-                                                    <p>0</p>
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </article>
-                                    <?php
-                                    $count++;
-                                    // A cada 50 publicações, mostrar "sugestões"
-                                    /* if ($count % 50 == 0) {
-                                        echo "Sugestões<br><br>";
-                                    } */
-                                }
-                            }
-                            ?><p class="endTimeline">...</p>
-                            <?php
-                        } else {
-                            ?>
-                                <p class="noPublicationsOnHome">Nenhuma publicação encontrada!</p>
-                            <?php
-                        }      
+                            $tipoPublicacao = '';
+                            $userId = isset($profileData['idUsuario']) ? $profileData['idUsuario'] : null;
+                            $publicacoes = queryPostsAndUserData($conn, '', $userId);
+                            include __DIR__ . "/../../app/includes/posts.php";
                         ?>
                     </section>
 
                     <section class="Pe-postsRelatos Pe-allPosts">
                         <?php
-                            $publicacoes = queryPostsAndUserData($conn, 'Relato');
-                            if (count($publicacoes) > 0) {
-                                $count = 0;
-                                foreach ($publicacoes as $dadosPublicacao) {
-                                    if ($dadosPublicacao['idUsuario'] == $profileData['idUsuario']) {
-                                        if($currentUserData['idUsuario'] !== $profileData['idUsuario'] && $dadosPublicacao['isAnonima']){
-                                            continue;
-                                        }
-                                        // Verificar se o link da foto de perfil está presente
-                                        $profileImage = !empty($dadosPublicacao['linkFotoPerfil']) ? $dadosPublicacao['linkFotoPerfil'] : 'default.png';
-                                
-                                        // Formatar a data da publicação utilizando a função do arquivo dateChecker.php
-                                        $mensagemData = postDateMessage($dadosPublicacao["dataCriacaoPublicacao"]);
-                                        ?>
-                                        <article class="Ho-post">
-                                            <div class="postOwnerImage">
-                                                <img src="<?= $relativeAssetsPath."/imagens/fotos/perfil/".$dadosPublicacao['linkFotoPerfil'];?>">
-                                            </div>
-                                
-                                            <div class="postContent">
-                                                <div class="postTimelineTop">
-                                                    <div class="postUserNames">
-                                                        <p class="postOwnerName">
-                                                        <?= getFirstAndLastName($dadosPublicacao['nomeCompleto'])?>
-                                                        </p>
-                                                        <p class="postOwnerUser">
-                                                            <?= '@' . htmlspecialchars($dadosPublicacao['nomeDeUsuario']); ?>
-                                                        </p>
-                                                    </div>
-                                
-                                                    <div class="postInfo">
-                                                        <ul class="postDate"><li><?= htmlspecialchars($mensagemData); ?></li></ul>
-                                                        <div class="bi bi-three-dots postMoreButton">
-                                                            <form class="postFunctionsModal close" method = "POST">
-                                                            <button class="reportPostButton bi bi-megaphone-fill pageIcon" name = "denunciarPost" onclick=""> Denunciar Postagem</button>
-                                                                <?php if($currentUserData['idUsuario'] == $dadosPublicacao['idUsuario']){?>
-                                                                    <input type="hidden" name = "deleterId" value="<?= $dadosPublicacao['idPublicacao']?>">
-                                                                    <button class="deletePostButton bi bi-trash3-fill pageIcon" name = "deletarPost" type = "submit"> Deletar Postagem</button>
-                                                                <?php } ?>
-                                                            </form>       
-                                                            <?php
-                                                                if(isset($_POST['deletarPost'])){
-                                                                    deletePost($conn, $_POST['deleterId']);
-                                                                }
-                                                            ?>                                     
-                                                        </div>                         
-                                                    </div>
-                                                </div>
-                                
-                                                <div class="postTitles">  
-                                                    <strong class="postTitle"><?= htmlspecialchars($dadosPublicacao['titulo']); ?></strong>
-                                                    <p class="textPost"><?= htmlspecialchars($dadosPublicacao['conteudo']); ?></p>
-                                                </div>
-                                
-                                                <form class="postTimelineBottom"  method='post'>
-                                                    <button class="postLikes" type="submit" name="like_<?= $dadosPublicacao['idPublicacao']; ?>" value="like">
-                                                        <i class="bi bi-heart-fill <?= queryUserLike($conn, $currentUserData['idUsuario'], $dadosPublicacao['idPublicacao']) ? 'postLiked' : 'postNotLiked'; ?>"></i>
-                                                        <p><?= htmlspecialchars($dadosPublicacao['totalLikes']); ?></p>
-                                                    </button>
-                                                    <div class="postComments">
-                                                        <i class="bi bi-chat-fill"></i>
-                                                        <p>0</p>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </article>
-                                
-                                        <?php
-                                        $count++;
-                                
-                                        /* A cada 50 publicações, mostrar "sugestões"
-                                            if ($count % 50 == 0) {
-                                                echo "Sugestões<br><br>";
-                                            }
-                                        */
-                                    }
-                                }
-                                ?><p class="endTimeline">...</p>
-                                <?php
-                            } else {
-                                ?>
-                                    <p class="noPublicationsOnHome">Nenhuma publicação encontrada!</p>
-                                <?php
-                            }   
+                            $tipoPublicacao = 'Relato';
+                            $userId = isset($profileData['idUsuario']) ? $profileData['idUsuario'] : null;
+                            $publicacoes = queryPostsAndUserData($conn, $tipoPublicacao, $userId);
+                            include __DIR__ . "/../../app/includes/posts.php";
                         ?>
                     </section>
 
-                    <section class="Pe-postsAuxilios Pe-allPosts">
+                    <section class="Pe-postsAuxilios Au-allAuxilios Pe-allPosts">
                         <?php
-                        $auxilios = queryPostsAndUserData($conn, 'Auxilio');
-                        if (count($auxilios) > 0) {
-                            $count = 0;
-                            foreach ($auxilios as $dadosPublicacao) {
-                                if ($dadosPublicacao['idUsuario'] == $profileData['idUsuario']) {
-                                    // Verificar se o link da foto de perfil está presente
-                                    $profileImage = !empty($dadosPublicacao['linkFotoPerfil']) ? $relativeAssetsPath."/imagens/fotos/perfil/".$dadosPublicacao['linkFotoPerfil'] : 'default.png';
-
-                                    // Formatar a data da publicação utilizando a função do arquivo dateChecker.php
-                                    $mensagemData = postDateMessage($dadosPublicacao["dataCriacaoPublicacao"]);
-                                    ?>
-                                    <article class="Au-auxilioCard" onclick="openAuxilioModal();">
-                                        <ul class="postDate"><li><?= htmlspecialchars($mensagemData); ?></li></ul>
-                                        <div class="postTimelineTop">
-                                            <div class="postOwnerImage">
-                                                <img src="<?= $relativeAssetsPath."/imagens/fotos/perfil/".$dadosPublicacao['linkFotoPerfil'];?>">
-                                            </div>
-
-                                            <div class="postUserNames">
-                                                <p class="postOwnerName">
-                                                <?= getFirstAndLastName($dadosPublicacao['nomeCompleto'])?>
-                                                </p>
-                                                <p class="postOwnerUser">
-                                                    <?= '@' . htmlspecialchars($dadosPublicacao['nomeDeUsuario']); ?>
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                        <p class="postTitle"><?= htmlspecialchars($dadosPublicacao['titulo']); ?></p>
-
-                                        <div class="postTimelineBottom">
-                                            <div class="postInteractions">
-                                                <div class="postLikes">
-                                                    <i class="bi bi-heart-fill"></i>
-                                                    <p><?= htmlspecialchars($dadosPublicacao['totalLikes']); ?></p>
-                                                </div>
-                                                <div class="postComments">
-                                                    <i class="bi bi-chat-fill"></i>
-                                                    <p>0</p>
-                                                </div>
-                                            </div>
-
-                                            <button name="openAuxilio" class="Au-openAuxilio confirmBtn">Auxiliar</button>
-                                        </div>
-
-                                        <section class="Au-auxilioModalBack close">
-                                            <article class="Au-auxilioModal">
-                                                <div class="Au-modalHeader">
-                                                    <ul class="auxilioDate"><li><?= htmlspecialchars($mensagemData); ?></li></ul> 
-                                                    <p class="auxilioTitle"><?= htmlspecialchars($dadosPublicacao['titulo']); ?></p>
-                                                    <i class="bi bi-x Au-closeModal" onclick="openAuxilioModal()"></i>
-                                                </div>
-
-                                                <div class="Au-auxilioUser">
-                                                    <div class="postOwnerImage">
-                                                        <img src="<?= $relativeAssetsPath."/imagens/fotos/perfil/".$dadosPublicacao['linkFotoPerfil'];?>">
-                                                    </div>
-
-                                                    <div class="postUserNames">
-                                                        <p class="postOwnerName"><?= htmlspecialchars($dadosPublicacao['nomeCompleto']); ?></p>
-                                                        <p class="postOwnerUser"><?= htmlspecialchars($dadosPublicacao['nomeDeUsuario']); ?></p>
-                                                    </div>
-
-                                                    <button name="followUser" class="Au-follow confirmBtn">Seguir</button>
-                                                </div>
-
-                                                <p class="Au-textPost"><?= htmlspecialchars($dadosPublicacao['conteudo']); ?></p>
-
-                                                <div class="Au-childPostSection">
-                                                    <div class="Au-childrenName">
-                                                        <img src="<?= $relativeAssetsPath; ?>/imagens/icons/pram_icon.png" class="pageImageIcon active" alt="Ícone de Criança">
-                                                        <p class="Au-childName">Nome da Criança</p>
-                                                    </div>
-
-                                                    <div class="postsImages">
-                                                        <p>+</p>
-                                                    </div>
-
-                                                    <div class="Au-postExtraInfos">
-                                                        <div class="Au-extraInfos">
-                                                            <img src="<?= $relativeAssetsPath; ?>/imagens/icons/local_icon.png" class="pageImageIcon active" alt="Ícone de Local">
-                                                            <p><?= htmlspecialchars($dadosPublicacao['estado']); ?></p>
-                                                        </div>
-                                                        <div class="Au-extraInfos">
-                                                            <img src="<?= $relativeAssetsPath; ?>/imagens/icons/pix_icon.png" class="pageImageIcon active" alt="Ícone de Pix">
-                                                            <p>N/a</p>
-                                                        </div>
-                                                    </div>
-                                                    <button name="helpUser" class="Au-help confirmBtn">Auxiliar</button>
-                                                </div>
-
-                                                <form class="postInteractions"  method='post'>
-                                                    <span></span>
-                                                    <button class="postLikes" type="submit" name="like_<?= $dadosPublicacao['idPublicacao']; ?>" value="like">
-                                                        <i class="bi bi-heart-fill <?= queryUserLike($conn,$currentUserData['idUsuario'],$dadosPublicacao['idPublicacao']) ? 'postLiked' : 'postNotLiked'; ?>"></i>
-                                                        <p><?= htmlspecialchars($dadosPublicacao['totalLikes']); ?></p>
-                                                    </button>
-
-                                                    <h3>Comentários</h3>
-
-                                                    <span></span>
-
-                                                    <div class="postComments">
-                                                        <i class="bi bi-heart-fill"></i>
-                                                        <p>0</p>
-                                                    </div>
-                                                    <span></span>
-                                                </form>
-                                            </article>
-                                        </section>
-                                    </article>
-                                    <?php
-                                }
-                            }
-                            ?><p class="endTimeline">...</p>
-                        <?php
-                        } else {
-                            ?>
-                            <p class="noPublicationsOnHome">Nenhuma publicação encontrada!</p>
-                        <?php
-                        }   
+                            $tipoPublicacao = 'Auxilio';
+                            $userId = isset($profileData['idUsuario']) ? $profileData['idUsuario'] : null;
+                            $publicacoes = queryPostsAndUserData($conn, $tipoPublicacao, $userId);
+                            include __DIR__ . "/../../app/includes/posts.php";
                         ?>
                     </section>
                 </section>
             </section>
+
             <?php include_once ("../../app/includes/asideRight.php");?>
         </main>
-
-        <?php //include_once ("../../app/includes/modais.php");?>
 
         <script src="<?= $relativeAssetsPath; ?>/js/system.js"></script>
         <script>

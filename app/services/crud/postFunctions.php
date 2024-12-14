@@ -118,7 +118,7 @@ function specificPostQuery($conn, $data, $where, $order) {
     return $sUExec;
 }
 
-function queryPostsAndUserData($conn, $postType = '', $postId = null, $limit = 10, $offset = 0) {
+function queryPostsAndUserData($conn, $postType = '', $userId = null, $limit = 10, $offset = 0) {
     $baseQuery = "
         SELECT 
             p.idPublicacao, 
@@ -145,14 +145,13 @@ function queryPostsAndUserData($conn, $postType = '', $postId = null, $limit = 1
             Usuario u ON p.idUsuario = u.idUsuario
     ";
 
-    if ($postId !== null) {
-        $finalQuery = $baseQuery . " WHERE p.idPublicacao = " . intval($postId) . " ORDER BY p.dataCriacaoPublicacao DESC LIMIT 1";
+    if ($userId !== null) {
+        $whereClause = "u.idUsuario = " . intval($userId);
     } else {
         $whereClause = ($postType === '') ? "p.tipoPublicacao <> 'Auxilio'" : "p.tipoPublicacao = '$postType'";
-        
-        $finalQuery = $baseQuery . " WHERE " . $whereClause . " ORDER BY p.dataCriacaoPublicacao DESC LIMIT $limit OFFSET $offset";
     }
 
+    $finalQuery = $baseQuery . " WHERE " . $whereClause . " ORDER BY p.dataCriacaoPublicacao DESC LIMIT $limit OFFSET $offset";
     $result = mysqli_query($conn, $finalQuery);
 
     if (!$result) {
@@ -161,6 +160,7 @@ function queryPostsAndUserData($conn, $postType = '', $postId = null, $limit = 1
     }
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
+
 
 function renderProfileLink($relativePublicPath, $profileImage, $nomeDeUsuario, $isRelatoAnonimo = false) {
     if ($isRelatoAnonimo) {
@@ -230,7 +230,7 @@ function deletePost($conn, $id) {
     }
 }
 if (isset($_POST['deletarPost'])) {
-    deletePost($conn, $_POST['identifierId']);
+    deletePost($conn, $_POST['deleterId']);
 }
 
 // LIKES
@@ -369,7 +369,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         handlePostLike($conn, $currentUserData['idUsuario'], (int)$postId);
     }
 
-    if ($likedComment = array_keys($_POST, 'like', true)) {
+    if ($likedComment = array_keys($_POST, 'likeComment', true)) {
         $commentId = filter_var(mysqli_escape_string($conn, str_replace('commentLike_', '', $likedComment[0])), FILTER_SANITIZE_NUMBER_INT);
         handleCommentLike($conn, $currentUserData['idUsuario'], (int)$commentId); 
     }

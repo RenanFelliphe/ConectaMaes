@@ -3628,8 +3628,7 @@ input[type="number"]::-webkit-inner-spin-button {
     font-weight: 700;
 }
 
-.Se-settingsCenter .Se-centerSections .Se-sectionTitle:nth-of-type(3),
-.Se-settingsCenter .Se-centerSections .Se-sectionTitle:nth-of-type(7){
+.Se-settingsCenter .Se-centerSections .Se-sectionTitle:nth-child(3){
     display: none;
 }
 
@@ -5453,10 +5452,11 @@ body.P-theme .Pe-main .timeline .Pe-profilePostType .Pe-postType:hover .Pe-postT
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
-.La-sectionTitle{
+.Su-sectionTitle{
     font-size: 2.5rem;
     text-align: center;
-    margin: 2rem;
+    margin-top: 10rem;
+    margin-bottom:4rem;
 }
 
 .Su-helpSection .Su-articleCards {
@@ -5558,7 +5558,109 @@ body.P-theme .Pe-main .timeline .Pe-profilePostType .Pe-postType:hover .Pe-postT
 .Su-card p span{
     font-weight: bolder;
 }
+.Su-navigator{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.Su-navLink{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 1rem;
+}
+.Su-navIcon{
+    min-width: 2rem;
+    max-width: 2rem;
+    min-height: 2rem;
+    max-height: 2rem;
+}
+.Su-suporte .Su-patchNotes {
+    margin: 2rem 0;
+    padding: 2rem;
+    max-width: 1200px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: var(--blackColor);
+}
 
+.Su-patchNotes h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color:var(--darkYellowColor);
+    margin-bottom: 1rem;
+}
+
+.Su-patchNotes p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.Su-patchNotes strong {
+    font-weight: 700;
+    color: var(--darkYellowColor);
+}
+
+.Su-patchNotes h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--middleYellowColor);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.Su-patchNotes ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 1rem;
+}
+
+.Su-patchNotes ul li {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+    padding-left: 1.25rem;
+    position: relative;
+}
+
+.Su-patchNotes ul li::before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--middleYellowColor);
+    font-weight: bold;
+}
+
+.Su-patchNotes ul:nth-of-type(1) li::before {
+    content: "✔";  
+}
+
+.Su-patchNotes ul:nth-of-type(2) li::before {
+    content: "⏳";  
+}
+
+
+.Su-patchNotes .Su-patchNotes > h3:first-of-type {
+    color: red;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.Su-patchNotes .Su-patchNotes > h3:last-of-type {
+    color: blue;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.Su-patchNotes > p {
+    font-size: 1.2rem;
+    color: var(--blackColor);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
 
 @media (max-width: 900px) {
     .Su-cellsBackground {

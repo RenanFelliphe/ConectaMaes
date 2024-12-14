@@ -4,7 +4,7 @@
     if (isset($_GET['post'])) {
         $postResult = queryPostsAndUserData($conn, "", $_GET['post'], 1);
         if (!$postResult || count($postResult) === 0) {
-            echo "<p class='error'>Postagem não encontrada!</p>";
+            header("Location:". $relativeRootPath."/notFound.php?subject=post");
             exit;
         }
         $dadosConteudoComentado = $postResult[0];
@@ -12,7 +12,7 @@
     } else if (isset($_GET['comment'])) {
         $commentResult  = queryCommentsData($conn, "", $_GET['comment'], 1);  // Ou o que for adequado para buscar por comentário
         if (!$commentResult || count($commentResult) === 0) {
-            echo "<p class='error'>Comentário não encontrado!</p>";
+            header("Location:". $relativeRootPath."/notFound.php?subject=comment");
             exit;
         }
         $dadosConteudoComentado = $commentResult[0];

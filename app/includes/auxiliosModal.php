@@ -1,3 +1,15 @@
+<?php
+    if($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (isset($currentUserData) && isset($_POST['followFromAuxilio'])) {
+            $toFollowId = (int) $_POST['idFromAuxilio'];
+        
+            if ($toFollowId !== $currentUserData['idUsuario'] && $toFollowId !== 1) {
+                followUser($conn, $currentUserData['idUsuario'], $toFollowId);
+            }
+        }
+    }
+?>
+
 <modal data-id="<?= $dadosPublicacao['idPublicacao']?>" class="modalSection close" data-type="auxilioModal">
     <article class="Au-auxilioModal pageModal">
         <div class="Au-modalHeader">
@@ -49,19 +61,25 @@
                     <p class="postOwnerUser"><?= '@' . htmlspecialchars($dadosPublicacao['nomeDeUsuario']); ?></p>
                 </div>    
                 <div class="followersNumber">
-                    <span class="followers"><?= getFollowingCount($conn, $dadosPublicacao['idUsuario']); ?></span>
+                    <span class="followers"><?= getFollowerCount($conn, $dadosPublicacao['idUsuario']); ?></span>
                     <p>Seguidores</p>
                 </div>                        
             </div>
 
-            <?php if($currentUserData['idUsuario'] != $dadosPublicacao['idUsuario']) {?>
-                <form method="POST">
-                    <button name="followProfile" class="Au-follow confirmBtn" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>
-                        <p>Seguir</p>
-                    </button>
-                </form>                    
-            <?php } ?>
 
+            <?php if($currentUserData['idUsuario'] != $dadosPublicacao['idUsuario']) {
+                    $isFollowingAuxilio = isUserFollowingProfile($conn, $currentUserData['idUsuario'], $dadosPublicacao['idUsuario']);
+                ?>
+                <form method="POST">
+                    <input type="hidden" name="idFromAuxilio" value="<?= $dadosPublicacao['idUsuario']; ?>">
+
+                    <button type="submit" name="followFromAuxilio" class="Au-follow confirmBtn <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>">
+                        <p><?= $isFollowingAuxilio ? 'Seguindo' : 'Seguir'; ?></p>
+                    </button>  
+                </form>   
+            <?php 
+                } 
+            ?>         
         </div>
 
         <p class="auxilioTitle"><?= htmlspecialchars($dadosPublicacao['titulo']); ?></p>

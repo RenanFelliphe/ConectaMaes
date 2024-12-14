@@ -24,7 +24,7 @@
                 </div>-->
             </section>
 
-            <h2 class="La-sectionTitle">Precisa de ajuda?</h2>
+            <h2 class="Su-sectionTitle">Precisa de ajuda?</h2>
 
             <section class="Su-helpSection">
                 <article class="Su-articleCards">

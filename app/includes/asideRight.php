@@ -1,3 +1,15 @@
+<?php
+    if($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (isset($currentUserData) && isset($_POST['followFromSuggestion'])) {
+            $toFollowId = (int) $_POST['idFromSuggestion'];
+        
+            if ($toFollowId !== $currentUserData['idUsuario'] && $toFollowId !== 1) {
+                followUser($conn, $currentUserData['idUsuario'], $toFollowId);
+            }
+        }
+    }
+?>
+
 <section class="asideRight">
     <?php 
         $resultAuxilios = specificPostQuery($conn, "idPublicacao, titulo, isConcluido", "tipoPublicacao = 'Auxilio' AND idUsuario = '".$currentUserData['idUsuario']."'", "ORDER BY dataCriacaoPublicacao DESC");
@@ -46,9 +58,10 @@
         
         <div class="sugesttionsAside">
             <?php
-                // Consulta os usuários que o atual usuário ainda não segue
                 $resultPeople = suggestUsers($conn, $currentUserData['idUsuario']);
                 foreach($resultPeople as $userSuggestion) {
+
+                    $isFollowingSuggestion = isUserFollowingProfile($conn, $currentUserData['idUsuario'], $userSuggestion['idUsuario']);
                     ?>
                         <form method="post" class="suggestionListItem" id="suggestionAside<?= $userSuggestion['idUsuario']; ?>" >
                             <div class="suggestionInfos">
@@ -58,23 +71,18 @@
                                         echo renderProfileLink($relativePublicPath, $relativeAssetsPath . "/imagens/fotos/perfil/" . $userSuggestionProfileImage, $userSuggestion['nomeDeUsuario'], $isRelatoAnonimo = false);
                                     ?>
                                 </div>
-                                <input type="hidden" name="toFollowId" value="<?= $userSuggestion['idUsuario']; ?>"> 
+
                                 <div class="suggestUserNames">
                                     <p class="userName"><?= getFirstAndLastName($userSuggestion['nomeCompleto'])?></p>
                                     <p class="userNick"><?= '@' . $userSuggestion['nomeDeUsuario']?></p>
                                 </div>
                             </div>
-                            <?php 
-                                if ($userSuggestion['sugestaoFoiSeguida']){ 
-                                    ?>
-                                        <button type="button" class="followSuggestion confirmBtn" disabled>Seguindo</button>
-                                    <?php 
-                                }else{ 
-                                    ?>
-                                        <button type="submit" class="followSuggestion confirmBtn" name="followSuggestedProfile<?= $userSuggestion['idUsuario']; ?>">Seguir</button>
-                                    <?php 
-                                }
-                            ?>
+                            
+                            <input type="hidden" name="idFromSuggestion" value="<?= $userSuggestion['idUsuario']; ?>">
+                            
+                            <button type="submit" name="followFromSuggestion" class="followSuggestion confirmBtn">
+                                <p><?= $isFollowingSuggestion ? 'Seguindo' : 'Seguir'; ?></p>
+                            </button>
                         </form>
                     <?php
                 }
@@ -94,7 +102,7 @@
 </section>
 
 <script>
-document.getElementById('verTodosBtn').addEventListener('click', function(e) {
+    document.getElementById('verTodosBtn').addEventListener('click', function(e) {
     e.preventDefault();
 
     var btn = e.target;

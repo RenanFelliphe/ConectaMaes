@@ -358,33 +358,32 @@ function editTelephone($conn, $userId) {
         $phone_messages = editTelephone($conn, filter_var(mysqli_escape_string($conn,$_POST['updaterId']), FILTER_SANITIZE_NUMBER_INT));
     }
 
-    function editPixKey($conn, $userId) {
-        $messages = array();  // Array para armazenar mensagens de erro e sucesso
-    
-        if (isset($_POST['editPixKey']) && !empty($_POST['editPixKey'])) {
-            $newPixKey = mysqli_real_escape_string($conn, htmlspecialchars($_POST['editPixKey']));
-            $checkPixQuery = "SELECT idUsuario FROM Usuario WHERE chavePix = '$newPixKey' AND idUsuario != $userId";
-            $result = mysqli_query($conn, $checkPixQuery);
+function editPixKey($conn, $userId) {
+    $messages = array();  // Array para armazenar mensagens de erro e sucesso
 
-            if (mysqli_num_rows($result) > 0) {
-                $messages[] = "<p class='error-message'>Esta chave Pix já está associada a outro usuário. Por favor, insira uma chave Pix diferente.</p>";
+    if (isset($_POST['editPixKey']) && !empty($_POST['editPixKey'])) {
+        $newPixKey = mysqli_real_escape_string($conn, htmlspecialchars($_POST['editPixKey']));
+        $checkPixQuery = "SELECT idUsuario FROM Usuario WHERE chavePix = '$newPixKey' AND idUsuario != $userId";
+        $result = mysqli_query($conn, $checkPixQuery);
+
+        if (mysqli_num_rows($result) > 0) {
+            $messages[] = "<p class='error-message'>Esta chave Pix já está associada a outro usuário. Por favor, insira uma chave Pix diferente.</p>";
+        } else {
+            $updatePixKey = "UPDATE Usuario SET chavePix = '$newPixKey' WHERE idUsuario = $userId";
+            if (mysqli_query($conn, $updatePixKey)) {
+                $messages[] = "<p class='success-message'>Chave Pix atualizada com sucesso!</p>";
             } else {
-                $updatePixKey = "UPDATE Usuario SET chavePix = '$newPixKey' WHERE idUsuario = $userId";
-                if (mysqli_query($conn, $updatePixKey)) {
-                    $messages[] = "<p class='success-message'>Chave Pix atualizada com sucesso!</p>";
-                } else {
-                    $messages[] = "<p class='error-message'>Erro ao atualizar a chave Pix: " . mysqli_error($conn) . "</p>";
-                }
+                $messages[] = "<p class='error-message'>Erro ao atualizar a chave Pix: " . mysqli_error($conn) . "</p>";
             }
         }
-    
-        return $messages;  // Retorna todas as mensagens (erro ou sucesso)
     }
-    
+
+    return $messages;  // Retorna todas as mensagens (erro ou sucesso)
+}
     if (isset($_POST['editPixSubmit'])) {   
         $pix_messages = editPixKey($conn, filter_var(mysqli_escape_string($conn,$_POST['updaterId']), FILTER_SANITIZE_NUMBER_INT));
     }
-    
+
 
 // DELETE ACCOUNT - DELETE
 function deleteAccount($conn, $id) {
@@ -448,7 +447,6 @@ function generateRandomCode() {
 
     return $code;
 }
-
     if (isset($_POST['deleteAccountSubmit'])) {
         $userId = filter_var(mysqli_escape_string($conn,$_POST['deleteUserId']), FILTER_SANITIZE_NUMBER_INT);
         $deleteUser_messages = deleteAccount($conn, $userId);
@@ -468,21 +466,7 @@ function followUser($conn, $followerId, $followedId) {
         mysqli_query($conn, $deleteFollowQuery);
     }
 }
-    if(isset($currentUserData)){
-        if (isset($_POST['followProfile'])) {
-            var_dump($_POST);
-            followUser($conn, $currentUserData['idUsuario'], $profileUserId);
-        }
-    }
 
-    if(isset($currentUserData) && $_SERVER['REQUEST_METHOD'] === 'POST'){
-        foreach ($_POST as $key => $value) {
-            if (strpos($key, 'followSuggestedProfile') === 0) {
-                $followedId = $_POST['toFollowId'];
-                followUser($conn, $currentUserData['idUsuario'], $followedId);
-            }
-        }
-    }
 function isUserFollowingProfile($conn, $currentUserId, $profileUserId) {
     $isFollowingQuery = "SELECT * FROM seguirUsuario WHERE idUsuarioSeguidor = $currentUserId AND idUsuarioSeguindo = $profileUserId";
     $isFollowingResult = mysqli_query($conn, $isFollowingQuery);
@@ -577,10 +561,9 @@ function markNotificationAsRead($conn, $notificationId) {
     exit;  
 
 }
-
-if (isset($_POST['notificationId'])) {
-    echo trim(markNotificationAsRead($conn, filter_var(mysqli_escape_string($conn, $_POST['notificationId']), FILTER_SANITIZE_NUMBER_INT)));
-}
+    if (isset($_POST['notificationId'])) {
+        echo trim(markNotificationAsRead($conn, filter_var(mysqli_escape_string($conn, $_POST['notificationId']), FILTER_SANITIZE_NUMBER_INT)));
+    }
 
 function hasNewNotifications($conn, $idUsuario) {
     // Obter a última notificação lida

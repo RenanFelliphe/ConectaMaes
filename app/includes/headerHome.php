@@ -4,9 +4,6 @@
     $currentUserHasNewNotifications = hasNewNotifications($conn, $currentUserData['idUsuario']);
 ?>
 
-<script>
-    
-</script>
 <header class="headerHome">
     <img src="<?= $relativeAssetsPath; ?>/imagens/logos/final/Conecta_Mães_Logo_Black.png" class="A-headerLogo" alt="Logo do ConectaMães">
     <input type="hidden" id="postTypeInput" name="postType" value="">
@@ -84,16 +81,17 @@
                     $foundNotification = false;
 
                     // Lista de notificações desativadas por tipo de notificação
-                    $notificacoesDesativadas = [
-                        1 => ["curtiuPublicacao"],
-                        2 => ["comentouPublicacao"],
-                        3 => ["curtiuPublicacao", "comentouPublicacao"],
+                    $mutedNotifs = [
+                        1 => ["curtiuPublicacao", "curtiuComentario"],
+                        2 => ["comentouPublicacao", "comentouComentario"],
                         4 => ["seguiuUsuario"],
-                        5 => ["curtiuPublicacao", "seguiuUsuario"],
-                        6 => ["comentouPublicacao", "seguiuUsuario"],
-                        7 => ["curtiuPublicacao", "comentouPublicacao", "seguiuUsuario"]
                     ];
-
+                    
+                    $mutedNotifs[3] = array_merge($mutedNotifs[1], $mutedNotifs[2]);
+                    $mutedNotifs[5] = array_merge($mutedNotifs[1], $mutedNotifs[4]);
+                    $mutedNotifs[6] = array_merge($mutedNotifs[2], $mutedNotifs[4]);
+                    $mutedNotifs[7] = array_merge($mutedNotifs[1], $mutedNotifs[2], $mutedNotifs[4]);
+                    
                     // Função para calcular o texto da data relativa
                     function getRelativeDateText($date, $today) {
                         $diff = (strtotime($today) - strtotime($date)) / 86400;
@@ -114,7 +112,7 @@
                             }
 
                             // Verifica se a notificação está desativada para o tipo atual
-                            $desativadoTipos = $notificacoesDesativadas[$currentUserData['desativouNotificacao']] ?? [];
+                            $desativadoTipos = $mutedNotifs[$currentUserData['desativouNotificacao']] ?? [];
                             if (in_array($notification['tipoNotificacao'], $desativadoTipos)) {
                                 continue;
                             }
@@ -149,8 +147,14 @@
                                     case 'curtiuPublicacao':
                                         $action = "curtiu sua publicação";
                                         break;
+                                    case 'curtiuComentario':
+                                        $action = "curtiu seu comentário";
+                                        break;
                                     case 'comentouPublicacao':
                                         $action = "comentou sua publicação";
+                                        break;
+                                    case 'comentouComentario':
+                                        $action = "respondeu ao seu comentário";
                                         break;
                                     case 'seguiuUsuario':
                                         $action = "seguiu você";
@@ -293,9 +297,8 @@
                 <img class="Ho-relatosIcon" src="<?= $relativeAssetsPath; ?>/imagens/icons/reports_off.png" alt="Ícone da página de relatos">
                 <h3>Publicação sem identificação</h3>
             </div>
-            <p><span>Relatos</span> podem ser publicados sem a necessidade de identificação, logo, 
-                suas informações <span>não serão vinculadas</span> ao post e nenhum usuários poderá 
-                acessar seu perfil a partir dele. Apesar disso, as notificações chegarão 
+            <p><span>Relatos</span> podem ser publicados sem a necessidade de identificação. Logo, 
+                suas informações <span>não serão vinculadas</span> à publicação e nenhum usuário poderá acessar seu perfil a partir dela. Apesar disso, as notificações chegarão 
                 normalmente.</p>
         </div>
 
@@ -318,6 +321,46 @@
 </modal> 
 
 <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const modal = document.querySelector('.notificationsModal');
+        
+        const observer = new MutationObserver(function (mutationsList) {
+            for (const mutation of mutationsList) {
+                if (mutation.type === 'attributes' && !modal.classList.contains('close')) {
+                    // A classe 'close' foi removida, ou seja, o modal foi aberto
+                    const notifications = document.querySelectorAll('.notification');
+                    
+                    notifications.forEach(notification => {
+                        const notificationId = notification.getAttribute('data-id');
+                        
+                        // Fazendo a requisição ao servidor para marcar a notificação como lida
+                        fetch('<?= $_SERVER['PHP_SELF']?>', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded'
+                            },
+                            body: `notificationId=${notificationId}`
+                        })
+                        .then(response => response.json())  // Converte automaticamente para JSON
+                        .then(data => {
+                            console.log('Dados recebidos do servidor:', data);
+                            if (data.success) {
+                                console.log('Notificação marcada como lida.');
+                            } else {
+                                console.log('Falha ao marcar a notificação:', data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Erro ao marcar notificação como lida:', error);
+                        });
+                    });
+                }
+            }
+        });
+
+        observer.observe(modal, { attributes: true });
+    });
+
     const headerHome = document.querySelector('.headerHome');
 
     function configurePostModal(modal) {
@@ -467,46 +510,6 @@
     document.querySelector('.Ho-identifyMyself').addEventListener('click', () => {
         document.querySelector('.Ho-identifyMyselfModal').classList.toggle('close');
     })
-
-    document.addEventListener("DOMContentLoaded", function () {
-        const modal = document.querySelector('.notificationsModal');
-        
-        const observer = new MutationObserver(function (mutationsList) {
-            for (const mutation of mutationsList) {
-                if (mutation.type === 'attributes' && !modal.classList.contains('close')) {
-                    // A classe 'close' foi removida, ou seja, o modal foi aberto
-                    const notifications = document.querySelectorAll('.notification');
-                    
-                    notifications.forEach(notification => {
-                        const notificationId = notification.getAttribute('data-id');
-                        
-                        // Fazendo a requisição ao servidor para marcar a notificação como lida
-                        fetch('<?= $_SERVER['PHP_SELF']?>', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/x-www-form-urlencoded'
-                            },
-                            body: `notificationId=${notificationId}`
-                        })
-                        .then(response => response.json())  // Converte automaticamente para JSON
-                        .then(data => {
-                            console.log('Dados recebidos do servidor:', data);
-                            if (data.success) {
-                                console.log('Notificação marcada como lida.');
-                            } else {
-                                console.log('Falha ao marcar a notificação:', data.message);
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Erro ao marcar notificação como lida:', error);
-                        });
-                    });
-                }
-            }
-        });
-
-        observer.observe(modal, { attributes: true });
-    });
 
     dropdownHeaderSections();
     toggleSelectedPage();

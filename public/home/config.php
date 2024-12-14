@@ -45,7 +45,6 @@
                         <i class="bi bi-chevron-right" onclick="toggleConfigSection();"></i>
                     </a>
                     
-                    <!-- -->
                     <a class="Se-sectionTitle">
                         <div>
                             <img src="<?= $relativeAssetsPath; ?>/imagens/icons/chat_icon.png" class="pageIcon" alt="Ícone de usuário">
@@ -62,7 +61,6 @@
                         <i class="bi bi-chevron-right"></i>
                     </a>
 
-                    <!-- -->
                     <a class="Se-sectionTitle">
                         <div>
                             <img src="<?= $relativeAssetsPath; ?>/imagens/icons/notifications_icon.png" class="pageIcon" alt="Ícone de usuário">

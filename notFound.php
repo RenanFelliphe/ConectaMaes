@@ -25,7 +25,7 @@
                         display: flex; flex-direction:
                         column; cursor: pointer;">
                 <h1> PÁGINA NÃO ENCONTRADA </h1>
-                <a class="" href = "<?= $relativePublicPath . "/home.php"; ?>"> Voltar de onde parou</a>
+                <a class="" href="javascript:window.history.back();"> Voltar de onde parou</a>
             </div>
             
         </main>

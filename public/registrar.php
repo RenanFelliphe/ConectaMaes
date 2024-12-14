@@ -178,10 +178,10 @@
                     
                     <div class="Re-termsPDF">
                         <div class="Re-usingTermsPDF">
-                            <embed src="<?=$relativeRootPath ."/documents/politicas_de_privacidade_ConectaMaes.pdf"?>" width="500" height="auto" style="overflow:hidden;" type="application/pdf">
+                            <embed src="<?=$relativeRootPath."/documents/termos_de_uso_ConectaMaes.pdf"?>" width="100%" height="auto" style="overflow: hidden;" type="application/pdf">
                         </div>
-                        <div class="Re-privacyTermsPDF">
-                            <embed src="<?=$relativeRootPath."/documents/termos_de_uso_ConectaMaes.pdf"?>" width="100%" height="auto" style="overflow:hidden;" type="application/pdf">
+                        <div class="Re-privacyTermsPDF" style="display: none;">
+                            <embed src="<?=$relativeRootPath ."/documents/politicas_de_privacidade_ConectaMaes.pdf"?>" width="500" height="auto" style="overflow: hidden;" type="application/pdf">
                         </div>
                     </div>
 
@@ -621,28 +621,22 @@
                         const termsSelector = document.querySelector('.Re-termsSelector');
                         const usingTermsPDF = document.querySelector('.Re-usingTermsPDF');
                         const privacyTermsPDF = document.querySelector('.Re-privacyTermsPDF');
-
-                        // Remove a classe 'active' de todos os botões
+                        privacyTermsPDF.style.display = 'none'; // Oculta o PDF de privacidade
                         termsType.forEach(termType => {
                             termType.classList.remove('active');
                         });
 
-                        // Adiciona a classe 'active' ao botão clicado
                         clicked.classList.add('active');
 
                         // Alterna entre os PDFs com base no botão clicado
                         if (clicked.classList.contains('Re-usingTerms')) {
-                            termsSelector.style.transform = 'translateX(0)';
-
-                            // Exibe o PDF de termos de uso e oculta o de privacidade
-                            usingTermsPDF.style.display = 'block';
-                            privacyTermsPDF.style.display = 'none';
+                            termsSelector.style.transform = 'translateX(0)';  // Move o seletor para o lado dos termos de uso
+                            usingTermsPDF.style.display = 'flex';  // Exibe o PDF de termos de uso
+                            privacyTermsPDF.style.display = 'none'; // Oculta o PDF de privacidade
                         } else if (clicked.classList.contains('Re-privacyTerms')) {
-                            termsSelector.style.transform = 'translateX(100%)';
-
-                            // Exibe o PDF de política de privacidade e oculta o de termos de uso
-                            usingTermsPDF.style.display = 'none';
-                            privacyTermsPDF.style.display = 'block';
+                            termsSelector.style.transform = 'translateX(100%)'; // Move o seletor para o lado da privacidade
+                            usingTermsPDF.style.display = 'none'; // Oculta o PDF de termos de uso
+                            privacyTermsPDF.style.display = 'flex'; // Exibe o PDF de políticas de privacidade
                         }
                     }
 
