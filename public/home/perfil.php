@@ -1,7 +1,6 @@
 <?php 
     include_once ("../../app/includes/globalIncludes.php");
 
-    // Verificar se o perfil de usuário foi especificado
     if (!isset($_GET['user'])) {
         header("Location: " . $relativeRootPath . "/notFound.php");
         exit;
@@ -9,7 +8,6 @@
 
     $profileData = getUserProfile($conn, $_GET['user']);
 
-    // Processar $_POST para curtir e seguir
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Curtir postagem
         if ($likedPost = array_keys($_POST, 'like', true)) {
@@ -140,12 +138,11 @@
                         <i class="bi bi-info-circle-fill"></i>
                         <span class="Pe-postTypeSelector"></span>
                     </div>
-                    
                 </section>
 
                 <section class="Pe-userProfilePosts">
                     <section class="Pe-postsPostagens Pe-allPosts active">
-                        <?php
+                        <?php 
                             $publicacoes = queryPostsAndUserData($conn, '', null, $profileData['idUsuario']);
                             include __DIR__ . "/../../app/includes/posts.php";
                         ?>
@@ -153,15 +150,15 @@
 
                     <section class="Pe-postsRelatos Pe-allPosts">
                         <?php
-                            $publicacoes = queryPostsAndUserData($conn, 'Relato',null, $profileData['idUsuario']);
-                            include __DIR__ . "/../../app/includes/posts.php";
+                            /*$publicacoes = queryPostsAndUserData($conn, 'Relato',null, $profileData['idUsuario']);
+                            include __DIR__ . "/../../app/includes/posts.php";*/
                         ?>
                     </section>
 
                     <section class="Pe-postsAuxilios Au-allAuxilios Pe-allPosts">
                         <?php
-                            $publicacoes = queryPostsAndUserData($conn, 'Auxilio',null, $profileData['idUsuario']);
-                            include __DIR__ . "/../../app/includes/posts.php";
+                            /*$publicacoes = queryPostsAndUserData($conn, 'Auxilio',null, $profileData['idUsuario']);
+                            include __DIR__ . "/../../app/includes/posts.php";*/
                         ?>
                     </section>
                 </section>
@@ -174,8 +171,8 @@
         <script>
             document.querySelectorAll('.postMoreButton').forEach(b => b.onclick = () => b.querySelector('.postFunctionsModal').classList.toggle('close'));
 
-            //const searchBar = document.querySelector('.Pe-searchBar');
-            //const backSearchBar = document.querySelector('.Pe-backSearchBar');
+            /*const searchBar = document.querySelector('.Pe-searchBar');
+            const backSearchBar = document.querySelector('.Pe-backSearchBar');*/
             const allPostTypes = document.querySelectorAll('.Pe-postType');
 
             /*searchBar.onclick = function () {

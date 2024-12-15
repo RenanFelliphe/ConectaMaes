@@ -2038,7 +2038,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
     display: flex;
     background: linear-gradient(var(--whiteColor) 0%, var(--firstColorLowOpacity) 95%);
     padding: 3vh;
-    min-height: 100vh;
+    height: 100vh;
     overflow: hidden;
 }
 
@@ -2061,6 +2061,39 @@ footer .A-footerRight li.A-footerPolitic h4 {
     box-shadow: 0 4px 16px 0px #00000040;
     overflow-y: hidden;
     gap: 5vh;
+}
+
+@media(min-width: 2560px){
+    .Lo-loginForm,
+    .Re-registerForm {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@media(max-width: 768px){
+    .Lo-loginForm,
+    .Re-registerForm {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@media(max-width: 500px){
+    .Lo-Login,
+    .Re-register {
+        padding: 0;
+        height: 100%;
+    }
+
+    .Lo-loginForm,
+    .Re-registerForm {
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        border: none;
+    }
 }
 
 .Lo-loginForm .Lo-loginHeader,
@@ -2130,6 +2163,20 @@ footer .A-footerRight li.A-footerPolitic h4 {
     padding: 0 1.5rem;
 }
 
+@media(max-width: 500px){
+    .Re-registerForm .Re-registerCenter .Re-registerSections,
+    .Lo-loginForm .Lo-loginCenter .Lo-loginSections {
+        grid-template-columns: repeat(1, 80%);
+    }
+}
+
+@media(max-width: 350px){
+    .Re-registerForm .Re-registerCenter .Re-registerSections,
+    .Lo-loginForm .Lo-loginCenter .Lo-loginSections {
+        grid-template-columns: repeat(1, 70%);
+    }
+}
+
 .Re-registerForm .Re-registerCenter .Re-registerSections.close {
     display: none;
 }
@@ -2161,7 +2208,6 @@ footer .A-footerRight li.A-footerPolitic h4 {
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.inputBio{
     min-height: 6rem;
     height: 100%;
-    max-height: 10rem;
     padding: 0.5rem 0;
 }
 
@@ -2177,6 +2223,13 @@ footer .A-footerRight li.A-footerPolitic h4 {
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.input-full,
 .Lo-loginForm .Lo-loginCenter .Lo-userSection .Re-input.input-full {
     grid-column: span 2;
+}
+
+@media(max-width: 500px){
+    .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.input-full,
+    .Lo-loginForm .Lo-loginCenter .Lo-userSection .Re-input.input-full {
+        grid-column: span 1;
+    }
 }
 
 .Lo-loginForm .Lo-loginCenter .Lo-userSection .Re-input .Re-userInput,
@@ -2414,6 +2467,12 @@ footer .A-footerRight li.A-footerPolitic h4 {
     padding: 0 2rem;
 }
 
+@media(max-width: 500px){
+    .Re-registerForm .Re-registerCenter .Re-registerResult {
+        flex-direction: column;
+    } 
+}
+
 .Re-registerForm .Re-registerCenter .Re-registerResult .Re-addImageProfile .Re-userImageProfile {
     position: relative;
     display: flex;
@@ -2423,6 +2482,13 @@ footer .A-footerRight li.A-footerPolitic h4 {
     border-radius: 100%;
     border: 2px solid var(--thirdColor);
     cursor: pointer;
+}
+
+@media(max-width: 500px){
+    .Re-registerForm .Re-registerCenter .Re-registerResult .Re-addImageProfile .Re-userImageProfile {
+        width: 20vh;
+        height: 20vh;    
+    } 
 }
 
 .Re-registerForm .Re-registerCenter .Re-registerResult .Re-addImageProfile .Re-userImageProfile div{
@@ -2452,6 +2518,13 @@ footer .A-footerRight li.A-footerPolitic h4 {
     border-radius: 100%;
     font-size: 1.5rem;
     color: var(--grayColor);
+}
+
+@media(max-width: 500px){
+    .Re-registerForm .Re-registerCenter .Re-registerResult .Re-addImageProfile .Re-addImageIcon {
+        width: 7vh;
+        height: 7vh;  
+    } 
 }
 
 .Re-registerForm .Re-registerCenter .Re-registerResult .Re-userInfoContainer .Re-userInformations {
@@ -2499,12 +2572,15 @@ footer .A-footerRight li.A-footerPolitic h4 {
 
 .Re-registerTerms{
     position: absolute;
-    min-width: 24rem;
-    width: 24vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    width: 90%;
     max-width: 30rem;
-    min-height: 29rem;
-    height: 60vh;
-    max-height: 35rem;
+    height: 70vh;
+    max-height: 30rem;
     border-radius: 0.7rem;
     border: 1px solid transparent;
     background: linear-gradient(var(--whiteColor), var(--whiteColor)) padding-box, linear-gradient(var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
@@ -2514,6 +2590,14 @@ footer .A-footerRight li.A-footerPolitic h4 {
     transform: translateY(-50%) translateX(-50%);
     box-shadow: 0 3px 9px 0px #00000040;
     overflow: hidden;
+}
+
+@media(max-width: 500px){
+    .Re-registerTerms{
+        width: 90%;
+        height: 100%;
+        border: none;
+    } 
 }
 
 .Re-registerTerms.close{
@@ -2530,6 +2614,13 @@ footer .A-footerRight li.A-footerPolitic h4 {
     border-bottom: 1px solid var(--grayColor);
     padding-left: 1.8rem;
     gap: 1.5rem;
+}
+
+@media(max-width: 500px){
+    .Re-registerTerms .Re-termsHeader {
+        width: 100%;
+        margin: auto;
+    } 
 }
 
 .Re-termsHeader h4 {
@@ -2567,19 +2658,19 @@ footer .A-footerRight li.A-footerPolitic h4 {
 
 .Re-registerTerms .Re-termsPDF{
     position: relative;
-    min-width: 20rem;
-    width: 20vw;
-    max-width: 26rem;
-    min-height: 15rem;
+    width: 90%;
     height: 35vh;
-    max-height: 20rem;
     padding: 1rem;
     background-color: #F8F8F8;
     border: 1px solid var(--grayColor);
     border-radius: 0.4rem;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-top: 4vh;
+}
+
+@media(max-width: 500px){
+    .Re-registerTerms .Re-termsPDF{
+        width: 90%;
+        height: 50vh;
+    } 
 }
 
 .Re-registerTerms .Re-termsCheckboxes{
@@ -2588,7 +2679,6 @@ footer .A-footerRight li.A-footerPolitic h4 {
     align-items: flex-start;
     gap: 0.5rem;
     font-size: 0.85rem;
-    padding: 3vh;
 }
 
 .Re-registerTerms .Re-termsCheckboxes .Re-termsCheckbox{
@@ -2608,6 +2698,7 @@ footer .A-footerRight li.A-footerPolitic h4 {
 .Re-registerTerms .Re-termsCheckboxes .Re-termsCheckbox label a {
     color: var(--thirdColor);
     font-weight: 500;
+    text-decoration: underline;
 }
 
 .Re-registerTerms .Re-termsButtons{
@@ -2640,6 +2731,13 @@ footer .A-footerRight li.A-footerPolitic h4 {
     font-size: 0.8rem;
 }
 
+@media(max-width: 500px){
+    .Lo-loginForm .Lo-loginBottom,
+    .Re-registerForm .Re-registerBottom {
+        transform: translateY(1rem);
+    } 
+}
+
 .Re-registerForm .Re-registerBottom .confirmBtn,
 .Lo-loginForm .Lo-loginBottom .confirmBtn {
     padding: 0;
@@ -2662,11 +2760,10 @@ footer .A-footerRight li.A-footerPolitic h4 {
     font-weight: 700;
 }
 
-/* Remover os botões de aumentar e diminuir no Chrome, Opera e Edge */
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     margin: 0;
-    display: none; /* Garante que os botões não sejam exibidos */
+    display: none;
 }
 
 

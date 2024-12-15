@@ -63,7 +63,6 @@ function sendComment($conn, $idPublicacao, $currentUserId) {
 
     return $messages;
 }
-
 function sendNestedComment($conn, $idComentarioAcima, $currentUserId) {
     $messages = array(); // Array para armazenar as mensagens
 
@@ -146,7 +145,11 @@ function queryPostsAndUserData($conn, $postType = '', $postId = null, $userId = 
     if ($postId !== null) {
         $whereClause = "p.idPublicacao = " . intval($postId);
     } elseif ($userId !== null) {
-        $whereClause = "u.idUsuario = " . intval($userId);
+        if ($postType === '') {
+            $whereClause = "u.idUsuario = " . intval($userId) . " AND p.tipoPublicacao <> 'Auxilio'";
+        } else {
+            $whereClause = "u.idUsuario = " . intval($userId) . " AND p.tipoPublicacao = '$postType'";
+        }
     } else {
         $whereClause = ($postType === '') ? "p.tipoPublicacao <> 'Auxilio'" : "p.tipoPublicacao = '$postType'";
     }
