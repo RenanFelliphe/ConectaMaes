@@ -4,9 +4,10 @@
     if (isset($_GET['post'])) {
         $postResult = queryPostsAndUserData($conn, "", $_GET['post'], 1);
         if (!$postResult || count($postResult) === 0) {
-            header("Location:". $relativeRootPath."/notFound.php?subject=post");
-            exit;
+            //header("Location:". $relativeRootPath."/notFound.php?subject=post");
+            //exit;
         }
+        var_dump($postResult);
         $dadosConteudoComentado = $postResult[0];
         $tipoConteudo = 'Publicação';
     } else if (isset($_GET['comment'])) {

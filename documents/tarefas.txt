@@ -1,6 +1,5 @@
 Ideias
 	Essenciais
-		!postagem - compartilhamento
 		!modo anônimo
 		!visualização de postagens não sensíveis sem ter o log in necessário
 	Futuras
@@ -30,7 +29,6 @@ implementacao
 		arrumar registro
     interface
         !arrumar header
-        arrumar carregamento esquisito das sessões com a timeline
 	!crud
 		!usuario
 			!update senha - nath

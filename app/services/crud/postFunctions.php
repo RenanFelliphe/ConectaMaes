@@ -118,7 +118,7 @@ function specificPostQuery($conn, $data, $where, $order) {
     return $sUExec;
 }
 
-function queryPostsAndUserData($conn, $postType = '', $userId = null, $limit = 10, $offset = 0) {
+function queryPostsAndUserData($conn, $postType = '', $postId = null, $userId = null, $limit = 10, $offset = 0) {
     $baseQuery = "
         SELECT 
             p.idPublicacao, 
@@ -145,7 +145,9 @@ function queryPostsAndUserData($conn, $postType = '', $userId = null, $limit = 1
             Usuario u ON p.idUsuario = u.idUsuario
     ";
 
-    if ($userId !== null) {
+    if ($postId !== null) {
+        $whereClause = "p.idPublicacao = " . intval($postId);
+    } elseif ($userId !== null) {
         $whereClause = "u.idUsuario = " . intval($userId);
     } else {
         $whereClause = ($postType === '') ? "p.tipoPublicacao <> 'Auxilio'" : "p.tipoPublicacao = '$postType'";
@@ -158,9 +160,9 @@ function queryPostsAndUserData($conn, $postType = '', $userId = null, $limit = 1
         echo "<p class='error'>Erro na consulta: " . mysqli_error($conn) . "</p>";
         return false;
     }
+
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
-
 
 function renderProfileLink($relativePublicPath, $profileImage, $nomeDeUsuario, $isRelatoAnonimo = false) {
     if ($isRelatoAnonimo) {
