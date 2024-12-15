@@ -1013,7 +1013,7 @@ body.Y-theme .makeAPostModal .postStyleSummary:hover .postStyleTitle img {
     float: right;
     right: 0;
     bottom: 0;
-    margin: 0.5rem;
+    margin: 0.5rem 0.5rem 0 0;
     cursor: pointer;
     font-size: 0.85rem;
     display: flex;
@@ -1094,30 +1094,29 @@ body.Y-theme .makeAPostModal .postStyleSummary:hover .postStyleTitle img {
 }
 
 .Ho-postSomething .Ho-identifyMyselfModal p span:first-of-type{
-    color: var(--secondColor);
+    color: var(--thirdColor);
 }
 
 .Ho-postSomething .Ho-postBottom {
     position: relative;
+    display: flex; 
+    width: 100%; 
+    gap: 1.5rem;
+    padding-left: 2rem;
+    justify-content: space-between;
+}
+
+.Ho-postSomething .Ho-postBottom .Ho-postAttachments{
     display: flex;
-    justify-content: flex-end;
-    width: 100%;
+    gap: 2rem;
 }
 
-.Ho-postSomething .Ho-postBottom .Ho-iconLabel {
-    font-size: 1rem;
-    cursor: pointer;
-}
-
-.Ho-postSomething .Ho-postBottom .Ho-imageInput {
+.Ho-postSomething .Ho-postBottom .Ho-postInputLabel{
     display: flex;
+    gap: 0.5rem;
 }
 
-.Ho-postSomething .Ho-postBottom .Ho-imageInput input {
-    display: none
-}
-
-.Ho-postSomething .Ho-postBottom .Ho-imageInput label {
+.Ho-postSomething .Ho-postBottom .Ho-postInputLabel label {
     display: flex;
     gap: 0.5rem;
     width: fit-content;
@@ -1126,19 +1125,91 @@ body.Y-theme .makeAPostModal .postStyleSummary:hover .postStyleTitle img {
     font-size: 0.9rem;
 }
 
-.Ho-postSomething .Ho-postBottom .Ho-imageInput label img {
-    width: 1.3rem;
+.Ho-postSomething .Ho-postBottom .Ho-postInputLabel img{
+    width: 1rem;
+    filter: brightness(0) saturate(100%) invert(66%) sepia(48%) saturate(459%) hue-rotate(16deg) brightness(97%) contrast(85%);
+}
+
+.Ho-postSomething .Ho-postBottom .Ho-iconLabel {
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.Ho-postSomething .Ho-postBottom .Ho-imageInput input {
+    display: none
+}
+
+.Ho-postSomething .Ho-postBottom .Ho-showPixKey .noPix{
+    color: var(--redColor);
+}
+
+.Ho-postSomething .Ho-postBottom .Ho-showPixKey img.noPix{
+    filter: brightness(0) saturate(100%) invert(39%) sepia(36%) saturate(961%) hue-rotate(300deg) brightness(96%) contrast(97%);
+}
+
+.Ho-postSomething .Ho-postBottom .Ho-showPixKey .bi-info-circle-fill{
+    font-size: 0.8rem;
+    color: var(--grayColor);
+    cursor: pointer;
+}
+
+.Ho-postSomething .Ho-postBottom .Ho-showPixKey .bi-info-circle-fill:hover{
+    color: var(--secondColor);
+}
+
+.Ho-postSomething .Ho-postBottom .Ho-showPixKey .Ho-showPixKeyModal{
+    position: absolute;
+    border-radius: 1.3rem;
+    top: 2rem;
+    padding: 1rem;
+    width: 13rem;
+    background-color: var(--whiteColor);
+    transition: 0.25s ease-in;
+    transform: translateX(0);
+    opacity: 1;
+    z-index: -1;
+    font-size: 0.8rem;
+}
+
+.Ho-postSomething .Ho-postBottom .Ho-showPixKey .Ho-showPixKeyModal.close{
+    transform: translateY(-5rem);
+    transition: 0.25s ease-in;
+    opacity: 0;
+}
+
+.Ho-postSomething .Ho-postBottom .Ho-showPixKey .Ho-showPixKeyModal:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    border-radius: 1.3rem;
+    border: 4px solid transparent;
+    background: linear-gradient(var(--whiteColor), var(--whiteColor)) padding-box, linear-gradient(to bottom, var(--middleYellowColor), var(--middleBlueColor), var(--middlePinkColor)) border-box;
+    opacity: 0.4;
+    z-index: -1;
+}
+
+.Ho-postSomething .Ho-postBottom .Ho-showPixKey .Ho-showPixKeyModal p:nth-of-type(2){
+    margin: 5px 0;
+    color: var(--thirdColor);
+}
+
+.Ho-postSomething .Ho-postBottom .Ho-showPixKey .Ho-showPixKeyModal p span{
+    color: var(--blackColor);
+    font-weight: bold;
 }
 
 .Ho-postSomething .Ho-postBottom .confirmBtn {
     position: relative;
-    float: right;
     display: flex;
     font-size: 1rem;
     padding: 0.4rem 1.5rem;
 }
 
-.Ho-postSomething .Ho-postAttachments {
+.Ho-postSomething .Ho-imagePreview {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -1146,16 +1217,17 @@ body.Y-theme .makeAPostModal .postStyleSummary:hover .postStyleTitle img {
     padding-left: 1.5rem;
 }
 
-.Ho-postSomething .Ho-postAttachments .Ho-preview img {
+.Ho-postSomething .Ho-imagePreview .Ho-preview img {
     margin-top: -1rem;
     width: 4rem;
     opacity: 0.5;
     transition: 0.3s;
     border-radius: 0.5rem;
     cursor: pointer;
+    border: 1px solid var(--grayColor);
 }
 
-.Ho-postSomething .Ho-postAttachments .Ho-preview img:hover {
+.Ho-postSomething .Ho-imagePreview .Ho-preview img:hover {
     opacity: 1;
     transition: 0.3s;
 }
@@ -1646,7 +1718,6 @@ footer .A-footerRight li.A-footerPolitic h4 {
     transition: max-height 0.4s ease, opacity 0.3s ease;
     padding: 0.5rem 0 0 1rem;
 }
-
 
 .La-landing .La-landingSections .La-frequentQuestions .faqList .La-faqQuestions.active .La-faqAnswers{
     opacity: 1;
@@ -3688,7 +3759,7 @@ body.Y-theme .Se-settingsCenter .Se-centerSections .Se-sectionTitle:hover div im
     width: 100%;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 0 2rem;
+    padding: 0 2rem 2rem 2rem;
 }
 
 .Se-asideRight .Se-subSection.active {
@@ -3722,6 +3793,7 @@ body.Y-theme .Se-asideRight .Se-subSection .Se-sectionHeader .pageIcon {
 
 .Se-asideRight .Se-accountInformations .Se-userInfo {
     display: flex;
+    justify-content: flex-start;
     gap: 1rem;
 }
 
@@ -3791,9 +3863,6 @@ body.Y-theme .Se-asideRight .Se-subSection .Se-sectionHeader .pageIcon {
 
 .Se-asideRight .Se-accountInformations .Se-editInfo {
     position: relative;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.25rem;
     width: 100%;
     margin: 1rem 0;
 }
@@ -3805,14 +3874,6 @@ body.Y-theme .Se-asideRight .Se-subSection .Se-sectionHeader .pageIcon {
     border: 1px solid var(--blackColor);
     min-height: 2.5rem;
     cursor: pointer;
-}
-
-.Se-asideRight .Se-accountInformations .Se-editInfo .Se-userInput.full-width {
-    grid-column: span 2;
-}
-
-.Se-asideRight .Se-accountInformations .Se-editInfo .Se-userInput.side-by-side {
-    /*grid-column: span 1;*/
 }
 
 .Se-asideRight .Se-accountInformations .Se-editInfo .Se-userInput label {
@@ -3835,6 +3896,7 @@ body.Y-theme .Se-asideRight .Se-subSection .Se-sectionHeader .pageIcon {
     outline: none;
     cursor: pointer;
     padding-right: 2rem;
+    resize: none;
 }
 
 .Se-asideRight .Se-accountInformations .Se-editInfo .Se-userInput textarea::-webkit-scrollbar {
@@ -3851,16 +3913,16 @@ body.Y-theme .Se-asideRight .Se-subSection .Se-sectionHeader .pageIcon {
 }
 
 .errorMessageContainer {
-    margin-bottom: 1rem; /* Espaçamento entre o campo de input e a mensagem de erro */
+    margin-bottom: 1rem;
     display: flex;
-    clear: both; /* Garantir que o container de erro não sobreponha o conteúdo anterior */
+    clear: both;
     width: 100%;
 }
 
 .errorMessageContent {
-    color: var(--redColor); /* Cor da mensagem de erro */
-    font-size: 14px; /* Tamanho da fonte da mensagem de erro */
-    line-height: 1; /* Espaçamento entre as linhas */
+    color: var(--redColor);
+    font-size: 14px;
+    line-height: 1;
 }
 
 .Se-asideRight .Se-accountInformations .Re-themeInfo {
@@ -4205,9 +4267,9 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
 }
 
 .Se-asideRight .Se-childInformations .Se-myChildBtn.expanded .editChildForm.open .childDisabilityEditor{
-display: flex;
-flex-direction: column;
-align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .Se-asideRight .Se-security ul {
@@ -4228,12 +4290,10 @@ align-items: flex-start;
 .Se-asideRight .Se-security ul li form {
     position: relative;
     gap: 1rem;
-    padding: 1.5rem 0;
     width: 100%;
 }
 
-.Se-asideRight .Se-security .Se-editPassword h4,
-.Se-asideRight .Se-security .Se-editPhoneNumber h4 {
+.Se-asideRight .Se-security ul li form h4{
     margin-bottom: 2rem;
 }
 
@@ -4319,11 +4379,49 @@ align-items: flex-start;
 }
 
 .Se-asideRight .Se-security .Se-editPassword .confirmBtn,
-.Se-asideRight .Se-security .Se-editPhoneNumber .confirmBtn {
-    padding: 0.6rem 1.5rem 0.6rem 1.5rem;
-    font-size: 1rem;
+.Se-asideRight .Se-security .Se-editPhoneNumber .confirmBtn,
+.Se-asideRight .Se-security .Se-editPixKey .confirmBtn {
+    padding: 0.5rem 1.3rem 0.5rem 1.3rem;
+    font-size: 0.8rem;
     float: inline-end;
-    margin: 1rem 0.5rem 0 1rem;
+    margin: 0 0.5rem 0 1rem;
+}
+
+.Se-asideRight .Se-security .Se-editPixKey .Se-pixInput{
+    position: relative;
+    padding: 0.7rem 0.5rem 0.5rem 1rem;
+    width: 100%;
+    min-height: 2.5rem;
+    height: 5vh;
+    max-height: 4rem;
+    border-radius: 0.7rem;
+    border: 1px solid var(--blackColor);
+}
+
+.Se-asideRight .Se-security .Se-editPixKey .Se-pixInput input {
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: none;
+}
+
+.Se-asideRight .Se-security .Se-editPixKey .Se-pixInput label {
+    position: absolute;
+    top: -0.5rem;
+    left: 1rem;
+    background-color: var(--whiteColor);
+    padding: 0 1rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.Se-asideRight .Se-security .Se-editPixKey .Se-pixInput .Se-editIcon {
+    position: absolute;
+    right: 1rem;
+    font-size: 0.7rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--secondColor);
 }
 
 .Se-asideRight .Se-security .Se-reportPrivacy {
@@ -4402,6 +4500,75 @@ align-items: flex-start;
 
 .Se-asideRight .Se-security .Se-reportPrivacy button{
     align-self: flex-end;
+}
+
+.Se-asideRight .Se-notifications .notificacaoForm{
+    position: relative;
+    width: 100%;
+}
+
+.Se-asideRight .Se-notifications .notificacaoForm .notificationsBlock {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 1rem;
+}
+
+.Se-asideRight .Se-notifications .notificacaoForm .notificationsBlock .notificationsOptions{
+    padding-left: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.Se-asideRight .Se-notifications .notificacaoForm .notificationsBlock .notificationsOptions .notificationsCheckbox {
+    position: relative;
+    display: flex;
+    width: 2rem;
+    height: 1.2rem;
+}
+
+.Se-asideRight .Se-notifications .notificacaoForm .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border: 1px solid var(--grayColor);
+    transition: 0.3s;
+    border-radius: 1rem;
+}
+
+.Se-asideRight .Se-notifications .notificacaoForm .slider:before {
+    position: absolute;
+    content: "";
+    height: 1rem;
+    width: 1rem;
+    left: 1px;
+    margin: auto 0;
+    background-color: var(--whiteColor);
+    transition: 0.3s;
+    border-radius: 50%;
+}
+
+.Se-asideRight .Se-notifications .notificacaoForm input:checked + .slider {
+    background-color: var(--secondColor);
+    border-color: var(--thirdColor);
+}
+
+.Se-asideRight .Se-notifications .notificacaoForm input:checked + .slider:before {
+    transform: translateX(80%);
+}
+
+.Se-asideRight .Se-notifications .notificacaoForm .confirmBtn{
+    padding: 0.5rem 1.3rem 0.5rem 1.3rem;
+    font-size: 0.8rem;
+    float: inline-end;
+    margin: 0 0.5rem 0 1rem;
 }
 
 .Se-asideRight .Se-security .Se-accountDelete{
@@ -5642,25 +5809,180 @@ body.P-theme .Pe-main .timeline .Pe-profilePostType .Pe-postType:hover .Pe-postT
     content: "⏳";  
 }
 
-
-.Su-patchNotes .Su-patchNotes > h3:first-of-type {
-    color: red;
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
-}
-
-.Su-patchNotes .Su-patchNotes > h3:last-of-type {
-    color: blue;
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
-}
-
 .Su-patchNotes > p {
     font-size: 1.2rem;
     color: var(--blackColor);
     margin-bottom: 2rem;
     line-height: 1.6;
 }
+
+.Su-policyDocs{
+    width: 80%;
+    position:relative;
+    left:10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3rem;
+}
+.Su-policyDocs > h2{
+    margin-bottom: 1rem;
+    color: var(--middleYellowColor);
+}
+.Su-policyDocs > p{
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+.Su-documents {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    justify-content: space-evenly;
+    margin-top: 20px;
+}
+
+.Su-docLink {
+    text-align: center;
+}
+
+.Su-docIcon {
+    width: 5rem;
+    height: 5rem;
+    margin-bottom: 10px;
+}
+
+.Su-docItem {
+    text-decoration: underline;
+    color: inherit;
+}
+
+.Su-docItem h4 {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Estilo da seção FAQ */
+.Su-suporte .Su-faqQuestionsSection .Su-frequentQuestions {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    left: 50%;
+    transform: translate(-50%);
+    width: 60vw;
+}
+
+/* Estilo da lista de perguntas */
+.Su-suporte .Su-faqQuestionsSection .Su-frequentQuestions .faqList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Estilo das perguntas */
+.Su-suporte .Su-faqQuestionsSection .Su-frequentQuestions .faqList .Su-faqQuestions {
+    position: relative;
+    border-bottom: 2px solid var(--grayColor);
+    cursor: pointer;
+    padding: 1.7rem 2rem 1.7rem 1.5rem;
+    margin: 0.25rem 0;
+    transition: background-color 0.3s ease;
+}
+
+/* Estilo para diferentes tamanhos de tela */
+@media (max-width: 768px) {
+    .Su-suporte .Su-faqQuestionsSection .Su-frequentQuestions .faqList .Su-faqQuestions {
+        padding: 1.5rem 2rem 1.5rem 1.5rem;
+    }
+}
+
+@media (max-width: 428px) {
+    .Su-suporte .Su-faqQuestionsSection .Su-frequentQuestions .faqList .Su-faqQuestions {
+        padding: 1rem 2rem 1rem 1.5rem;
+    }
+}
+
+/* Estilo da pergunta ativa */
+.Su-suporte .Su-faqQuestionsSection .Su-frequentQuestions .faqList .Su-faqQuestions.active {
+    border-color: var(--middleBlueColor);
+}
+
+/* Estilo do texto da pergunta */
+.Su-suporte .Su-faqQuestionsSection .Su-frequentQuestions .faqList .Su-faqQuestions p {
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+/* Mudança de cor quando o usuário passa o mouse */
+.Su-suporte .Su-faqQuestionsSection .Su-frequentQuestions .faqList .Su-faqQuestions:hover p {
+    color: var(--darkBlueColor);
+    transition: 0.1s;
+}
+
+/* Estilo da pergunta ativa (focada) */
+.Su-suporte .Su-faqQuestionsSection .Su-frequentQuestions .faqList .Su-faqQuestions.active p {
+    color: var(--middleBlueColor);
+    font-weight: 500;
+}
+
+/* Ícone de seta à direita */
+.Su-suporte .Su-faqQuestionsSection .Su-frequentQuestions .faqList .Su-faqQuestions .bi-chevron-right {
+    position: absolute;
+    right: 0;
+    top: 1.7rem;
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+/* Mudança de estado do ícone quando a pergunta está ativa */
+.Su-suporte .Su-faqQuestionsSection .Su-frequentQuestions .faqList .Su-faqQuestions.active .bi-chevron-right {
+    color: var(--middleBlueColor);
+    font-weight: 600;
+    transform: rotate(90deg);
+}
+
+/* Resposta da pergunta (inicialmente oculta) */
+.Su-suporte .Su-faqQuestionsSection .Su-frequentQuestions .faqList .Su-faqQuestions .Su-faqAnswers {
+    position: relative;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+    padding: 0.5rem 0 0 1rem;
+    font-size:1.2rem;
+}
+
+/* Mostra a resposta quando a pergunta está ativa */
+.Su-suporte .Su-faqQuestionsSection .Su-frequentQuestions .faqList .Su-faqQuestions.active .Su-faqAnswers {
+    opacity: 1;
+}
+
+/* Estilo da observação */
+.Su-suporte .Su-faqQuestionsSection .Su-frequentQuestions .Su-observation {
+    position: relative;
+}
+
+/* Estilo da observação em telas menores */
+@media (max-width: 768px) {
+    .Su-suporte .Su-faqQuestionsSection .Su-frequentQuestions .Su-observation {
+        width: 150%;
+    }
+}
+
+@media (max-width: 320px) {
+    .Su-suporte .Su-faqQuestionsSection .Su-frequentQuestions .Su-observation {
+        width: 200%;
+    }
+}
+
+/* Link na observação */
+.Su-suporte .Su-faqQuestionsSection .Su-frequentQuestions .Su-observation a {
+    font-weight: bold;
+    color: var(--middleBlueColor);
+    cursor: pointer;
+}
+
 
 @media (max-width: 900px) {
     .Su-cellsBackground {

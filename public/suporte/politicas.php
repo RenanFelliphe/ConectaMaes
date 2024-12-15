@@ -1,7 +1,7 @@
 <?php include_once __DIR__ . "/../../app/services/helpers/paths.php"; ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
 <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +13,7 @@
 <body class="Y-theme">
         <?php include_once ("../../app/includes/headerLanding.php");?>
         
-        <main class="Su-suporte">
+        <main class="Su-suporte policy">
             <h2 class="Su-sectionTitle">Políticas do ConectaMães</h2>
 
             <section class="Su-helpSection">
@@ -48,6 +48,29 @@
                     </a>
                 </nav>
             </section>
+            
+            <section class="Su-policyDocs">
+                <h2>Aqui você pode acessar nossas políticas!</h2>
+                <p>O ConectaMães se compromete a garantir a transparência e segurança das informações dos usuários, com políticas sobre privacidade, termos de uso e mais, disponíveis nos documentos abaixo.</p>
+
+                <div class="Su-documents">
+                    <div class="Su-docLink">
+                    <a href="<?=$relativeRootPath;?>/documents/politicas_de_privacidade_ConectaMaes.pdf" download="politicas_de_privacidade_ConectaMaes.pdf" class="Su-docItem">
+                            <img src="<?= $relativeAssetsPath; ?>/imagens/icons/nav_policy.png" alt="Política de Privacidade" class="Su-docIcon">
+                            <h4>Política de Privacidade</h4>
+                        </a>
+                    </div>
+
+                    <div class="Su-docLink">
+                        <a href="<?=$relativeRootPath;?>/documents/termos_de_uso_ConectaMaes.pdf" download="termos_de_uso_ConectaMaes.pdf" class="Su-docItem">
+                            <img src="<?= $relativeAssetsPath; ?>/imagens/icons/nav_policy.png" alt="Termos de Uso" class="Su-docIcon">
+                            <h4>Termos de Uso</h4>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+
         </main>
 
         <?php 
@@ -81,5 +104,20 @@
                 });
             });
         }
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const docLinks = document.querySelectorAll('.Su-docLink');
+        const hoverFilter = 'brightness(0) saturate(100%) invert(98%) sepia(5%) saturate(5439%) hue-rotate(352deg) brightness(81%) contrast(77%)';
+        docLinks.forEach(link => {
+            link.addEventListener('mouseover', () => {
+                link.style.filter = hoverFilter;
+            });
+
+            link.addEventListener('mouseout', () => {
+                link.style.filter = '';
+            });
+        });
     });
 </script>

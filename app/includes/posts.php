@@ -1,12 +1,4 @@
 <?php
-// Verifica se dados de uma publicação específica foram passados ou faz a consulta de todas as publicações
-if (isset($dadosPublicacao)) {
-    $publicacoes = [$dadosPublicacao]; // Transforma em array para manter a estrutura do foreach
-} else {
-    $tipoPublicacao = $tipoPublicacao ?? '';
-    $publicacoes = queryPostsAndUserData($conn, $tipoPublicacao);    
-}
-
 if (count($publicacoes) > 0) {        
     foreach ($publicacoes as $dadosPublicacao) {
         $profileImage = !empty($dadosPublicacao['linkFotoPerfil']) ? $dadosPublicacao['linkFotoPerfil'] : 'default.png';
@@ -22,21 +14,21 @@ if (count($publicacoes) > 0) {
             $profileImage = 'anonymous.png';
             $postLink = $relativePublicPath . "/home/comentarios.php?anonUser=" . anonUsername($conn, $dadosPublicacao['nomeDeUsuario']) ."&post=".$dadosPublicacao['idPublicacao'];
         } else {
-            $postLink = ($tipoPublicacao != 'Auxilio') 
+            $postLink = ($dadosPublicacao['tipoPublicacao'] != 'Auxilio') 
                 ? $relativePublicPath . "/home/comentarios.php?user=" . $dadosPublicacao['nomeDeUsuario'] ."&post=".$dadosPublicacao['idPublicacao']
                 : '#';
         }
         ?>
-        <article data-id="<?= $dadosPublicacao['idPublicacao']?>" class="Ho-post <?= $tipoPublicacao == 'Auxilio' ? 'Ho-auxilioCard' : '' ?>" <?= $tipoPublicacao == 'Auxilio' ? 'data-type="auxilioModal" onclick="toggleModal(this);"' : '' ?> data-link="<?= htmlspecialchars($postLink); ?>">
+        <article data-id="<?= $dadosPublicacao['idPublicacao']?>" class="Ho-post <?= $dadosPublicacao['tipoPublicacao'] == 'Auxilio' ? 'Ho-auxilioCard' : '' ?>" <?= $dadosPublicacao['tipoPublicacao'] == 'Auxilio' ? 'data-type="auxilioModal" onclick="toggleModal(this);"' : '' ?> data-link="<?= htmlspecialchars($postLink); ?>">
             <ul class="postDate"><li><?= htmlspecialchars($mensagemData); ?></li></ul>
             <?php 
-                if ($tipoPublicacao != 'Auxilio') 
+                if ($dadosPublicacao['tipoPublicacao'] != 'Auxilio') 
                     echo renderProfileLink($relativePublicPath, $relativeAssetsPath . "/imagens/fotos/perfil/" . $profileImage, $dadosPublicacao['nomeDeUsuario'], $isRelatoAnonimo);
             ?>
             <div class="postContent">
                 <div class="postTimelineTop">
                     <?php 
-                        if ($tipoPublicacao == 'Auxilio') 
+                        if ($dadosPublicacao['tipoPublicacao'] == 'Auxilio') 
                             echo renderProfileLink($relativePublicPath, $relativeAssetsPath . "/imagens/fotos/perfil/" . $profileImage, $dadosPublicacao['nomeDeUsuario']);
                     ?>
                     <div class="postUserNames" href="<?= $isRelatoAnonimo ? '#' : htmlspecialchars($relativePublicPath . "/home/perfil.php?user=" . urlencode($dadosPublicacao['nomeDeUsuario'])); ?>">
@@ -61,7 +53,7 @@ if (count($publicacoes) > 0) {
                     </div>
 
                     <div class="postInfo" >
-                        <?php if(($currentUserData['idUsuario'] == $dadosPublicacao['idUsuario'] || $currentUserData['isAdmin']) && $tipoPublicacao != "Auxilio"){ ?>
+                        <?php if(($currentUserData['idUsuario'] == $dadosPublicacao['idUsuario'] || $currentUserData['isAdmin']) && $dadosPublicacao['tipoPublicacao'] != "Auxilio"){ ?>
                             <div class="bi bi-three-dots postMoreButton">
                                 <form class="postFunctionsModal close" method="POST">
                                     <!-- <button class="reportPostButton  pageIcon" name="denunciarPost">
@@ -83,7 +75,7 @@ if (count($publicacoes) > 0) {
 
                 <div class="postTexts">  
                     <p class="postTitle"><?= htmlspecialchars($dadosPublicacao['titulo']); ?></p>
-                    <?php if ($tipoPublicacao !== 'Auxilio') { ?>
+                    <?php if ($dadosPublicacao['tipoPublicacao'] !== 'Auxilio') { ?>
                         <p class="postFullText"><?= htmlspecialchars($dadosPublicacao['conteudo']); ?></p>
                         <?php if($dadosPublicacao['linkAnexo'] != ''){?>
                                 <div class="postImageContainer">

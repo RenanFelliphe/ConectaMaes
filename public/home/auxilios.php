@@ -30,7 +30,7 @@
                 
                 <section class="Au-allAuxilios">
                     <?php
-                        $tipoPublicacao = 'Auxilio';
+                        $publicacoes = queryPostsAndUserData($conn, 'Auxilio', null, 10, 0);
                         include_once ("../../app/includes/posts.php");
                     ?>
                 </section>

@@ -283,12 +283,6 @@
                     <label for="meIdentificarCheckbox" style="cursor: pointer;"> Me identificar </label>
                     <i class="bi bi-info-circle-fill" id="Ho-identifyMyselfIcon" style="cursor: pointer;"></i>
                 </div>
-
-                <div class="Ho-showPixKey">
-                    <img src="<?= $relativeAssetsPath . "/imagens/icons/pix_icon.png"?>" alt="Ícone do Pix" style = "width: 20px;">
-                    <label for="showPixKeyCheckbox" style="cursor: pointer;"> Chave Pix </label>
-                    <input type="checkbox" id="showPixKeyCheckbox" name="showPixKey" style="cursor: pointer;">
-                </div>
             </div>
         </div>
 
@@ -298,23 +292,44 @@
                 <h3>Publicação sem identificação</h3>
             </div>
             <p><span>Relatos</span> podem ser publicados sem a necessidade de identificação. Logo, 
-                suas informações <span>não serão vinculadas</span> à publicação e nenhum usuário poderá acessar seu perfil a partir dela. Apesar disso, as notificações chegarão 
-                normalmente.</p>
+                suas informações <span>não serão vinculadas</span> à publicação e nenhum usuário poderá acessar seu perfil a partir dela.
+            </p>
         </div>
 
         <div class="Ho-postBottom">
-            <div class="Ho-imageInput">
-                <input type="file" id="Ho-imageSelector" name="linkAnexoEnvio" accept="image/png, image/jpeg" onchange="addPost();">
-                <label for="Ho-imageSelector">
-                    <i class="bi bi-images Ho-iconLabel"></i>
-                    <p> Imagem </p>
-                </label>
+            <div class="Ho-postAttachments">
+                <div class="Ho-imageInput Ho-postInputLabel">
+                    <input type="file" id="Ho-imageSelector" name="linkAnexoEnvio" accept="image/png, image/jpeg" onchange="addPost();">
+                    <label for="Ho-imageSelector">
+                        <i class="bi bi-images Ho-iconLabel"></i>
+                        <p> Imagem </p>
+                    </label>
+                </div>
+                
+                <div class="Ho-showPixKey Ho-postInputLabel">
+                    <div class="Ho-postInputLabel" style="pointer-events: <?= empty($currentUserData['chavePix']) ? 'none' : 'all' ?>;">
+                        <img src="<?= $relativeAssetsPath . "/imagens/icons/pix_icon.png" ?>" class="<?= empty($currentUserData['chavePix']) ? 'noPix' : '' ?>" alt="Ícone do Pix">
+                        <label for="showPixKeyCheckbox" class="<?= empty($currentUserData['chavePix']) ? 'noPix' : '' ?>">Chave Pix</label>
+                        <input type="checkbox" id="showPixKeyCheckbox" name="showPixKey">
+                        <i class="bi bi-info-circle-fill"></i>
+                    </div>
+                    
+                    <div class="Ho-showPixKeyModal close">
+                        <?php if (!empty($currentUserData['chavePix'])) { ?>
+                            <p>Você pode anexar uma chave Pix à publicação caso sua requisição de <span style="color: var(--thirdColor)">Auxílio</span> seja financeira.</p>
+                            <p><span>Sua chave Pix:</span> <?php echo $currentUserData['chavePix']; ?></p>
+                        <?php } else { ?>
+                            <p>Você não possui uma chave Pix cadastrada!</p>
+                            <p>Você pode adicioná-la na página de configurações.</p>
+                        <?php } ?>
+                    </div>
+                </div>
             </div>
-            
+
             <button type="submit" value="submit" name="postPostModal" class="Ho-submitPost confirmBtn close"> Postar </button>
         </div>
 
-        <div class="Ho-postAttachments">
+        <div class="Ho-imagePreview">
             <span class="Ho-preview"></span>
         </div>
     </form>
@@ -392,6 +407,7 @@
         } else if (postLink === 'postRelatoModal') {
             buttonText = 'Relatar';
         }
+
         submitPostBtn.textContent = buttonText;
 
         submitPostBtn.setAttribute('name', postLink);
@@ -509,6 +525,10 @@
 
     document.querySelector('.Ho-identifyMyself').addEventListener('click', () => {
         document.querySelector('.Ho-identifyMyselfModal').classList.toggle('close');
+    })
+
+    document.querySelector('.Ho-showPixKey').addEventListener('click', () => {
+        document.querySelector('.Ho-showPixKeyModal').classList.toggle('close');
     })
 
     dropdownHeaderSections();

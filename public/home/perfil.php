@@ -146,27 +146,21 @@
                 <section class="Pe-userProfilePosts">
                     <section class="Pe-postsPostagens Pe-allPosts active">
                         <?php
-                            $tipoPublicacao = '';
-                            $userId = isset($profileData['idUsuario']) ? $profileData['idUsuario'] : null;
-                            $publicacoes = queryPostsAndUserData($conn, '', $userId);
+                            $publicacoes = queryPostsAndUserData($conn, '', $profileData['idUsuario']);
                             include __DIR__ . "/../../app/includes/posts.php";
                         ?>
                     </section>
 
                     <section class="Pe-postsRelatos Pe-allPosts">
                         <?php
-                            $tipoPublicacao = 'Relato';
-                            $userId = isset($profileData['idUsuario']) ? $profileData['idUsuario'] : null;
-                            $publicacoes = queryPostsAndUserData($conn, $tipoPublicacao, $userId);
+                            $publicacoes = queryPostsAndUserData($conn, 'Relato', $profileData['idUsuario']);
                             include __DIR__ . "/../../app/includes/posts.php";
                         ?>
                     </section>
 
                     <section class="Pe-postsAuxilios Au-allAuxilios Pe-allPosts">
                         <?php
-                            $tipoPublicacao = 'Auxilio';
-                            $userId = isset($profileData['idUsuario']) ? $profileData['idUsuario'] : null;
-                            $publicacoes = queryPostsAndUserData($conn, $tipoPublicacao, $userId);
+                            $publicacoes = queryPostsAndUserData($conn, 'Auxilio', $profileData['idUsuario']);
                             include __DIR__ . "/../../app/includes/posts.php";
                         ?>
                     </section>

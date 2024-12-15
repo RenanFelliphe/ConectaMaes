@@ -23,6 +23,7 @@
         
         <main class="Ho-Main Se-main mainSystem">
             <?php include_once "../../app/includes/asideLeft.php";?>
+
             <section class="Se-settingsCenter">
                 <div class="Se-centerHeader">  
                     <a href="../home.php"><i class="bi bi-arrow-left-circle"></i></a>
@@ -127,7 +128,7 @@
 
                     <div class="Se-editInfo">
                         <input type="hidden" class="updaterIdHiddenInput" name="updaterId" value="<?= $currentUserData['idUsuario']; ?>">    
-                        <div class="Se-userInput full-width">
+                        <div class="Se-userInput">
                             <input type="text" id="nomeCompletoUsuario" name="nomeEdit" value="<?= $currentUserData['nomeCompleto'];?>">
                             <label class="Re-fakePlaceholder" for="nomeCompletoUsuario">Nome Completo</label>
                             <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>
@@ -136,7 +137,7 @@
                             <div class="errorMessageContent"></div>
                         </div>
 
-                        <div class="Se-userInput full-width">
+                        <div class="Se-userInput">
                             <textarea name="biografiaUsuarioEdit" id="biografiaUsuario" cols="54" rows="3"><?= $currentUserData['biografia']; ?></textarea>
                             <label class="Re-fakePlaceholder" for="biografiaUsuario">Biografia</label>
                             <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>
@@ -145,9 +146,10 @@
                             <div class="errorMessageContent"></div>
                         </div>
 
-                        <div class="Se-userInput full-width">
+                        <div class="Se-userInput">
                             <input type="number" id="localizacaoUsuario" name="localizacaoEdit" value="<?= $currentUserData['estado']; ?>">
                             <label class="Re-fakePlaceholder" for="localizacaoUsuario" style="pointer-events: none;">Código de Endereçamento Postal (CEP)</label>
+                            <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>
                         </div>
                         <div class="errorMessageContainer">
                             <div class="errorMessageContent"></div>
@@ -366,6 +368,7 @@
                                         <input type="text" id="newPassword" name="newPassword">
                                         <label class="Re-fakePlaceholder" for="newPassword">Senha Nova</label>
                                     </div>
+
                                     <div class="errorMessageContainer">
                                         <div class="editPasswordErrorContent"></div>
                                     </div>
@@ -395,7 +398,7 @@
                                 <h4> Número de Telefone </h4>
                                 <div class="Se-phoneInput">
                                     <input type="number" id="editTelephone" name="editTelephoneNumber">
-                                    <label class="Re-fakePlaceholder" for="editTelephone">Telefone</label>
+                                    <label class="Re-fakePlaceholder" for="editTelephone"><?= isset($currentUserData['telefone']) ? 'Telefone Atual: ' . $currentUserData['telefone'] : 'Adicionar Telefone'; ?></label>
                                     <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
                                 </div>
                                 <div class="errorMessageContainer">
@@ -416,11 +419,11 @@
                             <form class="Se-editPixKey" method="post" id="formPixKey">
                                 <input type="hidden" class="updaterIdHiddenInput" name="updaterId" value="<?= $currentUserData['idUsuario']; ?>">    
                                 <?php $hasPixKey = isset($currentUserData['chavePix']) && !in_array($currentUserData['chavePix'], ['N/a', NULL, '']); ?>
-                                <h4> <?= $hasPixKey ? 'Editar chave Pix' : 'Adicionar chave Pix'; ?> </h4>
+                                <h4> Chave Pix </h4>
 
                                 <div class="Se-pixInput">
                                     <input type="text" id="editPixKey" name="editPixKey" value="">
-                                    <label class="Re-fakePlaceholder" for="editPixKey">Chave Pix</label>
+                                    <label class="Re-fakePlaceholder" for="editPixKey"><?= isset($currentUserData['chavePix']) ? 'Chave Pix Atual: ' . $currentUserData['chavePix'] : 'Adicionar Chave Pix'; ?></label>
                                     <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
                                 </div>
                                 <div class="errorMessageContainer">
@@ -434,11 +437,7 @@
                                     ?>
                                 </div>
 
-                                <button class="Se-editSubmit confirmBtn" type="submit" name="editPixSubmit" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>
-                                    <?= $hasPixKey ? 'Editar' : 'Adicionar'; ?>
-                                </button>
-
-                                
+                                <button class="Se-editSubmit confirmBtn" type="submit" name="editPixSubmit" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Confirmar</button>
                             </form>
                         </li>
 
@@ -505,18 +504,49 @@
                         <h1>Notificações</h1>
                     </div>
 
-                    <form id="notificacaoForm" method="post" enctype="multipart/form-data">
+                    <form class="notificacaoForm" id="notificacaoForm" method="post" enctype="multipart/form-data">
                         <input type="hidden" id="valorBinario" name="valorBinario" value="0">
                         <input type="hidden" name="updaterId" value='<?= $currentUserData['idUsuario']?>'>
+                            <div class="notificationsBlock">
+                                <h4>Curtidas</h4>
 
-                        <label><input type="checkbox" id="curtidas" value="1" <?php if($currentUserData['idUsuario'] == 1){echo "disabled";}?>> Desativar notificações de curtidas</label><br>
-                        <label><input type="checkbox" id="comentarios" value="2" <?php if($currentUserData['idUsuario'] == 1){echo "disabled";}?>> Desativar notificações de comentários</label><br>
-                        <label><input type="checkbox" id="seguidores" value="3" <?php if($currentUserData['idUsuario'] == 1){echo "disabled";}?>> Desativar notificações de seguidores</label><br>
+                                <div class="notificationsOptions">
+                                    <label class="notificationsCheckbox">
+                                        <input type="checkbox" id="curtidas" value="1" <?php if($currentUserData['idUsuario'] == 1){echo "disabled";}?>>
+                                        <span class="slider"></span>
+                                    </label>
+                                    <p>Desativar notificações de curtidas</p>
+                                </div>
+                            </div>
 
-                        <button type="submit" value="submit" name="desativarNotificacoesEnvio" <?php if($currentUserData['idUsuario'] == 1){echo "disabled";}?>>Salvar</button>
+                            <div class="notificationsBlock">
+                                <h4>Comentários</h4>
+
+                                <div class="notificationsOptions">
+                                    <label class="notificationsCheckbox">
+                                        <input type="checkbox" id="comentarios" value="2" <?php if($currentUserData['idUsuario'] == 1){echo "disabled";}?>>
+                                        <span class="slider"></span>
+                                    </label>
+                                    <p>Desativar notificações de comentários</p>
+                                </div>
+                            </div>
+                            
+                            <div class="notificationsBlock">
+                                <h4>Seguidores</h4>
+
+                                <div class="notificationsOptions">
+                                    <label class="notificationsCheckbox">
+                                        <input type="checkbox" id="seguidores" value="3" <?php if($currentUserData['idUsuario'] == 1){echo "disabled";}?>>
+                                        <span class="slider"></span>
+                                    </label>
+                                    <p>Desativar notificações de seguidores</p>
+                                </div>
+                            </div>
+                        </ol>
+                        
+                        <button type="submit" class="confirmBtn" value="submit" name="desativarNotificacoesEnvio" <?php if($currentUserData['idUsuario'] == 1){echo "disabled";}?>>Confirmar</button>
                     </form>
                 </div>
-
             </section>
         </main>
 

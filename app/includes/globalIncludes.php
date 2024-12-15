@@ -13,7 +13,5 @@
     $currentUserData = queryUserData($conn, $_SESSION['idUsuario']);  
 
     include_once __DIR__ . "/../../app/services/crud/postFunctions.php";
-    $publicacoes = queryPostsAndUserData($conn, '', null, 10, 0);
-    $tipoPublicacao = "";
     date_default_timezone_set('America/Sao_Paulo');    
 ?>
