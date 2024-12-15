@@ -135,9 +135,7 @@ function queryPostsAndUserData($conn, $postType = '', $postId = null, $userId = 
             u.linkFotoPerfil,
             u.estado,
             IF(p.chavePix = 'N/a', 'N/a', u.chavePix) AS chavePix,
-            -- Subquery para contar likes
             (SELECT COUNT(*) FROM curtirPublicacao c WHERE c.idPublicacao = p.idPublicacao) AS totalLikes,
-            -- Subquery para contar comentários
             (SELECT COUNT(*) FROM Comentario cm WHERE cm.idPublicacao = p.idPublicacao) AS totalComments
         FROM 
             Publicacao p

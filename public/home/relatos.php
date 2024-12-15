@@ -29,7 +29,7 @@
                 -->
 
                 <?php
-                    $publicacoes = queryPostsAndUserData($conn, 'Relato', null, 10, 0);
+                    $publicacoes = queryPostsAndUserData($conn, 'Relato', null, null, 10, 0);
                     include_once ("../../app/includes/posts.php");
                 ?>
             </section>
