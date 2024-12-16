@@ -1,4 +1,0 @@
->info da conta
->info dos filhos
-> seguranca e privacidade
-> notificacoes
