@@ -16,7 +16,7 @@ if (count($publicacoes) > 0) {
         } else {
             $postLink = ($dadosPublicacao['tipoPublicacao'] != 'Auxilio') 
                 ? $relativePublicPath . "/home/comentarios.php?user=" . $dadosPublicacao['nomeDeUsuario'] ."&post=".$dadosPublicacao['idPublicacao']
-                : null; // Alterado para null em vez de string vazia
+                : null;
         }
         ?>
         <article data-id="<?= $dadosPublicacao['idPublicacao'] ?>" class="Ho-post <?= $dadosPublicacao['tipoPublicacao'] == 'Auxilio' ? 'Ho-auxilioCard' : '' ?>"  <?= $postLink ? 'data-link="' . htmlspecialchars($postLink) . '"' : '' ?>  <?= $dadosPublicacao['tipoPublicacao'] == 'Auxilio' ? 'data-type="auxilioModal" onclick="toggleModal(this);"' : '' ?>>
@@ -122,9 +122,9 @@ if (count($publicacoes) > 0) {
 <script>
     document.querySelectorAll('article[data-link]').forEach(article => {
         article.addEventListener('click', function(event) {
-            if (event.target.closest('.postMoreButton') || event.target.closest('.postFunctionsModal')) {
-                event.stopPropagation();
-            } else if(event.target.closest('.postComment')){
+            if (event.target.closest('.postMoreButton') || 
+                event.target.closest('.postFunctionsModal') || 
+                event.target.closest('.postComment')){
                 event.stopPropagation();
             } else {
                 window.location.href = article.getAttribute('data-link');
@@ -132,8 +132,17 @@ if (count($publicacoes) > 0) {
         });
     });
 
-    document.querySelectorAll('.postMoreButton').forEach(b => b.onclick = () => {
-        b.querySelector('.postFunctionsModal').classList.toggle('close');
+    document.querySelectorAll('.postMoreButton').forEach(b => {
+        b.onclick = (event) => {
+            event.stopPropagation();
+            b.querySelector('.postFunctionsModal').classList.toggle('close');
+        };
+    });
+
+    document.querySelectorAll('.postComment').forEach(commentButton => {
+        commentButton.addEventListener('click', (event) => {
+            event.stopPropagation();
+        });
     });
 
 </script>

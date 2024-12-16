@@ -116,7 +116,7 @@ function registerTheme(theme) {
         body.classList.remove("B-theme");
         body.classList.remove("Y-theme");
     }
-
+    
     toggleTheme();
 }
 
@@ -146,6 +146,8 @@ function toggleTheme() {
         cell.src = `${pathPrefix}${theme}.png`;
     });
 }
+
+
 
 function toggleConfigSection() {
     const sectionTitles = document.querySelectorAll('.Se-sectionTitle');

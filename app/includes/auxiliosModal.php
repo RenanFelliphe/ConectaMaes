@@ -52,7 +52,8 @@
         </div>
 
         <div class="Au-auxilioUser">
-            <?= renderProfileLink($relativePublicPath, $relativeAssetsPath . "/imagens/fotos/perfil/" . $profileImage, $dadosPublicacao['nomeDeUsuario']);
+            <?=
+                renderProfileLink($relativePublicPath, $relativeAssetsPath . "/imagens/fotos/perfil/" . $profileImage, $dadosPublicacao['nomeDeUsuario']);
             ?>
 
             <div class="postOwner">
@@ -151,7 +152,7 @@
                         </div>
                     </div>
                     <div class="Ho-postBottom">
-                        <button type="submit" value="submit" name="postComentarioModalAuxilio" class="confirmBtn"> Comentar </button>
+                        <button type="submit" value="submit" name="postComentarioModalAuxilio" class="confirmBtn" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>> Comentar </button>
                     </div>
                     <?php
                         

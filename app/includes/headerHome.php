@@ -73,6 +73,7 @@
             <h1>Notificações</h1>
             <!--i class="bi bi-three-dots pageIcon"></i-->
         </div>    
+        
         <div class="notificationsCenter">
             <div class="notificationsContainer">
                 <?php 

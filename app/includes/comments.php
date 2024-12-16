@@ -33,7 +33,7 @@ if ($allComentarios && count($allComentarios) > 0) {
                                         <div class="bi bi-three-dots postMoreButton">
                                             <form class="postFunctionsModal close" method="POST">
                                                 <input type="hidden" name="deleterCommentId" value="<?= $reply['idComentario']; ?>">
-                                                <button class="deletePostButton bi bi-trash3-fill pageIcon" name="deletarResposta" type="submit"> Deletar Comentário</button>
+                                                <button class="deletePostButton bi bi-trash3-fill pageIcon" name="deletarResposta" type="submit" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>> Deletar Comentário</button>
                                             </form>
                                         </div>
                                     <?php } ?>
@@ -87,7 +87,7 @@ if ($allComentarios && count($allComentarios) > 0) {
                                 <div class="bi bi-three-dots postMoreButton">
                                     <form class="postFunctionsModal close" method="POST">
                                         <input type="hidden" name="deleterCommentId" value="<?= $comentario['idComentario']; ?>">
-                                        <button class="deletePostButton bi bi-trash3-fill pageIcon" name="deletarComentario" type="submit"> Deletar Comentário</button>
+                                        <button class="deletePostButton bi bi-trash3-fill pageIcon" name="deletarComentario" type="submit" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>> Deletar Comentário</button>
                                     </form>
                                 </div>
                             <?php } ?>                         
@@ -137,7 +137,7 @@ if ($allComentarios && count($allComentarios) > 0) {
                                         <div class="bi bi-three-dots postMoreButton">
                                             <form class="postFunctionsModal close" method="POST">
                                                 <input type="hidden" name="deleterCommentId" value="<?= $reply['idComentario']; ?>">
-                                                <button class="deletePostButton bi bi-trash3-fill pageIcon" name="deletarResposta" type="submit"> Deletar Comentário</button>
+                                                <button class="deletePostButton bi bi-trash3-fill pageIcon" name="deletarResposta" type="submit" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>> Deletar Comentário</button>
                                             </form>
                                         </div>
                                     <?php } ?>

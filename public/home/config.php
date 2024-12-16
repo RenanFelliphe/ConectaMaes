@@ -158,14 +158,15 @@
                         <div class="Re-themeInfo">
                             <p> Tema </p>
                             <div class="Re-themeOptions">
-                                <input type="radio" name="temaEdit" value="Y-theme" id="Re-yellowTheme" <?= ($currentUserData['tema'] === 'Y-theme') ? 'checked' : ''; ?>>
+                                <input type="radio" name="temaEdit" value="Y-theme" id="Re-yellowTheme" <?= ($currentUserData['tema'] === 'Y-theme') ? 'checked' : ''; ?> onclick="registerTheme('Y-theme')">
                                 <label for="Re-yellowTheme"> Amarelo </label>
-                                <input type="radio" name="temaEdit" value="B-theme" id="Re-blueTheme" <?= ($currentUserData['tema'] === 'B-theme') ? 'checked' : ''; ?>>
+                                <input type="radio" name="temaEdit" value="B-theme" id="Re-blueTheme" <?= ($currentUserData['tema'] === 'B-theme') ? 'checked' : ''; ?> onclick="registerTheme('B-theme')">
                                 <label for="Re-blueTheme"> Azul </label>
-                                <input type="radio" name="temaEdit" value="P-theme" id="Re-pinkTheme" <?= ($currentUserData['tema'] === 'P-theme') ? 'checked' : ''; ?>>
+                                <input type="radio" name="temaEdit" value="P-theme" id="Re-pinkTheme" <?= ($currentUserData['tema'] === 'P-theme') ? 'checked' : ''; ?> onclick="registerTheme('P-theme')">
                                 <label for="Re-pinkTheme"> Rosa </label>
                             </div>
                         </div>
+                        
                         <?php 
                             if(isset($updateProfile_messages) and !empty($updateProfile_messages)){
                                 foreach ($updateProfile_messages as $upm) {
@@ -479,7 +480,7 @@
                                         <div class="raContentContainer">
                                             <div class="raContent">Conteúdo: <?= $ra['conteudo'];?></div>
                                         </div>
-                                        <button type="submit" class="confirmReportIdentification confirmBtn" name="confirmReportIdentification"> Confirmar identificação</button>
+                                        <button type="submit" class="confirmReportIdentification confirmBtn" name="confirmReportIdentification" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>> Confirmar identificação</button>
                                     </form>
                                 <?php
                                         } 
@@ -495,7 +496,7 @@
                         </li>
                     </ul>
 
-                    <button class="Se-accountDelete confirmBtn" data-type="deleteAccount" onclick="toggleModal(this);" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Excluir conta</button> <!--name="deletar" href="./config.php?deletar=true-->
+                    <button class="Se-accountDelete confirmBtn" data-type="deleteAccount" onclick="toggleModal(this);" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Excluir conta</button>
                 </div>
 
                 <div class="Se-notifications Se-subSection">
@@ -646,7 +647,7 @@
                     </div>
                 </div>
 
-                <button class="Se-modalSubmit" id="insertChild" type="submit" name="enviarFilho">Confirmar adição</button>
+                <button class="Se-modalSubmit" id="insertChild" type="submit" name="enviarFilho" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Confirmar adição</button>
             </form>
         </modal>
 
@@ -675,7 +676,7 @@
                         <div class="deleteAccountErrorContent"></div>
                     </div>
                 </div>
-                <button class="Se-modalSubmit confirmBtn" type="submit" name="deleteAccountSubmit">Confirmar deleção</button>
+                <button class="Se-modalSubmit confirmBtn" type="submit" name="deleteAccountSubmit" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>Confirmar deleção</button>
                 <?php
                     if (isset($deleteUser_messages) && !empty($deleteUser_messages)) {
                         foreach ($deleteUser_messages as $d_m) {

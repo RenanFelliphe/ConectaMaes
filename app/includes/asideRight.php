@@ -80,7 +80,7 @@
                             
                             <input type="hidden" name="idFromSuggestion" value="<?= $userSuggestion['idUsuario']; ?>">
                             
-                            <button type="submit" name="followFromSuggestion" class="followSuggestion confirmBtn">
+                            <button type="submit" name="followFromSuggestion" class="followSuggestion confirmBtn" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>
                                 <p><?= $isFollowingSuggestion ? 'Seguindo' : 'Seguir'; ?></p>
                             </button>
                         </form>

@@ -13,7 +13,7 @@
         <title>ConectaMães - Registro</title>
     </head>
 
-    <body class="<?php if(isset( $currentUserData['tema'])) echo $currentUserData['tema'];?>">
+    <body class="<?= isset($currentUserData['tema']) ? $currentUserData['tema'] : 'default-theme'; ?>">
         <?php 
             include_once ("../app/includes/headerLanding.php");
             include_once ("../app/services/crud/userFunctions.php");
