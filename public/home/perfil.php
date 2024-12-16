@@ -150,15 +150,15 @@
 
                     <section class="Pe-postsRelatos Pe-allPosts">
                         <?php
-                            /*$publicacoes = queryPostsAndUserData($conn, 'Relato',null, $profileData['idUsuario']);
-                            include __DIR__ . "/../../app/includes/posts.php";*/
+                            $publicacoes = queryPostsAndUserData($conn, 'Relato',null, $profileData['idUsuario']);
+                            include __DIR__ . "/../../app/includes/posts.php";
                         ?>
                     </section>
 
                     <section class="Pe-postsAuxilios Au-allAuxilios Pe-allPosts">
                         <?php
-                            /*$publicacoes = queryPostsAndUserData($conn, 'Auxilio',null, $profileData['idUsuario']);
-                            include __DIR__ . "/../../app/includes/posts.php";*/
+                            $publicacoes = queryPostsAndUserData($conn, 'Auxilio',null, $profileData['idUsuario']);
+                            include __DIR__ . "/../../app/includes/posts.php";
                         ?>
                     </section>
                 </section>

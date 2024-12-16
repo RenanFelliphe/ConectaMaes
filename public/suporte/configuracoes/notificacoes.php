@@ -1,4 +1,4 @@
-<?php include_once __DIR__ . "/../../app/services/helpers/paths.php"; ?>
+<?php include_once __DIR__ . "/../../../app/services/helpers/paths.php"; ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -8,10 +8,10 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
         <link rel="stylesheet" href="<?= $relativeAssetsPath; ?>/styles/style.css">
         <link rel="icon" href="<?= $relativeAssetsPath; ?>/imagens/logos/Final/Conecta_Mães_Logo_Icon.png">
-    <title>ConectaMães - Sobre Configurações</title>
+    <title>ConectaMães - Sobre as Notificações</title>
 </head>
 <body class="P-theme">
-        <?php include_once ("../../app/includes/headerLanding.php");?>
+        <?php include_once ("../../../app/includes/headerLanding.php");?>
         
         <main class="Su-suporte">
             <h2 class="Su-sectionTitle">Configurações</h2>
@@ -73,10 +73,15 @@
                     </a>
                 </nav>
             </section>
+            <section class="sSe-notifications">
+                <h2>Configuração de Notificações</h2>
+                <p>Na seção de Notificações, você pode gerenciar as notificações que deseja receber no seu perfil. As notificações podem ser de três tipos: curtidas, comentários e seguidores. Para personalizar as suas preferências, basta desmarcar os interruptores correspondentes às notificações que você deseja desativar. Caso queira reativar uma notificação, é só marcar novamente o interruptor. Depois de realizar as alterações, não se esqueça de confirmar, assim as notificações serão enviadas de acordo com as suas configurações escolhidas.</p>
+                <p><strong>Importante:</strong> As notificações serão ajustadas automaticamente assim que você confirmar as alterações. Certifique-se de revisar suas preferências regularmente para garantir que está recebendo as informações que mais lhe interessam.</p>
+            </section>
         </main>
 
         <?php 
-            include_once ("../../app/includes/footer.php");
+            include_once ("../../../app/includes/footer.php");
         ?>
 
         <script src="<?= $relativeAssetsPath; ?>/js/system.js"></script>

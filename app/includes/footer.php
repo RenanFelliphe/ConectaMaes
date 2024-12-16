@@ -1,4 +1,4 @@
-<footer>
+<footer class="footerLanding">
     <a href="#A-copyrightSign" class="footerLink"></a>
     <div class="A-footerLeft">
         <h4>Contato</h4>

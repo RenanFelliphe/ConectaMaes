@@ -146,7 +146,7 @@ function queryPostsAndUserData($conn, $postType = '', $postId = null, $userId = 
         $whereClause = "p.idPublicacao = " . intval($postId);
     } elseif ($userId !== null) {
         if ($postType === '') {
-            $whereClause = "u.idUsuario = " . intval($userId) . " AND p.tipoPublicacao <> 'Auxilio'";
+            $whereClause = "u.idUsuario = " . intval($userId) . /*" AND p.tipoPublicacao <> 'Relato'". */ " AND p.tipoPublicacao <> 'Auxilio'";
         } else {
             $whereClause = "u.idUsuario = " . intval($userId) . " AND p.tipoPublicacao = '$postType'";
         }

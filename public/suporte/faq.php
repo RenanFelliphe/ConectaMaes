@@ -10,7 +10,7 @@
         <title>ConectaMães - FAQ</title>
     </head>
 
-    <body class="Y-theme">
+    <body class="B-theme">
         <?php include_once ("../../app/includes/headerLanding.php");?>
         
         <main class="Su-suporte">

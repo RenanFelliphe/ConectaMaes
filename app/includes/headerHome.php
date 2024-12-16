@@ -45,6 +45,8 @@
         <div class="makeAPost" onclick="openModalHeader(this);">
             <button name ="postPostagem" class="makeAPostBtn">Postar</button>
 
+            <i class="bi bi-plus-lg postBtnMobile pageIcon"></i>
+
             <div class="postStyle">
                 <i class="bi bi-caret-down-fill pageIcon"></i>
             </div>
@@ -63,7 +65,6 @@
             <div class="userProfileImage">
                 <img src="<?= $relativeAssetsPath . "/imagens/fotos/perfil/". $currentUserData['linkFotoPerfil'];?>">
             </div>
-            <i class="bi bi-chevron-down"></i>
         </div>
     </div>
 
@@ -180,7 +181,6 @@
         </div>
     </div>
 
-
     <div class="makeAPostModal headerModal close">
         <div class="modalHeader">
             <h1>Publicação</h1>
@@ -251,6 +251,22 @@
         <span></span>
     </div>
 </header>
+
+<footer class="navMobile">
+    <a class="homePageLink pageLink" id="homePageLink" href="<?= $relativePublicPath; ?>/home.php">
+        <img class="homePageIcon headerIcon" src="<?= $relativeAssetsPath; ?>/imagens/icons/home_off.png" alt="Ícone da página inicial">
+        <?php $postType = "Postagem";?>
+    </a>
+
+    <a class="reportPageLink pageLink" id="reportPageLink" href="<?= $relativePublicPath; ?>/home/relatos.php">
+        <img class="reportPageIcon headerIcon" src="<?= $relativeAssetsPath; ?>/imagens/icons/reports_off.png" alt="Ícone da página de relatos">
+        <?php $postType = "Relato";?>
+    </a>
+
+    <a class="helpPageLink pageLink" id="helpPageLink" href="<?= $relativePublicPath; ?>/home/auxilios.php">
+        <img class="helpPageIcon headerIcon" src="<?= $relativeAssetsPath; ?>/imagens/icons/helps_off.png" alt="Ícone da página de pedidos">
+    </a>
+</footer>
 
 <modal class="modalSection close" data-type="postSomething">
     <form class="Ho-postSomething pageModal" method="post" enctype="multipart/form-data">

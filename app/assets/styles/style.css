@@ -411,7 +411,8 @@ a {
 }
 
 .headerHome .A-headerLogo {
-    width: 10rem;
+    width: 30vw;
+    max-width: 10rem;
     cursor: pointer;
 }
 
@@ -425,6 +426,12 @@ a {
     display: flex;
     gap: 5vw;
     height: 100%;
+}
+
+@media(max-width: 1024px){
+    .headerHome .headerPageLinks {
+        display: none;
+    }
 }
 
 .headerHome .headerPageLinks .pageLink {
@@ -497,12 +504,12 @@ body.Y-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon {
 
 .headerHome .userContainer .notificationIconContainer .notificationAlert {
     position: absolute;
-    top: -0.1rem; /* Ajuste fino para posicionamento */
-    right: -0.1rem; /* Ajuste fino para posicionamento */
-    width: 1rem; /* Unifique largura e altura */
+    top: -0.1rem;
+    right: -0.1rem;
+    width: 1rem;
     height: 1rem;
     background-color: var(--secondColor);
-    border: 3px solid white; /* Bordas mais finas */
+    border: 3px solid var(--whiteColor);
     border-radius: 50%;
     display: inline-block;
     z-index: 1;
@@ -515,6 +522,12 @@ body.Y-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon {
     font-size: 1rem;
     font-weight: 600;
     white-space: nowrap;
+}
+
+@media(max-width: 500px){
+    .headerHome .userContainer .userInformations {
+        display: none;
+    }
 }
 
 .headerHome .userContainer .userInformations .userNickname {
@@ -531,7 +544,6 @@ body.Y-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon {
     height: 3.5vw;
     max-width: 5rem;
     max-height: 5rem;
-    
 }
 
 .headerHome .userContainer .userAccount .userProfileImage {
@@ -552,20 +564,6 @@ body.Y-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon {
     object-fit: cover;
 }
 
-.headerHome .userContainer .userAccount .bi-chevron-down {
-    position: absolute;
-    display: flex;
-    width: 1.2vw;
-    height: 1.2vw;
-    right: 0;
-    bottom: 0;
-    font-size: 1rem;
-    font-weight: 900;
-    color: var(--grayColor);
-    background-color: var(--whiteColor);
-    border-radius: 100%;
-    cursor: pointer;
-}
 
 .headerHome .userContainer .makeAPost {
     display: flex;
@@ -582,6 +580,28 @@ body.Y-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon {
     font-weight: 900;
     font-size: 1rem;
     cursor: pointer;
+}
+
+.headerHome .userContainer .makeAPost  .postBtnMobile{
+    display: none;
+    width: 2rem;
+    height: 2rem;
+    background-color: var(--secondColor);
+    color: var(--whiteColor);
+    font-weight: bolder;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+}
+
+@media(max-width: 500px){
+    .headerHome .userContainer .makeAPost .makeAPostBtn,
+    .headerHome .userContainer .makeAPost .postStyle {
+        display: none;
+    }
+
+    .headerHome .userContainer .makeAPost  .postBtnMobile{
+        display: flex;
+    }
 }
 
 .headerHome .userContainer .makeAPost .postStyle {
@@ -620,6 +640,7 @@ body.Y-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon {
     border-bottom-left-radius: 1.3rem;
     border-bottom-right-radius: 1.3rem;
     background-color: var(--whiteColor);
+    z-index: 99999;
 }
 
 .headerHome .headerModal.close {
@@ -649,6 +670,12 @@ body.Y-theme .headerHome .headerPageLinks .pageLink:hover .headerIcon {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
+}
+
+@media(max-width: 500px){
+    .headerHome .makeAPostModal {
+        right: 1rem;
+    }
 }
 
 .headerHome .makeAPostModal.close {
@@ -772,11 +799,17 @@ body.Y-theme .makeAPostModal .postStyleSummary:hover .postStyleTitle img {
 
 .headerHome .notificationsModal {
     right: 15rem;
-    width: 20vw;
+    width: fit-content;
     padding: 1rem;
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
+}
+
+@media(max-width: 500px){
+    .headerHome .notificationsModal {
+        right: 1rem;
+    }
 }
 
 .headerHome .notificationsModal .notificationsCenter{
@@ -812,16 +845,16 @@ body.Y-theme .makeAPostModal .postStyleSummary:hover .postStyleTitle img {
 }
 
 .headerHome .notificationsModal .notificationsCenter .notificationsRelativeDate span:first-child {
-    width: 2rem; /* Tamanho fixo para o primeiro span */
+    width: 2rem;
 }
 
 .headerHome .notificationsModal .notificationsCenter .notificationsRelativeDate span:last-child {
-    flex-grow: 1; /* O segundo span ocupará o restante do espaço */
+    flex-grow: 1;
 }
 
 .headerHome .notificationsModal .notificationsCenter .notificationsRelativeDate p {
     margin: 0 8px;
-    white-space: nowrap; /* Garante que o texto não quebre */
+    white-space: nowrap;
 }
 
 .headerHome .notificationsModal .notificationsCenter .notificationsContainer{
@@ -1232,11 +1265,91 @@ body.Y-theme .makeAPostModal .postStyleSummary:hover .postStyleTitle img {
     transition: 0.3s;
 }
 
+.navMobile {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    display: none;
+    gap: 10vw;
+    height: 12vh;
+    width: 100%;
+    padding-bottom: 1rem;
+    background: var(--whiteColor);
+    border-top: 1px solid var(--grayColor);
+    z-index: 1;
+}
+
+@media(max-width: 1024px){
+    .navMobile {
+        display: flex;
+    }
+}
+
+.navMobile.active{
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: var(--whiteColor);
+    flex-direction: column;
+}
+
+.navMobile .pageLink {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    cursor: pointer;
+    height: 100%;
+    font-weight: 500;
+    color: var(--grayColor);
+    text-decoration: none;
+    cursor: pointer;
+    padding: 1rem 0 0.5rem 0;
+}
+
+.navMobile .pageLink.active,
+.navMobile .pageLink:hover {
+    color: var(--secondColor);
+}
+
+.navMobile .pageLink .pageSelector {
+    position: absolute;
+    width: 200%;
+    height: 3px;
+    bottom: -2px;
+    border-radius: 100rem;
+}
+
+.navMobile .pageLink.active .pageSelector {
+    background-color: var(--secondColor);
+}
+
+.navMobile .pageLink .headerIcon{
+    width: 6vh;
+}
+
+body.P-theme .navMobile .pageLink.active .headerIcon,
+body.P-theme .navMobile .pageLink:hover .headerIcon {
+    filter: brightness(0) saturate(100%) invert(42%) sepia(61%) saturate(1820%) hue-rotate(302deg) brightness(87%) contrast(85%);
+}
+
+body.B-theme .navMobile .pageLink.active .headerIcon,
+body.B-theme .navMobile .pageLink:hover .headerIcon {
+    filter: brightness(0) saturate(100%) invert(63%) sepia(81%) saturate(331%) hue-rotate(139deg) brightness(83%) contrast(87%);
+}
+
+body.Y-theme .navMobile .pageLink.active .headerIcon,
+body.Y-theme .navMobile .pageLink:hover .headerIcon {
+    filter: brightness(0) saturate(100%) invert(66%) sepia(48%) saturate(459%) hue-rotate(16deg) brightness(97%) contrast(85%);
+}
 /*====================================================================================================
 ============================================== FOOTER ================================================
 ====================================================================================================*/
 
-footer {
+.footerLanding {
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -1250,7 +1363,7 @@ footer {
     color: var(--whiteColor);
 }
 
-footer .footerLink {
+.footerLanding .footerLink {
     position: absolute;
     height: 7vh;
     width: 100%;
@@ -1258,13 +1371,13 @@ footer .footerLink {
     margin-left: -1rem;
 }
 
-footer h4 {
+.footerLanding h4 {
     font-size: 1.4em;
     line-height: 4rem;
     pointer-events: none;
 }
 
-footer .A-footerLeft .A-footerSocialMedias {
+.footerLanding .A-footerLeft .A-footerSocialMedias {
     display: flex;
     justify-content: space-evenly;
     gap: 5rem;
@@ -1272,17 +1385,17 @@ footer .A-footerLeft .A-footerSocialMedias {
     width: fit-content;
 }
 
-footer .A-footerLeft .A-footerSocialMedias .bi-instagram {
+.footerLanding .A-footerLeft .A-footerSocialMedias .bi-instagram {
     color: var(--pastelYellowColor);
     cursor: pointer;
 }
 
-footer .A-footerLeft .A-footerSocialMedias .bi-envelope-fill {
+.footerLanding .A-footerLeft .A-footerSocialMedias .bi-envelope-fill {
     color: var(--pastelBlueColor);
     cursor: pointer;
 }
 
-footer #A-copyrightSign {
+.footerLanding #A-copyrightSign {
     position: absolute;
     display: flex;
     bottom: 1rem;
@@ -1292,7 +1405,7 @@ footer #A-copyrightSign {
     text-align: center;
 }
 
-footer .A-footerRight {
+.footerLanding .A-footerRight {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
@@ -1301,7 +1414,7 @@ footer .A-footerRight {
     row-gap: 1rem;
 }
 
-footer .A-footerRight li{
+.footerLanding .A-footerRight li{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -1309,23 +1422,23 @@ footer .A-footerRight li{
     gap: 0.5rem;
 }
 
-footer .A-footerRight li a {
+.footerLanding .A-footerRight li a {
     cursor: pointer;
     text-decoration: none;
     color: var(--whiteColor);
 }
 
-footer .A-footerRight li.A-footerAbout h4 {
+.footerLanding .A-footerRight li.A-footerAbout h4 {
     color: var(--pastelYellowColor);
 }
 
-footer .A-footerRight li.A-footerHelp h4 {
+.footerLanding .A-footerRight li.A-footerHelp h4 {
     color: var(--pastelBlueColor);
 }
 
-footer .A-footerRight li.A-footerPolitic h4 {
+.footerLanding .A-footerRight li.A-footerPolitic h4 {
     color: var(--pastelPinkColor);
-}*/
+}
 
 /*====================================================================================================
 ====================================== PÁGINA DE APRESENTAÇÃO ========================================
@@ -3068,16 +3181,17 @@ input[type="number"]::-webkit-inner-spin-button {
     .Ho-Main .asideLeft{
         display: none;
     }
+    
     .Ho-Main .timeline {
         width: 70vw;
+    }
+
+    .Ho-Main .asideRight{
+        display: none;
     }
 }
 
 @media (max-width: 768px) {
-    .Ho-Main .asideRight{
-        display: none;
-    }
-
     .Ho-Main .timeline {
         width: 100vw;
     }
@@ -5393,7 +5507,9 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
 }
 
 .Pe-main .timeline .Pe-userProfileSection .Pe-userInformations .Pe-userTextInformations .Pe-userNumbers{
-    gap: 5vh;
+    column-gap: 5vh;
+    flex-wrap: wrap;
+    justify-content: flex-start;
 }
 
 .Pe-main .timeline .Pe-userProfileSection .Pe-userInformations .Pe-userTextInformations .Pe-userNumbers p{
@@ -5454,14 +5570,16 @@ body.Y-theme .Se-asideRight .Se-childInformations .Se-userChild .Se-childHeader 
     position: relative;
     width: 100%;
     display: flex;
-    column-gap: 2rem;
+    column-gap: 1rem;
     row-gap: 0.5rem;
     justify-content: space-evenly;
-    padding: 0 5rem;
-    height: 4rem;
+    padding: 0 1rem;
+    min-height: 4rem;
+    height: fit-content;
     flex-wrap: wrap;
     margin-bottom: 1rem;
 }
+
 .Pe-main .timeline .Pe-profilePostType .Pe-searchBar {
     position: absolute;
     left: 2rem;
@@ -5802,16 +5920,22 @@ body.P-theme .Pe-main .timeline .Pe-profilePostType .Pe-postType:hover .Pe-postT
     color: var(--middlePinkColor);
 }
 
-.Su-suporte .Su-helpSection .Su-card .Su-focusblue {
-    color: var(--middleBlueColor);
-}
-
-.Su-suporte .Su-helpSection .Su-card .Su-focusyellow {
-    color: var(--middleYellowColor);
-}
-
+.Su-suporte .Su-helpSection .Su-card .Su-focusblue,
+.Su-suporte .Su-helpSection .Su-card .Su-focusyellow,
 .Su-suporte .Su-helpSection .Su-card .Su-focuspink {
-    color: var(--middlePinkColor);
+    color: inherit; /* Inicialmente, as cores são herdadas, ou seja, sem cor */
+}
+
+.Su-suporte .Su-helpSection .Su-card:hover .Su-focusblue {
+    color: var(--middleBlueColor); 
+}
+
+.Su-suporte .Su-helpSection .Su-card:hover .Su-focusyellow {
+    color: var(--middleYellowColor); 
+}
+
+.Su-suporte .Su-helpSection .Su-card:hover .Su-focuspink {
+    color: var(--middlePinkColor); 
 }
 
 .Su-card p {
@@ -5841,7 +5965,10 @@ body.P-theme .Pe-main .timeline .Pe-profilePostType .Pe-postType:hover .Pe-postT
     min-height: 2rem;
     max-height: 2rem;
 }
+
 .Su-suporte .Su-patchNotes {
+    position: relative;
+    
     margin: 2rem 0;
     padding: 2rem;
     max-width: 1200px;
@@ -5849,6 +5976,63 @@ body.P-theme .Pe-main .timeline .Pe-profilePostType .Pe-postType:hover .Pe-postT
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     color: var(--blackColor);
+}
+
+@media (min-width: 1206px) {
+    .Su-suporte .Su-patchNotes {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 1205px) {
+    .Su-suporte .Su-patchNotes {
+        left: 0;
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .Su-suporte .Su-patchNotes {
+        left: 0;
+        padding: 1.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .Su-suporte .Su-patchNotes {
+        left: 0;
+        width: 100%;
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .Su-suporte .Su-patchNotes {
+        left: 0;
+        width: 100%;
+        padding: 1rem;
+    }
+
+    .Su-patchNotes h2 {
+        font-size: 1.6rem;
+    }
+
+    .Su-patchNotes p {
+        font-size: 1rem;
+    }
+
+    .Su-patchNotes strong {
+        font-weight: 700;
+    }
+
+    .Su-patchNotes h3 {
+        font-size: 1.3rem;
+    }
+
+    .Su-patchNotes ul li {
+        font-size: 1rem;
+    }
 }
 
 .Su-patchNotes h2 {
@@ -5911,6 +6095,590 @@ body.P-theme .Pe-main .timeline .Pe-profilePostType .Pe-postType:hover .Pe-postT
     color: var(--blackColor);
     margin-bottom: 2rem;
     line-height: 1.6;
+}
+
+.Su-suporte .Su-interfaces{
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap:1.5rem;
+}
+
+.Su-suporte .Su-interfaces.mainInterfacePage{
+    margin-top: 5rem;
+}
+
+.Su-suporte .Su-interfaces h1{
+    font-size: 2rem;
+}
+
+.Su-suporte .Su-interfaces.mainInterfacePage .Su-navIntLinks.mainInterfaces{
+    margin-top: 5rem;
+}
+
+.Su-suporte .Su-interfaces.mainInterfacePage .Su-navIntLinks.mainInterfaces .Su-navIntLink .Su-navIcon{
+    width: 10rem; height: 10rem;
+}
+
+.Su-navIntLinks{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    gap:5rem;
+}
+
+.Su-navIntLinks .Su-navIntLink{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.Su-suporte .In-landing {
+    background-color: var(--whiteColor);
+    padding: 5rem;
+}
+
+.Su-suporte .In-landing .In-landing-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.Su-suporte .In-landing .In-landing-content .In-sectionTitle {
+    font-size: 2rem;
+    color: var(--darkBlueColor);
+    margin-bottom: 20px;
+}
+
+.Su-suporte .In-landing .In-landing-content .In-description {
+    font-size: 1.2rem;
+    color: var(var(--blackColor));
+    margin-bottom: 30px;
+}
+
+.Su-suporte .In-landing .In-landing-content .In-feature-section, .In-nav-section, .In-faq-section, .In-contact-section, .In-cta-section, .In-team-section {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    padding: 1.25rem;
+    margin-bottom: 2rem;
+    border-radius: 0.5rem;
+}
+
+.Su-suporte .In-landing .In-landing-content .In-feature-section h3, .In-nav-section h3, .In-faq-section h3, .In-contact-section h3, .In-cta-section h3, .In-team-section h3 {
+    font-size: 1.5rem;
+    color: var(--middleBlueColor);
+    margin-bottom: 10px;
+}
+
+.In-feature-section p, .In-nav-section p, .In-faq-section p, .In-contact-section p, .In-cta-section p, .In-team-section p {
+    font-size: 1rem;
+    color: var(--blackColor);
+    line-height: 1.6;
+}
+
+.In-navLink {
+    display: inline-block;
+    background-color: var(--middleBlueColor);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.In-navLink:hover {
+    background-color: var(--darkBlueColor);
+}
+
+.In-faq-section p a{
+    font-weight: bold;
+}
+.In-faq-section p a:hover{
+    color: var(--middleBlueColor);
+}
+.In-cta-section a {
+    font-size: 1.2rem;
+    text-decoration: none;
+    background-color: var(--middleBlueColor);
+    padding: 12px 25px;
+    border-radius: 5px;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+.In-cta-section a:hover {
+    background-color: var(--darkBlueColor);
+}
+
+.In-contact-section a {
+    color: var(--middleBlueColor);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.In-contact-section a:hover {
+    text-decoration: underline;
+}
+
+.In-registerAndLogin {
+    background-color: var(--whiteColor);
+    padding: 40px;
+    max-width: 900px;
+    margin: 2rem auto;
+}
+
+.In-registerAndLogin .In-registerContent p a{
+    font-weight: bold;
+}
+
+.In-registerAndLogin .In-registerContent p a:hover{
+    color: var(--middleBlueColor);
+}
+
+.In-sectionTitle {
+    font-size: 2rem;
+    color: var(--darkBlueColor);
+    margin-bottom: 20px;
+}
+
+.In-register-step {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+}
+.In-register-step:first-of-type{
+    margin-top: 2rem;
+}
+
+.In-register-step h4 {
+    font-size: 1.5rem;
+    color: var(--middleBlueColor);
+    margin-bottom: 10px;
+}
+
+.In-register-step ul {
+    list-style: none;
+    padding-left: 20px;
+    margin-top: 2rem;
+}
+
+.In-register-step ul li {
+    font-size: 1rem;
+    color: var(--blackColor);
+    line-height: 1.6;
+}
+
+.In-registerAndLogin .In-registerContent hr{
+    margin-bottom: 2rem;
+}
+
+/* Estilizando a seção In-homeNavigation */
+.In-homeNavigation {
+    padding: 20px;
+    background-color: var(--whiteColor);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    margin-top: 2rem;
+    width: 80%;
+    margin: 2rem auto;
+}
+
+/* Título principal da seção */
+.In-homeNavigation h2 {
+    font-size: 24px;
+    color: var(--darkBlueColor);
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.In-homeNavigation h3 {
+    font-size: 20px;
+    color: var(--middleBlueColor);
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.In-homeNavigation p {
+    font-size: 16px;
+    color: var(--blackColor);
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.In-homeNavigation strong {
+    font-weight: bold;
+}
+.In-homeNavigation strong:hover{
+    color: var(--middleBlueColor);
+}
+
+/* Adicionando margens entre os parágrafos */
+.In-homeNavigation p + p {
+    margin-top: 10px;
+}
+
+/* Estilo para o layout responsivo - Ajuste para telas menores */
+@media (max-width: 768px) {
+    .In-homeNavigation {
+        padding: 15px;
+    }
+
+    .In-homeNavigation h2 {
+        font-size: 20px;
+    }
+
+    .In-homeNavigation h3 {
+        font-size: 18px;
+    }
+
+    .In-homeNavigation p {
+        font-size: 14px;
+    }
+}
+
+.In-profileNavigation {
+    padding: 20px;
+    background-color: var(--whiteColor);  /* Cor de fundo suave */
+    border-radius: 8px; /* Bordas arredondadas para suavizar a aparência */
+    width:80%;
+    margin: 2rem auto;
+}
+
+/* Título principal da seção */
+.In-profileNavigation h2 {
+    font-size: 2rem;
+    color: var(--darkBlueColor);  /* Cor escura para o título */
+    margin-bottom: 15px;
+}
+
+/* Estilo para os subtítulos dentro da descrição */
+.In-profileNavigation h3 {
+    font-size: 1.5rem;
+    color: var(--middleBlueColor);  /* Cor de texto um pouco mais clara para os subtítulos */
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+/* Estilo do texto explicativo */
+.In-profileNavigation p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--blackColor);  /* Cor mais suave para o texto */
+    margin-bottom: 15px;
+}
+
+/* Listagem dos tópicos explicados na seção */
+.In-profileNavigation ul {
+    list-style-type: disc;  /* Marcadores como bolinhas */
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+/* Estilo das listagens dentro da seção */
+.In-profileNavigation li {
+    font-size: 1rem;
+    color: var(--blackColor);
+    margin-bottom: 8px;
+}
+
+/* Estilo para a área de texto explicativo em geral */
+.In-profileDescription {
+    background-color: #fff; /* Cor de fundo branca para a área de explicação */
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Tornando o layout mais responsivo */
+@media (max-width: 768px) {
+    .In-profileNavigation {
+        padding: 15px;
+    }
+    
+    .In-profileNavigation h2 {
+        font-size: 1.8rem;
+    }
+
+    .In-profileNavigation h3 {
+        font-size: 1.3rem;
+    }
+
+    .In-profileNavigation p {
+        font-size: 0.95rem;
+    }
+
+    .In-profileNavigation ul {
+        margin-left: 15px;
+    }
+}
+
+.Su-suporte .In-supportNavigation{
+    width: 80%;
+    margin: 2rem auto;
+}
+
+.Su-suporte .In-supportNavigation h2{
+    color: var(--darkBlueColor);
+}
+
+.Su-suporte .In-supportNavigation .In-sNavLink {
+    display: inline-block;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--middleBlueColor);
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+/* Efeito ao passar o mouse sobre os links */
+.Su-suporte .In-supportNavigation .In-sNavLink:hover {
+    background-color: #ecf0f1;
+    color: var(--darkBlueColor);
+    transform: scale(1.05);
+}
+
+/* Estilo de link ativo */
+.Su-suporte .In-supportNavigation .In-sNavLink.active {
+    color: #fff;
+    background-color: var(--darkBlueColor);
+}
+
+/* Sublistas dentro de cada item de navegação */
+.Su-suporte .In-supportNavigation .Su-navLinks li {
+    list-style-type: none;
+    padding-left: 20px;
+}
+
+.Su-suporte .In-supportNavigation .Su-navLinks li ul li {
+    margin-bottom: 0.5rem;
+}
+
+.Su-suporte .In-supportNavigation .Su-navLinks li ul li .In-sNavLink {
+    font-size: 1rem;
+    color: var(--middleBlueColor);
+    transition: all 0.3s ease;
+}
+
+.Su-suporte .In-supportNavigation .Su-navLinks li ul li .In-sNavLink:hover {
+    color: var(--darkBlueColor);
+    text-decoration: underline;
+}
+
+/* Responsividade para telas pequenas */
+@media (max-width: 768px) {
+    .Su-suporte .In-supportNavigation {
+        padding: 1rem;
+    }
+
+    .Su-suporte .In-supportNavigation h2 {
+        font-size: 1.5rem;
+    }
+
+    .Su-suporte .In-supportNavigation p {
+        font-size: 0.9rem;
+    }
+
+    .Su-suporte .In-supportNavigation .Su-navLinks {
+        padding-left: 0;
+    }
+}
+
+.Su-settings{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin: 4rem auto;
+}
+.Su-settings h1{
+    color: var(--darkPinkColor);
+    font-size: 2rem;
+}
+
+.Su-settings .Su-navSetLinks{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.Su-settings .Su-navSetLinks a.Su-navSetLink{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.Su-suporte .sSe-accountInfo {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.Su-suporte .sSe-accountInfo h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: var(--darkPinkColor);
+}
+
+.Su-suporte .sSe-accountInfo p {
+    font-size: 16px;
+    color: var(--blackColor);
+    margin-bottom: 20px;
+    line-height: 1.7;
+}
+
+.Su-suporte .sSe-accountInfo h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: var(--middlePinkColor);
+}
+
+.Su-suporte .sSe-accountInfo ul {
+    list-style-type: none;
+    padding-left: 20px;
+}
+
+.Su-suporte .sSe-accountInfo ul li {
+    margin-bottom: 10px;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.Su-suporte .sSe-accountInfo ul li strong {
+    color: var(--middlePinkColor);
+}
+
+.sSe-childInfo {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.sSe-childInfo h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: var(--darkPinkColor);
+}
+
+.sSe-childInfo p {
+    font-size: 16px;
+    color: var(--blackColor);
+    margin-bottom: 20px;
+    line-height: 1.7;
+}
+
+.sSe-childInfo h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: var(--middlePinkColor);
+}
+
+.sSe-childInfo ul {
+    list-style-type: none;
+    padding-left: 20px;
+}
+
+.sSe-childInfo ul li {
+    margin-bottom: 10px;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.sSe-notifications {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.sSe-notifications h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--darkPinkColor);
+    margin-bottom: 20px;
+}
+
+.sSe-notifications p {
+    font-size: 16px;
+    color: var(--blackColor);
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.sSe-notifications p strong {
+    color: var(--middlePinkColor);
+}
+
+.sSe-securityAndPrivacy {
+    background-color: var(--whiteColor);
+    padding: 30px;
+    width:80%;
+    margin: 0 auto 2rem;
+    border-radius: 8px;
+}
+
+/* Título principal da seção */
+.sSe-securityAndPrivacy h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--darkPinkColor);
+    margin-bottom: 20px;
+}
+
+/* Títulos das subseções */
+.sSe-securityAndPrivacy h3 {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--middlePinkColor);
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+/* Parágrafos explicativos */
+.sSe-securityAndPrivacy p {
+    font-size: 16px;
+    color: var(--blackColor);
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+/* Estilo para listas */
+.sSe-securityAndPrivacy ul {
+    padding-left: 20px;
+    list-style-type: disc;
+}
+
+.sSe-securityAndPrivacy ul li {
+    font-size: 16px;
+    color: var(--blackColor);
+    margin-bottom: 10px;
+}
+
+/* Estilo para itens de lista importantes */
+.sSe-securityAndPrivacy ul li strong {
+    color: var(--middlePinkColor);
 }
 
 .Su-policyDocs{

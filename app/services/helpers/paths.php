@@ -15,3 +15,5 @@
     $relativeServicesPath = getRelativePath('app/services');
     $relativePublicPath = getRelativePath('public');
     $relativeSupportPath = getRelativePath('public/suporte');
+    $relativeInterfacesPath = getRelativePath(target: 'public/suporte/interface');
+    $relativeSettingsPath = getRelativePath(target: 'public/suporte/configuracoes');
