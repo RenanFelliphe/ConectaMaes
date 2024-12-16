@@ -16,10 +16,10 @@ if (count($publicacoes) > 0) {
         } else {
             $postLink = ($dadosPublicacao['tipoPublicacao'] != 'Auxilio') 
                 ? $relativePublicPath . "/home/comentarios.php?user=" . $dadosPublicacao['nomeDeUsuario'] ."&post=".$dadosPublicacao['idPublicacao']
-                : '#';
+                : null; // Alterado para null em vez de string vazia
         }
         ?>
-        <article data-id="<?= $dadosPublicacao['idPublicacao']?>" class="Ho-post <?= $dadosPublicacao['tipoPublicacao'] == 'Auxilio' ? 'Ho-auxilioCard' : '' ?>" <?= $dadosPublicacao['tipoPublicacao'] == 'Auxilio' ? 'data-type="auxilioModal" onclick="toggleModal(this);"' : '' ?> data-link="<?= htmlspecialchars($postLink); ?>">
+        <article data-id="<?= $dadosPublicacao['idPublicacao'] ?>" class="Ho-post <?= $dadosPublicacao['tipoPublicacao'] == 'Auxilio' ? 'Ho-auxilioCard' : '' ?>"  <?= $postLink ? 'data-link="' . htmlspecialchars($postLink) . '"' : '' ?>  <?= $dadosPublicacao['tipoPublicacao'] == 'Auxilio' ? 'data-type="auxilioModal" onclick="toggleModal(this);"' : '' ?>>
             <ul class="postDate"><li><?= htmlspecialchars($mensagemData); ?></li></ul>
             <?php 
                 if ($dadosPublicacao['tipoPublicacao'] != 'Auxilio') 

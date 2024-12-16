@@ -16,7 +16,7 @@
         </meta>
     </head>
 
-    <body class="<?= $currentUserData['tema'];?>">
+    <body class="<?= isset($currentUserData['tema']) ? $currentUserData['tema'] : 'default-theme'; ?>">
         <?php 
             include_once ("../../app/includes/headerHome.php");
         ?>
