@@ -143,21 +143,21 @@
                 <section class="Pe-userProfilePosts">
                     <section class="Pe-postsPostagens Pe-allPosts active">
                         <?php 
-                            $publicacoes = queryPostsAndUserData($conn, '', null, $profileData['idUsuario']);
+                            $publicacoes = queryPostsAndUserData($conn, '', null, $profileData['idUsuario'], 10, 0, false);
                             include __DIR__ . "/../../app/includes/posts.php";
                         ?>
                     </section>
 
                     <section class="Pe-postsRelatos Pe-allPosts">
                         <?php
-                            $publicacoes = queryPostsAndUserData($conn, 'Relato',null, $profileData['idUsuario']);
+                            $publicacoes = queryPostsAndUserData($conn, 'Relato',null, $profileData['idUsuario'], 10, 0, false);
                             include __DIR__ . "/../../app/includes/posts.php";
                         ?>
                     </section>
 
                     <section class="Pe-postsAuxilios Au-allAuxilios Pe-allPosts">
                         <?php
-                            $publicacoes = queryPostsAndUserData($conn, 'Auxilio',null, $profileData['idUsuario']);
+                            $publicacoes = queryPostsAndUserData($conn, 'Auxilio',null, $profileData['idUsuario'], 10, 0, false);
                             include __DIR__ . "/../../app/includes/posts.php";
                         ?>
                     </section>

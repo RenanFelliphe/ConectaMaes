@@ -1,7 +1,7 @@
 <?php
     include_once ("../../app/includes/globalIncludes.php");
     require_once "../../app/services/crud/disabilityFunctions.php";
-    $relatosAnonimosUsuario = queryPostsAndUserData($conn, 'Relato', null, $currentUserData['idUsuario'], 10, 0)
+    $relatosAnonimosUsuario = queryPostsAndUserData($conn, 'Relato', null, $currentUserData['idUsuario'], 10, 0, true)
 ?>
 
 <!DOCTYPE html>

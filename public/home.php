@@ -22,7 +22,7 @@
 
             <section class="timeline">
                 <?php 
-                    $publicacoes = queryPostsAndUserData($conn, '', null, null, 10, 0);
+                    $publicacoes = queryPostsAndUserData($conn, '', null, null, 10, 0, true);
                     include_once ("../app/includes/posts.php");
                 ?>
             </section>

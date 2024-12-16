@@ -122,7 +122,7 @@ function specificPostQuery($conn, $data, $where, $order) {
     return $sUExec;
 }
 
-function queryPostsAndUserData($conn, $postType = '', $postId = null, $userId = null, $limit = 10, $offset = 0) {
+function queryPostsAndUserData($conn, $postType = '', $postId = null, $userId = null, $limit = 10, $offset = 0, $showAnon = true) {
     $baseQuery = "
         SELECT 
             p.idPublicacao, 
@@ -151,12 +151,22 @@ function queryPostsAndUserData($conn, $postType = '', $postId = null, $userId = 
         $whereClause = "p.idPublicacao = " . intval($postId);
     } elseif ($userId !== null) {
         if ($postType === '') {
-            $whereClause = "u.idUsuario = " . intval($userId) . " AND p.isAnonima <> 1".  " AND p.tipoPublicacao <> 'Auxilio'";
+            $whereClause = "u.idUsuario = " . intval($userId) . " AND p.tipoPublicacao <> 'Auxilio'";
         } else {
-            $whereClause = "u.idUsuario = " . intval($userId) . " AND p.tipoPublicacao = '$postType'". " AND p.isAnonima <> 1";
+            $whereClause = "u.idUsuario = " . intval($userId) . " AND p.tipoPublicacao = '$postType'";
+        }
+
+        // Adicionar lógica para exibir ou não publicações anônimas conforme $showAnon
+        if (!$showAnon) {
+            $whereClause .= " AND p.isAnonima <> 1";
         }
     } else {
         $whereClause = ($postType === '') ? "p.tipoPublicacao <> 'Auxilio'" : "p.tipoPublicacao = '$postType'";
+    }
+
+    // Para casos em que $userId seja null, adicionar $showAnon logicamente
+    if ($userId === null && !$showAnon) {
+        $whereClause .= " AND p.isAnonima <> 1";
     }
 
     $finalQuery = $baseQuery . " WHERE " . $whereClause . " ORDER BY p.dataCriacaoPublicacao DESC LIMIT $limit OFFSET $offset";
@@ -169,6 +179,7 @@ function queryPostsAndUserData($conn, $postType = '', $postId = null, $userId = 
 
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
+
 
 function renderProfileLink($relativePublicPath, $profileImage, $nomeDeUsuario, $isRelatoAnonimo = false) {
     if ($isRelatoAnonimo) {
