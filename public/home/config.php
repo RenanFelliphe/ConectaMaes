@@ -459,11 +459,11 @@
                                     }
                                 ?>
                                 <?php 
-                                    $encontrouAnonimo = false; // Variável de controle para verificar se algum relato anônimo foi encontrado.
+                                    //$encontrouAnonimo = false; // Variável de controle para verificar se algum relato anônimo foi encontrado.
 
                                     foreach($relatosAnonimosUsuario as $ra){
                                         if($ra['isAnonima']){
-                                            $encontrouAnonimo = true;
+                                            //$encontrouAnonimo = true;
                                 ?>
                                     <form class="relatoAnonimo" method="post">
                                         <div class="raHeader">
@@ -486,11 +486,11 @@
                                         } 
                                     }
 
-                                    if (!$encontrouAnonimo) {
+                                    /*if (!$encontrouAnonimo) {
                                     ?>
                                         <div class="anonNotFound"><?= "Nenhum relato anônimo encontrado." ?></div>
                                     <?php
-                                    }
+                                    }*/
                                 ?>
                             </div>
                         </li>
