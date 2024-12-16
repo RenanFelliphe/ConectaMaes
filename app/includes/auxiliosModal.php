@@ -31,7 +31,7 @@
                                 <input type="hidden" name="identifierId" value="<?= $dadosPublicacao['idPublicacao']; ?>">
                                 <button class="deletePostButton pageIcon" name="deletarPost" type="submit" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>
                                     <i class="bi bi-trash3-fill"></i>
-                                    <p>Deletar Postagem</p>
+                                    <p>Deletar Auxílio</p>
                                 </button>
                                 <?php 
                                     if ($dadosPublicacao['tipoPublicacao'] == "Auxilio" && !$dadosPublicacao['isConcluido']) { 
@@ -127,7 +127,7 @@
         <div class="Ho-auxiliosComments">
             <?php if(!$dadosPublicacao['isConcluido']){?>
                 <form class="Ho-postSomething postAuxilioComent" method="post" enctype="multipart/form-data">
-                    <input type="hidden" name="idPublicacao" id="postIdField" value="">
+                    <input type="hidden" name="idPublicacao" value="<?=$dadosPublicacao['idPublicacao']?>">
                     <div class="Ho-postTop">
                         <a class="Ho-userProfileImage" href="<?= $relativePublicPath; ?>/home/perfil.php">
                             <img src="<?= $relativeAssetsPath . "/imagens/fotos/perfil/" . $currentUserData['linkFotoPerfil'];?>">
@@ -154,9 +154,7 @@
                         <button type="submit" value="submit" name="postComentarioModalAuxilio" class="confirmBtn"> Comentar </button>
                     </div>
                     <?php
-                        if(isset($_POST['postComentarioModalAuxilio'])){
-                            sendComment($conn, $dadosPublicacao['idPublicacao'], $currentUserData['idUsuario']);
-                        }
+                        
                     ?>  
                 </form>
             <?php } ?>
@@ -191,7 +189,5 @@
             console.error(error);
         }
     }
-
-    // Chama a função de localização para cada modal individualmente.
     buscarLocalizacao(cep_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?>, modalId_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?>);
 </script>

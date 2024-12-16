@@ -91,7 +91,7 @@ if (isset($_POST['postAuxilioModal'])) {
 } else if (isset($_POST['postRelatoModal'])) {
     $messages = sendPost($conn, 'Relato', $currentUserData['idUsuario']);
 } else if (isset($_POST['postComentarioModal'])) {
-    $postId = $_POST['idPublicacao'] ?? null;
+    $postId = intval($_POST['idPublicacao']) ?? null;
 
     if (!empty($postId)) {
         $messages = sendComment($conn, $postId, $currentUserData['idUsuario']);
@@ -99,13 +99,18 @@ if (isset($_POST['postAuxilioModal'])) {
         $messages[] = "<p class='error'>Erro: Não foi possível comentar nesta publicação.</p>";
     }
 } else if(isset($_POST['postNestedComentarioModal'])){
-    $commentId = $_POST['idComentario'] ?? null;
+    $commentId = intval($_POST['idComentario']) ?? null;
     if (!empty($commentId)) {
         $messages = sendNestedComment($conn, $commentId, $currentUserData['idUsuario']);
     } else {
         $messages[] = "<p class='error'>Erro: Não foi possível comentar este comentário.</p>";
     }
-} else {
+} else if(isset($_POST['postComentarioModalAuxilio'])){
+    $postId = intval($_POST['idPublicacao']);
+    if (!empty($postId)) {
+        $messages = sendComment($conn, $postId, $currentUserData['idUsuario']);
+    }
+}else{
     $messages = sendPost($conn, '', $currentUserData['idUsuario']);
 }
 
