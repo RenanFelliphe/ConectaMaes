@@ -88,7 +88,7 @@
         <div class="Au-postExtraInfos">
             <div class="Au-extraInfos">
                 <img src="<?= $relativeAssetsPath; ?>/imagens/icons/local_icon.png" class="pageImageIcon active" alt="Ícone de Local">
-                <p id="localizacaoDisplay"></p>
+                <p id="localizacaoDisplay_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?>"></p>
             </div>
             <div class="Au-extraInfos">
                 <img src="<?= $relativeAssetsPath; ?>/imagens/icons/pix_icon.png" class="pageImageIcon active" alt="Ícone de Pix">
@@ -168,37 +168,30 @@
     </article>
 </modal>
 <script>
-    const cep = "<?= htmlspecialchars($dadosPublicacao['estado']); ?>";  // O valor do CEP
-    const localizacaoElement = document.getElementById('localizacaoDisplay');
+    const cep_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?> = "<?= htmlspecialchars($dadosPublicacao['estado']); ?>";  // O valor do CEP
+    const modalId_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?> = "<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?>";  // ID único para cada modal
+    const localizacaoElement_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?> = document.getElementById(`localizacaoDisplay_${modalId_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?>}`);
 
-    // Função para buscar os dados de CEP na API do ViaCEP
-    async function buscarLocalizacao(cep) {
+    async function buscarLocalizacao(cep_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?>, modalId_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?>) {
         try {
-            // Fazendo a requisição para a API do ViaCEP
-            const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
-            
-            // Verifica se a resposta é válida
+            const response = await fetch(`https://viacep.com.br/ws/${cep_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?>}/json/`);
             if (!response.ok) {
                 throw new Error("Erro ao consultar o CEP.");
             }
-
-            // Parse da resposta JSON
             const data = await response.json();
-
-            // Verifica se a API retornou erro (CEP não encontrado)
+            const localizacaoElement_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?> = document.getElementById(`localizacaoDisplay_${modalId_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?>}`);
             if (data.erro) {
-                localizacaoElement.innerHTML = "CEP não encontrado.";
+                localizacaoElement_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?>.innerHTML = "CEP não encontrado.";
             } else {
-                // Exibe a cidade e o estado no formato 'Cidade, UF'
-                localizacaoElement.innerHTML = `${data.localidade}, ${data.uf}`;
+                localizacaoElement_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?>.innerHTML = `${data.localidade}, ${data.uf}`;
             }
         } catch (error) {
-            // Caso ocorra algum erro, exibe uma mensagem
-            localizacaoElement.innerHTML = "Erro ao buscar a localização.";
+            const localizacaoElement_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?> = document.getElementById(`localizacaoDisplay_${modalId_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?>}`);
+            localizacaoElement_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?>.innerHTML = "Erro ao buscar a localização.";
             console.error(error);
         }
     }
 
-    // Chama a função passando o CEP
-    buscarLocalizacao(cep);
+    // Chama a função de localização para cada modal individualmente.
+    buscarLocalizacao(cep_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?>, modalId_<?= htmlspecialchars($dadosPublicacao['idPublicacao']); ?>);
 </script>
