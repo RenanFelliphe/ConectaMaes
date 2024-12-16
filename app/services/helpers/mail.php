@@ -6,10 +6,10 @@
     use PHPMailer\PHPMailer\SMTP;
     use PHPMailer\PHPMailer\Exception;
 
-    $name = $_POST["nomeContato"];
-    $email = $_POST["emailContato"];
-    $subject = $_POST["assuntoContato"];
-    $message = $_POST["mensagemContato"];
+    $name = mysqli_escape_string($conn,$_POST["nomeContato"]);
+    $email = mysqli_escape_string($conn,$_POST["emailContato"]);
+    $subject = mysqli_escape_string($conn,$_POST["assuntoContato"]);
+    $message = mysqli_escape_string($conn,$_POST["mensagemContato"]);
 
     function configureMailServer($name, $email, $subject, $message) {
         $mailServer = new PHPMailer(true);

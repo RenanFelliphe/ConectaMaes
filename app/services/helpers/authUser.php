@@ -4,13 +4,13 @@ require_once 'conn.php';
 // LOG IN AND OUT FUNCTIONS
 function logIn($conn){
     if(isset($_POST['logar']) AND !empty($_POST['email']) AND !empty($_POST['senha'])){
-        $email = filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL);
-        $senha = md5($_POST['senha']);
+        $email = mysqli_escape_string($conn,filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL));
+        $senha = mysqli_escape_string($conn,md5($_POST['senha']));
         $query = "SELECT * FROM Usuario WHERE email = '$email' AND senha = '$senha' ";
         $execute = mysqli_query($conn,$query);
         $return = mysqli_fetch_assoc($execute);
 
-        $remember = $_POST['rememberMe'] ?? null;
+        $remember = mysqli_escape_string($conn,$_POST['rememberMe']) ?? null;
         if($remember) {
             $expires = time() + (60 * 60 * 24 * 7);
             $salt = "*&conectamaes#@";

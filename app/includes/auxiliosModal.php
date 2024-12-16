@@ -28,7 +28,7 @@
                             <?php 
                                 if ($currentUserData['idUsuario'] == $dadosPublicacao['idUsuario'] || $currentUserData['isAdmin']) { 
                             ?>
-                                <input type="hidden" name="identifierId" value="<?= $dadosPublicacao['idPublicacao']; ?>">
+                                <input type="hidden" name="deleterId" value="<?= $dadosPublicacao['idPublicacao']; ?>">
                                 <button class="deletePostButton pageIcon" name="deletarPost" type="submit" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>
                                     <i class="bi bi-trash3-fill"></i>
                                     <p>Deletar Auxílio</p>

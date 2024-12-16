@@ -151,9 +151,9 @@ function queryPostsAndUserData($conn, $postType = '', $postId = null, $userId = 
         $whereClause = "p.idPublicacao = " . intval($postId);
     } elseif ($userId !== null) {
         if ($postType === '') {
-            $whereClause = "u.idUsuario = " . intval($userId) . /*" AND p.tipoPublicacao <> 'Relato'". */ " AND p.tipoPublicacao <> 'Auxilio'";
+            $whereClause = "u.idUsuario = " . intval($userId) . " AND p.isAnonima <> 1".  " AND p.tipoPublicacao <> 'Auxilio'";
         } else {
-            $whereClause = "u.idUsuario = " . intval($userId) . " AND p.tipoPublicacao = '$postType'";
+            $whereClause = "u.idUsuario = " . intval($userId) . " AND p.tipoPublicacao = '$postType'". " AND p.isAnonima <> 1";
         }
     } else {
         $whereClause = ($postType === '') ? "p.tipoPublicacao <> 'Auxilio'" : "p.tipoPublicacao = '$postType'";
@@ -237,6 +237,7 @@ function deletePost($conn, $id) {
         exit; 
     }
 }
+
 if (isset($_POST['deletarPost'])) {
     deletePost($conn, $_POST['deleterId']);
 }
@@ -380,9 +381,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($likedComment = array_keys($_POST, 'likeComment', true)) {
         $commentId = filter_var(mysqli_escape_string($conn, str_replace('commentLike_', '', $likedComment[0])), FILTER_SANITIZE_NUMBER_INT);
         handleCommentLike($conn, $currentUserData['idUsuario'], (int)$commentId); 
-    }
+    } 
 
-    // Verifica se foi enviado para deletar algum comentário
     if (isset($_POST['deletarComentario'])) {
         deleteComment($conn, filter_var(mysqli_escape_string($conn,$_POST['deleterCommentId']), FILTER_SANITIZE_NUMBER_INT));
     }

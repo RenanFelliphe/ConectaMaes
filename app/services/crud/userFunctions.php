@@ -9,15 +9,15 @@ include_once(__DIR__ . '/../helpers/paths.php');
 function signUp($conn) {
     $err = array();
 
-    $nomeRegistro = $_POST['nomeUsuarioRegistro'];
-    $emailRegistro = $_POST['emailRegistro'];
-    $userRegistro = $_POST['userRegistro'];
-    $senhaRegistro = md5($_POST['senhaRegistro']);
-    $dataNascimentoRegistro = $_POST['dataNascimentoRegistro'];
-    $telefoneRegistro = !empty(trim($_POST['telefoneRegistro'])) ? trim($_POST['telefoneRegistro']) : NULL;
-    $biografiaUsuarioRegistro = $_POST['biografiaUsuarioRegistro'];
-    $temaRegistro = $_POST['temaRegistro']; 
-    $localizacaoRegistro = $_POST['localizacaoRegistro'];
+    $nomeRegistro = mysqli_escape_string($conn,$_POST['nomeUsuarioRegistro']);
+    $emailRegistro = mysqli_escape_string($conn,$_POST['emailRegistro']);
+    $userRegistro = mysqli_escape_string($conn,$_POST['userRegistro']);
+    $senhaRegistro = mysqli_escape_string($conn, md5($_POST['senhaRegistro']));
+    $dataNascimentoRegistro = mysqli_escape_string($conn,$_POST['dataNascimentoRegistro']);
+    $telefoneRegistro = !empty(trim(mysqli_escape_string($conn,$_POST['telefoneRegistro']))) ? trim(mysqli_escape_string($conn,$_POST['telefoneRegistro'])) : NULL;
+    $biografiaUsuarioRegistro = mysqli_escape_string($conn,$_POST['biografiaUsuarioRegistro']);
+    $temaRegistro = mysqli_escape_string($conn,$_POST['temaRegistro']); 
+    $localizacaoRegistro = mysqli_escape_string($conn,$_POST['localizacaoRegistro']);
     $linkFotoPerfilRegistro = 'default.png';
     $isAdminRegistro = false;
 
