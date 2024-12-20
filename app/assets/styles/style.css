@@ -2480,17 +2480,20 @@ body.Y-theme .navMobile .pageLink:hover .headerIcon {
 
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .errorMessageContainer .errorMessageContent {
     position: relative;
-    display: none;
+    display: flex;
+    flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    width: 10vw;
+    width: 100%;
     white-space: wrap;
-    gap: 0.5rem;
 }
 
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .errorMessageContainer .errorMessageContent .mainError {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-start;
+    align-items: flex-start;
     color: var(--redColor);
-    font-weight: bold;
 }
 
 .Lo-loginForm .Lo-loginCenter .Re-input.Lo-loginAssistants {

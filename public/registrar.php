@@ -13,7 +13,7 @@
         <title>ConectaMães - Registro</title>
     </head>
 
-    <body class="<?= isset($currentUserData['tema']) ? $currentUserData['tema'] : 'default-theme'; ?>">
+    <body class="<?php if(isset( $currentUserData['tema'])) echo $currentUserData['tema'];?>">
         <?php 
             include_once ("../app/includes/headerLanding.php");
             include_once ("../app/services/crud/userFunctions.php");
@@ -229,7 +229,7 @@
                 input.addEventListener('input', updateInfo);
             });
 
-            function userValidations(){
+            function userValidations() {
                 const validateInputs = document.querySelectorAll('.validate');
                 const inputContainers = document.querySelectorAll('.Re-input');
                 const placeholders = document.querySelectorAll('.Re-fakePlaceholder');
@@ -237,198 +237,151 @@
                 const errorMessageContent = document.querySelectorAll('.errorMessageContent');
                 const errorIcon = document.querySelectorAll('.errorIcon');
 
-                var maxChar = 0;
-
-                function setError(index, message){
+                function setErrors(index, errors) {
                     inputContainers[index].style.border = "2px solid var(--redColor)";
                     placeholders[index].style.color = "var(--redColor)";
-                    errorMessageContent[index].innerHTML = `<i class="bi bi-x-circle-fill mainError"></i><span class="errorMessage">${message}</span>`;
+                    validateInputs[index].classList.add('wEror');
+
+                    const errorHTML = errors.map(err => `<i class="bi bi-x-circle-fill mainError">${err}</i>`).join('<br>');
+                    errorMessageContent[index].innerHTML = errorHTML;
                     errorMessageContent[index].style.display = "flex";
                     errorIcon[index].style.display = "block";
 
-                    validateInputs[index].classList.add('wEror');
+                    errorIcon[index].addEventListener('click', () => {
+                        errorMessageContainers[index].style.display = 
+                            errorMessageContainers[index].style.display === 'flex' ? 'none' : 'flex';
+                    });
 
-                    function toggleErrorModal(index, show) {
-                        errorMessageContainers[index].style.display = show ? 'flex' : 'none';
-                    }
+                    errorIcon[index].addEventListener('mouseover', () => {
+                        errorMessageContainers[index].style.display = 'flex';
+                    });
 
-                    errorIcon.forEach((icon, idx) => {
-                        if (idx === index) {
-                            icon.addEventListener('mouseover', () => {
-                                toggleErrorModal(index, true);
-                            });
+                    errorIcon[index].addEventListener('mouseout', () => {
+                        errorMessageContainers[index].style.display = 'none';
+                    });
+                }
 
-                            icon.addEventListener('mouseout', () => {
-                                toggleErrorModal(index, false);
-                            });
+                function removeErrors(index) {
+                    inputContainers[index].style.border = "2px solid transparent";
+                    placeholders[index].style.color = "var(--secondColor)";
+                    validateInputs[index].classList.remove('wEror');
+                    validateInputs[index].classList.remove('blank');
+
+                    errorMessageContent[index].innerHTML = '';
+                    errorIcon[index].style.display = "none";
+                }
+
+                function checkEmptyInput() {
+                    validateInputs.forEach((input, index) => {
+                        if (input.value !== "") {
+                            placeholders[index].classList.add('notEmpty');
+                            inputContainers[index].style.opacity = "1";
+                        } else {
+                            placeholders[index].classList.remove('notEmpty');
+                            inputContainers[index].style.opacity = "0.5";
+                            inputContainers[index].style.border = "2px solid transparent";
+                            placeholders[index].style.color = "var(--secondColor)";
+                            errorMessageContent[index].innerHTML = '';
+                            errorIcon[index].style.display = "none";
                         }
                     });
                 }
 
-                function removeError(index){
-                    inputContainers[index].style.border = "2px solid transparent";
-                    placeholders[index].style.color = "var(--secondColor)";
-                    errorMessageContent[index].innerHTML = '';
-                    errorIcon[index].style.display = "none";
-
-                    validateInputs[index].classList.remove('wEror');
-                    validateInputs[index].classList.remove('blank');
-                }
-
-                function checkEmptyInput(index){
-                    if(validateInputs[index].value !== ""){
-                        placeholders[index].classList.add('notEmpty');
-                        inputContainers[index].style.opacity = "1";
-                    } else {
-                        placeholders[index].classList.remove('notEmpty');
-                        inputContainers[index].style.opacity = "0.5";
-                        inputContainers[index].style.border = "2px solid transparent";
-                        placeholders[index].style.color = "var(--secondColor)";
-                        errorMessageContent[index].innerHTML = '';
-                        errorIcon[index].style.display = "none";                    }
-                }
-
-                function validateName(){
+                function validateName() {
                     const username = validateInputs[0].value;
-                    maxChar = 50;
+                    const errors = [];
+                    const maxChar = 50;
 
-                    checkEmptyInput(0);
-                    if(username.length === 0){
-                        checkEmptyInput(0);
-                    } else if(username.length <= 3){
-                        setError(0, "O nome de usuário deve ter mais de <span class='mainError'>3 caracteres.</span>");
-                    } else if(username.length > maxChar){
-                        setError(0, "O nome de usuário é <span class='mainError'>longo demais.</span>");
-                        username = username.slice(0, maxChar);
-                    } else if(/[áàâãäéèêëíìîïóòôõöúùûü]/i.test(username)){
-                        setError(0, "O nome de usuário não pode ter <span class='mainError'>acentos.</span>");
-                    } else if(/[ç]/i.test(username)){
-                        setError(0, "O nome de usuário não pode ter <span class='mainError'>cedilha.</span>");
-                    } else if(/[-]/.test(username)){
-                        setError(0, "O nome de usuário não pode ter <span class='mainError'>hífens.</span>");
-                    } else if(/\s/.test(username)){
-                        setError(0, "O nome de usuário não pode ter <span class='mainError'>espaços.</span>");
-                    } else if(/[^a-zA-Z0-9_]/.test(username)){
-                        setError(0, "O nome de usuário não pode ter <span class='mainError'>caracteres especiais exceto underline (_).</span>");
+                    if (!username) {
+                        errors.push("O nome de usuário é obrigatório.");
                     } else {
-                        removeError(0);
+                        if (username.length <= 3) errors.push("O nome de usuário deve ter mais de 3 caracteres.");
+                        if (username.length > maxChar) errors.push("O nome de usuário é longo demais.");
+                        if (/[áàâãäéèêëíìîïóòôõöúùûüç]/i.test(username)) errors.push("O nome de usuário não pode ter acentos ou cedilhas.");
+                        if (/[-]/.test(username)) errors.push("O nome de usuário não pode ter hífens.");
+                        if (/\s/.test(username)) errors.push("O nome de usuário não pode ter espaços.");
+                        if (/[^a-zA-Z0-9_]/.test(username)) errors.push("Apenas letras, números e underscore (_) são permitidos.");
                     }
+
+                    errors.length ? setErrors(0, errors) : removeErrors(0);
                 }
 
                 function validateEmail() {
-                    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
                     const email = validateInputs[1].value;
-                    maxChar = 256;
+                    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+                    const errors = [];
+                    const maxChar = 256;
 
-                    checkEmptyInput(1);
-
-                    if(email.length === 0){
-                        checkEmptyInput(1);
-                    } else if (email.length > maxChar) {
-                        setError(1, "O e-mail é <span class='mainError'>longo demais.</span>");
-                        email = email.slice(0, maxChar);
-                    } else if (!emailRegex.test(email)) {
-                        setError(1, "Insira um <span class='mainError'>e-mail válido.</span>");
+                    if (!email) {
+                        errors.push("O e-mail é obrigatório.");
                     } else {
-                        removeError(1);
+                        if (email.length > maxChar) errors.push("O e-mail é longo demais.");
+                        if (!emailRegex.test(email)) errors.push("Insira um e-mail válido.");
                     }
-                }    
+
+                    errors.length ? setErrors(1, errors) : removeErrors(1);
+                }
 
                 function validatePassword() {
                     const password = validateInputs[2].value;
-                    const hasUpperCase = /[A-Z]/.test(password);
-                    const hasLowerCase = /[a-z]/.test(password);
-                    const hasDigit = /\d/.test(password);
-                    maxChar = 100;
-                    
-                    checkEmptyInput(2);
-                    validateConfirmPassword();
+                    const errors = [];
+                    const maxChar = 100;
 
-                    if(password.length === 0){
-                        checkEmptyInput(2);
-                    } else if (password.length < 8) {
-                        setError(2, "A senha deve ter mais de <span class='mainError'>8 caracteres.</span>");
-                    } else if (password.length > maxChar) {
-                        setError(2, "A senha é <span class='mainError'>longa demais.</span>");
-                        password = password.slice(0, maxChar);
-                    } else if (!hasUpperCase) {
-                        setError(2, "A senha deve conter <span class='mainError'>letras maiúsculas.</span>");
-                    } else if (!hasLowerCase) {
-                        setError(2, "A senha deve conter <span class='mainError'>letras minúsculas.</span>");
-                    } else if (!hasDigit) {
-                        setError(2, "A senha deve conter <span class='mainError'>números.</span>");
+                    if (!password) {
+                        errors.push("A senha é obrigatória.");
                     } else {
-                        removeError(2);
+                        if (password.length < 8) errors.push("A senha deve ter mais de 8 caracteres.");
+                        if (password.length > maxChar) errors.push("A senha é longa demais.");
+                        if (!/[A-Z]/.test(password)) errors.push("A senha deve conter ao menos uma letra maiúscula.");
+                        if (!/[a-z]/.test(password)) errors.push("A senha deve conter ao menos uma letra minúscula.");
+                        if (!/\d/.test(password)) errors.push("A senha deve conter ao menos um número.");
                     }
+
+                    errors.length ? setErrors(2, errors) : removeErrors(2);
                 }
 
-                function validateConfirmPassword(){
+                function validateConfirmPassword() {
                     const confirmPassword = validateInputs[3].value;
                     const password = validateInputs[2].value;
+                    const errors = [];
 
-                    checkEmptyInput(3);
-                    if(confirmPassword.length === 0){
-                        checkEmptyInput(3);
-                    } else if(password !== confirmPassword){
-                        setError(3, "As senhas <span class='mainError'>não coincidem.</span>");
-                    } else{
-                        removeError(3);
+                    if (!confirmPassword) {
+                        errors.push("A confirmação de senha é obrigatória.");
+                    } else if (confirmPassword !== password) {
+                        errors.push("As senhas não coincidem.");
                     }
+
+                    errors.length ? setErrors(3, errors) : removeErrors(3);
                 }
-                
+
                 function validateFullName() {
                     const fullName = validateInputs[4].value;
-                    maxChar = 100;
+                    const errors = [];
+                    const maxChar = 100;
 
-                    checkEmptyInput(4);
-
-                    const nameRegex = /^([a-zA-ZÀ-ÖØ-ÿ'-]+(\s[a-zA-ZÀ-ÖØ-ÿ'-]+)*)$/;
-
-                    if (fullName.length === 0) {
-                        checkEmptyInput(4);
-                    } else if (fullName.length > maxChar) {
-                        setError(4, "O nome é <span class='mainError'>longo demais.</span>");
-                    } else if (/\d/.test(fullName)) {
-                        setError(4, "O nome não pode possuir <span class='mainError'>números.</span>");
-                    } else if (!nameRegex.test(fullName)) {
-                        setError(4, "O nome pode conter apenas <span class='mainError'>letras, espaços, acentos, hífens, cedilhas e apóstrofos.</span>");
-                    } else if (!/^(\w+\s\w+.*)$/.test(fullName)) {
-                        setError(4, "Insira o seu <span class='mainError'>nome completo.</span>");
+                    if (!fullName) {
+                        errors.push("O nome completo é obrigatório.");
                     } else {
-                        removeError(4);
+                        if (fullName.length > maxChar) errors.push("O nome é longo demais.");
+                        if (/\d/.test(fullName)) errors.push("O nome não pode conter números.");
+                        if (!/^([a-zA-ZÀ-ÖØ-öø-ÿ'’\-\s]+)$/.test(fullName)) errors.push("Apenas letras, espaços, acentos, hífens e apóstrofos são permitidos.");
                     }
+
+                    errors.length ? setErrors(4, errors) : removeErrors(4);
                 }
 
                 function validatePhone() {
-                    const validDDDs = [
-                        '61', '62', '64', '65', '66', '67', // Centro-Oeste
-                        '82', '71', '73', '74', '75', '77', // Nordeste
-                        '85', '88', '98', '99', '83', '81', '87', '86', '89', '84', '79', // Nordeste
-                        '68', '96', '92', '97', '91', '93', '94', '69', '95', '63', // Norte
-                        '27', '28', '31', '32', '33', '34', '35', '37', '38', // Sudeste
-                        '21', '22', '24', '11', '12', '13', '14', '15', '16', '17', '18', '19', // Sudeste
-                        '41', '42', '43', '44', '45', '46', // Sul
-                        '51', '53', '54', '55', '47', '48', '49' // Sul
-                    ];
-
                     const phone = validateInputs[5].value;
-                    const ddd = phone.substring(0, 2); // Extrai os primeiros dois dígitos como DDD
+                    const errors = [];
                     const phoneRegex = /^\d{10,11}$/;
 
-                    maxChar = 11;
-
-                    checkEmptyInput(5);
-                    if (phone.length === 0) {
-                        checkEmptyInput(5);
-                    } else if (phone.length > maxChar) {
-                        setError(5, "O número de telefone é <span class='mainError'>longo demais.</span>");
-                    } else if (!phoneRegex.test(phone)) {
-                        setError(5, "Insira um <span class='mainError'>telefone válido.</span>");
-                    } else if (!validDDDs.includes(ddd)) {
-                        setError(5, "Insira um <span class='mainError'>DDD válido.</span>");
+                    if (!phone) {
+                        errors.push("O telefone é obrigatório.");
                     } else {
-                        removeError(5);
+                        if (!phoneRegex.test(phone)) errors.push("O telefone deve conter 10 ou 11 dígitos.");
                     }
+
+                    errors.length ? setErrors(5, errors) : removeErrors(5);
                 }
 
                 function validateBornDate() {
@@ -436,110 +389,87 @@
                     const today = new Date();
                     const hundredYearsAgo = new Date(today.getFullYear() - 100, today.getMonth(), today.getDate());
                     const eighteenYearsAgo = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+                    const errors = [];
 
-                    checkEmptyInput(6);
-
-                    if (validateInputs[6].value === "") {
-                        checkEmptyInput(6);
-                        placeholders[6].classList.add('notEmpty');
-                    } else if (birthDate > new Date()) {
-                        setError(6, "A data de nascimento não pode ser uma <span class='mainError'>data futura.</span>");
-                    } else if (birthDate < hundredYearsAgo) {
-                        setError(6, "A data de nascimento é <span class='mainError'>muito antiga.</span>");
-                    } else if (birthDate > eighteenYearsAgo) {
-                        setError(6, "Você precisa ser <span class='mainError'>maior de 18 anos.</span>");
+                    if (!validateInputs[6].value) {
+                        errors.push("A data de nascimento é obrigatória.");
                     } else {
-                        removeError(6);
+                        if (birthDate > today) errors.push("A data de nascimento não pode ser uma data futura.");
+                        if (birthDate < hundredYearsAgo) errors.push("A data de nascimento é muito antiga.");
+                        if (birthDate > eighteenYearsAgo) errors.push("Você precisa ser maior de 18 anos.");
                     }
+
+                    errors.length ? setErrors(6, errors) : removeErrors(6);
                 }
 
                 async function fetchCepData(cep) {
                     try {
                         const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
-
                         if (!response.ok) {
-                            throw new Error("Erro ao <span class='mainError'>consultar o CEP.</span>");
+                            throw new Error("Erro ao consultar o CEP.");
                         }
 
                         const data = await response.json();
-
                         if (data.erro) {
-                            throw new Error("O CEP informado <span class='mainError'>não foi encontrado.</span>");
+                            throw new Error("O CEP informado não foi encontrado.");
                         }
 
-                        return data; // Retorna o objeto com os dados do CEP
+                        return data;
                     } catch (error) {
                         console.error(error.message);
-                        throw error; // Lança o erro para ser tratado na função chamadora
+                        throw error;
                     }
                 }
 
                 async function validateLocal() {
-                    const cep = validateInputs[7].value.trim(); // Remove espaços em branco
-                    const maxChar = 8;
+                    const cep = validateInputs[7].value.trim();
+                    const errors = [];
 
-                    checkEmptyInput(7);
-
-                    if (cep === "") {
-                        inputContainers[7].style.opacity = '1';
-                        setError(7, "O campo CEP é <span class='mainError'>obrigatório.</span>");
-                        return;
+                    if (!cep) {
+                        errors.push("O campo CEP é obrigatório.");
+                    } else {
+                        if (!/^\d{8}$/.test(cep)) errors.push("Insira um CEP válido.");
                     }
 
-                    if (cep.length !== maxChar) {
-                        inputContainers[7].style.opacity = '1';
-                        setError(7, "O CEP deve ter <span class='mainError'>8 dígitos.</span>");
-                        return;
-                    }
-
-                    if (!/^\d{8}$/.test(cep)) {
-                        inputContainers[7].style.opacity = '1';
-                        setError(7, "Insira um <span class='mainError'>CEP válido.</span>");
+                    if (errors.length) {
+                        setErrors(7, errors);
                         return;
                     }
 
                     try {
                         const data = await fetchCepData(cep);
                         if (data.uf !== "MG") {
-                            setError(7, "O CEP não pertence ao estado de <span class='mainError'>Minas Gerais (MG).</span>");
+                            setErrors(7, ["O CEP não pertence ao estado de Minas Gerais (MG)."]);
                             return;
                         }
 
-                        // Atualiza o conteúdo de 'infoLocalizacao' com a cidade e UF
                         const infoLocalizacao = document.getElementById('infoLocalizacao');
                         infoLocalizacao.textContent = `${data.localidade}, ${data.uf}`;
-
-                        removeError(7); // Remove erros caso o CEP seja válido
+                        removeErrors(7);
                     } catch (error) {
-                        setError(7, error.message);
+                        setErrors(7, [error.message]);
                     }
                 }
 
                 function validateBio() {
-                    const bioInput = document.querySelector('.Re-userInput.validate');
-                    const characters = document.querySelector('.Re-charactersCounter');
+                    const biography = validateInputs[8].value.trim();
                     const charactersNumber = document.querySelector('.Re-charactersNumber');
-                    const maxCharacters = document.querySelector('.Re-maxCharacters');
-                    const biography = validateInputs[8].value;
-                    
+                    const maxCharacters = 255;
+                    const errors = [];
+
                     charactersNumber.textContent = biography.length;
-                    maxChar = 255;
 
-                    checkEmptyInput(8);
-
-                    if (biography.length === 0) {
-                        validateInputs[8].style.color = "";
-                        checkEmptyInput(8);
-                    } else if (biography.length > maxChar) {
-                        validateInputs[8].style.color = "var(--redColor)";
-                        setError(8, "A biografia é <span class='mainError'>muito longa.</span>");
+                    if (!biography) {
+                        errors.push("A biografia é obrigatória.");
                     } else {
-                        characters.style.color = "";
-                        validateInputs[8].style.color = "";
-                        removeError(8);
+                        if (biography.length > maxCharacters) {
+                            errors.push("A biografia é longa demais.");
+                        }
                     }
+
+                    errors.length ? setErrors(8, errors) : removeErrors(8);
                 }
-                
+
                 function validateImageProfile() {
                     const input = document.getElementById("imagesSelector");
                     const preview = document.querySelector(".Re-userImage");
@@ -556,16 +486,45 @@
                     });
                 }
 
-                validateInputs[0].addEventListener('input', validateName);
-                validateInputs[1].addEventListener('input', validateEmail);
-                validateInputs[2].addEventListener('input', validatePassword);
-                validateInputs[3].addEventListener('input', validateConfirmPassword);
-                validateInputs[4].addEventListener('input', validateFullName);
-                validateInputs[5].addEventListener('input', validatePhone);
-                validateInputs[6].addEventListener('change', validateBornDate);
-                validateInputs[7].addEventListener('change', validateLocal);
-                validateInputs[8].addEventListener('input', validateBio);
-                validateInputs[9].addEventListener('input', validateImageProfile);
+                validateInputs.forEach((input, index) => {
+                    input.addEventListener('input', () => {
+                        switch (index) {
+                            case 0:
+                                validateName();
+                                break;
+                            case 1:
+                                validateEmail();
+                                break;
+                            case 2:
+                                validatePassword();
+                                break;
+                            case 3:
+                                validateConfirmPassword();
+                                break;
+                            case 4:
+                                validateFullName();
+                                break;
+                            case 5:
+                                validatePhone();
+                                break;
+                            case 6:
+                                validateBornDate();
+                                break;
+                            case 7:
+                                validateLocal();
+                                break;
+                            case 8:
+                                validateBio();
+                                break;
+                            case 9:
+                                validateImageProfile();
+                                break;
+                        }
+                        checkEmptyInput();
+                    });
+                });
+                
+                
             }
 
             function toggleRegisterSections() {

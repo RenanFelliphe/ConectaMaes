@@ -542,11 +542,11 @@
 
     document.querySelector('.Ho-identifyMyself').addEventListener('click', () => {
         document.querySelector('.Ho-identifyMyselfModal').classList.toggle('close');
-    })
+    });
 
     document.querySelector('.Ho-showPixKey').addEventListener('click', () => {
         document.querySelector('.Ho-showPixKeyModal').classList.toggle('close');
-    })
+    });
 
     dropdownHeaderSections();
     toggleSelectedPage();

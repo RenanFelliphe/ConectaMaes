@@ -53,7 +53,7 @@
                         <div class="Re-input Lo-loginAssistants">
                             <div class="Lo-rememberMe" style="cursor: pointer">
                                 <input type="checkbox" name="rememberMe" id="rememberMeCheckbox" style="cursor: pointer"> 
-                                <label for="rememberMeCheckbox" style="cursor: pointer;"> Lembrar de mim?</label>
+                                <label for="rememberMeCheckbox" style="cursor: pointer;"> Manter-me conectado</label>
                             </div>
                             <!--
                             <a href="" class="Lo-forgetPassword">Esqueceu sua senha?</a>
