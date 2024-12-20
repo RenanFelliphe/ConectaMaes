@@ -240,15 +240,20 @@
                 function setErrors(index, errors) {
                     inputContainers[index].style.border = "2px solid var(--redColor)";
                     placeholders[index].style.color = "var(--redColor)";
+                    validateInputs[index].classList.remove('correct');
                     validateInputs[index].classList.add('wEror');
+
+                    errorIcon[index].className = "bi bi-x-circle-fill errorIcon";
+                    errorIcon[index].style.display = "block";
+                    errorIcon[index].style.color = "var(--redColor)";
+                    errorIcon[index].style.pointerEvents = "all";
 
                     const errorHTML = errors.map(err => `<i class="bi bi-x-circle-fill mainError">${err}</i>`).join('<br>');
                     errorMessageContent[index].innerHTML = errorHTML;
                     errorMessageContent[index].style.display = "flex";
-                    errorIcon[index].style.display = "block";
 
                     errorIcon[index].addEventListener('click', () => {
-                        errorMessageContainers[index].style.display = 
+                        errorMessageContainers[index].style.display =
                             errorMessageContainers[index].style.display === 'flex' ? 'none' : 'flex';
                     });
 
@@ -287,8 +292,32 @@
                     });
                 }
 
+                function setCorrectInput(index) {
+                    inputContainers[index].style.border = "2px solid green";
+                    placeholders[index].style.color = "green";
+                    validateInputs[index].classList.remove('wEror');
+                    validateInputs[index].classList.add('correct');
+                    
+                    errorIcon[index].className = "bi bi-check-circle-fill errorIcon";
+                    errorIcon[index].style.display = "block";
+                    errorIcon[index].style.color = "green";
+                    errorIcon[index].style.pointerEvents = "none";
+
+                    errorMessageContainers[index].style.display = "none";
+                }
+
+                function checkError(indexInput, errors) {
+                    if (errors.length) {
+                        setErrors(indexInput, errors);
+                    } else {
+                        removeErrors(indexInput);
+                        setCorrectInput(indexInput);
+                    }
+                }
+
                 function validateName() {
                     const username = validateInputs[0].value;
+                    const indexInput = 0;
                     const errors = [];
                     const maxChar = 50;
 
@@ -303,11 +332,12 @@
                         if (/[^a-zA-Z0-9_]/.test(username)) errors.push("Apenas letras, números e underscore (_) são permitidos.");
                     }
 
-                    errors.length ? setErrors(0, errors) : removeErrors(0);
+                    checkError(indexInput, errors);               
                 }
 
                 function validateEmail() {
                     const email = validateInputs[1].value;
+                    const indexInput = 1;
                     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
                     const errors = [];
                     const maxChar = 256;
@@ -319,11 +349,12 @@
                         if (!emailRegex.test(email)) errors.push("Insira um e-mail válido.");
                     }
 
-                    errors.length ? setErrors(1, errors) : removeErrors(1);
+                    checkError(indexInput, errors);               
                 }
 
-                function validatePassword() {
+                function validatePassword() {                    
                     const password = validateInputs[2].value;
+                    const indexInput = 2;
                     const errors = [];
                     const maxChar = 100;
 
@@ -337,11 +368,12 @@
                         if (!/\d/.test(password)) errors.push("A senha deve conter ao menos um número.");
                     }
 
-                    errors.length ? setErrors(2, errors) : removeErrors(2);
+                    checkError(indexInput, errors);               
                 }
 
                 function validateConfirmPassword() {
                     const confirmPassword = validateInputs[3].value;
+                    const indexInput = 3;
                     const password = validateInputs[2].value;
                     const errors = [];
 
@@ -351,11 +383,12 @@
                         errors.push("As senhas não coincidem.");
                     }
 
-                    errors.length ? setErrors(3, errors) : removeErrors(3);
+                    checkError(indexInput, errors);               
                 }
 
                 function validateFullName() {
                     const fullName = validateInputs[4].value;
+                    const indexInput = 4;
                     const errors = [];
                     const maxChar = 100;
 
@@ -367,11 +400,12 @@
                         if (!/^([a-zA-ZÀ-ÖØ-öø-ÿ'’\-\s]+)$/.test(fullName)) errors.push("Apenas letras, espaços, acentos, hífens e apóstrofos são permitidos.");
                     }
 
-                    errors.length ? setErrors(4, errors) : removeErrors(4);
+                    checkError(indexInput, errors);               
                 }
 
                 function validatePhone() {
                     const phone = validateInputs[5].value;
+                    const indexInput = 5;
                     const errors = [];
                     const phoneRegex = /^\d{10,11}$/;
 
@@ -381,11 +415,12 @@
                         if (!phoneRegex.test(phone)) errors.push("O telefone deve conter 10 ou 11 dígitos.");
                     }
 
-                    errors.length ? setErrors(5, errors) : removeErrors(5);
+                    checkError(indexInput, errors);               
                 }
 
                 function validateBornDate() {
                     const birthDate = new Date(validateInputs[6].value);
+                    const indexInput = 6;
                     const today = new Date();
                     const hundredYearsAgo = new Date(today.getFullYear() - 100, today.getMonth(), today.getDate());
                     const eighteenYearsAgo = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
@@ -399,7 +434,7 @@
                         if (birthDate > eighteenYearsAgo) errors.push("Você precisa ser maior de 18 anos.");
                     }
 
-                    errors.length ? setErrors(6, errors) : removeErrors(6);
+                    checkError(indexInput, errors);               
                 }
 
                 async function fetchCepData(cep) {
@@ -423,6 +458,7 @@
 
                 async function validateLocal() {
                     const cep = validateInputs[7].value.trim();
+                    const indexInput = 7;
                     const errors = [];
 
                     if (!cep) {
@@ -432,27 +468,30 @@
                     }
 
                     if (errors.length) {
-                        setErrors(7, errors);
+                        checkError(indexInput, errors);
                         return;
                     }
 
                     try {
                         const data = await fetchCepData(cep);
+
                         if (data.uf !== "MG") {
-                            setErrors(7, ["O CEP não pertence ao estado de Minas Gerais (MG)."]);
+                            checkError(indexInput, ["O CEP não pertence ao estado de Minas Gerais (MG)."]);
                             return;
                         }
 
                         const infoLocalizacao = document.getElementById('infoLocalizacao');
                         infoLocalizacao.textContent = `${data.localidade}, ${data.uf}`;
-                        removeErrors(7);
+
+                        checkError(indexInput, []);
                     } catch (error) {
-                        setErrors(7, [error.message]);
+                        checkError(indexInput, [error.message]);
                     }
                 }
 
                 function validateBio() {
                     const biography = validateInputs[8].value.trim();
+                    const indexInput = 8;
                     const charactersNumber = document.querySelector('.Re-charactersNumber');
                     const maxCharacters = 255;
                     const errors = [];
@@ -467,7 +506,7 @@
                         }
                     }
 
-                    errors.length ? setErrors(8, errors) : removeErrors(8);
+                    checkError(indexInput, errors);               
                 }
 
                 function validateImageProfile() {
@@ -522,9 +561,7 @@
                         }
                         checkEmptyInput();
                     });
-                });
-                
-                
+                });  
             }
 
             function toggleRegisterSections() {

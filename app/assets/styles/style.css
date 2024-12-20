@@ -2317,11 +2317,6 @@ body.Y-theme .navMobile .pageLink:hover .headerIcon {
     opacity: 0.5;
 }
 
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.inputLocal{
-    padding-right: 1rem;
-    cursor: pointer;
-}
-
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.inputBio{
     min-height: 6rem;
     height: 100%;
