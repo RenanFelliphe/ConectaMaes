@@ -56,10 +56,10 @@ if (count($publicacoes) > 0) {
                         <?php if(($currentUserData['idUsuario'] == $dadosPublicacao['idUsuario'] || $currentUserData['isAdmin']) && $dadosPublicacao['tipoPublicacao'] != "Auxilio"){ ?>
                             <div class="bi bi-three-dots postMoreButton">
                                 <form class="postFunctionsModal close" method="POST">
-                                    <!-- <button class="reportPostButton  pageIcon" name="denunciarPost">
+                                    <button class="reportPostButton  pageIcon" name="denunciarPost">
                                         <i class="bi bi-megaphone-fill"></i>
                                         <p>Denunciar Postagem</p>
-                                    </button> -->
+                                    </button>
                                     <?php if ($currentUserData['idUsuario'] == $dadosPublicacao['idUsuario'] || $currentUserData['isAdmin']) { ?>
                                         <input type="hidden" name="deleterId" value="<?= $dadosPublicacao['idPublicacao']; ?>">
                                         <button class="deletePostButton pageIcon" name="deletarPost" type="submit" <?= $currentUserData['idUsuario'] == 1 ? 'disabled' : ''; ?>>

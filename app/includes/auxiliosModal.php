@@ -101,7 +101,9 @@
             if($dadosPublicacao['linkAnexo']!=''){
                 ?>
                     <div class="postsImages">
-                        <img src="<?= $relativeAssetsPath . "/imagens/fotos/anexos/" . $dadosPublicacao['linkAnexo'];?>" alt="Anexo da Publicação <?=$dadosPublicacao['idPublicacao'];?>">
+                        <div class="auxilioImg">
+                            <img src="<?= $relativeAssetsPath . "/imagens/fotos/anexos/" . $dadosPublicacao['linkAnexo'];?>" alt="Anexo da Publicação <?=$dadosPublicacao['idPublicacao'];?>">
+                        </div>
                     </div>
                 <?php
             }
