@@ -34,7 +34,7 @@
                 <div class="Re-registerCenter">
                     <div class="Re-accountInformations Re-registerSections">
                         <div class="Re-input inputUserName">
-                            <input class="Re-userInput validate blank" type="text" id="nomeUsuario" name="userRegistro" oninput="validateName()" onclick="validateName()" required autofocus>
+                            <input class="Re-userInput validate blank" type="text" id="nomeUsuario" name="userRegistro" required autofocus>
                             <label class="Re-fakePlaceholder" for="nomeUsuario">Usuário</label>
                             <span class="userArroba">@</span>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
@@ -44,7 +44,7 @@
                         </div>
 
                         <div class="Re-input inputEmail">
-                            <input class="Re-userInput validate blank" type="email" id="email" name="emailRegistro" autocomplete="email" oninput="validateEmail()" required>
+                            <input class="Re-userInput validate blank" type="email" id="email" name="emailRegistro" autocomplete="email" required>
                             <label class="Re-fakePlaceholder" for="email">E-mail</label>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
                             <div class="errorMessageContainer">
@@ -53,7 +53,7 @@
                         </div>
 
                         <div class="Re-input inputPassword">
-                            <input class="Re-userInput validate blank" type="password" id="senha" name="senhaRegistro" oninput="validatePassword()" required>
+                            <input class="Re-userInput validate blank" type="password" id="senha" name="senhaRegistro" required>
                             <label class="Re-fakePlaceholder" for="senha">Senha</label>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
                             <div class="errorMessageContainer">
@@ -62,7 +62,7 @@
                         </div>
 
                         <div class="Re-input inputConfirmPassword">
-                            <input class="Re-userInput validate blank" type="password" id="confirmarSenha" name="senhaRegistroConfirma" oninput="validateConfirmPassword()" required>
+                            <input class="Re-userInput validate blank" type="password" id="confirmarSenha" name="senhaRegistroConfirma" required>
                             <label class="Re-fakePlaceholder" for="confirmarSenha">Confirmar Senha</label>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
                             <div class="errorMessageContainer">
@@ -85,7 +85,7 @@
 
                     <div class="Re-userInformations Re-registerSections close">
                         <div class="Re-input inputName">
-                            <input class="Re-userInput validate blank" type="text" id="nomeCompleto" name="nomeUsuarioRegistro" oninput="validateFullName()" required>
+                            <input class="Re-userInput validate blank" type="text" id="nomeCompleto" name="nomeUsuarioRegistro" required>
                             <label class="Re-fakePlaceholder" for="nomeCompleto">Nome Completo</label>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
                             <div class="errorMessageContainer">
@@ -93,7 +93,7 @@
                             </div>
                         </div>
                         <div class="Re-input inputCell">
-                            <input class="Re-userInput validate" type="number" id="telefone" name="telefoneRegistro" oninput="validatePhone()"/>
+                            <input class="Re-userInput validate" type="number" id="telefone" name="telefoneRegistro"/>
                             <label class="Re-fakePlaceholder" for="telefone">Telefone</label>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
                             <div class="errorMessageContainer">
@@ -101,7 +101,7 @@
                             </div>
                         </div>
                         <div class="Re-input inputDataNasc">
-                            <input class="Re-userInput validate blank" type="date" id="dataNascimento" name="dataNascimentoRegistro" onchange="validateBornDate()" required>
+                            <input class="Re-userInput validate blank" type="date" id="dataNascimento" name="dataNascimentoRegistro" required>
                             <label class="Re-fakePlaceholder notEmpty" for="dataNascimento">Data de Nascimento</label>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
                             <div class="errorMessageContainer">
@@ -109,15 +109,16 @@
                             </div>
                         </div>
                         <div class="Re-input inputLocal">
-                            <input class="Re-userInput validate blank"  type="number" name="localizacaoRegistro" id="localizacao" oninput="validateLocal()" required></input>
-                            <label class="Re-fakePlaceholder" for="localizacao" style="pointer-events: none;">CEP</label>
+                            <input class="Re-userInput validate blank"  type="number" name="localizacaoRegistro" id="localizacao" required></input>
+                            <label class="Re-fakePlaceholder" for="localizacao">CEP</label>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
                             <div class="errorMessageContainer">
                                 <div class="errorMessageContent"></div>
                             </div>
+                            <p class="CEPResult"></p>
                         </div>
                         <div class="Re-input input-full inputBio">
-                            <textarea class="Re-userInput validate" name="biografiaUsuarioRegistro" id="biografiaUsuario" style="resize: none;" oninput="validateBio()"></textarea>                        
+                            <textarea class="Re-userInput validate" name="biografiaUsuarioRegistro" id="biografiaUsuario"></textarea>                        
                             <label class="Re-fakePlaceholder" for="biografiaUsuario">Biografia</label>
                             <div class="Re-charactersCounter">
                                 <span class="Re-charactersNumber">0</span>/<span class="Re-maxCharacters">257</span>
@@ -282,25 +283,28 @@
                             placeholders[index].classList.add('notEmpty');
                             inputContainers[index].style.opacity = "1";
                         } else {
-                            placeholders[index].classList.remove('notEmpty');
                             inputContainers[index].style.opacity = "0.5";
                             inputContainers[index].style.border = "2px solid transparent";
-                            placeholders[index].style.color = "var(--secondColor)";
                             errorMessageContent[index].innerHTML = '';
                             errorIcon[index].style.display = "none";
+
+                            if (index !== 6) {
+                                placeholders[index].classList.remove('notEmpty');
+                                placeholders[index].style.color = "var(--secondColor)";
+                            }
                         }
                     });
                 }
 
                 function setCorrectInput(index) {
-                    inputContainers[index].style.border = "2px solid green";
-                    placeholders[index].style.color = "green";
+                    inputContainers[index].style.border = "2px solid var(--secondColor)";
+                    placeholders[index].style.color = "var(--thirdColor)";
                     validateInputs[index].classList.remove('wEror');
                     validateInputs[index].classList.add('correct');
                     
                     errorIcon[index].className = "bi bi-check-circle-fill errorIcon";
                     errorIcon[index].style.display = "block";
-                    errorIcon[index].style.color = "green";
+                    errorIcon[index].style.color = "var(--secondColor)";
                     errorIcon[index].style.pointerEvents = "none";
 
                     errorMessageContainers[index].style.display = "none";
@@ -315,21 +319,51 @@
                     }
                 }
 
-                function validateName() {
+                function limitMaxCharactersInput(input, maxChar) {
+                    input.addEventListener("keydown", (event) => {
+                        // Permitir teclas especiais como Backspace, Tab, Delete, setas de navegação, etc.
+                        const allowedKeys = [
+                            "Backspace",
+                            "Tab",
+                            "ArrowLeft",
+                            "ArrowRight",
+                            "ArrowUp",
+                            "ArrowDown",
+                            "Delete"
+                        ];
+
+                        // Impedir inserção se o valor atual já atingiu o limite e a tecla pressionada não for uma tecla especial
+                        if (input.value.length >= maxChar && !allowedKeys.includes(event.key)) {
+                            event.preventDefault(); // Bloqueia a inserção adicional
+                        }
+                    });
+
+                    // Limita o valor atual para o máximo permitido, caso já esteja acima
+                    input.addEventListener("input", () => {
+                        if (input.value.length > maxChar) {
+                            input.value = input.value.substring(0, maxChar); // Trunca o valor
+                        }
+                    });
+                }
+
+                function validateUsername() {
                     const username = validateInputs[0].value;
                     const indexInput = 0;
                     const errors = [];
-                    const maxChar = 50;
+                    const maxChar = 50 + 1; //Limite de caracteres do input +1 para a validação
 
-                    if (!username) {
-                        errors.push("O nome de usuário é obrigatório.");
-                    } else {
-                        if (username.length <= 3) errors.push("O nome de usuário deve ter mais de 3 caracteres.");
-                        if (username.length > maxChar) errors.push("O nome de usuário é longo demais.");
-                        if (/[áàâãäéèêëíìîïóòôõöúùûüç]/i.test(username)) errors.push("O nome de usuário não pode ter acentos ou cedilhas.");
-                        if (/[-]/.test(username)) errors.push("O nome de usuário não pode ter hífens.");
-                        if (/\s/.test(username)) errors.push("O nome de usuário não pode ter espaços.");
-                        if (/[^a-zA-Z0-9_]/.test(username)) errors.push("Apenas letras, números e underscore (_) são permitidos.");
+                    limitMaxCharactersInput(validateInputs[indexInput], maxChar);
+
+                    if (username.length >= maxChar) errors.push("O nome de usuário é longo demais.");
+                    if (username.length <= 3) errors.push("O nome de usuário deve ter mais de 3 caracteres.");
+                    if (/[áàâãäéèêëíìîïóòôõöúùûüç]/i.test(username)){
+                        errors.push("O nome de usuário não pode ter acentos ou cedilhas.");
+                    } else if(/[-]/.test(username)){
+                        errors.push("O nome de usuário não pode ter hífens.");
+                    } else if(/\s/.test(username)){
+                        errors.push("O nome de usuário não pode ter espaços.");
+                    } else if (/[^a-zA-Z0-9_]/.test(username)){
+                        errors.push("Use apenas underscores '_' como caractere especial.");
                     }
 
                     checkError(indexInput, errors);               
@@ -340,14 +374,12 @@
                     const indexInput = 1;
                     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
                     const errors = [];
-                    const maxChar = 256;
+                    const maxChar = 256 + 1; //Limite de caracteres do input +1 para a validação
 
-                    if (!email) {
-                        errors.push("O e-mail é obrigatório.");
-                    } else {
-                        if (email.length > maxChar) errors.push("O e-mail é longo demais.");
-                        if (!emailRegex.test(email)) errors.push("Insira um e-mail válido.");
-                    }
+                    limitMaxCharactersInput(validateInputs[indexInput], maxChar);
+                    
+                    if (email.length >= maxChar) errors.push("O e-mail é longo demais.");
+                    if (!emailRegex.test(email)) errors.push("Insira um e-mail válido.");
 
                     checkError(indexInput, errors);               
                 }
@@ -356,17 +388,15 @@
                     const password = validateInputs[2].value;
                     const indexInput = 2;
                     const errors = [];
-                    const maxChar = 100;
+                    const maxChar = 100 + 1; //Limite de caracteres do input +1 para a validação
 
-                    if (!password) {
-                        errors.push("A senha é obrigatória.");
-                    } else {
-                        if (password.length < 8) errors.push("A senha deve ter mais de 8 caracteres.");
-                        if (password.length > maxChar) errors.push("A senha é longa demais.");
-                        if (!/[A-Z]/.test(password)) errors.push("A senha deve conter ao menos uma letra maiúscula.");
-                        if (!/[a-z]/.test(password)) errors.push("A senha deve conter ao menos uma letra minúscula.");
-                        if (!/\d/.test(password)) errors.push("A senha deve conter ao menos um número.");
-                    }
+                    limitMaxCharactersInput(validateInputs[indexInput], maxChar);
+
+                    if (password.length >= maxChar) errors.push("A senha é longa demais.");
+                    if (password.length < 8) errors.push("A senha deve ter mais de 8 caracteres.");
+                    if (!/[A-Z]/.test(password)) errors.push("A senha deve conter ao menos uma letra maiúscula.");
+                    if (!/[a-z]/.test(password)) errors.push("A senha deve conter ao menos uma letra minúscula.");
+                    if (!/\d/.test(password)) errors.push("A senha deve conter ao menos um número.");
 
                     checkError(indexInput, errors);               
                 }
@@ -377,11 +407,7 @@
                     const password = validateInputs[2].value;
                     const errors = [];
 
-                    if (!confirmPassword) {
-                        errors.push("A confirmação de senha é obrigatória.");
-                    } else if (confirmPassword !== password) {
-                        errors.push("As senhas não coincidem.");
-                    }
+                    if (confirmPassword !== password) errors.push("As senhas não coincidem.");
 
                     checkError(indexInput, errors);               
                 }
@@ -390,31 +416,40 @@
                     const fullName = validateInputs[4].value;
                     const indexInput = 4;
                     const errors = [];
-                    const maxChar = 100;
+                    const maxChar = 100 + 1; //Limite de caracteres do input +1 para a validação
 
-                    if (!fullName) {
-                        errors.push("O nome completo é obrigatório.");
-                    } else {
-                        if (fullName.length > maxChar) errors.push("O nome é longo demais.");
-                        if (/\d/.test(fullName)) errors.push("O nome não pode conter números.");
-                        if (!/^([a-zA-ZÀ-ÖØ-öø-ÿ'’\-\s]+)$/.test(fullName)) errors.push("Apenas letras, espaços, acentos, hífens e apóstrofos são permitidos.");
-                    }
+                    limitMaxCharactersInput(validateInputs[indexInput], maxChar);
+
+                    if (fullName.length >= maxChar) errors.push("O nome é longo demais.");
+                    if (/\d/.test(fullName)) errors.push("O nome não pode conter números.");
+                    if (!/^([a-zA-ZÀ-ÖØ-öø-ÿ'’\-\s]+)$/.test(fullName)) errors.push("Apenas letras, acentos, hífens e apóstrofos são permitidos.");
 
                     checkError(indexInput, errors);               
                 }
 
                 function validatePhone() {
+                    const validDDDs = [
+                        '61', '62', '64', '65', '66', '67', // Centro-Oeste
+                        '82', '71', '73', '74', '75', '77', // Nordeste
+                        '85', '88', '98', '99', '83', '81', '87', '86', '89', '84', '79', // Nordeste
+                        '68', '96', '92', '97', '91', '93', '94', '69', '95', '63', // Norte
+                        '27', '28', '31', '32', '33', '34', '35', '37', '38', // Sudeste
+                        '21', '22', '24', '11', '12', '13', '14', '15', '16', '17', '18', '19', // Sudeste
+                        '41', '42', '43', '44', '45', '46', // Sul
+                        '51', '53', '54', '55', '47', '48', '49' // Sul
+                    ];
+
                     const phone = validateInputs[5].value;
+                    const ddd = phone.substring(0, 2); // Extrai os primeiros dois dígitos como DDD
                     const indexInput = 5;
                     const errors = [];
-                    const phoneRegex = /^\d{10,11}$/;
+                    const maxChar = 11 + 1; //Limite de caracteres do input +1 para a validação
 
-                    if (!phone) {
-                        errors.push("O telefone é obrigatório.");
-                    } else {
-                        if (!phoneRegex.test(phone)) errors.push("O telefone deve conter 10 ou 11 dígitos.");
-                    }
+                    limitMaxCharactersInput(validateInputs[indexInput], maxChar);
 
+                    if (phone.length >= maxChar) errors.push("O telefone é longo demais.");
+                    if (!validDDDs.includes(ddd)) errors.push("Insira um DDD válido.");
+                    
                     checkError(indexInput, errors);               
                 }
 
@@ -426,15 +461,15 @@
                     const eighteenYearsAgo = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
                     const errors = [];
 
-                    if (!validateInputs[6].value) {
-                        errors.push("A data de nascimento é obrigatória.");
-                    } else {
-                        if (birthDate > today) errors.push("A data de nascimento não pode ser uma data futura.");
-                        if (birthDate < hundredYearsAgo) errors.push("A data de nascimento é muito antiga.");
-                        if (birthDate > eighteenYearsAgo) errors.push("Você precisa ser maior de 18 anos.");
-                    }
+                    if (birthDate > today){
+                        errors.push("A data de nascimento não pode ser uma data futura.");
+                    } else if (birthDate < hundredYearsAgo){
+                        errors.push("A data de nascimento é muito antiga.");
+                    } else if (birthDate > eighteenYearsAgo){
+                        errors.push("Você precisa ser maior de 18 anos.");
+                    }                    
 
-                    checkError(indexInput, errors);               
+                    checkError(indexInput, errors);   
                 }
 
                 async function fetchCepData(cep) {
@@ -460,28 +495,22 @@
                     const cep = validateInputs[7].value.trim();
                     const indexInput = 7;
                     const errors = [];
+                    const maxChar = 8 + 1; //Limite de caracteres do input +1 para a validação
 
-                    if (!cep) {
-                        errors.push("O campo CEP é obrigatório.");
-                    } else {
-                        if (!/^\d{8}$/.test(cep)) errors.push("Insira um CEP válido.");
-                    }
+                    limitMaxCharactersInput(validateInputs[indexInput], maxChar);
 
-                    if (errors.length) {
-                        checkError(indexInput, errors);
-                        return;
-                    }
+                    if (cep.length >= maxChar) errors.push("O CEP é longo demais.");
+                    if (!/^\d{8}$/.test(cep)) errors.push("Insira um CEP válido.");
+
+                    checkError(indexInput, errors);
+
+                    const cepResultElement = document.querySelector(".CEPResult");
+                    cepResultElement.textContent = ""; 
 
                     try {
                         const data = await fetchCepData(cep);
-
-                        if (data.uf !== "MG") {
-                            checkError(indexInput, ["O CEP não pertence ao estado de Minas Gerais (MG)."]);
-                            return;
-                        }
-
-                        const infoLocalizacao = document.getElementById('infoLocalizacao');
-                        infoLocalizacao.textContent = `${data.localidade}, ${data.uf}`;
+    
+                        cepResultElement.textContent = `${data.localidade}, ${data.uf}`;
 
                         checkError(indexInput, []);
                     } catch (error) {
@@ -493,18 +522,13 @@
                     const biography = validateInputs[8].value.trim();
                     const indexInput = 8;
                     const charactersNumber = document.querySelector('.Re-charactersNumber');
-                    const maxCharacters = 255;
                     const errors = [];
+                    const maxChar = 256 + 1; //Limite de caracteres do input +1 para a validação
 
+                    limitMaxCharactersInput(validateInputs[indexInput], maxChar);
                     charactersNumber.textContent = biography.length;
 
-                    if (!biography) {
-                        errors.push("A biografia é obrigatória.");
-                    } else {
-                        if (biography.length > maxCharacters) {
-                            errors.push("A biografia é longa demais.");
-                        }
-                    }
+                    if (biography.length >= maxChar) errors.push("A biografia é longa demais.");
 
                     checkError(indexInput, errors);               
                 }
@@ -529,7 +553,7 @@
                     input.addEventListener('input', () => {
                         switch (index) {
                             case 0:
-                                validateName();
+                                validateUsername();
                                 break;
                             case 1:
                                 validateEmail();

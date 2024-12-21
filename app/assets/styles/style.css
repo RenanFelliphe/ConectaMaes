@@ -2174,7 +2174,7 @@ body.Y-theme .navMobile .pageLink:hover .headerIcon {
     max-width: 35rem;
     min-height: 29rem;
     height: 78vh;
-    max-height: 42rem;
+    max-height: max-content;
     box-shadow: 0 4px 16px 0px #00000040;
     overflow-y: hidden;
     gap: 5vh;
@@ -2354,23 +2354,16 @@ body.Y-theme .navMobile .pageLink:hover .headerIcon {
     outline: none;
     border: none;
     color: var(--blackColor);
+    resize: none;
 }
 
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.inputDataNasc .Re-userInput{
     padding-right: 1rem;
 }
 
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.inputLocal .Re-userInput{
-    cursor: pointer;
-}
-
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.inputDataNasc .Re-userInput::-webkit-calendar-picker-indicator {
     cursor: pointer;
     transform: translateY(2px);
-}
-
-.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.inputCell .Re-userInput::-webkit-inner-spin-button { 
-    -webkit-appearance: none;
 }
 
 .Lo-loginForm .Lo-loginCenter .Lo-userSection .Re-input .Re-fakePlaceholder,
@@ -2409,6 +2402,20 @@ body.Y-theme .navMobile .pageLink:hover .headerIcon {
     font-size: 0.65rem;
     bottom: 0.5rem;
     right: 0.5rem;
+}
+
+.Re-registerForm .Re-registerCenter .Re-registerSections .Re-input.inputLocal .CEPResult{
+    position: absolute;
+    color: var(--thirdColor);
+    cursor: text;
+    transform: translateY(-50%);
+    left: 1rem;
+    padding: 0 0.3rem;
+    white-space: nowrap;
+    bottom: -15px;
+    font-size: 0.8rem;
+    background: linear-gradient(transparent 45%, var(--whiteColor) 45%);
+    font-weight: 500;
 }
 
 .Re-registerForm .Re-registerCenter .Re-registerSections .Re-input .Re-fakePlaceholder.notEmpty + span.userArroba {
