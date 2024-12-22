@@ -32,9 +32,9 @@
                 </div>
 
                 <div class="Re-registerCenter">
-                    <div class="Re-accountInformations Re-registerSections">
+                    <div class="Re-accountInformations Re-registerSections ">
                         <div class="Re-input inputUserName">
-                            <input class="Re-userInput validate blank" type="text" id="nomeUsuario" name="userRegistro" required autofocus>
+                            <input class="Re-userInput validate" type="text" id="nomeUsuario" name="userRegistro" required autofocus>
                             <label class="Re-fakePlaceholder" for="nomeUsuario">Usuário</label>
                             <span class="userArroba">@</span>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
@@ -44,7 +44,7 @@
                         </div>
 
                         <div class="Re-input inputEmail">
-                            <input class="Re-userInput validate blank" type="email" id="email" name="emailRegistro" autocomplete="email" required>
+                            <input class="Re-userInput validate" type="email" id="email" name="emailRegistro" autocomplete="email" required>
                             <label class="Re-fakePlaceholder" for="email">E-mail</label>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
                             <div class="errorMessageContainer">
@@ -53,7 +53,7 @@
                         </div>
 
                         <div class="Re-input inputPassword">
-                            <input class="Re-userInput validate blank" type="password" id="senha" name="senhaRegistro" required>
+                            <input class="Re-userInput validate" type="password" id="senha" name="senhaRegistro" required>
                             <label class="Re-fakePlaceholder" for="senha">Senha</label>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
                             <div class="errorMessageContainer">
@@ -62,7 +62,7 @@
                         </div>
 
                         <div class="Re-input inputConfirmPassword">
-                            <input class="Re-userInput validate blank" type="password" id="confirmarSenha" name="senhaRegistroConfirma" required>
+                            <input class="Re-userInput validate" type="password" id="confirmarSenha" name="senhaRegistroConfirma" required>
                             <label class="Re-fakePlaceholder" for="confirmarSenha">Confirmar Senha</label>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
                             <div class="errorMessageContainer">
@@ -85,31 +85,34 @@
 
                     <div class="Re-userInformations Re-registerSections close">
                         <div class="Re-input inputName">
-                            <input class="Re-userInput validate blank" type="text" id="nomeCompleto" name="nomeUsuarioRegistro" required>
+                            <input class="Re-userInput validate" type="text" id="nomeCompleto" name="nomeUsuarioRegistro" required>
                             <label class="Re-fakePlaceholder" for="nomeCompleto">Nome Completo</label>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
                             <div class="errorMessageContainer">
                                 <div class="errorMessageContent"></div>
                             </div>
                         </div>
+
                         <div class="Re-input inputCell">
-                            <input class="Re-userInput validate" type="number" id="telefone" name="telefoneRegistro"/>
+                            <input class="Re-userInput validate" type="text" id="telefone" name="telefoneRegistro" pattern="^\d{8}$" />
                             <label class="Re-fakePlaceholder" for="telefone">Telefone</label>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
                             <div class="errorMessageContainer">
                                 <div class="errorMessageContent"></div>
                             </div>
                         </div>
+
                         <div class="Re-input inputDataNasc">
-                            <input class="Re-userInput validate blank" type="date" id="dataNascimento" name="dataNascimentoRegistro" required>
+                            <input class="Re-userInput validate" type="date" id="dataNascimento" name="dataNascimentoRegistro" required>
                             <label class="Re-fakePlaceholder notEmpty" for="dataNascimento">Data de Nascimento</label>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
                             <div class="errorMessageContainer">
                                 <div class="errorMessageContent"></div>
                             </div>
                         </div>
+
                         <div class="Re-input inputLocal">
-                            <input class="Re-userInput validate blank"  type="number" name="localizacaoRegistro" id="localizacao" required></input>
+                            <input class="Re-userInput validate" type="text" name="localizacaoRegistro" id="localizacao" pattern="^\d{8}$" required>
                             <label class="Re-fakePlaceholder" for="localizacao">CEP</label>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
                             <div class="errorMessageContainer">
@@ -117,6 +120,7 @@
                             </div>
                             <p class="CEPResult"></p>
                         </div>
+
                         <div class="Re-input input-full inputBio">
                             <textarea class="Re-userInput validate" name="biografiaUsuarioRegistro" id="biografiaUsuario"></textarea>                        
                             <label class="Re-fakePlaceholder" for="biografiaUsuario">Biografia</label>
@@ -131,40 +135,50 @@
                     </div>
 
                     <div class="Re-registerResult Re-registerSections close">
-                        <div class="Re-addImageProfile">
+                        <div class="Re-input Re-addImageProfile">
                             <input type="file" class="validate" id="imagesSelector" name="fotoPerfilRegistro" input="validateImageProfile();" accept="image/png, image/jpeg">
-                            <label for="imagesSelector" class="Re-userImageProfile">
+                            <label for="imagesSelector" class="Re-imageProfileLabel">
                                 <div>
                                     <img src="../app/assets/imagens/icons/user_no_profile_image.png" class="Re-userImage">
                                 </div>
                                 <i class="bi bi-camera-fill Re-addImageIcon"></i>                    
                             </label>
+                            <i class="bi bi-info-circle-fill errorIcon"></i>
+                            <div class="errorMessageContainer">
+                                <div class="errorMessageContent"></div>
+                            </div>
                         </div>
 
                         <div class="Re-userInfoContainer">
                             <div class="Re-userInformations">
-                                <p class="Re-infoLabel infoName">Nome:</p>
-                                <p class="Re-userInfo" id="infoNomeCompleto"></p>
+                                <p class="Re-userInfo" id="infoNomeCompleto">
+                                    <span class="Re-resultLable">Nome: </span><span class="Re-userData"></span>
+                                </p>
                             </div>
                             <div class="Re-userInformations">
-                                <p class="Re-infoLabel infoUser">Usuário:</p>
-                                <p class="Re-userInfo" id="infoNomeUsuario"></p>
+                                <p class="Re-userInfo" id="infoNomeUsuario">
+                                    <span class="Re-resultLable">Nome de usuário: </span><span class="Re-userData"></span>
+                                </p>
                             </div>
                             <div class="Re-userInformations">
-                                <p class="Re-infoLabel infoEmail">E-mail:</p>
-                                <p class="Re-userInfo" id="infoEmail"></p>
+                                <p class="Re-userInfo" id="infoEmail">
+                                    <span class="Re-resultLable">E-mail: </span><span class="Re-userData"></span>
+                                </p>
                             </div>
                             <div class="Re-userInformations">
-                                <p class="Re-infoLabel infoPhone">Telefone:</p>
-                                <p class="Re-userInfo" id="infoTelefone"></p>
+                                <p class="Re-userInfo" id="infoTelefone">
+                                    <span class="Re-resultLable">Telefone: </span><span class="Re-userData"></span>
+                                </p>
                             </div>
                             <div class="Re-userInformations">
-                                <p class="Re-infoLabel infoDate">Data de Nascimento:</p>
-                                <p class="Re-userInfo" id="infoDataNascimento"></p>
+                                <p class="Re-userInfo" id="infoDataNascimento">
+                                    <span class="Re-resultLable">Data de Nasc.: </span><span class="Re-userData"></span>
+                                </p>
                             </div>
                             <div class="Re-userInformations">
-                                <p class="Re-infoLabel infoLocal">Localização:</p>
-                                <p class="Re-userInfo" id="infoLocalizacao"></p>
+                                <p class="Re-userInfo" id="infoLocalizacao">
+                                    <span class="Re-resultLable">CEP: </span><span class="Re-userData"></span><span class="CEPResult"></span>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -220,14 +234,53 @@
         ?>
         <script src="<?= $relativeAssetsPath; ?>/js/system.js"></script>
         <script>  
-            document.querySelectorAll('.Re-userInput').forEach(input => {
+           document.querySelectorAll('.Re-userInput').forEach(input => {
                 const updateInfo = (event) => {
                     const inputId = event.target.id;
                     const infoElement = document.getElementById('info' + inputId.charAt(0).toUpperCase() + inputId.slice(1));
-                    infoElement.textContent = event.target.value;
+                    const userDataElement = infoElement.querySelector('.Re-userData');  // Elemento que conterá o dado inserido
+
+                    let value = event.target.value;
+
+                    // Formatação do telefone
+                    if (inputId === 'telefone') {
+                        value = value.replace(/\D/g, ''); // Remove qualquer caractere não numérico
+                        if (value.length === 11) {
+                            value = value.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+                        } else if (value.length === 10) {
+                            value = value.replace(/^(\d{2})(\d{4})(\d{4})$/, '($1) $2-$3');
+                        }
+                    }
+
+                    // Formatação do CEP
+                    if (inputId === 'localizacao') {
+                        value = value.replace(/\D/g, ''); // Remove qualquer caractere não numérico
+                        if (value.length === 8) {
+                            value = value.replace(/^(\d{5})(\d{3})$/, '$1-$2');
+                        }
+                    }
+
+                    // Formatação da data de nascimento
+                    if (inputId === 'dataNascimento') {
+                        const dateParts = value.split('-');
+                        if (dateParts.length === 3) {
+                            value = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
+                        }
+                    }
+
+                    // Atualiza o conteúdo do elemento de exibição
+                    userDataElement.textContent = value;  // Apenas o dado é alterado, mantendo o estilo do label
                 };
 
                 input.addEventListener('input', updateInfo);
+
+                document.getElementById("telefone").addEventListener("input", function(e) {
+                    e.target.value = e.target.value.replace(/[^0-9]/g, ''); // Remove qualquer caractere que não seja número
+                });
+
+                document.getElementById("localizacao").addEventListener("input", function(e) {
+                    e.target.value = e.target.value.replace(/[^0-9]/g, ''); // Remove qualquer caractere que não seja número
+                });
             });
 
             function userValidations() {
@@ -239,7 +292,7 @@
                 const errorIcon = document.querySelectorAll('.errorIcon');
 
                 function setErrors(index, errors) {
-                    inputContainers[index].style.border = "2px solid var(--redColor)";
+                    inputContainers[index].style.borderColor = "var(--redColor)";
                     placeholders[index].style.color = "var(--redColor)";
                     validateInputs[index].classList.remove('correct');
                     validateInputs[index].classList.add('wEror');
@@ -249,7 +302,7 @@
                     errorIcon[index].style.color = "var(--redColor)";
                     errorIcon[index].style.pointerEvents = "all";
 
-                    const errorHTML = errors.map(err => `<i class="bi bi-x-circle-fill mainError">${err}</i>`).join('<br>');
+                    const errorHTML = errors.map(err => `<i class="bi bi-x-circle-fill">${err}</i>`).join('<br>');
                     errorMessageContent[index].innerHTML = errorHTML;
                     errorMessageContent[index].style.display = "flex";
 
@@ -271,7 +324,6 @@
                     inputContainers[index].style.border = "2px solid transparent";
                     placeholders[index].style.color = "var(--secondColor)";
                     validateInputs[index].classList.remove('wEror');
-                    validateInputs[index].classList.remove('blank');
 
                     errorMessageContent[index].innerHTML = '';
                     errorIcon[index].style.display = "none";
@@ -283,7 +335,9 @@
                             placeholders[index].classList.add('notEmpty');
                             inputContainers[index].style.opacity = "1";
                         } else {
-                            inputContainers[index].style.opacity = "0.5";
+                            if(index !== 9){
+                                inputContainers[index].style.opacity = "0.5";
+                            }
                             inputContainers[index].style.border = "2px solid transparent";
                             errorMessageContent[index].innerHTML = '';
                             errorIcon[index].style.display = "none";
@@ -356,15 +410,10 @@
 
                     if (username.length >= maxChar) errors.push("O nome de usuário é longo demais.");
                     if (username.length <= 3) errors.push("O nome de usuário deve ter mais de 3 caracteres.");
-                    if (/[áàâãäéèêëíìîïóòôõöúùûüç]/i.test(username)){
-                        errors.push("O nome de usuário não pode ter acentos ou cedilhas.");
-                    } else if(/[-]/.test(username)){
-                        errors.push("O nome de usuário não pode ter hífens.");
-                    } else if(/\s/.test(username)){
-                        errors.push("O nome de usuário não pode ter espaços.");
-                    } else if (/[^a-zA-Z0-9_]/.test(username)){
-                        errors.push("Use apenas underscores '_' como caractere especial.");
-                    }
+                    if (/\s/.test(username)) errors.push("O nome de usuário não pode ter espaços.");
+                    if (/[áàâãäéèêëíìîïóòôõöúùûüç]/i.test(username)) errors.push("O nome de usuário não pode ter acentos ou cedilhas.");
+                        else if(/[-]/.test(username)) errors.push("O nome de usuário não pode ter hífens.");
+                        else if (/[^a-zA-Z0-9_\s]/.test(username)) errors.push("Use apenas underscores '_' e espaços como caracteres especiais.");
 
                     checkError(indexInput, errors);               
                 }
@@ -422,7 +471,7 @@
 
                     if (fullName.length >= maxChar) errors.push("O nome é longo demais.");
                     if (/\d/.test(fullName)) errors.push("O nome não pode conter números.");
-                    if (!/^([a-zA-ZÀ-ÖØ-öø-ÿ'’\-\s]+)$/.test(fullName)) errors.push("Apenas letras, acentos, hífens e apóstrofos são permitidos.");
+                        else if (!/^([a-zA-ZÀ-ÖØ-öø-ÿ'’\-\s]+)$/.test(fullName)) errors.push("Apenas letras, acentos, hífens e apóstrofos são permitidos.");
 
                     checkError(indexInput, errors);               
                 }
@@ -446,10 +495,11 @@
                     const maxChar = 11 + 1; //Limite de caracteres do input +1 para a validação
 
                     limitMaxCharactersInput(validateInputs[indexInput], maxChar);
-
-                    if (phone.length >= maxChar) errors.push("O telefone é longo demais.");
-                    if (!validDDDs.includes(ddd)) errors.push("Insira um DDD válido.");
                     
+                    if (phone.length >= maxChar) errors.push("O telefone é longo demais.");
+                        else if (!validDDDs.includes(ddd)) errors.push("Insira um DDD válido.");
+                        else if (phone.length != 10 && phone.length != 11) errors.push("Insira um telefone válido.");
+
                     checkError(indexInput, errors);               
                 }
 
@@ -461,13 +511,9 @@
                     const eighteenYearsAgo = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
                     const errors = [];
 
-                    if (birthDate > today){
-                        errors.push("A data de nascimento não pode ser uma data futura.");
-                    } else if (birthDate < hundredYearsAgo){
-                        errors.push("A data de nascimento é muito antiga.");
-                    } else if (birthDate > eighteenYearsAgo){
-                        errors.push("Você precisa ser maior de 18 anos.");
-                    }                    
+                    if (birthDate > today) errors.push("A data de nascimento não pode ser uma data futura.");
+                        else if (birthDate < hundredYearsAgo) errors.push("A data de nascimento é muito antiga.");
+                        else if (birthDate > eighteenYearsAgo) errors.push("Você precisa ser maior de 18 anos.");
 
                     checkError(indexInput, errors);   
                 }
@@ -500,7 +546,7 @@
                     limitMaxCharactersInput(validateInputs[indexInput], maxChar);
 
                     if (cep.length >= maxChar) errors.push("O CEP é longo demais.");
-                    if (!/^\d{8}$/.test(cep)) errors.push("Insira um CEP válido.");
+                        else if (!/^\d{8}$/.test(cep)) errors.push("Insira um CEP válido."); // Verifica se são 8 dígitos numéricos
 
                     checkError(indexInput, errors);
 
@@ -514,7 +560,8 @@
 
                         checkError(indexInput, []);
                     } catch (error) {
-                        checkError(indexInput, [error.message]);
+                        /*checkError(indexInput, [error.message]);*/
+                            //"FAILED TO FETCH" = Comentado para evitar o erro por enquanto
                     }
                 }
 
@@ -534,11 +581,13 @@
                 }
 
                 function validateImageProfile() {
-                    const input = document.getElementById("imagesSelector");
+                    const imageProfile = validateInputs[9];
                     const preview = document.querySelector(".Re-userImage");
+                    const indexInput = 9;
+                    const errors = [];
 
-                    input.addEventListener("change", function () {
-                        const file = input.files[0];
+                    imageProfile.addEventListener("change", function () {
+                        const file = imageProfile.files[0];
                         if (file) {
                             const reader = new FileReader();
                             reader.onload = function (e) {
@@ -547,6 +596,8 @@
                             reader.readAsDataURL(file);
                         }
                     });
+
+                    checkError(indexInput, errors);     
                 }
 
                 validateInputs.forEach((input, index) => {
@@ -607,7 +658,7 @@
 
                 const validateSection = (index) => {
                     return Array.from(sections[index].querySelectorAll('.validate')).every(input =>
-                        !input.hasAttribute('required') || (!input.classList.contains('wEror') && !input.classList.contains('blank') && input.value.trim() !== '')
+                        !input.hasAttribute('required') || (!input.classList.contains('wEror') && input.value.trim() !== '')
                     );
                 };
 
