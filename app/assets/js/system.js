@@ -147,8 +147,6 @@ function toggleTheme() {
     });
 }
 
-
-
 function toggleConfigSection() {
     const sectionTitles = document.querySelectorAll('.Se-sectionTitle');
     const subSections = document.querySelectorAll('.Se-subSection');

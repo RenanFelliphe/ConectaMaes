@@ -2,6 +2,7 @@
     require_once "../app/services/helpers/authUser.php";
     validateRememberedCookie($conn, "home.php");
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -94,7 +95,7 @@
                         </div>
 
                         <div class="Re-input inputCell">
-                            <input class="Re-userInput validate" type="text" id="telefone" name="telefoneRegistro" pattern="^\d{8}$" />
+                            <input class="Re-userInput validate" type="text" id="telefone" name="telefoneRegistro" pattern="^\d{10,11}$"/>
                             <label class="Re-fakePlaceholder" for="telefone">Telefone</label>
                             <i class="bi bi-info-circle-fill errorIcon"></i>
                             <div class="errorMessageContainer">
@@ -139,7 +140,7 @@
                             <input type="file" class="validate" id="imagesSelector" name="fotoPerfilRegistro" input="validateImageProfile();" accept="image/png, image/jpeg">
                             <label for="imagesSelector" class="Re-imageProfileLabel">
                                 <div>
-                                    <img src="../app/assets/imagens/icons/user_no_profile_image.png" class="Re-userImage">
+                                    <img src="../app/assets/imagens/icons/user_no_profile_image.png" class="Re-userImage" alt="Imagem do perfil padrão">
                                 </div>
                                 <i class="bi bi-camera-fill Re-addImageIcon"></i>                    
                             </label>
@@ -400,37 +401,96 @@
                     });
                 }
 
-                function validateUsername() {
-                    const username = validateInputs[0].value;
+                async function checkDuplicate(attribute, value) {
+                    try {
+                        const response = await fetch('../app/services/helpers/checkDuplicates.php', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded',
+                            },
+                            body: `attribute=${encodeURIComponent(attribute)}&value=${encodeURIComponent(value)}`,
+                        });
+
+                        if (!response.ok) {
+                            throw new Error('Erro na comunicação com o servidor.');
+                        }
+
+                        const result = await response.json();
+                        return result.exists;
+                    } catch (error) {
+                        console.error('Erro na verificação de duplicatas:', error);
+                        throw error;
+                    }
+                }
+                
+                async function validateUsername() {
+                    const username = validateInputs[0].value.trim();
                     const indexInput = 0;
                     const errors = [];
-                    const maxChar = 50 + 1; //Limite de caracteres do input +1 para a validação
+                    const maxChar = 50;
 
                     limitMaxCharactersInput(validateInputs[indexInput], maxChar);
-
                     if (username.length >= maxChar) errors.push("O nome de usuário é longo demais.");
                     if (username.length <= 3) errors.push("O nome de usuário deve ter mais de 3 caracteres.");
-                    if (/\s/.test(username)) errors.push("O nome de usuário não pode ter espaços.");
-                    if (/[áàâãäéèêëíìîïóòôõöúùûüç]/i.test(username)) errors.push("O nome de usuário não pode ter acentos ou cedilhas.");
-                        else if(/[-]/.test(username)) errors.push("O nome de usuário não pode ter hífens.");
-                        else if (/[^a-zA-Z0-9_\s]/.test(username)) errors.push("Use apenas underscores '_' e espaços como caracteres especiais.");
+                    if (/[^a-zA-Z0-9_]/.test(username)) errors.push("Apenas letras, números e underscore '_' são permitidos.");
 
-                    checkError(indexInput, errors);               
+                    if (!errors.length) {
+                        try {
+                            const isDuplicate = await checkDuplicate('nomeDeUsuario', username);
+                            if (isDuplicate) errors.push("Este nome de usuário já está em uso.");
+                            console.log("Nome de usuário já existe");
+                        } catch (error) {
+                            console.error("Erro ao verificar duplicidade do nome de usuário:", error);
+                        }
+                    }
+
+                    checkError(indexInput, errors);
                 }
 
-                function validateEmail() {
-                    const email = validateInputs[1].value;
+                async function validateEmail() {
+                    const email = validateInputs[1].value.trim();
                     const indexInput = 1;
-                    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
                     const errors = [];
-                    const maxChar = 256 + 1; //Limite de caracteres do input +1 para a validação
+                    const maxChar = 256;
 
                     limitMaxCharactersInput(validateInputs[indexInput], maxChar);
-                    
                     if (email.length >= maxChar) errors.push("O e-mail é longo demais.");
-                    if (!emailRegex.test(email)) errors.push("Insira um e-mail válido.");
+                    if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) errors.push("Insira um e-mail válido.");
 
-                    checkError(indexInput, errors);               
+                    if (!errors.length) {
+                        try {
+                            const isDuplicate = await checkDuplicate('email', email);
+                            if (isDuplicate) errors.push("Este e-mail já está em uso.");
+                        } catch (error) {
+                            console.error("Erro ao verificar duplicidade do e-mail:", error);
+                        }
+                    }
+
+                    checkError(indexInput, errors);
+                }
+
+                async function validatePhone() {
+                    const phone = validateInputs[5].value.trim();
+                    const ddd = phone.substring(0, 2);
+                    const indexInput = 5;
+                    const errors = [];
+                    const maxChar = 11;
+
+                    limitMaxCharactersInput(validateInputs[indexInput], maxChar);
+                    if (phone.length !== 10 && phone.length !== 11) errors.push("O telefone deve conter 10 ou 11 dígitos.");
+                    if (!/^\d{10,11}$/.test(phone)) errors.push("Insira um telefone válido.");
+                    if (!validDDDs.includes(ddd)) errors.push("Insira um DDD válido.");
+
+                    if (!errors.length) {
+                        try {
+                            const isDuplicate = await checkDuplicate('telefone', phone);
+                            if (isDuplicate) errors.push("Este telefone já está em uso.");
+                        } catch (error) {
+                            console.error("Erro ao verificar duplicidade do telefone:", error);
+                        }
+                    }
+
+                    checkError(indexInput, errors);
                 }
 
                 function validatePassword() {                    
@@ -472,33 +532,6 @@
                     if (fullName.length >= maxChar) errors.push("O nome é longo demais.");
                     if (/\d/.test(fullName)) errors.push("O nome não pode conter números.");
                         else if (!/^([a-zA-ZÀ-ÖØ-öø-ÿ'’\-\s]+)$/.test(fullName)) errors.push("Apenas letras, acentos, hífens e apóstrofos são permitidos.");
-
-                    checkError(indexInput, errors);               
-                }
-
-                function validatePhone() {
-                    const validDDDs = [
-                        '61', '62', '64', '65', '66', '67', // Centro-Oeste
-                        '82', '71', '73', '74', '75', '77', // Nordeste
-                        '85', '88', '98', '99', '83', '81', '87', '86', '89', '84', '79', // Nordeste
-                        '68', '96', '92', '97', '91', '93', '94', '69', '95', '63', // Norte
-                        '27', '28', '31', '32', '33', '34', '35', '37', '38', // Sudeste
-                        '21', '22', '24', '11', '12', '13', '14', '15', '16', '17', '18', '19', // Sudeste
-                        '41', '42', '43', '44', '45', '46', // Sul
-                        '51', '53', '54', '55', '47', '48', '49' // Sul
-                    ];
-
-                    const phone = validateInputs[5].value;
-                    const ddd = phone.substring(0, 2); // Extrai os primeiros dois dígitos como DDD
-                    const indexInput = 5;
-                    const errors = [];
-                    const maxChar = 11 + 1; //Limite de caracteres do input +1 para a validação
-
-                    limitMaxCharactersInput(validateInputs[indexInput], maxChar);
-                    
-                    if (phone.length >= maxChar) errors.push("O telefone é longo demais.");
-                        else if (!validDDDs.includes(ddd)) errors.push("Insira um DDD válido.");
-                        else if (phone.length != 10 && phone.length != 11) errors.push("Insira um telefone válido.");
 
                     checkError(indexInput, errors);               
                 }
@@ -586,29 +619,47 @@
                     const indexInput = 9;
                     const errors = [];
 
-                    imageProfile.addEventListener("change", function () {
+                    if (imageProfile.files && imageProfile.files[0]) {
                         const file = imageProfile.files[0];
-                        if (file) {
+                        if (!["image/jpeg", "image/png"].includes(file.type)) {
+                            errors.push("Apenas imagens PNG ou JPEG são permitidas.");
+                        }
+                        if (file.size > 2 * 1024 * 1024) { // 2MB
+                            errors.push("A imagem não pode exceder 2MB.");
+                        }
+
+                        if (!errors.length) {
                             const reader = new FileReader();
-                            reader.onload = function (e) {
+                            reader.onload = (e) => {
                                 preview.src = e.target.result;
                             };
                             reader.readAsDataURL(file);
                         }
-                    });
+                    }
 
-                    checkError(indexInput, errors);     
+                    checkError(indexInput, errors);
                 }
+
+                validateInputs.forEach((input, index) => {
+                    input.addEventListener('input', async () => {
+                        switch (index) {
+                            case 0:
+                                await validateUsername();
+                                break;
+                            case 1:
+                                await validateEmail();
+                                break;
+                            case 5:
+                                await validatePhone();
+                                break;
+                        }
+                        checkEmptyInput();
+                    });
+                });
 
                 validateInputs.forEach((input, index) => {
                     input.addEventListener('input', () => {
                         switch (index) {
-                            case 0:
-                                validateUsername();
-                                break;
-                            case 1:
-                                validateEmail();
-                                break;
                             case 2:
                                 validatePassword();
                                 break;
@@ -617,9 +668,6 @@
                                 break;
                             case 4:
                                 validateFullName();
-                                break;
-                            case 5:
-                                validatePhone();
                                 break;
                             case 6:
                                 validateBornDate();
@@ -636,7 +684,7 @@
                         }
                         checkEmptyInput();
                     });
-                });  
+                });
             }
 
             function toggleRegisterSections() {
