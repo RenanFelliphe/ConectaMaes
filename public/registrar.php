@@ -235,43 +235,48 @@
         ?>
         <script src="<?= $relativeAssetsPath; ?>/js/system.js"></script>
         <script>  
-           document.querySelectorAll('.Re-userInput').forEach(input => {
+            document.querySelectorAll('.Re-userInput').forEach(input => {
                 const updateInfo = (event) => {
-                    const inputId = event.target.id;
-                    const infoElement = document.getElementById('info' + inputId.charAt(0).toUpperCase() + inputId.slice(1));
-                    const userDataElement = infoElement.querySelector('.Re-userData');  // Elemento que conterá o dado inserido
+                        const inputId = event.target.id;
+                        const infoElement = document.getElementById('info' + inputId.charAt(0).toUpperCase() + inputId.slice(1));
 
-                    let value = event.target.value;
+                        // Verifica se o elemento infoElement existe
+                        if (!infoElement) return;
+                        
+                        const userDataElement = infoElement.querySelector('.Re-userData'); // Elemento que conterá o dado inserido
+                        let value = event.target.value;
 
-                    // Formatação do telefone
-                    if (inputId === 'telefone') {
-                        value = value.replace(/\D/g, ''); // Remove qualquer caractere não numérico
-                        if (value.length === 11) {
-                            value = value.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
-                        } else if (value.length === 10) {
-                            value = value.replace(/^(\d{2})(\d{4})(\d{4})$/, '($1) $2-$3');
+                        // Formatação do telefone
+                        if (inputId === 'telefone') {
+                            value = value.replace(/\D/g, ''); // Remove qualquer caractere não numérico
+                            if (value.length === 11) {
+                                value = value.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+                            } else if (value.length === 10) {
+                                value = value.replace(/^(\d{2})(\d{4})(\d{4})$/, '($1) $2-$3');
+                            }
                         }
-                    }
 
-                    // Formatação do CEP
-                    if (inputId === 'localizacao') {
-                        value = value.replace(/\D/g, ''); // Remove qualquer caractere não numérico
-                        if (value.length === 8) {
-                            value = value.replace(/^(\d{5})(\d{3})$/, '$1-$2');
+                        // Formatação do CEP
+                        if (inputId === 'localizacao') {
+                            value = value.replace(/\D/g, ''); // Remove qualquer caractere não numérico
+                            if (value.length === 8) {
+                                value = value.replace(/^(\d{5})(\d{3})$/, '$1-$2');
+                            }
                         }
-                    }
 
-                    // Formatação da data de nascimento
-                    if (inputId === 'dataNascimento') {
-                        const dateParts = value.split('-');
-                        if (dateParts.length === 3) {
-                            value = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
+                        // Formatação da data de nascimento
+                        if (inputId === 'dataNascimento') {
+                            const dateParts = value.split('-');
+                            if (dateParts.length === 3) {
+                                value = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
+                            }
                         }
-                    }
 
-                    // Atualiza o conteúdo do elemento de exibição
-                    userDataElement.textContent = value;  // Apenas o dado é alterado, mantendo o estilo do label
-                };
+                        // Atualiza o conteúdo do elemento de exibição
+                        if (userDataElement) {
+                            userDataElement.textContent = value; // Apenas o dado é alterado, mantendo o estilo do label
+                        }
+                    };
 
                 input.addEventListener('input', updateInfo);
 
@@ -282,8 +287,8 @@
                 document.getElementById("localizacao").addEventListener("input", function(e) {
                     e.target.value = e.target.value.replace(/[^0-9]/g, ''); // Remove qualquer caractere que não seja número
                 });
-            });
-
+            }); 
+            
             function userValidations() {
                 const validateInputs = document.querySelectorAll('.validate');
                 const inputContainers = document.querySelectorAll('.Re-input');
@@ -332,20 +337,31 @@
 
                 function checkEmptyInput() {
                     validateInputs.forEach((input, index) => {
-                        if (input.value !== "") {
-                            placeholders[index].classList.add('notEmpty');
-                            inputContainers[index].style.opacity = "1";
-                        } else {
-                            if(index !== 9){
-                                inputContainers[index].style.opacity = "0.5";
-                            }
-                            inputContainers[index].style.border = "2px solid transparent";
-                            errorMessageContent[index].innerHTML = '';
-                            errorIcon[index].style.display = "none";
+                        const placeholder = placeholders[index];
+                        const inputContainer = inputContainers[index];
+                        const errorMessage = errorMessageContent[index];
+                        const errorIconElement = errorIcon[index];
 
+                        // Verifica se os elementos existem antes de acessar suas propriedades
+                        if (!placeholder || !inputContainer || !errorMessage || !errorIconElement) {
+                            return; // Ignora índices inválidos
+                        }
+
+                        if (input.value !== "") {
+                            placeholder.classList.add('notEmpty');
+                            inputContainer.style.opacity = "1";
+                        } else {
+                            if (index !== 9) { // Preserva a opacidade para o índice 9
+                                inputContainer.style.opacity = "0.5";
+                            }
+                            inputContainer.style.border = "2px solid transparent";
+                            errorMessage.innerHTML = '';
+                            errorIconElement.style.display = "none";
+
+                            // Evita alterações específicas no índice 6
                             if (index !== 6) {
-                                placeholders[index].classList.remove('notEmpty');
-                                placeholders[index].style.color = "var(--secondColor)";
+                                placeholder.classList.remove('notEmpty');
+                                placeholder.style.color = "var(--secondColor)";
                             }
                         }
                     });
@@ -401,29 +417,7 @@
                     });
                 }
 
-                async function checkDuplicate(attribute, value) {
-                    try {
-                        const response = await fetch('../app/services/helpers/checkDuplicates.php', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/x-www-form-urlencoded',
-                            },
-                            body: `attribute=${encodeURIComponent(attribute)}&value=${encodeURIComponent(value)}`,
-                        });
-
-                        if (!response.ok) {
-                            throw new Error('Erro na comunicação com o servidor.');
-                        }
-
-                        const result = await response.json();
-                        return result.exists;
-                    } catch (error) {
-                        console.error('Erro na verificação de duplicatas:', error);
-                        throw error;
-                    }
-                }
-                
-                async function validateUsername() {
+                function validateUsername() {
                     const username = validateInputs[0].value.trim();
                     const indexInput = 0;
                     const errors = [];
@@ -434,20 +428,10 @@
                     if (username.length <= 3) errors.push("O nome de usuário deve ter mais de 3 caracteres.");
                     if (/[^a-zA-Z0-9_]/.test(username)) errors.push("Apenas letras, números e underscore '_' são permitidos.");
 
-                    if (!errors.length) {
-                        try {
-                            const isDuplicate = await checkDuplicate('nomeDeUsuario', username);
-                            if (isDuplicate) errors.push("Este nome de usuário já está em uso.");
-                            console.log("Nome de usuário já existe");
-                        } catch (error) {
-                            console.error("Erro ao verificar duplicidade do nome de usuário:", error);
-                        }
-                    }
-
                     checkError(indexInput, errors);
                 }
 
-                async function validateEmail() {
+                function validateEmail() {
                     const email = validateInputs[1].value.trim();
                     const indexInput = 1;
                     const errors = [];
@@ -457,40 +441,34 @@
                     if (email.length >= maxChar) errors.push("O e-mail é longo demais.");
                     if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) errors.push("Insira um e-mail válido.");
 
-                    if (!errors.length) {
-                        try {
-                            const isDuplicate = await checkDuplicate('email', email);
-                            if (isDuplicate) errors.push("Este e-mail já está em uso.");
-                        } catch (error) {
-                            console.error("Erro ao verificar duplicidade do e-mail:", error);
-                        }
-                    }
-
                     checkError(indexInput, errors);
                 }
 
-                async function validatePhone() {
-                    const phone = validateInputs[5].value.trim();
-                    const ddd = phone.substring(0, 2);
+                function validatePhone() {
+                    const validDDDs = [
+                        '61', '62', '64', '65', '66', '67', // Centro-Oeste
+                        '82', '71', '73', '74', '75', '77', // Nordeste
+                        '85', '88', '98', '99', '83', '81', '87', '86', '89', '84', '79', // Nordeste
+                        '68', '96', '92', '97', '91', '93', '94', '69', '95', '63', // Norte
+                        '27', '28', '31', '32', '33', '34', '35', '37', '38', // Sudeste
+                        '21', '22', '24', '11', '12', '13', '14', '15', '16', '17', '18', '19', // Sudeste
+                        '41', '42', '43', '44', '45', '46', // Sul
+                        '51', '53', '54', '55', '47', '48', '49' // Sul
+                    ];
+
+                    const phone = validateInputs[5].value;
+                    const ddd = phone.substring(0, 2); // Extrai os primeiros dois dígitos como DDD
                     const indexInput = 5;
                     const errors = [];
-                    const maxChar = 11;
+                    const maxChar = 11 + 1; //Limite de caracteres do input +1 para a validação
 
                     limitMaxCharactersInput(validateInputs[indexInput], maxChar);
-                    if (phone.length !== 10 && phone.length !== 11) errors.push("O telefone deve conter 10 ou 11 dígitos.");
-                    if (!/^\d{10,11}$/.test(phone)) errors.push("Insira um telefone válido.");
-                    if (!validDDDs.includes(ddd)) errors.push("Insira um DDD válido.");
+                    
+                    if (phone.length >= maxChar) errors.push("O telefone é longo demais.");
+                        else if (!validDDDs.includes(ddd)) errors.push("Insira um DDD válido.");
+                        else if (phone.length != 10 && phone.length != 11) errors.push("Insira um telefone válido.");
 
-                    if (!errors.length) {
-                        try {
-                            const isDuplicate = await checkDuplicate('telefone', phone);
-                            if (isDuplicate) errors.push("Este telefone já está em uso.");
-                        } catch (error) {
-                            console.error("Erro ao verificar duplicidade do telefone:", error);
-                        }
-                    }
-
-                    checkError(indexInput, errors);
+                    checkError(indexInput, errors);               
                 }
 
                 function validatePassword() {                    
@@ -641,25 +619,14 @@
                 }
 
                 validateInputs.forEach((input, index) => {
-                    input.addEventListener('input', async () => {
-                        switch (index) {
-                            case 0:
-                                await validateUsername();
-                                break;
-                            case 1:
-                                await validateEmail();
-                                break;
-                            case 5:
-                                await validatePhone();
-                                break;
-                        }
-                        checkEmptyInput();
-                    });
-                });
-
-                validateInputs.forEach((input, index) => {
                     input.addEventListener('input', () => {
                         switch (index) {
+                            case 0:
+                                validateUsername();
+                                break;
+                            case 1:
+                                validateEmail();
+                                break;
                             case 2:
                                 validatePassword();
                                 break;
@@ -668,6 +635,9 @@
                                 break;
                             case 4:
                                 validateFullName();
+                                break;
+                            case 5:
+                                validatePhone();
                                 break;
                             case 6:
                                 validateBornDate();
@@ -682,6 +652,7 @@
                                 validateImageProfile();
                                 break;
                         }
+
                         checkEmptyInput();
                     });
                 });
