@@ -1,11 +1,15 @@
 <?php
     function uploadPFP($conn, $userId, $nomeDeUsuario) {
         $diretorioPfP =  __DIR__ . '/../../assets/imagens/fotos/perfil/';
-        
+        $maxImgSize = 5 * 1024 * 1024; //5MB
         if (isset($_FILES['fotoPerfilRegistro']) && $_FILES['fotoPerfilRegistro']['name'] != '') {
             if ($_FILES['fotoPerfilRegistro']['error'] != UPLOAD_ERR_OK) {
                 echo "Erro no envio do arquivo.<br>";
                 exit; 
+            }
+            if($_FILES['fotoPerfilRegistro']['size']>$maxImgSize){
+                echo "Arquivo muito grande. Tamanho máximo: 5MB.<br>";
+                exit;
             }
         }
 
@@ -41,7 +45,19 @@
     function updatePFP($conn, $userId, $nomeDeUsuario = null) {
         $diretorioPfP = __DIR__ . '/../../assets/imagens/fotos/perfil/';
         $linkFotoPerfil = null; // Inicializa com null para manter o valor existente se não houver upload
+        $maxImgSize = 5 * 1024 * 1024; //5MB
         $mensagens = []; // Array para armazenar as mensagens
+        
+        if (isset($_FILES['fotoPerfilEdit']) && $_FILES['fotoPerfilEdit']['name'] != '') {
+            if ($_FILES['fotoPerfilEdit']['error'] != UPLOAD_ERR_OK) {
+                $mensagens[] =  "Erro no envio do arquivo.<br>";
+                return $mensagens;
+            }
+            if($_FILES['fotoPerfilEdit']['size']>$maxImgSize){
+                $mensagens[] = "Arquivo muito grande. Tamanho máximo: 5MB.<br>";
+                return $mensagens;
+            }
+        }
     
         if (!$nomeDeUsuario) {
             $query = "SELECT nomeDeUsuario FROM Usuario WHERE idUsuario = '$userId'";
@@ -95,15 +111,19 @@
             'mensagens' => $mensagens
         ];
     }
-    
      
     function uploadAnexo($conn, $idPost){
         $diretorioAnexo = __DIR__ . "/../../assets/imagens/fotos/anexos/";
+        $maxImgSize = 5 * 1024 * 1024; //5MB
 
         if (isset($_FILES['linkAnexoEnvio']) && $_FILES['linkAnexoEnvio']['name'] != '') {
             if ($_FILES['linkAnexoEnvio']['error'] != UPLOAD_ERR_OK) {
                 echo "Erro no envio do arquivo.<br>";
                 exit; 
+            }
+            if($_FILES['linkAnexoEnvio']['size']>$maxImgSize){
+                echo "Arquivo muito grande. Tamanho máximo: 5MB.<br>";
+                exit;
             }
         }
 
