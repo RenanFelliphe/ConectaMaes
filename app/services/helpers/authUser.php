@@ -10,31 +10,33 @@ function logIn($conn){
         $execute = mysqli_query($conn,$query);
         $return = mysqli_fetch_assoc($execute);
 
-        $remember = mysqli_escape_string($conn,$_POST['rememberMe']) ?? null;
-        if($remember) {
-            $expires = time() + (60 * 60 * 24 * 7);
-            $salt = "*&conectamaes#@";
-            $token_key = hash('md5', (time() . $salt));
-            $token_value = hash('md5', ('remembered' . $salt));
+        if ($return) { // Verifica se o usuário foi encontrado
+            $remember = isset($_POST['rememberMe']) ? mysqli_escape_string($conn, $_POST['rememberMe']) : null;
+            if ($remember) {
+                $expires = time() + (60 * 60 * 24 * 7);
+                $salt = "*&conectamaes#@";
+                $token_key = hash('md5', (time() . $salt));
+                $token_value = hash('md5', ('remembered' . $salt));
 
-            setcookie('remembered_cookie', $token_key . ':' . $token_value, $expires, '/'); // Cookie válido em todo o domínio
+                setcookie('remembered_cookie', $token_key . ':' . $token_value, $expires, '/'); // Cookie válido em todo o domínio
 
-            $id = $return['idUsuario'];
-            $rememberMeQuery = "UPDATE Usuario 
-                                SET remember_token_key = '$token_key', 
-                                    remember_token_value = '$token_value' 
-                                WHERE idUsuario = '$id' LIMIT 1";
-            mysqli_query($conn, $rememberMeQuery);
-        }
-
-        if(!empty($return['email'])){
-            if(session_status() === PHP_SESSION_NONE) {
-                session_start();
+                $id = $return['idUsuario'];
+                $rememberMeQuery = "UPDATE Usuario 
+                                    SET remember_token_key = '$token_key', 
+                                        remember_token_value = '$token_value' 
+                                    WHERE idUsuario = '$id' LIMIT 1";
+                mysqli_query($conn, $rememberMeQuery);
             }
-            $_SESSION['idUsuario'] = $return['idUsuario'];
-            $_SESSION['active'] = true;
-            header("Location: home.php");
-            exit();
+
+            if (!empty($return['email'])) {
+                if (session_status() === PHP_SESSION_NONE) {
+                    session_start();
+                }
+                $_SESSION['idUsuario'] = $return['idUsuario'];
+                $_SESSION['active'] = true;
+                header("Location: home.php");
+                exit();
+            }
         }
     }
 }
