@@ -1,6 +1,7 @@
 <?php     
     require_once "../app/services/helpers/authUser.php";
     validateRememberedCookie($conn, "home.php");
+    include_once ("../app/services/crud/userFunctions.php");
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +18,6 @@
     <body class="<?php if(isset( $currentUserData['tema'])) echo $currentUserData['tema'];?>">
         <?php 
             include_once ("../app/includes/headerLanding.php");
-            include_once ("../app/services/crud/userFunctions.php");
         ?>
 
         <main class="Re-register">
@@ -442,19 +442,34 @@
                     });
                 }
 
-                async function checkIfExists(field, value) {
+                async function checkIfExists(type, value) {
+                    const bodyData = {
+                        nomeDeUsuario: `registerUserValue=${encodeURIComponent(value)}`,
+                        email: `registerEmailValue=${encodeURIComponent(value)}`,
+                        telefone: `registerPhoneValue=${encodeURIComponent(value)}`
+                    };
+
+                    if (!bodyData[type]) {
+                        console.error('Tipo inválido fornecido:', type);
+                        return false;
+                    }
+
                     try {
                         const response = await fetch('<?= $_SERVER['PHP_SELF']?>', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/x-www-form-urlencoded'
                             },
-                            body: `registerField=${field}&registerValue=${encodeURIComponent(value)}`
+                            body: bodyData[type]
                         });
-                        const result = await response.json();
+
+                        const textResponse = await response.text(); // Obter o corpo da resposta como texto
+                        // console.log(textResponse); // Descomentar para depuração
+
+                        const result = JSON.parse(textResponse); // Tentar analisar como JSON
                         return result.exists;
                     } catch (error) {
-                        console.error('Erro ao verificar o campo:', error);
+                        console.error(`Erro ao verificar ${type}:`, error);
                         return false;
                     }
                 }
@@ -470,8 +485,8 @@
                     if (username.length <= 3) errors.push("O nome de usuário deve ter mais de 3 caracteres.");
                     if (/[^a-zA-Z0-9_]/.test(username)) errors.push("Apenas letras, números e underscore '_' são permitidos.");
 
-                    const exists = await checkIfExists('nomeDeUsuario', username);
-                    if (exists) errors.push("Nome de usuário já em uso.");
+                    const exists = await checkIfExists('nomeDeUsuario',username);
+                    if (exists) errors.push("Esse nome de usuário já está sendo usado. Tente outro!");
 
                     checkError(indexInput, errors);
                 }
@@ -487,7 +502,7 @@
                     if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) errors.push("Insira um e-mail válido.");
 
                     const exists = await checkIfExists('email', email);
-                    if (exists) errors.push("E-mail já cadastrado.");
+                    if (exists) errors.push("Esse email já está sendo usado. Tente outro!");
                     
                     checkError(indexInput, errors);
                 }
@@ -512,10 +527,13 @@
 
                     limitMaxCharactersInput(validateInputs[indexInput], maxChar);
                     
+                    const exists = await checkIfExists('telefone', phone);
+                    if (exists) errors.push("Esse telefone já está sendo usado. Tente outro!");
+
                     if (phone.length >= maxChar) errors.push("O telefone é longo demais.");
                         else if (!validDDDs.includes(ddd)) errors.push("Insira um DDD válido.");
                         else if (phone.length != 10 && phone.length != 11) errors.push("Insira um telefone válido.");
-    
+
                     checkError(indexInput, errors);               
                 }
 

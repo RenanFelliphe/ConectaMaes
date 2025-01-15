@@ -1,10 +1,8 @@
- <?php
+<?php
 include_once(__DIR__ . '/../helpers/upload.php');
 include_once(__DIR__ . '/../helpers/dateChecker.php');
 include_once(__DIR__ . '/../helpers/conn.php');
 include_once(__DIR__ . '/../helpers/paths.php');
-
-var_dump($_POST);
 
 // Função para registrar um novo usuário
 function signUp($conn) {
@@ -60,49 +58,38 @@ function signUp($conn) {
     }
 }
 
-//
-
-function checkIfExists($registerField, $registerValue, $conn) {
+function checkIfValueExists($value, $field, $conn) {
     header('Content-Type: application/json');
-    $field = mysqli_real_escape_string($conn, $registerField);
-    $value = mysqli_real_escape_string($conn, $registerValue);
-
-    // Monta a consulta SQL para verificar se o valor existe
-    $sql = "SELECT COUNT(*) AS count FROM Usuario WHERE $field = '$value'";
-
-    // Executa a consulta SQL
+    if (empty($value)) {
+        echo json_encode(['exists' => false, 'error' => 'Valor de registro não fornecido']);
+        exit;
+    }
+    $valueEscaped = mysqli_real_escape_string($conn, $value);
+    $allowedFields = ['nomeDeUsuario', 'email', 'telefone'];
+    if (!in_array($field, $allowedFields)) {
+        echo json_encode(['exists' => false, 'error' => 'Campo inválido']);
+        exit;
+    }
+    $sql = "SELECT COUNT(*) AS count FROM Usuario WHERE $field = '$valueEscaped'";
     $result = mysqli_query($conn, $sql);
-
     if ($result) {
-        // Obtém o número de registros encontrados
         $row = mysqli_fetch_assoc($result);
-        $response = ['exists' => $row['count'] > 0]; // Retorna true se o valor existir, false caso contrário
+        $response = ['exists' => $row['count'] > 0];
     } else {
-        // Caso haja erro na consulta
         $response = ['exists' => false, 'error' => 'Erro na consulta: ' . mysqli_error($conn)];
     }
-
-    var_dump($response);    
     echo trim(json_encode($response));
-    exit;  // Garante que o script pare por aqui e não envie nada mais
+    exit;
 }
-
-function checkMultipleFields($fields, $conn) {
-    //header('Content-Type: application/json');    
-    $results = [];
-    
-    // Para cada campo a ser verificado, chama a função checkIfExists
-    foreach ($fields as $field => $value) {
-        $exists = checkIfExists($field, $value, $conn);
-        $results[$field] = $exists;
+    if (isset($_POST['registerUserValue'])) {
+        checkIfValueExists($_POST['registerUserValue'], 'nomeDeUsuario', $conn);
     }
-
-    // Retorna os resultados das verificações
-    return $results;
-}
-
-// Chama a função para verificar múltiplos campos ao mesmo tempo
-$checkResults = checkMultipleFields($_POST, $conn);
+    if (isset($_POST['registerEmailValue'])) {
+        checkIfValueExists($_POST['registerEmailValue'], 'email', $conn);
+    }
+    if (isset($_POST['registerPhoneValue'])) {
+        checkIfValueExists($_POST['registerPhoneValue'], 'telefone', $conn);
+    }
 
 // USER QUERY FUNCTIONS - READ
 function queryUserData($conn, $userId) {
