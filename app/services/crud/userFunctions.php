@@ -59,6 +59,57 @@ function signUp($conn) {
     }
 }
 
+//
+
+function checkIfExists($registerField, $registerValue, $conn) {
+    // Prepara a consulta SQL com base no campo fornecido
+    $field = mysqli_real_escape_string($conn, $registerField);
+    $value = mysqli_real_escape_string($conn, $registerValue);
+
+    // Monta a consulta SQL para verificar se o valor existe
+    $sql = "SELECT COUNT(*) AS count FROM Usuario WHERE $field = '$value'";
+
+    // Executa a consulta SQL
+    $result = mysqli_query($conn, $sql);
+
+    if ($result) {
+        // Obtém o número de registros encontrados
+        $row = mysqli_fetch_assoc($result);
+        // Retorna true se o valor já existir no banco, caso contrário, false
+        return $row['count'] > 0;
+    } else {
+        // Caso haja algum erro na execução da consulta, exibe uma mensagem de erro
+        echo "Erro na consulta: " . mysqli_error($conn);
+        return false;
+    }
+}
+
+function checkMultipleFields($fields, $conn) {
+    //header('Content-Type: application/json');    
+    $results = [];
+    
+    // Para cada campo a ser verificado, chama a função checkIfExists
+    foreach ($fields as $field => $value) {
+        $exists = checkIfExists($field, $value, $conn);
+        $results[$field] = $exists;
+    }
+
+    // Retorna os resultados das verificações
+    return $results;
+}
+
+// Recupera os dados da requisição POST (os campos e valores a serem verificados)
+$fieldsToCheck = [
+    'nomeDeUsuario' => $_POST['registerValue'],
+    'email' => $_POST['registerValue']
+];
+
+// Chama a função para verificar múltiplos campos ao mesmo tempo
+$checkResults = checkMultipleFields($fieldsToCheck, $conn);
+
+// Retorna o resultado em formato JSON
+echo json_encode($checkResults);
+
 // USER QUERY FUNCTIONS - READ
 function queryUserData($conn, $userId) {
     $query = "

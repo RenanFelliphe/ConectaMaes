@@ -289,6 +289,31 @@
                 });
             }); 
             
+
+            /*
+            document.getElementById("telefone").addEventListener("input", function(event) {
+                // Obtém o valor do input, mas sem formatação
+                let rawValue = event.target.value.replace(/\D/g, '');
+
+                // Mantenha o valor real sem formatação (que será utilizado no banco de dados)
+                event.target.dataset.rawValue = rawValue;
+
+                // Formatação do telefone para visualização
+                if (rawValue.length <= 11) {
+                    // Formato para telefone celular: (XX) XXXXX-XXXX
+                    event.target.value = rawValue.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+                } else if (rawValue.length <= 10) {
+                    // Formato para telefone fixo: (XX) XXXX-XXXX
+                    event.target.value = rawValue.replace(/^(\d{2})(\d{4})(\d{4})$/, '($1) $2-$3');
+                } else {
+                    // Se houver mais de 11 dígitos, apenas aplica a máscara até o número permitido
+                    event.target.value = rawValue.substring(0, 11).replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+                }
+            });
+
+            // Quando for necessário obter o valor real, utilize `dataset.rawValue`
+            */
+
             function userValidations() {
                 const validateInputs = document.querySelectorAll('.validate');
                 const inputContainers = document.querySelectorAll('.Re-input');
@@ -417,7 +442,24 @@
                     });
                 }
 
-                function validateUsername() {
+                async function checkIfExists(field, value) {
+                    try {
+                        const response = await fetch('<?= $_SERVER['PHP_SELF']?>', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/x-www-form-urlencoded'
+                            },
+                            body: `registerField=${field}&registerValue=${encodeURIComponent(value)}`
+                        });
+                        const result = await response.json();
+                        return result.exists;
+                    } catch (error) {
+                        console.error('Erro ao verificar o campo:', error);
+                        return false;
+                    }
+                }
+
+                async function validateUsername() {
                     const username = validateInputs[0].value.trim();
                     const indexInput = 0;
                     const errors = [];
@@ -428,10 +470,13 @@
                     if (username.length <= 3) errors.push("O nome de usuário deve ter mais de 3 caracteres.");
                     if (/[^a-zA-Z0-9_]/.test(username)) errors.push("Apenas letras, números e underscore '_' são permitidos.");
 
+                    const exists = await checkIfExists('nomeDeUsuario', username);
+                    if (exists) errors.push("Nome de usuário já em uso.");
+
                     checkError(indexInput, errors);
                 }
 
-                function validateEmail() {
+                async function validateEmail() {
                     const email = validateInputs[1].value.trim();
                     const indexInput = 1;
                     const errors = [];
@@ -441,10 +486,13 @@
                     if (email.length >= maxChar) errors.push("O e-mail é longo demais.");
                     if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) errors.push("Insira um e-mail válido.");
 
+                    const exists = await checkIfExists('email', email);
+                    if (exists) errors.push("E-mail já cadastrado.");
+                    
                     checkError(indexInput, errors);
                 }
 
-                function validatePhone() {
+                async function validatePhone() {
                     const validDDDs = [
                         '61', '62', '64', '65', '66', '67', // Centro-Oeste
                         '82', '71', '73', '74', '75', '77', // Nordeste
@@ -467,7 +515,7 @@
                     if (phone.length >= maxChar) errors.push("O telefone é longo demais.");
                         else if (!validDDDs.includes(ddd)) errors.push("Insira um DDD válido.");
                         else if (phone.length != 10 && phone.length != 11) errors.push("Insira um telefone válido.");
-
+    
                     checkError(indexInput, errors);               
                 }
 
