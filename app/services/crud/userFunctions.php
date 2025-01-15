@@ -4,6 +4,7 @@ include_once(__DIR__ . '/../helpers/dateChecker.php');
 include_once(__DIR__ . '/../helpers/conn.php');
 include_once(__DIR__ . '/../helpers/paths.php');
 
+var_dump($_POST);
 
 // Função para registrar um novo usuário
 function signUp($conn) {
@@ -62,7 +63,7 @@ function signUp($conn) {
 //
 
 function checkIfExists($registerField, $registerValue, $conn) {
-    // Prepara a consulta SQL com base no campo fornecido
+    header('Content-Type: application/json');
     $field = mysqli_real_escape_string($conn, $registerField);
     $value = mysqli_real_escape_string($conn, $registerValue);
 
@@ -75,13 +76,15 @@ function checkIfExists($registerField, $registerValue, $conn) {
     if ($result) {
         // Obtém o número de registros encontrados
         $row = mysqli_fetch_assoc($result);
-        // Retorna true se o valor já existir no banco, caso contrário, false
-        return $row['count'] > 0;
+        $response = ['exists' => $row['count'] > 0]; // Retorna true se o valor existir, false caso contrário
     } else {
-        // Caso haja algum erro na execução da consulta, exibe uma mensagem de erro
-        echo "Erro na consulta: " . mysqli_error($conn);
-        return false;
+        // Caso haja erro na consulta
+        $response = ['exists' => false, 'error' => 'Erro na consulta: ' . mysqli_error($conn)];
     }
+
+    var_dump($response);    
+    echo trim(json_encode($response));
+    exit;  // Garante que o script pare por aqui e não envie nada mais
 }
 
 function checkMultipleFields($fields, $conn) {
@@ -98,17 +101,8 @@ function checkMultipleFields($fields, $conn) {
     return $results;
 }
 
-// Recupera os dados da requisição POST (os campos e valores a serem verificados)
-$fieldsToCheck = [
-    'nomeDeUsuario' => $_POST['registerValue'],
-    'email' => $_POST['registerValue']
-];
-
 // Chama a função para verificar múltiplos campos ao mesmo tempo
-$checkResults = checkMultipleFields($fieldsToCheck, $conn);
-
-// Retorna o resultado em formato JSON
-echo json_encode($checkResults);
+$checkResults = checkMultipleFields($_POST, $conn);
 
 // USER QUERY FUNCTIONS - READ
 function queryUserData($conn, $userId) {
