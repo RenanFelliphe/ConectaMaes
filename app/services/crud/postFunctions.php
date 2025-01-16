@@ -176,7 +176,7 @@ function queryPostsAndUserData($conn, $postType = '', $postId = null, $userId = 
         echo "<p class='error'>Erro na consulta: " . mysqli_error($conn) . "</p>";
         return false;
     }
-
+    //echo $finalQuery; //pra debugar
     return mysqli_fetch_all($result, MYSQLI_ASSOC);
 }
 

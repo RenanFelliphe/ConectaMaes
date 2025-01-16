@@ -2,7 +2,7 @@
     include_once __DIR__ . "/../../app/includes/globalIncludes.php";
 
     if (isset($_GET['post'])) {
-        $postResult = queryPostsAndUserData($conn, "", $_GET['post'], null, 1, true);
+        $postResult = queryPostsAndUserData($conn, "", $_GET['post'], null, 1, 0, true);
         if (!$postResult || count($postResult) === 0) {
             header("Location:". $relativeRootPath."/notFound.php?subject=post");
             exit;
