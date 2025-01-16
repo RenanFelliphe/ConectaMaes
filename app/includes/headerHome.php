@@ -405,6 +405,7 @@
             postIdField.name = 'idPublicacao';
         }
     }
+
     function openModalHeader(modal) { 
         configurePostModal(modal);
         const modalSections = document.querySelectorAll('.modalSection');
@@ -413,6 +414,10 @@
         const postLink = modal.getAttribute('post-link');
 
         const postTitleContainer = document.querySelector('#postTitleContainer');
+        const maxCharactersSpan = document.querySelector('.Ho-maxCharacters'); 
+        const maxCharacters = (postLink === 'postRelatoModal') ? 500 : 200;
+        maxCharactersSpan.textContent = maxCharacters;
+
         postTitleContainer.style.display = (btnClicked === 'postSomething' && modal.id === '') ? 'none' : 'flex';
 
         // Ajusta o texto do botão com base no `post-link`
@@ -426,7 +431,6 @@
         }
 
         submitPostBtn.textContent = buttonText;
-
         submitPostBtn.setAttribute('name', postLink);
 
         const identifyMyself = document.querySelector('.Ho-identifyMyself');
@@ -453,7 +457,6 @@
         
         toggleModal(modal);
 
-        // Adiciona o idPublicacao na postagem de comentários
         const postId = modal.getAttribute("data-post-id");
         if (btnClicked === 'postSomething' && postId) {
             const postIdField = document.querySelector('#postIdField');
@@ -462,7 +465,6 @@
             }
         }
 
-        // Fecha o modal
         const closeModalBtns = document.querySelectorAll('.closeModal');  
         closeModalBtns.forEach(closeModalBtn => {
             closeModalBtn.addEventListener('click', () => {
@@ -470,6 +472,7 @@
             });
         });
     }
+
 
 
     function dropdownHeaderSections() {
