@@ -194,10 +194,10 @@
                     
                     <div class="Re-termsPDF">
                         <div class="Re-usingTermsPDF">
-                            <embed src="<?=$relativeRootPath."/documents/termos_de_uso_ConectaMaes.pdf"?>" width="100%" height="auto" style="overflow: hidden;" type="application/pdf">
+                            <embed class="embedPDF" src="<?=$relativeRootPath."/documents/termos_de_uso_ConectaMaes.pdf#toolbar=0"?>" type="application/pdf">
                         </div>
                         <div class="Re-privacyTermsPDF" style="display: none;">
-                            <embed src="<?=$relativeRootPath ."/documents/politicas_de_privacidade_ConectaMaes.pdf"?>" width="500" height="auto" style="overflow: hidden;" type="application/pdf">
+                            <embed class="embedPDF" src="<?=$relativeRootPath ."/documents/politicas_de_privacidade_ConectaMaes.pdf#toolbar=0"?>" type="application/pdf">
                         </div>
                     </div>
 

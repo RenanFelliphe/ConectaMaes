@@ -2889,7 +2889,7 @@ body.Y-theme .navMobile .pageLink:hover .headerIcon {
     transition: 0.2s ease;
 }
 
-.Re-registerTerms .Re-termsPDF{
+.Re-registerTerms .Re-termsPDF {
     position: relative;
     width: 90%;
     height: 35vh;
@@ -2897,14 +2897,31 @@ body.Y-theme .navMobile .pageLink:hover .headerIcon {
     background-color: #F8F8F8;
     border: 1px solid var(--grayColor);
     border-radius: 0.4rem;
+    overflow: hidden; /* Adicionado para garantir que nada saia da área visível */
 }
 
-@media(max-width: 500px){
-    .Re-registerTerms .Re-termsPDF{
+.Re-registerTerms .Re-usingTermsPDF,
+.Re-registerTerms .Re-privacyTermsPDF {
+    position: absolute; /* Ambos se posicionam dentro da div com position: relative */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.Re-registerTerms .Re-usingTermsPDF .embedPDF,
+.Re-registerTerms .Re-privacyTermsPDF .embedPDF {
+    width: 100%;
+    height: 100%;
+}
+
+@media(max-width: 500px) {
+    .Re-registerTerms .Re-termsPDF {
         width: 90%;
         height: 50vh;
-    } 
+    }
 }
+
 
 .Re-registerTerms .Re-termsCheckboxes{
     display: flex;
