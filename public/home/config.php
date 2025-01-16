@@ -1290,6 +1290,7 @@
 
                     async function validatePixKey() {
                         const pixKey = pixKeyInput.value.trim();
+                        const pixKeyToCheck = pixKeyInput.value;
                         const cleanedPixKey = pixKey.replace(/\D/g, ''); // Remove caracteres não numéricos
                         let errorMessages = [];
 
@@ -1345,17 +1346,14 @@
                             errorMessages.push("E-mail inválido.");
                         }
 
-                        const exists = await checkIfExists('chavePix', pixKey);
-                        if(exists){
-                            errorMessages.push("Essa chave Pix já está sendo usada. Tente outra!");
-                        } else {
-                            removePixKeyError(); // Chave válida
-                            return;
-                        }
-
                         // Mensagem padrão se nenhuma validação for atendida
                         if (pixKey.length !== 0 && errorMessages.length === 0) {
-                            errorMessages.push("A chave Pix deve ser um CPF, CNPJ, e-mail ou chave aleatória.");
+                            const exists = await checkIfExists('chavePix', pixKeyToCheck);
+                            if (exists){
+                                errorMessages.push("Essa chave Pix já está sendo usada. Tente outra!");
+                            } else {
+                                errorMessages.push("A chave Pix deve ser um CPF, CNPJ, e-mail ou chave aleatória.");
+                            }
                         }
 
                         if (errorMessages.length > 0) {

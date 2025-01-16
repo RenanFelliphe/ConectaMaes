@@ -71,6 +71,8 @@ function checkIfValueExists($value, $field, $conn) {
         exit;
     }
     $sql = "SELECT COUNT(*) AS count FROM Usuario WHERE $field = '$valueEscaped'";
+    //$logMessage = "SQL Query: $sql" . PHP_EOL;
+    //file_put_contents('logfile.txt', $logMessage, FILE_APPEND); // Grava a mensagem no arquivo
     $result = mysqli_query($conn, $sql);
     if ($result) {
         $row = mysqli_fetch_assoc($result);
