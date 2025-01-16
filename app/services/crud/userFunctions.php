@@ -65,7 +65,7 @@ function checkIfValueExists($value, $field, $conn) {
         exit;
     }
     $valueEscaped = mysqli_real_escape_string($conn, $value);
-    $allowedFields = ['nomeDeUsuario', 'email', 'telefone'];
+    $allowedFields = ['nomeDeUsuario', 'email', 'telefone', 'chavePix'];
     if (!in_array($field, $allowedFields)) {
         echo json_encode(['exists' => false, 'error' => 'Campo inválido']);
         exit;
@@ -89,6 +89,9 @@ function checkIfValueExists($value, $field, $conn) {
     }
     if (isset($_POST['registerPhoneValue'])) {
         checkIfValueExists($_POST['registerPhoneValue'], 'telefone', $conn);
+    }
+    if (isset($_POST['registerPixValue'])) {
+        checkIfValueExists($_POST['registerPixValue'], 'chavePix', $conn);
     }
 
 // USER QUERY FUNCTIONS - READ

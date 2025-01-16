@@ -399,7 +399,7 @@
                                 <h4> Número de Telefone </h4>
                                 <div class="Se-phoneInput">
                                     <input type="number" id="editTelephone" name="editTelephoneNumber">
-                                    <label class="Re-fakePlaceholder" for="editTelephone"><?= isset($currentUserData['telefone']) ? 'Telefone Atual: ' . $currentUserData['telefone'] : 'Adicionar Telefone'; ?></label>
+                                    <label class="Re-fakePlaceholder" for="editTelephone"><?= !empty($currentUserData['telefone']) && $currentUserData['telefone'] != 0 ? 'Telefone Atual: ' . $currentUserData['telefone'] : 'Adicionar Telefone'; ?></label>
                                     <i class="bi bi-pencil-fill Se-editIcon pageIcon"></i>                    
                                 </div>
                                 <div class="errorMessageContainer">
@@ -690,6 +690,39 @@
         <script src="<?= $relativeAssetsPath; ?>/js/system.js"></script>
         <script>
             toggleConfigSection();
+
+            async function checkIfExists(type, value) {
+                const bodyData = {
+                    nomeDeUsuario: `registerUserValue=${encodeURIComponent(value)}`,
+                    email: `registerEmailValue=${encodeURIComponent(value)}`,
+                    telefone: `registerPhoneValue=${encodeURIComponent(value)}`,
+                    chavePix: `registerPixValue=${encodeURIComponent(value)}`
+                };
+
+                if (!bodyData[type]) {
+                    console.error('Tipo inválido fornecido:', type);
+                    return false;
+                }
+
+                try {
+                    const response = await fetch('<?= $_SERVER['PHP_SELF']?>', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: bodyData[type]
+                    });
+
+                    const textResponse = await response.text(); // Obter o corpo da resposta como texto
+                    console.log(textResponse); // Descomentar para depuração
+
+                    const result = JSON.parse(textResponse); // Tentar analisar como JSON
+                    return result.exists;
+                } catch (error) {
+                    console.error(`Erro ao verificar ${type}:`, error);
+                    return false;
+                }
+            }
 
             function editUserValidations(){
                 const validateUserInputs = [
@@ -1155,7 +1188,7 @@
                         phoneInput.classList.remove('error');
                     }
 
-                    function validatePhoneNumber() {
+                    async function validatePhoneNumber() {
                         const phone = phoneInput.value;
                         const validDDDs = [
                             '61', '62', '64', '65', '66', '67', // Centro-Oeste
@@ -1183,6 +1216,11 @@
                         }
                         if (!validDDDs.includes(ddd)) {
                             setPhoneError("Insira um DDD válido.");
+                            return;
+                        }
+                        const exists = await checkIfExists('telefone', phone);
+                        if(exists){
+                            setPhoneError("Esse telefone já está sendo usado. Tente outro!");
                             return;
                         }
                         removePhoneError();
@@ -1250,7 +1288,7 @@
                         return cpfArray[9] === v1 && cpfArray[10] === v2;
                     }
 
-                    function validatePixKey() {
+                    async function validatePixKey() {
                         const pixKey = pixKeyInput.value.trim();
                         const cleanedPixKey = pixKey.replace(/\D/g, ''); // Remove caracteres não numéricos
                         let errorMessages = [];
@@ -1300,15 +1338,23 @@
                             errorMessages.push("Chave aleatória inválida.");
                         }
 
-                        if (/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(pixKey)) {
+                        if (/^[\w-\.]+(\+[a-zA-Z0-9]+)?@([\w-]+\.)+[\w-]{2,4}$/.test(pixKey)) {
                             removePixKeyError(); // E-mail válido
                             return;
                         } else if (pixKey.includes('@')) {
                             errorMessages.push("E-mail inválido.");
                         }
 
+                        const exists = await checkIfExists('chavePix', pixKey);
+                        if(exists){
+                            errorMessages.push("Essa chave Pix já está sendo usada. Tente outra!");
+                        } else {
+                            removePixKeyError(); // Chave válida
+                            return;
+                        }
+
                         // Mensagem padrão se nenhuma validação for atendida
-                        if (pixKey.length !== 0 &&errorMessages.length === 0) {
+                        if (pixKey.length !== 0 && errorMessages.length === 0) {
                             errorMessages.push("A chave Pix deve ser um CPF, CNPJ, e-mail ou chave aleatória.");
                         }
 
