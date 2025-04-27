@@ -274,7 +274,7 @@
                             <div class="La-memberInformation">
                                 <p class="La-memberName"> Wagner</p>
                                 <p class="La-memberFamilyName"> Lessa</p>
-                                <p class="La-memberFunction"> Desenvolvedora </p>
+                                <p class="La-memberFunction"> Desenvolvedor  </p>
                             </div>
                         </div>
 
